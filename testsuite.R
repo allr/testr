@@ -221,7 +221,6 @@ separateTestHeader <- function(header) {
             if (contains(iGens, o$name) || contains(dGens, o$name))
                 stop("Generic with name ", o$name, " already exists for the test. Generics must have unique names.")
             iGens[[o$name]] <- o
-            print(o)
         } else if (is.dependentGeneric(o)) {
             # for dependent generics, check the name for duplicty, add the generic to the list of dependent generics and
             # then update the dependents field of the independent generic the dependent one depends on. 
@@ -232,7 +231,7 @@ separateTestHeader <- function(header) {
             dGens[[o$name]] <- o
             g <- iGens[[o$dependsOn]]
             g$dependents <- c(g$dependents, list(o$name))
-            igens[[g$name]] <- g
+            iGens[[g$name]] <- g
         } else if (is.condition(o)) {
             # TODO
         } else if (is.check(o)) {
@@ -253,7 +252,7 @@ separateTestHeader <- function(header) {
 #' 
 #' TODO the string replacement is not 100% identical to the substitute and does not allow % to appear in the string on its own if a valid generic name is after it, change to allow %% to become % and to only match each occurence of % in the string once. The way it is now if %a is replaced for say $haha and there is also haha generic, the final replacement will be to haha generic's value
 testSubstitute <- function(ast, env = list()) {
-    ast = substitute(ast)
+    #ast = substitute(ast)
     if (identical(typeof(ast), "character")) {
         for (i in 1:length(env)) {
             ast <- gsub(paste("%", names(env)[[i]], sep=""), env[[i]], ast)
@@ -294,9 +293,67 @@ testSubstitute2 <- function(ast, env) {
 
 # Test expansion -------------------------------------------------------------------------------------------------------
 
+# TODO This code is not the pretties and most likely not the best R usage either. I must revisit this when more is done.
+
 #' For given test name, separated headers and its code creates a list of tests that can be generated out of it using the generics in headers. 
 expandTest <- function(name, header, code ) {
-    
+    ig <- header$independentGenerics
+    dg <- header$dependentGenerics
+    # now create a vector of max sizes
+    iMax <- sapply(seq_len(length(ig)), function(i) { length(ig[[i]]) })
+    dMax <- sapply(seq_len(length(dg)), function(i) { length(dg[[i]]) })
+    # number of tests is the product of independent generics' sizes
+    n <- prod(iMax)
+    # create vector of independent and dependent positions
+    iPos <- rep(1, length(ig))
+    dPos <- rep(1, length(dg))
+    # generate the tests in a loop
+    for (t in 1:n) {
+        env <- list()
+        # evaluate the independent generic's values
+        for (i in 1:length(ig)) {
+            g <- ig[[i]]
+            value <- eval(g$expr[[iPos[[i]]]])
+            env[[g$name]] <- value
+            env[[paste("%",g$name, "%", sep="")]] <- value
+        }
+        # now evaluate the dependent generic's values, taking the existing environment into account
+        for (i in 1:length(dg)) {
+            g <- dg[[i]]
+            value <- g$expr[[dPos[[i]]]]
+            value <- eval(testSubstitute(value,env))
+            env[[g$name]] <- value
+            env[[paste("%",g$name, "%", sep="")]] <- value
+        }
+        # TODO do something with checks and conditions !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+        # finally substitute the code we have with the generic values
+        testCode = testSubstitute(code, env)
+        print(testCode)
+        # TODO create a test of the the bunch and report it
+        
+        # increment the generics
+        cont <- TRUE
+        j <- length(iPos)
+        while (cont == TRUE && j >= 1) {
+            print(j)
+            if (iPos[[j]] < iMax[[j]]) {
+                cont <- FALSE
+                iPos[[j]] <- iPos[[j]] + 1
+            } else {
+                iPos[[j]] <- 1
+            }
+            # now increment all dependent generics if required
+            for (dName in ig[[j]]$dependents) {
+                dIndex <- which(names(dg) == dName)[[1]] 
+                if (dPos[[dIndex]] < dMax[[dIndex]])
+                    dPos[[dIndex]] <- dPos[[dIndex]] + 1
+                else
+                    dPos[[dIndex]] <- 1
+            }
+            j <- j - 1
+        }
+    }
 }
 
 
@@ -316,6 +373,7 @@ test <- function(name = NULL, ...) {
     header <- header[-length(header)]
     # now process the headers to their proper objects, that is evaluate each header
     header <- separateTestHeader(header)
+    expandTest(name, header, code)
 }
 
 
