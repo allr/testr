@@ -1,11 +1,138 @@
+# Copyright (c) 2013, Purdue University. All rights reserved.
+# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+#
+# This code is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 only, as
+# published by the Free Software Foundation.
+#
+# This code is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# version 2 for more details (a copy is included in the LICENSE file that
+# accompanied this code).
+#
+# You should have received a copy of the GNU General Public License version
+# 2 along with this work; if not, write to the Free Software Foundation,
+# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+# or visit www.oracle.com if you need additional information or have any
+# questions.
+
+
+
+#' Checks that the given function has a proper signature for a generic content function. 
+#' 
+#' A generic content function takes the index of the value to be returned that must be named i, the generic itself named g, and the environment of the current test called env. The environment is a list containing values of all previously defined generics in the particular test instance. 
+#' The function returns true if the given function has three arguments, named i, g and env. False otherwise.  
+is.genericContentFunction <- function(f) {
+    identical(names(formals(f)), c("i", "g", "env"))
+}
+
+
+#' Creates new custom generic.
+#' 
+#' Default value for length 
+#' 
+customGeneric <- function(name, contentFunction, ..., dependsOn = NULL, length = 1) {
+    name <- as.character(name)
+    if (! is.genericContentFunction(contentFunction))
+        stop("Generic content function must take exactly three arguments named i, g and env.")
+    result <- eval(substitute(alist(...)))
+    # check that only named arguments were supplied to the list
+    n <- names(result)
+    if (length(n) != length(result))
+        stop("Only named arguments can be supplied to the generic object apart from name, length and content function")
+    # check that none of the arguments supplied corresponds with reserved values for the generics. Since name, length
+    # contentFunction and dependsOn are all listed as arguments to this function clash can only happen for dependents
+    if ("dependents" %in% n)
+        stop("'dependents' is a reserved generic field and cannot be supplied explicitly")
+    # get the name (convert its substitute to character if it is not yet)
+    if (typeof(name) == "character")
+        result$name <- name
+    else
+        result$name <- as.character(substitute(name))
+    # get the other arguments in the result object
+    result$contentFunction <- contentFunction
+    if (! identical(dependsOn, NULL)) {
+        result$dependsOn <- as.character(dependsOn)
+    } else {
+        if (missing(length))
+            stop("Length must be defined for an independent generic")
+    }
+    length <- as.integer(length)
+    if (length < 1)
+        stop("Generic must have length of at least one")
+    result$length <- length
+    class(result) <- "generic"
+    result
+}
+
+#' Shorthand for customGeneric function. 
+#' 
+#' @aliases customGeneric
+#' @seealso customGeneric
+cg <- customGeneric
+
+#' Creates new generic that is defined by a list of its values.
+generic <- function(name, ..., dependsOn = NULL) {
+    ex <- eval(substitute(alist(...)))
+    # convert name to character if required
+    if (typeof(name) != "character")
+        name <- as.character(substitute(name))
+    # we must do the eval & substitute here so that the actual ASTs supplied to this function will be passed to the
+    # underlying custom generic too
+    eval(substitute(customGeneric(name, function(i,g,env) { g$expr[[i]] }, length = length(expr), dependsOn = dependsOn, expr = ex), list(ex = ex)))
+}
+
+#' A shorthand for simple generic function
+g <- generic
+
+is.generic <- function(o) {
+    identical(class(o), "generic")
+}
+
+is.dependent.generic <- function(g) {
+    "dependsOn" %in% names(g)
+}
+
+is.independent.generic <- function(g) {
+    ! "dependsOn" %in% names(g)
+}
+
+length.generic <- function(g) {
+    g$length
+}
+
+is.dependent <- function(g) {
+    UseMethod("is.dependent", g)
+}
+
+is.independent <- function(g) {
+    UseMethod("is.independent", g)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 
 # test suite implementation - tests, test generator, generics, and commands
 #
 
 # class name for the objects representing the generics
-GENERIC <- "generic"
-INDEPENDENT_GENERIC <- "independent.generic"
-DEPENDENT_GENERIC <- "dependent.generic"
+XGENERIC <- "generic"
+XINDEPENDENT_GENERIC <- "independent.generic"
+XDEPENDENT_GENERIC <- "dependent.generic"
 
 
 contains <- function(lst, element) {
@@ -29,7 +156,7 @@ contains <- function(lst, element) {
 #'  generic(name=a, 1, 2, 3, 4, 5)
 #'  generic(name="b", dependsOn=a, 1, 2, 3)
 #'  }  
-generic <- function(name, ..., dependsOn = NULL) {
+genericX <- function(name, ..., dependsOn = NULL) {
     # create the object and set its class properly
     result <- list()
     # get the expressions of the generic argument
@@ -46,34 +173,34 @@ generic <- function(name, ..., dependsOn = NULL) {
 }
 
 #' Returns the length of the generic, that is the number of distinct values it can take.
-length.generic <- function(g) {
+length.genericX <- function(g) {
     length(g$expr)
 }
 
 #' Returns whether the given object is a generic or not
-is.generic <- function(o) {
+is.genericX <- function(o) {
     inherits(o, GENERIC)
 }
 
 #' Returns true if the object is an independent generic.
 #' 
 #' Apart from inheriting from generic.independent, independent generics must also lack the field dependsOn (but this is not tested by this method)
-is.independentGeneric <- function(o) {
+is.independentGenericX <- function(o) {
     inherits(o, INDEPENDENT_GENERIC)
 }
 
 #' Returns true if the object is a dependent generic. 
 #' 
 #' Apart from inheriting from generic.dependent, dependent generics must also have the field dependsOn that has the name of the generic it depends on. However, the method only tests the class of the object. 
-is.dependentGeneric <- function(o) {
+is.dependentGenericX <- function(o) {
     inherits(o, DEPENDENT_GENERIC)
 }
 
-is.check <- function(o) {
+is.checkX <- function(o) {
     FALSE
 }
 
-is.condition <- function(o) {
+is.conditionX <- function(o) {
     FALSE
 }
 
@@ -82,7 +209,7 @@ is.condition <- function(o) {
 #' Separates the given headers into generics, conditions and checks. 
 #' 
 #' The header is a list of ASTs for commands passed to the test builder. It evaluates them and decides if they are independent generics, dependent generics, conditions or checks. It creates these lists and returns them in a list. For each dependent generics also adds its name to the dependents field of the independent generic it depends on. This is later used in generic expansion. 
-separateTestHeader <- function(header) {
+separateTestHeaderX <- function(header) {
     iGens = list()
     dGens = list()
     conditions = list()
@@ -124,7 +251,7 @@ separateTestHeader <- function(header) {
 #' TODO This maybe calling testSubstitute2 is what should be done here, or renaming testSubstitute2 to testSubstitute completely because when used in test expansion the AST will already be evaluated and the initial substitute will not help us. 
 #' 
 #' TODO the string replacement is not 100% identical to the substitute and does not allow % to appear in the string on its own if a valid generic name is after it, change to allow %% to become % and to only match each occurence of % in the string once. The way it is now if %a is replaced for say $haha and there is also haha generic, the final replacement will be to haha generic's value
-testSubstitute <- function(ast, env = list()) {
+testSubstituteX <- function(ast, env = list()) {
     #ast = substitute(ast)
     if (identical(typeof(ast), "character")) {
         for (i in 1:length(env)) {
@@ -137,7 +264,7 @@ testSubstitute <- function(ast, env = list()) {
 }
 
 # TODO the %a% must be put in the environment as well if this simple way should work
-testSubstitute2 <- function(ast, env) {
+testSubstitute2X <- function(ast, env) {
     if (is.symbol(ast)) {
         aName <- as.character(ast)
         if (contains(env, aName))
@@ -169,7 +296,7 @@ testSubstitute2 <- function(ast, env) {
 # TODO This code is not the pretties and most likely not the best R usage either. I must revisit this when more is done.
 
 #' For given test name, separated headers and its code creates a list of tests that can be generated out of it using the generics in headers. 
-expandTest <- function(name, header, code ) {
+expandTestX <- function(name, header, code ) {
     ig <- header$independentGenerics
     dg <- header$dependentGenerics
     # now create a vector of max sizes
@@ -236,7 +363,7 @@ expandTest <- function(name, header, code ) {
 #' 
 #' The result of this function is a list of all primitive tests that can be created from the particular headers and code (that is using generics).
 #' 
-test <- function(name = NULL, ...) {
+testX <- function(name = NULL, ...) {
     # first process the arguments, get the header, code and name part of it 
     header <- eval(substitute(alist(...)))
     if (length(header) < 1)
