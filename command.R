@@ -40,12 +40,39 @@ command <- function(executable, arguments = NULL, input = NULL, workingDirectory
     else
         cmd <- join(" ", c(shQuote(executable), arguments))
     suppressWarnings(
-        result <- system(cmd, intern = TRUE, input = input, show.output.on.console = FALSE)
+        time <- system.time(tmp <- system(cmd, intern = TRUE, input = input, show.output.on.console = FALSE))
     )
     if (!is.null(wd))
         setwd(wd)
+    result <- list(
+        status = attr(tmp, "status"),
+        user.self = time[[1]], # maybe we do not need these
+        sys.self = time[[2]], # maybe we do not need these
+        elapsed = time[[3]],
+        user.child = time[[4]], # maybe we do not need these
+        sys.child = time[[5]], # maybe we do not need these
+        output = tmp,
+        command = cmd
+    )
+    if (is.null(result$status))
+        result$status <- 0
+    attributes(result$output) <- NULL
+    class(result) <- "test.result"
     result
 }
+
+print.test.result <- function(tr) {
+    cat("Command:     ", tr$command, "\n")
+    if (tr$status == 0)
+        cat("Status:      ", tr$status, "OK\n")
+    else
+        cat("Status:      ", tr$status, "FAILURE\n")
+    cat("Elapsed time:", tr$elapsed, "[sec]\n")
+    cat("Output:       (", length(tr$output), " lines)\n", sep="")
+    for (i in tr$output)
+        cat("             ",i,"\n")
+}
+
 
 
 RPATH = "c:\\Program Files\\R\\R-3.0.1\\bin\\R.exe"
