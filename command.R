@@ -57,11 +57,11 @@ command <- function(executable, arguments = NULL, input = NULL, workingDirectory
     if (is.null(result$status))
         result$status <- 0
     attributes(result$output) <- NULL
-    class(result) <- "test.result"
+    class(result) <- "commandResult"
     result
 }
 
-print.test.result <- function(tr) {
+print.commandResult <- function(tr) {
     cat("Command:     ", tr$command, "\n")
     if (tr$status == 0)
         cat("Status:      ", tr$status, "OK\n")
@@ -71,6 +71,10 @@ print.test.result <- function(tr) {
     cat("Output:       (", length(tr$output), " lines)\n", sep="")
     for (i in tr$output)
         cat("             ",i,"\n")
+}
+
+is.commandResult <- function(o) {
+    inherits(o, "commandResult")
 }
 
 

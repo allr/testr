@@ -62,6 +62,29 @@ disableTarget("gnu-r")
 
 Condition is very similar, but the arguments to the method are the test itself and the execution record, this record will be specified later, but will contain the processed output of the target, etc. 
 
+Targets
+=======
+
+To execute a test, the test itself must be passed to a target. Target does not run any checks, or conditions, it just takes the code stored in the test$code and executes it on the target, returning the updated result. The returned object of class targetResult is very simple and contains the following:
+
+    commandOutput == full output of the command 
+    commandStatus == status of the command
+    elapsed == elapsed time
+    user.self == user time
+    sys.self == sys time
+    output == only the actual output lines of the command, this is target specific
+
+Inside the target itself must know:
+
+    name == target name
+    adapters == list of known adapters, each adapter is a function transforming output to something else, all adapters are named
+    version == version of the target (obtained when the target is initialized)
+    any other arguments (like platform, architecture, target path, if relevant, etc.)
+   
+The adapters will be used on lazy basis and added to the targetResult objects of the particular tests. 
+
+?? Do I want the targetresult to remeber the target, or even the test, or will I always pass them together if required. At the moment I am more inclined to pass them together. 
+    
 
 
 
