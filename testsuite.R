@@ -21,6 +21,69 @@
 
 library("testthat")
 
+
+# Generics -------------------------------------------------------------------------------------------------------------
+
+is.generic <- function(o) {
+    inherits(o, "generic")
+}
+
+test_that("is.generic", {
+    expect_false(is.generic(1))
+    expect_true(is.generic(g(a, 1, 2, 4)))
+    expect_true(is.generic(g(a, 1, 2, dependsOn = b)))
+    expect_true(is.generic(customGeneric(a, function(i, g, env) { }, dependsOn = b)))
+    expect_true(is.generic(customGeneric(a, function(i, g, env) { }, length = 10)))
+})
+
+is.dependent.generic <- function(g) {
+    !is.null(g$dependsOn)
+}
+
+
+is.independent.generic <- function(g) {
+    is.null(g$dependsOn)
+}
+
+is.dependent <- function(o) {
+    UseMethod("is.dependent", o)
+}
+
+is.independent <- function(o) {
+    UseMethod("is.independent", o)
+}
+
+
+test_that("dependent and independent generic distinction works", {
+    g <- generic(a, 1, 2, 3)    
+    expect_false(is.dependent(g))
+    expect_true(is.independent(g))
+    g <- customGeneric(a, function(i, g, env) { }, length = 3)
+    expect_false(is.dependent(g))
+    expect_true(is.independent(g))
+    
+    g <- generic(a, 1, 2, 3, dependsOn = b)    
+    expect_true(is.dependent(g))
+    expect_false(is.independent(g))
+    g <- customGeneric(a, function(i, g, env) { }, dependsOn = b)
+    expect_true(is.dependent(g))
+    expect_false(is.independent(g))
+})
+
+length.generic <- function(g) {
+    g$length
+}
+
+test_that("generic length reflects the length described, not the length of the list", {
+    g <- generic(a, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    expect_equal(length(g), 10)
+    expect_equal(length(names(g)), 4)
+    g <- customGeneric(a, function(i, g, env) { }, length = 11)
+    expect_equal(length(g), 11)
+    expect_equal(length(names(g)), 3)
+})
+
+
 #' Checks that the given function has a proper signature for a generic content function. 
 #' 
 #' A generic content function takes the index of the value to be returned that must be named i, the generic itself named g, and the environment of the current test called env. The environment is a list containing values of all previously defined generics in the particular test instance. 
@@ -205,65 +268,11 @@ test_that("g as shorthand for generic works", {
     expect_equal(g(a, 1, 2), generic(a, 1, 2))
 })
 
-is.generic <- function(o) {
-    inherits(o, "generic")
+# checks ---------------------------------------------------------------------------------------------------------------
+
+is.check <- function(o) {
+    inherits(o, "check")
 }
-
-test_that("is.generic", {
-    expect_false(is.generic(1))
-    expect_true(is.generic(g(a, 1, 2, 4)))
-    expect_true(is.generic(g(a, 1, 2, dependsOn = b)))
-    expect_true(is.generic(customGeneric(a, function(i, g, env) { }, dependsOn = b)))
-    expect_true(is.generic(customGeneric(a, function(i, g, env) { }, length = 10)))
-})
-
-is.dependent.generic <- function(g) {
-    !is.null(g$dependsOn)
-}
-
-
-is.independent.generic <- function(g) {
-    is.null(g$dependsOn)
-}
-
-is.dependent <- function(o) {
-    UseMethod("is.dependent", o)
-}
-
-is.independent <- function(o) {
-    UseMethod("is.independent", o)
-}
-
-
-test_that("dependent and independent generic distinction works", {
-    g <- generic(a, 1, 2, 3)    
-    expect_false(is.dependent(g))
-    expect_true(is.independent(g))
-    g <- customGeneric(a, function(i, g, env) { }, length = 3)
-    expect_false(is.dependent(g))
-    expect_true(is.independent(g))
-
-    g <- generic(a, 1, 2, 3, dependsOn = b)    
-    expect_true(is.dependent(g))
-    expect_false(is.independent(g))
-    g <- customGeneric(a, function(i, g, env) { }, dependsOn = b)
-    expect_true(is.dependent(g))
-    expect_false(is.independent(g))
-})
-
-length.generic <- function(g) {
-    g$length
-}
-
-test_that("generic length reflects the length described, not the length of the list", {
-    g <- generic(a, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    expect_equal(length(g), 10)
-    expect_equal(length(names(g)), 4)
-    g <- customGeneric(a, function(i, g, env) { }, length = 11)
-    expect_equal(length(g), 11)
-    expect_equal(length(names(g)), 3)
-})
-
 
 # TODO This should do something more
 check <- function(checkFunction, ...) {
@@ -271,20 +280,19 @@ check <- function(checkFunction, ...) {
     class(result) <- "check"    
 }
 
-# TODO this should do something more
-condition <- function(conditionFunction, ...) {
-    result <- eval(substitute(alist(...)))
-    class(result) <- "condition"    
-    
-}
-
-is.check <- function(o) {
-    inherits(o, "check")
-}
+# conditions -----------------------------------------------------------------------------------------------------------
 
 is.condition <- function(o) {
     inherits(o, "condition")
 }
+
+# TODO this should do something more
+condition <- function(conditionFunction, ...) {
+    result <- eval(substitute(alist(...)))
+    class(result) <- "condition"    
+}
+
+# test generator -------------------------------------------------------------------------------------------------------
 
 test <- function(..., name = NULL) {
     # convert name to character if required, preserve name null if unnamed
@@ -429,12 +437,15 @@ enumerateTests <- function(name, code, separatedCommands) {
     tests
 }
 
+# substitution ---------------------------------------------------------------------------------------------------------
+
+context("substitution")
 
 testSubstitute <- function(code, env) {
     c = substitute(code)
     if (typeof(c) == "character") {
         c <- gsub("%%",as.character(as.raw(0)), c)
-        for (n in names(env))
+        if (length(env) != 0) for (n in sort(names(env), decreasing = TRUE))
             if (typeof(env[[n]]) == "character")
                 c <- gsub(paste("%", n, sep = ""), env[[n]], c)
             else
@@ -451,16 +462,16 @@ testSubstitute <- function(code, env) {
 testSubstituteAST <- function(ast, env) {
     if (is.symbol(ast)) {
         aName <- as.character(ast)
-        if (contains(env, aName))
+        if (aName %in% names(env))
             env[[aName]]
         else
             ast
     } else if (is.call(ast)) {
         aName <- as.character(ast[[1]])
-        if (contains(env, aName))
+        if (aName %in% names(env))
             ast[[1]] <- as.name(env[[aName]])
         for (i in 2:length(ast))
-            ast[[i]] <- testSubstitute2(ast[[i]], env)
+            ast[[i]] <- testSubstituteAST(ast[[i]], env)
         ast
     } else if (is.pairlist(ast)) {
         # for pairlists do not substitute at all
@@ -474,4 +485,115 @@ testSubstituteAST <- function(ast, env) {
     }
 }
 
+test_that("substitution works for strings into strings", {
+    expect_equal(
+        testSubstitute("a = a", list()),
+        "a = a"
+    )
+    expect_equal(
+        testSubstitute("a = a", list(a = "1")),
+        "a = a"
+    )
+    expect_equal(
+        testSubstitute("a = %%a", list(a = "1")),
+        "a = %a"
+    )
+    expect_equal(
+        testSubstitute("a = %a", list(a = "a+b")),
+        "a = a+b"
+    )
+    expect_equal(
+        testSubstitute("%a %%%b", list(a = "1", b = "c(1,2)")),
+        "1 %c(1,2)"
+    )
+    expect_equal( # order does not matter for substitutions of prefixed elements, longest will take precedence
+        testSubstitute("a = %aa", list(a = "a", aa = "b")),
+        "a = b"
+    )
+    expect_equal( # unmatched % are left in the string without any warnings
+        testSubstitute("a = %a", list()),
+        "a = %a"
+    )
+})
 
+test_that("substitution of ASTs into string", {
+    expect_equal(
+        testSubstitute("a = %%a", list(a = 1)),
+        "a = %a"
+    )
+    expect_equal(
+        testSubstitute("a = %%a", list(a = quote(1))),
+        "a = %a"
+    )
+    expect_equal(
+        testSubstitute("a = %a", list(a = quote(a+b))),
+        "a = a + b"
+    )
+    expect_equal(
+        testSubstitute("%a %%%b", list(a = 1, b = quote(c(1,2)))),
+        "1 %c(1, 2)"
+    )
+    expect_equal( # order does not matter for substitutions of prefixed elements, longest will take precedence
+        testSubstitute("a = %aa", list(a = quote(a), aa = quote(b))),
+        "a = b"
+    )
+})
+
+test_that("substitution of strings and ASTs into string", {
+    expect_equal(
+        testSubstitute("a %b %a %c", list( a= "+", b = quote(as.name("+")), c="c(1,2)")),
+        "a as.name(\"+\") + c(1,2)"
+        )
+})
+
+test_that("substitution works on ASTs replaced with ASTs", {
+    expect_equal(
+        testSubstitute(a + b + c %x% d, list()),
+        quote(a + b + c %x% d)
+    )
+    expect_equal(
+        testSubstitute(a + b + c %x% d, list(e = 1)),
+        quote(a + b + c %x% d)
+    )
+    expect_equal(
+        testSubstitute(a + b + c %x% d, list(a = 1)),
+        quote(1 + b + c %x% d)
+    )
+    expect_equal(
+        testSubstitute(a + b + c %x% d, list(a = 1, b = quote(c(1, 2)))),
+        quote(1 + c(1, 2) + c %x% d)
+    )
+    expect_equal(
+        testSubstitute(a + b + c %x% d, list(a = 1, b = quote(c(1, 2)), c = quote(5 + 6))),
+        quote(1 + c(1, 2) + (5 + 6) %x% d)
+    )
+})
+
+test_that("substition of operators in ASTs work with characters or names, or anything else too", {
+    expect_equal(
+        testSubstitute(1 %a% 2, list(a = "*")),
+        quote(1 * 2)
+    )
+    expect_equal(
+        testSubstitute(1 %a% 2, list(a = as.name("*"))),
+        quote(1 * 2)
+    )
+})
+
+test_that("substitution of strings into ASTs preserves the string nature", {
+    expect_equal(
+        testSubstitute(a + b, list(a = "1")),
+        quote("1" + b)
+    )
+    expect_equal(
+        testSubstitute(c(a, b), list(a = "c(1, 2)", b = "c(3, 4)")),
+        quote(c("c(1, 2)", "c(3, 4)"))
+    )
+})
+
+test_that("substitution of strings ansd ASTs into ASTs", {
+    expect_equal(
+        testSubstitute(c(a, b), list(a = "c(1, 2)", b = c(3, 4))),
+        quote(c("c(1, 2)", c(3, 4)))
+    )
+})
