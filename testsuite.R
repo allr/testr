@@ -19,7 +19,7 @@
 # or visit www.oracle.com if you need additional information or have any
 # questions.
 
-
+library("testthat")
 
 #' Checks that the given function has a proper signature for a generic content function. 
 #' 
@@ -29,12 +29,24 @@ is.genericContentFunction <- function(f) {
     identical(names(formals(f)), c("i", "g", "env"))
 }
 
+context("generics")
+
+test_that("is.genericContentFunction", {
+    # non-function is FALSE
+    expect_false(is.genericContentFunction(1))
+    # function with different arg count is false
+    expect_false(is.genericContentFunction(function(i, g, env, a, b) { }))
+    # function with different arg names is false (permutation)
+    expect_false(is.genericContentFunction(function(g, i, env) { }))
+    # correct function is true
+    expect_true(is.genericContentFunction(function(i, g, env) { }))
+})
+
 #' Creates new custom generic.
 #' 
 #' Default value for length 
 #' 
-customGeneric <- function(name, contentFunction, ..., dependsOn = NA, length = 1) {
-    name <- as.character(name)
+customGeneric <- function(name, contentFunction, ..., dependsOn = NULL, length = 1) {
     if (! is.genericContentFunction(contentFunction))
         stop("Generic content function must take exactly three arguments named i, g and env.")
     result <- eval(substitute(alist(...)))
@@ -47,20 +59,21 @@ customGeneric <- function(name, contentFunction, ..., dependsOn = NA, length = 1
     if ("dependents" %in% n)
         stop("'dependents' is a reserved generic field and cannot be supplied explicitly")
     # get the name (convert its substitute to character if it is not yet)
+    name <- substitute(name)
     if (typeof(name) == "character")
         result$name <- name
     else
-        result$name <- as.character(substitute(name))
+        result$name <- as.character(name)
     # get the other arguments in the result object
     result$contentFunction <- contentFunction
-    if (! identical(dependsOn, NA)) {
+    dependsOn <- substitute(dependsOn)
+    if (! is.null(dependsOn)) {
         result$dependsOn <- as.character(dependsOn)
     } else {
-        result$dependsOn <- NA
+        result$dependsOn <- NULL
         if (missing(length))
             stop("Length must be defined for an independent generic")
     }
-    result$dependents <- NA # make sure the value will be there when needed to speed things up
     length <- as.integer(length)
     if (length < 1)
         stop("Generic must have length of at least one")
@@ -69,40 +82,148 @@ customGeneric <- function(name, contentFunction, ..., dependsOn = NA, length = 1
     result
 }
 
+test_that("customGeneric name and dependsOn can be both strings and names and will be stringified", {
+    g <- customGeneric(a, function(i, g, env) { }, dependsOn = b )
+    expect_identical(typeof(g$name), "character")
+    expect_identical(typeof(g$dependsOn), "character")
+    expect_identical(g$name, "a")
+    expect_identical(g$dependsOn, "b")
+    g2 <- customGeneric("a", function(i, g, env) { }, dependsOn = "b" )
+    expect_identical(typeof(g2$name), "character")
+    expect_identical(typeof(g2$dependsOn), "character")
+    expect_identical(g2$name, "a")
+    expect_identical(g2$dependsOn, "b")
+})
+
+test_that("compulsory argument values", {
+    expect_error(customGeneric(a))
+    expect_error(customGeneric(name = a, length = 2))
+    expect_error(customGeneric(a, function(i, g, env) { }))
+    expect_error(customGeneric(a, function(i, g, env) { }, 1))
+    f <- function(i, g, env) { }
+    g <- customGeneric(a, f, length = 10)
+    expect_equal(g$name, "a")
+    expect_equal(g$length, 10)
+    expect_equal(g$contentFunction, f)
+})
+
+test_that("optional argument values", {
+    g <- customGeneric("a", function(i, g, env) { }, length = 1 )
+    expect_true(is.null(g$dependsOn))
+    g <- customGeneric(a, function(i, g, env) { }, dependsOn = b)
+    expect_equal(g$length, 1)
+})
+
+test_that("contentFunction can be supplied and works", {
+    content <- c(1,20,3,40,5,6)
+    g <- customGeneric(a, function(i, g, env) { content[[i]]}, length = 6)
+    expect_equal(g$contentFunction(1, g, list()), content[[1]])
+    expect_equal(g$contentFunction(2, g, list()), content[[2]])
+    expect_equal(g$contentFunction(3, g, list()), content[[3]])
+    expect_equal(g$contentFunction(4, g, list()), content[[4]])
+    expect_equal(g$contentFunction(5, g, list()), content[[5]])
+    expect_equal(g$contentFunction(6, g, list()), content[[6]])
+})
+
+test_that("additional arguments can be supplied and are not evaluated", {
+    g <- customGeneric(a, function(i, g, env) { }, length = 10, foo = "foo", bar = "bar", fooBar = c("foo", "bar"))  
+    expect_equal(g$foo, "foo")
+    expect_equal(g$bar, "bar")
+    expect_equal(g$fooBar, substitute(c("foo", "bar")))
+})
+
+test_that("additional arguments cannot be dependents", {
+    expect_error(customGeneric(a, function(i, g, env) { }, length = 1, dependents = 2))
+})
+
 #' Shorthand for customGeneric function. 
 #' 
 #' @aliases customGeneric
 #' @seealso customGeneric
 cg <- customGeneric
 
+test_that("cg shorthand for customGeneric works", {
+    expect_equal(cg(a, function(i, g, env) { i }, length = 10), customGeneric(a, function(i, g, env) { i }, length = 10))
+})
+
 #' Creates new generic that is defined by a list of its values.
-generic <- function(name, ..., dependsOn = NA) {
+generic <- function(name, ..., dependsOn = NULL) {
     ex <- eval(substitute(alist(...)))
     # convert name to character if required
+    name <- substitute(name)
+    dependsOn <- substitute(dependsOn)
     if (typeof(name) != "character")
-        name <- as.character(substitute(name))
+        name <- as.character(name)
+    if (!is.null(dependsOn))
+        dependsOn <- as.character(dependsOn)
     # we must do the eval & substitute here so that the actual ASTs supplied to this function will be passed to the
     # underlying custom generic too
-    eval(substitute(customGeneric(name, function(i,g,env) { g$expr[[i]] }, length = length(ex), dependsOn = dependsOn, expr = ex), list(ex = ex)))
+    eval(substitute(customGeneric(name, function(i,g,env) { g$expr[[i]] }, length = length(ex), dependsOn = dependsOn, expr = ex), list(ex = ex, name = name, dependsOn = dependsOn)))
 }
+
+test_that("generic propagates name and depends on correctly", {
+    g <- generic(a, 1, 2, 3)
+    expect_equal(g$name, "a")
+    expect_true(is.null(g$dependsOn))
+    g <- generic("a", 1, 2, 3, dependsOn = b)
+    expect_equal(g$name, "a")
+    expect_equal(g$dependsOn, "b")
+    g <- generic(g, 1, 2, 3, dependsOn = "b")
+    expect_equal(g$name, "g")
+    expect_equal(g$dependsOn, "b")
+})
+
+test_that("generic sets the length correctly and values are propagated to expr field", {
+    g <- generic(a, 1)
+    expect_equal(g$length, 1)
+    expect_equal(g$expr, list(1))
+    g <- generic(a, 1, 2, 3)
+    expect_equal(g$length, 3)
+    expect_equal(g$expr, list(1, 2, 3))
+})
+
+test_that("generic expr is not evaluated", {
+    g <- generic(a, 1, c(1, 2), as.name("+"))
+    expect_equal(g$length, 3)
+    expect_equal(g$expr, list(1, substitute(c(1, 2)), substitute(as.name("+"))))
+})
+
+test_that("generic content function returns correct values", {
+    g <- generic(a, 1, 2, 3, 4, 5, 6)
+    expect_equal(g$contentFunction(1, g, list()), 1)
+    expect_equal(g$contentFunction(2, g, list()), 2)
+    expect_equal(g$contentFunction(3, g, list()), 3)
+    expect_equal(g$contentFunction(4, g, list()), 4)
+    expect_equal(g$contentFunction(5, g, list()), 5)
+    expect_equal(g$contentFunction(6, g, list()), 6)
+})
 
 #' A shorthand for simple generic function
 g <- generic
+
+test_that("g as shorthand for generic works", {
+    expect_equal(g(a, 1, 2), generic(a, 1, 2))
+})
 
 is.generic <- function(o) {
     inherits(o, "generic")
 }
 
+test_that("is.generic", {
+    expect_false(is.generic(1))
+    expect_true(is.generic(g(a, 1, 2, 4)))
+    expect_true(is.generic(g(a, 1, 2, dependsOn = b)))
+    expect_true(is.generic(customGeneric(a, function(i, g, env) { }, dependsOn = b)))
+    expect_true(is.generic(customGeneric(a, function(i, g, env) { }, length = 10)))
+})
+
 is.dependent.generic <- function(g) {
-    ! is.na(g$dependsOn)
+    !is.null(g$dependsOn)
 }
+
 
 is.independent.generic <- function(g) {
-    is.na(g$dependsOn)
-}
-
-length.generic <- function(g) {
-    g$length
+    is.null(g$dependsOn)
 }
 
 is.dependent <- function(o) {
@@ -112,6 +233,37 @@ is.dependent <- function(o) {
 is.independent <- function(o) {
     UseMethod("is.independent", o)
 }
+
+
+test_that("dependent and independent generic distinction works", {
+    g <- generic(a, 1, 2, 3)    
+    expect_false(is.dependent(g))
+    expect_true(is.independent(g))
+    g <- customGeneric(a, function(i, g, env) { }, length = 3)
+    expect_false(is.dependent(g))
+    expect_true(is.independent(g))
+
+    g <- generic(a, 1, 2, 3, dependsOn = b)    
+    expect_true(is.dependent(g))
+    expect_false(is.independent(g))
+    g <- customGeneric(a, function(i, g, env) { }, dependsOn = b)
+    expect_true(is.dependent(g))
+    expect_false(is.independent(g))
+})
+
+length.generic <- function(g) {
+    g$length
+}
+
+test_that("generic length reflects the length described, not the length of the list", {
+    g <- generic(a, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    expect_equal(length(g), 10)
+    expect_equal(length(names(g)), 4)
+    g <- customGeneric(a, function(i, g, env) { }, length = 11)
+    expect_equal(length(g), 11)
+    expect_equal(length(names(g)), 3)
+})
+
 
 # TODO This should do something more
 check <- function(checkFunction, ...) {
@@ -134,12 +286,12 @@ is.condition <- function(o) {
     inherits(o, "condition")
 }
 
-test <- function(..., name = NA) {
+test <- function(..., name = NULL) {
     # convert name to character if required, preserve name null if unnamed
     if (typeof(name) != "character")
         name <- as.character(substitute(name))
     if (length(name) == 0)
-        name <- NA
+        name <- NULL
     # get the arguments in dots and separate them as code commands and code (code being the last one)
     commands <- eval(substitute(alist(...)))
     if (length(commands) == 1)
@@ -208,7 +360,7 @@ enumerateTests <- function(name, code, separatedCommands) {
     increaseGeneric <- function(i = length(ig)) {
         g <- ig[[i]]
         # first increase dependent generics
-        if (!is.na(g$dependents)) for (dg in g$dependents)
+        for (dg in g$dependents)
             if (dPos[[dg$name]] == dMax[[dg$name]])
                 dPos[[dg$name]] <<- 1
             else
@@ -321,3 +473,5 @@ testSubstituteAST <- function(ast, env) {
         stop("unknown type ", typeof(ast))
     }
 }
+
+
