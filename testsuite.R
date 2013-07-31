@@ -164,8 +164,16 @@ separateCommands <- function(commands) {
     for (i in 1:length(commands)) {
         # first check if it is a named argument, in which case its AST will be stored in the test itself
         if (identical(cmdNames[[i]],"")) {
-            # TODO the reserved names will change 
-            if (cmdNames[[i]] %in% c("independentGenerics", "dependentGenerics", "checks", "conditions", "code", "env"))
+            if (cmdNames[[i]] %in% c("name",
+                                     "env",
+                                     "code",
+                                     "originalCode",
+                                     "conditions",
+                                     "checks",
+                                     "independentGenerics",
+                                     "dependentGenerics",
+                                     "genericValues"
+                                     ))
                 stop("Cannot use reserved name ",cmdNames[[i]]," in test field creation")
             test[[cmdNames[[i]]]] <- commands[[i]]
         } else {
@@ -230,6 +238,7 @@ enumerateTests <- function(name, code, separatedCommands) {
     dPos <- rep(1, length(dg))
     names(dPos) <- names(dg)
     # enumerate the n tests and advance the generics 
+    tests <- list()
     for (t in 1:n) {
         # first determine the values of the generics and store them to the environment list
         env <- list()
@@ -245,16 +254,28 @@ enumerateTests <- function(name, code, separatedCommands) {
             if (identical(code[[1]], as.name("{")))
                 codeStr <- codeStr[c(-1, -length(codeStr))]
         }
-        print(codeStr)
         # create the test
-        
+        test <- c(
+            list(
+                # if changing these, also change the check for reserved names in separateCommands function above
+                name = name,
+                env = env, 
+                code = codeStr, 
+                originalCode = code, 
+                conditions = separatedCommands$conditions,
+                checks = separatedCommands$checks, 
+                independentGenerics = separatedCommands$independentGenerics,
+                dependentGenerics = separatedCommands$dependentGenerics,
+                generiValues = c(iPos, dPos)
+                ),
+            separatedCommands$test
+        )
+        tests <- c(tests, test)
         # increase the generics
         increaseGeneric()
     }
+    tests
 }
-
-
-
 
 
 testSubstitute <- function(code, env) {
