@@ -23,6 +23,7 @@ library("testthat")
 
 
 # Generics -------------------------------------------------------------------------------------------------------------
+context("generics")
 
 is.generic <- function(o) {
     inherits(o, "generic")
@@ -91,8 +92,6 @@ test_that("generic length reflects the length described, not the length of the l
 is.genericContentFunction <- function(f) {
     identical(names(formals(f)), c("i", "g", "env"))
 }
-
-context("generics")
 
 test_that("is.genericContentFunction", {
     # non-function is FALSE
@@ -323,7 +322,7 @@ separateCommands <- function(commands) {
     cmdNames = names(commands)
     for (i in 1:length(commands)) {
         # first check if it is a named argument, in which case its AST will be stored in the test itself
-        if (identical(cmdNames[[i]],"")) {
+        if (!identical(cmdNames[[i]],"") && !is.null(cmdNames[[i]])) {
             if (cmdNames[[i]] %in% c("name",
                                      "env",
                                      "code",
@@ -411,8 +410,9 @@ enumerateTests <- function(name, code, separatedCommands) {
         codeStr <- eval(substitute(testSubstitute(code, env), list(code = code)))
         if (typeof(codeStr) != "character") {
             codeStr <- deparse(codeStr)
-            if (identical(code[[1]], as.name("{")))
-                codeStr <- codeStr[c(-1, -length(codeStr))]
+            if (length(code) > 1)
+                if (identical(code[[1]], as.name("{")))
+                    codeStr <- codeStr[c(-1, -length(codeStr))]
         }
         # create the test
         test <- c(
@@ -426,16 +426,34 @@ enumerateTests <- function(name, code, separatedCommands) {
                 checks = separatedCommands$checks, 
                 independentGenerics = separatedCommands$independentGenerics,
                 dependentGenerics = separatedCommands$dependentGenerics,
-                generiValues = c(iPos, dPos)
+                genericValues = c(iPos, dPos)
                 ),
             separatedCommands$test
         )
-        tests <- c(tests, test)
+        class(test) <- "testInstance"
+        tests <- c(tests, list(test))
         # increase the generics
         increaseGeneric()
     }
     tests
 }
+
+print.testInstance <- function(t) {
+    cat("Test", t$name, "\n")
+    cat("Generics:\n")
+    print(t$genericValues)
+    cat("Code:\n", t$code, "\n")
+}
+
+test_that("Tests are returned in hierarchical list", {
+    x = test(name="haha", g(a, 1, 2, 3, 4, 5), a)
+    expect_equal(length(x), 5)
+})
+
+test_that("Symbol can be substitued", {
+    x = test(name="haha", g(a, 1, 2, 3, 4, 5), a)
+    expect_equal(x[[1]]$code, "1")
+})
 
 # substitution ---------------------------------------------------------------------------------------------------------
 
