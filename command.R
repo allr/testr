@@ -31,7 +31,7 @@ join <- function(separator, v) {
 }
 
 
-command <- function(executable, arguments = NULL, input = NULL, workingDirectory = NULL) {
+command <- function(executable, arguments = NULL, input = NULL, workingDirectory = NULL, separateOutErr = FALSE) {
     wd <- getwd()
     if (!missing(workingDirectory))
         setwd(workingDirectory)
@@ -39,19 +39,31 @@ command <- function(executable, arguments = NULL, input = NULL, workingDirectory
         cmd <- shQuote(executable)
     else
         cmd <- join(" ", c(shQuote(executable), arguments))
-    suppressWarnings(
-        time <- system.time(tmp <- system(cmd, intern = TRUE, input = input, show.output.on.console = FALSE))
-    )
+    if (separateOutErr) {
+        suppressWarnings(
+            time <- system.time(cout <- system(cmd, intern = TRUE, input = input, show.output.on.console = FALSE, ignore.stderr = TRUE))
+        )
+        suppressWarnings(
+            time <- time + system.time(cerr <- system(cmd, intern = TRUE, input = input, show.output.on.console = FALSE, ignore.stdout = TRUE))
+        )
+        time <- time / 2
+    } else {
+        suppressWarnings(
+            time <- system.time(cout <- system(cmd, intern = TRUE, input = input, show.output.on.console = FALSE))
+        )
+        cerr <- NULL
+    }
     if (!is.null(wd))
         setwd(wd)
     result <- list(
-        status = attr(tmp, "status"),
+        status = attr(cout, "status"),
         user.self = time[[1]], # maybe we do not need these
         sys.self = time[[2]], # maybe we do not need these
         elapsed = time[[3]],
         user.child = time[[4]], # maybe we do not need these
         sys.child = time[[5]], # maybe we do not need these
-        output = tmp,
+        output = cout,
+        error = cerr,
         command = cmd
     )
     if (is.null(result$status))
@@ -71,6 +83,12 @@ print.commandResult <- function(tr) {
     cat("Output:       (", length(tr$output), " lines)\n", sep="")
     for (i in tr$output)
         cat("             ",i,"\n")
+    if (!is.null(tr$error)) {
+        cat("Error:        (", length(tr$error), " lines)\n", sep="")
+        for (i in tr$error)
+            cat("             ",i,"\n")
+        
+    }
 }
 
 is.commandResult <- function(o) {
