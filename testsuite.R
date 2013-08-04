@@ -466,7 +466,7 @@ test <- function(..., name = NULL) {
         name <- NULL
     # get the arguments in dots and separate them as code commands and code (code being the last one)
     commands <- eval(substitute(alist(...)))
-    if (length(commands) == 1)
+    if (length(commands) == 0)
         stop("The test must have at least a code specified.")
     code <- commands[[length(commands)]]
     commands <- commands[-length(commands)]
@@ -485,43 +485,45 @@ separateCommands <- function(commands) {
         test = list()
         )
     cmdNames = names(commands)
-    for (i in 1:length(commands)) {
-        # first check if it is a named argument, in which case its AST will be stored in the test itself
-        if (!identical(cmdNames[[i]],"") && !is.null(cmdNames[[i]])) {
-            if (cmdNames[[i]] %in% c("name",
-                                     "env",
-                                     "code",
-                                     "originalCode",
-                                     "conditions",
-                                     "checks",
-                                     "independentGenerators",
-                                     "dependentGenerators",
-                                     "generatorValues"
-                                     ))
-                stop("Cannot use reserved name ",cmdNames[[i]]," in test field creation")
-            test[[cmdNames[[i]]]] <- commands[[i]]
-        } else {
-            cmd <- eval(commands[[i]])
-            if (is.generator(cmd)) {
-                if (cmd$name %in% c(names(result$independentGenerators), names(result$dependentGenerators)))
-                    stop("Generator ", cmd$name, " already defined for the test.")
-                if (is.independent(cmd)) { # for independent generators, only store them
-                    result$independentGenerators[[cmd$name]] <- cmd
-                } else { # for dependent generators update the master generator's dependents list
-                    result$dependentGenerators[[cmd$name]] <- cmd
-                    if (! cmd$dependsOn %in% names(result$independentGenerators))
-                        stop("Generator ", cmd$name, " depends on unknown generator ", cmd$dependsOn)
-                    # add the dependent generator to the master list and replace it
-                    ig <- result$independentGenerators[[cmd$dependsOn]]
-                    ig$dependents <- c(ig$dependents, cmd$name)
-                    result$independentGenerators[[ig$name]] <- ig
-                }
-            } else if (is.check(cmd)) {
-                result$checks <- c(result$checks, cmd)
-            } else if (is.condition(cmd)) {
-                result$conditions <- c(result$conditions, cmd)
+    if (length(commands) != 0) {
+        for (i in 1:length(commands)) {
+            # first check if it is a named argument, in which case its AST will be stored in the test itself
+            if (!identical(cmdNames[[i]],"") && !is.null(cmdNames[[i]])) {
+                if (cmdNames[[i]] %in% c("name",
+                                         "env",
+                                         "code",
+                                         "originalCode",
+                                         "conditions",
+                                         "checks",
+                                         "independentGenerators",
+                                         "dependentGenerators",
+                                         "generatorValues"
+                                         ))
+                    stop("Cannot use reserved name ",cmdNames[[i]]," in test field creation")
+                test[[cmdNames[[i]]]] <- commands[[i]]
             } else {
-                stop("Only generator, check, or condition can be passed as an argument to a test")
+                cmd <- eval(commands[[i]])
+                if (is.generator(cmd)) {
+                    if (cmd$name %in% c(names(result$independentGenerators), names(result$dependentGenerators)))
+                        stop("Generator ", cmd$name, " already defined for the test.")
+                    if (is.independent(cmd)) { # for independent generators, only store them
+                        result$independentGenerators[[cmd$name]] <- cmd
+                    } else { # for dependent generators update the master generator's dependents list
+                        result$dependentGenerators[[cmd$name]] <- cmd
+                        if (! cmd$dependsOn %in% names(result$independentGenerators))
+                            stop("Generator ", cmd$name, " depends on unknown generator ", cmd$dependsOn)
+                        # add the dependent generator to the master list and replace it
+                        ig <- result$independentGenerators[[cmd$dependsOn]]
+                        ig$dependents <- c(ig$dependents, cmd$name)
+                        result$independentGenerators[[ig$name]] <- ig
+                    }
+                } else if (is.check(cmd)) {
+                    result$checks <- c(result$checks, cmd)
+                } else if (is.condition(cmd)) {
+                    result$conditions <- c(result$conditions, cmd)
+                } else {
+                    stop("Only generator, check, or condition can be passed as an argument to a test")
+                }
             }
         }
     }
@@ -530,20 +532,22 @@ separateCommands <- function(commands) {
 
 enumerateTests <- function(name, code, separatedCommands) {
     increaseGenerator <- function(i = length(ig)) {
-        g <- ig[[i]]
-        # first increase dependent generators
-        for (dg in g$dependents)
-            if (dPos[[dg$name]] == dMax[[dg$name]])
-                dPos[[dg$name]] <<- 1
-            else
-                dPos[[dg$name]] <<- dPos[[dg$name]] + 1
-        # now increase the generator itself and perform recursive increase ifoverflow
-        if (iPos[[i]] == iMax[[i]]) {
-            iPos[[i]] <<- 1
-            if (i > 1)
-                increaseGenerator(i-1)
-        } else {
-            iPos[[i]] <<- iPos[[i]] + 1
+        if (i != 0) {
+            g <- ig[[i]]
+            # first increase dependent generators
+            for (dg in g$dependents)
+                if (dPos[[dg$name]] == dMax[[dg$name]])
+                    dPos[[dg$name]] <<- 1
+                else
+                    dPos[[dg$name]] <<- dPos[[dg$name]] + 1
+            # now increase the generator itself and perform recursive increase ifoverflow
+            if (iPos[[i]] == iMax[[i]]) {
+                iPos[[i]] <<- 1
+                if (i > 1)
+                    increaseGenerator(i-1)
+            } else {
+                iPos[[i]] <<- iPos[[i]] + 1
+            }
         }
     }
     # shorthands
@@ -552,7 +556,10 @@ enumerateTests <- function(name, code, separatedCommands) {
     # determine the number of tests to be produced and max lengths for the independent generators
     iMax <- sapply(seq_len(length(ig)), function(i) { length(ig[[i]]) })
     names(iMax) <- names(ig)
-    n <- prod(iMax)
+    if (length(iMax) == 0)
+        n <- 1
+    else 
+        n <- prod(iMax)
     # determine the max value for dependent generators
     dMax <- sapply(seq_len(length(dg)), function(i) { length(dg[[i]]) })
     names(dMax) <- names(dg)

@@ -22,7 +22,7 @@
 join <- function(separator, v) {
     if (length(v) == 0) {
         ""
-    } else {
+    } else { 
         result = as.character(v[[1]])
         for (i in (v)[-1])
             result = paste(result, separator, i, sep = "") 
@@ -62,8 +62,8 @@ command <- function(executable, arguments = NULL, input = NULL, workingDirectory
         elapsed = time[[3]],
         user.child = time[[4]], # maybe we do not need these
         sys.child = time[[5]], # maybe we do not need these
-        output = cout,
-        error = cerr,
+        cout = cout,
+        cerr = cerr,
         command = cmd
     )
     if (is.null(result$status))
@@ -80,12 +80,18 @@ print.commandResult <- function(tr) {
     else
         cat("Status:      ", tr$status, "FAILURE\n")
     cat("Elapsed time:", tr$elapsed, "[sec]\n")
-    cat("Output:       (", length(tr$output), " lines)\n", sep="")
-    for (i in tr$output)
+    cat("Output:       (", length(tr$cout), " lines)\n", sep="")
+    for (i in tr$cout)
         cat("             ",i,"\n")
-    if (!is.null(tr$error)) {
-        cat("Error:        (", length(tr$error), " lines)\n", sep="")
-        for (i in tr$error)
+    if (!is.null(tr$cerr)) {
+        cat("Error:        (", length(tr$cerr), " lines)\n", sep="")
+        for (i in tr$cerr)
+            cat("             ",i,"\n")
+        
+    }
+    if (!is.null(tr$targetOutput)) {
+        cat("Target Output:(", length(tr$targetOutput), " lines)\n", sep="")
+        for (i in tr$targetOutput)
             cat("             ",i,"\n")
         
     }
