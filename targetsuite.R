@@ -49,20 +49,20 @@ testSuite <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors 
     displayOnlyErrors <<- displayOnlyErrors
     stopOnError <<- stopOnError
     displayCodeOnError <<- displayCodeOnError
-    totalFail <- 0
-    totalPass <- 0
+    totalFails <- 0
+    totalPasses <- 0
     if (verbose)
         cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
     for (f in list.files(root, pattern=".[rR]$", recursive = TRUE)) {
         filename <- paste(root,"/", f, sep = "")
         cat(filename,"...\n")
         tests <<- list(c("Test Name","Result", "Comments"))
-        fail <<- 0
-        pass <<- 0
+        fails <<- 0
+        passes <<- 0
         source(filename, local = FALSE)
-        cat("  (pass = ", pass,", fail = ", fail, ", total = ", pass + fail, ")\n", sep = "")
-        totalFail <- totalFail + fail
-        totalPass <- totalPass + pass
+        cat("  (pass = ", passes,", fail = ", fails, ", total = ", passes + fails, ")\n", sep = "")
+        totalFails <- totalFails + fails
+        totalPasses <- totalPasses + passes
         if (summary == TRUE) {
             cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
             for (t in tests[-1])
@@ -71,17 +71,17 @@ testSuite <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors 
         }
     }
     rm(tests, envir = globalenv())
-    rm(fail, envir = globalenv())
-    rm(pass, envir = globalenv())
+    rm(fails, envir = globalenv())
+    rm(passes, envir = globalenv())
     rm(verbose, envir = globalenv())
     rm(displayOnlyErrors, envir = globalenv())
     rm(stopOnError, envir = globalenv())
     rm(displayCodeOnError, envir = globalenv())
     cat("\n-------- Results --------\n")
-    cat("Passed:   ", totalPass, "\n")
-    cat("Failed:   ", totalFail, "\n")
-    cat("Total:    ", totalPass + totalFail, "\n")
-    if (totalFail == 0) {
+    cat("Passed:   ", totalPasses, "\n")
+    cat("Failed:   ", totalFails, "\n")
+    cat("Total:    ", totalPasses + totalFails, "\n")
+    if (totalFails == 0) {
         cat("Overall:  ", "PASS\n")
         TRUE
     } else {
@@ -210,10 +210,10 @@ test <- function(code, output = NULL, expectWarning = NULL, expectError = NULL, 
     if (verbose)
         print.test(tests[[length(tests)]], code)
     if (identical(result, "PASS")) {
-        pass <<- pass + 1
+        passes <<- passes + 1
         TRUE
     } else {
-        fail <<- fail + 1
+        fails <<- fails + 1
         if (stopOnError) {
             stop("Test ",name," failed: ", comments)
         }
