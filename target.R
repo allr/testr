@@ -118,6 +118,7 @@ execute.target <- function(target, test) {
     r <- command(target$path, target$args, input = test$code, separateOutErr = TRUE)
     print(getProgramOutput(target, r))
     r$targetOutput <- getProgramOutput(target, r)
+    r$target <- target
     r
 }
 

@@ -273,10 +273,83 @@ is.check <- function(o) {
     inherits(o, "check")
 }
 
-# TODO This should do something more
-check <- function(checkFunction, ...) {
+#' Checks that the given argument is a check function. 
+#' 
+#' The check function acts upon a test result on the particular target, the check itself and the environment used for the test expansion. 
+is.checkFunction <- function(f) {
+    identical(names(formals(f)), c("testResult", "check", "env"))
+}
+
+#' The expand function is suposed to produce a string that will be an argument to the test function in the targetSuite mode of operation. 
+#' 
+#' It only takes two arguments, the check itself and the environment used for the test. 
+is.expandFunction <- function(f) {
+    identical(names(formals(f)), c("check", "env"))
+}
+
+#' TODO documentation
+check <- function(checkFunction, ..., expandFunction = NULL) {
+    if (! is.checkFunction(checkFunction))
+        stop("Check function must have exactly three arguments named testResult, check and env")
+    if (missing(expandFunction))
+        expandFunction <- function(check, env) { NULL }
+    else
+        if (! is.expandFunction(expandFunction))
+            stop("Expand function must have exactly two arguments named check and env")
+    # get the additional arguments
     result <- eval(substitute(alist(...)))
+    n <- names(result)
+    if ((length(n) != length(result)) || ("" %in% n))
+        stop("Only named arguments can be added as check fields.")
     class(result) <- "check"    
+    result$checkFunction <- checkFunction
+    result$expandFunction <- expandFunction
+    result
+}
+
+#' An expected output. R expression is expected, generator replacement will be used on it. 
+o <- function(expectedOutput) {
+    eval(substitute(
+        check(
+            checkFunction = function(testResult, check, env) {
+                # TODO the check function must do the proper stuff
+            },
+            expandFunction = function(check, env) {
+                paste("output = ",deparse(eval(substitute(testSubstitute(co, env), list(co = check$output)))), sep = "")
+            },
+            output = eo
+            )
+    , list(eo = substitute(expectedOutput))))
+}
+
+#' A warning expectation check. Argument can be either a single string to find in warnings, or a vector of strings
+w <- function(expectWarning) {
+    eval(substitute(
+        check(
+            checkFunction = function(testResult, check, env) {
+                # TODO the check function must do the proper stuff
+            },
+            expandFunction = function(check, env) {
+                paste("expectWarning = ",deparse(eval(substitute(testSubstitute(cw, env), list(cw = check$expectWarning)))), sep = "")
+            },
+            expectWarning = ew
+        )
+        , list(ew = substitute(expectWarning))))
+}
+
+#' An error expectation check. Argument can be either a single error to find, or a vector of strings
+e <- function(expectError) {
+    eval(substitute(
+        check(
+            checkFunction = function(testResult, check, env) {
+                # TODO the check function must do the proper stuff
+            },
+            expandFunction = function(check, env) {
+                paste("expectError = ",deparse(eval(substitute(testSubstitute(ce, env), list(ce = check$expectError)))), sep = "")
+            },
+            expectWarning = ee
+        )
+        , list(ee = substitute(expectError))))
 }
 
 # conditions -----------------------------------------------------------------------------------------------------------
@@ -625,5 +698,8 @@ test_that("Tests are returned in hierarchical list", {
 test_that("Symbol can be substitued", {
     x = test(name="haha", g(a, 1, 2, 3, 4, 5), a)
     expect_equal(x[[1]]$code, "1")
-})
+}) 
+
+
+
 
