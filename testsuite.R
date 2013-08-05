@@ -695,6 +695,8 @@ expandTest.testInstance <- function(test) {
         if (! is.null(s)) {
             if (length(grep(pattern="^output =", s)) != 0)
                 isOutputSet <- TRUE
+            if (length(grep(pattern="^expectError =", s)) != 0)
+                isOutputSet <- TRUE
             callArgs <- c(callArgs, s)
         }
     }
