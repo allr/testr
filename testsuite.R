@@ -591,9 +591,9 @@ separateCommands <- function(commands) {
                         result$independentGenerators[[ig$name]] <- ig
                     }
                 } else if (is.check(cmd)) {
-                    result$checks <- c(result$checks, cmd)
+                    result$checks <- c(result$checks, list(cmd))
                 } else if (is.condition(cmd)) {
-                    result$conditions <- c(result$conditions, cmd)
+                    result$conditions <- c(result$conditions, list(cmd))
                 } else {
                     stop("Only generator, check, or condition can be passed as an argument to a test")
                 }
@@ -641,8 +641,6 @@ enumerateTests <- function(name, code, separatedCommands) {
     names(iPos) <- names(ig)
     dPos <- rep(1, length(dg))
     names(dPos) <- names(dg)
-    # enumerate the n tests and advance the generators 
-    tests <- list()
     for (t in 1:n) {
         # first determine the values of the generators and store them to the environment list
         env <- list()
@@ -655,9 +653,9 @@ enumerateTests <- function(name, code, separatedCommands) {
         codeStr <- eval(substitute(testSubstitute(code, env), list(code = code)))
         if (typeof(codeStr) != "character") {
             codeStr <- deparse(codeStr)
-            if (length(code) > 1)
-                if (identical(code[[1]], as.name("{")))
-                    codeStr <- codeStr[c(-1, -length(codeStr))]
+#            if (length(code) > 1)
+#                if (identical(code[[1]], as.name("{")))
+#                    codeStr <- codeStr[c(-1, -length(codeStr))]
         }
         # create the test
         test <- c(
@@ -676,11 +674,43 @@ enumerateTests <- function(name, code, separatedCommands) {
             separatedCommands$test
         )
         class(test) <- "testInstance"
-        tests <- c(tests, list(test))
+        tests <<- c(tests, list(test))
         # increase the generators
         increaseGenerator()
     }
-    tests
+}
+
+expandTest <- function(t, ...) {
+    UseMethod("expandTest", t)
+}
+
+expandTest.testInstance <- function(test) {
+    code <- test$code
+#    if (length(code)>1)
+#        code <- c("  {",code,"}")
+    callArgs <- NULL
+    isOutputSet <- FALSE
+    for (ch in test$checks) {
+        s <- ch$expandFunction(ch, test$env)
+        if (! is.null(s)) {
+            if (length(grep(pattern="^output =", s)) != 0)
+                isOutputSet <- TRUE
+            callArgs <- c(callArgs, s)
+        }
+    }
+    if (!isOutputSet) {
+        cat("Test", test$name, "does not have output specified, calculating...\n")
+        o <- eval(eval(substitute(testSubstitute(code, test$env), list(code = test$originalCode))), envir = new.env(parent=baseenv()))
+        callArgs <- c(callArgs, paste("output = ",deparse(o), sep = ""))
+    }
+    result <- paste(code, collapse = "\n  ")
+    if (! is.null(test$name))
+        result <- c(result, paste("  name = \"",gsub('"',"\\\\\"",gsub("\\\\","\\\\\\",test$name)),"\"", sep = ""))
+    for (arg in callArgs) { 
+        result <- c(result, paste("  ",arg, sep = ""))
+    }
+    result <- paste(result, collapse = ",\n")
+    paste("test(\n  ", result,"\n)\n\n", sep ="")
 }
 
 print.testInstance <- function(t) {
@@ -690,16 +720,45 @@ print.testInstance <- function(t) {
     cat("Code:\n", t$code, "\n")
 }
 
-test_that("Tests are returned in hierarchical list", {
-    x = test(name="haha", g(a, 1, 2, 3, 4, 5), a)
-    expect_equal(length(x), 5)
-})
-
-test_that("Symbol can be substitued", {
-    x = test(name="haha", g(a, 1, 2, 3, 4, 5), a)
-    expect_equal(x[[1]]$code, "1")
-}) 
 
 
 
+#t = test(name = "A simple \"example test", 
+#         g(a, 1, 2, 3),
+#         o(c(a,1)),
+#         w("none"), {
+#           x = a
+#           x + 1
+#         }
+#         )
+#expandTest(t[[1]])
+
+testSuite <- function(root, destRoot, showCode = FALSE) {
+    total <- 0
+    nFiles <- 0
+    for (f in list.files(root, pattern=".[rR]$", recursive = TRUE)) {
+        nFiles <- nFiles + 1
+        filename <- paste(root,"/", f, sep = "")
+        cat(filename,"...\n")
+        tests <<- list()
+        cat("Analyzing file", filename, "\n")
+        source(filename, local = FALSE)
+        total <- total + length(tests)
+        outFilename <- gsub(root, destRoot, filename)
+        cat("  Writing", length(tests), "tests to file", outFilename,"...\n")
+        dir.create(dirname(outFilename), recursive = TRUE, showWarnings = FALSE)
+        f <- file(outFilename, "wt")
+        for (t in tests) {
+            code <- expandTest(t)
+            cat(file = f, code)
+            if (showCode)
+                cat(code)
+        }
+        close(f)   
+    }
+    rm(tests, envir = globalenv())
+    cat("Total", total, "tests created out of", nFiles, "files.\n")
+} 
+
+#testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
 
