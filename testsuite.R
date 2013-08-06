@@ -764,5 +764,5 @@ testSuite <- function(root, destRoot, showCode = FALSE) {
     cat("Total", total, "tests created out of", nFiles, "files.\n")
 } 
 
-testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
+#testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
 
