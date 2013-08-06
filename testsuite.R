@@ -726,7 +726,7 @@ expandTest.testInstance <- function(test, testId) {
         result <- c(result, paste("  ",arg, sep = ""))
     }
     result <- paste(result, collapse = ",\n")
-    paste("test(id = ", testId, ",\n  ", result,"\n)\n\n", sep ="")
+    paste("test(id=", testId, ",\n  ", result,"\n)\n\n", sep ="")
 }
 
 print.testInstance <- function(t) {
@@ -752,6 +752,7 @@ print.testInstance <- function(t) {
 testSuite <- function(root, destRoot, showCode = FALSE) {
     total <- 0
     nFiles <- 0
+    i = 1
     for (f in list.files(root, pattern=".[rR]$", recursive = TRUE)) {
         nFiles <- nFiles + 1
         filename <- paste(root,"/", f, sep = "")
@@ -764,7 +765,6 @@ testSuite <- function(root, destRoot, showCode = FALSE) {
         cat("  Writing", length(tests), "tests to file", outFilename,"...\n")
         dir.create(dirname(outFilename), recursive = TRUE, showWarnings = FALSE)
         f <- file(outFilename, "wt")
-        i = 1
         for (t in tests) {
             code <- expandTest(t, i)
             i <- i + 1

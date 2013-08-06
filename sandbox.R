@@ -1,15 +1,64 @@
 # testr sandbox
 
 
-testSuite <- function(root) {
+
+
+testSuite <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE) {
+    verbose <<- verbose
+    displayOnlyErrors <<- displayOnlyErrors
+    stopOnError <<- stopOnError
+    displayCodeOnError <<- displayCodeOnError
+    totalFail <- 0
+    totalPass <- 0
+    if (verbose)
+        cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
     for (f in list.files(root, pattern=".[rR]$", recursive = TRUE)) {
         filename <- paste(root,"/", f, sep = "")
+        cat(filename,"...\n")
         tests <<- list(c("Test Name","Result", "Comments"))
+        fail <<- 0
+        pass <<- 0
         source(filename, local = FALSE)
-        cat(filename)
-        cat("(pass = ", length(tests[ tests[[2]] == "PASS" ]), ", ")
-        cat("fail = ", length(tests[ tests[[2]] == "FAIL"]), ", ")
-        cat("total = ", length(tests) - 1, ")\n")
+        cat("  (pass = ", pass,", fail = ", fail, ", total = ", pass + fail, ")\n", sep = "")
+        totalFail <- totalFail + fail
+        totalPass <- totalPass + pass
+        if (summary == TRUE) {
+            cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
+            for (t in tests[-1])
+                print.test(t)
+            cat("\n")
+        }
+    }
+    rm(tests, envir = globalenv())
+    rm(fail, envir = globalenv())
+    rm(pass, envir = globalenv())
+    rm(verbose, envir = globalenv())
+    rm(displayOnlyErrors, envir = globalenv())
+    rm(stopOnError, envir = globalenv())
+    rm(displayCodeOnError, envir = globalenv())
+    cat("\n-------- Results --------\n")
+    cat("Passed:   ", totalPass, "\n")
+    cat("Failed:   ", totalFail, "\n")
+    cat("Total:    ", totalPass + totalFail, "\n")
+    if (totalFail == 0)
+        cat("Overall:  ", "PASS\n")
+    else
+        cat("Overall:  ", "FAIL\n")
+} 
+
+print.test <- function(test, code = NULL) {
+    if (displayOnlyErrors && identical(test[[2]], "PASS"))
+        return()
+    if (nchar(test[[1]]) > 80)
+        test[[1]] <- paste("...",substr(test[[1]], length(test[[1]])-77, length(test[[1]])), sep = "")
+    cat(sprintf("%-80s", test[[1]]),test[[2]],"\n")
+    if (! identical(test[[2]], "PASS")) {
+        cat(" ",test[[3]], "\n")
+        if (displayCodeOnError && ! is.null(code)) {
+            cat("  Code:\n")
+            for (l in deparse(code))
+                cat("    ", l, "\n", sep="")
+        }
     }
 }
 
@@ -81,6 +130,16 @@ test <- function(code, output = NULL, expectWarning = NULL, expectError = NULL, 
     if (missing(name))
         name <- as.character(length(tests))
     tests[[length(tests) + 1]] <<- c(name, result, comments)
+    if (verbose)
+        print.test(tests[[length(tests)]], code)
+    if (identical(result, "PASS")) {
+        pass <<- pass + 1
+    } else {
+        fail <<- fail + 1
+        if (stopOnError) {
+            stop("Test ",name," failed: ", comments)
+        }
+    }
 }
 
-#testSuite("c:/delete/tests")
+testSuite("c:/delete/tests")
