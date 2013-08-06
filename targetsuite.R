@@ -107,6 +107,23 @@ print.test <- function(test, code = NULL) {
     }
 }
 
+compareResults <- function(a, b) {
+    if (identical(all.equal(a, b), TRUE)) {
+        TRUE
+    } else if (is.na(a) && is.na(b) && !is.nan(a) && (!is.nan(b))) {
+        TRUE # we do not care about types of NA's, or should we -- I think this should be tested by a test rather than assumed here
+#    } else if (typeof(a) != typeof(b)) {
+#        FALSE
+#    } else if (typeof(a) == "double") {
+#        
+#    }
+#    if (is.na(a) && (is.na(b))) {
+#        TRUE
+    } else {
+        FALSE        
+    }
+}
+
 #' Creates a test and evaluates its result. 
 #' 
 #' The test is a success if the expected output is identical to the actual output and expected (or none) warnings have been reported during the execution, or if the code itself failed and the expected error has been found.
@@ -172,7 +189,7 @@ test <- function(code, output = NULL, expectWarning = NULL, expectError = NULL, 
     # if we have an error, the result is irrelevant and should be NULL
     if (!is.null(errors))
         result <- NULL
-    if (identical(result, output)) {
+    if (compareResults(result, output)) {
         result <- "PASS"
     } else {
         appendComment("Expected",output, "got", result)

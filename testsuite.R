@@ -608,11 +608,13 @@ enumerateTests <- function(name, code, separatedCommands) {
         if (i != 0) {
             g <- ig[[i]]
             # first increase dependent generators
-            for (dg in g$dependents)
+            for (dgn in g$dependents) {
+                dg <- dg[[dgn]] 
                 if (dPos[[dg$name]] == dMax[[dg$name]])
                     dPos[[dg$name]] <<- 1
                 else
                     dPos[[dg$name]] <<- dPos[[dg$name]] + 1
+            }
             # now increase the generator itself and perform recursive increase ifoverflow
             if (iPos[[i]] == iMax[[i]]) {
                 iPos[[i]] <<- 1
@@ -762,5 +764,5 @@ testSuite <- function(root, destRoot, showCode = FALSE) {
     cat("Total", total, "tests created out of", nFiles, "files.\n")
 } 
 
-#testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
+testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
 
