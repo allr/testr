@@ -660,10 +660,22 @@ enumerateTests <- function(name, code, separatedCommands) {
 #                    codeStr <- codeStr[c(-1, -length(codeStr))]
         }
         # create the test
+        if (is.null(name)) {
+            tname <- length(tests) + 1
+        } else {
+            tname <- name
+            if (length(env) != 0) {
+                s <- NULL
+                for (n in names(env))
+                    s <- c(s, paste(n, "=", deparse(env[[n]])))
+                s <- paste(s, collapse = ", ")
+                tname <- paste(tname, " [", s, "]", sep = "")
+            }
+        }
         test <- c(
             list(
                 # if changing these, also change the check for reserved names in separateCommands function above
-                name = name,
+                name = tname,
                 env = env, 
                 code = codeStr, 
                 originalCode = code, 
@@ -686,7 +698,7 @@ expandTest <- function(t, ...) {
     UseMethod("expandTest", t)
 }
 
-expandTest.testInstance <- function(test) {
+expandTest.testInstance <- function(test, testId) {
     code <- test$code
 #    if (length(code)>1)
 #        code <- c("  {",code,"}")
@@ -714,7 +726,7 @@ expandTest.testInstance <- function(test) {
         result <- c(result, paste("  ",arg, sep = ""))
     }
     result <- paste(result, collapse = ",\n")
-    paste("test(\n  ", result,"\n)\n\n", sep ="")
+    paste("test(id = ", testId, ",\n  ", result,"\n)\n\n", sep ="")
 }
 
 print.testInstance <- function(t) {
@@ -752,8 +764,10 @@ testSuite <- function(root, destRoot, showCode = FALSE) {
         cat("  Writing", length(tests), "tests to file", outFilename,"...\n")
         dir.create(dirname(outFilename), recursive = TRUE, showWarnings = FALSE)
         f <- file(outFilename, "wt")
+        i = 1
         for (t in tests) {
-            code <- expandTest(t)
+            code <- expandTest(t, i)
+            i <- i + 1
             cat(file = f, code)
             if (showCode)
                 cat(code)
@@ -764,5 +778,5 @@ testSuite <- function(root, destRoot, showCode = FALSE) {
     cat("Total", total, "tests created out of", nFiles, "files.\n")
 } 
 
-#testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
+testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
 

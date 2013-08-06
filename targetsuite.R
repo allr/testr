@@ -157,7 +157,7 @@ compareResults <- function(a, b) {
 #'   TRUE
 #'   }, expectError = "error", name = "error example)
 #' 
-test <- function(code, output = NULL, expectWarning = NULL, expectError = NULL, name = NULL) {
+test <- function(id, code, output = NULL, expectWarning = NULL, expectError = NULL, name = NULL) {
     appendComment <- function(...) {
         s <- list(...)[[1]]
         for (o in list(...)[-1])
@@ -223,7 +223,7 @@ test <- function(code, output = NULL, expectWarning = NULL, expectError = NULL, 
     }
     if (missing(name))
         name <- as.character(length(tests))
-    tests[[length(tests) + 1]] <<- c(name, result, comments)
+    tests[[length(tests) + 1]] <<- c(paste("[",id,"] ",name, sep = ""), result, comments)
     if (verbose)
         print.test(tests[[length(tests)]], code)
     if (identical(result, "PASS")) {
@@ -232,7 +232,7 @@ test <- function(code, output = NULL, expectWarning = NULL, expectError = NULL, 
     } else {
         fails <<- fails + 1
         if (stopOnError) {
-            stop("Test ",name," failed: ", comments)
+            stop("Test id ", id, " name " ,name," failed: ", comments)
         }
         FALSE
     }
