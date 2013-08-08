@@ -19,35 +19,44 @@
 # or visit www.oracle.com if you need additional information or have any
 # questions.
 
-library("testthat")
-
-
 # Generators -------------------------------------------------------------------------------------------------------------
-context("generators")
 
+#' @export
 #' Checks that the given function has a proper signature for a generator content function. 
 #' 
 #' A generator content function takes the index of the value to be returned that must be named i, the generator itself named g, and the environment of the current test called env. The environment is a list containing values of all previously defined generators in the particular test instance. 
 #' The function returns true if the given function has three arguments, named i, g and env. False otherwise.  
+#' 
+#' @param f function whose signature is to be checked.
+#' @return TRUE if the function has the signature of a generator content function (arguments i, g and env) and FALSE otherwise
+#' 
+#' @seealso customGenerator
+#' @examples
+#' is.generatorContentFunction(function(i,g,env) { g$expr[[i]]} )
 is.generatorContentFunction <- function(f) {
     identical(names(formals(f)), c("i", "g", "env"))
 }
 
-test_that("is.generatorContentFunction", {
-    # non-function is FALSE
-    expect_false(is.generatorContentFunction(1))
-    # function with different arg count is false
-    expect_false(is.generatorContentFunction(function(i, g, env, a, b) { }))
-    # function with different arg names is false (permutation)
-    expect_false(is.generatorContentFunction(function(g, i, env) { }))
-    # correct function is true
-    expect_true(is.generatorContentFunction(function(i, g, env) { }))
-})
-
+#' @export
 #' Creates new custom generator.
 #' 
-#' Default value for length 
+#' A generator is identified by its content function which is called with the index of the value, the generator itself and already evaluated generators. The generator also must have assigned a name.
 #' 
+#'  Generators can be dependent or independent. Independent generators define how many tests a single test definition will be expanded to since for each possible permutation of independent generator values a new test is produced.
+#' 
+#' @param name Name of the generic - either string or an unquoted name
+#' @param contentFunction Function that provides the content of the generator.
+#' @param dependsOn Determines a generator on whose value this generator depends. That is if the generator the current one depends on changes, only then the dependent generator changes too.
+#' @param length Number of values the generator provides, practically valid only for independent generators as dependent generators are simply evaluated as many times as the generator they depend on.
+#' @param ... any other optional named arguments that will become fields of the returned generator S3 object. These additional arguments are not evaluated and are stored as their language objects.
+#' @return The generator object that can be passed to the test function.
+#' 
+#' @seealso is.generatorContentFunction, test
+#' 
+#' @examples
+#' customGenerator(a, function(i, g, env) { rep(g$foo, i) }, foo = 1, length = 10)
+#' # with other generator already defined
+#' customGenerator(d, function(i, g, env) { if (is.nan(env$a) TRUE else FALSE) }, dependsOn = a)
 customGenerator <- function(name, contentFunction, ..., dependsOn = NULL, length = 1) {
     if (! is.generatorContentFunction(contentFunction))
         stop("Generator content function must take exactly three arguments named i, g and env.")
@@ -84,71 +93,30 @@ customGenerator <- function(name, contentFunction, ..., dependsOn = NULL, length
     result
 }
 
-test_that("customGenerator name and dependsOn can be both strings and names and will be stringified", {
-    g <- customGenerator(a, function(i, g, env) { }, dependsOn = b )
-    expect_identical(typeof(g$name), "character")
-    expect_identical(typeof(g$dependsOn), "character")
-    expect_identical(g$name, "a")
-    expect_identical(g$dependsOn, "b")
-    g2 <- customGenerator("a", function(i, g, env) { }, dependsOn = "b" )
-    expect_identical(typeof(g2$name), "character")
-    expect_identical(typeof(g2$dependsOn), "character")
-    expect_identical(g2$name, "a")
-    expect_identical(g2$dependsOn, "b")
-})
-
-test_that("compulsory argument values", {
-    expect_error(customGenerator(a))
-    expect_error(customGenerator(name = a, length = 2))
-    expect_error(customGenerator(a, function(i, g, env) { }))
-    expect_error(customGenerator(a, function(i, g, env) { }, 1))
-    f <- function(i, g, env) { }
-    g <- customGenerator(a, f, length = 10)
-    expect_equal(g$name, "a")
-    expect_equal(g$length, 10)
-    expect_equal(g$contentFunction, f)
-})
-
-test_that("optional argument values", {
-    g <- customGenerator("a", function(i, g, env) { }, length = 1 )
-    expect_true(is.null(g$dependsOn))
-    g <- customGenerator(a, function(i, g, env) { }, dependsOn = b)
-    expect_equal(g$length, 1)
-})
-
-test_that("contentFunction can be supplied and works", {
-    content <- c(1,20,3,40,5,6)
-    g <- customGenerator(a, function(i, g, env) { content[[i]]}, length = 6)
-    expect_equal(g$contentFunction(1, g, list()), content[[1]])
-    expect_equal(g$contentFunction(2, g, list()), content[[2]])
-    expect_equal(g$contentFunction(3, g, list()), content[[3]])
-    expect_equal(g$contentFunction(4, g, list()), content[[4]])
-    expect_equal(g$contentFunction(5, g, list()), content[[5]])
-    expect_equal(g$contentFunction(6, g, list()), content[[6]])
-})
-
-test_that("additional arguments can be supplied and are not evaluated", {
-    g <- customGenerator(a, function(i, g, env) { }, length = 10, foo = "foo", bar = "bar", fooBar = c("foo", "bar"))  
-    expect_equal(g$foo, "foo")
-    expect_equal(g$bar, "bar")
-    expect_equal(g$fooBar, substitute(c("foo", "bar")))
-})
-
-test_that("additional arguments cannot be dependents", {
-    expect_error(customGenerator(a, function(i, g, env) { }, length = 1, dependents = 2))
-})
-
+#' @export
 #' Shorthand for customGenerator function. 
 #' 
 #' @aliases customGenerator
 #' @seealso customGenerator
+#' @examples
+#' cg("a", function(i, g, env) { 1 }, length = 5)
 cg <- customGenerator
 
-test_that("cg shorthand for customGenerator works", {
-    expect_equal(cg(a, function(i, g, env) { i }, length = 10), customGenerator(a, function(i, g, env) { i }, length = 10))
-})
 
+#' @export
 #' Creates new generator that is defined by a list of its values.
+#' 
+#' This is a simplified version of the custom generator where instead of the content generator function, an actual list of the possible values for the generic is specified. 
+#' 
+#' @param name Name of the generator.
+#' @param ... Values of the generator. The number of values determines the length of the generator. The values are not evaluated, but are stored as their language objects. 
+#' @param dependsOn If specified, determines which other generator this one depends on.
+#' @return The generator object that will have the length defined by number of its ... values and returns them one by one.
+#' 
+#' @seealso customGenerator
+#' @examples
+#' generator(a, 1, 2, 3, 4, 5)
+#' generator(a, c(1,2), list(1,2))
 generator <- function(name, ..., dependsOn = NULL) {
     ex <- eval(substitute(alist(...)))
     # convert name to character if required
@@ -163,157 +131,161 @@ generator <- function(name, ..., dependsOn = NULL) {
     eval(substitute(customGenerator(name, function(i,g,env) { g$expr[[i]] }, length = length(ex), dependsOn = dependsOn, expr = ex), list(ex = ex, name = name, dependsOn = dependsOn)))
 }
 
-test_that("generator propagates name and depends on correctly", {
-    g <- generator(a, 1, 2, 3)
-    expect_equal(g$name, "a")
-    expect_true(is.null(g$dependsOn))
-    g <- generator("a", 1, 2, 3, dependsOn = b)
-    expect_equal(g$name, "a")
-    expect_equal(g$dependsOn, "b")
-    g <- generator(g, 1, 2, 3, dependsOn = "b")
-    expect_equal(g$name, "g")
-    expect_equal(g$dependsOn, "b")
-})
-
-test_that("generator sets the length correctly and values are propagated to expr field", {
-    g <- generator(a, 1)
-    expect_equal(g$length, 1)
-    expect_equal(g$expr, list(1))
-    g <- generator(a, 1, 2, 3)
-    expect_equal(g$length, 3)
-    expect_equal(g$expr, list(1, 2, 3))
-})
-
-test_that("generator expr is not evaluated", {
-    g <- generator(a, 1, c(1, 2), as.name("+"))
-    expect_equal(g$length, 3)
-    expect_equal(g$expr, list(1, substitute(c(1, 2)), substitute(as.name("+"))))
-})
-
-test_that("generator content function returns correct values", {
-    g <- generator(a, 1, 2, 3, 4, 5, 6)
-    expect_equal(g$contentFunction(1, g, list()), 1)
-    expect_equal(g$contentFunction(2, g, list()), 2)
-    expect_equal(g$contentFunction(3, g, list()), 3)
-    expect_equal(g$contentFunction(4, g, list()), 4)
-    expect_equal(g$contentFunction(5, g, list()), 5)
-    expect_equal(g$contentFunction(6, g, list()), 6)
-})
-
+#' @export
 #' A shorthand for simple generator function
+#' 
+#' @seealso generator
+#' @examples
+#' g(a, 1, 2, 3)
 g <- generator
 
-test_that("g as shorthand for generator works", {
-    expect_equal(g(a, 1, 2), generator(a, 1, 2))
-})
-
+#' @export 
+#' Determines if given object is an instance of generator. 
+#' 
+#' A generator must inherit from a generator class. Likely this is produced by calling either customGenerator, or generator function. 
+#' @param o Object to be tested.
+#' @return TRUE if the argument is a generator, FALSE otherwise
+#' @seealso customGenerator, generator
+#' @examples
+#' is.generator(1) # FALSE
+#' is.generator(generator(a, 1, 2, 3)) # TRUE
+#' is.customGenerator(cg(b, function(i, g, env) { 1 }, dependsOn = a)) # TRUE
 is.generator <- function(o) {
     inherits(o, "generator")
 }
 
-test_that("is.generator", {
-    expect_false(is.generator(1))
-    expect_true(is.generator(g(a, 1, 2, 4)))
-    expect_true(is.generator(g(a, 1, 2, dependsOn = b)))
-    expect_true(is.generator(customGenerator(a, function(i, g, env) { }, dependsOn = b)))
-    expect_true(is.generator(customGenerator(a, function(i, g, env) { }, length = 10)))
-})
-
+#' @export
+#' Determines if the given generator is dependent one.
+#' 
+#' @param g Generator to be tested.
+#' @return TRUE if the generator is dependent, FALSE if independent.
+#' @seealso customGenerator, generator
+#' @examples
+#' is.dependent(g(a, 1, 2, 3)) # FALSE
+#' is.dependent(g(b, 1, 2, 3, dependsOn = b)) # TRUE
 is.dependent.generator <- function(g) {
     !is.null(g$dependsOn)
 }
 
-
+#' @export
+#' Determines if the given generator is independent, or not. 
+#' 
+#' @param g Generator to be tested.
+#' @return TRUE if the generator is independent, FALSE if dependent.
+#' @seealso customGenerator, generator
+#' @examples
+#' is.independent(g(a, 1, 2, 3)) # TRUE
+#' is.independent(g(b, 1, 2, 3, dependsOn = b)) # FALSE
 is.independent.generator <- function(g) {
     is.null(g$dependsOn)
 }
 
+#' @export
+#' Generic method for S3 dependent and independent generators. Checks that the generator is dependent
+#'
+#' @param g Generator to be tested.
+#' @return TRUE if the generator is dependent, FALSE if independent.
+#' @seealso is.dependent.generator, customGenerator, generator
+#' @examples
+#' is.dependent(g(a, 1, 2, 3)) # FALSE
+#' is.dependent(g(b, 1, 2, 3, dependsOn = b)) # TRUE
 is.dependent <- function(o) {
     UseMethod("is.dependent", o)
 }
 
+#' @export
+#' Generic method for S3 dependent and independent generators. Checks that the generator is independent
+#'
+#' @param g Generator to be tested.
+#' @return TRUE if the generator is independent, FALSE if dependent.
+#' @seealso is.independent.generator, customGenerator, generator
+#' @examples
+#' is.independent(g(a, 1, 2, 3)) # TRUE
+#' is.independent(g(b, 1, 2, 3, dependsOn = b)) # FALSE
 is.independent <- function(o) {
     UseMethod("is.independent", o)
 }
 
 
-test_that("dependent and independent generator distinction works", {
-    g <- generator(a, 1, 2, 3)    
-    expect_false(is.dependent(g))
-    expect_true(is.independent(g))
-    g <- customGenerator(a, function(i, g, env) { }, length = 3)
-    expect_false(is.dependent(g))
-    expect_true(is.independent(g))
-    
-    g <- generator(a, 1, 2, 3, dependsOn = b)    
-    expect_true(is.dependent(g))
-    expect_false(is.independent(g))
-    g <- customGenerator(a, function(i, g, env) { }, dependsOn = b)
-    expect_true(is.dependent(g))
-    expect_false(is.independent(g))
-})
-
+#' @export
+#' Returns the length of a generator. 
+#' 
+#' The length of a generator is number of unique values the generator can produce. This only has real meaning for independent generators as dependent generators can have length 1 which gets constantly reevaluated. 
+#' 
+#' @param g Generator whose length is to be determined. 
+#' @return Length of the generator.
+#' @seealso customGenerator, generator
+#' @examples
+#' length(g(a, 1, 2, 3)) # 3
+#' length(g(b, 1, 2, dependsOn = a)) # 2
+#' length(cg(c, function(i, g, env) { i }, dependsOn = a)) # 1
 length.generator <- function(g) {
     g$length
 }
 
-test_that("generator length reflects the length described, not the length of the list", {
-    g <- generator(a, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    expect_equal(length(g), 10)
-    expect_equal(length(names(g)), 4)
-    g <- customGenerator(a, function(i, g, env) { }, length = 11)
-    expect_equal(length(g), 11)
-    expect_equal(length(names(g)), 3)
-})
-
-
 # checks ---------------------------------------------------------------------------------------------------------------
 
+#' @export
+#' Checks that the given object is inherits from an S3 "check" class.
+#' 
+#' @param o Object in question.
+#' @return TRUE if the object inherits from "check", FALSE otherwise. 
+#' @seealso check
 is.check <- function(o) {
     inherits(o, "check")
 }
 
-#' Checks that the given argument is a check function. 
-#' 
-#' The check function acts upon a test result on the particular target, the check itself and the environment used for the test expansion. 
-is.checkFunction <- function(f) {
-    identical(names(formals(f)), c("testResult", "check", "env"))
-}
-
+#' @export
 #' The expand function is suposed to produce a string that will be an argument to the test function in the targetSuite mode of operation. 
 #' 
 #' It only takes two arguments, the check itself and the environment used for the test. 
+#' 
+#' @param f The function whose signature is to be tested.
+#' @return TRUE if f has two arguments named check and env, FALSE otherwise.
+#' @seealso check
 is.expandFunction <- function(f) {
     identical(names(formals(f)), c("check", "env"))
 }
 
-#' TODO documentation
-check <- function(checkFunction, ..., expandFunction = NULL) {
-    if (! is.checkFunction(checkFunction))
-        stop("Check function must have exactly three arguments named testResult, check and env")
-    if (missing(expandFunction))
-        expandFunction <- function(check, env) { NULL }
-    else
-        if (! is.expandFunction(expandFunction))
-            stop("Expand function must have exactly two arguments named check and env")
+#' @export
+#' Creates a new check object. 
+#' 
+#' The check object is defined by the check function and any other arguments that may be passed. These are not evaluated, but will become named fields of the resulting check object in their language forms. 
+#' 
+#' @param expandFunction Expand function used to translate the check to the expanded version of the test. This must be a function that takes two arguments, the check itself (check) and the environment of matched generator values (env).
+#' @param ... Additional named only arguments that will become fields of the check object. The arguments are not evaluated. 
+#' @return S3 check object consisting of the expandFunction and any other fields specified. 
+#' @seealso test, is.expandFunction, is.check, o, w, e
+#' @examples
+#' #' check(function(check, env) { paste("output = ", eval(env$a)) }) 
+ 
+check <- function(expandFunction, ...) {
+    if (! is.expandFunction(expandFunction))
+        stop("Expand function must have exactly two arguments named check and env")
     # get the additional arguments
     result <- eval(substitute(alist(...)))
     n <- names(result)
     if ((length(n) != length(result)) || ("" %in% n))
         stop("Only named arguments can be added as check fields.")
     class(result) <- "check"    
-    result$checkFunction <- checkFunction
     result$expandFunction <- expandFunction
     result
 }
 
-#' An expected output. R expression is expected, generator replacement will be used on it. 
+#' @export
+#' An expected output. R expression is expected, generator replacement will be used on its value.
+#' 
+#' If an error is checked, output cannot be checked too
+#' 
+#'  @param expectedOutput The expected output of the test. If the output contains any of the generators used in the test, their values are replaced. 
+#'  @return S3 check object that translates to output check. 
+#'  @seelalso check, test, w, e
+#'  @examples 
+#'  o(c(1,2))
+
 o <- function(expectedOutput) {
     eval(substitute(
         check(
-            checkFunction = function(testResult, check, env) {
-                # TODO the check function must do the proper stuff
-            },
             expandFunction = function(check, env) {
                 paste("output = ",deparse(eval(substitute(testSubstitute(co, env), list(co = check$output)))), sep = "")
             },
@@ -322,13 +294,19 @@ o <- function(expectedOutput) {
     , list(eo = substitute(expectedOutput))))
 }
 
-#' A warning expectation check. Argument can be either a single string to find in warnings, or a vector of strings
+#' @export
+#' A warning expectation check. Argument can be either a single string to find in warnings, or a vector of strings in which case all the strings must be found in the warnings reported by the test. 
+#' 
+#' @param expectWarning Partial or full text to expect in the warning. 
+#' @return S3 object of a check that performs the warning checking. 
+#' @seealso check, test, o, e
+#' @examples
+#' 
+#' w("partial match") # for test where partial matching warning is expected
+
 w <- function(expectWarning) {
     eval(substitute(
         check(
-            checkFunction = function(testResult, check, env) {
-                # TODO the check function must do the proper stuff
-            },
             expandFunction = function(check, env) {
                 paste("expectWarning = ",deparse(eval(substitute(testSubstitute(cw, env), list(cw = check$expectWarning)))), sep = "")
             },
@@ -337,13 +315,21 @@ w <- function(expectWarning) {
         , list(ew = substitute(expectWarning))))
 }
 
-#' An error expectation check. Argument can be either a single error to find, or a vector of strings
+#' @export
+#' An error expectation check. Argument can be either a single error to find, or a vector of strings if whih case all the strings must be found in the error messages. 
+#' 
+#' If an error is checked, output cannot be checked too.
+#' 
+#' @param expectError Partial or full text of the error to be expected. 
+#' @return S3 object of the error check.
+#' @seealso check, test, o , e
+#' @examples
+#' 
+#' e("not found") # for a test giving the object not found warning
+
 e <- function(expectError) {
     eval(substitute(
         check(
-            checkFunction = function(testResult, check, env) {
-                # TODO the check function must do the proper stuff
-            },
             expandFunction = function(check, env) {
                 paste("expectError = ",deparse(eval(substitute(testSubstitute(ce, env), list(ce = check$expectError)))), sep = "")
             },
@@ -354,6 +340,7 @@ e <- function(expectError) {
 
 # conditions -----------------------------------------------------------------------------------------------------------
 
+# TODO maybe not relevant anymore in the new version
 is.condition <- function(o) {
     inherits(o, "condition")
 }
@@ -367,7 +354,31 @@ condition <- function(conditionFunction, ...) {
 
 # substitution ---------------------------------------------------------------------------------------------------------
 
-context("substitution")
+#' @export
+#' Substitutes given string or AST with the specified environment. 
+#' 
+#' This function works in a way similar to the substitute function known in R with two main differences: 
+#' 
+#' 1) if the argument code is character, a string replacement is used instead of substitution and a character with replaced portions is returned. 
+#' 2) substitution on AST objects also works for function calls and operators, not just variables.
+#' 
+#' Due to the above mentioned points, the correctness of the produced R code is not guaranteed. 
+#' 
+#' Variables and function calls are replaced according to the expected behavior. That is variable of the same name as a generator name is replaced by the value of that generator. Function with the same name as a generator is also replaced by the generator's value - this applies only to function name, not the function call itself. 
+#' 
+#' Operators can be replaced if they are written in a form of %A% where A is the name of the generator. It is assumed the generator will then list character identifiers fully replacing the operator. 
+#' 
+#' For character replacement, %A where A is name of the generator, is replaced by the generator value. %% will be replaced by %. 
+#' 
+#' @param code AST or string of the code that is to be replaced.
+#' @param env list of the environment used for the replacement. 
+#' @return Same type as the code, with replacements from env as described above. 
+#' @seealso customGenerator, test
+#' @examples
+#' testSubstitute(a + b, list(a = 1)) # 1 + b
+#' testSubstitute(1 %x% 2, list (x = "+")) # 1 + 2
+#' testSubstitute(f(1, 2), list( f = "foo")) # foo(1, 2)
+#' testSubstitute("%a + %b %c %%in%% container", list(a = 1, b = 2, c = 3)) # "1 + 2 3 %in% container" -- invalid R code
 
 testSubstitute <- function(code, env) {
     c = substitute(code)
@@ -387,6 +398,7 @@ testSubstitute <- function(code, env) {
     }
 }
 
+# test substitute helper function
 testSubstituteAST <- function(ast, env) {
     if (is.symbol(ast)) {
         aName <- as.character(ast)
@@ -413,123 +425,63 @@ testSubstituteAST <- function(ast, env) {
     }
 }
 
-test_that("substitution works for strings into strings", {
-    expect_equal(
-        testSubstitute("a = a", list()),
-        "a = a"
-    )
-    expect_equal(
-        testSubstitute("a = a", list(a = "1")),
-        "a = a"
-    )
-    expect_equal(
-        testSubstitute("a = %%a", list(a = "1")),
-        "a = %a"
-    )
-    expect_equal(
-        testSubstitute("a = %a", list(a = "a+b")),
-        "a = a+b"
-    )
-    expect_equal(
-        testSubstitute("%a %%%b", list(a = "1", b = "c(1,2)")),
-        "1 %c(1,2)"
-    )
-    expect_equal( # order does not matter for substitutions of prefixed elements, longest will take precedence
-        testSubstitute("a = %aa", list(a = "a", aa = "b")),
-        "a = b"
-    )
-    expect_equal( # unmatched % are left in the string without any warnings
-        testSubstitute("a = %a", list()),
-        "a = %a"
-    )
-})
-
-test_that("substitution of ASTs into string", {
-    expect_equal(
-        testSubstitute("a = %%a", list(a = 1)),
-        "a = %a"
-    )
-    expect_equal(
-        testSubstitute("a = %%a", list(a = quote(1))),
-        "a = %a"
-    )
-    expect_equal(
-        testSubstitute("a = %a", list(a = quote(a+b))),
-        "a = a + b"
-    )
-    expect_equal(
-        testSubstitute("%a %%%b", list(a = 1, b = quote(c(1,2)))),
-        "1 %c(1, 2)"
-    )
-    expect_equal( # order does not matter for substitutions of prefixed elements, longest will take precedence
-        testSubstitute("a = %aa", list(a = quote(a), aa = quote(b))),
-        "a = b"
-    )
-})
-
-test_that("substitution of strings and ASTs into string", {
-    expect_equal(
-        testSubstitute("a %b %a %c", list( a= "+", b = quote(as.name("+")), c="c(1,2)")),
-        "a as.name(\"+\") + c(1,2)"
-    )
-})
-
-test_that("substitution works on ASTs replaced with ASTs", {
-    expect_equal(
-        testSubstitute(a + b + c %x% d, list()),
-        quote(a + b + c %x% d)
-    )
-    expect_equal(
-        testSubstitute(a + b + c %x% d, list(e = 1)),
-        quote(a + b + c %x% d)
-    )
-    expect_equal(
-        testSubstitute(a + b + c %x% d, list(a = 1)),
-        quote(1 + b + c %x% d)
-    )
-    expect_equal(
-        testSubstitute(a + b + c %x% d, list(a = 1, b = quote(c(1, 2)))),
-        quote(1 + c(1, 2) + c %x% d)
-    )
-    expect_equal(
-        testSubstitute(a + b + c %x% d, list(a = 1, b = quote(c(1, 2)), c = quote(5 + 6))),
-        quote(1 + c(1, 2) + (5 + 6) %x% d)
-    )
-})
-
-test_that("substition of operators in ASTs work with characters or names, or anything else too", {
-    expect_equal(
-        testSubstitute(1 %a% 2, list(a = "*")),
-        quote(1 * 2)
-    )
-    expect_equal(
-        testSubstitute(1 %a% 2, list(a = as.name("*"))),
-        quote(1 * 2)
-    )
-})
-
-test_that("substitution of strings into ASTs preserves the string nature", {
-    expect_equal(
-        testSubstitute(a + b, list(a = "1")),
-        quote("1" + b)
-    )
-    expect_equal(
-        testSubstitute(c(a, b), list(a = "c(1, 2)", b = "c(3, 4)")),
-        quote(c("c(1, 2)", "c(3, 4)"))
-    )
-})
-
-test_that("substitution of strings ansd ASTs into ASTs", {
-    expect_equal(
-        testSubstitute(c(a, b), list(a = "c(1, 2)", b = c(3, 4))),
-        quote(c("c(1, 2)", c(3, 4)))
-    )
-})
-
-
 # test generator -------------------------------------------------------------------------------------------------------
 
-context("test generator")
+#' @export
+#' Function that creates a test based on its code and checks. 
+#' 
+#' The function identifies new test, specifies its generators and their values and the checks used to verify its correctness. The test can optionally have a name specified.
+#' 
+#' The test is expanded to as many tests as there are permutations of its independent generators. The generator values are incremented in order of their definition so that the last defined generator is the LSB value. For example a test with three generators will be expanded accordingly:
+#' 
+#' test(
+#'   g(a, 1, 2),
+#'   g(b, 3, 4),
+#'   g(c, 5, 6),
+#'   a + b + c
+#' )
+#' 
+#' a b c
+#' 1 3 5
+#' 1 3 6
+#' 1 4 5
+#' 1 4 6
+#' 2 3 5
+#' 2 3 6
+#' 2 4 5
+#' 2 4 6
+#' 
+#' A test may also have generators that depend on others. These do not increase the number of expanded tests but allow a mechanism of linking two or more generated values together.
+#' 
+#' Any usage of the generator name in either the code, or the output test will be replaced by the respective value of that generator for the particular test. 
+#' 
+#' If the output check is not specified, the test will be executed and its value calculated. If the test produces any warnings or errors that are not explicitly checked, an error will be produced. 
+#' 
+#' To expand the tests, testSuite function must be called. 
+#' 
+#' @param ... checks, generators and code of the test. Code must be the last argument. Code can be eitcher character, or an AST.
+#' @param name optional name of the test. 
+#' @return NULL - the tests are added automatically to the testSuite. 
+#' @seealso testSuite, cg, g, o, w, e, testSubstitute
+#' @examples
+#' # simple test, no generators
+#' test( 1 + 2, o(3))
+#' # test with generators, output specified
+#' test(g(a, 1, 2, 3),
+#'   g(b, 2, 4, 6, dependsOn = a) 
+#'   a + a,
+#'   o(b)
+#' )
+#' # test with generators, output will be calculated before the expansion
+#' test(g(a, 1, 2, 3),
+#'   a + a,
+#' )
+#' # test with a warning and calculated output
+#' test({
+#'   warning("foobar")
+#'   1
+#' }, w("foobar")
+#' )
 
 test <- function(..., name = NULL) {
     # convert name to character if required, preserve name null if unnamed
@@ -655,9 +607,6 @@ enumerateTests <- function(name, code, separatedCommands) {
         codeStr <- eval(substitute(testSubstitute(code, env), list(code = code)))
         if (typeof(codeStr) != "character") {
             codeStr <- deparse(codeStr)
-#            if (length(code) > 1)
-#                if (identical(code[[1]], as.name("{")))
-#                    codeStr <- codeStr[c(-1, -length(codeStr))]
         }
         # create the test
         if (is.null(name)) {
@@ -694,14 +643,20 @@ enumerateTests <- function(name, code, separatedCommands) {
     }
 }
 
+#' @export 
+#' S3 method to expand a test to a string that can be stored to the expanded tests file. 
+#' 
+#' Such a method must return the string corresponding to that test definition. May be overriden for different tests. 
+#' @param t Test to be expanded
+#' @param testId Id of the test within the suite. 
+#' @seealso test
 expandTest <- function(t, ...) {
     UseMethod("expandTest", t)
 }
 
+# expansion of the default test
 expandTest.testInstance <- function(test, testId) {
     code <- test$code
-#    if (length(code)>1)
-#        code <- c("  {",code,"}")
     callArgs <- NULL
     isOutputSet <- FALSE
     for (ch in test$checks) {
@@ -729,6 +684,14 @@ expandTest.testInstance <- function(test, testId) {
     paste("test(id=", testId, ",\n  ", result,"\n)\n\n", sep ="")
 }
 
+#' @export
+#' Prettyprint for an expanded test instance. 
+#' 
+#' Prints the test name, generators and code with generators replaced. 
+#' 
+#' @param t Test to be printed. 
+#' @seealso test
+
 print.testInstance <- function(t) {
     cat("Test", t$name, "\n")
     cat("Generators:\n")
@@ -736,18 +699,22 @@ print.testInstance <- function(t) {
     cat("Code:\n", t$code, "\n")
 }
 
-
-
-
-#t = test(name = "A simple \"example test", 
-#         g(a, 1, 2, 3),
-#         o(c(a,1)),
-#         w("none"), {
-#           x = a
-#           x + 1
-#         }
-#         )
-#expandTest(t[[1]])
+#' @export
+#' Launches the test compiler that takes the unexpanded tests with generators and converts them to their expanded variants. 
+#' 
+#' Recursively walks all R (.r and .R) files on given root. For each file reads its tests, expands them and stores them to the same file but under the destRoot folder. 
+#' 
+#' It is assumed that the tests are defined using the test function, but any object that inherits from "testInstance" and overrides its own expand method will work properly. 
+#' 
+#' The recursive folders (if any) in the dest folder will be created automatically. 
+#' 
+#' @param root Folder from where to look for R files with unexpanded tests
+#' @param destRoot Folder to which the expanded tests will be stored
+#' @param showCode if TRUE, code of the expanded tests will also be printed to stdout
+#' @return NULL
+#' @seealso test
+#' @examples
+#' testSuite("c:/unexpandedTests", "c:/expandedTests", showCode <- TRUE)
 
 testSuite <- function(root, destRoot, showCode = FALSE) {
     total <- 0
@@ -778,5 +745,4 @@ testSuite <- function(root, destRoot, showCode = FALSE) {
     cat("Total", total, "tests created out of", nFiles, "files.\n")
 } 
 
-testSuite("c:/delete/inTests", "c:/delete/outTests", showCode <- TRUE)
 

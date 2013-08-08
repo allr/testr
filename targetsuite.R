@@ -21,30 +21,52 @@
 
 # target suite. This file is supposed to run on target
 
+#' @export
+#' Determines if given function is a proper testlisterenr listener or not. 
+#' 
+#' A test listener is a function that has exactly five arguments named "id", "name", "result", "filename" and "comments" in this order. The id is the unique id of the test within the testSuite, name is the name of the test. Result is TRUE for passed test, or FALSE for a failed one. 
+#' 
+#' @param f Function to check
+#' @return TRUE if the function has the valid signature, FALSE otherwise
+#' @seealso testSuite
+#' 
+is.testListener <- function(f) {
+    identical(names(formals(f)), c("id", "name", "result", "filename", "comments"))
+}
 
-
-#' Launches the test suite. 
+#' @export
+#' Launches the test suite on the target VM. 
 #' 
-#' The root argument points to a folder that contains the R files to be executed. The R files are expected to be in the testR expanded format, that is each test has its source code, expected output (if output should be checked) and possible warnings and errors to be expected. 
+#' testSuite takes as an argument the root folder where the expanded test files are stored and then launches all tests found in all R (.r or .R) files recursively found in that location. Each test is executed and its output checked. Based on the optional arguments, different reporting methods can be used. 
 #' 
-#' The tests in all files are executed and reported textually.
+#' By default, a text output is given on the standard output summarizing the numbers of failed / passed tests. If a listener function is provided, each analyzed test will invoke a call of this function so that more detailed reporting can be implemented directly by the caller. 
 #' 
-#' Tests may have names which will be reported and used to identify the test. If the test has no name, its index in the actual tested file will be given as a name. 
+#' Note that since the testSuite method also runs on the tested VM, the VM must at least support the functionality required by this function (and other functions used for the test analysis). 
 #' 
-#' @param root Folder where to look for the tests (recursively)
-#' @param verbose If true, each test will be reported as it is executed.
-#' @param summary If true, at the end of each file a summary will be given for each test in the file, showing its name, result and description of failure.
-#' @param displayOnlyErrors If true, both verbose and summary printouts will only display failed tests. 
-#' @param stopOnError If true, upon encountering first error, testR stops from executing further tests.
-#' @param displayCodeOnError If true, for a failed test, its code will also be displayed. 
-#' 
+#' @param root Folder where to recursively look for the expanded tests. The tests must be located in files with extension either r or R. All other files are ignored.
+#' @param verbose If TRUE, each test will be reported to the stdout as soon as it was executed and analyzed.
+#' @param summary If TRUE, at the end of each analyzed file, a summary of all its tests will be printed. The summary contains the name and id of the test, its result and possibly comments to the reason for its failure.
+#' @param displayOnlyErrors If TRUE, in either verbose mode, or summary, detailed information will only be printed about failed tests.
+#' @param stopOnError If TRUE, first failed test will also terminate the execution of the test suite.
+#' @param displayCodeOnError if TRUE, the code of the test will be displayed when the test fails (only relevant for verbose mode). To determine the code, deparse function is used.
+#' @param testListener A function that will be called for each test. If supplied, it must be a proper test listener function whuich is checked by the is.testListener function (a proper test listener function has exactly five arguments, id, name, result, filename and comments).
+#'  
 #' @return TRUE if all tests have passed, FALSE otherwise. 
 #' 
-#' @seealso test
+#' @seealso test, is.testListener
 #' 
-#' @examples testSuite("c:/delete/tests", verbose = TRUE)
+#' @examples testSuite("c:/tests", verbose = TRUE)
+#' 
+#' f <- function(id, name, result, filename, comments) {
+#'   if (result == "FAIL")
+#'       cat("Test",name,"failed.\n")
+#' }
+#' testSuite("c:/tests", testListener = f)
 
-testSuite <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE) {
+testSuite <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE, testListener = NULL) {
+    if (!missing(testListener)) 
+        if (! is.testListener(testListener))
+            stop("Invalid function supported as a test listener.")
     verbose <<- verbose
     displayOnlyErrors <<- displayOnlyErrors
     stopOnError <<- stopOnError
@@ -56,10 +78,14 @@ testSuite <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors 
     for (f in list.files(root, pattern=".[rR]$", recursive = TRUE)) {
         filename <- paste(root,"/", f, sep = "")
         cat(filename,"...\n")
-        tests <<- list(c("Test Name","Result", "Comments"))
+        tests <<- list(c("Test Name","Result", "Comments", "Id"))
         fails <<- 0
         passes <<- 0
         source(filename, local = FALSE)
+        # invoke the test listener so that the results can be grabbed
+        if (!is.null(testListener))
+            for (t in tests[-1])
+                testListener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
         cat("  (pass = ", passes,", fail = ", fails, ", total = ", passes + fails, ")\n", sep = "")
         totalFails <- totalFails + fails
         totalPasses <- totalPasses + passes
@@ -96,8 +122,8 @@ print.test <- function(test, code = NULL) {
         return()
     if (nchar(test[[1]]) > 80)
         test[[1]] <- paste("...",substr(test[[1]], length(test[[1]])-77, length(test[[1]])), sep = "")
-    cat(sprintf("%-80s", test[[1]]),test[[2]],"\n")
-    if (! identical(test[[2]], "PASS")) {
+    cat(sprintf("%-80s", test[[1]]),if (test[[2]]) "PASS" else "FAIL","\n")
+    if (! test[[2]]) {
         cat(" ",test[[3]], "\n")
         if (displayCodeOnError && ! is.null(code)) {
             cat("  Code:\n")
@@ -107,6 +133,7 @@ print.test <- function(test, code = NULL) {
     }
 }
 
+#' Comparing the results, also only to be used internally
 compareResults <- function(a, b) {
     if (identical(all.equal(a, b), TRUE)) {
         TRUE
@@ -126,10 +153,11 @@ compareResults <- function(a, b) {
 
 #' Creates a test and evaluates its result. 
 #' 
-#' The test is a success if the expected output is identical to the actual output and expected (or none) warnings have been reported during the execution, or if the code itself failed and the expected error has been found.
+#' The test is a success if the expected output is identical to the actual output and expected (or none) warnings have been reported during the execution, or if the code itself failed and the expected error has been found. Two NA values are always identical regardless their type. 
 #' 
-#' Note that this function is not intended to be directly executed by user. Use the testSuite function on how to run the tests.
+#' This function effectively defines the test and should be used in the test files. However, the test should only be executed by the testSuite function which also prepares the necessary environment for the test function. 
 #' 
+#' @param id the unique id of the test in the testSuite. 
 #' @param code The code of the test, must be a runnable R code.
 #' @param output Output of the test, if not specified no output will be checked (in case of an error expected)
 #' @param expectWarning String to find in the warning messages (scalar or vector)
@@ -141,20 +169,23 @@ compareResults <- function(a, b) {
 #' @seealso testSuite
 #' 
 #' @examples 
-#' test({
-#'   a = 1
-#'   b = 2
-#'   a + b
+#' test(id = 1, 
+#'   {
+#'     a = 1
+#'     b = 2
+#'     a + b
 #'   }, 2, name = "simple test")
 #' 
-#' test( {
-#'   warning("example warning")
-#'   TRUE
+#' test(id = 2, 
+#'   {
+#'     warning("example warning")
+#'     TRUE
 #'   }, TRUE, expectWarning = "warning", name = "warning example)
 
-#' test( {
-#'   stop("error")
-#'   TRUE
+#' test(id = 3,
+#'   {
+#'     stop("error")
+#'     TRUE
 #'   }, expectError = "error", name = "error example)
 #' 
 test <- function(id, code, output = NULL, expectWarning = NULL, expectError = NULL, name = NULL) {
@@ -190,10 +221,10 @@ test <- function(id, code, output = NULL, expectWarning = NULL, expectError = NU
     if (!is.null(errors))
         result <- NULL
     if (compareResults(result, output)) {
-        result <- "PASS"
+        result <- TRUE
     } else {
         appendComment("Expected",output, "got", result)
-        result <- "FAIL"
+        result <- FALSE
     }
     # check the warnings
     if (missing(expectWarning)) {
@@ -223,7 +254,7 @@ test <- function(id, code, output = NULL, expectWarning = NULL, expectError = NU
     }
     if (missing(name))
         name <- as.character(length(tests))
-    tests[[length(tests) + 1]] <<- c(paste("[",id,"] ",name, sep = ""), result, comments)
+    tests[[length(tests) + 1]] <<- c(paste("[",id,"] ",name, sep = ""), result, comments, id)
     if (verbose)
         print.test(tests[[length(tests)]], code)
     if (identical(result, "PASS")) {
