@@ -1,5 +1,8 @@
+
 #' Report coverage statistics 
-#' dir: the VM source directory. The VM must have been compiled with gcov support. 
+#' dir: the directory where .gcno files for the VM source code are stored.
+#' The VM must have been compiled with gcov support and executed at least once.
+
 coverage <- function(dir=NULL) {
   if (missing(dir)) return(0);
   cfiles <- list.files(path=dir, recursive=TRUE, pattern=".c$")
