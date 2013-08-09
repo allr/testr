@@ -123,9 +123,9 @@ print.test <- function(test, code = NULL) {
     if (nchar(test[[1]]) > 80)
         test[[1]] <- paste("...",substr(test[[1]], length(test[[1]])-77, length(test[[1]])), sep = "")
     cat(sprintf("%-80s", test[[1]]),if (test[[2]]) "PASS" else "FAIL","\n")
-    if (! test[[2]]) {
+    if (test[[2]] == FALSE) {
         cat(" ",test[[3]], "\n")
-        if (displayCodeOnError && ! is.null(code)) {
+        if (displayCodeOnError && ! missing(code)) {
             cat("  Code:\n")
             for (l in deparse(code))
                 cat("    ", l, "\n", sep="")
@@ -159,9 +159,9 @@ compareResults <- function(a, b) {
 #' 
 #' @param id the unique id of the test in the testSuite. 
 #' @param code The code of the test, must be a runnable R code.
-#' @param output Output of the test, if not specified no output will be checked (in case of an error expected)
-#' @param expectWarning String to find in the warning messages (scalar or vector)
-#' @param expectError String to find in the errro messages (scalar or vector)
+#' @param o Output of the test, if not specified no output will be checked (in case of an error expected)
+#' @param w String to find in the warning messages (scalar or vector)
+#' @param e String to find in the error messages (scalar or vector)
 #' @param name Name of the test. If no name is specified, the index of the test in the file will be used.
 #' 
 #' @returns TRUE if the test passes, FALSE otherwise
@@ -188,7 +188,7 @@ compareResults <- function(a, b) {
 #'     TRUE
 #'   }, expectError = "error", name = "error example)
 #' 
-test <- function(id, code, output = NULL, expectWarning = NULL, expectError = NULL, name = NULL) {
+test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
     appendComment <- function(...) {
         s <- list(...)[[1]]
         for (o in list(...)[-1])
@@ -218,38 +218,38 @@ test <- function(id, code, output = NULL, expectWarning = NULL, expectError = NU
         }
     )
     # if we have an error, the result is irrelevant and should be NULL
-    if (!is.null(errors))
-        result <- NULL
-    if (compareResults(result, output)) {
+    if (!is.null(errors)) {
+        result <- TRUE
+    } else if (compareResults(result, o)) {
         result <- TRUE
     } else {
-        appendComment("Expected",output, "got", result)
+        appendComment("Expected",o, "got", result)
         result <- FALSE
     }
     # check the warnings
-    if (missing(expectWarning)) {
-        if (!is.null(warnings)) {
-            result <- "FAIL"
+    if (missing(w)) {
+        if (!is.null(w)) {
+            result <- FALSE
             appendComment("Expected no warnings, but", warnings,"found")
         }
     } else {
-        for (w in expectWarning) 
-            if (length(grep(w, warnings)) == 0) {
-                result <- "FAIL"
-                appendComment("Warning", w, "not found in", warnings)
+        for (ww in w) 
+            if (length(grep(ww, warnings)) == 0) {
+                result <- FALSE
+                appendComment("Warning", ww, "not found in", warnings)
             }
     }
     # check the errors
-    if (missing(expectError)) {
+    if (missing(e)) {
         if (!is.null(errors)) {
-            result <- "FAIL"
+            result <- FALSE
             appendComment("Expected no errors, but", errors,"found")
         }
     } else {
-        for (e in expectError) 
-            if (length(grep(e, errors)) == 0) {
-                result <- "FAIL"
-                appendComment("Error", e, "not found in ", errors)
+        for (ee in e) 
+            if (length(grep(ee, errors)) == 0) {
+                result <- FALSE
+                appendComment("Error", ee, "not found in ", errors)
             }
     }
     if (missing(name))
@@ -257,7 +257,7 @@ test <- function(id, code, output = NULL, expectWarning = NULL, expectError = NU
     tests[[length(tests) + 1]] <<- c(paste("[",id,"] ",name, sep = ""), result, comments, id)
     if (verbose)
         print.test(tests[[length(tests)]], code)
-    if (identical(result, "PASS")) {
+    if (result) {
         passes <<- passes + 1
         TRUE
     } else {

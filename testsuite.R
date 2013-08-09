@@ -483,7 +483,7 @@ testSubstituteAST <- function(ast, env) {
 #' }, w("foobar")
 #' )
 
-test <- function(..., name = NULL) {
+test <- function(..., name = NULL, o = NULL, w = NULL, e = NULL) {
     # convert name to character if required, preserve name null if unnamed
     if (typeof(name) != "character")
         name <- as.character(substitute(name))
@@ -491,6 +491,12 @@ test <- function(..., name = NULL) {
         name <- NULL
     # get the arguments in dots and separate them as code commands and code (code being the last one)
     commands <- eval(substitute(alist(...)))
+    if (!missing(o))
+        o <- substitute(o)
+    if (!missing(e))
+        o <- substitute(e)
+    if (!missing(w))
+        o <- substitute(w)
     if (length(commands) == 0)
         stop("The test must have at least a code specified.")
     code <- commands[[length(commands)]]
@@ -498,15 +504,18 @@ test <- function(..., name = NULL) {
     # now that we have the commands, make them into generators, checks and conditions
     separatedCommands <- separateCommands(commands)
     # now ennumerate the tests 
-    enumerateTests(name, code, separatedCommands)
+    if (missing(o))
+        enumerateTests(name, code, w, e, separatedCommands)
+    else
+        enumerateTests(name, code, w, e, separatedCommands, o = o)
 }
 
 separateCommands <- function(commands) {
     result <- list(
         independentGenerators = list(),
         dependentGenerators = list(),
-        checks = list(),
-        conditions = list(),
+#        checks = list(),
+#        conditions = list(),
         test = list()
         )
     cmdNames = names(commands)
@@ -518,8 +527,9 @@ separateCommands <- function(commands) {
                                          "env",
                                          "code",
                                          "originalCode",
-                                         "conditions",
-                                         "checks",
+                                         "e",
+                                         "w",
+                                         "o",
                                          "independentGenerators",
                                          "dependentGenerators",
                                          "generatorValues"
@@ -542,12 +552,12 @@ separateCommands <- function(commands) {
                         ig$dependents <- c(ig$dependents, cmd$name)
                         result$independentGenerators[[ig$name]] <- ig
                     }
-                } else if (is.check(cmd)) {
-                    result$checks <- c(result$checks, list(cmd))
-                } else if (is.condition(cmd)) {
-                    result$conditions <- c(result$conditions, list(cmd))
+#                } else if (is.check(cmd)) {
+#                    result$checks <- c(result$checks, list(cmd))
+#                } else if (is.condition(cmd)) {
+#                    result$conditions <- c(result$conditions, list(cmd))
                 } else {
-                    stop("Only generator, check, or condition can be passed as an argument to a test")
+                    stop("Only generator, or a named argument can be passed as an argument to a test")
                 }
             }
         }
@@ -555,7 +565,7 @@ separateCommands <- function(commands) {
     result
 }
 
-enumerateTests <- function(name, code, separatedCommands) {
+enumerateTests <- function(name, code, w, e, separatedCommands,  o = NULL) {
     increaseGenerator <- function(i = length(ig)) {
         if (i != 0) {
             g <- ig[[i]]
@@ -628,14 +638,20 @@ enumerateTests <- function(name, code, separatedCommands) {
                 env = env, 
                 code = codeStr, 
                 originalCode = code, 
-                conditions = separatedCommands$conditions,
-                checks = separatedCommands$checks, 
+#                conditions = separatedCommands$conditions,
+#                checks = separatedCommands$checks, 
                 independentGenerators = separatedCommands$independentGenerators,
                 dependentGenerators = separatedCommands$dependentGenerators,
                 generatorValues = c(iPos, dPos)
                 ),
             separatedCommands$test
         )
+        if (!missing(o))
+            test$o <- testSubstitute(o,env)
+        if (!is.null(w))
+            test$w <- w
+        if (!is.null(e)) 
+            test$e <- e
         class(test) <- "testInstance"
         tests <<- c(tests, list(test))
         # increase the generators
@@ -658,22 +674,19 @@ expandTest <- function(t, ...) {
 expandTest.testInstance <- function(test, testId) {
     code <- test$code
     callArgs <- NULL
-    isOutputSet <- FALSE
-    for (ch in test$checks) {
-        s <- ch$expandFunction(ch, test$env)
-        if (! is.null(s)) {
-            if (length(grep(pattern="^output =", s)) != 0)
-                isOutputSet <- TRUE
-            if (length(grep(pattern="^expectError =", s)) != 0)
-                isOutputSet <- TRUE
-            callArgs <- c(callArgs, s)
-        }
-    }
-    if (!isOutputSet) {
+    if ("O" %in% names(test)) {
+        callArgs <- c(callArgs, paste("o = ", test$o))
+        if ("e" %in% names(test))
+            stop("Output and error cannot be defined at the same time")
+    } else if ("e" %in% names(test)) {
+        callArgs <- c(callArgs, paste("e = ", deparse(test$e)))
+    } else {
         cat("Test", test$name, "does not have output specified, calculating...\n")
         o <- eval(eval(substitute(testSubstitute(code, test$env), list(code = test$originalCode))), envir = new.env(parent=baseenv()))
-        callArgs <- c(callArgs, paste("output = ",deparse(o), sep = ""))
+        callArgs <- c(callArgs, paste("o = ",deparse(o), sep = ""))
     }
+    if ("w" %in% names(test))
+        callArgs <- c(callArgs, paste("w = ", deparse(test$w)))
     result <- paste(code, collapse = "\n  ")
     if (! is.null(test$name))
         result <- c(result, paste("  name = \"",gsub('"',"\\\\\"",gsub("\\\\","\\\\\\",test$name)),"\"", sep = ""))
