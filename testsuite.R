@@ -223,134 +223,6 @@ length.generator <- function(g) {
     g$length
 }
 
-# checks ---------------------------------------------------------------------------------------------------------------
-
-#' @export
-#' Checks that the given object is inherits from an S3 "check" class.
-#' 
-#' @param o Object in question.
-#' @return TRUE if the object inherits from "check", FALSE otherwise. 
-#' @seealso check
-is.check <- function(o) {
-    inherits(o, "check")
-}
-
-#' @export
-#' The expand function is suposed to produce a string that will be an argument to the test function in the targetSuite mode of operation. 
-#' 
-#' It only takes two arguments, the check itself and the environment used for the test. 
-#' 
-#' @param f The function whose signature is to be tested.
-#' @return TRUE if f has two arguments named check and env, FALSE otherwise.
-#' @seealso check
-is.expandFunction <- function(f) {
-    identical(names(formals(f)), c("check", "env"))
-}
-
-#' @export
-#' Creates a new check object. 
-#' 
-#' The check object is defined by the check function and any other arguments that may be passed. These are not evaluated, but will become named fields of the resulting check object in their language forms. 
-#' 
-#' @param expandFunction Expand function used to translate the check to the expanded version of the test. This must be a function that takes two arguments, the check itself (check) and the environment of matched generator values (env).
-#' @param ... Additional named only arguments that will become fields of the check object. The arguments are not evaluated. 
-#' @return S3 check object consisting of the expandFunction and any other fields specified. 
-#' @seealso test, is.expandFunction, is.check, o, w, e
-#' @examples
-#' #' check(function(check, env) { paste("output = ", eval(env$a)) }) 
- 
-check <- function(expandFunction, ...) {
-    if (! is.expandFunction(expandFunction))
-        stop("Expand function must have exactly two arguments named check and env")
-    # get the additional arguments
-    result <- eval(substitute(alist(...)))
-    n <- names(result)
-    if ((length(n) != length(result)) || ("" %in% n))
-        stop("Only named arguments can be added as check fields.")
-    class(result) <- "check"    
-    result$expandFunction <- expandFunction
-    result
-}
-
-#' @export
-#' An expected output. R expression is expected, generator replacement will be used on its value.
-#' 
-#' If an error is checked, output cannot be checked too
-#' 
-#'  @param expectedOutput The expected output of the test. If the output contains any of the generators used in the test, their values are replaced. 
-#'  @return S3 check object that translates to output check. 
-#'  @seelalso check, test, w, e
-#'  @examples 
-#'  o(c(1,2))
-
-o <- function(expectedOutput) {
-    eval(substitute(
-        check(
-            expandFunction = function(check, env) {
-                paste("output = ",deparse(eval(substitute(testSubstitute(co, env), list(co = check$output)))), sep = "")
-            },
-            output = eo
-            )
-    , list(eo = substitute(expectedOutput))))
-}
-
-#' @export
-#' A warning expectation check. Argument can be either a single string to find in warnings, or a vector of strings in which case all the strings must be found in the warnings reported by the test. 
-#' 
-#' @param expectWarning Partial or full text to expect in the warning. 
-#' @return S3 object of a check that performs the warning checking. 
-#' @seealso check, test, o, e
-#' @examples
-#' 
-#' w("partial match") # for test where partial matching warning is expected
-
-w <- function(expectWarning) {
-    eval(substitute(
-        check(
-            expandFunction = function(check, env) {
-                paste("expectWarning = ",deparse(eval(substitute(testSubstitute(cw, env), list(cw = check$expectWarning)))), sep = "")
-            },
-            expectWarning = ew
-        )
-        , list(ew = substitute(expectWarning))))
-}
-
-#' @export
-#' An error expectation check. Argument can be either a single error to find, or a vector of strings if whih case all the strings must be found in the error messages. 
-#' 
-#' If an error is checked, output cannot be checked too.
-#' 
-#' @param expectError Partial or full text of the error to be expected. 
-#' @return S3 object of the error check.
-#' @seealso check, test, o , e
-#' @examples
-#' 
-#' e("not found") # for a test giving the object not found warning
-
-e <- function(expectError) {
-    eval(substitute(
-        check(
-            expandFunction = function(check, env) {
-                paste("expectError = ",deparse(eval(substitute(testSubstitute(ce, env), list(ce = check$expectError)))), sep = "")
-            },
-            expectWarning = ee
-        )
-        , list(ee = substitute(expectError))))
-}
-
-# conditions -----------------------------------------------------------------------------------------------------------
-
-# TODO maybe not relevant anymore in the new version
-is.condition <- function(o) {
-    inherits(o, "condition")
-}
-
-# TODO this should do something more
-condition <- function(conditionFunction, ...) {
-    result <- eval(substitute(alist(...)))
-    class(result) <- "condition"    
-}
-
 
 # substitution ---------------------------------------------------------------------------------------------------------
 
@@ -455,22 +327,23 @@ testSubstituteAST <- function(ast, env) {
 #' 
 #' Any usage of the generator name in either the code, or the output test will be replaced by the respective value of that generator for the particular test. 
 #' 
-#' If the output check is not specified, the test will be executed and its value calculated. If the test produces any warnings or errors that are not explicitly checked, an error will be produced. 
-#' 
 #' To expand the tests, testSuite function must be called. 
 #' 
-#' @param ... checks, generators and code of the test. Code must be the last argument. Code can be eitcher character, or an AST.
+#' @param ... generators, code of the test. Code must be the last argument. Code can be eitcher character, or an AST. Other named arguments will become fields of the test object (but this has no effect on the standard test implementation)
 #' @param name optional name of the test. 
+#' @param o Expected output of the test. Can contain generators. If not specified, and no error is expected, the output will be calculated automatically by executing the test. If the output contains generators, these will be substitued with their values. If the output is character string, it will still be substitued, but not deparsed. Only the last value of the test can be checked. 
+#' @param w Character of warning messages to be expected. The messages can be either parts of the message or full lines. If there are multiple warning messages all must be found within the test result. 
+#' @param e Character of error messages expected. The messages can be either parts of the message or full lines. If there are multiple error messages all must be found within the test result. 
 #' @return NULL - the tests are added automatically to the testSuite. 
-#' @seealso testSuite, cg, g, o, w, e, testSubstitute
+#' @seealso testSuite, cg, g, testSubstitute
 #' @examples
 #' # simple test, no generators
-#' test( 1 + 2, o(3))
+#' test( 1 + 2, o = 3)
 #' # test with generators, output specified
 #' test(g(a, 1, 2, 3),
 #'   g(b, 2, 4, 6, dependsOn = a) 
 #'   a + a,
-#'   o(b)
+#'   o = b
 #' )
 #' # test with generators, output will be calculated before the expansion
 #' test(g(a, 1, 2, 3),
@@ -480,7 +353,7 @@ testSubstituteAST <- function(ast, env) {
 #' test({
 #'   warning("foobar")
 #'   1
-#' }, w("foobar")
+#' }, w = "foobar"
 #' )
 
 test <- function(..., name = NULL, o = NULL, w = NULL, e = NULL) {
@@ -491,12 +364,10 @@ test <- function(..., name = NULL, o = NULL, w = NULL, e = NULL) {
         name <- NULL
     # get the arguments in dots and separate them as code commands and code (code being the last one)
     commands <- eval(substitute(alist(...)))
-    if (!missing(o))
-        o <- substitute(o)
     if (!missing(e))
-        o <- substitute(e)
+        e <- substitute(e)
     if (!missing(w))
-        o <- substitute(w)
+        w <- substitute(w)
     if (length(commands) == 0)
         stop("The test must have at least a code specified.")
     code <- commands[[length(commands)]]
@@ -507,15 +378,13 @@ test <- function(..., name = NULL, o = NULL, w = NULL, e = NULL) {
     if (missing(o))
         enumerateTests(name, code, w, e, separatedCommands)
     else
-        enumerateTests(name, code, w, e, separatedCommands, o = o)
+        enumerateTests(name, code, w, e, separatedCommands, o = substitute(o))
 }
 
 separateCommands <- function(commands) {
     result <- list(
         independentGenerators = list(),
         dependentGenerators = list(),
-#        checks = list(),
-#        conditions = list(),
         test = list()
         )
     cmdNames = names(commands)
@@ -552,10 +421,6 @@ separateCommands <- function(commands) {
                         ig$dependents <- c(ig$dependents, cmd$name)
                         result$independentGenerators[[ig$name]] <- ig
                     }
-#                } else if (is.check(cmd)) {
-#                    result$checks <- c(result$checks, list(cmd))
-#                } else if (is.condition(cmd)) {
-#                    result$conditions <- c(result$conditions, list(cmd))
                 } else {
                     stop("Only generator, or a named argument can be passed as an argument to a test")
                 }
@@ -638,8 +503,6 @@ enumerateTests <- function(name, code, w, e, separatedCommands,  o = NULL) {
                 env = env, 
                 code = codeStr, 
                 originalCode = code, 
-#                conditions = separatedCommands$conditions,
-#                checks = separatedCommands$checks, 
                 independentGenerators = separatedCommands$independentGenerators,
                 dependentGenerators = separatedCommands$dependentGenerators,
                 generatorValues = c(iPos, dPos)
@@ -647,7 +510,7 @@ enumerateTests <- function(name, code, w, e, separatedCommands,  o = NULL) {
             separatedCommands$test
         )
         if (!missing(o))
-            test$o <- testSubstitute(o,env)
+            test$o <- eval(substitute(testSubstitute(o,env), list(o = o)))
         if (!is.null(w))
             test$w <- w
         if (!is.null(e)) 
@@ -674,9 +537,9 @@ expandTest <- function(t, ...) {
 expandTest.testInstance <- function(test, testId) {
     code <- test$code
     callArgs <- NULL
-    if ("O" %in% names(test)) {
+    if ("o" %in% names(test)) {
         callArgs <- c(callArgs, paste("o = ", test$o))
-        if ("e" %in% names(test))
+        if ("e" %in% names(test)) 
             stop("Output and error cannot be defined at the same time")
     } else if ("e" %in% names(test)) {
         callArgs <- c(callArgs, paste("e = ", deparse(test$e)))
