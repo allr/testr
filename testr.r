@@ -331,7 +331,7 @@ testSubstituteAST <- function(ast, env) {
 #' 
 #' @param ... generators, code of the test. Code must be the last argument. Code can be eitcher character, or an AST. Other named arguments will become fields of the test object (but this has no effect on the standard test implementation)
 #' @param name optional name of the test. 
-#' @param o Expected output of the test. Can contain generators. If not specified, and no error is expected, the output will be calculated automatically by executing the test. If the output contains generators, these will be substitued with their values. If the output is character string, it will still be substitued, but not deparsed. Only the last value of the test can be checked. 
+#' @param o Expected output of the test. Can contain generators. If not specified, and no error is expected, the output will be calculated automatically by executing the test. If the output contains generators, these will be substitued with their values. If the output is character string, it will still be substitued, but not deparsed. Only the last value of the test can be checked. A code can be supplied instead of a value in which case the code will be exectuted to produce the correct output (this will happen in the test expansion, not on target). 
 #' @param w Character of warning messages to be expected. The messages can be either parts of the message or full lines. If there are multiple warning messages all must be found within the test result. 
 #' @param e Character of error messages expected. The messages can be either parts of the message or full lines. If there are multiple error messages all must be found within the test result. 
 #' @return NULL - the tests are added automatically to the makeTests. 

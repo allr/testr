@@ -176,10 +176,6 @@ test_that("generator length reflects the length described, not the length of the
     expect_equal(length(names(g)), 3)
 })
 
-# checks ---------------------------------------------------------------------------------------------------------------
-
-context("checks")
-
 # substitution ---------------------------------------------------------------------------------------------------------
 
 context("substitution")
@@ -300,3 +296,95 @@ test_that("substitution of strings ansd ASTs into ASTs", {
 # test generator -------------------------------------------------------------------------------------------------------
 
 context("test generator")
+
+test_that("simple test works", {
+    tests <<- list()
+    test(name = "foobar",
+        o = 3,
+        1 + 2
+    )
+    expect_equal(length(tests), 1)
+    t <- tests[[1]]
+    expect_equal(t$name, "foobar")
+    expect_equal(t$o, 3)
+    expect_false("w" %in% names(t))
+    expect_false("e" %in% names(t))
+})
+
+test_that("independent generator works and output may be missing", {
+    tests <<- list()
+    test(name = "test",
+         g(a, 1, 2, 3, 4),
+         a
+    )
+    expect_equal(length(tests), 4)
+    t <- tests[[1]]
+    expect_equal(t$name, "test [a = 1]")
+    expect_equal(t$code, "1")
+    expect_false("o" %in% names(t))
+    expect_false("w" %in% names(t))
+    expect_false("e" %in% names(t))
+    t <- tests[[2]]
+    expect_equal(t$name, "test [a = 2]")
+    expect_equal(t$code, "2")
+    expect_false("o" %in% names(t))
+    expect_false("w" %in% names(t))
+    expect_false("e" %in% names(t))
+    t <- tests[[3]]
+    expect_equal(t$name, "test [a = 3]")
+    expect_equal(t$code, "3")
+    expect_false("o" %in% names(t))
+    expect_false("w" %in% names(t))
+    expect_false("e" %in% names(t))
+    t <- tests[[4]]
+    expect_equal(t$name, "test [a = 4]")
+    expect_equal(t$code, "4")
+    expect_false("o" %in% names(t))
+    expect_false("w" %in% names(t))
+    expect_false("e" %in% names(t))
+})
+
+test_that("multiple independent generators", {
+    tests <<- list()
+    test(name = "test",
+         g(a, 1, 2, 3),
+         g(b, 1, 2, 3),
+         g(c, "+","-","*"),
+         a %c% b
+    )
+    expect_equal(length(tests), 27)
+    expect_equal(tests[[1]]$generatorValues, c(a = 1, b = 1, c = 1))
+    expect_equal(tests[[2]]$generatorValues, c(a = 1, b = 1, c = 2))
+    expect_equal(tests[[3]]$generatorValues, c(a = 1, b = 1, c = 3))
+    expect_equal(tests[[4]]$generatorValues, c(a = 1, b = 2, c = 1))
+    expect_equal(tests[[8]]$generatorValues, c(a = 1, b = 3, c = 2))
+    expect_equal(tests[[11]]$generatorValues, c(a = 2, b = 1, c = 2))
+    expect_equal(tests[[11]]$code, "2 - 1")
+})
+
+test_that("dependent generator works", {
+    tests <<- list()
+    test(
+        g(a, 1, 2, 3),
+        g(b, 3, 2, 1, dependsOn = a),
+        a + b
+    )
+    expect_equal(length(tests), 3)
+    expect_equal(tests[[1]]$generatorValues, c(a = 1, b = 1))
+    expect_equal(tests[[2]]$generatorValues, c(a = 2, b = 2))
+    expect_equal(tests[[3]]$generatorValues, c(a = 3, b = 3))
+})
+
+test_that("output if code is executed and generators are replaced", {
+    tests <<- list()
+    test(
+        g(a, 1, 2, 3),
+        g(b, 3, 2, 1, dependsOn = a),
+        o = a + b,
+        a + b
+    )
+    expect_equal(length(tests), 3)
+    expect_equal(tests[[1]]$o, 4)
+    expect_equal(tests[[2]]$o, 4)
+    expect_equal(tests[[3]]$o, 4)
+})
