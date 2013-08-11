@@ -327,15 +327,15 @@ testSubstituteAST <- function(ast, env) {
 #' 
 #' Any usage of the generator name in either the code, or the output test will be replaced by the respective value of that generator for the particular test. 
 #' 
-#' To expand the tests, testSuite function must be called. 
+#' To expand the tests, makeTests function must be called. 
 #' 
 #' @param ... generators, code of the test. Code must be the last argument. Code can be eitcher character, or an AST. Other named arguments will become fields of the test object (but this has no effect on the standard test implementation)
 #' @param name optional name of the test. 
 #' @param o Expected output of the test. Can contain generators. If not specified, and no error is expected, the output will be calculated automatically by executing the test. If the output contains generators, these will be substitued with their values. If the output is character string, it will still be substitued, but not deparsed. Only the last value of the test can be checked. 
 #' @param w Character of warning messages to be expected. The messages can be either parts of the message or full lines. If there are multiple warning messages all must be found within the test result. 
 #' @param e Character of error messages expected. The messages can be either parts of the message or full lines. If there are multiple error messages all must be found within the test result. 
-#' @return NULL - the tests are added automatically to the testSuite. 
-#' @seealso testSuite, cg, g, testSubstitute
+#' @return NULL - the tests are added automatically to the makeTests. 
+#' @seealso makeTests, cg, g, testSubstitute
 #' @examples
 #' # simple test, no generators
 #' test( 1 + 2, o = 3)
@@ -578,7 +578,7 @@ print.testInstance <- function(t) {
 #' @export
 #' Launches the test compiler that takes the unexpanded tests with generators and converts them to their expanded variants. 
 #' 
-#' Recursively walks all R (.r and .R) files on given root. For each file reads its tests, expands them and stores them to the same file but under the destRoot folder. 
+#' Recursively walks all tr (.tr and .TR) files on given root. For each file reads its tests, expands them and stores them to the same file but under the destRoot folder. 
 #' 
 #' It is assumed that the tests are defined using the test function, but any object that inherits from "testInstance" and overrides its own expand method will work properly. 
 #' 
@@ -590,13 +590,13 @@ print.testInstance <- function(t) {
 #' @return NULL
 #' @seealso test
 #' @examples
-#' testSuite("c:/unexpandedTests", "c:/expandedTests", showCode <- TRUE)
+#' makeTests("c:/unexpandedTests", "c:/expandedTests", showCode <- TRUE)
 
-testSuite <- function(root, destRoot, showCode = FALSE) {
+makeTests <- function(root, destRoot, showCode = FALSE) {
     total <- 0
     nFiles <- 0
     i = 1
-    for (f in list.files(root, pattern=".[rR]$", recursive = TRUE)) {
+    for (f in list.files(root, pattern=".[tT][rR]$", recursive = TRUE)) {
         nFiles <- nFiles + 1
         filename <- paste(root,"/", f, sep = "")
         cat(filename,"...\n")
@@ -604,7 +604,7 @@ testSuite <- function(root, destRoot, showCode = FALSE) {
         cat("Analyzing file", filename, "\n")
         source(filename, local = FALSE)
         total <- total + length(tests)
-        outFilename <- gsub(root, destRoot, filename)
+        outFilename <- gsub(".[tT][rR]$", ".r", gsub(root, destRoot, filename))
         cat("  Writing", length(tests), "tests to file", outFilename,"...\n")
         dir.create(dirname(outFilename), recursive = TRUE, showWarnings = FALSE)
         f <- file(outFilename, "wt")
