@@ -355,6 +355,14 @@ testSubstituteAST <- function(ast, env) {
 #'   1
 #' }, w = "foobar"
 #' )
+#' # evaluation of the output command
+#' test(
+#'   g(a, NA, NaN),
+#'   g(b, NA, NaN),
+#'   g(c, "+", "-", "*", "/"),
+#'   o = if (is.nan(a) && is.nan(b)) NaN else NA,
+#'   a %c% b
+#' )
 
 test <- function(..., name = NULL, o = NULL, w = NULL, e = NULL) {
     # convert name to character if required, preserve name null if unnamed
@@ -510,7 +518,7 @@ enumerateTests <- function(name, code, w, e, separatedCommands,  o = NULL) {
             separatedCommands$test
         )
         if (!missing(o))
-            test$o <- eval(substitute(testSubstitute(o,env), list(o = o)))
+            test$o <- eval(eval(substitute(testSubstitute(o,env), list(o = o))))
         if (!is.null(w))
             test$w <- w
         if (!is.null(e)) 
