@@ -35,7 +35,6 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   DEBUG <- FALSE;
   if (missing(root)) stop("A directory containing VM source files must be specified!");
   if (DEBUG) cat("===",root,"===","\n");
-  if (DEBUG) cat("===",root,"===","\n");
   if (length(grep("[.]c$", root, ignore.case=TRUE))) { cfiles <- root }
   else { cfiles <- list.files(path=root, recursive=TRUE, pattern=".c$") }
   if (DEBUG) print(cfiles);
@@ -151,5 +150,20 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   return (list(file=file.df, func=func.df));
 }
 
-#coverage("/home/lzhao/r/gcov/src")
-#coverage("/home/lzhao/r/R-3.0.1/src/main")
+#' The coverage data is accumulated for every run. Invoke this function to reset whenever
+#' you want a fresh start. All it does is to delete the .gcda files.
+#'
+#' Parameter:
+#' * root: the top directory of the instrumented VM source.
+#'
+reset <- function(root) {
+  if (missing(root)) stop("A directory containing VM source files must be specified!");
+  if (.Platform$OS.type=="unix") {
+    cmd <- paste("find", root, "-name", "\'*.gcda\'", "-delete", sep=" ");
+    system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);
+  } else if (.Platform$OS.type=="windows") {
+    stop("Not supported yet! Let me find a Windows machine to test the command...");
+  } else {
+    stop("Unknown operating system type: ", .Platform$OS.type);
+  }
+}
