@@ -19,28 +19,132 @@
 # or visit www.oracle.com if you need additional information or have any
 # questions.
 
-#' Coverage Report
+#' @title Coverage Report on Specified R Virtual Machine Source Code
 #'
-#' Parameters:
-#'  * root: a directory or a single C file that contains/is instrumented VM source.
-#'          The VM must have been compiled with gcov support and executed at least once.
-#'  * exclude.header: whether include header files in statistics.
-#'  * file/func.detail: whether show detailed tables.
-#'  * file/func.keyword: only include the files/functions that contain the specified keyword in statistics.
-#'  * ignore.case: whether case should be ignored for the keywords.
-#' Return: list(file=file.df, func=func.df)
+#' @description This function works with the GNU coverage tool, gcov, to report code coverage of the
+#'  tested R virtual machine. and The VM must have been compiled with gcov support and executed at least
+#'  once before this function is executed for meanful statistics. Note that, gcov is designed such
+#'  that the coverage results are accumulated, so for a fresh new result of a test suit, call
+#'  \code{\link{reset}} before executing the test suite. The coverage granularition spans line, function,
+#'  and file. 
 #'
-
-coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=FALSE, file.keyword="", func.keyword="", ignore.case=TRUE, ...) {
-  DEBUG <- FALSE;
+#' @param root a directory or a single C file that contains or is instrumented VM source.
+#' @param exclude.header whether to include header files in statistics.
+#' @param file.detail whether to display statistic details for files.
+#' @param func.detail whether to display statistic details for functions.
+#' @param file.keyword filtering the result by only including files whose names contain the keyword.
+#' @param func.keyword filtering the result by only including functions whose names contain the keyword.
+#' @param ignore.case whether the keywords should be case-sensitive.
+#' @return list(file=file.df, func=func.df)
+#'
+#' @details In this section we give some design thoughts then in example section some sample
+#'  reports and the interpretation.
+#' 
+#'  As a testcase contributor, the right way to use the coverage rate is to look for increments
+#'  after new testcases are added rather than aiming for 100% coverage. The reason is that, due
+#'  to the file inclusion feature of C language, exhaustive tests will be hardly shown as 100%
+#'  coverage (could be lower or higher). Specifically, if one piece of code in a header file gets
+#'  included in two C files, gcov reports it twice and C in C inclusion will make the situation
+#'  even more complicated. So we give users the choices to either include both (over estimation)
+#'  or include none (under estimation) in the overall result by allowing them to choose whether
+#'  to include the header files in the statistics. Identifying duplication is almost impossible.
+#'
+#'  On the other hand, gcov produces precise result object-wise. The term "object" is used as is
+#'  in "object file" during linking, referring to a group of files glued together by inclusion,
+#'  usually a C file and several header files but in rare case several C files and several header
+#'  files. The coverage within the range of object is precise as C compilers guarantee no duplication
+#'  by nature. In that, the object information is included in the file/function detail tables for
+#'  users' reference.
+#'
+#' @examples
+#'
+#' Sample 1 (no filter):
+#'
+#' \code{========-------- Coverage Report --------========}
+#'
+#' \code{>>> Configration:}
+#'
+#' \code{- src diretory:     /home/somebody/some_vm/src}
+#' \code{- file keyword:}
+#' \code{- func keyword:}
+#' \code{- igore case:       TRUE}
+#' \code{- exclude header:   FALSE}
+#'
+#' \code{>>> Coverage:}
+#'
+#' \code{* Line (file): 22 out of 30 (73.33%)}
+#' \code{* Line (func): 22 out of 30 (73.33%)}
+#' \code{* File:        7 out of 8 (87.5%)}
+#' \code{* Func:        7 out of 11 (63.64%)}
+#'
+#' \code{----------------   File Detail   ----------------
+#'
+#' \code{       Obj          File CovLn LOC CovLn%}
+#' \code{     add.c  src/static.h     2   4  50.00}
+#' \code{     add.c     src/add.c     5   5 100.00}
+#' \code{ include.c src/include.c     0   1   0.00}
+#' \code{    main.c src/regular.h     2   4  50.00}
+#' \code{    main.c src/include.c     1   1 100.00}
+#' \code{    main.c    src/main.c     6   6 100.00}
+#' \code{   minus.c  src/static.h     2   4  50.00}
+#' \code{   minus.c   src/minus.c     4   5  80.00}
+#'
+#' \code{----------------   Func Detail   ----------------}
+#'
+#' \code{       Obj         Func CovLn LOC CovLn%}
+#' \code{     add.c   static_add     2   2 100.00}
+#' \code{     add.c static_minus     0   2   0.00}
+#' \code{     add.c       my_add     5   5 100.00}
+#' \code{ include.c          one     0   1   0.00}
+#' \code{    main.c      reg_add     0   2   0.00}
+#' \code{    main.c    reg_minus     2   2 100.00}
+#' \code{    main.c          one     1   1 100.00}
+#' \code{    main.c         main     6   6 100.00}
+#' \code{   minus.c   static_add     0   2   0.00}
+#' \code{   minus.c static_minus     2   2 100.00}
+#' \code{   minus.c     my_minus     4   5  80.00}
+#'
+#' \code{=================================================}
+#'
+#' Sample 2 (filters used):
+#'
+#' \code{  ========-------- Coverage Report --------========}
+#'
+#' \code{  >>> Configration:}
+#'
+#' \code{- src diretory:     /home/somebody/some_vm/src}
+#' \code{- file keyword:     add}
+#' \code{- func keyword:     ad}
+#' \code{- igore case:       TRUE}
+#' \code{- exclude header:   TRUE}
+#'
+#' \code{>>> Coverage:}
+#'
+#' \code{* Line (file): 5 out of 5 (100%)}
+#' \code{* Line (func): 7 out of 7 (100%)}
+#' \code{* File:        1 out of 1 (100%)}
+#' \code{* Func:        2 out of 2 (100%)}
+#'
+#' \code{----------------   File Detail   ----------------}
+#'
+#' \code{   Obj      File CovLn LOC CovLn%}
+#' \code{ add.c src/add.c     5   5 100.00}
+#'
+#' \code{----------------   Func Detail   ----------------}
+#'
+#' \code{   Obj       Func CovLn LOC CovLn%}
+#' \code{ add.c static_add     2   2 100.00}
+#' \code{ add.c     my_add     5   5 100.00}
+#'
+#' \code{=================================================}
+#'
+  
+coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=FALSE, file.keyword="", func.keyword="", ignore.case=TRUE) {
   if (missing(root)) stop("A directory containing VM source files must be specified!");
-  if (DEBUG) cat("===",root,"===","\n");
   if (length(grep("[.]c$", root, ignore.case=TRUE))) { cfiles <- root }
   else { cfiles <- list.files(path=root, recursive=TRUE, pattern=".c$") }
-  if (DEBUG) print(cfiles);
   res <- c()
   gcovOnSingleFile <- function(f) {
-    if (DEBUG) cat("-----------------",f,"-----------------","\n");
     path <- file.path(root, dirname(f), fsep=.Platform$file.sep);
     file <- file.path(root, f,          fsep=.Platform$file.sep);
     cmd <- paste("gcov", "-p", "-n", "-f",  "-o", path, file, sep=" ");
@@ -48,9 +152,6 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
     fileLines <- r[grep("^File", r)];
     funcLines <- r[grep("^Function", r)];
     dataLines <- r[grep("^Lines executed", r)];
-    if (DEBUG) print(fileLines);
-    if (DEBUG) print(funcLines);
-    if (DEBUG) print(dataLines);
     if (length(fileLines) != 0) {
       files.len <- length(fileLines);
       funcs.len <- length(funcLines);
@@ -59,13 +160,8 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
       files <- matrix(unlist(strsplit(fileLines,"'")), ncol=2, byrow=TRUE)[,2];
       funcs <- matrix(unlist(strsplit(funcLines,"'")), ncol=2, byrow=TRUE)[,2];
       data  <- strsplit(unlist(strsplit(dataLines, "Lines executed:")), "% of ")[seq(2,2*data.len,2)];
-      if (DEBUG) print(files);
-      if (DEBUG) print(funcs);
-      if (DEBUG) print(data);
       func.data <- data[1:funcs.len];
       file.data <- data[(funcs.len+1):data.len];
-      if (DEBUG) print(func.data);
-      if (DEBUG) print(file.data);
       func.df <- data.frame(cbind(funcs, matrix(unlist(func.data), ncol=2, byrow=TRUE)), stringsAsFactors=FALSE);
       file.df <- data.frame(cbind(files, matrix(unlist(file.data), ncol=2, byrow=TRUE)), stringsAsFactors=FALSE);
       colnames(func.df) <- c("Func", "CovLn%", "LOC");
@@ -77,29 +173,22 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
       }
       func.df <- calCovLnAndAddObj(func.df)[,c(5,1,4,3,2)]; # Obj Func CovLn LOC CovLn%
       file.df <- calCovLnAndAddObj(file.df)[,c(5,1,4,3,2)]; # Obj File CovLn LOC CovLn%
-      if (DEBUG) print(func.df);
-      if (DEBUG) print(file.df);
       list(file=file.df, func=func.df);
     } else { NULL }
   }
   result <- Map(gcovOnSingleFile, cfiles);
-  if (DEBUG) print(result);
   file.df <- data.frame('File'=vector(),'CovLn%'=vector(),'LOC'=vector(),'CovLn'=vector(),'Obj'=vector());
   func.df <- data.frame('Func'=vector(),'CovLn%'=vector(),'LOC'=vector(),'CovLn'=vector(),'Obj'=vector());
   for (item in result) {
     file.df <- rbind(file.df, item$file);
     func.df <- rbind(func.df, item$func);
   }
-  if (DEBUG) print(file.df);
-  if (DEBUG) print(func.df);
   file.df <- file.df[grep(file.keyword, file.df$'Obj',  ignore.case=ignore.case),];
   func.df <- func.df[grep(file.keyword, func.df$'Obj',  ignore.case=ignore.case),];
   func.df <- func.df[grep(func.keyword, func.df$'Func', ignore.case=ignore.case),];
   if (exclude.header) {
     file.df <- file.df[grep("[.]c$", file.df$'File', ignore.case=ignore.case),];  
   }
-  if (DEBUG) print(file.df);
-  if (DEBUG) print(func.df);
   # line file coverage
   totalLine.file        <- sum(as.numeric(file.df$'LOC'));
   totalCovLine.file     <- sum(as.numeric(file.df$'CovLn'));
