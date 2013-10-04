@@ -23,7 +23,6 @@
 # output.dir: the overall directory to store all outputs. Each run of this function
 #   will create its own subdir under output.dir in format of "2013-09-12 15:22:23".
 testgen <- function(seed.file, output.dir) {
-  DEBUG <- TRUE;
   if (missing(seed.file)) stop("A seed file must be provided!");
   if (missing(output.dir)) stop("A output directory must be provided!");
   ### make file and path names absolute ###
@@ -37,7 +36,7 @@ testgen <- function(seed.file, output.dir) {
   if (!dir.create(output.dir)) stop("Unable to create directory: ", output.dir);
   if (file.exists(output.lnk)) file.remove(output.lnk);
   if (!file.symlink(output.dir, output.lnk)) stop("Unable to create directory link: ", output.lnk);
-  bad.args.file <- file.path(output.dir, "bad_arguments", fsep=.Platform$file.sep);
+  bad.argv.file <- file.path(output.dir, "bad_arguments", fsep=.Platform$file.sep);
   ### process the seed file ###
   map.func.info <- process(readLines(seed.file));
   ### statistic stuff ####
@@ -56,13 +55,13 @@ testgen <- function(seed.file, output.dir) {
     if (!file.create(tc.name)) stop("Unable to create testcase file: ", tc.name);
     #### generate testcase ####
     info <- map.func.info[[func]];
-    for (args in info$'argss') {
-      res <- singlegen(func, info$'type', args);
+    for (argv in info$'argvs') {
+      res <- singlegen(func, info$'type', argv);
       #### see what we get ####
       if (res$type == "err") {
         #### the captured information is not usable ####
         stat.bad.arg = stat.bad.arg + 1;
-        write(res$msg, file=bad.args.file, append=TRUE);
+        write(res$msg, file=bad.argv.file, append=TRUE);
       } else if (res$type == "src") {
         #### good, we get the source code ####
         stat.tst.gen = stat.tst.gen + 1;
@@ -85,67 +84,51 @@ testgen <- function(seed.file, output.dir) {
 }
 
 process <- function(lines) {
-  DEBUG <- TRUE;
   lines <- c(lines, "xxxx: dummy");
-  map.func.info <- new.env(); # a hashtable mapping function name to its args
+  map.func.info <- new.env(); # a hashtable mapping function name to its argv
   funcIdxLst <- grep("^func: ", lines);
   if (length(funcIdxLst) == 0) return(map.func.info);
   contentS <- nchar("func: ")+1;
-  lines <- substring(lines, contentS); # removing prefixes: "func: ", "type: ", or "args: "
+  lines <- substring(lines, contentS); # removing prefixes: "func: ", "type: ", or "argv: "
   for (i in 1:(length(funcIdxLst)-1)) {
     func <- lines[funcIdxLst[i]];
     type <- lines[funcIdxLst[i]+1];
     argS <- funcIdxLst[i]+2;
     argE <- funcIdxLst[i+1]-1;
-    if (DEBUG && FALSE) { cat(i, func, type, argS, argE, "\n", sep=" - "); }
-    args <- paste(lines[argS:argE], collapse='');
+    argv <- paste(lines[argS:argE], collapse='');
     # use hashtable to store arguments for auto duplication removal
     info <- map.func.info[[func]];
     if (is.null(info)) {
-      info <- list('type'=type, 'argss'=new.env());
+      info <- list('type'=type, 'argvs'=new.env());
       map.func.info[[func]] <- info;
     }
-    info$'argss'[[args]] <- TRUE;
+    info$'argvs'[[argv]] <- TRUE;
   }
   for (f in ls(map.func.info)) {
-    map.func.info[[f]]$'argss' <- ls(map.func.info[[f]]$'argss');
-  }
-  if (DEBUG && FALSE) {
-    for (f in ls(map.func.info)) {
-      cat("func:", f, "\n");
-      cat("type:", map.func.info[[f]]$'type', "\n");
-      cat(paste("argv:", map.func.info[[f]]$'argss', "\n"), sep="");
-    }
+    map.func.info[[f]]$'argvs' <- ls(map.func.info[[f]]$'argvs');
   }
   map.func.info;
 }
 
 singlegen <- function(func, type, argv) {
-  DEBUG <- TRUE;
-  if (DEBUG && FALSE) {
-    cat("func:", func, "\n");
-    cat("type:", type, "\n");
-    cat("argv:", argv, "\n");
-  }
   # not a valid argument list, possible reason is arguments too long therefore ignored.
   argv1 <- tryCatch({
     eval(parse(text=argv));
   }, warning = function(war) {
     print(war); #TODO: why warninng?
   }, error = function(err) {
-    # cat("[BAD_ARGS]", argv, "\tfunc:", func, "\n");
+    # cat("[BAD_ARGV]", argv, "\tfunc:", func, "\n");
   });
   if (!is.list(argv1)) {
     return (list(type="err", msg=paste("func:", func,"\nargv:", argv,"\n")));
   }
+  # potentially good arguments, alter it 
+  argv1.lst <- alter.arguments(argv1);
   args1 <- length(argv1); 
   genPrimitive <- function() {
     src <- "";
-    if (args1 > 0) {
-      src <- paste(src, "argv <- eval(parse(text=\'", argv, "\'));", "\n", sep="");
-    } else {
-      src <- paste(src, "argv <- list();", "\n", sep="");
-    }
+    if (args1 > 0) { src <- paste(src, "argv <- eval(parse(text=\'", argv, "\'));", "\n", sep=""); }
+    else           { src <- paste(src, "argv <- list();", "\n", sep=""); }
     src <- paste(src, "do.call(\"", func, "\", argv);", "\n", sep="");
     src;
   }
@@ -164,5 +147,9 @@ singlegen <- function(func, type, argv) {
   }
   src <- switch(type, "P"=genPrimitive(), "I"=genInternal());
   list(type="src", msg=src);
+}
+
+alter.arguments <- function(argv) {
+  
 }
 
