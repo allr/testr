@@ -137,8 +137,11 @@ print.test <- function(test, code = NULL) {
 compareResults <- function(a, b) {
     if (identical(all.equal(a, b), TRUE)) {
         TRUE
-    } else if (is.na(a) && is.na(b) && !is.nan(a) && (!is.nan(b))) {
-        TRUE # we do not care about types of NA's, or should we -- I think this should be tested by a test rather than assumed here
+    } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
+        aa = a[!is.na(a)]
+        bb = b[!is.na(b)]
+        ((length(aa) == 0) && (length(bb) == 0)) || identical(all.equal(aa, bb), TRUE)
+        # we do not care about types of NA's, or should we -- I think this should be tested by a test rather than assumed here
 #    } else if (typeof(a) != typeof(b)) {
 #        FALSE
 #    } else if (typeof(a) == "double") {
