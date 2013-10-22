@@ -44,19 +44,18 @@ testgen <- function(seed.file, output.dir) {
   stat.builtin.captured <- length(ls(map.func.info));
   summary.df <- data.frame('TstGen'=vector(), 'BadArg'=vector(), stringsAsFactors=FALSE);
   #### generate test cases ####
-  tc.name.prefix <- "tc_";
   for (func in ls(map.func.info)) {
     stat.tst.gen <- 0;
     stat.bad.arg <- 0;
     #### create testcase file ####
     tc.name.body = func;
     if (tc.name.body == .Platform$file.sep) tc.name.body <- "";
-    tc.name <- file.path(output.dir, paste(tc.name.prefix, tc.name.body, sep=""), fsep=.Platform$file.sep);
-    if (!file.create(tc.name)) stop("Unable to create testcase file: ", tc.name);
+    tc.name <- file.path(output.dir, paste("tc_", tc.name.body, ".r", sep=""), fsep=.Platform$file.sep);
+    if (!file.create(tc.name)) stop("Unable to create file: ", tc.name);
     #### generate testcase ####
     info <- map.func.info[[func]];
-    for (argv in info$'argvs') {
-      res <- singlegen(func, info$'type', argv);
+    for (argv in ls(info$'argvs')) {
+      res <- singlegen(func, info$'type', argv, info$'argvs'[[argv]]);
       #### see what we get ####
       if (res$type == "err") {
         #### the captured information is not usable ####
@@ -84,72 +83,78 @@ testgen <- function(seed.file, output.dir) {
 }
 
 process <- function(lines) {
-  lines <- c(lines, "xxxx: dummy");
-  map.func.info <- new.env(); # a hashtable mapping function name to its argv
+  lines <- c(lines, "func: dummy");
   funcIdxLst <- grep("^func: ", lines);
-  if (length(funcIdxLst) == 0) return(map.func.info);
-  contentS <- nchar("func: ")+1;
-  lines <- substring(lines, contentS); # removing prefixes: "func: ", "type: ", or "argv: "
-  for (i in 1:(length(funcIdxLst)-1)) {
-    func <- lines[funcIdxLst[i]];
-    type <- lines[funcIdxLst[i]+1];
-    argS <- funcIdxLst[i]+2;
-    argE <- funcIdxLst[i+1]-1;
-    argv <- paste(lines[argS:argE], collapse='');
-    # use hashtable to store arguments for auto duplication removal
-    info <- map.func.info[[func]];
-    if (is.null(info)) {
-      info <- list('type'=type, 'argvs'=new.env());
-      map.func.info[[func]] <- info;
+  if (length(funcIdxLst) == 1) return(map.func.info);
+  process.entry <- function(entry.lines) {
+    merge.lines <- function(prefix) {
+      pattern <- paste("^", prefix, sep="");
+      substr.s <- nchar(prefix)+1;
+      item.lines <- entry.lines[grep(pattern, entry.lines)];
+      item.lines <- substring(item.lines, substr.s);
+      paste(item.lines, collapse='');
     }
-    info$'argvs'[[argv]] <- TRUE;
+    list('func'=merge.lines('func: '),
+         'type'=merge.lines('type: '),
+         'argv'=merge.lines('args: '),
+         'retn'=merge.lines('retn: '));
   }
-  for (f in ls(map.func.info)) {
-    map.func.info[[f]]$'argvs' <- ls(map.func.info[[f]]$'argvs');
+  map.func.info <- new.env(); # a hashtable: [ func => type | map(args => retn) ]
+  for (i in 1:(length(funcIdxLst)-1)) {
+    entry <- process.entry(lines[funcIdxLst[i]:(funcIdxLst[i+1]-1)]);
+    # use hashtable to store arguments for auto duplication removal
+    info <- map.func.info[[entry$'func']];
+    if (is.null(info)) {
+      info <- list('type'=entry$'type', 'argvs'=new.env());
+      map.func.info[[entry$'func']] <- info;
+    }
+    info$'argvs'[[entry$'argv']] <- entry$'retn';
   }
   map.func.info;
 }
 
-singlegen <- function(func, type, argv) {
-  # not a valid argument list, possible reason is arguments too long therefore ignored.
-  argv1 <- tryCatch({
-    eval(parse(text=argv));
-  }, warning = function(war) {
-    print(war); #TODO: why warninng?
-  }, error = function(err) {
-    # cat("[BAD_ARGV]", argv, "\tfunc:", func, "\n");
-  });
-  if (!is.list(argv1)) {
-    return (list(type="err", msg=paste("func:", func,"\nargv:", argv,"\n")));
-  }
-  # potentially good arguments, alter it 
-  argv1.lst <- alter.arguments(argv1);
-  args1 <- length(argv1); 
+singlegen <- function(func, type, argv, retn) {
+  # check to see if it is bad arguments
+  qualityCheck <- function(what) { tryCatch({eval(parse(text=what))}, warning=print, error=function(e){NULL}); }
+  argv.obj <- qualityCheck(argv);
+  retn.obj <- qualityCheck(retn);
+  valid.argv <-  is.list(argv.obj) || (is.null(argv.obj) && argv == "NULL");
+  valid.retn <- !is.null(retn.obj) || (is.null(retn.obj) && retn == "NULL");
+  # proper argument should always be packed in a list
+  if (!valid.argv || !valid.retn) { 
+    return (list(type="err", msg=paste("func:", func, "\ntype:", type, "\nargv:", argv,"\nretn:", retn,"\n")));
+  }  
+  # TODO: potentially good arguments, alter it 
+  # argv.obj.lst <- alter.arguments(argv.obj);
+  args <- length(argv.obj); 
   genPrimitive <- function() {
     src <- "";
-    if (args1 > 0) { src <- paste(src, "argv <- eval(parse(text=\'", argv, "\'));", "\n", sep=""); }
-    else           { src <- paste(src, "argv <- list();", "\n", sep=""); }
-    src <- paste(src, "do.call(\"", func, "\", argv);", "\n", sep="");
+    if (args > 0) { src <- paste(src, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep=""); }
+    else          { src <- paste(src, "argv <- list();", "\n", sep=""); }
+    src <- paste(src, "do.call(\"", func, "\", argv);", sep="");
     src;
   }
   genInternal <- function() {
     src <- "";
-    if (args1 > 0) {
-      src <- paste(src, "argv <- eval(parse(text=\'", argv, "\'));", "\n", sep="");
+    if (args > 0) {
+      src <- paste(src, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep="");
       src <- paste(src, ".Internal(", func, "(",  sep="");
       src <- paste(src, "argv[[1]]",  sep="");
-      if (args1 > 1) { for (idx in 2:args1) { src <- paste(src, ", argv[[",idx,"]]", sep=""); } }
+      if (args > 1) { for (idx in 2:args) { src <- paste(src, ", argv[[",idx,"]]", sep=""); } }
       src <- paste(src, "));", "\n", sep="");
     } else {
-      src <- paste(src, ".Internal(", func, ");", "\n", sep="");
+      src <- paste(src, ".Internal(", func, "());", sep="");
     }
     src;
   }
-  src <- switch(type, "P"=genPrimitive(), "I"=genInternal());
+  code <- switch(type, "P"=genPrimitive(), "I"=genInternal());
+  # wrap the test source in the way that harness expected
+  src <- "";
+  src <- paste(src, "expected <- eval(parse(text=", deparse(retn), "));\n",  sep="");
+  src <- paste(src, "test(id=0, code={\n", code, "\n}, o=expected);\n", sep="")
   list(type="src", msg=src);
 }
 
 alter.arguments <- function(argv) {
-  
+## TODO  
 }
-
