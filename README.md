@@ -60,11 +60,11 @@ point to the latest generated test set folder. The overall directory structure o
 
     <OUTPUT_DIR>/
         last
-		    2013-10-17 13:42:43/
-		        bad_arguments
+        2013-10-17 13:42:43/
+            bad_arguments
             tc_foo.r
             tc_bar.r
-			      ...
+            ...
 
 
 Run Test Cases
