@@ -9,12 +9,8 @@ testR
 TestR implementation in R. 
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                  %
-%  Automatic Test Case Generation  %
-%                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Automatic Test Case Generation
+==============================
 
 TestR includes tools to capture function calls in R programs and automatically convert them into test cases. Currently, only builtin functions
 will be captured because they don't have unevaluated promises in their arguments while the bodys are being executed according to the R 
@@ -24,18 +20,18 @@ This section explains how to generate the test case set given a set of R program
 
 
 Generate Capture File
-=====================
+---------------------
 
 The usage of functions in the R programs are traced and recorded in a text file named `capture`. To generate the capture file, one needs to the
 programs on the instrumented version of GNU-R, called `r-instrumented`, which is part of the `allr` project.
 
 Checkout `r-instrumented` on branch `capture` by typing
 
-  git clone -b capture https://github.com/allr/r-instrumented <R_INSTRUMENTED_HOME>
+    git clone -b capture https://github.com/allr/r-instrumented <R_INSTRUMENTED_HOME>
 
-To trace the prgram <R_PROG>, type
+To trace the prgram `<R_PROG>`, type
 
-  <R_INSTRUMENTED_HOME>/bin/R --no-restore --no-save --slave --trace capture --tracedir <TRACE_DIR> -f <R_PROG>
+    <R_INSTRUMENTED_HOME>/bin/R --no-restore --no-save --slave --trace capture --tracedir <TRACE_DIR> -f <R_PROG>
 
 After the run, the traced information will be appended to file `<TRACE_DIR>/capture`.
 
@@ -43,17 +39,17 @@ The capture file consists of entries, each of which is a record of a function ca
 function calls will be replayed in test cases if valid.
 
   - func: function name
-  - type: P | I, indicating if the function is primitive or internal.
+  - type: `P` | `I`, indicating if the function is primitive or internal.
   - args: list of deparsed argument objects
   - retn: deparsed returned objects
 
 
 Generate Test Cases
-===================
+-------------------
 
 TestGen converts a given capture file into test case set. To do so, one needs to call the following function located in `testgen.r`:
 
-  testgen(<PATH_TO_CAPTURE_FILE>, <OUTPUT_DIR>)
+    testgen(<PATH_TO_CAPTURE_FILE>, <OUTPUT_DIR>)
 
 Each run of TestGen will create a folder under `<OUTPUT_DIR>` named with the current date and time to store the test case set generated.
 The set consists of files with name `tc_<FUNC_NAME>.r`, where each function has its tests put together in a single file. A file named 
@@ -62,30 +58,26 @@ recorded argument and/or return values/objects cannot be restored properly due t
 function takes environment as arguments. For details, see comments in testgen.r. Under `<OUTPUT_DIR>`, a link symbol `last` is set to 
 point to the latest generated test set folder. The overall directory structure of the test set would look like:
 
-  <OUTPUT_DIR>/
-    last
-		2013-10-17 13:42:43/
-		  bad_arguments
-      tc_foo.r
-      tc_bar.r
-			...
+    <OUTPUT_DIR>/
+      last
+		    2013-10-17 13:42:43/
+		    bad_arguments
+        tc_foo.r
+        tc_bar.r
+			  ...
 
 
 Run Test Cases
-==============
+--------------
 
 The test cases are generated in the compatible format with the test harness of TestR. To run the test set under `<TC_DIR>`, call the
 following function in `target.r`:
 
-   runTests(<TC_DIR>)
+     runTests(<TC_DIR>)
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                  %
-%    Code Coverage Measurement     %
-%                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Code Coverage Measurement
+=========================
 
 One way to assess the completeness of the test set is to measure the code coverage rate. TestR includes a coverage reporter which 
 supports generating various forms of summary of C file coverage by processing the output of `gcov`. This section briefly explains
@@ -93,12 +85,12 @@ how to use the reporter.
 
 
 Instrument GNU-R with GCOV
-==========================
+--------------------------
 
 To use GNU-R as the tested VM, one needs to first build it with `gcov` support. Following shows how to properly set up the variables 
 during configuration:
 
-  ./configure CFLAGS='-O0 -fprofile-arcs -ftest-coverage' LDFLAGS='-fprofile-arcs' 
+    ./configure CFLAGS='-O0 -fprofile-arcs -ftest-coverage' LDFLAGS='-fprofile-arcs' 
 
 After the build is done, for every .o file, a corresponding .gcno file will be generated for storing the source code structural 
 information. Any C file not accompanied by a .gcno file was excluded in the compilation, and therefore will be excluded as well in 
@@ -108,9 +100,9 @@ look at http://gcc.gnu.org/onlinedocs/gcc/index.html#toc_Gcov.
 
 
 Measure Code Coverage
-=====================
+---------------------
 
 To invoke the reporter, call the following function located in coverage.r. The required argument is the the top level directory that
 contains the .gcda files. For details of the result report, see comments in coverarge.r.
 
-  coverage(<PATH_TO_GCDA_FILES>)
+    coverage(<PATH_TO_GCDA_FILES>)
