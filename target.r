@@ -31,7 +31,7 @@
 #' @seealso runTests
 #' 
 is.testListener <- function(f) {
-    identical(names(formals(f)), c("id", "name", "result", "filename", "comments"))
+  identical(names(formals(f)), c("id", "name", "result", "filename", "comments"))
 }
 
 #' @export
@@ -64,94 +64,100 @@ is.testListener <- function(f) {
 #' runTests("c:/tests", testListener = f)
 
 runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE, testListener = NULL) {
-    if (!missing(testListener)) 
-        if (! is.testListener(testListener))
-            stop("Invalid function supported as a test listener.")
-    verbose <<- verbose
-    displayOnlyErrors <<- displayOnlyErrors
-    stopOnError <<- stopOnError
-    displayCodeOnError <<- displayCodeOnError
-    totalFails <- 0
-    totalPasses <- 0
-    if (verbose)
-        cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
-    for (f in list.files(root, pattern=".[rR]$", recursive = TRUE)) {
-        filename <- paste(root,"/", f, sep = "")
-        cat(filename,"...\n")
-        tests <<- list(c("Test Name","Result", "Comments", "Id"))
-        fails <<- 0
-        passes <<- 0
-        source(filename, local = FALSE)
-        # invoke the test listener so that the results can be grabbed
-        if (!is.null(testListener))
-            for (t in tests[-1])
-                testListener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
-        cat("  (pass = ", passes,", fail = ", fails, ", total = ", passes + fails, ")\n", sep = "")
-        totalFails <- totalFails + fails
-        totalPasses <- totalPasses + passes
-        if (summary == TRUE) {
-            cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
-            for (t in tests[-1])
-                print.test(t)
-            cat("\n")
-        }
+  if (!missing(testListener)) 
+    if (! is.testListener(testListener))
+      stop("Invalid function supported as a test listener.")
+  verbose <<- verbose
+  displayOnlyErrors <<- displayOnlyErrors
+  stopOnError <<- stopOnError
+  displayCodeOnError <<- displayCodeOnError
+  totalFails <- 0
+  totalPasses <- 0
+  if (verbose)
+    cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
+  if (file.info(root)$isdir){
+    files <- list.files(root, pattern=".[rR]$", recursive = TRUE) 
+    files <- Map(function (x) paste(root,"/",x, sep=""), files) 
+  } else {
+    files <- root
+  }
+  for (filename in files) {
+    #filename <- paste(root,"/", f, sep = "")
+    cat(filename,"...\n")
+    tests <<- list(c("Test Name","Result", "Comments", "Id"))
+    fails <<- 0
+    passes <<- 0
+    source(filename, local = FALSE)
+    # invoke the test listener so that the results can be grabbed
+    if (!is.null(testListener))
+      for (t in tests[-1])
+        testListener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
+    cat("  (pass = ", passes,", fail = ", fails, ", total = ", passes + fails, ")\n", sep = "")
+    totalFails <- totalFails + fails
+    totalPasses <- totalPasses + passes
+    if (summary == TRUE) {
+      cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
+      for (t in tests[-1])
+        print.test(t)
+      cat("\n")
     }
-    rm(tests, envir = globalenv())
-    rm(fails, envir = globalenv())
-    rm(passes, envir = globalenv())
-    rm(verbose, envir = globalenv())
-    rm(displayOnlyErrors, envir = globalenv())
-    rm(stopOnError, envir = globalenv())
-    rm(displayCodeOnError, envir = globalenv())
-    cat("\n-------- Results --------\n")
-    cat("Passed:   ", totalPasses, "\n")
-    cat("Failed:   ", totalFails, "\n")
-    cat("Total:    ", totalPasses + totalFails, "\n")
-    if (totalFails == 0) {
-        cat("Overall:  ", "PASS\n")
-        TRUE
-    } else {
-        cat("Overall:  ", "FAIL\n")
-        FALSE
-    }
+  }
+  rm(tests, envir = globalenv())
+  rm(fails, envir = globalenv())
+  rm(passes, envir = globalenv())
+  rm(verbose, envir = globalenv())
+  rm(displayOnlyErrors, envir = globalenv())
+  rm(stopOnError, envir = globalenv())
+  rm(displayCodeOnError, envir = globalenv())
+  cat("\n-------- Results --------\n")
+  cat("Passed:   ", totalPasses, "\n")
+  cat("Failed:   ", totalFails, "\n")
+  cat("Total:    ", totalPasses + totalFails, "\n")
+  if (totalFails == 0) {
+    cat("Overall:  ", "PASS\n")
+    TRUE
+  } else {
+    cat("Overall:  ", "FAIL\n")
+    FALSE
+  }
 } 
 
 #' Prettyprints the test, is intended to be used only internally. 
 print.test <- function(test, code = NULL) {
-    if (displayOnlyErrors && identical(test[[2]], "PASS"))
-        return()
-    if (nchar(test[[1]]) > 80)
-        test[[1]] <- paste("...",substr(test[[1]], length(test[[1]])-77, length(test[[1]])), sep = "")
-    cat(sprintf("%-80s", test[[1]]),if (test[[2]]) "PASS" else "FAIL","\n")
-    if (test[[2]] == FALSE) {
-        cat(" ",test[[3]], "\n")
-        if (displayCodeOnError && ! missing(code)) {
-            cat("  Code:\n")
-            for (l in deparse(code))
-                cat("    ", l, "\n", sep="")
-        }
+  if (displayOnlyErrors && identical(test[[2]], "PASS"))
+    return()
+  if (nchar(test[[1]]) > 80)
+    test[[1]] <- paste("...",substr(test[[1]], length(test[[1]])-77, length(test[[1]])), sep = "")
+  cat(sprintf("%-80s", test[[1]]),if (test[[2]]) "PASS" else "FAIL","\n")
+  if (test[[2]] == FALSE) {
+    cat(" ",test[[3]], "\n")
+    if (displayCodeOnError && ! missing(code)) {
+      cat("  Code:\n")
+      for (l in deparse(code))
+        cat("    ", l, "\n", sep="")
     }
+  }
 }
 
 #' Comparing the results, also only to be used internally
 compareResults <- function(a, b) {
-    if (identical(all.equal(a, b), TRUE)) {
-        TRUE
-    } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
-        aa = a[!is.na(a)]
-        bb = b[!is.na(b)]
-        ((length(aa) == 0) && (length(bb) == 0)) || identical(all.equal(aa, bb), TRUE)
-        # we do not care about types of NA's, or should we -- I think this should be tested by a test rather than assumed here
-#    } else if (typeof(a) != typeof(b)) {
-#        FALSE
-#    } else if (typeof(a) == "double") {
-#        
-#    }
-#    if (is.na(a) && (is.na(b))) {
-#        TRUE
-    } else {
-        FALSE        
-    }
+  if (identical(all.equal(a, b), TRUE)) {
+    TRUE
+  } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
+    aa = a[!is.na(a)]
+    bb = b[!is.na(b)]
+    ((length(aa) == 0) && (length(bb) == 0)) || identical(all.equal(aa, bb), TRUE)
+    # we do not care about types of NA's, or should we -- I think this should be tested by a test rather than assumed here
+    #    } else if (typeof(a) != typeof(b)) {
+    #        FALSE
+    #    } else if (typeof(a) == "double") {
+    #        
+    #    }
+    #    if (is.na(a) && (is.na(b))) {
+    #        TRUE
+  } else {
+    FALSE        
+  }
 }
 
 #' Creates a test and evaluates its result. 
@@ -192,82 +198,82 @@ compareResults <- function(a, b) {
 #'   }, expectError = "error", name = "error example)
 #' 
 test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
-    appendComment <- function(...) {
-        s <- list(...)[[1]]
-        for (o in list(...)[-1])
-            s <- paste(s, paste(o, collapse = " "))
-        if (is.null(comments))
-            comments <<- s
-        else
-            comments <<- paste(comments, s, sep = ". ")
+  appendComment <- function(...) {
+    s <- list(...)[[1]]
+    for (o in list(...)[-1])
+      s <- paste(s, paste(o, collapse = " "))
+    if (is.null(comments))
+      comments <<- s
+    else
+      comments <<- paste(comments, s, sep = ". ")
+  }
+  warnings <- NULL
+  errors <- NULL
+  code <- substitute(code)
+  comments <- NULL
+  # execute the test and grap warnings and errors
+  result <- withCallingHandlers(
+    tryCatch(
+      eval(code, envir = new.env(parent=baseenv())),
+      error = function(e) {
+        errors <<- e$message
+      }),
+    warning = function(w) {
+      if (is.null(warnings))
+        warnings <<- w$message
+      else 
+        warnings <<- paste(warnings, w$message, sep = "; ")
+      invokeRestart("muffleWarning")
     }
-    warnings <- NULL
-    errors <- NULL
-    code <- substitute(code)
-    comments <- NULL
-    # execute the test and grap warnings and errors
-    result <- withCallingHandlers(
-        tryCatch(
-            eval(code, envir = new.env(parent=baseenv())),
-            error = function(e) {
-                errors <<- e$message
-            }),
-        warning = function(w) {
-            if (is.null(warnings))
-                warnings <<- w$message
-            else 
-                warnings <<- paste(warnings, w$message, sep = "; ")
-            invokeRestart("muffleWarning")
-        }
-    )
-    # if we have an error, the result is irrelevant and should be NULL
-    if (!is.null(errors)) {
-        result <- TRUE
-    } else if (compareResults(result, o)) {
-        result <- TRUE
-    } else {
-        appendComment("Expected",o, "got", result)
+  )
+  # if we have an error, the result is irrelevant and should be NULL
+  if (!is.null(errors)) {
+    result <- TRUE
+  } else if (compareResults(result, o)) {
+    result <- TRUE
+  } else {
+    appendComment("Expected",o, "got", result)
+    result <- FALSE
+  }
+  # check the warnings
+  if (missing(w)) {
+    if (!is.null(w)) {
+      result <- FALSE
+      appendComment("Expected no warnings, but", warnings,"found")
+    }
+  } else {
+    for (ww in w) 
+      if (length(grep(ww, warnings)) == 0) {
         result <- FALSE
+        appendComment("Warning", ww, "not found in", warnings)
+      }
+  }
+  # check the errors
+  if (missing(e)) {
+    if (!is.null(errors)) {
+      result <- FALSE
+      appendComment("Expected no errors, but", errors,"found")
     }
-    # check the warnings
-    if (missing(w)) {
-        if (!is.null(w)) {
-            result <- FALSE
-            appendComment("Expected no warnings, but", warnings,"found")
-        }
-    } else {
-        for (ww in w) 
-            if (length(grep(ww, warnings)) == 0) {
-                result <- FALSE
-                appendComment("Warning", ww, "not found in", warnings)
-            }
+  } else {
+    for (ee in e) 
+      if (length(grep(ee, errors)) == 0) {
+        result <- FALSE
+        appendComment("Error", ee, "not found in ", errors)
+      }
+  }
+  if (missing(name))
+    name <- as.character(length(tests))
+  tests[[length(tests) + 1]] <<- c(paste("[",id,"] ",name, sep = ""), result, comments, id)
+  if (verbose)
+    print.test(tests[[length(tests)]], code)
+  if (result) {
+    passes <<- passes + 1
+    TRUE
+  } else {
+    fails <<- fails + 1
+    if (stopOnError) {
+      stop("Test id ", id, " name " ,name," failed: ", comments)
     }
-    # check the errors
-    if (missing(e)) {
-        if (!is.null(errors)) {
-            result <- FALSE
-            appendComment("Expected no errors, but", errors,"found")
-        }
-    } else {
-        for (ee in e) 
-            if (length(grep(ee, errors)) == 0) {
-                result <- FALSE
-                appendComment("Error", ee, "not found in ", errors)
-            }
-    }
-    if (missing(name))
-        name <- as.character(length(tests))
-    tests[[length(tests) + 1]] <<- c(paste("[",id,"] ",name, sep = ""), result, comments, id)
-    if (verbose)
-        print.test(tests[[length(tests)]], code)
-    if (result) {
-        passes <<- passes + 1
-        TRUE
-    } else {
-        fails <<- fails + 1
-        if (stopOnError) {
-            stop("Test id ", id, " name " ,name," failed: ", comments)
-        }
-        FALSE
-    }
+    FALSE
+  }
 }
