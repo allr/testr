@@ -230,7 +230,7 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   cat(">>> Coverage:\n");
   cat("\n");
   cat("* Line (file): ", totalCovLine.file, " out of ", totalLine.file, " (", totalCovLinePcnt.file, "%)\n", sep="");
-  cat("* Line (func): ", totalCovLine.func, " out of ", totalLine.func, " (", totalCovLinePcnt.file, "%)\n", sep="");#cheat or it should be that way?
+  cat("* Line (func): ", totalCovLine.func, " out of ", totalLine.func, " (", totalCovLinePcnt.func, "%)\n", sep="");
   cat("* File:        ", totalCovFile,      " out of ", totalFile,      " (", totalCovFilePcnt,      "%)\n", sep="");
   cat("* Func:        ", totalCovFunc,      " out of ", totalFunc,      " (", totalCovFuncPcnt,      "%)\n", sep="");
   if (file.detail) {
@@ -247,7 +247,6 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   }
   cat("\n");
   cat("=================================================\n");
-  #return (totalCovLinePcnt.file);
   return (list(file=file.df, func=func.df));
 }
 
