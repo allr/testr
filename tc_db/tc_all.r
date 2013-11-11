@@ -5,8 +5,3 @@ test(id=0, code={
 }, o=expected);
 
 
-expected <- eval(parse(text='FALSE'));
-test(id=0, code={
-  argv <- eval(parse(text='list(c(FALSE, TRUE))'))
-  do.call("all", argv);
-}, o=expected);
