@@ -22,70 +22,96 @@
 # seed.file: the trace file containing all captures
 # output.dir: the overall directory to store all outputs. Each run of this function
 #   will create its own subdir under output.dir in format of "2013-09-12 15:22:23".
-testgen <- function(seed.file, output.dir) {
-  if (missing(seed.file)) stop("A seed file must be provided!");
+testgen <- function(input.dir, output.dir, verbose=FALSE) {
+  
+  if (missing(input.dir))  stop("A input diretory must be provided!");
   if (missing(output.dir)) stop("A output directory must be provided!");
-  ### make file and path names absolute ###
-  abs.path <- function(path) { substring(path,1,1) == .Platform$file.sep; }
-  if (!abs.path(seed.file)) seed.file <- file.path(getwd(), seed.file, fsep=.Platform$file.sep);
-  if (!file.exists(seed.file)) stop("Cannot find seed file: ", seed.file);
-  if (!abs.path(output.dir)) output.dir <- file.path(getwd(), output.dir, fsep=.Platform$file.sep);
+  
+  is.abs.path <- function(path) { c <- substring(path,1,1); c == .Platform$file.sep || c == '~'; }
+  mk.abs.path <- function(path) { file.path(getwd(), path, fsep=.Platform$file.sep); }
+
+  ## make file and path names absolute
+  if (!is.abs.path(input.dir))  input.dir <- mk.abs.path(input.dir);
+  if (!is.abs.path(output.dir)) output.dir <- mk.abs.path(output.dir);
+  if (!file.exists(input.dir))  stop("Cannot find input directory: ", input.dir);
   if (!file.exists(output.dir)) stop("Cannot find output directory: ", output.dir);
+  
+  ## create a new directory to store generated testcases
   output.lnk <- file.path(output.dir, "last",     fsep=.Platform$file.sep);
   output.dir <- file.path(output.dir, Sys.time(), fsep=.Platform$file.sep);
   if (!dir.create(output.dir)) stop("Unable to create directory: ", output.dir);
   if (file.exists(output.lnk)) file.remove(output.lnk);
   if (!file.symlink(output.dir, output.lnk)) stop("Unable to create directory link: ", output.lnk);
   bad.argv.file <- file.path(output.dir, "bad_arguments", fsep=.Platform$file.sep);
-  ### process the seed file ###
-  map.func.info <- process(readLines(seed.file));
-  ### statistic stuff ####
-  stat.builtin.total <- length(ls(baseenv()));
-  stat.builtin.captured <- length(ls(map.func.info));
-  summary.df <- data.frame('TstGen'=vector(), 'BadArg'=vector(), stringsAsFactors=FALSE);
-  #### generate test cases ####
-  for (func in ls(map.func.info)) {
+  if (!file.create(bad.argv.file)) stop("Unable to create file: ", bad.argv.file);
+
+  ## get the seed files
+  seed.files <- list.files(path=input.dir, recursive=TRUE);
+  
+  if (verbose) {
+    cat("Read from", input.dir, "\n");
+    cat("Total", length(seed.files), "trace files\n");
+    cat("Output to", output.dir, "\n");
+  }
+  gen.stat.map <- new.env();
+  for (sf in seed.files) {
+    sf <- file.path(input.dir, sf, fsep=.Platform$file.sep);
+    stat <- gen.file(sf, output.dir, bad.argv.file, verbose);
+    for (func in ls(stat)) {
+      cur.stat <- gen.stat.map[[func]];
+      if (is.null(cur.stat)) {
+        cur.stat <- c(0,0);
+      }
+      gen.stat.map[[func]] <- cur.stat + stat[[func]];
+    }
+  }
+  report(gen.stat.map);
+}
+
+gen.file <- function(seed.file, output.dir, bad.argv.file, verbose=FALSE) {
+  ensure.tc.file <- function(path, name) {
+    if (name == .Platform$file.sep) name <- "";
+    tc.file <- file.path(path, paste("tc_", name, ".r", sep=""), fsep=.Platform$file.sep);
+    if (!file.exists(tc.file) && !file.create(tc.file)) stop("Unable to create file: ", tc.file);
+    return(tc.file);
+  }
+  if (verbose) {
+    cat(">>> processing file: ", seed.file, "...", "\n");
+  }
+  ### read the seed file into a table
+  func.info.map <- process(readLines(seed.file));
+  #### generate test cases
+  func.stat.map <- new.env();
+  for (func in ls(func.info.map)) {
     stat.tst.gen <- 0;
     stat.bad.arg <- 0;
-    #### create testcase file ####
-    tc.name.body = func;
-    if (tc.name.body == .Platform$file.sep) tc.name.body <- "";
-    tc.name <- file.path(output.dir, paste("tc_", tc.name.body, ".r", sep=""), fsep=.Platform$file.sep);
-    if (!file.create(tc.name)) stop("Unable to create file: ", tc.name);
-    #### generate testcase ####
-    info <- map.func.info[[func]];
+    tc.file <- ensure.tc.file(output.dir, func);
+    #### generate testcase
+    info <- func.info.map[[func]];
     for (argv in ls(info$'argvs')) {
-      res <- singlegen(func, info$'type', argv, info$'argvs'[[argv]]);
-      #### see what we get ####
-      if (res$type == "err") {
-        #### the captured information is not usable ####
+      feedback <- gen.func(func, info$'type', argv, info$'argvs'[[argv]]);
+      #### see what we get
+      if (feedback$'type' == "err") {
+        #### the captured information is not usable
         stat.bad.arg = stat.bad.arg + 1;
-        write(res$msg, file=bad.argv.file, append=TRUE);
-      } else if (res$type == "src") {
-        #### good, we get the source code ####
+        write(feedback$'msg', file=bad.argv.file, append=TRUE);
+      } else if (feedback$'type' == "src") {
+        #### good, we get the source code
         stat.tst.gen = stat.tst.gen + 1;
-        write(res$msg,  file=tc.name, append=TRUE);
+        write(feedback$'msg',  file=tc.file, append=TRUE);
       } else {
         stop("Not reached!");
       }
     }
-    func.df <- data.frame('TstGen'=stat.tst.gen, 'BadArg'=stat.bad.arg, row.names=c(func), stringsAsFactors=F);
-    summary.df <- rbind(summary.df, func.df);
+    func.stat.map[[func]] <- c(stat.tst.gen, stat.bad.arg);
   }
-  summary.df["Total" ,] <- colSums(summary.df);
-  cat("========--------   Statistics   --------========\n");
-  cat("\n");
-  cat("* builtin captured:   ", stat.builtin.captured, " / ", stat.builtin.total, "\n", sep="");
-  cat("\n");
-  print(summary.df);
-  cat("\n");
-  cat("=================================================\n");
+  return(func.stat.map);
 }
 
 process <- function(lines) {
   lines <- c(lines, "func: dummy");
   funcIdxLst <- grep("^func: ", lines);
-  if (length(funcIdxLst) == 1) return(map.func.info);
+  if (length(funcIdxLst) == 1) return(func.info.map);
   process.entry <- function(entry.lines) {
     merge.lines <- function(prefix) {
       pattern <- paste("^", prefix, sep="");
@@ -99,30 +125,36 @@ process <- function(lines) {
          'argv'=merge.lines('args: '),
          'retn'=merge.lines('retn: '));
   }
-  map.func.info <- new.env(); # a hashtable: [ func => type | map(args => retn) ]
+  func.info.map <- new.env(); # hashtable: [ func => type | map(args => retn) ]
   for (i in 1:(length(funcIdxLst)-1)) {
     entry <- process.entry(lines[funcIdxLst[i]:(funcIdxLst[i+1]-1)]);
     # use hashtable to store arguments for auto duplication removal
-    info <- map.func.info[[entry$'func']];
+    info <- func.info.map[[entry$'func']];
     if (is.null(info)) {
       info <- list('type'=entry$'type', 'argvs'=new.env());
-      map.func.info[[entry$'func']] <- info;
+      func.info.map[[entry$'func']] <- info;
     }
     info$'argvs'[[entry$'argv']] <- entry$'retn';
   }
-  map.func.info;
+  func.info.map;
 }
 
-singlegen <- function(func, type, argv, retn) {
+gen.func <- function(func, type, argv, retn) {
   # check to see if it is bad arguments
-  qualityCheck <- function(what) { tryCatch({eval(parse(text=what))}, warning=print, error=function(e){NULL}); }
-  argv.obj <- qualityCheck(argv);
-  retn.obj <- qualityCheck(retn);
-  valid.argv <-  is.list(argv.obj) || (is.null(argv.obj) && argv == "NULL");
-  valid.retn <- !is.null(retn.obj) || (is.null(retn.obj) && retn == "NULL");
+  parseAndCheck <- function(what) {
+    tryCatch({eval(parse(text=what))}, warning=print, error=function(e){valid<<-FALSE;});
+  }
+  mk.err <- function(msg) { list(type="err", msg=msg); }
+  mk.src <- function(msg) { list(type="src", msg=msg); }
+  valid <- TRUE;
+  argv.obj <- parseAndCheck(argv);
+  valid.argv <- valid;
+  valid <- TRUE;
+  retn.obj <- parseAndCheck(retn);
+  valid.retn <- valid;
   # proper argument should always be packed in a list
   if (!valid.argv || !valid.retn) { 
-    return (list(type="err", msg=paste("func:", func, "\ntype:", type, "\nargv:", argv,"\nretn:", retn,"\n")));
+    return (mk.err(paste("func:", func, "\ntype:", type, "\nargv:", argv,"\nretn:", retn,"\n")));
   }  
   # TODO: potentially good arguments, alter it 
   # argv.obj.lst <- alter.arguments(argv.obj);
@@ -155,6 +187,26 @@ singlegen <- function(func, type, argv, retn) {
   list(type="src", msg=src);
 }
 
+report <- function(gen.stat.map) {
+  captured.builtin.total <- length(ls(gen.stat.map));
+  builtin.total <- length(ls(baseenv()));
+  summary.df <- data.frame(stringsAsFactors=FALSE);
+  for (func in ls(gen.stat.map)) {
+    summary.df <- rbind(summary.df, gen.stat.map[[func]]);
+  }
+  summary.df["Total" ,] <- colSums(summary.df);
+  names(summary.df) <- c("TstGen", "BadArg");
+  cat("========--------   Statistics   --------========\n");
+  cat("\n");
+  cat("* builtin captured:   ", captured.builtin.total, " / ", builtin.total, "\n", sep="");
+  cat("\n");
+  print(summary.df);
+  cat("\n");
+  cat("=================================================\n");
+
+}
+
 alter.arguments <- function(argv) {
 ## TODO  
 }
+
