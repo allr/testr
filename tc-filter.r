@@ -48,7 +48,7 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
     con <- file(tc.full.path)
     lines <- readLines(con)
     close(con)
-    tests_starts <- grep("test",lines)
+    tests_starts <- grep("test\\(id",lines)
     if (length(grep("expected", lines[tests_starts - 1]))==length(tests_starts)){
       tests_starts <- tests_starts - 1
     }
