@@ -138,44 +138,54 @@
 #'
 #' \code{=================================================}
 #'
-  
+
+
 coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=FALSE, file.keyword="", func.keyword="", ignore.case=TRUE) {
   if (missing(root)) stop("A directory containing VM source files must be specified!");
   if (length(grep("[.]c$", root, ignore.case=TRUE))) { cfiles <- root }
   else { cfiles <- list.files(path=root, recursive=TRUE, pattern=".c$") }
   res <- c()
   gcovOnSingleFile <- function(f) {
-    path <- file.path(root, dirname(f), fsep=.Platform$file.sep);
-    file <- file.path(root, f,          fsep=.Platform$file.sep);
-    cmd <- paste("gcov", "-p", "-n", "-f",  "-o", path, file, sep=" ");
-    r <- system(cmd, intern=TRUE, ignore.stderr=TRUE);
-    fileLines <- r[grep("^File", r)];
-    funcLines <- r[grep("^Function", r)];
-    dataLines <- r[grep("^Lines executed", r)];
-    if (length(fileLines) != 0) {
-      files.len <- length(fileLines);
-      funcs.len <- length(funcLines);
-      data.len  <- length(dataLines);
-      if (files.len + funcs.len != data.len) stop("Unexpected gcov output format!");
-      files <- matrix(unlist(strsplit(fileLines,"'")), ncol=2, byrow=TRUE)[,2];
-      funcs <- matrix(unlist(strsplit(funcLines,"'")), ncol=2, byrow=TRUE)[,2];
-      data  <- strsplit(unlist(strsplit(dataLines, "Lines executed:")), "% of ")[seq(2,2*data.len,2)];
-      func.data <- data[1:funcs.len];
-      file.data <- data[(funcs.len+1):data.len];
-      func.df <- data.frame(cbind(funcs, matrix(unlist(func.data), ncol=2, byrow=TRUE)), stringsAsFactors=FALSE);
-      file.df <- data.frame(cbind(files, matrix(unlist(file.data), ncol=2, byrow=TRUE)), stringsAsFactors=FALSE);
-      colnames(func.df) <- c("Func", "CovLn%", "LOC");
-      colnames(file.df) <- c("File", "CovLn%", "LOC");
-      calCovLnAndAddObj <- function(df) {
-        covLn <- round(as.numeric(df$'CovLn%') / 100.0 * as.numeric(df$'LOC'), digits=0);
-        df <- cbind(df, 'CovLn'=covLn);
-        cbind(df, Obj=f);        
-      }
-      func.df <- calCovLnAndAddObj(func.df)[,c(5,1,4,3,2)]; # Obj Func CovLn LOC CovLn%
-      file.df <- calCovLnAndAddObj(file.df)[,c(5,1,4,3,2)]; # Obj File CovLn LOC CovLn%
-      list(file=file.df, func=func.df);
-    } else { NULL }
+	  path <- file.path(root, dirname(f), fsep=.Platform$file.sep);
+	  file <- file.path(root, f,          fsep=.Platform$file.sep);
+	  cmd <- paste("gcov", "-p", "-n", "-f",  "-o", path, file, sep=" ");
+	  r <- system(cmd, intern=TRUE, ignore.stderr=TRUE);
+	  
+	  # for gcov4.7 output
+	  i <- which(r == "No executable lines");
+	  j <- i - 1;
+	  i <- append(i,j);
+	  if (length(i) != 0)
+		  r <- r[-i];
+	  
+	  fileLines <- r[grep("^File", r)];
+	  funcLines <- r[grep("^Function", r)];
+	  dataLines <- r[grep("^Lines executed", r)];
+	  if (length(fileLines) != 0) {
+		  files.len <- length(fileLines);# - length(noExecFiles);
+		  funcs.len <- length(funcLines);
+		  data.len  <- length(dataLines);
+		  if (files.len + funcs.len != data.len) stop("Unexpected gcov output format!");
+		  files <- matrix(unlist(strsplit(fileLines,"'")), ncol=2, byrow=TRUE)[,2];
+		  funcs <- matrix(unlist(strsplit(funcLines,"'")), ncol=2, byrow=TRUE)[,2];
+		  data  <- strsplit(unlist(strsplit(dataLines, "Lines executed:")), "% of ")[seq(2,2*data.len,2)];
+		  func.data <- data[1:funcs.len];
+		  file.data <- data[(funcs.len+1):data.len];
+		  func.df <- data.frame(cbind(funcs, matrix(unlist(func.data), ncol=2, byrow=TRUE)), stringsAsFactors=FALSE);
+		  file.df <- data.frame(cbind(files, matrix(unlist(file.data), ncol=2, byrow=TRUE)), stringsAsFactors=FALSE);
+		  colnames(func.df) <- c("Func", "CovLn%", "LOC");
+		  colnames(file.df) <- c("File", "CovLn%", "LOC");
+		  calCovLnAndAddObj <- function(df) {
+			  covLn <- round(as.numeric(df$'CovLn%') / 100.0 * as.numeric(df$'LOC'), digits=0);
+			  df <- cbind(df, 'CovLn'=covLn);
+			  cbind(df, Obj=f);        
+		  }
+		  func.df <- calCovLnAndAddObj(func.df)[,c(5,1,4,3,2)]; # Obj Func CovLn LOC CovLn%
+		  file.df <- calCovLnAndAddObj(file.df)[,c(5,1,4,3,2)]; # Obj File CovLn LOC CovLn%
+		  list(file=file.df, func=func.df);
+	  } else { NULL }
   }
+  
   result <- Map(gcovOnSingleFile, cfiles);
   file.df <- data.frame('File'=vector(),'CovLn%'=vector(),'LOC'=vector(),'CovLn'=vector(),'Obj'=vector());
   func.df <- data.frame('Func'=vector(),'CovLn%'=vector(),'LOC'=vector(),'CovLn'=vector(),'Obj'=vector());
@@ -189,6 +199,7 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   if (exclude.header) {
     file.df <- file.df[grep("[.]c$", file.df$'File', ignore.case=ignore.case),];  
   }
+  
   # line file coverage
   totalLine.file        <- sum(as.numeric(file.df$'LOC'));
   totalCovLine.file     <- sum(as.numeric(file.df$'CovLn'));
@@ -219,7 +230,7 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   cat(">>> Coverage:\n");
   cat("\n");
   cat("* Line (file): ", totalCovLine.file, " out of ", totalLine.file, " (", totalCovLinePcnt.file, "%)\n", sep="");
-  cat("* Line (func): ", totalCovLine.func, " out of ", totalLine.func, " (", totalCovLinePcnt.file, "%)\n", sep="");
+  cat("* Line (func): ", totalCovLine.func, " out of ", totalLine.func, " (", totalCovLinePcnt.func, "%)\n", sep="");
   cat("* File:        ", totalCovFile,      " out of ", totalFile,      " (", totalCovFilePcnt,      "%)\n", sep="");
   cat("* Func:        ", totalCovFunc,      " out of ", totalFunc,      " (", totalCovFuncPcnt,      "%)\n", sep="");
   if (file.detail) {
@@ -256,3 +267,5 @@ reset <- function(root) {
     stop("Unknown operating system type: ", .Platform$OS.type);
   }
 }
+
+ 
