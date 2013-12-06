@@ -15,6 +15,8 @@ public class tc_split {
 
 	static String dirName = "functions";
 	static final String prefix = "func_";
+	static final String SYS_SEP = System.getProperty("file.separator");
+	static final String SEP_REP = "sep";
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader reader = null;
@@ -30,20 +32,23 @@ public class tc_split {
 		Set<String> functions = new HashSet<>();
 		Map<String, Integer> funcFileCounter = new HashMap<>();
 		Map<String, HashSet<String>> funcArguments = new HashMap<>();
-		if (args.length != 1)
-			dirName = args[1];
+		if (args.length != 1) dirName = args[1];
 		createDir(dirName);
 
 		System.out.println("Starting split");
 		try {
-			reader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(args[0])));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0])));
 			line = reader.readLine();
 			while (line != null) {
 				functionCalls++;
 				sameArguments = false;
 //				System.out.println(line);
+				if (!line.startsWith("func:")) {
+					System.err.println(line);
+					System.exit(1);
+				}
 				funcName = line.substring(line.indexOf(':') + 2, line.length());
+				funcName = funcName.replaceAll(SYS_SEP, SEP_REP);
 
 				if (!functions.contains(funcName)) {
 					// create dir and file
@@ -56,11 +61,11 @@ public class tc_split {
 									+ "/" + prefix + funcName + "_" + 1)));
 					bufferGeneral.append(line + "\n");
 					line = reader.readLine();
-					while (line.contains("type")) {
+					while (line.startsWith("type:")) {
 						bufferGeneral.append(line + '\n');
 						line = reader.readLine();
 					}
-					while (line.contains("args")) {
+					while (line.startsWith("args:")) {
 						bufferArguments.append(line + '\n');
 						bufferGeneral.append(line + '\n');
 						line = reader.readLine();
@@ -70,7 +75,7 @@ public class tc_split {
 					funcArguments.put(funcName, arguments);
 					bufferArguments = new StringBuilder();
 
-					while (line != null && line.contains("retn")) {
+					while (line != null && line.startsWith("retn:")) {
 						bufferGeneral.append(line + '\n');
 						line = reader.readLine();
 					}
@@ -92,12 +97,12 @@ public class tc_split {
 									+ "/" + prefix + funcName + "_" + index, true)));
 					bufferGeneral.append(line + "\n");
 					line = reader.readLine();
-					while (line.contains("type")) {
+					while (line.startsWith("type:")) {
 						bufferGeneral.append(line + '\n');
 						line = reader.readLine();
 					}
 
-					while (line.contains("args")) {
+					while (line.startsWith("args:")) {
 						bufferArguments.append(line + '\n');
 						bufferGeneral.append(line + '\n');
 						line = reader.readLine();
@@ -109,7 +114,7 @@ public class tc_split {
 					}
 					arguments.add(bufferArguments.toString());
 					funcArguments.put(funcName, arguments);
-					while (line != null && line.contains("retn")) {
+					while (line != null && line.startsWith("retn:")) {
 						bufferGeneral.append(line + '\n');
 						line = reader.readLine();
 					}
