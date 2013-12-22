@@ -14,10 +14,11 @@
 #'
 library(tools)
 
-filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.coverage = TRUE, wipe.tc.database = FALSE) {
-  if (!file.exists("testr/coverage.R") || !file.exists("testr/run.r"))
+filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE) {
+  after.tc.coverage.percentage <- 0
+  if (!file.exists("testr/coverage.r") || !file.exists("testr/run.r"))
     stop("Please make sure that current working directory contains testr files")
-  source("testr/coverage.R")
+  source("testr/coverage.r")
   run.script <<- file_path_as_absolute("testr/run.r")
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
@@ -34,69 +35,58 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
   if (missing(tc.db.path)) 
     stop("A directory containing TC DB files must be specified!");
   if (!file.exists(tc.db.path))
-    stop('Specified directory with database of TCs does not exist!'); 
+    dir.create(tc.db.path)
   if (clear.previous.coverage)
     reset(paste(r.home, source.folder, sep = "/"))
   if (wipe.tc.database)
     cleanTCDB(tc.db.path)
   r.home <- file_path_as_absolute(r.home)
   tc.root <- file_path_as_absolute(tc.root)
-  db.coverage <- measureCoverageByDB(r.home, source.folder, tc.db.path)
-  all.tc <- list.files(path = tc.root, recursive = TRUE)
+  if (use.tc.db)
+    db.coverage <- measureCoverageByDB(r.home, source.folder, tc.db.path)
+  else
+    db.coverage <- 0
+  all.tc <- list.files(path = tc.root, recursive = TRUE, pattern = "*.[rR]")
+  
+  filename <- basename(all.tc[1])
+  function.name <- substr(filename, 1, nchar(filename) - 4)
+
+  
+  tc.function.path <- paste(tc.db.path, function.name, sep = "/")
+  
+  if (!file.exists(tc.function.path))
+    dir.create(tc.function.path)
+  i <- 1
   coverageChangeMeasureForSingleTCFile <- function(tc) {
     tc.full.path <- paste(tc.root, tc, sep = "/")
-    con <- file(tc.full.path)
-    lines <- readLines(con)
-    close(con)
-    tests_starts <- grep("test\\(id",lines)
-    if (length(grep("expected", lines[tests_starts - 1]))==length(tests_starts)){
-      tests_starts <- tests_starts - 1
-    }
-    if (length(tests_starts) > 1){
-      tests_ends <- tests_starts[2:length(tests_starts)]
-      tests_ends <- tests_ends - 1
-      tests_ends <- append(tests_ends, length(lines))
-    }
-    else
-      tests_ends <- length(lines)
-    cat(paste("File ",tc,"\n", sep=""))
-    cat(paste("Number of TCs in file - ", length(tests_starts), "\n", sep=""))
-
-    for (i in 1:length(tests_starts)){
-      cat(paste("Test case number ", i, "\n", sep=""))
-      tc.temp.full.path <- paste("tmp_",tc,sep="")
-      sink(tc.temp.full.path)
-      for (j in tests_starts[i]:tests_ends[i]){
-        cat(lines[j])
-        cat("\n")
+    tc.temp.full.path <- file_path_as_absolute(tc.full.path)
+    
+    sink(paste(tc.db.path, tc, sep = "/"))
+    
+    before.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
+    cmd <- paste(r.home, 
+                 "/bin/Rscript --no-restore --slave --quiet ", 
+                 paste(run.script, tc.temp.full.path, sep = " "), 
+                 sep = "")
+    cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
+    after.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
+    sink()
+    file.remove(paste(tc.db.path, tc, sep = "/"))
+    before.tc.coverage.percentage <- calculateCoverage(before.tc.coverage.info)
+    if (is.nan(before.tc.coverage.percentage)) 
+      before.tc.coverage.percentage <- 0
+    after.tc.coverage.percentage <<- calculateCoverage(after.tc.coverage.info)
+    cat(paste("Coverage before running TC ", i, " from file ", before.tc.coverage.percentage, "\n", sep=""))
+    cat(paste("Coverage after running TC ", i, " from file ", after.tc.coverage.percentage, "\n", sep=""))
+    if (after.tc.coverage.percentage > before.tc.coverage.percentage) {
+      tc.db.file <- paste(tc.db.path, tc, sep = "/")
+      if (!file.exists(tc.db.file)) {
+        file.create(tc.db.file)
       }
-      sink()
-      tc.temp.full.path <- file_path_as_absolute(tc.temp.full.path)
-      sink(tc)
-      before.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
-      cmd <- paste(r.home, 
-                   "/bin/Rscript --no-restore --slave --quiet ", 
-                   paste(run.script, tc.temp.full.path, sep = " "), 
-                   sep = "")
-      cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
-      after.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
-      sink()
-      file.remove(tc)
-      before.tc.coverage.percentage <- calculateCoverage(before.tc.coverage.info)
-      if (is.nan(before.tc.coverage.percentage)) 
-        before.tc.coverage.percentage <- 0
-      after.tc.coverage.percentage <<- calculateCoverage(after.tc.coverage.info)
-      cat(paste("Coverage before running TC ", i, " from file ", before.tc.coverage.percentage, "\n", sep=""))
-      cat(paste("Coverage after running TC ", i, " from file ", after.tc.coverage.percentage, "\n", sep=""))
-      if (after.tc.coverage.percentage > before.tc.coverage.percentage) {
-        tc.db.file <- paste(tc.db.path, tc, sep = "/")
-        if (!file.exists(tc.db.file)) {
-          file.create(tc.db.file)
-        }
-        file.append(tc.db.file, tc.temp.full.path)
-      }
-      file.remove(tc.temp.full.path)
+      file.append(tc.db.file, tc.temp.full.path)
     }
+    file.remove(tc.temp.full.path)
+    i <<- i + 1
   }
   result <- Map(coverageChangeMeasureForSingleTCFile, all.tc)
   cat("Coverage gain by TCs - ")
