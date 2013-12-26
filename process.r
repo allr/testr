@@ -1,5 +1,6 @@
-source("testr/target.r")
 source("testr/tc-filter.r")
+source("testr/target.r")
+
 library(tools)
 
 processTC <- function(tc.file, tc.final.root, r.home, source.folder) {
@@ -7,11 +8,13 @@ processTC <- function(tc.file, tc.final.root, r.home, source.folder) {
 
   if (!file.exists(tc.final.root))
     dir.create(tc.final.root)
+  if (!file.exists("correct-and-split-tc"))
+    dir.create("correct-and-split-tc")
   
-  all.tc <- list.files(path = splitAndFindCorrectTCs(tc.file, tc.final.root), recursive = TRUE)
+  path <- splitAndFindCorrectTCs(tc.file, "correct-and-split-tc")
   
-  filterTCs(tc.root = tc.final.root, r.home = r.home, source.folder = source.folder, 
-            tc.db.path = "tc_db", clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = FALSE) 
+  filterTCs(tc.root = path, r.home = r.home, source.folder = source.folder, 
+            tc.db.path = tc.final.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db =TRUE) 
 }
 
 splitAndFindCorrectTCs<- function(tc, tc.final.root) {
@@ -48,6 +51,7 @@ splitAndFindCorrectTCs<- function(tc, tc.final.root) {
     }
     
     tc.temp.full.path <- paste(tc.function.path, "/", function.name,"_",i, ".R", sep="")
+    
     sink(tc.temp.full.path)
     
     for (j in tests.starts[i]:tests.ends[i]){
@@ -57,7 +61,6 @@ splitAndFindCorrectTCs<- function(tc, tc.final.root) {
     sink()
     
     tc.temp.full.path <- file_path_as_absolute(tc.temp.full.path)
-    
     sink(paste(tc.function.path, "/", function.name, "_info", sep=""), append = TRUE)
     tc.result <- runTests(tc.temp.full.path)
     cat("\n")
@@ -79,3 +82,13 @@ splitAndFindCorrectTCs<- function(tc, tc.final.root) {
   cat(paste("Correct/Fail: ",correctTC, "/", failedTC, "\n", sep = ""))
   return(tc.function.path)
 }
+
+processTCfromCommandLine <- function(){
+  args <- commandArgs(trailingOnly = TRUE)
+  if (length(args) == 3)  {
+    processTC(tc.file = args[2], tc.final.root = args[3], r.home = args[1], source.folder = "src/main/")
+  }else{
+  }
+}
+
+processTCfromCommandLine()

@@ -277,3 +277,13 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
     FALSE
   }
 }
+
+externalTestExecute <- function(){
+  args <- commandArgs(trailingOnly = TRUE)
+  if (length(args) == 1)  {
+    runTests(args[1])
+  }else{
+  }
+}
+
+externalTestExecute()

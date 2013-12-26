@@ -16,10 +16,10 @@ library(tools)
 
 filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE) {
   after.tc.coverage.percentage <- 0
-  if (!file.exists("testr/coverage.r") || !file.exists("testr/run.r"))
+  if (!file.exists("testr/coverage.r") || !file.exists("testr/target.r"))
     stop("Please make sure that current working directory contains testr files")
   source("testr/coverage.r")
-  run.script <<- file_path_as_absolute("testr/run.r")
+  run.script <<- file_path_as_absolute("testr/target.r")
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
   if (!file.exists(tc.root))
@@ -46,12 +46,13 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
     db.coverage <- measureCoverageByDB(r.home, source.folder, tc.db.path)
   else
     db.coverage <- 0
-  all.tc <- list.files(path = tc.root, recursive = TRUE, pattern = "*.[rR]")
   
-  filename <- basename(all.tc[1])
-  function.name <- substr(filename, 1, nchar(filename) - 4)
+  all.tc <- list.files(path = tc.root, recursive = TRUE, pattern = "\\.[rR]$")
 
-  
+  filename <- basename(all.tc[1])
+  pattern <- regexpr("^[^_]+(?=_)", filename, perl = TRUE)
+  function.name <- regmatches(filename, pattern)
+
   tc.function.path <- paste(tc.db.path, function.name, sep = "/")
   
   if (!file.exists(tc.function.path))
@@ -60,9 +61,10 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
   coverageChangeMeasureForSingleTCFile <- function(tc) {
     tc.full.path <- paste(tc.root, tc, sep = "/")
     tc.temp.full.path <- file_path_as_absolute(tc.full.path)
-    
-    sink(paste(tc.db.path, tc, sep = "/"))
-    
+    tc <- basename(tc)
+    info.file <- paste(tc.db.path, paste(function.name,"info", sep = "_"), sep = "/")
+    sink(info.file, append=TRUE)
+    cat(tc, "\n")
     before.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
     cmd <- paste(r.home, 
                  "/bin/Rscript --no-restore --slave --quiet ", 
@@ -71,21 +73,21 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
     cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
     after.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
     sink()
-    file.remove(paste(tc.db.path, tc, sep = "/"))
-    before.tc.coverage.percentage <- calculateCoverage(before.tc.coverage.info)
+    #file.remove(info.file)
+    before.tc.coverage.percentage <<- calculateCoverage(before.tc.coverage.info)
     if (is.nan(before.tc.coverage.percentage)) 
-      before.tc.coverage.percentage <- 0
+      before.tc.coverage.percentage <<- 0
     after.tc.coverage.percentage <<- calculateCoverage(after.tc.coverage.info)
     cat(paste("Coverage before running TC ", i, " from file ", before.tc.coverage.percentage, "\n", sep=""))
     cat(paste("Coverage after running TC ", i, " from file ", after.tc.coverage.percentage, "\n", sep=""))
     if (after.tc.coverage.percentage > before.tc.coverage.percentage) {
-      tc.db.file <- paste(tc.db.path, tc, sep = "/")
+      tc.db.file <- paste(tc.function.path, tc, sep = "/")
       if (!file.exists(tc.db.file)) {
         file.create(tc.db.file)
       }
       file.append(tc.db.file, tc.temp.full.path)
     }
-    file.remove(tc.temp.full.path)
+    #file.remove(tc.temp.full.path)
     i <<- i + 1
   }
   result <- Map(coverageChangeMeasureForSingleTCFile, all.tc)
@@ -150,7 +152,7 @@ measureCoverageByDB <- function(r.home, source.folder, tc.db.path) {
   sink("db_out")
   before.db.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
   cmd <- paste(r.home, 
-               "/bin/Rscript --no-restore --slave --quiet ", 
+               "/bin/Rscript --no-save --no-restore --slave --quiet ", 
                paste(run.script, tc.db.path, sep = " "), 
                sep = "")
   cat(cmd)

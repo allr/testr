@@ -1,8 +1,8 @@
-source('~/Documents/RProject/testr/target.r')
+source('testr/target.r')
+
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) != 0)  {
+if (length(args) == 1)  {
   runTests(args[1])
 }else{
-  # just for testing
-  runTests('~/Documents/RProject/wd/tc/')
+  stop("Wrong number of arguments")
 }

@@ -1,0 +1,9 @@
+# Files used for testing
+vm
+vms
+tc/
+
+# Java compiled classes
+*.class
+
+
