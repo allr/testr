@@ -1,19 +1,24 @@
 \documentclass[9pt]{sigplanconf}
 
-\usepackage{graphicx,color,xspace,amssymb,textcomp}
+\usepackage{array,booktabs,mathtools,microtype,comment}
+\usepackage{graphicx,url,color,xspace,amssymb,wasysym,textcomp,extpfeil}
+\usepackage[caption=false,font=footnotesize]{subfig}
 \graphicspath{{fig/}}
 \newcommand{\code}[1]{\texttt{#1}\xspace}
 \newcommand{\figref}[1]{Fig.~\ref{fig:#1}\xspace}
 \newcommand{\tabref}[1]{Tab.~\ref{fig:#1}\xspace}
 
+
 \begin{document}
 
-\title{Draft of Test R}
+\title{Test R}
+\authorinfo{Authors}{Affiliations}{\vspace{-2.3cm}} \maketitle
 
-\include{lei}
-\include{roman}
+\input{lei.tex}
+\input{roman.tex}
 
-
+\bibliographystyle{abbrvnat}
 \bibliography{bib/biblio}
+\vfill\eject
 
 \end{document}
