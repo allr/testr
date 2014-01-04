@@ -14,7 +14,7 @@
 #'
 library(tools)
 
-filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE) {
+filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
   after.tc.coverage.percentage <- 0
   if (!file.exists("testr/coverage.r") || !file.exists("testr/target.r"))
     stop("Please make sure that current working directory contains testr files")
@@ -46,49 +46,52 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
     db.coverage <- measureCoverageByDB(r.home, source.folder, tc.db.path)
   else
     db.coverage <- 0
-  
-  all.tc <- list.files(path = tc.root, recursive = TRUE, pattern = "\\.[rR]$")
-
+  cat("TC Root - ", tc.root, "\n")
+  all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
+  cat("Number of TC Files - ", length(all.tc), "\n")
   filename <- basename(all.tc[1])
-  pattern <- regexpr("^[^_]+(?=_)", filename, perl = TRUE)
-  function.name <- regmatches(filename, pattern)
+  spl <- strsplit(filename, "_")
+  if (length(spl[[1]]) == 2)
+    function.name <- substr(spl[[1]][2], 1, nchar(spl[[1]][2]) - 2)
+  else
+    function.name <- spl[[1]][2]
 
   tc.function.path <- paste(tc.db.path, function.name, sep = "/")
-  
+  cat("TC function path in filter - ",tc.function.path, "\n")
   if (!file.exists(tc.function.path))
     dir.create(tc.function.path)
   i <- 1
   coverageChangeMeasureForSingleTCFile <- function(tc) {
+    cat(tc, "\n")
     tc.full.path <- paste(tc.root, tc, sep = "/")
+    cat(tc.full.path, "\n")
     tc.temp.full.path <- file_path_as_absolute(tc.full.path)
+    tc.db.full.path <- paste(tc.function.path)
     tc <- basename(tc)
     info.file <- paste(tc.db.path, paste(function.name,"info", sep = "_"), sep = "/")
     sink(info.file, append=TRUE)
     cat(tc, "\n")
     before.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
-    cmd <- paste(r.home, 
-                 "/bin/Rscript --no-restore --slave --quiet ", 
-                 paste(run.script, tc.temp.full.path, sep = " "), 
-                 sep = "")
-    cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
-    after.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
-    sink()
-    #file.remove(info.file)
     before.tc.coverage.percentage <<- calculateCoverage(before.tc.coverage.info)
     if (is.nan(before.tc.coverage.percentage)) 
       before.tc.coverage.percentage <<- 0
+    sink()
+    cmd <- paste(r.home, 
+                   "/bin/Rscript --no-save --no-restore --slave --quiet ", 
+                   paste(run.script, tc.temp.full.path, sep = " "), 
+                   sep = "")
+    cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
+    sink(info.file, append=TRUE)
+    after.tc.coverage.info <- coverage(root = paste(r.home, source.folder, sep = "/"))
     after.tc.coverage.percentage <<- calculateCoverage(after.tc.coverage.info)
-    cat(paste("Coverage before running TC ", i, " from file ", before.tc.coverage.percentage, "\n", sep=""))
-    cat(paste("Coverage after running TC ", i, " from file ", after.tc.coverage.percentage, "\n", sep=""))
+    sink()
     if (after.tc.coverage.percentage > before.tc.coverage.percentage) {
-      tc.db.file <- paste(tc.function.path, tc, sep = "/")
-      if (!file.exists(tc.db.file)) {
-        file.create(tc.db.file)
-      }
-      file.append(tc.db.file, tc.temp.full.path)
+      cat(paste("Coverage before running TC ", i, " from file ", before.tc.coverage.percentage, "\n", sep=""))
+      cat(paste("Coverage after running TC ", i, " from file ", after.tc.coverage.percentage, "\n", sep=""))
+      file.copy(tc.temp.full.path, tc.db.full.path, overwrite=FALSE)
     }
-    #file.remove(tc.temp.full.path)
     i <<- i + 1
+    file.remove(tc.temp.full.path)
   }
   result <- Map(coverageChangeMeasureForSingleTCFile, all.tc)
   cat("Coverage gain by TCs - ")

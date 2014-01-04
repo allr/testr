@@ -2,6 +2,10 @@
 vm
 vms
 tc/
+trace/
+process_change.r
+process (copy).r
+tcFilter.R
 
 # Java compiled classes
 *.class

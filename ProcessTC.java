@@ -1,16 +1,23 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ProcessTC {
 	private static String RSCRIPT = "Rscript";
-	private static LinkedBlockingQueue<String> tcFileNames = new LinkedBlockingQueue<>();
-	private static LinkedBlockingQueue<String> virtualMachines = new LinkedBlockingQueue<>();
-	private static String tcResultLocation;
+	private static volatile ConcurrentLinkedQueue<String> tcFileAddr = new ConcurrentLinkedQueue<>();
+	private static volatile ConcurrentLinkedQueue<String> tcFileNames = new ConcurrentLinkedQueue<>();
+	private static volatile ConcurrentLinkedQueue<String> virtualMachines = new ConcurrentLinkedQueue<>();
+	private static volatile String tcResultLocation;
 	static ProcessTC pr = new ProcessTC();
 
 	public static void main(String[] args) throws IOException, InterruptedException {
@@ -31,13 +38,19 @@ public class ProcessTC {
 				virtualMachinesListFile));
 		String line;
 		while ((line = br.readLine()) != null) {
-			virtualMachines.put(line);
+			virtualMachines.add(line);
 		}
 		br.close();
-
-		ExecutorService executor = Executors.newFixedThreadPool(virtualMachines
-				.size());
-		for (int i = 0; i < tcFileNames.size(); i++) {
+		System.out.println(tcFileAddr.size());
+		System.out.println(tcFileNames.size());
+		
+		int cores = Runtime.getRuntime().availableProcessors();
+		System.out.println("Number of available cores - " + cores);
+		System.out.println("Number of available VMs - " + virtualMachines.size());
+		int threads = cores < virtualMachines.size() ? cores : virtualMachines.size();
+//		threads = 1;
+		ExecutorService executor = Executors.newFixedThreadPool(threads);
+		for (int i = 0; i < tcFileAddr.size() + threads; i++) {
 			Runnable worker = pr.new TCThread(i);
 			executor.execute(worker);
 		}
@@ -53,7 +66,8 @@ public class ProcessTC {
 			if (fileEntry.isDirectory()) {
 				listFilesForFolder(fileEntry);
 			} else {
-				tcFileNames.add(fileEntry.getAbsolutePath());
+				tcFileAddr.add(fileEntry.getAbsolutePath());
+				tcFileNames.add(fileEntry.getName());
 			}
 		}
 	}
@@ -70,22 +84,50 @@ public class ProcessTC {
 		public void run() {
 			String vm = "";
 			String file;
+			String name;
 			try {
-				vm = virtualMachines.take();
-
-				file = tcFileNames.take();
+				synchronized (this) {
+					vm = virtualMachines.poll();
+					file = tcFileAddr.poll();
+					name = tcFileNames.poll();
+				}
+				BufferedWriter writer = new BufferedWriter(
+						new OutputStreamWriter(new FileOutputStream("/home/roman/rWD/info/"
+								+ name + "_info", true)));
 				System.out.println("Starting file - " + file);
 				String[] commands = { RSCRIPT, "--no-save", "--no-restore",
-						"--slave", "--quiet",
-						"process.r", vm, file,
+						"--slave", "--quiet", "process.r", vm, file,
 						tcResultLocation };
 				Runtime rt = Runtime.getRuntime();
 				Process proc = rt.exec(commands);
-				proc.waitFor();
+//				proc.waitFor();
+
+				InputStream is = proc.getInputStream();
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr);
+
+				String line;
+				int exit = -1;
+
+				while ((line = br.readLine()) != null) {
+					// Outputs your process execution
+
+					writer.write(line + "\n");
+					writer.flush();
+					try {
+						exit = proc.exitValue();
+						if (exit == 0) {
+							break;
+						}
+					} catch (IllegalThreadStateException t) {
+
+					}
+				}
+
 				System.out.println("Finished file - " + file);
-				virtualMachines.put(vm);
-				
-			} catch (IOException | InterruptedException e) {
+				virtualMachines.add(vm);
+
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

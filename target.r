@@ -76,13 +76,12 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
   if (verbose)
     cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
   if (file.info(root)$isdir){
-    files <- list.files(root, pattern=".[rR]$", recursive = TRUE) 
+    files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
     files <- Map(function (x) paste(root,"/",x, sep=""), files) 
   } else {
     files <- root
   }
   for (filename in files) {
-    #filename <- paste(root,"/", f, sep = "")
     cat(filename,"...\n")
     tests <<- list(c("Test Name","Result", "Comments", "Id"))
     fails <<- 0

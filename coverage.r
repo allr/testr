@@ -139,7 +139,6 @@
 #' \code{=================================================}
 #'
 
-
 coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=FALSE, file.keyword="", func.keyword="", ignore.case=TRUE) {
   if (missing(root)) stop("A directory containing VM source files must be specified!");
   if (length(grep("[.]c$", root, ignore.case=TRUE))) { cfiles <- root }
