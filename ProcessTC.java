@@ -19,8 +19,10 @@ public class ProcessTC {
 	private static volatile ConcurrentLinkedQueue<String> virtualMachines = new ConcurrentLinkedQueue<>();
 	private static volatile String tcResultLocation;
 	static ProcessTC pr = new ProcessTC();
+	private static volatile int correct = 0, failed = 0;
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
 		if (args.length < 3)
 			throw new RuntimeException("Wrong number of arguments!");
 
@@ -41,14 +43,14 @@ public class ProcessTC {
 			virtualMachines.add(line);
 		}
 		br.close();
-		System.out.println(tcFileAddr.size());
-		System.out.println(tcFileNames.size());
-		
+		System.out.println("Number of files - " +  tcFileAddr.size());
 		int cores = Runtime.getRuntime().availableProcessors();
 		System.out.println("Number of available cores - " + cores);
-		System.out.println("Number of available VMs - " + virtualMachines.size());
-		int threads = cores < virtualMachines.size() ? cores : virtualMachines.size();
-//		threads = 1;
+		System.out.println("Number of available VMs - "
+				+ virtualMachines.size());
+		int threads = cores < virtualMachines.size() ? cores : virtualMachines
+				.size();
+		// threads = 1;
 		ExecutorService executor = Executors.newFixedThreadPool(threads);
 		for (int i = 0; i < tcFileAddr.size() + threads; i++) {
 			Runnable worker = pr.new TCThread(i);
@@ -58,6 +60,8 @@ public class ProcessTC {
 		while (!executor.isTerminated()) {
 		}
 		System.out.println("Finished all threads");
+		System.out.println("Successful files - " + correct);
+		System.out.println("Failed file - " + failed);
 
 	}
 
@@ -82,9 +86,8 @@ public class ProcessTC {
 
 		@Override
 		public void run() {
-			String vm = "";
-			String file;
-			String name;
+			String vm = "", name, file, sline = null, eline = null;
+			int exit;
 			try {
 				synchronized (this) {
 					vm = virtualMachines.poll();
@@ -92,41 +95,46 @@ public class ProcessTC {
 					name = tcFileNames.poll();
 				}
 				BufferedWriter writer = new BufferedWriter(
-						new OutputStreamWriter(new FileOutputStream("/home/roman/rWD/info/"
-								+ name + "_info", true)));
+						new OutputStreamWriter(new FileOutputStream(
+								"/home/roman/rWD/info/" + name + "_info", true)));
 				System.out.println("Starting file - " + file);
 				String[] commands = { RSCRIPT, "--no-save", "--no-restore",
 						"--slave", "--quiet", "process.r", vm, file,
 						tcResultLocation };
 				Runtime rt = Runtime.getRuntime();
 				Process proc = rt.exec(commands);
-//				proc.waitFor();
+				// proc.waitFor();
 
-				InputStream is = proc.getInputStream();
-				InputStreamReader isr = new InputStreamReader(is);
-				BufferedReader br = new BufferedReader(isr);
+				BufferedReader stdInput = new BufferedReader(
+						new InputStreamReader(proc.getInputStream()));
 
-				String line;
-				int exit = -1;
+				BufferedReader stdError = new BufferedReader(
+						new InputStreamReader(proc.getErrorStream()));
 
-				while ((line = br.readLine()) != null) {
-					// Outputs your process execution
-
-					writer.write(line + "\n");
+				while (((sline = stdInput.readLine()) != null)
+						|| ((eline = stdError.readLine()) != null)) {
+					if (sline != null)
+						writer.write(sline + "\n");
+					if (eline != null)
+						writer.write(eline + "\n");
 					writer.flush();
 					try {
 						exit = proc.exitValue();
 						if (exit == 0) {
-							break;
+							correct++;
+						}else{
+							failed++;
 						}
 					} catch (IllegalThreadStateException t) {
 
 					}
 				}
-
-				System.out.println("Finished file - " + file);
+				System.out.println("Finished file - " + file
+						+ " Number of files left to process - "
+						+ tcFileAddr.size());
 				virtualMachines.add(vm);
-
+				stdError.close();
+				stdInput.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

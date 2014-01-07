@@ -202,11 +202,11 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   # line file coverage
   totalLine.file        <- sum(as.numeric(file.df$'LOC'));
   totalCovLine.file     <- sum(as.numeric(file.df$'CovLn'));
-  totalCovLinePcnt.file <- round(totalCovLine.file / totalLine.file * 100, digits=2);
+  totalCovLinePcnt.file <- round(totalCovLine.file / totalLine.file * 100, digits=10);
   # line func coverage
   totalLine.func        <- sum(as.numeric(func.df$'LOC'));
   totalCovLine.func     <- sum(as.numeric(func.df$'CovLn'));
-  totalCovLinePcnt.func <- round(totalCovLine.func / totalLine.func * 100, digits=2);
+  totalCovLinePcnt.func <- round(totalCovLine.func / totalLine.func * 100, digits=10);
   # func coverage
   totalFunc        <- nrow(func.df);
   totalCovFunc     <- nrow(func.df[as.numeric(func.df$'CovLn')>0,]);

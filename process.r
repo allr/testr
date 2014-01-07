@@ -3,112 +3,124 @@ source("testr/target.r")
 
 library(tools)
 
-processTC <- function(tc.file, tc.final.root, r.home, source.folder) {
-  temp.dir <<- "temp"
+temp.dir <<- "temp"
+
+processTC <- function(tc.file, tc.result.root, r.home, source.folder) {
   r.home <<- r.home
   source.folder <<- source.folder
   tc.file <- file_path_as_absolute(tc.file)
   
-  if (!file.exists(tc.final.root))
-    dir.create(tc.final.root)
-  if (!file.exists("temp"))
-    dir.create("temp")
-  
+  if (!file.exists(tc.result.root))
+    dir.create(tc.result.root)
+  if (!file.exists(temp.dir))
+    dir.create(temp.dir)
   k <<- 1
   n <- round(getNumberOfTC(tc.file) /4 + 0.00001)
-  path <- splitAndFindCorrectTCs(tc.file,tc.final.root, n)
-  filterTCs(tc.root = path[1], r.home = r.home, source.folder = source.folder, 
-            tc.db.path = tc.final.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = FALSE) 
-  temp.tc <- list.files(path[2], full.names=TRUE)
+  split.paths <- splitAndFindCorrectTCs(tc.file, tc.result.root, n, TRUE)
+  filterTCs(tc.root = split.paths[1], 
+            r.home = r.home, 
+            source.folder = source.folder, 
+            tc.db.path = tc.result.root, 
+            clear.previous.coverage = TRUE, 
+            wipe.tc.database = FALSE, 
+            use.tc.db = FALSE) 
+  temp.tc <- list.files(split.paths[2], 
+                        full.names = TRUE)
   n <- round(n / 2 + 0.00001)
   while (n >= 1){
     cat("n - ", n, "\n")
     k <<- 1
-    path <- splitAndFindCorrectTCs(path[2],tc.final.root, n)
+    split.paths <- splitAndFindCorrectTCs(split.paths[2], tc.result.root, n, FALSE)
     file.remove(temp.tc)
-    filterTCs(tc.root = path[1], r.home = r.home, source.folder = source.folder, 
-              tc.db.path = tc.final.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = FALSE) 
-    temp.tc <- list.files(path[2], full.names=TRUE)
+    filterTCs(tc.root = split.paths[1], 
+              r.home = r.home, 
+              source.folder = source.folder, 
+              tc.db.path = tc.result.root, 
+              clear.previous.coverage = TRUE, 
+              wipe.tc.database = FALSE, 
+              use.tc.db = FALSE) 
+    temp.tc <- list.files(split.paths[2], full.names = TRUE)
     if (n == 1)
       n <- 0
     n <- round(n / 2 + 0.00001)
   }
+  
 }
 
-splitAndFindCorrectTCs<- function(tc, tc.final.root, n) {
+splitAndFindCorrectTCs<- function(tc, tc.result.root, n = 1, check.correctness = TRUE) {
+  # In case tc is diretory, recursively call this function on all files in directory
   if (file.info(tc)$isdir){
-    all.tc <- list.files(tc, recursive=TRUE)
+    all.tc <- list.files(tc, recursive=TRUE, all.files = TRUE, pattern = "\\.[rR]$")
     for (test.case in all.tc){
-      path.temp <<- splitAndFindCorrectTCs(paste(tc, test.case, sep = "/"), tc.final.root, n)
+      tc.path <- file.path(tc, test.case, fsep = .Platform$file.sep)
+      path.temp <- splitAndFindCorrectTCs(tc.path, tc.result.root, n)
     }
     return (path.temp);
   }
-  temp.path <- "temp"
-  correctTC <- 0
-  failedTC <- 0
+  correct.tcs <- 0
+  failed.tcs <- 0
   filename <- basename(tc)
-  spl <- strsplit(filename, "_")
-  if (length(spl[[1]]) == 2)
-    function.name <- substr(spl[[1]][2], 1, nchar(spl[[1]][2]) - 2)
-  else
-    function.name <- spl[[1]][2]
-  tc.function.path <- paste(temp.path, function.name, sep="/")
-  tc.full.path <- tc
-
-#  if (!file.exists(temp.path))
-#    dir.create(temp.path)
-  
+  function.name <- determineFunctionName(filename)  
+  function.path <- file.path(temp.dir, function.name, fsep = .Platform$file.sep)
+  tc.full.path <- file_path_as_absolute(tc)  
+  # split file with bunch of TCs in single TC files
   con <- file(tc.full.path)
   lines <- readLines(con)
   close(con)
   if (length(lines) == 0)
     stop("Empty file\n")
   tests.starts <- grep("test\\(id",lines)
-  if (length(grep("expected", lines[tests.starts - 1]))==length(tests.starts)){
+  if (length(grep("expected", lines[tests.starts - 1])) == length(tests.starts)){
     tests.starts <- tests.starts - 1
   }
   if (length(tests.starts) > 1){
-    tests.ends <- tests.starts[2:length(tests.starts)]
+    tests.ends <- tests.starts[2 : length(tests.starts)]
     tests.ends <- tests.ends - 1
     tests.ends <- append(tests.ends, length(lines))
   }
   else
     tests.ends <- length(lines)
   
-  cat(paste("File ",tc,"\n", sep=""))
-  cat(paste("Number of TCs in file - ", length(tests.starts), "\n", sep=""))
-  tc.full.path <- paste(tc.function.path, "/tc_", function.name,"_", k, ".R", sep="")
+  cat("File ", tc, "\n")
+  cat("Number of TCs in file - ", length(tests.starts), "\n")
+  
+  tc.result <- file.path(function.path, paste0("tc_", function.name, "_", k, ".R", sep = ""), fsep = .Platform$file.sep)
+  # Process TCs one by one, by creating a temp file with one TC and running it to check it's correctness. Then it is appended to the result file
   for (i in 1:length(tests.starts)){
-    if (!file.exists(tc.function.path)){
-      cat("TC Function path - ", tc.function.path, "\n")
-      dir.create(tc.function.path)
+    if (!file.exists(function.path)){
+      cat("TC Function path - ", function.path, "\n")
+      dir.create(function.path)
     }
-    tc.temp.full.path <- paste(tc.function.path, "/", function.name,"_tmp", ".R", sep="")
-    sink(tc.temp.full.path, append = TRUE)
-    for (j in tests.starts[i]:tests.ends[i]){
+    tc.temp <- file.path(function.path, paste0(function.name, "_tmp", ".R", sep = ""), fsep = .Platform$file.sep)
+    sink(tc.temp)
+    for (j in tests.starts[i]:tests.ends[i])
       cat(lines[j], "\n")
+    sink()
+    tc.temp <- file_path_as_absolute(tc.temp)
+    if (check.correctness){
+      info.file <- file.path(function.path, paste0(function.name, "_info", sep = ""), fsep = .Platform$file.sep)
+      sink(info.file, append = TRUE)
+      run.result <- runTests(tc.temp)
+      cat("\n")
+      sink()
+    }else{
+      run.result <- TRUE
     }
-    sink()
-    tc.temp.full.path <- file_path_as_absolute(tc.temp.full.path)
-    sink(paste(tc.function.path, "/", function.name, "_info", sep=""), append = TRUE)
-    tc.result <- runTests(tc.temp.full.path)
-    cat("\n")
-    sink()
-    if (tc.result)    {
-      correctTC <- correctTC + 1
-      file.append(tc.full.path, tc.temp.full.path)
+    if (run.result){
+      correct.tcs <- correct.tcs + 1
+      file.append(tc.result, tc.temp)
     } else {
-      failedTC <- failedTC + 1
+      failed.tcs <- failed.tcs + 1
     }
-    file.remove(tc.temp.full.path)
-    if (i %% n == 0 || i == length(tests.starts)){
+    file.remove(tc.temp)
+    if (correct.tcs %% n == 0 || i == length(tests.starts)){
       k <<- k + 1
-      tc.full.path <- paste(tc.function.path, "/tc_", function.name, "_", k, ".R", sep="")
+      tc.result <- file.path(function.path, paste0("tc_", function.name, "_", k, ".r", sep = ""), fsep = .Platform$file.sep)
     }
   }
-  file.remove(paste(tc.function.path, "/", function.name, "_info", sep=""))
-  cat(paste("Correct/Fail: ",correctTC, "/", failedTC, "\n", sep = ""))
-  return (c(tc.function.path, paste(tc.final.root, function.name, sep ="/")))
+  file.remove(info.file)
+  cat("Correct/Fail: ", correct.tcs, "/", failed.tcs, "\n")
+  return (c(function.path, file.path(tc.result.root, function.name, fsep = .Platform$file.sep)))
 }
 
 getNumberOfTC <- function(path){
@@ -124,10 +136,19 @@ getNumberOfTC <- function(path){
   return (length(tests.starts))
 }
 
+determineFunctionName <- function(filename){
+  spl <- strsplit(filename, "_")
+  if (length(spl[[1]]) == 2)
+    function.name <- substr(spl[[1]][2], 1, nchar(spl[[1]][2]) - 2)
+  else
+    function.name <- spl[[1]][2]
+  return (function.name)
+}
+
 processTCfromCommandLine <- function(){
   args <- commandArgs(trailingOnly = TRUE)
   if (length(args) == 3)  {
-    processTC(tc.file = args[2], tc.final.root = args[3], r.home = args[1], source.folder = "src/main/")
+    processTC(tc.file = args[2], tc.result.root = args[3], r.home = args[1], source.folder = "src/main/")
   }else{
   }
 }
