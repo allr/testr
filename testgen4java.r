@@ -101,7 +101,7 @@ gen.func <- function(func, type, argv, retn) {
     src <- "";
     if (args > 0) {
       src <- paste(src, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep="");
-      src <- paste(src, ".Internal(", func, "(",  sep="");
+      src <- paste(src, ".Internal(`", func, "`(",  sep="");
       src <- paste(src, "argv[[1]]",  sep="");
       if (args > 1) { for (idx in 2:args) { src <- paste(src, ", argv[[",idx,"]]", sep=""); } }
       src <- paste(src, "));", "\n", sep="");
