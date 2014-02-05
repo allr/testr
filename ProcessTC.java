@@ -96,7 +96,7 @@ public class ProcessTC {
 				}
 				BufferedWriter writer = new BufferedWriter(
 						new OutputStreamWriter(new FileOutputStream(
-								"/home/roman/rWD/info/" + name + "_info", true)));
+								"/home/romantsegelskyi/rWD/info/" + name + "_info", true)));
 				System.out.println("Starting file - " + file);
 				String[] commands = { RSCRIPT, "--no-save", "--no-restore",
 						"--slave", "--quiet", "process.r", vm, file,
@@ -121,17 +121,13 @@ public class ProcessTC {
 					try {
 						exit = proc.exitValue();
 						if (exit == 0) {
-							correct++;
-						}else{
-							failed++;
 						}
 					} catch (IllegalThreadStateException t) {
 
 					}
 				}
-				System.out.println("Finished file - " + file
-						+ " Number of files left to process - "
-						+ tcFileAddr.size());
+				System.out.println("Finished File - " + file + ". Files left - " + tcFileAddr.size());
+				
 				virtualMachines.add(vm);
 				stdError.close();
 				stdInput.close();

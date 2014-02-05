@@ -91,7 +91,9 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     if (!is.null(testListener))
       for (t in tests[-1])
         testListener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
+#    if (fails > 0){
     cat("  (pass = ", passes,", fail = ", fails, ", total = ", passes + fails, ")\n", sep = "")
+#    }
     totalFails <- totalFails + fails
     totalPasses <- totalPasses + passes
     if (summary == TRUE) {

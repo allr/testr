@@ -6,6 +6,7 @@ trace/
 process_change.r
 process (copy).r
 tcFilter.R
+execute-tests.R
 
 # Java compiled classes
 *.class

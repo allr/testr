@@ -123,7 +123,8 @@ calculateCoverage <- function(coverage.data) {
   totalFile <- nrow(coverage.data$file)
   totalCovFile <- nrow(coverage.data$file[as.numeric(coverage.data$file$CovLn) > 0, ])
   totalCovFilePcnt <- round(totalCovFile/totalFile * 100, digits = 2)
-  return(totalCovLinePcnt.file)
+  #return(totalCovLinePcnt.file)
+  return (totalCovLine.file)
 }
 
 #' @description measures coverage by test cases in TC database. 
