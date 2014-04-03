@@ -1,0 +1,8 @@
+func: quote(ross$balance)
+body: function () 
+body: {
+body:     cat("Your balance is", total, "\n\n")
+body: }
+args: NULL
+retn: NULL
+

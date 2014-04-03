@@ -1,0 +1,12 @@
+func: quote(row.names)
+body: function (x) 
+body: UseMethod("row.names")
+args: <arguments too long, ignored>
+retn: <arguments too long, ignored>
+
+func: quote(row.names)
+body: function (x) 
+body: UseMethod("row.names")
+args: list(structure(list(visible = logical(0), from = structure(integer(0), .Label = c(".GlobalEnv", "package:base", "package:datasets", "package:grDevices", "package:graphics", "package:methods", "package:stats", "package:utils"), class = "factor")), .Names = c("visible", "from"), row.names = character(0), class = "data.frame"))
+retn: character(0)
+

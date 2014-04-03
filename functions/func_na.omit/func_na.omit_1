@@ -1,0 +1,12 @@
+func: quote(na.omit)
+body: function (object, ...) 
+body: UseMethod("na.omit")
+args: list(structure(list(freq = numeric(0), score = integer(0), `(weights)` = numeric(0)), .Names = c("freq", "score", "(weights)"), class = "data.frame", terms = quote(freq ~ score)))
+retn: structure(list(freq = numeric(0), score = integer(0), `(weights)` = numeric(0)), .Names = c("freq", "score", "(weights)"), terms = quote(freq ~ score), class = "data.frame")
+
+func: quote(na.omit)
+body: function (object, ...) 
+body: UseMethod("na.omit")
+args: list(structure(list(freq = NaN, score = 1L, `(weights)` = NaN), .Names = c("freq", "score", "(weights)"), class = "data.frame", row.names = c(NA, 1L), terms = quote(freq ~ score)))
+retn: structure(list(freq = numeric(0), score = integer(0), `(weights)` = numeric(0)), .Names = c("freq", "score", "(weights)"), terms = quote(freq ~ score), row.names = integer(0), class = "data.frame", na.action = structure(1L, .Names = "1", class = "omit"))
+

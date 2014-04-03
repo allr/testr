@@ -1,0 +1,6 @@
+func: quote(file.remove)
+body: function (...) 
+body: .Internal(file.remove(c(...)))
+args: list(".RDataTmp")
+retn: TRUE
+

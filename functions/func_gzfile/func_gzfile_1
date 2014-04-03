@@ -1,0 +1,6 @@
+func: quote(gzfile)
+body: function (description, open) 
+body: .Internal(gzfile(description, open, "", 6))
+args: list("/home/roman/r-instrumented/library/base/R/base.rdx", "rb")
+retn: structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4>)
+

@@ -1,0 +1,18 @@
+func: quote(median)
+body: function (x, na.rm = FALSE) 
+body: UseMethod("median")
+args: list(FALSE)
+retn: FALSE
+
+func: quote(median)
+body: function (x, na.rm = FALSE) 
+body: UseMethod("median")
+args: list(NULL)
+retn: NULL
+
+func: quote(median)
+body: function (x, na.rm = FALSE) 
+body: UseMethod("median")
+args: list(list())
+retn: list(NULL)
+

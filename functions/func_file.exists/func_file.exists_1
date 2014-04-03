@@ -1,0 +1,12 @@
+func: quote(file.exists)
+body: function (...) 
+body: .Internal(file.exists(c(...)))
+args: list("/home/roman/r-instrumented/site-library")
+retn: FALSE
+
+func: quote(file.exists)
+body: function (...) 
+body: .Internal(file.exists(c(...)))
+args: list("/home/roman/r-instrumented/library/translations/DESCRIPTION")
+retn: TRUE
+

@@ -1,0 +1,36 @@
+func: quote(bibentry1)
+body: function (bibtype, textVersion, header = NULL, footer = NULL, key = NULL, ..., other = list()) 
+body: {
+body:     bibtype <- as.character(bibtype)
+body:     stopifnot(length(bibtype) == 1L)
+body:     pos <- match(tolower(bibtype), tolower(BibTeX_names))
+body:     if (is.na(pos)) 
+body:         stop(gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names, collapse = ", ")), domain = NA)
+body:     bibtype <- BibTeX_names[pos]
+body:     rval <- c(list(...), other)
+body:     rval <- rval[!sapply(rval, .is_not_nonempty_text)]
+body:     fields <- tolower(names(rval))
+body:     names(rval) <- fields
+body:     attr(rval, "bibtype") <- bibtype
+body:     .bibentry_check_bibentry1(rval)
+body:     pos <- fields %in% c("author", "editor")
+body:     if (any(pos)) {
+body:         for (i in which(pos)) rval[[i]] <- as.person(rval[[i]])
+body:     }
+body:     if (any(!pos)) {
+body:         for (i in which(!pos)) rval[[i]] <- as.character(rval[[i]])
+body:     }
+body:     attr(rval, "key") <- if (is.null(key)) 
+body:         NULL
+body:     else as.character(key)
+body:     if (!is.null(textVersion)) 
+body:         attr(rval, "textVersion") <- as.character(textVersion)
+body:     if (!.is_not_nonempty_text(header)) 
+body:         attr(rval, "header") <- paste(header, collapse = "\n")
+body:     if (!.is_not_nonempty_text(footer)) 
+body:         attr(rval, "footer") <- paste(footer, collapse = "\n")
+body:     return(rval)
+body: }
+args: list(bibtype = "Manual", textVersion = "R Core Team (2013). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/.", header = NULL, footer = NULL, key = NULL, title = "R: A Language and Environment for Statistical Computing", author = structure(list(structure(list(given = "R Core Team", family = NULL, role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))), class = "person"), organization = "R Foundation for Statistical Computing", address = "Vienna, Austria", year = "2013", url = "http://www.R-project.org/", other = list())
+retn: structure(list(title = "R: A Language and Environment for Statistical Computing", author = structure(list(structure(list(given = "R Core Team", family = NULL, role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))), class = "person"), organization = "R Foundation for Statistical Computing", address = "Vienna, Austria", year = "2013", url = "http://www.R-project.org/"), .Names = c("title", "author", "organization", "address", "year", "url"), bibtype = "Manual", textVersion = "R Core Team (2013). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/.")
+

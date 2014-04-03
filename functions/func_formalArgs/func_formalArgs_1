@@ -1,0 +1,18 @@
+func: quote(formalArgs)
+body: function (def) 
+body: names(formals(def))
+args: list(NULL)
+retn: NULL
+
+func: quote(formalArgs)
+body: function (def) 
+body: names(formals(def))
+args: list(list())
+retn: NULL
+
+func: quote(formalArgs)
+body: function (def) 
+body: names(formals(def))
+args: list(FALSE)
+retn: NULL
+

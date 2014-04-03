@@ -1,0 +1,53 @@
+func: quote(person)
+body: function (given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL) 
+body: {
+body:     args <- list(given = given, family = family, middle = middle, email = email, role = role, comment = comment, first = first, last = last)
+body:     args <- lapply(args, .listify)
+body:     args_length <- sapply(args, length)
+body:     if (!all(args_length_ok <- args_length %in% c(1L, max(args_length)))) 
+body:         warning(gettextf("Not all arguments are of the same length, the following need to be recycled: %s", paste(names(args)[!args_length_ok], collapse = ", ")), domain = NA)
+body:     args <- lapply(args, function(x) rep(x, length.out = max(args_length)))
+body:     person1 <- function(given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL) {
+body:         if (!.is_not_nonempty_text(first)) {
+body:             if (!.is_not_nonempty_text(given)) 
+body:                 stop(gettextf("Use either %s or %s/%s but not both.", sQuote("given"), sQuote("first"), sQuote("middle")), domain = NA)
+body:             message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("first")), domain = NA)
+body:             given <- first
+body:         }
+body:         if (!.is_not_nonempty_text(middle)) {
+body:             message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("middle")), domain = NA)
+body:             given <- c(given, unlist(strsplit(middle, "[[:space:]]+")))
+body:         }
+body:         if (!.is_not_nonempty_text(last)) {
+body:             if (!.is_not_nonempty_text(family)) 
+body:                 stop(gettextf("Use either %s or %s but not both.", sQuote("family"), sQuote("last")), domain = NA)
+body:             message(gettextf("It is recommended to use %s instead of %s.", sQuote("family"), sQuote("last")), domain = NA)
+body:             family <- last
+body:         }
+body:         if (.is_not_nonempty_text(given)) 
+body:             given <- NULL
+body:         if (.is_not_nonempty_text(family)) 
+body:             family <- NULL
+body:         if (.is_not_nonempty_text(email)) 
+body:             email <- NULL
+body:         if (.is_not_nonempty_text(role)) {
+body:             if (!is.null(role)) 
+body:                 warning(sprintf(ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s."), paste(sQuote(role), collapse = ", ")), domain = NA)
+body:             role <- NULL
+body:         }
+body:         if (.is_not_nonempty_text(comment)) 
+body:             comment <- NULL
+body:         if (length(role)) 
+body:             role <- .canonicalize_person_role(role)
+body:         rval <- list(given = given, family = family, role = role, email = email, comment = comment)
+body:         if (any(ind <- (sapply(rval, length) == 0L))) 
+body:             rval[ind] <- vector("list", length = sum(ind))
+body:         return(rval)
+body:     }
+body:     rval <- lapply(seq_along(args$given), function(i) with(args, person1(given = given[[i]], family = family[[i]], middle = middle[[i]], email = email[[i]], role = role[[i]], comment = comment[[i]], first = first[[i]], last = last[[i]])))
+body:     class(rval) <- "person"
+body:     rval
+body: }
+args: list("R Core Team")
+retn: structure(list(structure(list(given = "R Core Team", family = NULL, role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))), class = "person")
+

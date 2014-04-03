@@ -1,0 +1,6 @@
+func: quote(dev.flush)
+body: function (level = 1L) 
+body: .External(C_devholdflush, -max(0L, level))
+args: NULL
+retn: 0L
+

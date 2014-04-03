@@ -1,0 +1,154 @@
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("utils", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("methods", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("grDevices", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("graphics", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("stats", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("tools", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("compiler", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("KernSmooth", "2.23-10"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("grid", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("splines", "3.0.1"), "")
+retn: <environment>
+
+func: quote(..getNamespace)
+body: function (name, where) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) {
+body:         warning(gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s", sQuote(name)[1L], sQuote(where)), domain = NA, call. = FALSE, immediate. = TRUE)
+body:         .GlobalEnv
+body:     })
+body: }
+args: list(c("stats4", "3.0.1"), "")
+retn: <environment>
+

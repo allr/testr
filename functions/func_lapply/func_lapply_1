@@ -1,0 +1,123 @@
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: list(structure(list(), class = "NativeRoutineList"), function (sym) 
+args: assign(paste0(".C_", sym$name), sym, envir = .BaseNamespaceEnv))
+retn: list()
+
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: <arguments too long, ignored>
+retn: structure(list(is.array = structure(".", class = "noquote"), is.atomic = structure("|", class = "noquote"), is.call = structure(".", class = "noquote"), is.character = structure(".", class = "noquote"), is.complex = structure(".", class = "noquote"), is.data.frame = structure(".", class = "noquote"), is.double = structure(".", class = "noquote"), is.environment = structure(".", class = "noquote"), is.expression = structure(".", class = "noquote"), is.factor = structure(".", class = "noquote"), is.finite = structure("NA", class = "noquote"), 
+retn:     is.function = structure(".", class = "noquote"), is.infinite = structure(character(0), class = "noquote"), is.integer = structure(".", class = "noquote"), is.language = structure(".", class = "noquote"), is.list = structure(".", class = "noquote"), is.logical = structure(".", class = "noquote"), is.matrix = structure(".", class = "noquote"), is.na = structure("NA", class = "noquote"), is.name = structure(".", class = "noquote"), is.nan = structure(character(0), class = "noquote"), is.null = structure("|", class = "noquote"), 
+retn:     is.numeric = structure(".", class = "noquote"), is.numeric_version = structure(".", class = "noquote"), is.object = structure(".", class = "noquote"), is.ordered = structure(".", class = "noquote"), is.package_version = structure(".", class = "noquote"), is.pairlist = structure("|", class = "noquote"), is.primitive = structure(".", class = "noquote"), is.qr = structure(".", class = "noquote"), is.raw = structure(".", class = "noquote"), is.recursive = structure(".", class = "noquote"), is.symbol = structure(".", class = "noquote"), 
+retn:     is.table = structure(".", class = "noquote"), is.vector = structure(".", class = "noquote")), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", 
+retn: "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"))
+
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: list(structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x11a8c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+args:     address = <pointer: 0x1108770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x124b810>, dll = structure(list(name = "base", 
+args:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), class = "NativeRoutineList", .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback")), function (sym) 
+args: assign(paste0(".C_", sym$name), sym, envir = .BaseNamespaceEnv))
+retn: structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x11a8c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+retn:     address = <pointer: 0x1108770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x124b810>, dll = structure(list(name = "base", 
+retn:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback"))
+
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: list(structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x1c8cc20>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+args:     address = <pointer: 0x1bec760>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1d2f800>, dll = structure(list(name = "base", 
+args:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), class = "NativeRoutineList", .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback")), function (sym) 
+args: assign(paste0(".C_", sym$name), sym, envir = .BaseNamespaceEnv))
+retn: structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x1c8cc20>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+retn:     address = <pointer: 0x1bec760>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1d2f800>, dll = structure(list(name = "base", 
+retn:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback"))
+
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: list(structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x1b34c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+args:     address = <pointer: 0x1a94770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1bd7810>, dll = structure(list(name = "base", 
+args:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), class = "NativeRoutineList", .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback")), function (sym) 
+args: assign(paste0(".C_", sym$name), sym, envir = .BaseNamespaceEnv))
+retn: structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x1b34c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+retn:     address = <pointer: 0x1a94770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1bd7810>, dll = structure(list(name = "base", 
+retn:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback"))
+
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: list(structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x1973c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+args:     address = <pointer: 0x18d3770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1a16810>, dll = structure(list(name = "base", 
+args:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), class = "NativeRoutineList", .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback")), function (sym) 
+args: assign(paste0(".C_", sym$name), sym, envir = .BaseNamespaceEnv))
+retn: structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x1973c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+retn:     address = <pointer: 0x18d3770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1a16810>, dll = structure(list(name = "base", 
+retn:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback"))
+
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: list(structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x19efc30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+args:     address = <pointer: 0x194f770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1a92810>, dll = structure(list(name = "base", 
+args:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), class = "NativeRoutineList", .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback")), function (sym) 
+args: assign(paste0(".C_", sym$name), sym, envir = .BaseNamespaceEnv))
+retn: structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x19efc30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+retn:     address = <pointer: 0x194f770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x1a92810>, dll = structure(list(name = "base", 
+retn:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback"))
+
+func: quote(lapply)
+body: function (X, FUN, ...) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     if (!is.vector(X) || is.object(X)) 
+body:         X <- as.list(X)
+body:     .Internal(lapply(X, FUN))
+body: }
+args: list(structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x2816c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+args:     address = <pointer: 0x2776770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x28b9810>, dll = structure(list(name = "base", 
+args:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), class = "NativeRoutineList", .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback")), function (sym) 
+args: assign(paste0(".C_", sym$name), sym, envir = .BaseNamespaceEnv))
+retn: structure(list(R_addTaskCallback = structure(list(name = "R_addTaskCallback", address = <pointer: 0x2816c30>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 4L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_getTaskCallbackNames = structure(list(name = "R_getTaskCallbackNames", 
+retn:     address = <pointer: 0x2776770>, dll = structure(list(name = "base", path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 0L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), R_removeTaskCallback = structure(list(name = "R_removeTaskCallback", address = <pointer: 0x28b9810>, dll = structure(list(name = "base", 
+retn:     path = "base", dynamicLookup = FALSE, handle = <pointer: (nil)>, info = <pointer: 0x92df60>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters"))), .Names = c("R_addTaskCallback", "R_getTaskCallbackNames", "R_removeTaskCallback"))
+

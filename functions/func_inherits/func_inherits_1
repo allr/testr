@@ -1,0 +1,662 @@
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), .Dim = 0L), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(character(0), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(complex(0), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(x = integer(0)), .Names = "x", row.names = character(0), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(numeric(0), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(expression(), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), .Label = character(0), class = "factor"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(integer(0), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(list(), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(logical(0), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), .Dim = 0:1), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(NULL, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(), class = "numeric_version"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), .Label = character(0), class = c("ordered", "factor")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(), class = c("package_version", "numeric_version")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(raw(0), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), class = "hexmode"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), class = "octmode"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(numeric(0), Csingle = TRUE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(expression(NULL), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(), class = "formula", .Environment = <environment>), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(), .Dim = 0L), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(), .Dim = 0:1), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(numeric(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Dim = 1L), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list("1", "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(1+0i, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(x = 1L), .Names = "x", row.names = c(NA, -1L), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(1, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(<environment>, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(expression(1L), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Label = "1", class = "factor"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(1L, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(list(1L), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(TRUE, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Dim = c(1L, 1L)), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(quote(`1`), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(1L), class = "numeric_version"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Label = "1", class = c("ordered", "factor")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(01, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Dim = 1L, .Dimnames = list("A"), class = "table"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Tsp = c(1, 1, 1), class = "ts"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, class = "hexmode"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, class = "octmode"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1, Csingle = TRUE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(integer(0), Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(3.14159265358979, .Dim = 1L), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list("3.14159265358979", "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(3.14159265358979+0i, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(x = 3.14159265358979), .Names = "x", row.names = c(NA, -1L), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(3.14159265358979, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(expression(3.14159265358979), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Label = "3.14159265358979", class = "factor"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(3L, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(list(3.14159265358979), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(3.14159265358979, .Dim = c(1L, 1L)), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(quote(`3.141593`), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(c(3L, 2147483647L)), class = "numeric_version"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Label = "3.14159265358979", class = c("ordered", "factor")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(c(3L, 2147483647L)), class = c("package_version", "numeric_version")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(03, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(3.14159265358979, .Dim = 1L, .Dimnames = list("A"), class = "table"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(3.14159265358979, .Tsp = c(1, 1, 1), class = "ts"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(3.14159265358979, Csingle = TRUE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(numeric(0), Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure("1.3", .Dim = 1L), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list("1.3", "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(1.3+0i, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(x = structure(1L, .Label = "1.3", class = "factor")), .Names = "x", row.names = c(NA, -1L), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(1.3, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(expression("1.3"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Label = "1.3", class = "factor"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(list("1.3"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(NA, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure("1.3", .Dim = c(1L, 1L)), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(quote(`1.3`), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(c(1L, 3L)), class = "numeric_version"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1L, .Label = "1.3", class = c("ordered", "factor")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(c(1L, 3L)), class = c("package_version", "numeric_version")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure("1.3", .Tsp = c(1, 1, 1), class = "ts"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(NA_real_, tzone = "", units = "secs", class = "difftime"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(1.3, Csingle = TRUE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(a = 1), .Dim = 1L, .Dimnames = list("a")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(quote(1()), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(a = 1), .Names = "a", row.names = c(NA, -1L), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(expression(a = 1), .Names = "a"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(function () 
+args: 1, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(a = 1), .Names = "a"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(1), .Dim = c(1L, 1L), .Dimnames = list("a", NULL)), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(a = 1L), .Names = "a", class = "numeric_version"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(list(a = 1), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(a = 1), .Names = "a", .Tsp = c(1, 1, 1), class = "ts"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(numeric(0), Labels = "a", Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(quote(integer(0)()), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list("integer(0)", "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(NA_complex_, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(NA_real_, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(expression(`character(0)` = integer(0)), .Names = "character(0)", row.names = character(0), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(function () 
+args: integer(0), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(NA_integer_, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(logical(0), .Dim = 0:1, .Dimnames = list(NULL, "character(0)")), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), row.names = character(0), class = "data.frame"), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(00, "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(NA_real_, Csingle = TRUE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(structure(numeric(0), Labels = "character(0)", Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), "try-error")
+retn: FALSE
+
+func: quote(inherits)
+body: function (x, what, which = FALSE) 
+body: .Internal(inherits(x, what, which))
+args: list(quote(~`character(0)`), "try-error")
+retn: FALSE
+

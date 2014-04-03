@@ -1,0 +1,66 @@
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dchdc")
+retn: ".F_dchdc"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dqrcf")
+retn: ".F_dqrcf"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dqrdc2")
+retn: ".F_dqrdc2"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dqrqty")
+retn: ".F_dqrqty"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dqrqy")
+retn: ".F_dqrqy"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dqrrsd")
+retn: ".F_dqrrsd"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dqrxb")
+retn: ".F_dqrxb"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".F_", "dtrco")
+retn: ".F_dtrco"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".C_", "R_addTaskCallback")
+retn: ".C_R_addTaskCallback"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".C_", "R_getTaskCallbackNames")
+retn: ".C_R_getTaskCallbackNames"
+
+func: quote(paste0)
+body: function (..., collapse = NULL) 
+body: .Internal(paste0(list(...), collapse))
+args: list(".C_", "R_removeTaskCallback")
+retn: ".C_R_removeTaskCallback"
+

@@ -1,0 +1,564 @@
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(x[[i]]), width.cutoff = 500L)
+retn: "x[[i]]"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(faithful))
+retn: "faithful"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(integer(0)))
+retn: "integer(0)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(NULL)
+retn: "NULL"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(list()))
+retn: "list()"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(1:1))
+retn: "1:1"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(pi))
+retn: "pi"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list("1.3")
+retn: "\"1.3\""
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(list(a = 1)))
+retn: "list(a = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(as.data.frame(character(0))))
+retn: "as.data.frame(character(0))"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(x), width.cutoff = 500L)
+retn: "x"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(binom(size = 1, prob = 0.2)))
+retn: "binom(size = 1, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(binom(size = 2, prob = 0.2)))
+retn: "binom(size = 2, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(binom(size = 100, prob = 0.2)))
+retn: "binom(size = 100, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(binom(size = 10000, prob = 0.2)))
+retn: "binom(size = 10000, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(binom(size = 1, prob = 0.8)))
+retn: "binom(size = 1, prob = 0.8)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(binom(size = 100, prob = 0.8)))
+retn: "binom(size = 100, prob = 0.8)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(binom(size = 100, prob = 0.999)))
+retn: "binom(size = 100, prob = 0.999)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(pois(lambda = 0.095)))
+retn: "pois(lambda = 0.095)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(pois(lambda = 0.95)))
+retn: "pois(lambda = 0.95)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(pois(lambda = 9.5)))
+retn: "pois(lambda = 9.5)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(pois(lambda = 95)))
+retn: "pois(lambda = 95)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(nbinom(size = 1, prob = 0.2)))
+retn: "nbinom(size = 1, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(nbinom(size = 2, prob = 0.2)))
+retn: "nbinom(size = 2, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(nbinom(size = 100, prob = 0.2)))
+retn: "nbinom(size = 100, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(nbinom(size = 10000, prob = 0.2)))
+retn: "nbinom(size = 10000, prob = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(nbinom(size = 1, prob = 0.8)))
+retn: "nbinom(size = 1, prob = 0.8)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(nbinom(size = 100, prob = 0.8)))
+retn: "nbinom(size = 100, prob = 0.8)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(nbinom(size = 100, prob = 0.999)))
+retn: "nbinom(size = 100, prob = 0.999)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(norm()))
+retn: "norm()"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(norm(mean = 5, sd = 3)))
+retn: "norm(mean = 5, sd = 3)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(gamma(shape = 0.1)))
+retn: "gamma(shape = 0.1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(gamma(shape = 0.2)))
+retn: "gamma(shape = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(gamma(shape = 10)))
+retn: "gamma(shape = 10)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(gamma(shape = 20)))
+retn: "gamma(shape = 20)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 40, n = 30, k = 20)))
+retn: "hyper(m = 40, n = 30, k = 20)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 40, n = 3, k = 20)))
+retn: "hyper(m = 40, n = 3, k = 20)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 6, n = 3, k = 2)))
+retn: "hyper(m = 6, n = 3, k = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 5, n = 3, k = 2)))
+retn: "hyper(m = 5, n = 3, k = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 4, n = 3, k = 2)))
+retn: "hyper(m = 4, n = 3, k = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(signrank(n = 1)))
+retn: "signrank(n = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(signrank(n = 2)))
+retn: "signrank(n = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(signrank(n = 10)))
+retn: "signrank(n = 10)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(signrank(n = 30)))
+retn: "signrank(n = 30)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(wilcox(m = 40, n = 30)))
+retn: "wilcox(m = 40, n = 30)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(wilcox(m = 40, n = 10)))
+retn: "wilcox(m = 40, n = 10)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(wilcox(m = 6, n = 3)))
+retn: "wilcox(m = 6, n = 3)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(wilcox(m = 5, n = 3)))
+retn: "wilcox(m = 5, n = 3)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(wilcox(m = 4, n = 3)))
+retn: "wilcox(m = 4, n = 3)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(chisq(df = 1)))
+retn: "chisq(df = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(chisq(df = 10)))
+retn: "chisq(df = 10)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(logis()))
+retn: "logis()"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(logis(location = 4, scale = 2)))
+retn: "logis(location = 4, scale = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(t(df = 1)))
+retn: "t(df = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(t(df = 10)))
+retn: "t(df = 10)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(t(df = 40)))
+retn: "t(df = 40)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(beta(shape1 = 1, shape2 = 1)))
+retn: "beta(shape1 = 1, shape2 = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(beta(shape1 = 2, shape2 = 1)))
+retn: "beta(shape1 = 2, shape2 = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(beta(shape1 = 1, shape2 = 2)))
+retn: "beta(shape1 = 1, shape2 = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(beta(shape1 = 2, shape2 = 2)))
+retn: "beta(shape1 = 2, shape2 = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(beta(shape1 = 0.2, shape2 = 0.2)))
+retn: "beta(shape1 = 0.2, shape2 = 0.2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(cauchy()))
+retn: "cauchy()"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(cauchy(location = 4, scale = 2)))
+retn: "cauchy(location = 4, scale = 2)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(f(df1 = 1, df2 = 1)))
+retn: "f(df1 = 1, df2 = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(f(df1 = 1, df2 = 10)))
+retn: "f(df1 = 1, df2 = 10)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(f(df1 = 10, df2 = 10)))
+retn: "f(df1 = 10, df2 = 10)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(f(df1 = 30, df2 = 3)))
+retn: "f(df1 = 30, df2 = 3)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(weibull(shape = 1)))
+retn: "weibull(shape = 1)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(weibull(shape = 4, scale = 4)))
+retn: "weibull(shape = 4, scale = 4)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 60, n = 100, k = 50)))
+retn: "hyper(m = 60, n = 100, k = 50)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 6, n = 10, k = 5)))
+retn: "hyper(m = 6, n = 10, k = 5)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(hyper(m = 600, n = 1000, k = 500)))
+retn: "hyper(m = 600, n = 1000, k = 500)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(t(df = 20, ncp = 3)))
+retn: "t(df = 20, ncp = 3)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(f(df1 = 10, df2 = 2, ncp = 3)))
+retn: "f(df1 = 10, df2 = 2, ncp = 3)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(l0), width.cutoff = 500L)
+retn: "l0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(FALSE, width.cutoff = 500L)
+retn: "FALSE"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(), width.cutoff = 500L)
+retn: ""
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(NULL, width.cutoff = 500L)
+retn: "NULL"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(list()), width.cutoff = 500L)
+retn: "list()"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(c0), width.cutoff = 500L)
+retn: "c0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(m0), width.cutoff = 500L)
+retn: "m0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(df0), width.cutoff = 500L)
+retn: "df0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(as.POSIXct(x)), width.cutoff = 500L)
+retn: "as.POSIXct(x)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(unclass(x)), width.cutoff = 500L)
+retn: "unclass(x)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(l0))
+retn: "l0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(c0))
+retn: "c0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(m0))
+retn: "m0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(df0))
+retn: "df0"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(FALSE)
+retn: "FALSE"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(data), width.cutoff = 500L)
+retn: "data"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(y), width.cutoff = 500L)
+retn: "y"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(structure(FALSE, .Dim = 1L))
+retn: "structure(FALSE, .Dim = 1L)"
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote())
+retn: ""
+
+func: quote(deparse)
+body: function (expr, width.cutoff = 60L, backtick = mode(expr) %in% c("call", "expression", "(", "function"), control = c("keepInteger", "showAttributes", "keepNA"), nlines = -1L) 
+body: .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
+args: list(quote(x))
+retn: "x"
+

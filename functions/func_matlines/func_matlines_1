@@ -1,0 +1,6 @@
+func: quote(matlines)
+body: function (x, y, type = "l", lty = 1:5, lwd = 1, pch = NULL, col = 1:6, ...) 
+body: matplot(x = x, y = y, type = type, lty = lty, lwd = lwd, pch = pch, col = col, add = TRUE, ...)
+args: list(structure(c(8, 9, 10, 10, 0, 0, 9, 9, 8, 9, 10, 0, 10, 9, 9, 9, 8, 9, 10, 0, 10, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9), .Dim = c(8L, 4L)))
+retn: NULL
+

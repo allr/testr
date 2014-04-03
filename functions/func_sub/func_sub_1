@@ -1,0 +1,75 @@
+func: quote(sub)
+body: function (pattern, replacement, x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(x)) 
+body:         x <- as.character(x)
+body:     .Internal(sub(as.character(pattern), as.character(replacement), x, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("[[:blank:]]*([[:alnum:]]+)", "\\1", c("datasets", "utils", "grDevices", "graphics", "stats", "methods"))
+retn: c("datasets", "utils", "grDevices", "graphics", "stats", "methods")
+
+func: quote(sub)
+body: function (pattern, replacement, x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(x)) 
+body:         x <- as.character(x)
+body:     .Internal(sub(as.character(pattern), as.character(replacement), x, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("\\..*", "", c("Date", "Date.POSIXct", "Date.POSIXlt", "Date.character", "Date.date", "Date.dates", "Date.default", "Date.factor", "Date.numeric", "POSIXct", "POSIXct.Date", "POSIXct.POSIXlt", "POSIXct.date", "POSIXct.dates", "POSIXct.default", "POSIXct.numeric", "POSIXlt", "POSIXlt.Date", "POSIXlt.POSIXct", "POSIXlt.character", "POSIXlt.date", "POSIXlt.dates", "POSIXlt.default", "POSIXlt.factor", "POSIXlt.numeric", "array", "array.default", "call", "character", "character.Date", "character.POSIXt", 
+args: "character.condition", "character.default", "character.error", "character.factor", "character.hexmode", "character.numeric_version", "character.octmode", "character.srcref", "complex", "data.frame", "data.frame.AsIs", "data.frame.Date", "data.frame.POSIXct", "data.frame.POSIXlt", "data.frame.array", "data.frame.character", "data.frame.complex", "data.frame.data.frame", "data.frame.default", "data.frame.difftime", "data.frame.factor", "data.frame.integer", "data.frame.list", "data.frame.logical", 
+args: "data.frame.matrix", "data.frame.model.matrix", "data.frame.numeric", "data.frame.numeric_version", "data.frame.ordered", "data.frame.raw", "data.frame.table", "data.frame.ts", "data.frame.vector", "difftime", "double", "double.POSIXlt", "double.difftime", "environment", "expression", "expression.default", "factor", "function", "function.default", "hexmode", "integer", "list", "list.Date", "list.POSIXct", "list.data.frame", "list.default", "list.environment", "list.factor", "list.function", "list.numeric_version", 
+args: "logical", "logical.factor", "matrix", "matrix.POSIXlt", "matrix.data.frame", "matrix.default", "matrix.noquote", "name", "null", "null.default", "numeric", "numeric_version", "octmode", "ordered", "package_version", "pairlist", "qr", "raw", "single", "single.default", "symbol", "table", "table.default", "vector", "vector.factor", "dendrogram", "dist", "formula", "hclust", "stepfun", "ts"))
+retn: c("Date", "Date", "Date", "Date", "Date", "Date", "Date", "Date", "Date", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "array", "array", "call", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "complex", "data", "data", "data", "data", "data", "data", "data", "data", "data", 
+retn: "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "difftime", "double", "double", "double", "environment", "expression", "expression", "factor", "function", "function", "hexmode", "integer", "list", "list", "list", "list", "list", "list", "list", "list", "list", "logical", "logical", "matrix", "matrix", "matrix", "matrix", "matrix", "name", "null", "null", "numeric", "numeric_version", "octmode", "ordered", "package_version", "pairlist", 
+retn: "qr", "raw", "single", "single", "symbol", "table", "table", "vector", "vector", "dendrogram", "dist", "formula", "hclust", "stepfun", "ts")
+
+func: quote(sub)
+body: function (pattern, replacement, x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(x)) 
+body:         x <- as.character(x)
+body:     .Internal(sub(as.character(pattern), as.character(replacement), x, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("\\.R$", "", c("error.catching.R", "is.things.R", "recursion.R", "scoping.R"))
+retn: c("error.catching", "is.things", "recursion", "scoping")
+
+func: quote(sub)
+body: function (pattern, replacement, x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(x)) 
+body:         x <- as.character(x)
+body:     .Internal(sub(as.character(pattern), as.character(replacement), x, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("[b-e]", ".", c("The", "licenses", "for", "most", "software", "are", "designed", "to", "take", "away", "your", "freedom", "to", "share", "and", "change", "it.", "", "By", "contrast,", "the", "GNU", "General", "Public", "License", "is", "intended", "to", "guarantee", "your", "freedom", "to", "share", "and", "change", "free", "software", "--", "to", "make", "sure", "the", "software", "is", "free", "for", "all", "its", "users"), perl = TRUE)
+retn: c("Th.", "li.enses", "for", "most", "softwar.", "ar.", ".esigned", "to", "tak.", "away", "your", "fr.edom", "to", "shar.", "an.", ".hange", "it.", "", "By", ".ontrast,", "th.", "GNU", "G.neral", "Pu.lic", "Li.ense", "is", "int.nded", "to", "guarant.e", "your", "fr.edom", "to", "shar.", "an.", ".hange", "fr.e", "softwar.", "--", "to", "mak.", "sur.", "th.", "softwar.", "is", "fr.e", "for", "all", "its", "us.rs")
+
+func: quote(sub)
+body: function (pattern, replacement, x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(x)) 
+body:         x <- as.character(x)
+body:     .Internal(sub(as.character(pattern), as.character(replacement), x, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("[b-e]", ".", c("The", "licenses", "for", "most", "software", "are", "designed", "to", "take", "away", "your", "freedom", "to", "share", "and", "change", "it.", "", "By", "contrast,", "the", "GNU", "General", "Public", "License", "is", "intended", "to", "guarantee", "your", "freedom", "to", "share", "and", "change", "free", "software", "--", "to", "make", "sure", "the", "software", "is", "free", "for", "all", "its", "users"))
+retn: c("Th.", "li.enses", "for", "most", "softwar.", "ar.", ".esigned", "to", "tak.", "away", "your", "fr.edom", "to", "shar.", "an.", ".hange", "it.", "", "By", ".ontrast,", "th.", "GNU", "G.neral", "Pu.lic", "Li.ense", "is", "int.nded", "to", "guarant.e", "your", "fr.edom", "to", "shar.", "an.", ".hange", "fr.e", "softwar.", "--", "to", "mak.", "sur.", "th.", "softwar.", "is", "fr.e", "for", "all", "its", "us.rs")
+
+func: quote(sub)
+body: function (pattern, replacement, x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(x)) 
+body:         x <- as.character(x)
+body:     .Internal(sub(as.character(pattern), as.character(replacement), x, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("[b-e]", ".", c("The", "licenses", "for", "most", "software", "are", "designed", "to", "take", "away", "your", "freedom", "to", "share", "and", "change", "it.", "", "By", "contrast,", "the", "GNU", "General", "Public", "License", "is", "intended", "to", "guarantee", "your", "freedom", "to", "share", "and", "change", "free", "software", "--", "to", "make", "sure", "the", "software", "is", "free", "for", "all", "its", "users"), ignore.case = TRUE, perl = TRUE)
+retn: c("Th.", "li.enses", "for", "most", "softwar.", "ar.", ".esigned", "to", "tak.", "away", "your", "fr.edom", "to", "shar.", "an.", ".hange", "it.", "", ".y", ".ontrast,", "th.", "GNU", "G.neral", "Pu.lic", "Li.ense", "is", "int.nded", "to", "guarant.e", "your", "fr.edom", "to", "shar.", "an.", ".hange", "fr.e", "softwar.", "--", "to", "mak.", "sur.", "th.", "softwar.", "is", "fr.e", "for", "all", "its", "us.rs")
+
+func: quote(sub)
+body: function (pattern, replacement, x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(x)) 
+body:         x <- as.character(x)
+body:     .Internal(sub(as.character(pattern), as.character(replacement), x, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("[b-e]", ".", c("The", "licenses", "for", "most", "software", "are", "designed", "to", "take", "away", "your", "freedom", "to", "share", "and", "change", "it.", "", "By", "contrast,", "the", "GNU", "General", "Public", "License", "is", "intended", "to", "guarantee", "your", "freedom", "to", "share", "and", "change", "free", "software", "--", "to", "make", "sure", "the", "software", "is", "free", "for", "all", "its", "users"), ignore.case = TRUE)
+retn: c("Th.", "li.enses", "for", "most", "softwar.", "ar.", ".esigned", "to", "tak.", "away", "your", "fr.edom", "to", "shar.", "an.", ".hange", "it.", "", ".y", ".ontrast,", "th.", "GNU", "G.neral", "Pu.lic", "Li.ense", "is", "int.nded", "to", "guarant.e", "your", "fr.edom", "to", "shar.", "an.", ".hange", "fr.e", "softwar.", "--", "to", "mak.", "sur.", "th.", "softwar.", "is", "fr.e", "for", "all", "its", "us.rs")
+

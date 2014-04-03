@@ -1,0 +1,26 @@
+func: quote(tryCatch.W.E)
+body: function (expr) 
+body: {
+body:     W <- NULL
+body:     w.handler <- function(w) {
+body:         W <<- w
+body:         invokeRestart("muffleWarning")
+body:     }
+body:     list(value = withCallingHandlers(tryCatch(expr, error = function(e) e), warning = w.handler), warning = W)
+body: }
+args: list(0.693147180559945)
+retn: structure(list(value = 0.693147180559945, warning = NULL), .Names = c("value", "warning"))
+
+func: quote(tryCatch.W.E)
+body: function (expr) 
+body: {
+body:     W <- NULL
+body:     w.handler <- function(w) {
+body:         W <<- w
+body:         invokeRestart("muffleWarning")
+body:     }
+body:     list(value = withCallingHandlers(tryCatch(expr, error = function(e) e), warning = w.handler), warning = W)
+body: }
+args: list(NaN)
+retn: structure(list(value = NaN, warning = structure(list(message = "NaNs produced", call = quote(log(-1))), .Names = c("message", "call"), class = c("simpleWarning", "warning", "condition"))), .Names = c("value", "warning"))
+

@@ -1,0 +1,20 @@
+func: quote(provideDimnames)
+body: function (x, sep = "", base = list(LETTERS)) 
+body: {
+body:     dx <- dim(x)
+body:     dnx <- dimnames(x)
+body:     if (new <- is.null(dnx)) 
+body:         dnx <- vector("list", length(dx))
+body:     k <- length(M <- vapply(base, length, 1L))
+body:     for (i in which(vapply(dnx, is.null, NA))) {
+body:         ii <- 1L + (i - 1L)%%k
+body:         dnx[[i]] <- make.unique(base[[ii]][1L + 0:(dx[i] - 1L)%%M[ii]], sep = sep)
+body:         new <- TRUE
+body:     }
+body:     if (new) 
+body:         dimnames(x) <- dnx
+body:     x
+body: }
+args: list(structure(list(c0 = structure(integer(0), .Label = character(0), class = "factor")), .Names = "c0", row.names = character(0), class = "data.frame"))
+retn: structure(list(c0 = structure(integer(0), .Label = character(0), class = "factor")), .Names = "c0", row.names = character(0), class = "data.frame")
+

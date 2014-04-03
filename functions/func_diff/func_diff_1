@@ -1,0 +1,18 @@
+func: quote(diff)
+body: function (x, ...) 
+body: UseMethod("diff")
+args: list(c(0, 0))
+retn: 0
+
+func: quote(diff)
+body: function (x, ...) 
+body: UseMethod("diff")
+args: list(c(Inf, -Inf))
+retn: -Inf
+
+func: quote(diff)
+body: function (x, ...) 
+body: UseMethod("diff")
+args: list(c(1, 1))
+retn: 0
+

@@ -1,0 +1,12 @@
+func: quote(dev.cur)
+body: function () 
+body: {
+body:     if (!exists(".Devices")) 
+body:         .Devices <- list("null device")
+body:     num.device <- .External(C_devcur)
+body:     names(num.device) <- .Devices[[num.device]]
+body:     num.device
+body: }
+args: NULL
+retn: structure(2L, .Names = "pdf")
+

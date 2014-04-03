@@ -1,0 +1,6 @@
+func: quote(stdin)
+body: function () 
+body: .Internal(stdin())
+args: NULL
+retn: structure(0L, class = c("terminal", "connection"))
+

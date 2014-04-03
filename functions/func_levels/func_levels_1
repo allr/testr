@@ -1,0 +1,6 @@
+func: quote(levels)
+body: function (x) 
+body: UseMethod("levels")
+args: list(structure(c(6L, 5L, 4L, 2L, 2L, 3L, 8L, 8L, 4L, 7L, 2L, 7L, 4L, 4L, 5L, 6L, 5L, 3L, 8L, 7L, 4L, 2L, 2L, 8L, 5L, 1L, 2L, 7L, 7L, 1L), .Label = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"), class = "factor"))
+retn: c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa")
+

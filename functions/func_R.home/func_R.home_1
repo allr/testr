@@ -1,0 +1,10 @@
+func: quote(R.home)
+body: function (component = "home") 
+body: {
+body:     rh <- .Internal(R.home())
+body:     switch(component, home = rh, bin = if (.Platform$OS.type == "windows" && nzchar(p <- .Platform$r_arch)) file.path(rh, component, p) else file.path(rh, component), share = if (nzchar(p <- Sys.getenv("R_SHARE_DIR"))) p else file.path(rh, component), doc = if (nzchar(p <- Sys.getenv("R_DOC_DIR"))) p else file.path(rh, component), include = if (nzchar(p <- Sys.getenv("R_INCLUDE_DIR"))) p else file.path(rh, component), modules = if (nzchar(p <- .Platform$r_arch)) file.path(rh, component, p) else file.path(rh, 
+body:         component), file.path(rh, component))
+body: }
+args: NULL
+retn: "/home/roman/r-instrumented"
+

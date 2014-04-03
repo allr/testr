@@ -1,0 +1,4047 @@
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list(".proctime00 <- proc.time()\n", "isall.equal <- function(x,y)", "typeof(x) == typeof(y) && is.logical(r <- all.equal(x,y, tol=0)) && r \n", sep = "\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("report <- function(x) {print(x); stopifnot(x)}\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("options(error = expression(NULL))", "# don't stop on error in batch\n##~~~~~~~~~~~~~~\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "integer(0)", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "array", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "array", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "call", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "call", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "character", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "character", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "complex", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "complex", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "data.frame", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "data.frame", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "double", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "double", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "environment", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "environment", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "expression", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "expression", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "factor", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "factor", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "function", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "function", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "integer", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "integer", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "list", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "list", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "logical", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "logical", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "matrix", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "matrix", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "name", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "name", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "null", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "null", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "numeric", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "numeric", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "numeric_version", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "numeric_version", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "ordered", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "ordered", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "package_version", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "package_version", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "pairlist", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "pairlist", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "qr", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "qr", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "raw", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "raw", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "symbol", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "symbol", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "table", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "table", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "vector", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "vector", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "stepfun", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "stepfun", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("res <- try(as.", "ts", "( x ), silent = TRUE)\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error')) report(is.", "ts", "(res))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "array", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "call", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "character", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "complex", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "data.frame", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "double", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "environment", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "expression", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "factor", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "function", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "integer", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "list", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "logical", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "matrix", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "name", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "null", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "numeric", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "numeric_version", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "ordered", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "package_version", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "pairlist", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "qr", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "raw", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "symbol", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "table", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "vector", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "stepfun", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("if(!inherits(res, 'try-error'))\n   report({if(is.", "ts", "(x)) { ", "cat('IS: ');all.equal(x, res, tol=0)\n", "   } else   !isall.equal(x, res)})\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "Date", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "Date", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "POSIXct", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "POSIXct", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "POSIXlt", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "POSIXlt", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "array", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "array", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "call", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "call", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "character", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "character", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "complex", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "complex", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "data.frame", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "data.frame", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "difftime", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "difftime", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "double", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "double", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "environment", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "environment", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "expression", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "expression", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "factor", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "factor", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "function", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "function", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "hexmode", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "hexmode", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "integer", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "integer", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "list", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "list", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "logical", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "logical", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "matrix", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "matrix", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "name", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "name", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "null", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "null", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "numeric", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "numeric", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "numeric_version", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "numeric_version", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "octmode", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "octmode", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "ordered", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "ordered", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "package_version", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "package_version", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "pairlist", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "pairlist", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "qr", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "qr", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "raw", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "raw", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "single", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "single", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "symbol", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "symbol", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "table", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "table", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "vector", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "vector", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "dendrogram", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "dendrogram", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "dist", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "dist", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "formula", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "formula", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "hclust", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "hclust", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "stepfun", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "stepfun", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f <- try(as.", "ts", "( x ), silent = TRUE)\n  if(!inherits(f, 'try-error')) report(identical(f, as.", "ts", "( f )))\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "NULL", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "list()", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "1:1", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "pi", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "\"1.3\"", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "list(a = 1)", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("\n###--------\n x <- ", "as.data.frame(character(0))", "\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("cat('Time elapsed: ', proc.time() - .proctime00,'\\n')\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("IS: ")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("Time elapsed: ", structure(c(2.888, 0.232, 3.129, 0, 0), class = "proc_time", .Names = c("user.self", "sys.self", "elapsed", "user.child", "sys.child")), "\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("binom(size = 1, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list(" PASSED\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("binom(size = 2, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("binom(size = 100, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("binom(size = 10000, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("binom(size = 1, prob = 0.8)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("binom(size = 100, prob = 0.8)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("binom(size = 100, prob = 0.999)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("pois(lambda = 0.095)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("pois(lambda = 0.95)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("pois(lambda = 9.5)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("pois(lambda = 95)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("nbinom(size = 1, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("nbinom(size = 2, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("nbinom(size = 100, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("nbinom(size = 10000, prob = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("nbinom(size = 1, prob = 0.8)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("nbinom(size = 100, prob = 0.8)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("nbinom(size = 100, prob = 0.999)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("norm()")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("norm(mean = 5, sd = 3)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("gamma(shape = 0.1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("gamma(shape = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("gamma(shape = 10)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("gamma(shape = 20)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 40, n = 30, k = 20)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 40, n = 3, k = 20)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 6, n = 3, k = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 5, n = 3, k = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 4, n = 3, k = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("signrank(n = 1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("signrank(n = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("signrank(n = 10)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("signrank(n = 30)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("wilcox(m = 40, n = 30)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("wilcox(m = 40, n = 10)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("wilcox(m = 6, n = 3)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("wilcox(m = 5, n = 3)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("wilcox(m = 4, n = 3)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("chisq(df = 1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("chisq(df = 10)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("logis()")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("logis(location = 4, scale = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("t(df = 1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("t(df = 10)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("t(df = 40)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("beta(shape1 = 1, shape2 = 1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("beta(shape1 = 2, shape2 = 1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("beta(shape1 = 1, shape2 = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("beta(shape1 = 2, shape2 = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("beta(shape1 = 0.2, shape2 = 0.2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("cauchy()")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("cauchy(location = 4, scale = 2)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f(df1 = 1, df2 = 1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f(df1 = 1, df2 = 10)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f(df1 = 10, df2 = 10)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f(df1 = 30, df2 = 3)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("weibull(shape = 1)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("weibull(shape = 4, scale = 4)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 60, n = 100, k = 50)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 6, n = 10, k = 5)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("hyper(m = 600, n = 1000, k = 500)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("t(df = 20, ncp = 3)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("f(df1 = 10, df2 = 2, ncp = 3)")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("Time elapsed: ", structure(c(47.136, 0.072, 47.38, 0, 0), class = "proc_time", .Names = c("user.self", "sys.self", "elapsed", "user.child", "sys.child")), "\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("testing S3 generic '", "!", "'\n", sep = "")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("Timing stopped at:", structure(c(0, 0, 0.000999999999997669), .Names = c("user.self", "sys.self", "elapsed")), "\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("Timing stopped at:", structure(c(0, 0, 0), .Names = c("user.self", "sys.self", "elapsed")), "\n")
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("FALSEFALSE", fill = TRUE)
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("FALSEFALSE", NULL, fill = TRUE)
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("FALSEFALSE", NULL, NULL, fill = TRUE)
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("FALSEFALSE", list(), fill = TRUE)
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("FALSEFALSE", FALSE, fill = TRUE)
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("FALSEFALSE", list(), list(), fill = TRUE)
+retn: NULL
+
+func: quote(cat)
+body: function (..., file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE) 
+body: {
+body:     if (is.character(file)) 
+body:         if (file == "") 
+body:             file <- stdout()
+body:         else if (substring(file, 1L, 1L) == "|") {
+body:             file <- pipe(substring(file, 2L), "w")
+body:             on.exit(close(file))
+body:         }
+body:         else {
+body:             file <- file(file, ifelse(append, "a", "w"))
+body:             on.exit(close(file))
+body:         }
+body:     .Internal(cat(list(...), file, sep, fill, labels, append))
+body: }
+args: list("FALSEFALSE", FALSE, FALSE, fill = TRUE)
+retn: NULL
+

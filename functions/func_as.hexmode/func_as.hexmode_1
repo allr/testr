@@ -1,0 +1,76 @@
+func: quote(as.hexmode)
+body: function (x) 
+body: {
+body:     if (inherits(x, "hexmode")) 
+body:         return(x)
+body:     if (is.double(x) && (x == as.integer(x))) 
+body:         x <- as.integer(x)
+body:     if (is.integer(x)) 
+body:         return(structure(x, class = "hexmode"))
+body:     if (is.character(x)) {
+body:         z <- strtoi(x, 16L)
+body:         if (!any(is.na(z) | z < 0)) 
+body:             return(structure(z, class = "hexmode"))
+body:     }
+body:     stop("'x' cannot be coerced to class \"hexmode\"")
+body: }
+args: list(integer(0))
+retn: structure(integer(0), class = "hexmode")
+
+func: quote(as.hexmode)
+body: function (x) 
+body: {
+body:     if (inherits(x, "hexmode")) 
+body:         return(x)
+body:     if (is.double(x) && (x == as.integer(x))) 
+body:         x <- as.integer(x)
+body:     if (is.integer(x)) 
+body:         return(structure(x, class = "hexmode"))
+body:     if (is.character(x)) {
+body:         z <- strtoi(x, 16L)
+body:         if (!any(is.na(z) | z < 0)) 
+body:             return(structure(z, class = "hexmode"))
+body:     }
+body:     stop("'x' cannot be coerced to class \"hexmode\"")
+body: }
+args: list(structure(integer(0), class = "hexmode"))
+retn: structure(integer(0), class = "hexmode")
+
+func: quote(as.hexmode)
+body: function (x) 
+body: {
+body:     if (inherits(x, "hexmode")) 
+body:         return(x)
+body:     if (is.double(x) && (x == as.integer(x))) 
+body:         x <- as.integer(x)
+body:     if (is.integer(x)) 
+body:         return(structure(x, class = "hexmode"))
+body:     if (is.character(x)) {
+body:         z <- strtoi(x, 16L)
+body:         if (!any(is.na(z) | z < 0)) 
+body:             return(structure(z, class = "hexmode"))
+body:     }
+body:     stop("'x' cannot be coerced to class \"hexmode\"")
+body: }
+args: list(1L)
+retn: structure(1L, class = "hexmode")
+
+func: quote(as.hexmode)
+body: function (x) 
+body: {
+body:     if (inherits(x, "hexmode")) 
+body:         return(x)
+body:     if (is.double(x) && (x == as.integer(x))) 
+body:         x <- as.integer(x)
+body:     if (is.integer(x)) 
+body:         return(structure(x, class = "hexmode"))
+body:     if (is.character(x)) {
+body:         z <- strtoi(x, 16L)
+body:         if (!any(is.na(z) | z < 0)) 
+body:             return(structure(z, class = "hexmode"))
+body:     }
+body:     stop("'x' cannot be coerced to class \"hexmode\"")
+body: }
+args: list(structure(1L, class = "hexmode"))
+retn: structure(1L, class = "hexmode")
+

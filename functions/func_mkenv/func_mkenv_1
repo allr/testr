@@ -1,0 +1,6 @@
+func: quote(mkenv)
+body: function () 
+body: .Internal(new.env(TRUE, baseenv(), 29L))
+args: NULL
+retn: <environment>
+

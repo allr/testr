@@ -1,0 +1,42 @@
+func: quote(getFromFrame)
+body: function (x, env) 
+body: .Internal(get(x, env, "any", FALSE))
+args: list("env::1", <environment>)
+retn: c(0L, 138L)
+
+func: quote(getFromFrame)
+body: function (x, env) 
+body: .Internal(get(x, env, "any", FALSE))
+args: list("env::5", <environment>)
+retn: c(24015L, 86L)
+
+func: quote(getFromFrame)
+body: function (x, env) 
+body: .Internal(get(x, env, "any", FALSE))
+args: list("env::7", <environment>)
+retn: c(46343L, 132L)
+
+func: quote(getFromFrame)
+body: function (x, env) 
+body: .Internal(get(x, env, "any", FALSE))
+args: list("env::6", <environment>)
+retn: c(32201L, 122L)
+
+func: quote(getFromFrame)
+body: function (x, env) 
+body: .Internal(get(x, env, "any", FALSE))
+args: list("env::8", <environment>)
+retn: c(55904L, 86L)
+
+func: quote(getFromFrame)
+body: function (x, env) 
+body: .Internal(get(x, env, "any", FALSE))
+args: list("env::4", <environment>)
+retn: c(16139L, 1514L)
+
+func: quote(getFromFrame)
+body: function (x, env) 
+body: .Internal(get(x, env, "any", FALSE))
+args: list("env::2", <environment>)
+retn: c(11137L, 2161L)
+

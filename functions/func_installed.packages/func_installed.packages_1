@@ -1,0 +1,117 @@
+func: quote(installed.packages)
+body: function (lib.loc = NULL, priority = NULL, noCache = FALSE, fields = NULL, subarch = .Platform$r_arch) 
+body: {
+body:     if (is.null(lib.loc)) 
+body:         lib.loc <- .libPaths()
+body:     if (!is.null(priority)) {
+body:         if (!is.character(priority)) 
+body:             stop("'priority' must be character or NULL")
+body:         if (any(b <- priority %in% "high")) 
+body:             priority <- c(priority[!b], "recommended", "base")
+body:     }
+body:     fields <- .instPkgFields(fields)
+body:     retval <- matrix(character(), 0L, 2L + length(fields))
+body:     for (lib in lib.loc) {
+body:         if (noCache) {
+body:             ret0 <- .readPkgDesc(lib, fields)
+body:             if (length(ret0)) 
+body:                 retval <- rbind(retval, ret0)
+body:         }
+body:         else {
+body:             base <- paste(c(lib, fields), collapse = ",")
+body:             enc <- sprintf("%d_%s", nchar(base), .Call(C_crc64, base))
+body:             dest <- file.path(tempdir(), paste0("libloc_", enc, ".rds"))
+body:             if (file.exists(dest) && file.info(dest)$mtime > file.info(lib)$mtime && (val <- readRDS(dest))$base == base) 
+body:                 retval <- rbind(retval, val$value)
+body:             else {
+body:                 ret0 <- .readPkgDesc(lib, fields)
+body:                 if (length(ret0)) {
+body:                   retval <- rbind(retval, ret0)
+body:                   saveRDS(list(base = base, value = ret0), dest)
+body:                 }
+body:             }
+body:         }
+body:     }
+body:     .fixupPkgMat(retval, fields, priority, subarch)
+body: }
+args: list(NULL, fields = "Enhances")
+retn: <arguments too long, ignored>
+
+func: quote(installed.packages)
+body: function (lib.loc = NULL, priority = NULL, noCache = FALSE, fields = NULL, subarch = .Platform$r_arch) 
+body: {
+body:     if (is.null(lib.loc)) 
+body:         lib.loc <- .libPaths()
+body:     if (!is.null(priority)) {
+body:         if (!is.character(priority)) 
+body:             stop("'priority' must be character or NULL")
+body:         if (any(b <- priority %in% "high")) 
+body:             priority <- c(priority[!b], "recommended", "base")
+body:     }
+body:     fields <- .instPkgFields(fields)
+body:     retval <- matrix(character(), 0L, 2L + length(fields))
+body:     for (lib in lib.loc) {
+body:         if (noCache) {
+body:             ret0 <- .readPkgDesc(lib, fields)
+body:             if (length(ret0)) 
+body:                 retval <- rbind(retval, ret0)
+body:         }
+body:         else {
+body:             base <- paste(c(lib, fields), collapse = ",")
+body:             enc <- sprintf("%d_%s", nchar(base), .Call(C_crc64, base))
+body:             dest <- file.path(tempdir(), paste0("libloc_", enc, ".rds"))
+body:             if (file.exists(dest) && file.info(dest)$mtime > file.info(lib)$mtime && (val <- readRDS(dest))$base == base) 
+body:                 retval <- rbind(retval, val$value)
+body:             else {
+body:                 ret0 <- .readPkgDesc(lib, fields)
+body:                 if (length(ret0)) {
+body:                   retval <- rbind(retval, ret0)
+body:                   saveRDS(list(base = base, value = ret0), dest)
+body:                 }
+body:             }
+body:         }
+body:     }
+body:     .fixupPkgMat(retval, fields, priority, subarch)
+body: }
+args: list(lib.loc = "/home/roman/r-instrumented/library")
+retn: <arguments too long, ignored>
+
+func: quote(installed.packages)
+body: function (lib.loc = NULL, priority = NULL, noCache = FALSE, fields = NULL, subarch = .Platform$r_arch) 
+body: {
+body:     if (is.null(lib.loc)) 
+body:         lib.loc <- .libPaths()
+body:     if (!is.null(priority)) {
+body:         if (!is.character(priority)) 
+body:             stop("'priority' must be character or NULL")
+body:         if (any(b <- priority %in% "high")) 
+body:             priority <- c(priority[!b], "recommended", "base")
+body:     }
+body:     fields <- .instPkgFields(fields)
+body:     retval <- matrix(character(), 0L, 2L + length(fields))
+body:     for (lib in lib.loc) {
+body:         if (noCache) {
+body:             ret0 <- .readPkgDesc(lib, fields)
+body:             if (length(ret0)) 
+body:                 retval <- rbind(retval, ret0)
+body:         }
+body:         else {
+body:             base <- paste(c(lib, fields), collapse = ",")
+body:             enc <- sprintf("%d_%s", nchar(base), .Call(C_crc64, base))
+body:             dest <- file.path(tempdir(), paste0("libloc_", enc, ".rds"))
+body:             if (file.exists(dest) && file.info(dest)$mtime > file.info(lib)$mtime && (val <- readRDS(dest))$base == base) 
+body:                 retval <- rbind(retval, val$value)
+body:             else {
+body:                 ret0 <- .readPkgDesc(lib, fields)
+body:                 if (length(ret0)) {
+body:                   retval <- rbind(retval, ret0)
+body:                   saveRDS(list(base = base, value = ret0), dest)
+body:                 }
+body:             }
+body:         }
+body:     }
+body:     .fixupPkgMat(retval, fields, priority, subarch)
+body: }
+args: list(lib.loc = list())
+retn: structure(character(0), .Dim = c(0L, 17L), .Dimnames = list(NULL, c("Package", "LibPath", "Version", "Priority", "Depends", "Imports", "LinkingTo", "Suggests", "Enhances", "License", "License_is_FOSS", "License_restricts_use", "OS_type", "Archs", "MD5sum", "NeedsCompilation", "Built")))
+

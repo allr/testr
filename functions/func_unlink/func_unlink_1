@@ -1,0 +1,132 @@
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/Rex25467e2d5767")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/Rex25465e3fdad9")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file25467c59d4fa")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file2546675f0311")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file254616a872a0")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file2546764f9e52")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file25465437fafe")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file254664a4678")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file25467c679370")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file25465091cff8")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file254672d83188")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file25469065d10")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file254618ec5e5d")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file2546344812a6")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file2546479ebc66")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file2546d4bf77a")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/file254635488fcc")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/Rfwf.25466d4dacd3")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/Rfwf.254646dafc34")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/Rfwf.254632b46e7")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/Rfwf.25469b4849d")
+retn: 0L
+
+func: quote(unlink)
+body: function (x, recursive = FALSE, force = FALSE) 
+body: .Internal(unlink(as.character(x), recursive, force))
+args: list("/tmp/RtmpK5mJUt/Rfwf.254610041cbe")
+retn: 0L
+

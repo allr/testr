@@ -1,0 +1,36 @@
+func: quote(as.table)
+body: function (x, ...) 
+body: UseMethod("as.table")
+args: list(1L)
+retn: structure(1L, .Dim = 1L, .Dimnames = list("A"), class = "table")
+
+func: quote(as.table)
+body: function (x, ...) 
+body: UseMethod("as.table")
+args: list(structure(1L, .Dim = 1L, .Dimnames = list("A"), class = "table"))
+retn: structure(1L, .Dim = 1L, .Dimnames = list("A"), class = "table")
+
+func: quote(as.table)
+body: function (x, ...) 
+body: UseMethod("as.table")
+args: list(3.14159265358979)
+retn: structure(3.14159265358979, .Dim = 1L, .Dimnames = list("A"), class = "table")
+
+func: quote(as.table)
+body: function (x, ...) 
+body: UseMethod("as.table")
+args: list(structure(3.14159265358979, .Dim = 1L, .Dimnames = list("A"), class = "table"))
+retn: structure(3.14159265358979, .Dim = 1L, .Dimnames = list("A"), class = "table")
+
+func: quote(as.table)
+body: function (x, ...) 
+body: UseMethod("as.table")
+args: list(structure(1, Csingle = TRUE))
+retn: structure(1, .Dim = 1L, Csingle = TRUE, .Dimnames = list("A"), class = "table")
+
+func: quote(as.table)
+body: function (x, ...) 
+body: UseMethod("as.table")
+args: list(structure(NA_real_, Csingle = TRUE))
+retn: structure(NA_real_, .Dim = 1L, Csingle = TRUE, .Dimnames = list("A"), class = "table")
+

@@ -1,0 +1,12 @@
+func: quote(sys.parent)
+body: function (n = 1L) 
+body: .Internal(sys.parent(n))
+args: NULL
+retn: 24L
+
+func: quote(sys.parent)
+body: function (n = 1L) 
+body: .Internal(sys.parent(n))
+args: list(2)
+retn: 0L
+

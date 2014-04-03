@@ -1,0 +1,6 @@
+func: quote(as.POSIXct)
+body: function (x, tz = "", ...) 
+body: UseMethod("as.POSIXct")
+args: list("1970-01-01", tz = "GMT")
+retn: structure(0, class = c("POSIXct", "POSIXt"), tzone = "GMT")
+

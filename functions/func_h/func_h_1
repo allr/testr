@@ -1,0 +1,1080 @@
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.2, 1)
+retn: structure(c(1330, 480, 480, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.1999988, 1)
+retn: structure(c(1329.99654400173, 479.99952, 479.99952, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.2, 1.000001)
+retn: structure(c(1329.9996, 480, 480, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.08082095905929, 1.04942029244545)
+retn: structure(c(984.040617672037, 432.328383623717, 432.328383623717, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.0384996077341, 1.05872765249508)
+retn: structure(c(872.686661318632, 415.399843093641, 415.399843093641, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.02653259453702, 1.05695001978742)
+retn: structure(c(843.742993261314, 410.613037814807, 410.613037814807, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.02230923313571, 1.05279535183694)
+retn: structure(c(835.021261050658, 408.923693254285, 408.923693254285, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.0196323442019, 1.04817320234758)
+retn: structure(c(830.310859872158, 407.85293768076, 407.85293768076, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.0172349040539, 1.04345131361971)
+retn: structure(c(826.339694582779, 406.893961621561, 406.893961621561, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.01487829246577, 1.03869794633305)
+retn: structure(c(822.494359688658, 405.951316986307, 405.951316986307, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.01251820537677, 1.03392555283474)
+retn: structure(c(818.661518329371, 405.007282150707, 405.007282150707, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.01014631524939, 1.02913627109357)
+retn: structure(c(814.820185416868, 404.058526099755, 404.058526099755, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.00776092701257, 1.02433033316454)
+retn: structure(c(810.966369950058, 403.104370805027, 403.104370805027, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.00536156441615, 1.01950761625421)
+retn: structure(c(807.099203744658, 402.144625766459, 402.144625766459, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.00294797202216, 1.01466792865117)
+retn: structure(c(803.218390039554, 401.179188808862, 401.179188808862, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-1.00051993115088, 1.00981106234544)
+retn: structure(c(799.323734218017, 400.207972460352, 400.207972460352, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.998077225833718, 1.00493680262199)
+retn: structure(c(795.41505742472, 399.230890333487, 399.230890333487, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.995619636405517, 1.00004492971653)
+retn: structure(c(791.492180588893, 398.247854562207, 398.247854562207, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.99314693818488, 0.995135219003165)
+retn: structure(c(787.554921389936, 397.258775273952, 397.258775273952, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.990658901086165, 0.990207440906638)
+retn: structure(c(783.603093598842, 396.263560434466, 396.263560434466, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.988155289396961, 0.985261360758782)
+retn: structure(c(779.636506852318, 395.262115758784, 395.262115758784, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.985635861579519, 0.980296738639518)
+retn: structure(c(775.654966502114, 394.254344631808, 394.254344631808, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.98310037006971, 0.975313329209494)
+retn: structure(c(771.658273473642, 393.240148027884, 393.240148027884, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.980548561068271, 0.970310881535421)
+retn: structure(c(767.6462241215, 392.219424427308, 392.219424427308, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.97798017432299, 0.965289138908002)
+retn: structure(c(763.618610079389, 391.192069729196, 391.192069729196, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.975394942901146, 0.960247838652121)
+retn: structure(c(759.575218103706, 390.157977160458, 390.157977160458, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.972792592951657, 0.955186711928879)
+retn: structure(c(755.515829910378, 389.117037180663, 389.117037180663, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.97017284345634, 0.950105483529062)
+retn: structure(c(751.440222004568, 388.069137382536, 388.069137382536, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.967535405969682, 0.945003871657573)
+retn: structure(c(747.348165502871, 387.014162387873, 387.014162387873, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.964879984346465, 0.939881587708348)
+retn: structure(c(743.239425947582, 385.951993738586, 385.951993738586, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.962206274456554, 0.934738336029216)
+retn: structure(c(739.113763112588, 384.882509782622, 384.882509782622, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.959513963886106, 0.929573813676173)
+retn: structure(c(734.970930800443, 383.805585554442, 383.805585554442, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.956802731624394, 0.924387710156459)
+retn: structure(c(730.810676630099, 382.721092649758, 382.721092649758, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.954072247735423, 0.919179707159815)
+retn: structure(c(726.63274181478, 381.628899094169, 381.628899094169, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.9513221730134, 0.913949478277246)
+retn: structure(c(722.436860929426, 380.52886920536, 380.52886920536, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.94855215862111, 0.908696688706568)
+retn: structure(c(718.222761667093, 379.420863448444, 379.420863448444, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.945761845710139, 0.903420994943971)
+retn: structure(c(713.990164583671, 378.304738284056, 378.304738284056, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.942950865021839, 0.898122044460777)
+retn: structure(c(709.738782830211, 377.180346008736, 377.180346008736, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.940118836467822, 0.892799475364507)
+retn: structure(c(705.468321872132, 376.047534587129, 376.047534587129, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.93726536868871, 0.88745291604332)
+retn: structure(c(701.178479194491, 374.906147475484, 374.906147475484, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.934390058589736, 0.882081984792806)
+retn: structure(c(696.868943992475, 373.756023435895, 373.756023435895, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.931492490851734, 0.876686289424052)
+retn: structure(c(692.539396846181, 372.596996340694, 372.596996340694, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.928572237415877, 0.871265426851816)
+retn: structure(c(688.189509378708, 371.428894966351, 371.428894966351, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.925628856940472, 0.865818982661556)
+retn: structure(c(683.818943896487, 370.251542776189, 370.251542776189, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.922661894227917, 0.860346530653967)
+retn: structure(c(679.42735301071, 369.064757691167, 369.064757691167, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.91967087961983, 0.854847632365578)
+retn: structure(c(675.014379238622, 367.868351847932, 367.868351847932, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.916655328358159, 0.849321836563851)
+retn: structure(c(670.579654583345, 366.662131343264, 366.662131343264, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.913614739909938, 0.843768678715093)
+retn: structure(c(666.122800090807, 365.445895963975, 365.445895963975, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.910548597253127, 0.838187680423376)
+retn: structure(c(661.643425382214, 364.219438901251, 364.219438901251, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.907456366120795, 0.83257834883849)
+retn: structure(c(657.141128160395, 362.982546448318, 362.982546448318, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.904337494200654, 0.826940176030829)
+retn: structure(c(652.615493688211, 361.734997680262, 361.734997680262, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.901191410286686, 0.821272638330893)
+retn: structure(c(648.06609423705, 360.476564114675, 360.476564114675, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.898017523379358, 0.815575195630947)
+retn: structure(c(643.492488503296, 359.207009351743, 359.207009351743, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.894815221730573, 0.809847290646118)
+retn: structure(c(638.894220990435, 357.926088692229, 357.926088692229, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.891583871829192, 0.804088348132034)
+retn: structure(c(634.270821354307, 356.633548731677, 356.633548731677, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.888322817322567, 0.79829777405581)
+retn: structure(c(629.621803708759, 355.329126929027, 355.329126929027, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.885031377869119, 0.792474954716933)
+retn: structure(c(624.946665888721, 354.012551147648, 354.012551147648, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.881708847916541, 0.786619255814289)
+retn: structure(c(620.244888667461, 352.683539166616, 352.683539166616, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.878354495399669, 0.780730021455235)
+retn: structure(c(615.515934924475, 351.341798159868, 351.341798159868, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.874967560351539, 0.774806573102236)
+retn: structure(c(610.759248760135, 349.987024140616, 349.987024140616, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.87154725342048, 0.768848208452183)
+retn: structure(c(605.974254552866, 348.618901368192, 348.618901368192, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.868092754285418, 0.762854200243053)
+retn: structure(c(601.160355954191, 347.237101714167, 347.237101714167, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.864603209960784, 0.756823794982046)
+retn: structure(c(596.316934816571, 345.841283984313, 345.841283984313, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.86107773298153, 0.750756211588781)
+retn: structure(c(591.443350048422, 344.431093192612, 344.431093192612, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.857515399457821, 0.744650639946504)
+retn: structure(c(586.538936390166, 343.006159783128, 343.006159783128, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.853915246987828, 0.738506239353541)
+retn: structure(c(581.603003104523, 341.566098795131, 341.566098795131, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.850276272415889, 0.732322136866472)
+retn: structure(c(576.634832573562, 340.110508966355, 340.110508966355, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.846597429421875, 0.726097425525584)
+retn: structure(c(571.633678794238, 338.63897176875, 338.63897176875, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.842877625926088, 0.719831162452228)
+retn: structure(c(566.598765763266, 337.151050370435, 337.151050370435, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.839115721292257, 0.713522366806546)
+retn: structure(c(561.529285741172, 335.646288516903, 335.646288516903, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.835310523309244, 0.707170017592836)
+retn: structure(c(556.424397384262, 334.124209323698, 334.124209323698, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.831460784929817, 0.700773051298394)
+retn: structure(c(551.283223731971, 332.584313971927, 332.584313971927, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.827565200742348, 0.694330359350111)
+retn: structure(c(546.104850035622, 331.026080296939, 331.026080296939, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.823622403148393, 0.687840785371295)
+retn: structure(c(540.888321413002, 329.448961259357, 329.448961259357, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.819630958215848, 0.681303122219198)
+retn: structure(c(535.632640311315, 327.852383286339, 327.852383286339, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.815589361173617, 0.67471610878138)
+retn: structure(c(530.336763758954, 326.235744469447, 326.235744469447, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.811496031509473, 0.668078426506472)
+retn: structure(c(524.999600384159, 324.598412603789, 324.598412603789, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.807349307627838, 0.661388695641876)
+retn: structure(c(519.620007175828, 322.939723051135, 322.939723051135, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.803147441018596, 0.654645471147559)
+retn: structure(c(514.19678595864, 321.258976407438, 321.258976407438, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.798888589881502, 0.64784723825115)
+retn: structure(c(508.728679550966, 319.555435952601, 319.555435952601, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.79457081214322, 0.64099240760508)
+retn: structure(c(503.214367569891, 317.828324857288, 317.828324857288, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.790192057795293, 0.634079310001325)
+retn: structure(c(497.652461842781, 316.076823118117, 316.076823118117, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.785750160471157, 0.6271061905933)
+retn: structure(c(492.041501379219, 314.300064188463, 314.300064188463, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.781242828168478, 0.620071202567563)
+retn: structure(c(486.379946850593, 312.497131267391, 312.497131267391, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.776667633009173, 0.61297240019991)
+retn: structure(c(480.666174516922, 310.667053203669, 310.667053203669, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.772021999913237, 0.605807731221074)
+retn: structure(c(474.898469531611, 308.808799965295, 308.808799965295, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.767303194043245, 0.598575028406284)
+retn: structure(c(469.075018544246, 306.921277617298, 306.921277617298, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.76250830685375, 0.591272000290077)
+retn: structure(c(463.193901509137, 305.0033227415, 305.0033227415, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.757634240552843, 0.583896220892651)
+retn: structure(c(457.25308259264, 303.053696221137, 303.053696221137, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.752677690751082, 0.576445118326181)
+retn: structure(c(451.250400054785, 301.071076300433, 301.071076300433, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.74763512703461, 0.56891596212839)
+retn: structure(c(445.183554959912, 299.054050813844, 299.054050813844, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.742502771153221, 0.561305849145485)
+retn: structure(c(439.050098546062, 297.001108461289, 297.001108461289, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.737276572458499, 0.553611687756537)
+retn: structure(c(432.847418052769, 294.9106289834, 294.9106289834, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.731952180159759, 0.54583018019536)
+retn: structure(c(426.572720770605, 292.780872063903, 292.780872063903, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.726524911883413, 0.537957802682544)
+retn: structure(c(420.223016031624, 290.609964753365, 290.609964753365, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.720989717920827, 0.529990783027809)
+retn: structure(c(413.795094805942, 288.395887168331, 288.395887168331, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.715341140425926, 0.52192507529903)
+retn: structure(c(407.285506503425, 286.13645617037, 286.13645617037, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.70957326667054, 0.513756331076329)
+retn: structure(c(400.69053249767, 283.829306668216, 283.829306668216, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.703679675274513, 0.505479866713897)
+retn: structure(c(394.006155787774, 281.471870109805, 281.471870109805, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.697653374088143, 0.497090625914018)
+retn: structure(c(387.228026086278, 279.061349635257, 279.061349635257, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.691486728102337, 0.488583136770982)
+retn: structure(c(380.351419461617, 276.594691240935, 276.594691240935, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.685171375377544, 0.47995146225923)
+retn: structure(c(373.371191460414, 274.068550151017, 274.068550151017, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.678698128490293, 0.471189142909593)
+retn: structure(c(366.281722375634, 271.479251396117, 271.479251396117, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.678598128490293, 0.471189142909593)
+retn: structure(c(366.118846824796, 271.439251396117, 271.439251396117, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.678698128490293, 0.471289142909593)
+retn: structure(c(366.241722375634, 271.479251396117, 271.479251396117, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.678498128490293, 0.471189142909593)
+retn: structure(c(365.955995273958, 271.399251396117, 271.399251396117, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.678598128490293, 0.471289142909593)
+retn: structure(c(366.078846824796, 271.439251396117, 271.439251396117, 200), .Dim = c(2L, 2L))
+
+func: quote(h)
+body: function (x1, x2) 
+body: {
+body:     a11 <- 2 - 400 * x2 + 1200 * x1 * x1
+body:     a21 <- -400 * x1
+body:     matrix(c(a11, a21, a21, 200), 2, 2)
+body: }
+args: list(-0.678698128490293, 0.471389142909593)
+retn: structure(c(366.201722375633, 271.479251396117, 271.479251396117, 200), .Dim = c(2L, 2L))
+

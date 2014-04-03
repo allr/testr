@@ -1,0 +1,11 @@
+func: quote(dev.off)
+body: function (which = dev.cur()) 
+body: {
+body:     if (which == 1) 
+body:         stop("cannot shut down device 1 (the null device)")
+body:     .External(C_devoff, as.integer(which))
+body:     dev.cur()
+body: }
+args: NULL
+retn: structure(2L, .Names = "pdf")
+

@@ -1,0 +1,100 @@
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", fixed = TRUE)
+retn: list(structure(c(27L, 43L), match.length = c(2L, 2L)))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", fixed = TRUE, useBytes = TRUE)
+retn: list(structure(c(29L, 54L), match.length = c(4L, 4L), useBytes = TRUE))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè")
+retn: list(structure(c(27L, 43L), match.length = c(2L, 2L)))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", useBytes = TRUE)
+retn: list(structure(c(29L, 54L), match.length = c(4L, 4L), useBytes = TRUE))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", perl = TRUE)
+retn: list(structure(c(27L, 43L), match.length = c(2L, 2L)))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", perl = TRUE, useBytes = TRUE)
+retn: list(structure(c(29L, 54L), match.length = c(4L, 4L), useBytes = TRUE))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", ignore.case = TRUE)
+retn: list(structure(c(27L, 43L), match.length = c(2L, 2L)))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", ignore.case = TRUE, useByte = TRUE)
+retn: list(structure(c(29L, 54L), match.length = c(4L, 4L), useBytes = TRUE))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", ignore.case = TRUE, perl = TRUE)
+retn: list(structure(c(27L, 43L), match.length = c(2L, 2L)))
+
+func: quote(gregexpr)
+body: function (pattern, text, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) 
+body: {
+body:     if (!is.character(text)) 
+body:         text <- as.character(text)
+body:     .Internal(gregexpr(as.character(pattern), text, ignore.case, perl, fixed, useBytes))
+body: }
+args: list("éè", "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè", ignore.case = TRUE, perl = TRUE, useBytes = TRUE)
+retn: list(structure(c(29L, 54L), match.length = c(4L, 4L), useBytes = TRUE))
+

@@ -1,0 +1,13 @@
+func: quote(.libPaths)
+body: function (new) 
+body: {
+body:     if (!missing(new)) {
+body:         new <- Sys.glob(path.expand(new))
+body:         paths <- unique(normalizePath(c(new, .Library.site, .Library), "/"))
+body:         .lib.loc <<- paths[file.info(paths)$isdir %in% TRUE]
+body:     }
+body:     else .lib.loc
+body: }
+args: list("~/R/x86_64-unknown-linux-gnu-library/3.0")
+retn: "/home/roman/r-instrumented/library"
+

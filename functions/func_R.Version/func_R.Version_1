@@ -1,0 +1,6 @@
+func: quote(R.Version)
+body: function () 
+body: .Internal(Version())
+args: NULL
+retn: structure(list(platform = "x86_64-unknown-linux-gnu", arch = "x86_64", os = "linux-gnu", system = "x86_64, linux-gnu", status = "", major = "3", minor = "0.1", year = "2013", month = "05", day = "16", `svn rev` = "62743", language = "R", version.string = "R version 3.0.1 (2013-05-16)", nickname = "Good Sport"), .Names = c("platform", "arch", "os", "system", "status", "major", "minor", "year", "month", "day", "svn rev", "language", "version.string", "nickname"))
+

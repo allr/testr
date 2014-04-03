@@ -1,0 +1,6 @@
+func: quote(isTRUE)
+body: function (x) 
+body: identical(TRUE, x)
+args: list(TRUE)
+retn: TRUE
+

@@ -1,0 +1,12 @@
+func: quote(do.call)
+body: function (what, args, quote = FALSE, envir = parent.frame()) 
+body: {
+body:     if (!is.list(args)) 
+body:         stop("second argument must be a list")
+body:     if (quote) 
+body:         args <- lapply(args, enquote)
+body:     .Internal(do.call(what, args, envir))
+body: }
+args: list("expand.grid", structure(list(character(0), "c0", KEEP.OUT.ATTRS = FALSE, stringsAsFactors = TRUE), .Names = c("", "", "KEEP.OUT.ATTRS", "stringsAsFactors")))
+retn: structure(list(Var1 = character(0), Var2 = character(0)), .Names = c("Var1", "Var2"), class = "data.frame", row.names = integer(0))
+

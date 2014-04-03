@@ -1,0 +1,38 @@
+func: quote(str)
+body: function (object, ...) 
+body: UseMethod("str")
+args: list(structure(list(home = structure(c(6L, 5L, 4L, 2L, 2L, 3L, 8L, 8L, 4L, 7L, 2L, 7L, 4L, 4L, 5L, 6L, 5L, 3L, 8L, 7L, 4L, 2L, 2L, 8L, 5L, 1L, 2L, 7L, 7L, 1L), .Label = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"), class = "factor"), loot = c(60, 49, 40, 61, 64, 60, 59, 54, 62, 69, 70, 42, 56, 61, 61, 61, 58, 51, 48, 65, 49, 49, 41, 48, 52, 46, 59, 46, 58, 43), shot = structure(c(3L, 2L, 1L, 3L, 3L, 3L, 3L, 2L, 3L, 4L, 4L, 1L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 3L, 2L, 2L, 1L, 2L, 2L, 2L, 3L, 
+args: 2L, 3L, 1L), .Label = c("(35,45]", "(45,55]", "(55,65]", "(65,75]"), class = "factor")), .Names = c("home", "loot", "shot"), row.names = c(NA, -30L), class = "data.frame"))
+retn: NULL
+
+func: quote(str)
+body: function (object, ...) 
+body: UseMethod("str")
+args: list(structure(list(value = 0.693147180559945, warning = NULL), .Names = c("value", "warning")))
+retn: NULL
+
+func: quote(str)
+body: function (object, ...) 
+body: UseMethod("str")
+args: list(structure(list(value = NaN, warning = structure(list(message = "NaNs produced", call = quote(log(-1))), .Names = c("message", "call"), class = c("simpleWarning", "warning", "condition"))), .Names = c("value", "warning")))
+retn: NULL
+
+func: quote(str)
+body: function (object, ...) 
+body: UseMethod("str")
+args: list(structure(list(value = structure(list(message = "non-numeric argument to mathematical function", call = quote(log("a"))), .Names = c("message", "call"), class = c("simpleError", "error", "condition")), warning = NULL), .Names = c("value", "warning")))
+retn: NULL
+
+func: quote(str)
+body: function (object, ...) 
+body: UseMethod("str")
+args: list(structure(list(minimum = 1.23819143962283e-14, estimate = c(0.999999998122234, 3.07087772634488e-09, -6.06359497280411e-09), gradient = c(-3.75553199251553e-07, 3.48582704012987e-06, -2.20233692589866e-06), hessian = structure(c(200, -0.040658420253196, 9.77393011902739e-07, -0.040658420253196, 506.605899595655, -318.309885720372, 9.77393011902739e-07, -318.309885720372, 202), .Dim = c(3L, 3L)), code = 2L, iterations = 27L), .Names = c("minimum", "estimate", "gradient", "hessian", "code", "iterations"
+args: )))
+retn: NULL
+
+func: quote(str)
+body: function (object, ...) 
+body: UseMethod("str")
+args: list(structure(list(minimum = 3.97376540705816e-12, estimate = c(0.999998006639223, 0.999996014950405), gradient = c(-6.53922922052308e-07, 3.33597371948924e-07), hessian = structure(c(802.23682348024, -400.019202655466, -400.019202655466, 200), .Dim = c(2L, 2L)), code = 1L, iterations = 23L), .Names = c("minimum", "estimate", "gradient", "hessian", "code", "iterations")))
+retn: NULL
+

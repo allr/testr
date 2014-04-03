@@ -1,0 +1,1023 @@
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("error.catching", character.only = TRUE)
+retn: structure(list(value = NULL, visible = TRUE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("is.things", character.only = TRUE)
+retn: structure(list(value = c("is.atomic", "is.integer", "is.numeric", "is.vector"), visible = TRUE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("recursion", character.only = TRUE)
+retn: <arguments too long, ignored>
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("scoping", character.only = TRUE)
+retn: structure(list(value = structure("Error in ross$withdraw(500) : You don't have that much money!\n\n", class = "try-error", condition = structure(list(message = "You don't have that much money!\n", call = quote(ross$withdraw(500))), .Names = c("message", "call"), class = c("simpleError", "error", "condition"))), visible = TRUE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("graphics", character.only = TRUE)
+retn: structure(list(value = structure(list(bg = "cornsilk"), .Names = "bg"), visible = FALSE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("image", character.only = TRUE)
+retn: structure(list(value = structure(list(value = NULL, visible = TRUE), .Names = c("value", "visible")), visible = TRUE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("persp", character.only = TRUE)
+retn: structure(list(value = structure(list(bg = "slategray"), .Names = "bg"), visible = FALSE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("glm.vr", character.only = TRUE)
+retn: structure(list(value = structure(list(`Resid. Df` = c(11, 8), `Resid. Dev` = c(32.8256226818389, 5.65604443126002), Df = c(NA, 3), Deviance = c(NA, 27.1695782505789)), .Names = c("Resid. Df", "Resid. Dev", "Df", "Deviance"), row.names = c("1", "2"), class = c("anova", "data.frame"), heading = c("Analysis of Deviance Table\n", "Model 1: Fr ~ M.user * Temp * Soft + Brand\nModel 2: Fr ~ M.user * Temp * Soft + Brand * M.user * Temp")), visible = TRUE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("smooth", character.only = TRUE)
+retn: structure(list(value = structure(list(mfrow = c(1L, 1L)), .Names = "mfrow"), visible = FALSE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("Hershey", character.only = TRUE)
+retn: structure(list(value = structure(list(mar = c(0, 0, 0, 0), pty = "s"), .Names = c("mar", "pty")), visible = FALSE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("Japanese", character.only = TRUE)
+retn: structure(list(value = structure(list(mar = c(0, 0, 0, 0), pty = "s"), .Names = c("mar", "pty")), visible = FALSE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("lm.glm", character.only = TRUE)
+retn: structure(list(value = structure(list(`Resid. Df` = c(5, 4), `Resid. Dev` = c(62.5583882385782, 29.2407169463278), Df = c(NA, 1), Deviance = c(NA, 33.3176712922505), `Pr(>Chi)` = c(NA, 7.8268178476136e-09)), .Names = c("Resid. Df", "Resid. Dev", "Df", "Deviance", "Pr(>Chi)"), row.names = c("1", "2"), class = c("anova", "data.frame"), heading = c("Analysis of Deviance Table\n", "Model 1: counts ~ group * city + blood\nModel 2: counts ~ group * (city + blood)")), visible = TRUE), .Names = c("value", 
+retn: "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("nlm", character.only = TRUE)
+retn: structure(list(value = structure(list(minimum = 2.82917452883509, estimate = c(-0.678698128490293, 0.471189142909593), gradient = c(-0.491120141451911, 2.11159865867353), hessian = structure(c(366.11884888246, 271.459251433075, 271.459251433075, 200.000000028), .Dim = c(2L, 2L)), code = 4L, iterations = 100L), .Names = c("minimum", "estimate", "gradient", "hessian", "code", "iterations")), visible = TRUE), .Names = c("value", "visible"))
+
+func: quote(demo)
+body: function (topic, package = NULL, lib.loc = NULL, character.only = FALSE, verbose = getOption("verbose"), echo = TRUE, ask = getOption("demo.ask"), encoding = getOption("encoding")) 
+body: {
+body:     paths <- find.package(package, lib.loc, verbose = verbose)
+body:     paths <- paths[file_test("-d", file.path(paths, "demo"))]
+body:     if (missing(topic)) {
+body:         db <- matrix(character(), nrow = 0L, ncol = 4L)
+body:         for (path in paths) {
+body:             entries <- NULL
+body:             if (file_test("-f", INDEX <- file.path(path, "Meta", "demo.rds"))) {
+body:                 entries <- readRDS(INDEX)
+body:             }
+body:             if (NROW(entries)) {
+body:                 db <- rbind(db, cbind(basename(path), dirname(path), entries))
+body:             }
+body:         }
+body:         colnames(db) <- c("Package", "LibPath", "Item", "Title")
+body:         footer <- if (missing(package)) 
+body:             paste0("Use ", sQuote(paste("demo(package =", ".packages(all.available = TRUE))")), "\n", "to list the demos in all *available* packages.")
+body:         else NULL
+body:         y <- list(title = "Demos", header = NULL, results = db, footer = footer)
+body:         class(y) <- "packageIQR"
+body:         return(y)
+body:     }
+body:     if (!character.only) {
+body:         topic <- substitute(topic)
+body:         if (is.call(topic) && (topic[[1L]] == "::" || topic[[1L]] == ":::")) {
+body:             package <- as.character(topic[[2L]])
+body:             topic <- as.character(topic[[3L]])
+body:         }
+body:         else topic <- as.character(topic)
+body:     }
+body:     available <- character()
+body:     paths <- file.path(paths, "demo")
+body:     for (p in paths) {
+body:         files <- basename(tools::list_files_with_type(p, "demo"))
+body:         files <- files[topic == tools::file_path_sans_ext(files)]
+body:         if (length(files)) 
+body:             available <- c(available, file.path(p, files))
+body:     }
+body:     if (length(available) == 0L) 
+body:         stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+body:     if (length(available) > 1L) {
+body:         available <- available[1L]
+body:         warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+body:     }
+body:     pkgpath <- dirname(dirname(available))
+body:     if (file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
+body:         desc <- readRDS(file)$DESCRIPTION
+body:         if (length(desc) == 1L) {
+body:             enc <- as.list(desc)[["Encoding"]]
+body:             !if (!is.null(enc)) 
+body:                 encoding <- enc
+body:         }
+body:     }
+body:     if (ask == "default") 
+body:         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
+body:     if (.Device != "null device") {
+body:         oldask <- grDevices::devAskNewPage(ask = ask)
+body:         on.exit(grDevices::devAskNewPage(oldask), add = TRUE)
+body:     }
+body:     op <- options(device.ask.default = ask)
+body:     on.exit(options(op), add = TRUE)
+body:     if (echo) {
+body:         cat("\n\n", "\tdemo(", topic, ")\n", "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n", sep = "")
+body:         if (ask && interactive()) 
+body:             readline("\nType  <Return>\t to start : ")
+body:     }
+body:     source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
+body: }
+args: list("plotmath", character.only = TRUE)
+retn: structure(list(value = structure(list(mar = c(0, 0, 0, 0), pty = "s"), .Names = c("mar", "pty")), visible = FALSE), .Names = c("value", "visible"))
+

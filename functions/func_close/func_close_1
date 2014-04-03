@@ -1,0 +1,6210 @@
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xa>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xe>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x10>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x11>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x12>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x13>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x14>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x15>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x16>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x17>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x18>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x19>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x1a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x1b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x1c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x1d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x1f>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x20>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x21>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x22>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x23>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x24>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x25>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x26>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x27>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x28>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x29>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x29>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x30>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x31>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x32>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x33>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x34>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x35>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x36>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x37>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x38>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x39>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x40>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x41>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x42>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x43>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x44>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x45>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x46>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x47>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x48>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x49>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x4f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x50>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x51>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x52>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x53>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x54>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x55>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x56>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x57>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x58>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x59>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x5a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x5b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x5c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x5d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x5e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x5f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x60>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x61>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x62>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x63>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x64>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x65>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x66>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x67>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x68>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x69>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x6a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x6b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x6c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x6d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x6e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x6f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x70>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x71>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x72>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x73>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x74>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x75>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x76>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x77>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x78>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x79>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x7a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x7b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x7c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x7d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x7e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x7f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x80>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(4L, class = c("file", "connection"), conn_id = <pointer: 0x82>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(4L, class = c("file", "connection"), conn_id = <pointer: 0x83>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x85>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x93>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x94>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x95>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x96>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x97>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x98>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x99>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x9a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x9b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x9c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x9d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x9e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x9f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xa9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xaa>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xab>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xac>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xad>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xae>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xaf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xb9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xba>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xbb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xbc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xbd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xbe>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xbf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xc9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xca>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xcb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xcc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xcd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xce>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xcf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xd9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xda>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xdb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xdc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xde>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xdf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xe0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xe1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xe2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xe3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xe4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xe5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xe6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xe7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xe8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xe9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xea>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xeb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xec>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xed>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xee>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xef>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xf2>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf3>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xf8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xf9>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xfa>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xfb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xfc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xfd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0xfe>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0xff>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x100>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x101>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x102>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x103>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x104>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x105>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x106>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x107>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x108>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x109>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x10a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x10b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x10c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x10d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x10e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x10f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x110>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x111>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x112>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x113>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x114>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x115>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x116>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x117>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x118>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x119>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x11a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x11b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x11c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x11d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x11e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x11f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x120>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x121>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x122>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x123>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x124>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x125>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x126>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x127>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x128>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x129>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x12a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x12b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x12c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x12d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x12e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x12f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x130>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x131>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x132>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x133>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x134>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x135>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x136>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x137>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x138>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x139>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x13a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x13b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x13c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x13d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x13e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x13f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x140>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x141>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x142>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x143>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x144>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x145>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x146>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x147>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x148>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x149>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x14a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x14b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x14c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x14d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x14e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x14f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x150>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x151>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x152>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x153>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x154>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x155>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x156>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x157>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x158>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x159>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x15a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x15b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x15c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x15d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x15e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x15f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x160>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x161>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x162>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x163>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x164>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x165>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x166>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x167>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x168>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x169>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x16a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x16b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x16c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x16d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x16e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x16f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x170>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x171>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x172>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x173>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x174>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x175>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x176>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x177>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x178>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x179>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x17a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x17b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x17c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x17d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x17e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x17f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x180>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x181>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x182>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x183>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x184>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x185>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x186>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x187>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x188>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x189>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x18a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x18b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x18c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x18d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x18e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x18f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x190>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x191>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x192>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x193>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x194>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x195>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x196>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x197>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x198>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x199>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x19a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x19b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x19c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x19d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x19e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x19f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1a9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1aa>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ab>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ac>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ad>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ae>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1af>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1b9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ba>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1bb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1bc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1bd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1be>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1bf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1c9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ca>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1cb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1cc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1cd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ce>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1cf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1d9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1da>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1db>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1dc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1dd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1de>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1df>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1e9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ea>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1eb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ec>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ed>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ee>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ef>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1f9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1fa>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1fb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1fc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1fd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1fe>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x1ff>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x200>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x201>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x202>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x203>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x204>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x205>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x206>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x207>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x208>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x209>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x20a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x20b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x20c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x20d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x20e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x20f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x210>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x211>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x212>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x213>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x214>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x215>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x216>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x217>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x218>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x219>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x21a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x21b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x21c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x21d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x21e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x21f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x220>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x221>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x222>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x223>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x224>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x225>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x226>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x227>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x228>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x229>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x22a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x22b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x22c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x22d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x22e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x22f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x230>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x231>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x232>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x233>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x234>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x235>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x236>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x237>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x238>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x239>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x23a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x23b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x23c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x23d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x23e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x23f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x240>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x241>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x242>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x243>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x244>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x245>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x246>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x247>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x248>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x249>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x24a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x24b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x24c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x24d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x24e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x24f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x250>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x251>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x252>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x253>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x254>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x255>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x256>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x257>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x258>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x259>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x25a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x25b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x25c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x25d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x25e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x25f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x260>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x261>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x262>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x263>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x264>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x265>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x266>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x267>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x268>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x269>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x26a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x26b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x26c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x26d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x26e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x26f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x270>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x271>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x272>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x273>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x274>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x275>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x276>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x277>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x278>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x279>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x27a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x27b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x27c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x27d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x27e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x27f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x280>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x281>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x282>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x283>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x284>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x285>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x286>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x287>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x288>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x289>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x28a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x28b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x28c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x28d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x28e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x28f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x290>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x291>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x292>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x293>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x294>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x295>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x296>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x297>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x298>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x299>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x29a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x29b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x29c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x29d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x29e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x29f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2a9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2aa>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ab>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ac>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ad>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ae>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2af>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2b9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ba>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2bb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2bc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2bd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2be>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2bf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2c9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ca>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2cb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2cc>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(4L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ce>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x2cd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d6>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(4L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2d8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x2d7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2da>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2db>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2dc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2dd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2de>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2df>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e0>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(4L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x2e1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2e9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ea>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2eb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ec>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ed>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ee>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ef>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2f9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2fa>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2fb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2fc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2fd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2fe>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x2ff>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x300>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x301>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x302>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x303>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x304>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x305>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x306>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(4L, class = c("gzfile", "connection"), conn_id = <pointer: 0x308>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x307>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x30a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x30b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x30c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x30d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x30e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x30f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x310>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x311>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x312>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x313>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x314>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x315>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x316>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x317>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x318>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x319>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x31a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x31b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x31c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x31d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x31e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x31f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x320>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x321>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x322>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x323>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x324>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x325>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("textConnection", "connection"), conn_id = <pointer: 0x327>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("textConnection", "connection"), conn_id = <pointer: 0x328>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("textConnection", "connection"), conn_id = <pointer: 0x329>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("textConnection", "connection"), conn_id = <pointer: 0x32f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("textConnection", "connection"), conn_id = <pointer: 0x334>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x335>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x336>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x338>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x339>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x33b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x33c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x33d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x33e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x340>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x341>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x342>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x343>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x345>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x346>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x347>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x348>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x349>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x34a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x34b>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x34c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x34d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x34f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x352>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x353>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x354>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x355>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x356>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x357>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x358>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x359>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x35a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x35c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x35f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x360>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x361>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x362>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x363>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x364>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x365>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x366>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x367>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x368>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x369>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x36a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x36b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x36c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x36d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x36e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x36f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x370>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x371>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x372>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x373>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x374>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x375>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x376>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x377>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x378>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x379>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x37a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x37b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x37c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x37d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x37e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x37f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x380>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x381>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x382>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x383>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x384>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x385>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x386>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x387>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x388>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x389>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x38a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x38b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x38c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x38d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x38e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x38f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x390>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x391>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x392>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x393>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x394>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x395>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x396>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x397>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x398>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x399>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x39a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x39b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x39c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x39d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x39e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x39f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3a9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3aa>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ab>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ac>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ad>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ae>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3af>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3b0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3b9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3ba>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3bb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3bc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3bd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3be>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3bf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3c9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3cb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3cc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ce>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3cf>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3d1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3d2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3d4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3d5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3d7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3d8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3da>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3db>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3dd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3de>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3e0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3e1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3e3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3e4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3e6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3e7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3e9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ea>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ec>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ed>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3ef>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f0>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f1>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f2>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f3>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f4>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f5>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f6>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x3f7>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3f8>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3f9>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3fa>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3fb>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3fc>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3fd>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3fe>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x3ff>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x400>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x401>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x402>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x403>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x404>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x405>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x406>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x407>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x408>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x409>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x40a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x40b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x40c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x40d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x40e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x40f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x410>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x411>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x412>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x413>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x414>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x415>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x416>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x417>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x418>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x419>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x41a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x41b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x41c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x41d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x41e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x41f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x420>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x421>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x422>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x423>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x424>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x425>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x426>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x427>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x428>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x429>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x42a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x42b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x42c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x42d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x42e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x42f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x430>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x431>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x432>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x433>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x434>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x435>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x436>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x437>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x438>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x439>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x43a>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x43b>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x43c>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x43d>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x43e>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x43f>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x442>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x443>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x444>))
+retn: NULL
+
+func: quote(close)
+body: function (con, ...) 
+body: UseMethod("close")
+args: list(structure(3L, class = c("file", "connection"), conn_id = <pointer: 0x445>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x446>))
+retn: NULL
+
+func: quote(close)
+body: function (con) 
+body: .Internal(close(con, "rw"))
+args: list(structure(3L, class = c("gzfile", "connection"), conn_id = <pointer: 0x447>))
+retn: NULL
+

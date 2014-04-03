@@ -1,0 +1,744 @@
+func: quote(write.table)
+body: function (x, file = "", append = FALSE, quote = TRUE, sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "") 
+body: {
+body:     qmethod <- match.arg(qmethod)
+body:     if (is.logical(quote) && (length(quote) != 1L || is.na(quote))) 
+body:         stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+body:     quoteC <- if (is.logical(quote)) 
+body:         quote
+body:     else TRUE
+body:     qset <- is.logical(quote) && quote
+body:     if (!is.data.frame(x) && !is.matrix(x)) 
+body:         x <- data.frame(x)
+body:     makeRownames <- isTRUE(row.names)
+body:     makeColnames <- is.logical(col.names) && !identical(FALSE, col.names)
+body:     if (is.matrix(x)) {
+body:         p <- ncol(x)
+body:         d <- dimnames(x)
+body:         if (is.null(d)) 
+body:             d <- list(NULL, NULL)
+body:         if (is.null(d[[1L]]) && makeRownames) 
+body:             d[[1L]] <- seq_len(nrow(x))
+body:         if (is.null(d[[2L]]) && makeColnames && p > 0L) 
+body:             d[[2L]] <- paste0("V", 1L:p)
+body:         if (qset) 
+body:             quote <- if (is.character(x)) 
+body:                 seq_len(p)
+body:             else numeric()
+body:     }
+body:     else {
+body:         if (qset) 
+body:             quote <- if (length(x)) 
+body:                 which(unlist(lapply(x, function(x) is.character(x) || is.factor(x))))
+body:             else numeric()
+body:         if (any(sapply(x, function(z) length(dim(z)) == 2 && dim(z)[2L] > 1))) {
+body:             c1 <- names(x)
+body:             x <- as.matrix(x, rownames.force = makeRownames)
+body:             d <- dimnames(x)
+body:             if (qset) {
+body:                 ord <- match(c1, d[[2L]], 0L)
+body:                 quote <- ord[quote]
+body:                 quote <- quote[quote > 0L]
+body:             }
+body:         }
+body:         else d <- list(if (makeRownames) row.names(x), if (makeColnames) names(x))
+body:         p <- ncol(x)
+body:     }
+body:     nocols <- p == 0L
+body:     if (is.logical(quote)) 
+body:         quote <- NULL
+body:     else if (is.numeric(quote)) {
+body:         if (any(quote < 1L | quote > p)) 
+body:             stop("invalid numbers in 'quote'")
+body:     }
+body:     else stop("invalid 'quote' specification")
+body:     rn <- FALSE
+body:     rnames <- NULL
+body:     if (is.logical(row.names)) {
+body:         if (row.names) {
+body:             rnames <- as.character(d[[1L]])
+body:             rn <- TRUE
+body:         }
+body:     }
+body:     else {
+body:         rnames <- as.character(row.names)
+body:         rn <- TRUE
+body:         if (length(rnames) != nrow(x)) 
+body:             stop("invalid 'row.names' specification")
+body:     }
+body:     if (!is.null(quote) && rn) 
+body:         quote <- c(0, quote)
+body:     if (is.logical(col.names)) {
+body:         if (!rn && is.na(col.names)) 
+body:             stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+body:         col.names <- if (is.na(col.names) && rn) 
+body:             c("", d[[2L]])
+body:         else if (col.names) 
+body:             d[[2L]]
+body:         else NULL
+body:     }
+body:     else {
+body:         col.names <- as.character(col.names)
+body:         if (length(col.names) != p) 
+body:             stop("invalid 'col.names' specification")
+body:     }
+body:     if (file == "") 
+body:         file <- stdout()
+body:     else if (is.character(file)) {
+body:         file <- if (nzchar(fileEncoding)) 
+body:             file(file, ifelse(append, "a", "w"), encoding = fileEncoding)
+body:         else file(file, ifelse(append, "a", "w"))
+body:         on.exit(close(file))
+body:     }
+body:     else if (!isOpen(file, "w")) {
+body:         open(file, "w")
+body:         on.exit(close(file))
+body:     }
+body:     if (!inherits(file, "connection")) 
+body:         stop("'file' must be a character string or connection")
+body:     qstring <- switch(qmethod, escape = "\\\\\"", double = "\"\"")
+body:     if (!is.null(col.names)) {
+body:         if (append) 
+body:             warning("appending column names to file")
+body:         if (quoteC) 
+body:             col.names <- paste("\"", gsub("\"", qstring, col.names), "\"", sep = "")
+body:         writeLines(paste(col.names, collapse = sep), file, sep = eol)
+body:     }
+body:     if (nrow(x) == 0L) 
+body:         return(invisible())
+body:     if (nocols && !rn) 
+body:         return(cat(rep.int(eol, NROW(x)), file = file, sep = ""))
+body:     if (is.matrix(x) && !is.atomic(x)) 
+body:         mode(x) <- "character"
+body:     if (is.data.frame(x)) {
+body:         x[] <- lapply(x, function(z) {
+body:             if (is.object(z) && !is.factor(z)) 
+body:                 as.character(z)
+body:             else z
+body:         })
+body:     }
+body:     invisible(.External2(C_writetable, x, file, nrow(x), p, rnames, sep, eol, na, dec, as.integer(quote), qmethod != "double"))
+body: }
+args: list(NULL, col.names = NA, sep = ",", dec = ".", qmethod = "double")
+retn: NULL
+
+func: quote(write.table)
+body: function (x, file = "", append = FALSE, quote = TRUE, sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "") 
+body: {
+body:     qmethod <- match.arg(qmethod)
+body:     if (is.logical(quote) && (length(quote) != 1L || is.na(quote))) 
+body:         stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+body:     quoteC <- if (is.logical(quote)) 
+body:         quote
+body:     else TRUE
+body:     qset <- is.logical(quote) && quote
+body:     if (!is.data.frame(x) && !is.matrix(x)) 
+body:         x <- data.frame(x)
+body:     makeRownames <- isTRUE(row.names)
+body:     makeColnames <- is.logical(col.names) && !identical(FALSE, col.names)
+body:     if (is.matrix(x)) {
+body:         p <- ncol(x)
+body:         d <- dimnames(x)
+body:         if (is.null(d)) 
+body:             d <- list(NULL, NULL)
+body:         if (is.null(d[[1L]]) && makeRownames) 
+body:             d[[1L]] <- seq_len(nrow(x))
+body:         if (is.null(d[[2L]]) && makeColnames && p > 0L) 
+body:             d[[2L]] <- paste0("V", 1L:p)
+body:         if (qset) 
+body:             quote <- if (is.character(x)) 
+body:                 seq_len(p)
+body:             else numeric()
+body:     }
+body:     else {
+body:         if (qset) 
+body:             quote <- if (length(x)) 
+body:                 which(unlist(lapply(x, function(x) is.character(x) || is.factor(x))))
+body:             else numeric()
+body:         if (any(sapply(x, function(z) length(dim(z)) == 2 && dim(z)[2L] > 1))) {
+body:             c1 <- names(x)
+body:             x <- as.matrix(x, rownames.force = makeRownames)
+body:             d <- dimnames(x)
+body:             if (qset) {
+body:                 ord <- match(c1, d[[2L]], 0L)
+body:                 quote <- ord[quote]
+body:                 quote <- quote[quote > 0L]
+body:             }
+body:         }
+body:         else d <- list(if (makeRownames) row.names(x), if (makeColnames) names(x))
+body:         p <- ncol(x)
+body:     }
+body:     nocols <- p == 0L
+body:     if (is.logical(quote)) 
+body:         quote <- NULL
+body:     else if (is.numeric(quote)) {
+body:         if (any(quote < 1L | quote > p)) 
+body:             stop("invalid numbers in 'quote'")
+body:     }
+body:     else stop("invalid 'quote' specification")
+body:     rn <- FALSE
+body:     rnames <- NULL
+body:     if (is.logical(row.names)) {
+body:         if (row.names) {
+body:             rnames <- as.character(d[[1L]])
+body:             rn <- TRUE
+body:         }
+body:     }
+body:     else {
+body:         rnames <- as.character(row.names)
+body:         rn <- TRUE
+body:         if (length(rnames) != nrow(x)) 
+body:             stop("invalid 'row.names' specification")
+body:     }
+body:     if (!is.null(quote) && rn) 
+body:         quote <- c(0, quote)
+body:     if (is.logical(col.names)) {
+body:         if (!rn && is.na(col.names)) 
+body:             stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+body:         col.names <- if (is.na(col.names) && rn) 
+body:             c("", d[[2L]])
+body:         else if (col.names) 
+body:             d[[2L]]
+body:         else NULL
+body:     }
+body:     else {
+body:         col.names <- as.character(col.names)
+body:         if (length(col.names) != p) 
+body:             stop("invalid 'col.names' specification")
+body:     }
+body:     if (file == "") 
+body:         file <- stdout()
+body:     else if (is.character(file)) {
+body:         file <- if (nzchar(fileEncoding)) 
+body:             file(file, ifelse(append, "a", "w"), encoding = fileEncoding)
+body:         else file(file, ifelse(append, "a", "w"))
+body:         on.exit(close(file))
+body:     }
+body:     else if (!isOpen(file, "w")) {
+body:         open(file, "w")
+body:         on.exit(close(file))
+body:     }
+body:     if (!inherits(file, "connection")) 
+body:         stop("'file' must be a character string or connection")
+body:     qstring <- switch(qmethod, escape = "\\\\\"", double = "\"\"")
+body:     if (!is.null(col.names)) {
+body:         if (append) 
+body:             warning("appending column names to file")
+body:         if (quoteC) 
+body:             col.names <- paste("\"", gsub("\"", qstring, col.names), "\"", sep = "")
+body:         writeLines(paste(col.names, collapse = sep), file, sep = eol)
+body:     }
+body:     if (nrow(x) == 0L) 
+body:         return(invisible())
+body:     if (nocols && !rn) 
+body:         return(cat(rep.int(eol, NROW(x)), file = file, sep = ""))
+body:     if (is.matrix(x) && !is.atomic(x)) 
+body:         mode(x) <- "character"
+body:     if (is.data.frame(x)) {
+body:         x[] <- lapply(x, function(z) {
+body:             if (is.object(z) && !is.factor(z)) 
+body:                 as.character(z)
+body:             else z
+body:         })
+body:     }
+body:     invisible(.External2(C_writetable, x, file, nrow(x), p, rnames, sep, eol, na, dec, as.integer(quote), qmethod != "double"))
+body: }
+args: list(list(), col.names = NA, sep = ",", dec = ".", qmethod = "double")
+retn: NULL
+
+func: quote(write.table)
+body: function (x, file = "", append = FALSE, quote = TRUE, sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "") 
+body: {
+body:     qmethod <- match.arg(qmethod)
+body:     if (is.logical(quote) && (length(quote) != 1L || is.na(quote))) 
+body:         stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+body:     quoteC <- if (is.logical(quote)) 
+body:         quote
+body:     else TRUE
+body:     qset <- is.logical(quote) && quote
+body:     if (!is.data.frame(x) && !is.matrix(x)) 
+body:         x <- data.frame(x)
+body:     makeRownames <- isTRUE(row.names)
+body:     makeColnames <- is.logical(col.names) && !identical(FALSE, col.names)
+body:     if (is.matrix(x)) {
+body:         p <- ncol(x)
+body:         d <- dimnames(x)
+body:         if (is.null(d)) 
+body:             d <- list(NULL, NULL)
+body:         if (is.null(d[[1L]]) && makeRownames) 
+body:             d[[1L]] <- seq_len(nrow(x))
+body:         if (is.null(d[[2L]]) && makeColnames && p > 0L) 
+body:             d[[2L]] <- paste0("V", 1L:p)
+body:         if (qset) 
+body:             quote <- if (is.character(x)) 
+body:                 seq_len(p)
+body:             else numeric()
+body:     }
+body:     else {
+body:         if (qset) 
+body:             quote <- if (length(x)) 
+body:                 which(unlist(lapply(x, function(x) is.character(x) || is.factor(x))))
+body:             else numeric()
+body:         if (any(sapply(x, function(z) length(dim(z)) == 2 && dim(z)[2L] > 1))) {
+body:             c1 <- names(x)
+body:             x <- as.matrix(x, rownames.force = makeRownames)
+body:             d <- dimnames(x)
+body:             if (qset) {
+body:                 ord <- match(c1, d[[2L]], 0L)
+body:                 quote <- ord[quote]
+body:                 quote <- quote[quote > 0L]
+body:             }
+body:         }
+body:         else d <- list(if (makeRownames) row.names(x), if (makeColnames) names(x))
+body:         p <- ncol(x)
+body:     }
+body:     nocols <- p == 0L
+body:     if (is.logical(quote)) 
+body:         quote <- NULL
+body:     else if (is.numeric(quote)) {
+body:         if (any(quote < 1L | quote > p)) 
+body:             stop("invalid numbers in 'quote'")
+body:     }
+body:     else stop("invalid 'quote' specification")
+body:     rn <- FALSE
+body:     rnames <- NULL
+body:     if (is.logical(row.names)) {
+body:         if (row.names) {
+body:             rnames <- as.character(d[[1L]])
+body:             rn <- TRUE
+body:         }
+body:     }
+body:     else {
+body:         rnames <- as.character(row.names)
+body:         rn <- TRUE
+body:         if (length(rnames) != nrow(x)) 
+body:             stop("invalid 'row.names' specification")
+body:     }
+body:     if (!is.null(quote) && rn) 
+body:         quote <- c(0, quote)
+body:     if (is.logical(col.names)) {
+body:         if (!rn && is.na(col.names)) 
+body:             stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+body:         col.names <- if (is.na(col.names) && rn) 
+body:             c("", d[[2L]])
+body:         else if (col.names) 
+body:             d[[2L]]
+body:         else NULL
+body:     }
+body:     else {
+body:         col.names <- as.character(col.names)
+body:         if (length(col.names) != p) 
+body:             stop("invalid 'col.names' specification")
+body:     }
+body:     if (file == "") 
+body:         file <- stdout()
+body:     else if (is.character(file)) {
+body:         file <- if (nzchar(fileEncoding)) 
+body:             file(file, ifelse(append, "a", "w"), encoding = fileEncoding)
+body:         else file(file, ifelse(append, "a", "w"))
+body:         on.exit(close(file))
+body:     }
+body:     else if (!isOpen(file, "w")) {
+body:         open(file, "w")
+body:         on.exit(close(file))
+body:     }
+body:     if (!inherits(file, "connection")) 
+body:         stop("'file' must be a character string or connection")
+body:     qstring <- switch(qmethod, escape = "\\\\\"", double = "\"\"")
+body:     if (!is.null(col.names)) {
+body:         if (append) 
+body:             warning("appending column names to file")
+body:         if (quoteC) 
+body:             col.names <- paste("\"", gsub("\"", qstring, col.names), "\"", sep = "")
+body:         writeLines(paste(col.names, collapse = sep), file, sep = eol)
+body:     }
+body:     if (nrow(x) == 0L) 
+body:         return(invisible())
+body:     if (nocols && !rn) 
+body:         return(cat(rep.int(eol, NROW(x)), file = file, sep = ""))
+body:     if (is.matrix(x) && !is.atomic(x)) 
+body:         mode(x) <- "character"
+body:     if (is.data.frame(x)) {
+body:         x[] <- lapply(x, function(z) {
+body:             if (is.object(z) && !is.factor(z)) 
+body:                 as.character(z)
+body:             else z
+body:         })
+body:     }
+body:     invisible(.External2(C_writetable, x, file, nrow(x), p, rnames, sep, eol, na, dec, as.integer(quote), qmethod != "double"))
+body: }
+args: list(FALSE, col.names = NA, sep = ",", dec = ".", qmethod = "double")
+retn: NULL
+
+func: quote(write.table)
+body: function (x, file = "", append = FALSE, quote = TRUE, sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "") 
+body: {
+body:     qmethod <- match.arg(qmethod)
+body:     if (is.logical(quote) && (length(quote) != 1L || is.na(quote))) 
+body:         stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+body:     quoteC <- if (is.logical(quote)) 
+body:         quote
+body:     else TRUE
+body:     qset <- is.logical(quote) && quote
+body:     if (!is.data.frame(x) && !is.matrix(x)) 
+body:         x <- data.frame(x)
+body:     makeRownames <- isTRUE(row.names)
+body:     makeColnames <- is.logical(col.names) && !identical(FALSE, col.names)
+body:     if (is.matrix(x)) {
+body:         p <- ncol(x)
+body:         d <- dimnames(x)
+body:         if (is.null(d)) 
+body:             d <- list(NULL, NULL)
+body:         if (is.null(d[[1L]]) && makeRownames) 
+body:             d[[1L]] <- seq_len(nrow(x))
+body:         if (is.null(d[[2L]]) && makeColnames && p > 0L) 
+body:             d[[2L]] <- paste0("V", 1L:p)
+body:         if (qset) 
+body:             quote <- if (is.character(x)) 
+body:                 seq_len(p)
+body:             else numeric()
+body:     }
+body:     else {
+body:         if (qset) 
+body:             quote <- if (length(x)) 
+body:                 which(unlist(lapply(x, function(x) is.character(x) || is.factor(x))))
+body:             else numeric()
+body:         if (any(sapply(x, function(z) length(dim(z)) == 2 && dim(z)[2L] > 1))) {
+body:             c1 <- names(x)
+body:             x <- as.matrix(x, rownames.force = makeRownames)
+body:             d <- dimnames(x)
+body:             if (qset) {
+body:                 ord <- match(c1, d[[2L]], 0L)
+body:                 quote <- ord[quote]
+body:                 quote <- quote[quote > 0L]
+body:             }
+body:         }
+body:         else d <- list(if (makeRownames) row.names(x), if (makeColnames) names(x))
+body:         p <- ncol(x)
+body:     }
+body:     nocols <- p == 0L
+body:     if (is.logical(quote)) 
+body:         quote <- NULL
+body:     else if (is.numeric(quote)) {
+body:         if (any(quote < 1L | quote > p)) 
+body:             stop("invalid numbers in 'quote'")
+body:     }
+body:     else stop("invalid 'quote' specification")
+body:     rn <- FALSE
+body:     rnames <- NULL
+body:     if (is.logical(row.names)) {
+body:         if (row.names) {
+body:             rnames <- as.character(d[[1L]])
+body:             rn <- TRUE
+body:         }
+body:     }
+body:     else {
+body:         rnames <- as.character(row.names)
+body:         rn <- TRUE
+body:         if (length(rnames) != nrow(x)) 
+body:             stop("invalid 'row.names' specification")
+body:     }
+body:     if (!is.null(quote) && rn) 
+body:         quote <- c(0, quote)
+body:     if (is.logical(col.names)) {
+body:         if (!rn && is.na(col.names)) 
+body:             stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+body:         col.names <- if (is.na(col.names) && rn) 
+body:             c("", d[[2L]])
+body:         else if (col.names) 
+body:             d[[2L]]
+body:         else NULL
+body:     }
+body:     else {
+body:         col.names <- as.character(col.names)
+body:         if (length(col.names) != p) 
+body:             stop("invalid 'col.names' specification")
+body:     }
+body:     if (file == "") 
+body:         file <- stdout()
+body:     else if (is.character(file)) {
+body:         file <- if (nzchar(fileEncoding)) 
+body:             file(file, ifelse(append, "a", "w"), encoding = fileEncoding)
+body:         else file(file, ifelse(append, "a", "w"))
+body:         on.exit(close(file))
+body:     }
+body:     else if (!isOpen(file, "w")) {
+body:         open(file, "w")
+body:         on.exit(close(file))
+body:     }
+body:     if (!inherits(file, "connection")) 
+body:         stop("'file' must be a character string or connection")
+body:     qstring <- switch(qmethod, escape = "\\\\\"", double = "\"\"")
+body:     if (!is.null(col.names)) {
+body:         if (append) 
+body:             warning("appending column names to file")
+body:         if (quoteC) 
+body:             col.names <- paste("\"", gsub("\"", qstring, col.names), "\"", sep = "")
+body:         writeLines(paste(col.names, collapse = sep), file, sep = eol)
+body:     }
+body:     if (nrow(x) == 0L) 
+body:         return(invisible())
+body:     if (nocols && !rn) 
+body:         return(cat(rep.int(eol, NROW(x)), file = file, sep = ""))
+body:     if (is.matrix(x) && !is.atomic(x)) 
+body:         mode(x) <- "character"
+body:     if (is.data.frame(x)) {
+body:         x[] <- lapply(x, function(z) {
+body:             if (is.object(z) && !is.factor(z)) 
+body:                 as.character(z)
+body:             else z
+body:         })
+body:     }
+body:     invisible(.External2(C_writetable, x, file, nrow(x), p, rnames, sep, eol, na, dec, as.integer(quote), qmethod != "double"))
+body: }
+args: list(NULL, col.names = NA, sep = ";", dec = ",", qmethod = "double")
+retn: NULL
+
+func: quote(write.table)
+body: function (x, file = "", append = FALSE, quote = TRUE, sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "") 
+body: {
+body:     qmethod <- match.arg(qmethod)
+body:     if (is.logical(quote) && (length(quote) != 1L || is.na(quote))) 
+body:         stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+body:     quoteC <- if (is.logical(quote)) 
+body:         quote
+body:     else TRUE
+body:     qset <- is.logical(quote) && quote
+body:     if (!is.data.frame(x) && !is.matrix(x)) 
+body:         x <- data.frame(x)
+body:     makeRownames <- isTRUE(row.names)
+body:     makeColnames <- is.logical(col.names) && !identical(FALSE, col.names)
+body:     if (is.matrix(x)) {
+body:         p <- ncol(x)
+body:         d <- dimnames(x)
+body:         if (is.null(d)) 
+body:             d <- list(NULL, NULL)
+body:         if (is.null(d[[1L]]) && makeRownames) 
+body:             d[[1L]] <- seq_len(nrow(x))
+body:         if (is.null(d[[2L]]) && makeColnames && p > 0L) 
+body:             d[[2L]] <- paste0("V", 1L:p)
+body:         if (qset) 
+body:             quote <- if (is.character(x)) 
+body:                 seq_len(p)
+body:             else numeric()
+body:     }
+body:     else {
+body:         if (qset) 
+body:             quote <- if (length(x)) 
+body:                 which(unlist(lapply(x, function(x) is.character(x) || is.factor(x))))
+body:             else numeric()
+body:         if (any(sapply(x, function(z) length(dim(z)) == 2 && dim(z)[2L] > 1))) {
+body:             c1 <- names(x)
+body:             x <- as.matrix(x, rownames.force = makeRownames)
+body:             d <- dimnames(x)
+body:             if (qset) {
+body:                 ord <- match(c1, d[[2L]], 0L)
+body:                 quote <- ord[quote]
+body:                 quote <- quote[quote > 0L]
+body:             }
+body:         }
+body:         else d <- list(if (makeRownames) row.names(x), if (makeColnames) names(x))
+body:         p <- ncol(x)
+body:     }
+body:     nocols <- p == 0L
+body:     if (is.logical(quote)) 
+body:         quote <- NULL
+body:     else if (is.numeric(quote)) {
+body:         if (any(quote < 1L | quote > p)) 
+body:             stop("invalid numbers in 'quote'")
+body:     }
+body:     else stop("invalid 'quote' specification")
+body:     rn <- FALSE
+body:     rnames <- NULL
+body:     if (is.logical(row.names)) {
+body:         if (row.names) {
+body:             rnames <- as.character(d[[1L]])
+body:             rn <- TRUE
+body:         }
+body:     }
+body:     else {
+body:         rnames <- as.character(row.names)
+body:         rn <- TRUE
+body:         if (length(rnames) != nrow(x)) 
+body:             stop("invalid 'row.names' specification")
+body:     }
+body:     if (!is.null(quote) && rn) 
+body:         quote <- c(0, quote)
+body:     if (is.logical(col.names)) {
+body:         if (!rn && is.na(col.names)) 
+body:             stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+body:         col.names <- if (is.na(col.names) && rn) 
+body:             c("", d[[2L]])
+body:         else if (col.names) 
+body:             d[[2L]]
+body:         else NULL
+body:     }
+body:     else {
+body:         col.names <- as.character(col.names)
+body:         if (length(col.names) != p) 
+body:             stop("invalid 'col.names' specification")
+body:     }
+body:     if (file == "") 
+body:         file <- stdout()
+body:     else if (is.character(file)) {
+body:         file <- if (nzchar(fileEncoding)) 
+body:             file(file, ifelse(append, "a", "w"), encoding = fileEncoding)
+body:         else file(file, ifelse(append, "a", "w"))
+body:         on.exit(close(file))
+body:     }
+body:     else if (!isOpen(file, "w")) {
+body:         open(file, "w")
+body:         on.exit(close(file))
+body:     }
+body:     if (!inherits(file, "connection")) 
+body:         stop("'file' must be a character string or connection")
+body:     qstring <- switch(qmethod, escape = "\\\\\"", double = "\"\"")
+body:     if (!is.null(col.names)) {
+body:         if (append) 
+body:             warning("appending column names to file")
+body:         if (quoteC) 
+body:             col.names <- paste("\"", gsub("\"", qstring, col.names), "\"", sep = "")
+body:         writeLines(paste(col.names, collapse = sep), file, sep = eol)
+body:     }
+body:     if (nrow(x) == 0L) 
+body:         return(invisible())
+body:     if (nocols && !rn) 
+body:         return(cat(rep.int(eol, NROW(x)), file = file, sep = ""))
+body:     if (is.matrix(x) && !is.atomic(x)) 
+body:         mode(x) <- "character"
+body:     if (is.data.frame(x)) {
+body:         x[] <- lapply(x, function(z) {
+body:             if (is.object(z) && !is.factor(z)) 
+body:                 as.character(z)
+body:             else z
+body:         })
+body:     }
+body:     invisible(.External2(C_writetable, x, file, nrow(x), p, rnames, sep, eol, na, dec, as.integer(quote), qmethod != "double"))
+body: }
+args: list(list(), col.names = NA, sep = ";", dec = ",", qmethod = "double")
+retn: NULL
+
+func: quote(write.table)
+body: function (x, file = "", append = FALSE, quote = TRUE, sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "") 
+body: {
+body:     qmethod <- match.arg(qmethod)
+body:     if (is.logical(quote) && (length(quote) != 1L || is.na(quote))) 
+body:         stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+body:     quoteC <- if (is.logical(quote)) 
+body:         quote
+body:     else TRUE
+body:     qset <- is.logical(quote) && quote
+body:     if (!is.data.frame(x) && !is.matrix(x)) 
+body:         x <- data.frame(x)
+body:     makeRownames <- isTRUE(row.names)
+body:     makeColnames <- is.logical(col.names) && !identical(FALSE, col.names)
+body:     if (is.matrix(x)) {
+body:         p <- ncol(x)
+body:         d <- dimnames(x)
+body:         if (is.null(d)) 
+body:             d <- list(NULL, NULL)
+body:         if (is.null(d[[1L]]) && makeRownames) 
+body:             d[[1L]] <- seq_len(nrow(x))
+body:         if (is.null(d[[2L]]) && makeColnames && p > 0L) 
+body:             d[[2L]] <- paste0("V", 1L:p)
+body:         if (qset) 
+body:             quote <- if (is.character(x)) 
+body:                 seq_len(p)
+body:             else numeric()
+body:     }
+body:     else {
+body:         if (qset) 
+body:             quote <- if (length(x)) 
+body:                 which(unlist(lapply(x, function(x) is.character(x) || is.factor(x))))
+body:             else numeric()
+body:         if (any(sapply(x, function(z) length(dim(z)) == 2 && dim(z)[2L] > 1))) {
+body:             c1 <- names(x)
+body:             x <- as.matrix(x, rownames.force = makeRownames)
+body:             d <- dimnames(x)
+body:             if (qset) {
+body:                 ord <- match(c1, d[[2L]], 0L)
+body:                 quote <- ord[quote]
+body:                 quote <- quote[quote > 0L]
+body:             }
+body:         }
+body:         else d <- list(if (makeRownames) row.names(x), if (makeColnames) names(x))
+body:         p <- ncol(x)
+body:     }
+body:     nocols <- p == 0L
+body:     if (is.logical(quote)) 
+body:         quote <- NULL
+body:     else if (is.numeric(quote)) {
+body:         if (any(quote < 1L | quote > p)) 
+body:             stop("invalid numbers in 'quote'")
+body:     }
+body:     else stop("invalid 'quote' specification")
+body:     rn <- FALSE
+body:     rnames <- NULL
+body:     if (is.logical(row.names)) {
+body:         if (row.names) {
+body:             rnames <- as.character(d[[1L]])
+body:             rn <- TRUE
+body:         }
+body:     }
+body:     else {
+body:         rnames <- as.character(row.names)
+body:         rn <- TRUE
+body:         if (length(rnames) != nrow(x)) 
+body:             stop("invalid 'row.names' specification")
+body:     }
+body:     if (!is.null(quote) && rn) 
+body:         quote <- c(0, quote)
+body:     if (is.logical(col.names)) {
+body:         if (!rn && is.na(col.names)) 
+body:             stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+body:         col.names <- if (is.na(col.names) && rn) 
+body:             c("", d[[2L]])
+body:         else if (col.names) 
+body:             d[[2L]]
+body:         else NULL
+body:     }
+body:     else {
+body:         col.names <- as.character(col.names)
+body:         if (length(col.names) != p) 
+body:             stop("invalid 'col.names' specification")
+body:     }
+body:     if (file == "") 
+body:         file <- stdout()
+body:     else if (is.character(file)) {
+body:         file <- if (nzchar(fileEncoding)) 
+body:             file(file, ifelse(append, "a", "w"), encoding = fileEncoding)
+body:         else file(file, ifelse(append, "a", "w"))
+body:         on.exit(close(file))
+body:     }
+body:     else if (!isOpen(file, "w")) {
+body:         open(file, "w")
+body:         on.exit(close(file))
+body:     }
+body:     if (!inherits(file, "connection")) 
+body:         stop("'file' must be a character string or connection")
+body:     qstring <- switch(qmethod, escape = "\\\\\"", double = "\"\"")
+body:     if (!is.null(col.names)) {
+body:         if (append) 
+body:             warning("appending column names to file")
+body:         if (quoteC) 
+body:             col.names <- paste("\"", gsub("\"", qstring, col.names), "\"", sep = "")
+body:         writeLines(paste(col.names, collapse = sep), file, sep = eol)
+body:     }
+body:     if (nrow(x) == 0L) 
+body:         return(invisible())
+body:     if (nocols && !rn) 
+body:         return(cat(rep.int(eol, NROW(x)), file = file, sep = ""))
+body:     if (is.matrix(x) && !is.atomic(x)) 
+body:         mode(x) <- "character"
+body:     if (is.data.frame(x)) {
+body:         x[] <- lapply(x, function(z) {
+body:             if (is.object(z) && !is.factor(z)) 
+body:                 as.character(z)
+body:             else z
+body:         })
+body:     }
+body:     invisible(.External2(C_writetable, x, file, nrow(x), p, rnames, sep, eol, na, dec, as.integer(quote), qmethod != "double"))
+body: }
+args: list(FALSE, col.names = NA, sep = ";", dec = ",", qmethod = "double")
+retn: NULL
+

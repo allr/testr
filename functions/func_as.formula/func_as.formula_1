@@ -1,0 +1,60 @@
+func: quote(as.formula)
+body: function (object, env = parent.frame()) 
+body: {
+body:     if (inherits(object, "formula")) 
+body:         object
+body:     else {
+body:         rval <- formula(object, env = baseenv())
+body:         if (identical(environment(rval), baseenv()) || !missing(env)) 
+body:             environment(rval) <- env
+body:         rval
+body:     }
+body: }
+args: list(structure(list(), class = "formula", .Environment = <environment>))
+retn: structure(list(), class = "formula", .Environment = <environment>)
+
+func: quote(as.formula)
+body: function (object, env = parent.frame()) 
+body: {
+body:     if (inherits(object, "formula")) 
+body:         object
+body:     else {
+body:         rval <- formula(object, env = baseenv())
+body:         if (identical(environment(rval), baseenv()) || !missing(env)) 
+body:             environment(rval) <- env
+body:         rval
+body:     }
+body: }
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"))
+retn: quote(~`character(0)`)
+
+func: quote(as.formula)
+body: function (object, env = parent.frame()) 
+body: {
+body:     if (inherits(object, "formula")) 
+body:         object
+body:     else {
+body:         rval <- formula(object, env = baseenv())
+body:         if (identical(environment(rval), baseenv()) || !missing(env)) 
+body:             environment(rval) <- env
+body:         rval
+body:     }
+body: }
+args: list(quote(~`character(0)`))
+retn: quote(~`character(0)`)
+
+func: quote(as.formula)
+body: function (object, env = parent.frame()) 
+body: {
+body:     if (inherits(object, "formula")) 
+body:         object
+body:     else {
+body:         rval <- formula(object, env = baseenv())
+body:         if (identical(environment(rval), baseenv()) || !missing(env)) 
+body:             environment(rval) <- env
+body:         rval
+body:     }
+body: }
+args: list(NULL)
+retn: structure(list(), class = "formula", .Environment = <environment>)
+

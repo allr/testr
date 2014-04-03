@@ -1,0 +1,489 @@
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(NULL)
+retn: structure(list(is.array = FALSE, is.atomic = TRUE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = FALSE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = NA, is.function = FALSE, is.infinite = logical(0), is.integer = FALSE, is.language = FALSE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = NA, is.name = FALSE, is.nan = logical(0), is.null = TRUE, is.numeric = FALSE, is.numeric_version = FALSE, is.object = FALSE, 
+retn:     is.ordered = FALSE, is.package_version = FALSE, is.pairlist = TRUE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = FALSE, is.symbol = FALSE, is.table = FALSE, is.vector = FALSE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", 
+retn: "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(1:5)
+retn: structure(list(is.array = FALSE, is.atomic = TRUE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = FALSE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = c(TRUE, TRUE, TRUE, TRUE, TRUE), is.function = FALSE, is.infinite = c(FALSE, FALSE, FALSE, FALSE, FALSE), is.integer = TRUE, is.language = FALSE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = c(FALSE, FALSE, FALSE, FALSE, FALSE), is.name = FALSE, is.nan = c(FALSE, 
+retn: FALSE, FALSE, FALSE, FALSE), is.null = FALSE, is.numeric = TRUE, is.numeric_version = FALSE, is.object = FALSE, is.ordered = FALSE, is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = FALSE, is.symbol = FALSE, is.table = FALSE, is.vector = TRUE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", 
+retn: "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(structure(1:24, .Dim = 2:4))
+retn: structure(list(is.array = TRUE, is.atomic = TRUE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = FALSE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = structure(c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE), .Dim = 2:4), is.function = FALSE, is.infinite = structure(c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+retn: FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), .Dim = 2:4), is.integer = TRUE, is.language = FALSE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = structure(c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), .Dim = 2:4), is.name = FALSE, is.nan = structure(c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+retn: FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), .Dim = 2:4), is.null = FALSE, is.numeric = TRUE, is.numeric_version = FALSE, is.object = FALSE, is.ordered = FALSE, is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = FALSE, is.symbol = FALSE, is.table = FALSE, is.vector = FALSE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", 
+retn: "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(4)
+retn: structure(list(is.array = FALSE, is.atomic = TRUE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = TRUE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = TRUE, is.function = FALSE, is.infinite = FALSE, is.integer = FALSE, is.language = FALSE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = FALSE, is.name = FALSE, is.nan = FALSE, is.null = FALSE, is.numeric = TRUE, is.numeric_version = FALSE, is.object = FALSE, 
+retn:     is.ordered = FALSE, is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = FALSE, is.symbol = FALSE, is.table = FALSE, is.vector = TRUE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", 
+retn: "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(expression(1 + 3))
+retn: structure(list(is.array = FALSE, is.atomic = FALSE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = FALSE, is.environment = FALSE, is.expression = TRUE, is.factor = FALSE, is.finite = NA, is.function = FALSE, is.infinite = NA, is.integer = FALSE, is.language = TRUE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = FALSE, is.name = FALSE, is.nan = NA, is.null = FALSE, is.numeric = FALSE, is.numeric_version = FALSE, is.object = FALSE, is.ordered = FALSE, 
+retn:     is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = TRUE, is.symbol = FALSE, is.table = FALSE, is.vector = TRUE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", "is.numeric", 
+retn: "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(quote(y ~ x))
+retn: structure(list(is.array = FALSE, is.atomic = FALSE, is.call = TRUE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = FALSE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = NA, is.function = FALSE, is.infinite = NA, is.integer = FALSE, is.language = TRUE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = NA, is.name = FALSE, is.nan = NA, is.null = FALSE, is.numeric = FALSE, is.numeric_version = FALSE, is.object = TRUE, is.ordered = FALSE, 
+retn:     is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = TRUE, is.symbol = FALSE, is.table = FALSE, is.vector = FALSE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", "is.numeric", 
+retn: "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(numeric(0))
+retn: structure(list(is.array = FALSE, is.atomic = TRUE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = TRUE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = logical(0), is.function = FALSE, is.infinite = logical(0), is.integer = FALSE, is.language = FALSE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = logical(0), is.name = FALSE, is.nan = logical(0), is.null = FALSE, is.numeric = TRUE, is.numeric_version = FALSE, 
+retn:     is.object = FALSE, is.ordered = FALSE, is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = FALSE, is.symbol = FALSE, is.table = FALSE, is.vector = TRUE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", 
+retn: "is.nan", "is.null", "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(3.14159265358979)
+retn: structure(list(is.array = FALSE, is.atomic = TRUE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = TRUE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = TRUE, is.function = FALSE, is.infinite = FALSE, is.integer = FALSE, is.language = FALSE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = FALSE, is.name = FALSE, is.nan = FALSE, is.null = FALSE, is.numeric = TRUE, is.numeric_version = FALSE, is.object = FALSE, 
+retn:     is.ordered = FALSE, is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = FALSE, is.symbol = FALSE, is.table = FALSE, is.vector = TRUE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", 
+retn: "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(structure(1:7, .Names = c("a1", "a2", "a3", "a4", "a5", "a6", "a7")))
+retn: structure(list(is.array = FALSE, is.atomic = TRUE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = FALSE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = structure(c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE), .Names = c("a1", "a2", "a3", "a4", "a5", "a6", "a7")), is.function = FALSE, is.infinite = structure(c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), .Names = c("a1", "a2", "a3", "a4", "a5", "a6", "a7")), is.integer = TRUE, 
+retn:     is.language = FALSE, is.list = FALSE, is.logical = FALSE, is.matrix = FALSE, is.na = structure(c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), .Names = c("a1", "a2", "a3", "a4", "a5", "a6", "a7")), is.name = FALSE, is.nan = structure(c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), .Names = c("a1", "a2", "a3", "a4", "a5", "a6", "a7")), is.null = FALSE, is.numeric = TRUE, is.numeric_version = FALSE, is.object = FALSE, is.ordered = FALSE, is.package_version = FALSE, is.pairlist = FALSE, 
+retn:     is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = FALSE, is.symbol = FALSE, is.table = FALSE, is.vector = TRUE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", "is.numeric", "is.numeric_version", "is.object", "is.ordered", 
+retn: "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+
+func: quote(is.ALL)
+body: function (obj, func.names = ls(pos = length(search())), not.using = c("is.single", "is.real", "is.loaded", "is.empty.model", "is.R", "is.element", "is.unsorted"), true.only = FALSE, debug = FALSE) 
+body: {
+body:     is.fn <- func.names[substring(func.names, 1, 3) == "is."]
+body:     is.fn <- is.fn[substring(is.fn, 1, 7) != "is.na<-"]
+body:     use.fn <- is.fn[is.na(match(is.fn, not.using)) & !sapply(is.fn, is.method)]
+body:     r <- if (true.only) 
+body:         character(0)
+body:     else structure(vector("list", length = length(use.fn)), names = use.fn)
+body:     for (f in use.fn) {
+body:         if (any(f == c("is.na", "is.finite"))) {
+body:             if (!is.list(obj) && !is.vector(obj) && !is.array(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (any(f == c("is.nan", "is.finite", "is.infinite"))) {
+body:             if (!is.atomic(obj)) {
+body:                 if (!true.only) 
+body:                   r[[f]] <- NA
+body:                 next
+body:             }
+body:         }
+body:         if (debug) 
+body:             cat(f, "")
+body:         fn <- get(f)
+body:         rr <- if (is.primitive(fn) || length(formals(fn)) > 0) 
+body:             fn(obj)
+body:         else fn()
+body:         if (!is.logical(rr)) 
+body:             cat("f=", f, " --- rr\t is NOT logical\t = ", rr, "\n")
+body:         if (true.only && length(rr) == 1 && !is.na(rr) && rr) 
+body:             r <- c(r, f)
+body:         else if (!true.only) 
+body:             r[[f]] <- rr
+body:     }
+body:     if (debug) 
+body:         cat("\n")
+body:     if (is.list(r)) 
+body:         structure(r, class = "isList")
+body:     else r
+body: }
+args: list(structure(list(coefficients = structure(c(5.31009251003524, 5.9839553611847), .Names = c("(Intercept)", "x")), residuals = structure(c(-0.854523517772146, -0.508180721887918, 1.29674972055978, -0.175405563349466, -0.100581580797801, 1.50124030973984, 0.263136167661054, -1.44679663411938, -0.852543612591074, -0.595308091982211, 1.09048031437252, 0.242256982805719, 0.2992592451577, 0.0252151493240635, -0.625264062559832, 1.73353484781263, 0.460516828054082, -1.98790616798949, 0.696111529019131, 
+args: -0.461991141457199), .Names = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20")), effects = structure(c(-304.738605839102, 154.311810868426, 1.51524160320372, 0.0322720281659912, 0.0962817195891787, 1.68728931899834, 0.438370885791079, -1.28237620711783, -0.698937476718005, -0.45251624723762, 1.22245786798863, 0.363420245293355, 0.409608216516858, 0.124749829554744, -0.536543673457629, 1.81144094578635, 0.52760863489933, -1.93162865227272, 
+args: 0.741574753607424, -0.427342207997384), .Names = c("(Intercept)", "x", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")), rank = 2L, fitted.values = structure(c(11.2940478712199, 17.2780032324046, 23.2619585935893, 29.245913954774, 35.2298693159587, 41.2138246771434, 47.1977800383281, 53.1817353995128, 59.1656907606975, 65.1496461218822, 71.133601483067, 77.1175568442517, 83.1015122054364, 89.085467566621, 95.0694229278058, 101.05337828899, 107.037333650175, 113.02128901136, 
+args: 119.005244372545, 124.989199733729), .Names = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20")), assign = 0:1, qr = structure(list(qr = structure(c(-4.47213595499958, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, 
+args: 0.223606797749979, 0.223606797749979, 0.223606797749979, 0.223606797749979, -46.9574275274956, 25.7875939164553, 0.22351569677938, 0.184737360062906, 0.145959023346432, 0.107180686629958, 0.0684023499134842, 0.0296240131970101, -0.00915432351946394, -0.047932660235938, -0.0867109969524121, -0.125489333668886, -0.16426767038536, -0.203046007101834, -0.241824343818308, -0.280602680534782, -0.319381017251256, -0.358159353967731, -0.396937690684205, -0.435716027400679), .Dim = c(20L, 2L), .Dimnames = list(
+args:     c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"), c("(Intercept)", "x")), assign = 0:1), qraux = c(1.22360679774998, 1.26229403349585), pivot = 1:2, tol = 1e-07, rank = 2L), .Names = c("qr", "qraux", "pivot", "tol", "rank"), class = "qr"), df.residual = 18L, xlevels = structure(list(), .Names = character(0)), call = quote(lm(formula = y ~ x)), terms = quote(y ~ x), model = structure(list(y = c(10.4395243534478, 16.7698225105167, 
+args: 24.5587083141491, 29.0705083914246, 35.1292877351609, 42.7150649868833, 47.4609162059892, 51.7349387653935, 58.3131471481065, 64.5543380299, 72.2240817974395, 77.3598138270574, 83.400771450594, 89.1106827159451, 94.4441588652459, 102.786913136803, 107.497850478229, 111.03338284337, 119.701355901564, 124.527208592272), x = 1:20), .Names = c("y", "x"), terms = quote(y ~ x), row.names = c(NA, 20L), class = "data.frame")), .Names = c("coefficients", "residuals", "effects", "rank", "fitted.values", "assign", 
+args: "qr", "df.residual", "xlevels", "call", "terms", "model"), class = "lm"))
+retn: structure(list(is.array = FALSE, is.atomic = FALSE, is.call = FALSE, is.character = FALSE, is.complex = FALSE, is.data.frame = FALSE, is.double = FALSE, is.environment = FALSE, is.expression = FALSE, is.factor = FALSE, is.finite = NA, is.function = FALSE, is.infinite = NA, is.integer = FALSE, is.language = FALSE, is.list = TRUE, is.logical = FALSE, is.matrix = FALSE, is.na = structure(c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), .Names = c("coefficients", 
+retn: "residuals", "effects", "rank", "fitted.values", "assign", "qr", "df.residual", "xlevels", "call", "terms", "model")), is.name = FALSE, is.nan = NA, is.null = FALSE, is.numeric = FALSE, is.numeric_version = FALSE, is.object = TRUE, is.ordered = FALSE, is.package_version = FALSE, is.pairlist = FALSE, is.primitive = FALSE, is.qr = FALSE, is.raw = FALSE, is.recursive = TRUE, is.symbol = FALSE, is.table = FALSE, is.vector = FALSE), .Names = c("is.array", "is.atomic", "is.call", "is.character", "is.complex", 
+retn: "is.data.frame", "is.double", "is.environment", "is.expression", "is.factor", "is.finite", "is.function", "is.infinite", "is.integer", "is.language", "is.list", "is.logical", "is.matrix", "is.na", "is.name", "is.nan", "is.null", "is.numeric", "is.numeric_version", "is.object", "is.ordered", "is.package_version", "is.pairlist", "is.primitive", "is.qr", "is.raw", "is.recursive", "is.symbol", "is.table", "is.vector"), class = "isList")
+

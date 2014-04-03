@@ -1,0 +1,8 @@
+func: quote(Rtangle)
+body: function () 
+body: {
+body:     list(setup = RtangleSetup, runcode = RtangleRuncode, writedoc = RtangleWritedoc, finish = RtangleFinish, checkopts = RweaveLatexOptions)
+body: }
+args: NULL
+retn: <arguments too long, ignored>
+

@@ -1,0 +1,76 @@
+func: quote(tryCatch)
+body: function (expr, ..., finally) 
+body: {
+body:     tryCatchList <- function(expr, names, parentenv, handlers) {
+body:         nh <- length(names)
+body:         if (nh > 1L) 
+body:             tryCatchOne(tryCatchList(expr, names[-nh], parentenv, handlers[-nh]), names[nh], parentenv, handlers[[nh]])
+body:         else if (nh == 1L) 
+body:             tryCatchOne(expr, names, parentenv, handlers[[1L]])
+body:         else expr
+body:     }
+body:     tryCatchOne <- function(expr, name, parentenv, handler) {
+body:         doTryCatch <- function(expr, name, parentenv, handler) {
+body:             .Internal(.addCondHands(name, list(handler), parentenv, environment(), FALSE))
+body:             expr
+body:         }
+body:         value <- doTryCatch(return(expr), name, parentenv, handler)
+body:         if (is.null(value[[1L]])) {
+body:             msg <- .Internal(geterrmessage())
+body:             call <- value[[2L]]
+body:             cond <- simpleError(msg, call)
+body:         }
+body:         else cond <- value[[1L]]
+body:         value[[3L]](cond)
+body:     }
+body:     if (!missing(finally)) 
+body:         on.exit(finally)
+body:     handlers <- list(...)
+body:     classes <- names(handlers)
+body:     parentenv <- parent.frame()
+body:     if (length(classes) != length(handlers)) 
+body:         stop("bad handler specification")
+body:     tryCatchList(expr, classes, parentenv, handlers)
+body: }
+args: list(0.693147180559945, error = function (e) 
+args: e)
+retn: 0.693147180559945
+
+func: quote(tryCatch)
+body: function (expr, ..., finally) 
+body: {
+body:     tryCatchList <- function(expr, names, parentenv, handlers) {
+body:         nh <- length(names)
+body:         if (nh > 1L) 
+body:             tryCatchOne(tryCatchList(expr, names[-nh], parentenv, handlers[-nh]), names[nh], parentenv, handlers[[nh]])
+body:         else if (nh == 1L) 
+body:             tryCatchOne(expr, names, parentenv, handlers[[1L]])
+body:         else expr
+body:     }
+body:     tryCatchOne <- function(expr, name, parentenv, handler) {
+body:         doTryCatch <- function(expr, name, parentenv, handler) {
+body:             .Internal(.addCondHands(name, list(handler), parentenv, environment(), FALSE))
+body:             expr
+body:         }
+body:         value <- doTryCatch(return(expr), name, parentenv, handler)
+body:         if (is.null(value[[1L]])) {
+body:             msg <- .Internal(geterrmessage())
+body:             call <- value[[2L]]
+body:             cond <- simpleError(msg, call)
+body:         }
+body:         else cond <- value[[1L]]
+body:         value[[3L]](cond)
+body:     }
+body:     if (!missing(finally)) 
+body:         on.exit(finally)
+body:     handlers <- list(...)
+body:     classes <- names(handlers)
+body:     parentenv <- parent.frame()
+body:     if (length(classes) != length(handlers)) 
+body:         stop("bad handler specification")
+body:     tryCatchList(expr, classes, parentenv, handlers)
+body: }
+args: list(NaN, error = function (e) 
+args: e)
+retn: NaN
+

@@ -1,0 +1,838 @@
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("", "")
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 1L, 2L, 3L, 4L, 5L, 6L, 7L), .Dim = c(3L, 4L, 2L)), structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 1L, 2L, 3L, 4L, 5L, 6L, 7L), .Dim = c(3L, 4L, 2L)))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(c(1L, 4L, 2L, 5L, 3L, 6L), .Dim = 2:3), structure(c(1L, 4L, 2L, 5L, 3L, 6L), .Dim = 2:3))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(c(1, -2, -2, 4), .Dim = c(2L, 2L)), structure(c(1, -2, -2, 4), .Dim = c(2L, 2L)))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), .Dim = 0L), structure(integer(0), .Dim = 0L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(character(0), character(0))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(complex(0), complex(0))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(x = integer(0)), .Names = "x", row.names = character(0), class = "data.frame"), structure(list(x = integer(0)), .Names = "x", row.names = character(0), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(numeric(0), numeric(0))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(expression(), expression())
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), .Label = character(0), class = "factor"), structure(integer(0), .Label = character(0), class = "factor"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), class = "hexmode"), structure(integer(0), class = "hexmode"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(integer(0), integer(0))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(list(), list())
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(logical(0), logical(0))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), .Dim = 0:1), structure(integer(0), .Dim = 0:1))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(NULL, NULL)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(), class = "numeric_version"), structure(list(), class = "numeric_version"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), class = "octmode"), structure(integer(0), class = "octmode"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), .Label = character(0), class = c("ordered", "factor")), structure(integer(0), .Label = character(0), class = c("ordered", "factor")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(), class = c("package_version", "numeric_version")), structure(list(), class = c("package_version", "numeric_version")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(raw(0), raw(0))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(numeric(0), Csingle = TRUE), structure(numeric(0), Csingle = TRUE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), structure(integer(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), structure(integer(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE, .Dim = 0L))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame"), structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(expression(NULL), expression(NULL))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(logical(0), structure(logical(0), .Dim = 0:1))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(), class = "formula", .Environment = <environment>), structure(list(), class = "formula", .Environment = <environment>))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(), .Dim = 0L), structure(list(), .Dim = 0L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(), .Dim = 0:1), structure(list(), .Dim = 0:1))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(numeric(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), structure(numeric(0), Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Dim = 1L), structure(1L, .Dim = 1L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("1", "1")
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(1+0i, 1+0i)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(x = 1L), .Names = "x", row.names = c(NA, -1L), class = "data.frame"), structure(list(x = 1L), .Names = "x", row.names = c(NA, -1L), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(1, 1)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(<environment>, <environment>)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(expression(1L), expression(1L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Label = "1", class = "factor"), structure(1L, .Label = "1", class = "factor"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, class = "hexmode"), structure(1L, class = "hexmode"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(1L, 1L)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(list(1L), list(1L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(TRUE, TRUE)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Dim = c(1L, 1L)), structure(1L, .Dim = c(1L, 1L)))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(quote(`1`), quote(`1`))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(1L), class = "numeric_version"), structure(list(1L), class = "numeric_version"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, class = "octmode"), structure(1L, class = "octmode"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Label = "1", class = c("ordered", "factor")), structure(1L, .Label = "1", class = c("ordered", "factor")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(01, 01)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1, Csingle = TRUE), structure(1, Csingle = TRUE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Dim = 1L, .Dimnames = list("A"), class = "table"), structure(1L, .Dim = 1L, .Dimnames = list("A"), class = "table"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(integer(0), Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), structure(integer(0), Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Tsp = c(1, 1, 1), class = "ts"), structure(1L, .Tsp = c(1, 1, 1), class = "ts"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(3.14159265358979, .Dim = 1L), structure(3.14159265358979, .Dim = 1L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("3.14159265358979", "3.14159265358979")
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(3.14159265358979+0i, 3.14159265358979+0i)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(x = 3.14159265358979), .Names = "x", row.names = c(NA, -1L), class = "data.frame"), structure(list(x = 3.14159265358979), .Names = "x", row.names = c(NA, -1L), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(3.14159265358979, 3.14159265358979)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(expression(3.14159265358979), expression(3.14159265358979))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Label = "3.14159265358979", class = "factor"), structure(1L, .Label = "3.14159265358979", class = "factor"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(3L, 3L)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(list(3.14159265358979), list(3.14159265358979))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(3.14159265358979, .Dim = c(1L, 1L)), structure(3.14159265358979, .Dim = c(1L, 1L)))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(quote(`3.141593`), quote(`3.141593`))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(c(3L, 2147483647L)), class = "numeric_version"), structure(list(c(3L, 2147483647L)), class = "numeric_version"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Label = "3.14159265358979", class = c("ordered", "factor")), structure(1L, .Label = "3.14159265358979", class = c("ordered", "factor")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(c(3L, 2147483647L)), class = c("package_version", "numeric_version")), structure(list(c(3L, 2147483647L)), class = c("package_version", "numeric_version")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(03, 03)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(3.14159265358979, Csingle = TRUE), structure(3.14159265358979, Csingle = TRUE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(3.14159265358979, .Dim = 1L, .Dimnames = list("A"), class = "table"), structure(3.14159265358979, .Dim = 1L, .Dimnames = list("A"), class = "table"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(numeric(0), Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), structure(numeric(0), Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(3.14159265358979, .Tsp = c(1, 1, 1), class = "ts"), structure(3.14159265358979, .Tsp = c(1, 1, 1), class = "ts"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure("1.3", .Dim = 1L), structure("1.3", .Dim = 1L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("1.3", "1.3")
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(1.3+0i, 1.3+0i)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(x = structure(1L, .Label = "1.3", class = "factor")), .Names = "x", row.names = c(NA, -1L), class = "data.frame"), structure(list(x = structure(1L, .Label = "1.3", class = "factor")), .Names = "x", row.names = c(NA, -1L), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(NA_real_, tzone = "", units = "secs", class = "difftime"), structure(NA_real_, tzone = "", units = "secs", class = "difftime"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(1.3, 1.3)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(1.3, <environment>)
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(expression("1.3"), expression("1.3"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Label = "1.3", class = "factor"), structure(1L, .Label = "1.3", class = "factor"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(list("1.3"), list("1.3"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(NA, NA)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure("1.3", .Dim = c(1L, 1L)), structure("1.3", .Dim = c(1L, 1L)))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(quote(`1.3`), quote(`1.3`))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(c(1L, 3L)), class = "numeric_version"), structure(list(c(1L, 3L)), class = "numeric_version"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1L, .Label = "1.3", class = c("ordered", "factor")), structure(1L, .Label = "1.3", class = c("ordered", "factor")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(c(1L, 3L)), class = c("package_version", "numeric_version")), structure(list(c(1L, 3L)), class = c("package_version", "numeric_version")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1.3, Csingle = TRUE), structure(1.3, Csingle = TRUE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure("1.3", .Tsp = c(1, 1, 1), class = "ts"), structure("1.3", .Tsp = c(1, 1, 1), class = "ts"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(a = 1), .Dim = 1L, .Dimnames = list("a")), structure(list(a = 1), .Dim = 1L, .Dimnames = list("a")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(quote(1()), quote(1()))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(a = 1), .Names = "a", row.names = c(NA, -1L), class = "data.frame"), structure(list(a = 1), .Names = "a", row.names = c(NA, -1L), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(expression(a = 1), .Names = "a"), structure(expression(a = 1), .Names = "a"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(function () 
+args: 1, function () 
+args: 1)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(a = 1), .Names = "a"), structure(list(a = 1), .Names = "a"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(1), .Dim = c(1L, 1L), .Dimnames = list("a", NULL)), structure(list(1), .Dim = c(1L, 1L), .Dimnames = list("a", NULL)))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(a = 1L), .Names = "a", class = "numeric_version"), structure(list(a = 1L), .Names = "a", class = "numeric_version"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(list(a = 1), list(a = 1))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1, Csingle = TRUE), quote(`1`))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(1, Csingle = TRUE), structure(1, .Dim = 1L, Csingle = TRUE, .Dimnames = list("A"), class = "table"))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(numeric(0), Labels = "a", Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), structure(numeric(0), Labels = "a", Size = 1L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(a = 1), .Names = "a", .Tsp = c(1, 1, 1), class = "ts"), structure(list(a = 1), .Names = "a", .Tsp = c(1, 1, 1), class = "ts"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(a = 1), .Names = "a", .Tsp = c(1, 1, 1), class = "ts"), structure(list(a = 1), .Tsp = c(1, 1, 1), class = "ts", .Dim = 1L, .Dimnames = list("a")))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(quote(integer(0)()), quote(integer(0)()))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("integer(0)", "integer(0)")
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(NA_complex_, NA_complex_)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"), structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(NA_real_, NA_real_)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(expression(`character(0)` = integer(0)), .Names = "character(0)", row.names = character(0), class = "data.frame"), structure(expression(`character(0)` = integer(0)), .Names = "character(0)", row.names = character(0), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(function () 
+args: integer(0), function () 
+args: integer(0))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(NA_integer_, NA_integer_)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)"), structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(logical(0), .Dim = 0:1, .Dimnames = list(NULL, "character(0)")), structure(logical(0), .Dim = 0:1, .Dimnames = list(NULL, "character(0)")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(NA_real_, structure(NA_integer_, .Label = character(0), class = c("ordered", "factor")))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), row.names = character(0), class = "data.frame"), structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), row.names = character(0), class = "data.frame"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(00, 00)
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(NA_real_, Csingle = TRUE), structure(NA_real_, Csingle = TRUE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(NA_real_, Csingle = TRUE), quote(`NA`))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(NA_real_, Csingle = TRUE), structure(NA_real_, .Dim = 1L, Csingle = TRUE, .Dimnames = list("A"), class = "table"))
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(numeric(0), Labels = "character(0)", Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE), structure(numeric(0), Labels = "character(0)", Size = 0L, call = quote(as.dist.default(m = x)), class = "dist", Diag = FALSE, Upper = FALSE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(quote(~`character(0)`), quote(~`character(0)`))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(13L, match.length = 2L), structure(13L, match.length = 2L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(14L, match.length = 2L, useBytes = TRUE), structure(14L, match.length = 2L, useBytes = TRUE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(27L, match.length = 2L), structure(27L, match.length = 2L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(29L, match.length = 4L, useBytes = TRUE), structure(29L, match.length = 4L, useBytes = TRUE))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(list(structure(c(27L, 43L), match.length = c(2L, 2L))), list(structure(c(27L, 43L), match.length = c(2L, 2L))))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(list(structure(c(29L, 54L), match.length = c(4L, 4L), useBytes = TRUE)), list(structure(c(29L, 54L), match.length = c(4L, 4L), useBytes = TRUE)))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(c(7L, 11L, 16L, 24L, 29L, 30L, 35L, 41L, 49L), c(7L, 11L, 16L, 24L, 29L, 30L, 35L, 41L, 49L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("xbxcx", "xbxcx")
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("|The| |quick| |brown| |fox|", "|The| |quick| |brown| |fox|")
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(c("A", " ", "t", "e", "x", "t", " ", "I", " ", "w", "a", "n", "t", " ", "t", "o", " ", "d", "i", "s", "p", "l", "a", "y", " ", "w", "i", "t", "h", " ", "s", "p", "a", "c", "e", "s"), c("A", " ", "t", "e", "x", "t", " ", "I", " ", "w", "a", "n", "t", " ", "t", "o", " ", "d", "i", "s", "p", "l", "a", "y", " ", "w", "i", "t", "h", " ", "s", "p", "a", "c", "e", "s"))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(list(as = c("asf", "f"), qu = c("qw", "rty"), "yuiop[", "b", c("stuff.blah.y", "ch")), .Names = c("as", "qu", "", "", "")), structure(list(as = c("asf", "f"), qu = c("qw", "rty"), "yuiop[", "b", c("stuff.blah.y", "ch")), .Names = c("as", "qu", "", "", "")))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(7L, match.length = 1L), structure(7L, match.length = 1L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(structure(7L, match.length = 2L), structure(7L, match.length = 2L))
+retn: TRUE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("", "\n")
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list(NULL, <environment>)
+retn: FALSE
+
+func: quote(identical)
+body: function (x, y, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE) 
+body: .Internal(identical(x, y, num.eq, single.NA, attrib.as.set, ignore.bytecode, ignore.environment))
+args: list("\n", "\n")
+retn: TRUE
+

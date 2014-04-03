@@ -1,0 +1,1449 @@
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("binom", size = 1, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("binom", size = 2, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("binom", size = 100, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("binom", size = 10000, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("binom", size = 1, prob = 0.8)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("binom", size = 100, prob = 0.8)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("binom", size = 100, prob = 0.999)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("pois", lambda = 0.095)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("pois", lambda = 0.95)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("pois", lambda = 9.5)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("pois", lambda = 95)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("nbinom", size = 1, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("nbinom", size = 2, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("nbinom", size = 100, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("nbinom", size = 10000, prob = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("nbinom", size = 1, prob = 0.8)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("nbinom", size = 100, prob = 0.8)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("nbinom", size = 100, prob = 0.999)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("norm")
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("norm", mean = 5, sd = 3)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("gamma", shape = 0.1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("gamma", shape = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("gamma", shape = 10)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("gamma", shape = 20)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 40, n = 30, k = 20)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 40, n = 3, k = 20)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 6, n = 3, k = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 5, n = 3, k = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 4, n = 3, k = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("signrank", n = 1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("signrank", n = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("signrank", n = 10)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("signrank", n = 30)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("wilcox", m = 40, n = 30)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("wilcox", m = 40, n = 10)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("wilcox", m = 6, n = 3)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("wilcox", m = 5, n = 3)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("wilcox", m = 4, n = 3)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("chisq", df = 1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("chisq", df = 10)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("logis")
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("logis", location = 4, scale = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("t", df = 1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("t", df = 10)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("t", df = 40)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("beta", shape1 = 1, shape2 = 1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("beta", shape1 = 2, shape2 = 1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("beta", shape1 = 1, shape2 = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("beta", shape1 = 2, shape2 = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("beta", shape1 = 0.2, shape2 = 0.2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("cauchy")
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("cauchy", location = 4, scale = 2)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("f", df1 = 1, df2 = 1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("f", df1 = 1, df2 = 10)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("f", df1 = 10, df2 = 10)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("f", df1 = 30, df2 = 3)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("weibull", shape = 1)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("weibull", shape = 4, scale = 4)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 60, n = 100, k = 50)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 6, n = 10, k = 5)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("hyper", m = 600, n = 1000, k = 500)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("t", df = 20, ncp = 3)
+retn: TRUE
+
+func: quote(dkwtest)
+body: function (stub = "norm", ..., sample.size = 10000, pthreshold = 0.001, print.result = TRUE, print.detail = FALSE, stop.on.failure = TRUE) 
+body: {
+body:     rfoo <- eval(as.name(paste("r", stub, sep = "")))
+body:     pfoo <- eval(as.name(paste("p", stub, sep = "")))
+body:     s <- superror(rfoo, pfoo, sample.size, ...)
+body:     if (print.result || print.detail) {
+body:         printargs <- substitute(list(...))
+body:         printargs[[1]] <- as.name(stub)
+body:         cat(deparse(printargs))
+body:         if (print.detail) 
+body:             cat("\nsupremum error = ", signif(s, 2), " with p-value=", min(1, round(pdkwbound(sample.size, s), 4)), "\n")
+body:     }
+body:     rval <- (s < qdkwbound(sample.size, pthreshold))
+body:     if (print.result) 
+body:         cat(c(" FAILED\n", " PASSED\n")[rval + 1])
+body:     if (stop.on.failure && !rval) 
+body:         stop("dkwtest failed")
+body:     rval
+body: }
+args: list("f", df1 = 10, df2 = 2, ncp = 3)
+retn: TRUE
+

@@ -1,0 +1,4686 @@
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(event))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`[[`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(x[[i]]))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(method))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(justify))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(useNA))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.numeric))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.numeric(names(fr))))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(fr))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(preserve.width))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(faithful))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(style))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(type))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(integer))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(integer(0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(NULL)
+retn: "NULL"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(list))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(list()))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`:`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(1:1))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(pi))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("1.3")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(list(a = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.data.frame))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.data.frame(character(0))))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.call))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.call(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(x))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.environment))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.environment(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.function.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.function.default(x, envir)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.name))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.name(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.qr))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.qr(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.symbol))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.symbol(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.table.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.table.default(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.stepfun.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.stepfun.default(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(ts))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(ts(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.Date.numeric))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.Date.numeric(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXct.numeric))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXct.numeric(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXlt.numeric))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXlt.numeric(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.difftime))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.difftime(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(UseMethod))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(UseMethod("as.dendrogram")))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(formula.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(formula.default(object, env = baseenv())))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.hclust.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.hclust.default(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.array.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.array.default(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(array))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(array(x, c(length(x), 1L), if (!is.null(names(x))) list(names(x), NULL) else NULL)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.Date.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.Date.default(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXct.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXct.default(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXlt.default))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXlt.default(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.hexmode))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.hexmode(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.octmode))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.octmode(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(list2env))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(list2env(list(), NULL, <environment>)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(sort.list))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(sort.list(y)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(charToDate))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(charToDate(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXlt.character))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXlt.character(x, tz, ...)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXlt.character(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(units))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(formula.default(eval(parse(text = x)[[1L]]))))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(character))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(character(0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`dimnames<-.data.frame`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`dimnames<-.data.frame`(`*tmp*`, value = list(n))))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom(size = 1, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom(size = 2, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom(size = 100, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom(size = 10000, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom(size = 1, prob = 0.8)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom(size = 100, prob = 0.8)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(binom(size = 100, prob = 0.999)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(pois))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(pois(lambda = 0.095)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(pois(lambda = 0.95)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(pois(lambda = 9.5)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(pois(lambda = 95)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom(size = 1, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom(size = 2, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom(size = 100, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom(size = 10000, prob = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom(size = 1, prob = 0.8)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom(size = 100, prob = 0.8)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(nbinom(size = 100, prob = 0.999)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(norm))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(norm()))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(norm(mean = 5, sd = 3)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(gamma))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(gamma(shape = 0.1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(gamma(shape = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(gamma(shape = 10)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(gamma(shape = 20)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 40, n = 30, k = 20)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 40, n = 3, k = 20)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 6, n = 3, k = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 5, n = 3, k = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 4, n = 3, k = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(signrank))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(signrank(n = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(signrank(n = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(signrank(n = 10)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(signrank(n = 30)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(wilcox))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(wilcox(m = 40, n = 30)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(wilcox(m = 40, n = 10)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(wilcox(m = 6, n = 3)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(wilcox(m = 5, n = 3)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(wilcox(m = 4, n = 3)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(chisq))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(chisq(df = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(chisq(df = 10)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(logis))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(logis()))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(logis(location = 4, scale = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(t))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(t(df = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(t(df = 10)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(t(df = 40)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(beta))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(beta(shape1 = 1, shape2 = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(beta(shape1 = 2, shape2 = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(beta(shape1 = 1, shape2 = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(beta(shape1 = 2, shape2 = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(beta(shape1 = 0.2, shape2 = 0.2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(cauchy))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(cauchy()))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(cauchy(location = 4, scale = 2)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(df1 = 1, df2 = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(df1 = 1, df2 = 10)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(df1 = 10, df2 = 10)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(df1 = 30, df2 = 3)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(weibull))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(weibull(shape = 1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(weibull(shape = 4, scale = 4)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 60, n = 100, k = 50)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 6, n = 10, k = 5)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(hyper(m = 600, n = 1000, k = 500)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(t(df = 20, ncp = 3)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(df1 = 10, df2 = 2, ncp = 3)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`<-`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(str))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(log))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(log(-1)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(c0))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(FALSE)
+retn: "logical"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(list())
+retn: "list"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(logical(0))
+retn: "logical"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(character(0))
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(structure(list(c0 = structure(integer(0), .Label = character(0), class = "factor")), .Names = "c0", row.names = character(0), class = "data.frame"))
+retn: "list"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(df0))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(l0))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(m0))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(origin))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`if`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(if (first > last) return(character())))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`>`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(first > last))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`[.data.frame`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`[.data.frame`(x, 3L)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote())
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXct))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.POSIXct(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("NULL")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("list")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("logical")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("character")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("matrix")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("data.frame")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(unclass))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(unclass(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(data))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(do.call))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(do.call("c", lapply(list(...), as.POSIXct))))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(X[[1L]]))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(structure("integer(0)", .Names = "c0"))
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(structure(numeric(0), .Dim = c(0L, 0L)))
+retn: "numeric"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(structure(list(c0 = structure(integer(0), .Label = character(0), class = "factor")), .Names = "c0", row.names = character(0), class = structure("integer(0)", .Names = "c0")))
+retn: "list"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(time1))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(ties.method))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`[`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(x[FALSE, ]))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(y[FALSE, ]))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(y))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(encoding))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`$`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(srcfile$lines))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(NA)
+retn: "logical"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(how))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(c(FALSE, FALSE))
+retn: "logical"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.matrix))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.matrix(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(action))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.character))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.character(filename)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(inherits))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(inherits(srcfile, "srcfile")))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(object))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`_data`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(NULL)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(, NULL)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(NULL, NULL)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(list())))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(l0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(c0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(m0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(df0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(FALSE)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(list(), list())))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(l0, l0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(c0, c0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(df0, df0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(FALSE, FALSE)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`==`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(d == c(4L, 4L)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(space))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(interpolate))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(displaylist))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.atomic))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.atomic(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(l0(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(c0(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(m0(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(df0(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(x[, 1L]))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(y[, 1L]))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(structure(FALSE, .Dim = 1L))
+retn: "logical"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(mean))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(xlim))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(ylim))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(seasonal))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(1)
+retn: "numeric"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(resdf))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(resdev))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(c))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(c(NA, -diff(resdf))))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(c(NA, -diff(resdev))))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(alternative))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.ts))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.ts(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.ts(y)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(X))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`||`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.numeric(x) || is.logical(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(`/`))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(cumsum(y)/sum(y)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(kernel))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(scale))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = NULL)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = NULL, y = NULL)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = l0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = c0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = m0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = df0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = FALSE)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = list(), y = list())))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = l0, y = l0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = c0, y = c0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = df0, y = df0)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(f(x = FALSE, y = FALSE)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(algorithm))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(lag))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(lag(X, ll)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(plot.type))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(xy))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(family))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(surface))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(statistics))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(trace.hat))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(p.adjust.method))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(x$freq))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(x$spec))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(sm.method))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(freq))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(score))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(sx))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(sy))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("list()")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("l0")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("c0")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("m0")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("df0")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(endrule))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.numeric))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.numeric(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(test))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(chop))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(depLevel))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(compress))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list("rval")
+retn: "character"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.character(what)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(UseMethod("close")))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(length(m) == 1L))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.null))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(as.null))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(length(n) == 1L))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.list))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.list(x)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.function))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(is.function(fn)))
+retn: "call"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(qmethod))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(function (from, to = "MethodDefinition", value) 
+args: {
+args:     for (what in c(".Data", "target", "defined", "generic")) slot(from, what) <- slot(value, what)
+args:     from
+args: })
+retn: "function"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(function (from, to = "PossibleMethod", strict = TRUE) 
+args: if (strict) {
+args:     if (strict) from <- from@.Data
+args:     from
+args: } else from)
+retn: "function"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(function (from, to = "PossibleMethod", strict = TRUE) 
+args: from)
+retn: "function"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(function (from, to = "character", value) 
+args: {
+args:     from@.Data <- as(value, "character", strict = FALSE)
+args:     from
+args: })
+retn: "function"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(function (from, to = "character", strict = TRUE) 
+args: if (strict) {
+args:     attributes(from) <- NULL
+args:     from
+args: } else from)
+retn: "function"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(quote(pkg))
+retn: "name"
+
+func: quote(mode)
+body: function (x) 
+body: {
+body:     if (is.expression(x)) 
+body:         return("expression")
+body:     if (is.call(x)) 
+body:         return(switch(deparse(x[[1L]])[1L], `(` = "(", "call"))
+body:     if (is.name(x)) 
+body:         "name"
+body:     else switch(tx <- typeof(x), double = , integer = "numeric", closure = , builtin = , special = "function", tx)
+body: }
+args: list(function (from, to = "function", strict = TRUE) 
+args: if (strict) {
+args:     from <- {
+args:         class(from) <- "MethodDefinition"
+args:         from
+args:     }
+args:     if (strict) from@.Data
+args: } else from)
+retn: "function"
+

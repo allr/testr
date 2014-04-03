@@ -1,0 +1,66 @@
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(utils))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(methods))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(grDevices))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(graphics))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(stats))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(tools))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(compiler))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(KernSmooth))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(grid))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(splines))
+retn: <environment>
+
+func: quote(.getNamespace)
+body: function (name) 
+body: .Internal(getRegisteredNamespace(as.name(name)))
+args: list(quote(stats4))
+retn: <environment>
+

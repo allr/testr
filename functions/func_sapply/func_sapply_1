@@ -1,0 +1,241 @@
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: <arguments too long, ignored>
+retn: <arguments too long, ignored>
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(), class = "gList"), .Primitive("is.null"))
+retn: list()
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), y = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), pch = 0L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.104", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(label = "FALSE", x = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), y = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), just = c("left", "centre"), hjust = NULL, vjust = NULL, rot = 0, check.overlap = FALSE, name = "GRID.text.106", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("label", "x", "y", "just", "hjust", "vjust", "rot", "check.overlap", "name", "gp", "vp"), class = c("text", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), y = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), width = structure(1, unit = "npc", valid.unit = 0L, class = "unit"), height = structure(1, unit = "npc", valid.unit = 0L, class = "unit"), just = "centre", hjust = NULL, vjust = NULL, name = "GRID.rect.123", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "width", "height", "just", "hjust", "vjust", "name", 
+args: "gp", "vp"), class = c("rect", "grob", "gDesc")), structure(list(x = structure(c(0.19993519037962, 0.625975889386609, 0.0893336697481573, 0.592171489261091, 0.876366320298985, 0.0317300164606422, 0.767538770334795, 0.602125052828342, 0.153913748450577, 0.685900660930201), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0.600413234904408, 0.833192054415122, 0.679607773199677, 0.149200899293646, 0.411069074412808, 0.067236814647913, 0.762439512880519, 0.511508482741192, 0.610330656636506, 
+args: 0.301385844359174), unit = "native", valid.unit = 4L, class = "unit"), pch = 1L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.124", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc")), structure(list(x = structure(c(0.19993519037962, 0.625975889386609, 0.0893336697481573, 0.592171489261091, 0.876366320298985, 0.0317300164606422, 0.767538770334795, 0.602125052828342, 
+args: 0.153913748450577, 0.685900660930201), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0.953295870684087, 0.736370670842007, 0.539358808426186, 0.000972693553194404, 0.373487477656454, 0.465154562378302, 0.840900033712387, 0.56224281154573, 0.630959619535133, 0.672728161793202), unit = "native", valid.unit = 4L, class = "unit"), pch = 2L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.125", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", 
+args: "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc")), structure(list(at = NULL, label = TRUE, main = TRUE, edits = NULL, name = "GRID.xaxis.126", gp = structure(list(), class = "gpar"), vp = NULL, children = structure(list(), class = "gList"), childrenOrder = character(0)), .Names = c("at", "label", "main", "edits", "name", "gp", "vp", "children", "childrenOrder"), class = c("xaxis", "axis", "gTree", "grob", "gDesc")), structure(list(at = NULL, label = TRUE, main = TRUE, 
+args:     edits = NULL, name = "GRID.yaxis.127", gp = structure(list(), class = "gpar"), vp = NULL, children = structure(list(), class = "gList"), childrenOrder = character(0)), .Names = c("at", "label", "main", "edits", "name", "gp", "vp", "children", "childrenOrder"), class = c("yaxis", "axis", "gTree", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: c(FALSE, FALSE, FALSE, FALSE, FALSE)
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(name = "GRID.gTree.122", gp = NULL, vp = NULL, children = structure(list(GRID.rect.123 = structure(list(x = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), y = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), width = structure(1, unit = "npc", valid.unit = 0L, class = "unit"), height = structure(1, unit = "npc", valid.unit = 0L, class = "unit"), just = "centre", hjust = NULL, vjust = NULL, name = "GRID.rect.123", gp = structure(list(), class = "gpar"), 
+args:     vp = NULL), .Names = c("x", "y", "width", "height", "just", "hjust", "vjust", "name", "gp", "vp"), class = c("rect", "grob", "gDesc")), GRID.points.124 = structure(list(x = structure(c(0.19993519037962, 0.625975889386609, 0.0893336697481573, 0.592171489261091, 0.876366320298985, 0.0317300164606422, 0.767538770334795, 0.602125052828342, 0.153913748450577, 0.685900660930201), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0.600413234904408, 0.833192054415122, 0.679607773199677, 
+args: 0.149200899293646, 0.411069074412808, 0.067236814647913, 0.762439512880519, 0.511508482741192, 0.610330656636506, 0.301385844359174), unit = "native", valid.unit = 4L, class = "unit"), pch = 1L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.124", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc")), GRID.points.125 = structure(list(x = structure(c(0.19993519037962, 
+args: 0.625975889386609, 0.0893336697481573, 0.592171489261091, 0.876366320298985, 0.0317300164606422, 0.767538770334795, 0.602125052828342, 0.153913748450577, 0.685900660930201), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0.953295870684087, 0.736370670842007, 0.539358808426186, 0.000972693553194404, 0.373487477656454, 0.465154562378302, 0.840900033712387, 0.56224281154573, 0.630959619535133, 0.672728161793202), unit = "native", valid.unit = 4L, class = "unit"), pch = 2L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), 
+args:     name = "GRID.points.125", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc")), GRID.xaxis.126 = structure(list(at = NULL, label = TRUE, main = TRUE, edits = NULL, name = "GRID.xaxis.126", gp = structure(list(), class = "gpar"), vp = NULL, children = structure(list(), class = "gList"), childrenOrder = character(0)), .Names = c("at", "label", "main", "edits", "name", "gp", "vp", "children", "childrenOrder"
+args: ), class = c("xaxis", "axis", "gTree", "grob", "gDesc")), GRID.yaxis.127 = structure(list(at = NULL, label = TRUE, main = TRUE, edits = NULL, name = "GRID.yaxis.127", gp = structure(list(), class = "gpar"), vp = NULL, children = structure(list(), class = "gList"), childrenOrder = character(0)), .Names = c("at", "label", "main", "edits", "name", "gp", "vp", "children", "childrenOrder"), class = c("yaxis", "axis", "gTree", "grob", "gDesc"))), class = "gList", .Names = c("GRID.rect.123", "GRID.points.124", 
+args: "GRID.points.125", "GRID.xaxis.126", "GRID.yaxis.127")), childrenOrder = c("GRID.rect.123", "GRID.points.124", "GRID.points.125", "GRID.xaxis.126", "GRID.yaxis.127")), .Names = c("name", "gp", "vp", "children", "childrenOrder"), class = c("gTree", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), y = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), pch = 1L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.130", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(label = "Girls", x = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), y = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), just = c("left", "centre"), hjust = NULL, vjust = NULL, rot = 0, check.overlap = FALSE, name = "GRID.text.132", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("label", "x", "y", "just", "hjust", "vjust", "rot", "check.overlap", "name", "gp", "vp"), class = c("text", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), y = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), pch = 2L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.134", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(label = "Boys", x = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), y = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), just = c("left", "centre"), hjust = NULL, vjust = NULL, rot = 0, check.overlap = FALSE, name = "GRID.text.136", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("label", "x", "y", "just", "hjust", "vjust", "rot", "check.overlap", "name", "gp", "vp"), class = c("text", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), y = structure(0.5, unit = "native", valid.unit = 4L, class = "unit"), pch = 3L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.138", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(label = "Other", x = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), y = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), just = c("left", "centre"), hjust = NULL, vjust = NULL, rot = 0, check.overlap = FALSE, name = "GRID.text.140", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("label", "x", "y", "just", "hjust", "vjust", "rot", "check.overlap", "name", "gp", "vp"), class = c("text", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: FALSE
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(c(0, 0), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0, 0), unit = "npc", valid.unit = 0L, class = "unit"), arrow = NULL, name = "major", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "arrow", "name", "gp", "vp"), class = c("lines", "grob", "gDesc")), structure(list(x0 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), y0 = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), 
+args:     x1 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), y1 = structure(-0.5, unit = "lines", valid.unit = 3L, class = "unit"), arrow = NULL, name = "ticks", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x0", "y0", "x1", "y1", "arrow", "name", "gp", "vp"), class = c("segments", "grob", "gDesc")), structure(list(label = "FALSE", x = structure(0, unit = "native", valid.unit = 4L, class = "unit"), y = structure(-1.5, unit = "lines", valid.unit = 3L, class = "unit"), 
+args:     just = "centre", hjust = NULL, vjust = NULL, rot = 0, check.overlap = TRUE, name = "labels", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("label", "x", "y", "just", "hjust", "vjust", "rot", "check.overlap", "name", "gp", "vp"), class = c("text", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: c(FALSE, FALSE, FALSE)
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(c(0, 0), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0, 0), unit = "npc", valid.unit = 0L, class = "unit"), arrow = NULL, name = "major", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "arrow", "name", "gp", "vp"), class = c("lines", "grob", "gDesc")), structure(list(x0 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), y0 = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), 
+args:     x1 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), y1 = structure(-0.5, unit = "lines", valid.unit = 3L, class = "unit"), arrow = NULL, name = "ticks", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x0", "y0", "x1", "y1", "arrow", "name", "gp", "vp"), class = c("segments", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: c(FALSE, FALSE)
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(c(0, 0), unit = "npc", valid.unit = 0L, class = "unit"), y = structure(c(0, 0), unit = "native", valid.unit = 4L, class = "unit"), arrow = NULL, name = "major", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "arrow", "name", "gp", "vp"), class = c("lines", "grob", "gDesc")), structure(list(x0 = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), y0 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), 
+args:     x1 = structure(-0.5, unit = "lines", valid.unit = 3L, class = "unit"), y1 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), arrow = NULL, name = "ticks", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x0", "y0", "x1", "y1", "arrow", "name", "gp", "vp"), class = c("segments", "grob", "gDesc")), structure(list(label = "FALSE", x = structure(-1, unit = "lines", valid.unit = 3L, class = "unit"), y = structure(0, unit = "native", valid.unit = 4L, class = "unit"), just = c("right", 
+args: "centre"), hjust = NULL, vjust = NULL, rot = 0, check.overlap = TRUE, name = "labels", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("label", "x", "y", "just", "hjust", "vjust", "rot", "check.overlap", "name", "gp", "vp"), class = c("text", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: c(FALSE, FALSE, FALSE)
+
+func: quote(sapply)
+body: function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) 
+body: {
+body:     FUN <- match.fun(FUN)
+body:     answer <- lapply(X = X, FUN = FUN, ...)
+body:     if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+body:         names(answer) <- X
+body:     if (!identical(simplify, FALSE) && length(answer)) 
+body:         simplify2array(answer, higher = (simplify == "array"))
+body:     else answer
+body: }
+args: list(structure(list(structure(list(x = structure(c(0, 0), unit = "npc", valid.unit = 0L, class = "unit"), y = structure(c(0, 0), unit = "native", valid.unit = 4L, class = "unit"), arrow = NULL, name = "major", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "arrow", "name", "gp", "vp"), class = c("lines", "grob", "gDesc")), structure(list(x0 = structure(0, unit = "npc", valid.unit = 0L, class = "unit"), y0 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), 
+args:     x1 = structure(-0.5, unit = "lines", valid.unit = 3L, class = "unit"), y1 = structure(0, unit = "native", valid.unit = 4L, class = "unit"), arrow = NULL, name = "ticks", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x0", "y0", "x1", "y1", "arrow", "name", "gp", "vp"), class = c("segments", "grob", "gDesc"))), class = "gList"), .Primitive("is.null"))
+retn: c(FALSE, FALSE)
+

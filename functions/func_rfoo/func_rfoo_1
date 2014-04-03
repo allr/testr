@@ -1,0 +1,405 @@
+func: quote(rfoo)
+body: function (n, size, prob) 
+body: .External(C_rbinom, n, size, prob)
+args: list(10000, size = 1, prob = 0.2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, size, prob) 
+body: .External(C_rbinom, n, size, prob)
+args: list(10000, size = 2, prob = 0.2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, size, prob) 
+body: .External(C_rbinom, n, size, prob)
+args: list(10000, size = 100, prob = 0.2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, size, prob) 
+body: .External(C_rbinom, n, size, prob)
+args: list(10000, size = 10000, prob = 0.2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, size, prob) 
+body: .External(C_rbinom, n, size, prob)
+args: list(10000, size = 1, prob = 0.8)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, size, prob) 
+body: .External(C_rbinom, n, size, prob)
+args: list(10000, size = 100, prob = 0.8)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, size, prob) 
+body: .External(C_rbinom, n, size, prob)
+args: list(10000, size = 100, prob = 0.999)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, lambda) 
+body: .External(C_rpois, n, lambda)
+args: list(10000, lambda = 0.095)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, lambda) 
+body: .External(C_rpois, n, lambda)
+args: list(10000, lambda = 0.95)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, lambda) 
+body: .External(C_rpois, n, lambda)
+args: list(10000, lambda = 9.5)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, lambda) 
+body: .External(C_rpois, n, lambda)
+args: list(10000, lambda = 95)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, mean = 0, sd = 1) 
+body: .External(C_rnorm, n, mean, sd)
+args: list(10000)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, mean = 0, sd = 1) 
+body: .External(C_rnorm, n, mean, sd)
+args: list(10000, mean = 5, sd = 3)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape, rate = 1, scale = 1/rate) 
+body: {
+body:     if (!missing(rate) && !missing(scale)) {
+body:         if (abs(rate * scale - 1) < 1e-15) 
+body:             warning("specify 'rate' or 'scale' but not both")
+body:         else stop("specify 'rate' or 'scale' but not both")
+body:     }
+body:     .External(C_rgamma, n, shape, scale)
+body: }
+args: list(10000, shape = 0.1)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape, rate = 1, scale = 1/rate) 
+body: {
+body:     if (!missing(rate) && !missing(scale)) {
+body:         if (abs(rate * scale - 1) < 1e-15) 
+body:             warning("specify 'rate' or 'scale' but not both")
+body:         else stop("specify 'rate' or 'scale' but not both")
+body:     }
+body:     .External(C_rgamma, n, shape, scale)
+body: }
+args: list(10000, shape = 0.2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape, rate = 1, scale = 1/rate) 
+body: {
+body:     if (!missing(rate) && !missing(scale)) {
+body:         if (abs(rate * scale - 1) < 1e-15) 
+body:             warning("specify 'rate' or 'scale' but not both")
+body:         else stop("specify 'rate' or 'scale' but not both")
+body:     }
+body:     .External(C_rgamma, n, shape, scale)
+body: }
+args: list(10000, shape = 10)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape, rate = 1, scale = 1/rate) 
+body: {
+body:     if (!missing(rate) && !missing(scale)) {
+body:         if (abs(rate * scale - 1) < 1e-15) 
+body:             warning("specify 'rate' or 'scale' but not both")
+body:         else stop("specify 'rate' or 'scale' but not both")
+body:     }
+body:     .External(C_rgamma, n, shape, scale)
+body: }
+args: list(10000, shape = 20)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 40, n = 30, k = 20)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 40, n = 3, k = 20)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 6, n = 3, k = 2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 5, n = 3, k = 2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 4, n = 3, k = 2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, n) 
+body: .External(C_rsignrank, nn, n)
+args: list(10000, n = 1)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, n) 
+body: .External(C_rsignrank, nn, n)
+args: list(10000, n = 2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, n) 
+body: .External(C_rsignrank, nn, n)
+args: list(10000, n = 10)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, n) 
+body: .External(C_rsignrank, nn, n)
+args: list(10000, n = 30)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n) 
+body: .External(C_rwilcox, nn, m, n)
+args: list(10000, m = 40, n = 30)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n) 
+body: .External(C_rwilcox, nn, m, n)
+args: list(10000, m = 40, n = 10)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n) 
+body: .External(C_rwilcox, nn, m, n)
+args: list(10000, m = 6, n = 3)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n) 
+body: .External(C_rwilcox, nn, m, n)
+args: list(10000, m = 5, n = 3)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n) 
+body: .External(C_rwilcox, nn, m, n)
+args: list(10000, m = 4, n = 3)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df, ncp = 0) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rchisq, n, df)
+body:     else .External(C_rnchisq, n, df, ncp)
+body: }
+args: list(10000, df = 1)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df, ncp = 0) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rchisq, n, df)
+body:     else .External(C_rnchisq, n, df, ncp)
+body: }
+args: list(10000, df = 10)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, location = 0, scale = 1) 
+body: .External(C_rlogis, n, location, scale)
+args: list(10000, location = 4, scale = 2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df, ncp) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rt, n, df)
+body:     else rnorm(n, ncp)/sqrt(rchisq(n, df)/df)
+body: }
+args: list(10000, df = 40)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape1, shape2, ncp = 0) 
+body: {
+body:     if (ncp == 0) 
+body:         .External(C_rbeta, n, shape1, shape2)
+body:     else {
+body:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+body:         X/(X + rchisq(n, 2 * shape2))
+body:     }
+body: }
+args: list(10000, shape1 = 1, shape2 = 1)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape1, shape2, ncp = 0) 
+body: {
+body:     if (ncp == 0) 
+body:         .External(C_rbeta, n, shape1, shape2)
+body:     else {
+body:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+body:         X/(X + rchisq(n, 2 * shape2))
+body:     }
+body: }
+args: list(10000, shape1 = 2, shape2 = 1)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape1, shape2, ncp = 0) 
+body: {
+body:     if (ncp == 0) 
+body:         .External(C_rbeta, n, shape1, shape2)
+body:     else {
+body:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+body:         X/(X + rchisq(n, 2 * shape2))
+body:     }
+body: }
+args: list(10000, shape1 = 1, shape2 = 2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape1, shape2, ncp = 0) 
+body: {
+body:     if (ncp == 0) 
+body:         .External(C_rbeta, n, shape1, shape2)
+body:     else {
+body:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+body:         X/(X + rchisq(n, 2 * shape2))
+body:     }
+body: }
+args: list(10000, shape1 = 2, shape2 = 2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape1, shape2, ncp = 0) 
+body: {
+body:     if (ncp == 0) 
+body:         .External(C_rbeta, n, shape1, shape2)
+body:     else {
+body:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+body:         X/(X + rchisq(n, 2 * shape2))
+body:     }
+body: }
+args: list(10000, shape1 = 0.2, shape2 = 0.2)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df1, df2, ncp) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rf, n, df1, df2)
+body:     else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+body: }
+args: list(10000, df1 = 1, df2 = 1)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df1, df2, ncp) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rf, n, df1, df2)
+body:     else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+body: }
+args: list(10000, df1 = 1, df2 = 10)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df1, df2, ncp) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rf, n, df1, df2)
+body:     else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+body: }
+args: list(10000, df1 = 10, df2 = 10)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df1, df2, ncp) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rf, n, df1, df2)
+body:     else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+body: }
+args: list(10000, df1 = 30, df2 = 3)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape, scale = 1) 
+body: .External(C_rweibull, n, shape, scale)
+args: list(10000, shape = 1)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, shape, scale = 1) 
+body: .External(C_rweibull, n, shape, scale)
+args: list(10000, shape = 4, scale = 4)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 60, n = 100, k = 50)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 6, n = 10, k = 5)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (nn, m, n, k) 
+body: .External(C_rhyper, nn, m, n, k)
+args: list(10000, m = 600, n = 1000, k = 500)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df, ncp) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rt, n, df)
+body:     else rnorm(n, ncp)/sqrt(rchisq(n, df)/df)
+body: }
+args: list(10000, df = 20, ncp = 3)
+retn: <arguments too long, ignored>
+
+func: quote(rfoo)
+body: function (n, df1, df2, ncp) 
+body: {
+body:     if (missing(ncp)) 
+body:         .External(C_rf, n, df1, df2)
+body:     else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+body: }
+args: list(10000, df1 = 10, df2 = 2, ncp = 3)
+retn: <arguments too long, ignored>
+

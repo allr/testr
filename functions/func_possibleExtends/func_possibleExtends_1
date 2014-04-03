@@ -1,0 +1,136 @@
+func: quote(possibleExtends)
+body: function (class1, class2, ClassDef1 = getClassDef(class1), ClassDef2 = getClassDef(class2, where = .classEnv(ClassDef1))) 
+body: {
+body:     if (.identC(class1[[1L]], class2) || .identC(class2, "ANY")) 
+body:         return(TRUE)
+body:     ext <- TRUE
+body:     if (is.null(ClassDef1)) 
+body:         return(FALSE)
+body:     ext <- ClassDef1@contains
+body:     nm1 <- names(ext)
+body:     i <- match(class2, nm1)
+body:     if (is.na(i)) {
+body:         if (!is.null(ClassDef2)) {
+body:             ext <- ClassDef2@subclasses
+body:             if (!.identC(class(ClassDef2), "classRepresentation") && isClassUnion(ClassDef2)) 
+body:                 i <- as.logical(anyDuplicated(c(class1, unique(nm1), names(ext))))
+body:             else {
+body:                 i <- match(class1, names(ext))
+body:                 ii <- i[!is.na(i)]
+body:                 i <- if (length(ii)) 
+body:                   ii[1L]
+body:                 else i[1L]
+body:             }
+body:         }
+body:     }
+body:     if (is.na(i)) 
+body:         FALSE
+body:     else if (is.logical(i)) 
+body:         i
+body:     else el(ext, i)
+body: }
+args: list(structure("derivedDefaultMethod", package = "methods"), structure("PossibleMethod", package = "methods"))
+retn: <S4 object of class structure("SClassExtension", package = "methods")>
+
+func: quote(possibleExtends)
+body: function (class1, class2, ClassDef1 = getClassDef(class1), ClassDef2 = getClassDef(class2, where = .classEnv(ClassDef1))) 
+body: {
+body:     if (.identC(class1[[1L]], class2) || .identC(class2, "ANY")) 
+body:         return(TRUE)
+body:     ext <- TRUE
+body:     if (is.null(ClassDef1)) 
+body:         return(FALSE)
+body:     ext <- ClassDef1@contains
+body:     nm1 <- names(ext)
+body:     i <- match(class2, nm1)
+body:     if (is.na(i)) {
+body:         if (!is.null(ClassDef2)) {
+body:             ext <- ClassDef2@subclasses
+body:             if (!.identC(class(ClassDef2), "classRepresentation") && isClassUnion(ClassDef2)) 
+body:                 i <- as.logical(anyDuplicated(c(class1, unique(nm1), names(ext))))
+body:             else {
+body:                 i <- match(class1, names(ext))
+body:                 ii <- i[!is.na(i)]
+body:                 i <- if (length(ii)) 
+body:                   ii[1L]
+body:                 else i[1L]
+body:             }
+body:         }
+body:     }
+body:     if (is.na(i)) 
+body:         FALSE
+body:     else if (is.logical(i)) 
+body:         i
+body:     else el(ext, i)
+body: }
+args: list(structure("MethodDefinition", package = "methods"), structure("PossibleMethod", package = "methods"))
+retn: <S4 object of class structure("SClassExtension", package = "methods")>
+
+func: quote(possibleExtends)
+body: function (class1, class2, ClassDef1 = getClassDef(class1), ClassDef2 = getClassDef(class2, where = .classEnv(ClassDef1))) 
+body: {
+body:     if (.identC(class1[[1L]], class2) || .identC(class2, "ANY")) 
+body:         return(TRUE)
+body:     ext <- TRUE
+body:     if (is.null(ClassDef1)) 
+body:         return(FALSE)
+body:     ext <- ClassDef1@contains
+body:     nm1 <- names(ext)
+body:     i <- match(class2, nm1)
+body:     if (is.na(i)) {
+body:         if (!is.null(ClassDef2)) {
+body:             ext <- ClassDef2@subclasses
+body:             if (!.identC(class(ClassDef2), "classRepresentation") && isClassUnion(ClassDef2)) 
+body:                 i <- as.logical(anyDuplicated(c(class1, unique(nm1), names(ext))))
+body:             else {
+body:                 i <- match(class1, names(ext))
+body:                 ii <- i[!is.na(i)]
+body:                 i <- if (length(ii)) 
+body:                   ii[1L]
+body:                 else i[1L]
+body:             }
+body:         }
+body:     }
+body:     if (is.na(i)) 
+body:         FALSE
+body:     else if (is.logical(i)) 
+body:         i
+body:     else el(ext, i)
+body: }
+args: list(structure("ObjectsWithPackage", package = "methods"), "character")
+retn: <S4 object of class structure("SClassExtension", package = "methods")>
+
+func: quote(possibleExtends)
+body: function (class1, class2, ClassDef1 = getClassDef(class1), ClassDef2 = getClassDef(class2, where = .classEnv(ClassDef1))) 
+body: {
+body:     if (.identC(class1[[1L]], class2) || .identC(class2, "ANY")) 
+body:         return(TRUE)
+body:     ext <- TRUE
+body:     if (is.null(ClassDef1)) 
+body:         return(FALSE)
+body:     ext <- ClassDef1@contains
+body:     nm1 <- names(ext)
+body:     i <- match(class2, nm1)
+body:     if (is.na(i)) {
+body:         if (!is.null(ClassDef2)) {
+body:             ext <- ClassDef2@subclasses
+body:             if (!.identC(class(ClassDef2), "classRepresentation") && isClassUnion(ClassDef2)) 
+body:                 i <- as.logical(anyDuplicated(c(class1, unique(nm1), names(ext))))
+body:             else {
+body:                 i <- match(class1, names(ext))
+body:                 ii <- i[!is.na(i)]
+body:                 i <- if (length(ii)) 
+body:                   ii[1L]
+body:                 else i[1L]
+body:             }
+body:         }
+body:     }
+body:     if (is.na(i)) 
+body:         FALSE
+body:     else if (is.logical(i)) 
+body:         i
+body:     else el(ext, i)
+body: }
+args: list(structure("derivedDefaultMethod", package = "methods"), "function")
+retn: <S4 object of class structure("SClassExtension", package = "methods")>
+

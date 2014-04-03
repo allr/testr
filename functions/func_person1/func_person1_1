@@ -1,0 +1,210 @@
+func: quote(person1)
+body: function (given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL) 
+body: {
+body:     if (!.is_not_nonempty_text(first)) {
+body:         if (!.is_not_nonempty_text(given)) 
+body:             stop(gettextf("Use either %s or %s/%s but not both.", sQuote("given"), sQuote("first"), sQuote("middle")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("first")), domain = NA)
+body:         given <- first
+body:     }
+body:     if (!.is_not_nonempty_text(middle)) {
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("middle")), domain = NA)
+body:         given <- c(given, unlist(strsplit(middle, "[[:space:]]+")))
+body:     }
+body:     if (!.is_not_nonempty_text(last)) {
+body:         if (!.is_not_nonempty_text(family)) 
+body:             stop(gettextf("Use either %s or %s but not both.", sQuote("family"), sQuote("last")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("family"), sQuote("last")), domain = NA)
+body:         family <- last
+body:     }
+body:     if (.is_not_nonempty_text(given)) 
+body:         given <- NULL
+body:     if (.is_not_nonempty_text(family)) 
+body:         family <- NULL
+body:     if (.is_not_nonempty_text(email)) 
+body:         email <- NULL
+body:     if (.is_not_nonempty_text(role)) {
+body:         if (!is.null(role)) 
+body:             warning(sprintf(ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s."), paste(sQuote(role), collapse = ", ")), domain = NA)
+body:         role <- NULL
+body:     }
+body:     if (.is_not_nonempty_text(comment)) 
+body:         comment <- NULL
+body:     if (length(role)) 
+body:         role <- .canonicalize_person_role(role)
+body:     rval <- list(given = given, family = family, role = role, email = email, comment = comment)
+body:     if (any(ind <- (sapply(rval, length) == 0L))) 
+body:         rval[ind] <- vector("list", length = sum(ind))
+body:     return(rval)
+body: }
+args: list(given = character(0), family = "FALSE", middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL)
+retn: structure(list(given = NULL, family = "FALSE", role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))
+
+func: quote(person1)
+body: function (given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL) 
+body: {
+body:     if (!.is_not_nonempty_text(first)) {
+body:         if (!.is_not_nonempty_text(given)) 
+body:             stop(gettextf("Use either %s or %s/%s but not both.", sQuote("given"), sQuote("first"), sQuote("middle")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("first")), domain = NA)
+body:         given <- first
+body:     }
+body:     if (!.is_not_nonempty_text(middle)) {
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("middle")), domain = NA)
+body:         given <- c(given, unlist(strsplit(middle, "[[:space:]]+")))
+body:     }
+body:     if (!.is_not_nonempty_text(last)) {
+body:         if (!.is_not_nonempty_text(family)) 
+body:             stop(gettextf("Use either %s or %s but not both.", sQuote("family"), sQuote("last")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("family"), sQuote("last")), domain = NA)
+body:         family <- last
+body:     }
+body:     if (.is_not_nonempty_text(given)) 
+body:         given <- NULL
+body:     if (.is_not_nonempty_text(family)) 
+body:         family <- NULL
+body:     if (.is_not_nonempty_text(email)) 
+body:         email <- NULL
+body:     if (.is_not_nonempty_text(role)) {
+body:         if (!is.null(role)) 
+body:             warning(sprintf(ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s."), paste(sQuote(role), collapse = ", ")), domain = NA)
+body:         role <- NULL
+body:     }
+body:     if (.is_not_nonempty_text(comment)) 
+body:         comment <- NULL
+body:     if (length(role)) 
+body:         role <- .canonicalize_person_role(role)
+body:     rval <- list(given = given, family = family, role = role, email = email, comment = comment)
+body:     if (any(ind <- (sapply(rval, length) == 0L))) 
+body:         rval[ind] <- vector("list", length = sum(ind))
+body:     return(rval)
+body: }
+args: list(given = "R Core Team", family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL)
+retn: structure(list(given = "R Core Team", family = NULL, role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))
+
+func: quote(person1)
+body: function (given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL) 
+body: {
+body:     if (!.is_not_nonempty_text(first)) {
+body:         if (!.is_not_nonempty_text(given)) 
+body:             stop(gettextf("Use either %s or %s/%s but not both.", sQuote("given"), sQuote("first"), sQuote("middle")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("first")), domain = NA)
+body:         given <- first
+body:     }
+body:     if (!.is_not_nonempty_text(middle)) {
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("middle")), domain = NA)
+body:         given <- c(given, unlist(strsplit(middle, "[[:space:]]+")))
+body:     }
+body:     if (!.is_not_nonempty_text(last)) {
+body:         if (!.is_not_nonempty_text(family)) 
+body:             stop(gettextf("Use either %s or %s but not both.", sQuote("family"), sQuote("last")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("family"), sQuote("last")), domain = NA)
+body:         family <- last
+body:     }
+body:     if (.is_not_nonempty_text(given)) 
+body:         given <- NULL
+body:     if (.is_not_nonempty_text(family)) 
+body:         family <- NULL
+body:     if (.is_not_nonempty_text(email)) 
+body:         email <- NULL
+body:     if (.is_not_nonempty_text(role)) {
+body:         if (!is.null(role)) 
+body:             warning(sprintf(ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s."), paste(sQuote(role), collapse = ", ")), domain = NA)
+body:         role <- NULL
+body:     }
+body:     if (.is_not_nonempty_text(comment)) 
+body:         comment <- NULL
+body:     if (length(role)) 
+body:         role <- .canonicalize_person_role(role)
+body:     rval <- list(given = given, family = family, role = role, email = email, comment = comment)
+body:     if (any(ind <- (sapply(rval, length) == 0L))) 
+body:         rval[ind] <- vector("list", length = sum(ind))
+body:     return(rval)
+body: }
+args: list(given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL)
+retn: structure(list(given = NULL, family = NULL, role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))
+
+func: quote(person1)
+body: function (given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL) 
+body: {
+body:     if (!.is_not_nonempty_text(first)) {
+body:         if (!.is_not_nonempty_text(given)) 
+body:             stop(gettextf("Use either %s or %s/%s but not both.", sQuote("given"), sQuote("first"), sQuote("middle")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("first")), domain = NA)
+body:         given <- first
+body:     }
+body:     if (!.is_not_nonempty_text(middle)) {
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("middle")), domain = NA)
+body:         given <- c(given, unlist(strsplit(middle, "[[:space:]]+")))
+body:     }
+body:     if (!.is_not_nonempty_text(last)) {
+body:         if (!.is_not_nonempty_text(family)) 
+body:             stop(gettextf("Use either %s or %s but not both.", sQuote("family"), sQuote("last")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("family"), sQuote("last")), domain = NA)
+body:         family <- last
+body:     }
+body:     if (.is_not_nonempty_text(given)) 
+body:         given <- NULL
+body:     if (.is_not_nonempty_text(family)) 
+body:         family <- NULL
+body:     if (.is_not_nonempty_text(email)) 
+body:         email <- NULL
+body:     if (.is_not_nonempty_text(role)) {
+body:         if (!is.null(role)) 
+body:             warning(sprintf(ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s."), paste(sQuote(role), collapse = ", ")), domain = NA)
+body:         role <- NULL
+body:     }
+body:     if (.is_not_nonempty_text(comment)) 
+body:         comment <- NULL
+body:     if (length(role)) 
+body:         role <- .canonicalize_person_role(role)
+body:     rval <- list(given = given, family = family, role = role, email = email, comment = comment)
+body:     if (any(ind <- (sapply(rval, length) == 0L))) 
+body:         rval[ind] <- vector("list", length = sum(ind))
+body:     return(rval)
+body: }
+args: list(given = FALSE, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL)
+retn: structure(list(given = FALSE, family = NULL, role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))
+
+func: quote(person1)
+body: function (given = NULL, family = NULL, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL) 
+body: {
+body:     if (!.is_not_nonempty_text(first)) {
+body:         if (!.is_not_nonempty_text(given)) 
+body:             stop(gettextf("Use either %s or %s/%s but not both.", sQuote("given"), sQuote("first"), sQuote("middle")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("first")), domain = NA)
+body:         given <- first
+body:     }
+body:     if (!.is_not_nonempty_text(middle)) {
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("given"), sQuote("middle")), domain = NA)
+body:         given <- c(given, unlist(strsplit(middle, "[[:space:]]+")))
+body:     }
+body:     if (!.is_not_nonempty_text(last)) {
+body:         if (!.is_not_nonempty_text(family)) 
+body:             stop(gettextf("Use either %s or %s but not both.", sQuote("family"), sQuote("last")), domain = NA)
+body:         message(gettextf("It is recommended to use %s instead of %s.", sQuote("family"), sQuote("last")), domain = NA)
+body:         family <- last
+body:     }
+body:     if (.is_not_nonempty_text(given)) 
+body:         given <- NULL
+body:     if (.is_not_nonempty_text(family)) 
+body:         family <- NULL
+body:     if (.is_not_nonempty_text(email)) 
+body:         email <- NULL
+body:     if (.is_not_nonempty_text(role)) {
+body:         if (!is.null(role)) 
+body:             warning(sprintf(ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s."), paste(sQuote(role), collapse = ", ")), domain = NA)
+body:         role <- NULL
+body:     }
+body:     if (.is_not_nonempty_text(comment)) 
+body:         comment <- NULL
+body:     if (length(role)) 
+body:         role <- .canonicalize_person_role(role)
+body:     rval <- list(given = given, family = family, role = role, email = email, comment = comment)
+body:     if (any(ind <- (sapply(rval, length) == 0L))) 
+body:         rval[ind] <- vector("list", length = sum(ind))
+body:     return(rval)
+body: }
+args: list(given = FALSE, family = FALSE, middle = NULL, email = NULL, role = NULL, comment = NULL, first = NULL, last = NULL)
+retn: structure(list(given = FALSE, family = FALSE, role = NULL, email = NULL, comment = NULL), .Names = c("given", "family", "role", "email", "comment"))
+

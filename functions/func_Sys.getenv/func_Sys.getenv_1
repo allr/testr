@@ -1,0 +1,384 @@
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_DEFAULT_PACKAGES")
+retn: ""
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_LIBS_SITE")
+retn: ""
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_LIBS_USER")
+retn: "~/R/x86_64-unknown-linux-gnu-library/3.0"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_BATCH")
+retn: ""
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_LIBS")
+retn: ""
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_TRANSLATIONS", "")
+retn: ""
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_PAPERSIZE_USER")
+retn: ""
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_PRINTCMD")
+retn: "lpr"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("DVIPS", "dvips")
+retn: "dvips"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_TEXI2DVICMD")
+retn: "texi2dvi"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_BROWSER")
+retn: "/usr/bin/firefox"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_PDFVIEWER")
+retn: "/usr/bin/xdg-open"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_TESTS")
+retn: ""
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("R_QPDF", "qpdf")
+retn: "qpdf"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("GS_QUALITY", "none")
+retn: "none"
+
+func: quote(Sys.getenv)
+body: function (x = NULL, unset = "", names = NA) 
+body: {
+body:     if (is.null(x)) {
+body:         x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed = TRUE)
+body:         v <- n <- character(LEN <- length(x))
+body:         for (i in 1L:LEN) {
+body:             n[i] <- x[[i]][1L]
+body:             v[i] <- paste(x[[i]][-1L], collapse = "=")
+body:         }
+body:         if (!identical(names, FALSE)) 
+body:             v <- structure(v, names = n)
+body:         v[sort.list(n)]
+body:     }
+body:     else {
+body:         v <- .Internal(Sys.getenv(as.character(x), as.character(unset)))
+body:         if (isTRUE(names) || (length(x) > 1L && !identical(names, FALSE))) 
+body:             structure(v, names = x)
+body:         else v
+body:     }
+body: }
+args: list("TAR")
+retn: "/bin/tar"
+

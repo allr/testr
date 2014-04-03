@@ -1,0 +1,110 @@
+func: quote(as)
+body: function (object, Class, strict = TRUE, ext = possibleExtends(thisClass, Class)) 
+body: {
+body:     if (.identC(Class, "double")) 
+body:         Class <- "numeric"
+body:     thisClass <- .class1(object)
+body:     if (.identC(thisClass, Class) || .identC(Class, "ANY")) 
+body:         return(object)
+body:     where <- .classEnv(thisClass, mustFind = FALSE)
+body:     coerceFun <- getGeneric("coerce", where = where)
+body:     coerceMethods <- .getMethodsTable(coerceFun, environment(coerceFun), inherited = TRUE)
+body:     asMethod <- .quickCoerceSelect(thisClass, Class, coerceFun, coerceMethods, where)
+body:     if (is.null(asMethod)) {
+body:         sig <- c(from = thisClass, to = Class)
+body:         asMethod <- selectMethod("coerce", sig, optional = TRUE, useInherited = FALSE, fdef = coerceFun, mlist = getMethodsForDispatch(coerceFun))
+body:         if (is.null(asMethod)) {
+body:             canCache <- TRUE
+body:             inherited <- FALSE
+body:             if (is(object, Class)) {
+body:                 ClassDef <- getClassDef(Class, where)
+body:                 if (identical(ext, FALSE)) 
+body:                   stop(sprintf("internal problem in as(): %s is(object, \"%s\") is TRUE, but the metadata asserts that the 'is' relation is FALSE", dQuote(thisClass), Class), domain = NA)
+body:                 else if (identical(ext, TRUE)) 
+body:                   asMethod <- .makeAsMethod(quote(from), TRUE, Class, ClassDef, where)
+body:                 else {
+body:                   test <- ext@test
+body:                   asMethod <- .makeAsMethod(ext@coerce, ext@simple, Class, ClassDef, where)
+body:                   canCache <- (!is(test, "function")) || identical(body(test), TRUE)
+body:                 }
+body:             }
+body:             if (is.null(asMethod) && extends(Class, thisClass)) {
+body:                 ClassDef <- getClassDef(Class, where)
+body:                 asMethod <- .asFromReplace(thisClass, Class, ClassDef, where)
+body:             }
+body:             if (is.null(asMethod)) {
+body:                 asMethod <- selectMethod("coerce", sig, optional = TRUE, c(from = TRUE, to = FALSE), fdef = coerceFun, mlist = coerceMethods)
+body:                 inherited <- TRUE
+body:             }
+body:             else if (canCache) 
+body:                 asMethod <- .asCoerceMethod(asMethod, thisClass, ClassDef, FALSE, where)
+body:             if (is.null(asMethod)) 
+body:                 stop(gettextf("no method or default for coercing %s to %s", dQuote(thisClass), dQuote(Class)), domain = NA)
+body:             else if (canCache) {
+body:                 cacheMethod("coerce", sig, asMethod, fdef = coerceFun, inherited = inherited)
+body:             }
+body:         }
+body:     }
+body:     if (strict) 
+body:         asMethod(object)
+body:     else asMethod(object, strict = FALSE)
+body: }
+args: list(c("!=", "$", "$<-", "%%", "%/%", "&", "*", "+", "-", "/", "<", "<=", "==", ">", ">=", "Arith", "Compare", "Complex", "Logic", "Math", "Math2", "Ops", "Summary", "[", "^", "abs", "acos", "acosh", "addNextMethod", "asin", "asinh", "atan", "atanh", "body<-", "cbind2", "ceiling", "coerce", "coerce<-", "cos", "cosh", "cummax", "cummin", "cumprod", "cumsum", "digamma", "exp", "expm1", "floor", "gamma", "initialize", "kronecker", "lgamma", "loadMethod", "log", "log10", "log1p", "log2", "rbind2", "round", 
+args: "show", "sign", "signif", "sin", "sinh", "slotsFromS3", "sqrt", "tan", "tanh", "trigamma", "trunc", "|"), "character", strict = FALSE)
+retn: c("!=", "$", "$<-", "%%", "%/%", "&", "*", "+", "-", "/", "<", "<=", "==", ">", ">=", "Arith", "Compare", "Complex", "Logic", "Math", "Math2", "Ops", "Summary", "[", "^", "abs", "acos", "acosh", "addNextMethod", "asin", "asinh", "atan", "atanh", "body<-", "cbind2", "ceiling", "coerce", "coerce<-", "cos", "cosh", "cummax", "cummin", "cumprod", "cumsum", "digamma", "exp", "expm1", "floor", "gamma", "initialize", "kronecker", "lgamma", "loadMethod", "log", "log10", "log1p", "log2", "rbind2", "round", 
+retn: "show", "sign", "signif", "sin", "sinh", "slotsFromS3", "sqrt", "tan", "tanh", "trigamma", "trunc", "|")
+
+func: quote(as)
+body: function (object, Class, strict = TRUE, ext = possibleExtends(thisClass, Class)) 
+body: {
+body:     if (.identC(Class, "double")) 
+body:         Class <- "numeric"
+body:     thisClass <- .class1(object)
+body:     if (.identC(thisClass, Class) || .identC(Class, "ANY")) 
+body:         return(object)
+body:     where <- .classEnv(thisClass, mustFind = FALSE)
+body:     coerceFun <- getGeneric("coerce", where = where)
+body:     coerceMethods <- .getMethodsTable(coerceFun, environment(coerceFun), inherited = TRUE)
+body:     asMethod <- .quickCoerceSelect(thisClass, Class, coerceFun, coerceMethods, where)
+body:     if (is.null(asMethod)) {
+body:         sig <- c(from = thisClass, to = Class)
+body:         asMethod <- selectMethod("coerce", sig, optional = TRUE, useInherited = FALSE, fdef = coerceFun, mlist = getMethodsForDispatch(coerceFun))
+body:         if (is.null(asMethod)) {
+body:             canCache <- TRUE
+body:             inherited <- FALSE
+body:             if (is(object, Class)) {
+body:                 ClassDef <- getClassDef(Class, where)
+body:                 if (identical(ext, FALSE)) 
+body:                   stop(sprintf("internal problem in as(): %s is(object, \"%s\") is TRUE, but the metadata asserts that the 'is' relation is FALSE", dQuote(thisClass), Class), domain = NA)
+body:                 else if (identical(ext, TRUE)) 
+body:                   asMethod <- .makeAsMethod(quote(from), TRUE, Class, ClassDef, where)
+body:                 else {
+body:                   test <- ext@test
+body:                   asMethod <- .makeAsMethod(ext@coerce, ext@simple, Class, ClassDef, where)
+body:                   canCache <- (!is(test, "function")) || identical(body(test), TRUE)
+body:                 }
+body:             }
+body:             if (is.null(asMethod) && extends(Class, thisClass)) {
+body:                 ClassDef <- getClassDef(Class, where)
+body:                 asMethod <- .asFromReplace(thisClass, Class, ClassDef, where)
+body:             }
+body:             if (is.null(asMethod)) {
+body:                 asMethod <- selectMethod("coerce", sig, optional = TRUE, c(from = TRUE, to = FALSE), fdef = coerceFun, mlist = coerceMethods)
+body:                 inherited <- TRUE
+body:             }
+body:             else if (canCache) 
+body:                 asMethod <- .asCoerceMethod(asMethod, thisClass, ClassDef, FALSE, where)
+body:             if (is.null(asMethod)) 
+body:                 stop(gettextf("no method or default for coercing %s to %s", dQuote(thisClass), dQuote(Class)), domain = NA)
+body:             else if (canCache) {
+body:                 cacheMethod("coerce", sig, asMethod, fdef = coerceFun, inherited = inherited)
+body:             }
+body:         }
+body:     }
+body:     if (strict) 
+body:         asMethod(object)
+body:     else asMethod(object, strict = FALSE)
+body: }
+args: list(character(0), "character", strict = FALSE)
+retn: character(0)
+

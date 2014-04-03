@@ -1,0 +1,62 @@
+func: quote(grid.Call)
+body: function (fnname, ...) 
+body: {
+body:     .Call(L_gridDirty)
+body:     .Call(fnname, ...)
+body: }
+args: list(structure(list(name = "L_setDLon", address = <pointer: 0x59ca1e0>, dll = structure(list(name = "grid", path = "/home/roman/r-instrumented/library/grid/libs/grid.so", dynamicLookup = FALSE, handle = <pointer: 0x43d4f50>, info = <pointer: 0x92e2c0>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), TRUE)
+retn: FALSE
+
+func: quote(grid.Call)
+body: function (fnname, ...) 
+body: {
+body:     .Call(L_gridDirty)
+body:     .Call(fnname, ...)
+body: }
+args: list(structure(list(name = "L_setGPar", address = <pointer: 0x68f79e0>, dll = structure(list(name = "grid", path = "/home/roman/r-instrumented/library/grid/libs/grid.so", dynamicLookup = FALSE, handle = <pointer: 0x43d4f50>, info = <pointer: 0x92e2c0>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), structure(list(fill = "transparent", col = "black", 
+args:     gamma = 1, lty = "solid", lwd = 1, cex = 1, fontsize = 12, lineheight = 1.2, font = 1L, fontfamily = "", alpha = 1, lineend = "round", linejoin = "round", linemitre = 10, lex = 1), .Names = c("fill", "col", "gamma", "lty", "lwd", "cex", "fontsize", "lineheight", "font", "fontfamily", "alpha", "lineend", "linejoin", "linemitre", "lex"), class = "gpar"))
+retn: NULL
+
+func: quote(grid.Call)
+body: function (fnname, ...) 
+body: {
+body:     .Call(L_gridDirty)
+body:     .Call(fnname, ...)
+body: }
+args: list(structure(list(name = "L_setCurrentGrob", address = <pointer: 0x66841f0>, dll = structure(list(name = "grid", path = "/home/roman/r-instrumented/library/grid/libs/grid.so", dynamicLookup = FALSE, handle = <pointer: 0x43d4f50>, info = <pointer: 0x92e2c0>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), NULL)
+retn: NULL
+
+func: quote(grid.Call)
+body: function (fnname, ...) 
+body: {
+body:     .Call(L_gridDirty)
+body:     .Call(fnname, ...)
+body: }
+args: list(structure(list(name = "L_setDLon", address = <pointer: 0x59ca1e0>, dll = structure(list(name = "grid", path = "/home/roman/r-instrumented/library/grid/libs/grid.so", dynamicLookup = FALSE, handle = <pointer: 0x43d4f50>, info = <pointer: 0x92e2c0>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), FALSE)
+retn: FALSE
+
+func: quote(grid.Call)
+body: function (fnname, ...) 
+body: {
+body:     .Call(L_gridDirty)
+body:     .Call(fnname, ...)
+body: }
+args: <arguments too long, ignored>
+retn: NULL
+
+func: quote(grid.Call)
+body: function (fnname, ...) 
+body: {
+body:     .Call(L_gridDirty)
+body:     .Call(fnname, ...)
+body: }
+args: list(structure(list(name = "L_setCurrentGrob", address = <pointer: 0x66841f0>, dll = structure(list(name = "grid", path = "/home/roman/r-instrumented/library/grid/libs/grid.so", dynamicLookup = FALSE, handle = <pointer: 0x43d4f50>, info = <pointer: 0x92e2c0>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo"), numParameters = 1L), class = c("CallRoutine", "NativeSymbolInfo"), .Names = c("name", "address", "dll", "numParameters")), structure(list(name = "GRID.gTree.122", 
+args:     gp = NULL, vp = NULL, children = structure(list(GRID.rect.123 = structure(list(x = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), y = structure(0.5, unit = "npc", valid.unit = 0L, class = "unit"), width = structure(1, unit = "npc", valid.unit = 0L, class = "unit"), height = structure(1, unit = "npc", valid.unit = 0L, class = "unit"), just = "centre", hjust = NULL, vjust = NULL, name = "GRID.rect.123", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "width", 
+args:     "height", "just", "hjust", "vjust", "name", "gp", "vp"), class = c("rect", "grob", "gDesc")), GRID.points.124 = structure(list(x = structure(c(0.19993519037962, 0.625975889386609, 0.0893336697481573, 0.592171489261091, 0.876366320298985, 0.0317300164606422, 0.767538770334795, 0.602125052828342, 0.153913748450577, 0.685900660930201), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0.600413234904408, 0.833192054415122, 0.679607773199677, 0.149200899293646, 0.411069074412808, 
+args:     0.067236814647913, 0.762439512880519, 0.511508482741192, 0.610330656636506, 0.301385844359174), unit = "native", valid.unit = 4L, class = "unit"), pch = 1L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), name = "GRID.points.124", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc")), GRID.points.125 = structure(list(x = structure(c(0.19993519037962, 0.625975889386609, 0.0893336697481573, 
+args:     0.592171489261091, 0.876366320298985, 0.0317300164606422, 0.767538770334795, 0.602125052828342, 0.153913748450577, 0.685900660930201), unit = "native", valid.unit = 4L, class = "unit"), y = structure(c(0.953295870684087, 0.736370670842007, 0.539358808426186, 0.000972693553194404, 0.373487477656454, 0.465154562378302, 0.840900033712387, 0.56224281154573, 0.630959619535133, 0.672728161793202), unit = "native", valid.unit = 4L, class = "unit"), pch = 2L, size = structure(1, unit = "char", valid.unit = 18L, class = "unit"), 
+args:         name = "GRID.points.125", gp = structure(list(), class = "gpar"), vp = NULL), .Names = c("x", "y", "pch", "size", "name", "gp", "vp"), class = c("points", "grob", "gDesc")), GRID.xaxis.126 = structure(list(at = NULL, label = TRUE, main = TRUE, edits = NULL, name = "GRID.xaxis.126", gp = structure(list(), class = "gpar"), vp = NULL, children = structure(list(), class = "gList"), childrenOrder = character(0)), .Names = c("at", "label", "main", "edits", "name", "gp", "vp", "children", "childrenOrder"
+args:     ), class = c("xaxis", "axis", "gTree", "grob", "gDesc")), GRID.yaxis.127 = structure(list(at = NULL, label = TRUE, main = TRUE, edits = NULL, name = "GRID.yaxis.127", gp = structure(list(), class = "gpar"), vp = NULL, children = structure(list(), class = "gList"), childrenOrder = character(0)), .Names = c("at", "label", "main", "edits", "name", "gp", "vp", "children", "childrenOrder"), class = c("yaxis", "axis", "gTree", "grob", "gDesc"))), class = "gList", .Names = c("GRID.rect.123", "GRID.points.124", 
+args:     "GRID.points.125", "GRID.xaxis.126", "GRID.yaxis.127")), childrenOrder = c("GRID.rect.123", "GRID.points.124", "GRID.points.125", "GRID.xaxis.126", "GRID.yaxis.127")), .Names = c("name", "gp", "vp", "children", "childrenOrder"), class = c("gTree", "grob", "gDesc")))
+retn: NULL
+

@@ -1,0 +1,11 @@
+func: quote(Sys.setlocale)
+body: function (category = "LC_ALL", locale = "") 
+body: {
+body:     category <- match(category, c("LC_ALL", "LC_COLLATE", "LC_CTYPE", "LC_MONETARY", "LC_NUMERIC", "LC_TIME", "LC_MESSAGES", "LC_PAPER", "LC_MEASUREMENT"))
+body:     if (is.na(category)) 
+body:         stop("invalid 'category' argument")
+body:     .Internal(Sys.setlocale(category, locale))
+body: }
+args: list("LC_COLLATE", "C")
+retn: "C"
+

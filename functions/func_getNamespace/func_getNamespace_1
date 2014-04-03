@@ -1,0 +1,22 @@
+func: quote(getNamespace)
+body: function (name) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) stop(e))
+body: }
+args: list("grDevices")
+retn: <environment>
+
+func: quote(getNamespace)
+body: function (name) 
+body: {
+body:     ns <- .Internal(getRegisteredNamespace(as.name(name)))
+body:     if (!is.null(ns)) 
+body:         ns
+body:     else tryCatch(loadNamespace(name), error = function(e) stop(e))
+body: }
+args: list("utils")
+retn: <environment>
+

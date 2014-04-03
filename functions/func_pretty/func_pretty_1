@@ -1,0 +1,12 @@
+func: quote(pretty)
+body: function (x, ...) 
+body: UseMethod("pretty")
+args: list(c(Inf, -Inf), 20)
+retn: numeric(0)
+
+func: quote(pretty)
+body: function (x, ...) 
+body: UseMethod("pretty")
+args: list(c(0L, 0L), 20)
+retn: c(-0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3)
+

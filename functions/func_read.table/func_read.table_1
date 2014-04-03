@@ -1,0 +1,188 @@
+func: quote(read.table)
+body: function (file, header = FALSE, sep = "", quote = "\"'", dec = ".", row.names, col.names, as.is = !stringsAsFactors, na.strings = "NA", colClasses = NA, nrows = -1, skip = 0, check.names = TRUE, fill = !blank.lines.skip, strip.white = FALSE, blank.lines.skip = TRUE, comment.char = "#", allowEscapes = FALSE, flush = FALSE, stringsAsFactors = default.stringsAsFactors(), fileEncoding = "", encoding = "unknown", text) 
+body: {
+body:     if (missing(file) && !missing(text)) {
+body:         file <- textConnection(text)
+body:         on.exit(close(file))
+body:     }
+body:     if (is.character(file)) {
+body:         file <- if (nzchar(fileEncoding)) 
+body:             file(file, "rt", encoding = fileEncoding)
+body:         else file(file, "rt")
+body:         on.exit(close(file))
+body:     }
+body:     if (!inherits(file, "connection")) 
+body:         stop("'file' must be a character string or connection")
+body:     if (!isOpen(file, "rt")) {
+body:         open(file, "rt")
+body:         on.exit(close(file))
+body:     }
+body:     if (skip > 0L) 
+body:         readLines(file, skip)
+body:     nlines <- n0lines <- if (nrows < 0L) 
+body:         5
+body:     else min(5L, (header + nrows))
+body:     lines <- .External(C_readtablehead, file, nlines, comment.char, blank.lines.skip, quote, sep)
+body:     nlines <- length(lines)
+body:     if (!nlines) {
+body:         if (missing(col.names)) 
+body:             stop("no lines available in input")
+body:         rlabp <- FALSE
+body:         cols <- length(col.names)
+body:     }
+body:     else {
+body:         if (all(!nzchar(lines))) 
+body:             stop("empty beginning of file")
+body:         if (nlines < n0lines && file == 0L) {
+body:             pushBack(c(lines, lines, ""), file)
+body:             on.exit((clearPushBack(stdin())))
+body:         }
+body:         else pushBack(c(lines, lines), file)
+body:         first <- scan(file, what = "", sep = sep, quote = quote, nlines = 1, quiet = TRUE, skip = 0, strip.white = TRUE, blank.lines.skip = blank.lines.skip, comment.char = comment.char, allowEscapes = allowEscapes, encoding = encoding)
+body:         col1 <- if (missing(col.names)) 
+body:             length(first)
+body:         else length(col.names)
+body:         col <- numeric(nlines - 1L)
+body:         if (nlines > 1L) 
+body:             for (i in seq_along(col)) col[i] <- length(scan(file, what = "", sep = sep, quote = quote, nlines = 1, quiet = TRUE, skip = 0, strip.white = strip.white, blank.lines.skip = blank.lines.skip, comment.char = comment.char, allowEscapes = allowEscapes))
+body:         cols <- max(col1, col)
+body:         rlabp <- (cols - col1) == 1L
+body:         if (rlabp && missing(header)) 
+body:             header <- TRUE
+body:         if (!header) 
+body:             rlabp <- FALSE
+body:         if (header) {
+body:             .External(C_readtablehead, file, 1L, comment.char, blank.lines.skip, quote, sep)
+body:             if (missing(col.names)) 
+body:                 col.names <- first
+body:             else if (length(first) != length(col.names)) 
+body:                 warning("header and 'col.names' are of different lengths")
+body:         }
+body:         else if (missing(col.names)) 
+body:             col.names <- paste0("V", 1L:cols)
+body:         if (length(col.names) + rlabp < cols) 
+body:             stop("more columns than column names")
+body:         if (fill && length(col.names) > cols) 
+body:             cols <- length(col.names)
+body:         if (!fill && cols > 0L && length(col.names) > cols) 
+body:             stop("more column names than columns")
+body:         if (cols == 0L) 
+body:             stop("first five rows are empty: giving up")
+body:     }
+body:     if (check.names) 
+body:         col.names <- make.names(col.names, unique = TRUE)
+body:     if (rlabp) 
+body:         col.names <- c("row.names", col.names)
+body:     nmColClasses <- names(colClasses)
+body:     if (length(colClasses) < cols) 
+body:         if (is.null(nmColClasses)) {
+body:             colClasses <- rep_len(colClasses, cols)
+body:         }
+body:         else {
+body:             tmp <- rep_len(NA_character_, cols)
+body:             names(tmp) <- col.names
+body:             i <- match(nmColClasses, col.names, 0L)
+body:             if (any(i <= 0L)) 
+body:                 warning("not all columns named in 'colClasses' exist")
+body:             tmp[i[i > 0L]] <- colClasses
+body:             colClasses <- tmp
+body:         }
+body:     what <- rep.int(list(""), cols)
+body:     names(what) <- col.names
+body:     colClasses[colClasses %in% c("real", "double")] <- "numeric"
+body:     known <- colClasses %in% c("logical", "integer", "numeric", "complex", "character", "raw")
+body:     what[known] <- sapply(colClasses[known], do.call, list(0))
+body:     what[colClasses %in% "NULL"] <- list(NULL)
+body:     keep <- !sapply(what, is.null)
+body:     data <- scan(file = file, what = what, sep = sep, quote = quote, dec = dec, nmax = nrows, skip = 0, na.strings = na.strings, quiet = TRUE, fill = fill, strip.white = strip.white, blank.lines.skip = blank.lines.skip, multi.line = FALSE, comment.char = comment.char, allowEscapes = allowEscapes, flush = flush, encoding = encoding)
+body:     nlines <- length(data[[which(keep)[1L]]])
+body:     if (cols != length(data)) {
+body:         warning("cols = ", cols, " != length(data) = ", length(data), domain = NA)
+body:         cols <- length(data)
+body:     }
+body:     if (is.logical(as.is)) {
+body:         as.is <- rep_len(as.is, cols)
+body:     }
+body:     else if (is.numeric(as.is)) {
+body:         if (any(as.is < 1 | as.is > cols)) 
+body:             stop("invalid numeric 'as.is' expression")
+body:         i <- rep.int(FALSE, cols)
+body:         i[as.is] <- TRUE
+body:         as.is <- i
+body:     }
+body:     else if (is.character(as.is)) {
+body:         i <- match(as.is, col.names, 0L)
+body:         if (any(i <= 0L)) 
+body:             warning("not all columns named in 'as.is' exist")
+body:         i <- i[i > 0L]
+body:         as.is <- rep.int(FALSE, cols)
+body:         as.is[i] <- TRUE
+body:     }
+body:     else if (length(as.is) != cols) 
+body:         stop(gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is), cols), domain = NA)
+body:     do <- keep & !known
+body:     if (rlabp) 
+body:         do[1L] <- FALSE
+body:     for (i in (1L:cols)[do]) {
+body:         data[[i]] <- if (is.na(colClasses[i])) 
+body:             type.convert(data[[i]], as.is = as.is[i], dec = dec, na.strings = character(0L))
+body:         else if (colClasses[i] == "factor") 
+body:             as.factor(data[[i]])
+body:         else if (colClasses[i] == "Date") 
+body:             as.Date(data[[i]])
+body:         else if (colClasses[i] == "POSIXct") 
+body:             as.POSIXct(data[[i]])
+body:         else methods::as(data[[i]], colClasses[i])
+body:     }
+body:     compactRN <- TRUE
+body:     if (missing(row.names)) {
+body:         if (rlabp) {
+body:             row.names <- data[[1L]]
+body:             data <- data[-1L]
+body:             keep <- keep[-1L]
+body:             compactRN <- FALSE
+body:         }
+body:         else row.names <- .set_row_names(as.integer(nlines))
+body:     }
+body:     else if (is.null(row.names)) {
+body:         row.names <- .set_row_names(as.integer(nlines))
+body:     }
+body:     else if (is.character(row.names)) {
+body:         compactRN <- FALSE
+body:         if (length(row.names) == 1L) {
+body:             rowvar <- (1L:cols)[match(col.names, row.names, 0L) == 1L]
+body:             row.names <- data[[rowvar]]
+body:             data <- data[-rowvar]
+body:             keep <- keep[-rowvar]
+body:         }
+body:     }
+body:     else if (is.numeric(row.names) && length(row.names) == 1L) {
+body:         compactRN <- FALSE
+body:         rlabp <- row.names
+body:         row.names <- data[[rlabp]]
+body:         data <- data[-rlabp]
+body:         keep <- keep[-rlabp]
+body:     }
+body:     else stop("invalid 'row.names' specification")
+body:     data <- data[keep]
+body:     if (is.object(row.names) || !(is.integer(row.names))) 
+body:         row.names <- as.character(row.names)
+body:     if (!compactRN) {
+body:         if (length(row.names) != nlines) 
+body:             stop("invalid 'row.names' length")
+body:         if (anyDuplicated(row.names)) 
+body:             stop("duplicate 'row.names' are not allowed")
+body:         if (any(is.na(row.names))) 
+body:             stop("missing values in 'row.names' are not allowed")
+body:     }
+body:     class(data) <- "data.frame"
+body:     attr(data, "row.names") <- row.names
+body:     data
+body: }
+args: list("/home/roman/r-instrumented/library/datasets/data/morley.tab")
+retn: structure(list(Expt = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L), Run = c(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 
+retn: 17L, 18L, 19L, 20L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L), Speed = c(850L, 740L, 900L, 1070L, 930L, 850L, 950L, 980L, 980L, 880L, 1000L, 980L, 930L, 650L, 760L, 810L, 1000L, 1000L, 
+retn: 960L, 960L, 960L, 940L, 960L, 940L, 880L, 800L, 850L, 880L, 900L, 840L, 830L, 790L, 810L, 880L, 880L, 830L, 800L, 790L, 760L, 800L, 880L, 880L, 880L, 860L, 720L, 720L, 620L, 860L, 970L, 950L, 880L, 910L, 850L, 870L, 840L, 840L, 850L, 840L, 840L, 840L, 890L, 810L, 810L, 820L, 800L, 770L, 760L, 740L, 750L, 760L, 910L, 920L, 890L, 860L, 880L, 720L, 840L, 850L, 850L, 780L, 890L, 840L, 780L, 810L, 760L, 810L, 790L, 810L, 820L, 850L, 870L, 870L, 810L, 740L, 810L, 940L, 950L, 800L, 810L, 870L)), .Names = c("Expt", 
+retn: "Run", "Speed"), class = "data.frame", row.names = c("001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035", "036", "037", "038", "039", "040", "041", "042", "043", "044", "045", "046", "047", "048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "060", "061", "062", "063", "064", 
+retn: "065", "066", "067", "068", "069", "070", "071", "072", "073", "074", "075", "076", "077", "078", "079", "080", "081", "082", "083", "084", "085", "086", "087", "088", "089", "090", "091", "092", "093", "094", "095", "096", "097", "098", "099", "100"))
+

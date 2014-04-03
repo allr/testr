@@ -1,0 +1,14 @@
+func: quote(topenv)
+body: function (envir = parent.frame(), matchThisEnv = getOption("topLevelEnvironment")) 
+body: {
+body:     while (!identical(envir, emptyenv())) {
+body:         nm <- attributes(envir)[["names", exact = TRUE]]
+body:         if ((is.character(nm) && length(grep("^package:", nm))) || identical(envir, matchThisEnv) || identical(envir, .GlobalEnv) || identical(envir, baseenv()) || .Internal(isNamespaceEnv(envir)) || exists(".packageName", envir = envir, inherits = FALSE)) 
+body:             return(envir)
+body:         else envir <- parent.env(envir)
+body:     }
+body:     return(.GlobalEnv)
+body: }
+args: list(<environment>)
+retn: <environment>
+

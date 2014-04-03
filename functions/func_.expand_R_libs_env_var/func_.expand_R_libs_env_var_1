@@ -1,0 +1,30 @@
+func: quote(.expand_R_libs_env_var)
+body: function (x) 
+body: {
+body:     v <- paste(R.version[c("major", "minor")], collapse = ".")
+body:     expand <- function(x, spec, expansion) gsub(paste0("(^|[^%])(%%)*%", spec), sprintf("\\1\\2%s", expansion), x)
+body:     x <- expand(x, "V", v)
+body:     x <- expand(x, "v", sub("\\.[^.]*$", "", v))
+body:     x <- expand(x, "p", R.version$platform)
+body:     x <- expand(x, "a", R.version$arch)
+body:     x <- expand(x, "o", R.version$os)
+body:     gsub("%%", "%", x)
+body: }
+args: list("")
+retn: ""
+
+func: quote(.expand_R_libs_env_var)
+body: function (x) 
+body: {
+body:     v <- paste(R.version[c("major", "minor")], collapse = ".")
+body:     expand <- function(x, spec, expansion) gsub(paste0("(^|[^%])(%%)*%", spec), sprintf("\\1\\2%s", expansion), x)
+body:     x <- expand(x, "V", v)
+body:     x <- expand(x, "v", sub("\\.[^.]*$", "", v))
+body:     x <- expand(x, "p", R.version$platform)
+body:     x <- expand(x, "a", R.version$arch)
+body:     x <- expand(x, "o", R.version$os)
+body:     gsub("%%", "%", x)
+body: }
+args: list("~/R/x86_64-unknown-linux-gnu-library/3.0")
+retn: "~/R/x86_64-unknown-linux-gnu-library/3.0"
+

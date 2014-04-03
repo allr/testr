@@ -1,0 +1,36 @@
+func: quote(nchar)
+body: function (x, type = "chars", allowNA = FALSE) 
+body: .Internal(nchar(x, type, allowNA))
+args: list("")
+retn: 0L
+
+func: quote(nchar)
+body: function (x, type = "chars", allowNA = FALSE) 
+body: .Internal(nchar(x, type, allowNA))
+args: list("C")
+retn: 1L
+
+func: quote(nchar)
+body: function (x, type = "chars", allowNA = FALSE) 
+body: .Internal(nchar(x, type, allowNA))
+args: list("x86_64-linux-gnu", "chars")
+retn: 16L
+
+func: quote(nchar)
+body: function (x, type = "chars", allowNA = FALSE) 
+body: .Internal(nchar(x, type, allowNA))
+args: list("a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a ", "chars")
+retn: 1200L
+
+func: quote(nchar)
+body: function (x, type = "chars", allowNA = FALSE) 
+body: .Internal(nchar(x, type, allowNA))
+args: list("integer(0)", "chars")
+retn: 10L
+
+func: quote(nchar)
+body: function (x, type = "chars", allowNA = FALSE) 
+body: .Internal(nchar(x, type, allowNA))
+args: list("FALSE", "chars")
+retn: 5L
+

@@ -1,0 +1,99 @@
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (.Object, ...) 
+args: {
+args:     .MlistDeprecated()
+args:     callNextMethod()
+args: }, target = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), generic = structure("initialize", package = "methods"), class = structure("MethodDefinition", package = "methods")), ".Data")
+retn: function (.Object, ...) 
+retn: {
+retn:     .MlistDeprecated()
+retn:     callNextMethod()
+retn: }
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (.Object, ...) 
+args: {
+args:     .MlistDeprecated()
+args:     callNextMethod()
+args: }, target = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), generic = structure("initialize", package = "methods"), class = structure("MethodDefinition", package = "methods")), "target")
+retn: structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods"))
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (.Object, ...) 
+args: {
+args:     .MlistDeprecated()
+args:     callNextMethod()
+args: }, target = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), generic = structure("initialize", package = "methods"), class = structure("MethodDefinition", package = "methods")), "defined")
+retn: structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods"))
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (.Object, ...) 
+args: {
+args:     .MlistDeprecated()
+args:     callNextMethod()
+args: }, target = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), generic = structure("initialize", package = "methods"), class = structure("MethodDefinition", package = "methods")), "generic")
+retn: structure("initialize", package = "methods")
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (method, fname, envir) 
+args: {
+args:     callNextMethod()
+args:     assign(".nextMethod", method@nextMethod, envir = envir)
+args:     method
+args: }, target = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), generic = structure("loadMethod", package = "methods"), class = structure("MethodDefinition", package = "methods")), ".Data")
+retn: function (method, fname, envir) 
+retn: {
+retn:     callNextMethod()
+retn:     assign(".nextMethod", method@nextMethod, envir = envir)
+retn:     method
+retn: }
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (method, fname, envir) 
+args: {
+args:     callNextMethod()
+args:     assign(".nextMethod", method@nextMethod, envir = envir)
+args:     method
+args: }, target = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), generic = structure("loadMethod", package = "methods"), class = structure("MethodDefinition", package = "methods")), "target")
+retn: structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods"))
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (method, fname, envir) 
+args: {
+args:     callNextMethod()
+args:     assign(".nextMethod", method@nextMethod, envir = envir)
+args:     method
+args: }, target = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), generic = structure("loadMethod", package = "methods"), class = structure("MethodDefinition", package = "methods")), "defined")
+retn: structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods"))
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: list(structure(function (method, fname, envir) 
+args: {
+args:     callNextMethod()
+args:     assign(".nextMethod", method@nextMethod, envir = envir)
+args:     method
+args: }, target = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), generic = structure("loadMethod", package = "methods"), class = structure("MethodDefinition", package = "methods")), "generic")
+retn: structure("loadMethod", package = "methods")
+
+func: quote(slot)
+body: function (object, name) 
+body: .Call(C_R_get_slot, object, name)
+args: <arguments too long, ignored>
+retn: <arguments too long, ignored>
+

@@ -1,0 +1,30 @@
+func: quote(extendrange)
+body: function (x, r = range(x, na.rm = TRUE), f = 0.05) 
+body: {
+body:     if (!missing(r) && length(r) != 2) 
+body:         stop("'r' must be a \"range\", hence of length 2")
+body:     r + c(-f, f) * diff(r)
+body: }
+args: list(NULL)
+retn: c(Inf, -Inf)
+
+func: quote(extendrange)
+body: function (x, r = range(x, na.rm = TRUE), f = 0.05) 
+body: {
+body:     if (!missing(r) && length(r) != 2) 
+body:         stop("'r' must be a \"range\", hence of length 2")
+body:     r + c(-f, f) * diff(r)
+body: }
+args: list(list())
+retn: c(Inf, -Inf)
+
+func: quote(extendrange)
+body: function (x, r = range(x, na.rm = TRUE), f = 0.05) 
+body: {
+body:     if (!missing(r) && length(r) != 2) 
+body:         stop("'r' must be a \"range\", hence of length 2")
+body:     r + c(-f, f) * diff(r)
+body: }
+args: list(FALSE)
+retn: c(0, 0)
+

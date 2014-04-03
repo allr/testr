@@ -1,0 +1,18 @@
+func: quote(IQR)
+body: function (x, na.rm = FALSE, type = 7) 
+body: diff(quantile(as.numeric(x), c(0.25, 0.75), na.rm = na.rm, names = FALSE, type = type))
+args: list(numeric(0))
+retn: NA_real_
+
+func: quote(IQR)
+body: function (x, na.rm = FALSE, type = 7) 
+body: diff(quantile(as.numeric(x), c(0.25, 0.75), na.rm = na.rm, names = FALSE, type = type))
+args: list(1)
+retn: 0
+
+func: quote(IQR)
+body: function (x, na.rm = FALSE, type = 7) 
+body: diff(quantile(as.numeric(x), c(0.25, 0.75), na.rm = na.rm, names = FALSE, type = type))
+args: list(0)
+retn: 0
+

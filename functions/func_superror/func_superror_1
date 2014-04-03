@@ -1,0 +1,899 @@
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, size, prob) 
+args: .External(C_rbinom, n, size, prob), function (q, size, prob, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pbinom, q, size, prob, lower.tail, log.p), 10000, size = 1, prob = 0.2)
+retn: 0.00140000000000007
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, size, prob) 
+args: .External(C_rbinom, n, size, prob), function (q, size, prob, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pbinom, q, size, prob, lower.tail, log.p), 10000, size = 2, prob = 0.2)
+retn: 0.00640000000000018
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, size, prob) 
+args: .External(C_rbinom, n, size, prob), function (q, size, prob, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pbinom, q, size, prob, lower.tail, log.p), 10000, size = 100, prob = 0.2)
+retn: 0.00893321802465841
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, size, prob) 
+args: .External(C_rbinom, n, size, prob), function (q, size, prob, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pbinom, q, size, prob, lower.tail, log.p), 10000, size = 10000, prob = 0.2)
+retn: 0.0108483581213358
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, size, prob) 
+args: .External(C_rbinom, n, size, prob), function (q, size, prob, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pbinom, q, size, prob, lower.tail, log.p), 10000, size = 1, prob = 0.8)
+retn: 0.000500000000000028
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, size, prob) 
+args: .External(C_rbinom, n, size, prob), function (q, size, prob, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pbinom, q, size, prob, lower.tail, log.p), 10000, size = 100, prob = 0.8)
+retn: 0.00723758459760171
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, size, prob) 
+args: .External(C_rbinom, n, size, prob), function (q, size, prob, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pbinom, q, size, prob, lower.tail, log.p), 10000, size = 100, prob = 0.999)
+retn: 0.00109214711370889
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, lambda) 
+args: .External(C_rpois, n, lambda), function (q, lambda, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_ppois, q, lambda, lower.tail, log.p), 10000, lambda = 0.095)
+retn: 0.00357293446823137
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, lambda) 
+args: .External(C_rpois, n, lambda), function (q, lambda, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_ppois, q, lambda, lower.tail, log.p), 10000, lambda = 0.95)
+retn: 0.00664102345450124
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, lambda) 
+args: .External(C_rpois, n, lambda), function (q, lambda, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_ppois, q, lambda, lower.tail, log.p), 10000, lambda = 9.5)
+retn: 0.00547651745506045
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, lambda) 
+args: .External(C_rpois, n, lambda), function (q, lambda, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_ppois, q, lambda, lower.tail, log.p), 10000, lambda = 95)
+retn: 0.0094228657885479
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: <arguments too long, ignored>
+retn: 0.00390000000000024
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, mean = 0, sd = 1) 
+args: .External(C_rnorm, n, mean, sd), function (q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pnorm, q, mean, sd, lower.tail, log.p), 10000)
+retn: 0.00844670033248018
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, mean = 0, sd = 1) 
+args: .External(C_rnorm, n, mean, sd), function (q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pnorm, q, mean, sd, lower.tail, log.p), 10000, mean = 5, sd = 3)
+retn: 0.00424749956122243
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 40, n = 30, k = 20)
+retn: 0.00385659016196715
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 40, n = 3, k = 20)
+retn: 0.0038946114577425
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 6, n = 3, k = 2)
+retn: 0.00406666666666669
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 5, n = 3, k = 2)
+retn: 0.00614285714285717
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 4, n = 3, k = 2)
+retn: 0.00495714285714285
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, n) 
+args: .External(C_rsignrank, nn, n), function (q, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_signrank_free))
+args:     .External(C_psignrank, q, n, lower.tail, log.p)
+args: }, 10000, n = 1)
+retn: 0.0086
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, n) 
+args: .External(C_rsignrank, nn, n), function (q, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_signrank_free))
+args:     .External(C_psignrank, q, n, lower.tail, log.p)
+args: }, 10000, n = 2)
+retn: 0.00380000000000003
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, n) 
+args: .External(C_rsignrank, nn, n), function (q, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_signrank_free))
+args:     .External(C_psignrank, q, n, lower.tail, log.p)
+args: }, 10000, n = 10)
+retn: 0.00925625000000002
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, n) 
+args: .External(C_rsignrank, nn, n), function (q, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_signrank_free))
+args:     .External(C_psignrank, q, n, lower.tail, log.p)
+args: }, 10000, n = 30)
+retn: 0.00510066597461695
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n) 
+args: .External(C_rwilcox, nn, m, n), function (q, m, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_wilcox_free))
+args:     .External(C_pwilcox, q, m, n, lower.tail, log.p)
+args: }, 10000, m = 40, n = 30)
+retn: 0.00998270638804677
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n) 
+args: .External(C_rwilcox, nn, m, n), function (q, m, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_wilcox_free))
+args:     .External(C_pwilcox, q, m, n, lower.tail, log.p)
+args: }, 10000, m = 40, n = 10)
+retn: 0.00826008988831739
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n) 
+args: .External(C_rwilcox, nn, m, n), function (q, m, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_wilcox_free))
+args:     .External(C_pwilcox, q, m, n, lower.tail, log.p)
+args: }, 10000, m = 6, n = 3)
+retn: 0.00950952380952375
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n) 
+args: .External(C_rwilcox, nn, m, n), function (q, m, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_wilcox_free))
+args:     .External(C_pwilcox, q, m, n, lower.tail, log.p)
+args: }, 10000, m = 5, n = 3)
+retn: 0.00732857142857143
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n) 
+args: .External(C_rwilcox, nn, m, n), function (q, m, n, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     on.exit(.External(C_wilcox_free))
+args:     .External(C_pwilcox, q, m, n, lower.tail, log.p)
+args: }, 10000, m = 4, n = 3)
+retn: 0.0045857142857143
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df, ncp = 0) 
+args: {
+args:     if (missing(ncp)) .External(C_rchisq, n, df) else .External(C_rnchisq, n, df, ncp)
+args: }, function (q, df, ncp = 0, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pchisq, q, df, lower.tail, log.p) else .External(C_pnchisq, q, df, ncp, lower.tail, log.p)
+args: }, 10000, df = 1)
+retn: 0.00927454646532788
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df, ncp = 0) 
+args: {
+args:     if (missing(ncp)) .External(C_rchisq, n, df) else .External(C_rnchisq, n, df, ncp)
+args: }, function (q, df, ncp = 0, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pchisq, q, df, lower.tail, log.p) else .External(C_pnchisq, q, df, ncp, lower.tail, log.p)
+args: }, 10000, df = 10)
+retn: 0.00572492249384271
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, location = 0, scale = 1) 
+args: .External(C_rlogis, n, location, scale), function (q, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_plogis, q, location, scale, lower.tail, log.p), 10000)
+retn: 0.00715846518274596
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, location = 0, scale = 1) 
+args: .External(C_rlogis, n, location, scale), function (q, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_plogis, q, location, scale, lower.tail, log.p), 10000, location = 4, scale = 2)
+retn: 0.00784192322237753
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rt, n, df) else rnorm(n, ncp)/sqrt(rchisq(n, df)/df)
+args: }, function (q, df, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pt, q, df, lower.tail, log.p) else .External(C_pnt, q, df, ncp, lower.tail, log.p)
+args: }, 10000, df = 1)
+retn: 0.012831547773755
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rt, n, df) else rnorm(n, ncp)/sqrt(rchisq(n, df)/df)
+args: }, function (q, df, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pt, q, df, lower.tail, log.p) else .External(C_pnt, q, df, ncp, lower.tail, log.p)
+args: }, 10000, df = 10)
+retn: 0.00701578618677356
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rt, n, df) else rnorm(n, ncp)/sqrt(rchisq(n, df)/df)
+args: }, function (q, df, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pt, q, df, lower.tail, log.p) else .External(C_pnt, q, df, ncp, lower.tail, log.p)
+args: }, 10000, df = 40)
+retn: 0.00915007047268168
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, shape1, shape2, ncp = 0) 
+args: {
+args:     if (ncp == 0) .External(C_rbeta, n, shape1, shape2) else {
+args:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+args:         X/(X + rchisq(n, 2 * shape2))
+args:     }
+args: }, function (q, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pbeta, q, shape1, shape2, lower.tail, log.p) else .External(C_pnbeta, q, shape1, shape2, ncp, lower.tail, log.p)
+args: }, 10000, shape1 = 1, shape2 = 1)
+retn: 0.00786067551899999
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, shape1, shape2, ncp = 0) 
+args: {
+args:     if (ncp == 0) .External(C_rbeta, n, shape1, shape2) else {
+args:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+args:         X/(X + rchisq(n, 2 * shape2))
+args:     }
+args: }, function (q, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pbeta, q, shape1, shape2, lower.tail, log.p) else .External(C_pnbeta, q, shape1, shape2, ncp, lower.tail, log.p)
+args: }, 10000, shape1 = 2, shape2 = 1)
+retn: 0.00868157777880255
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, shape1, shape2, ncp = 0) 
+args: {
+args:     if (ncp == 0) .External(C_rbeta, n, shape1, shape2) else {
+args:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+args:         X/(X + rchisq(n, 2 * shape2))
+args:     }
+args: }, function (q, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pbeta, q, shape1, shape2, lower.tail, log.p) else .External(C_pnbeta, q, shape1, shape2, ncp, lower.tail, log.p)
+args: }, 10000, shape1 = 1, shape2 = 2)
+retn: 0.00562246616118695
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, shape1, shape2, ncp = 0) 
+args: {
+args:     if (ncp == 0) .External(C_rbeta, n, shape1, shape2) else {
+args:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+args:         X/(X + rchisq(n, 2 * shape2))
+args:     }
+args: }, function (q, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pbeta, q, shape1, shape2, lower.tail, log.p) else .External(C_pnbeta, q, shape1, shape2, ncp, lower.tail, log.p)
+args: }, 10000, shape1 = 2, shape2 = 2)
+retn: 0.013883068389031
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, shape1, shape2, ncp = 0) 
+args: {
+args:     if (ncp == 0) .External(C_rbeta, n, shape1, shape2) else {
+args:         X <- rchisq(n, 2 * shape1, ncp = ncp)
+args:         X/(X + rchisq(n, 2 * shape2))
+args:     }
+args: }, function (q, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pbeta, q, shape1, shape2, lower.tail, log.p) else .External(C_pnbeta, q, shape1, shape2, ncp, lower.tail, log.p)
+args: }, 10000, shape1 = 0.2, shape2 = 0.2)
+retn: 0.00984483714896123
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, location = 0, scale = 1) 
+args: .External(C_rcauchy, n, location, scale), function (q, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pcauchy, q, location, scale, lower.tail, log.p), 10000)
+retn: 0.00760482446439367
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, location = 0, scale = 1) 
+args: .External(C_rcauchy, n, location, scale), function (q, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pcauchy, q, location, scale, lower.tail, log.p), 10000, location = 4, scale = 2)
+retn: 0.00661012512463932
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df1, df2, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rf, n, df1, df2) else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+args: }, function (q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pf, q, df1, df2, lower.tail, log.p) else .External(C_pnf, q, df1, df2, ncp, lower.tail, log.p)
+args: }, 10000, df1 = 1, df2 = 1)
+retn: 0.00676696639862151
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df1, df2, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rf, n, df1, df2) else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+args: }, function (q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pf, q, df1, df2, lower.tail, log.p) else .External(C_pnf, q, df1, df2, ncp, lower.tail, log.p)
+args: }, 10000, df1 = 1, df2 = 10)
+retn: 0.00929821631558392
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df1, df2, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rf, n, df1, df2) else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+args: }, function (q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pf, q, df1, df2, lower.tail, log.p) else .External(C_pnf, q, df1, df2, ncp, lower.tail, log.p)
+args: }, 10000, df1 = 10, df2 = 10)
+retn: 0.00573339219727509
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df1, df2, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rf, n, df1, df2) else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+args: }, function (q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pf, q, df1, df2, lower.tail, log.p) else .External(C_pnf, q, df1, df2, ncp, lower.tail, log.p)
+args: }, 10000, df1 = 30, df2 = 3)
+retn: 0.00731440120495019
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, shape, scale = 1) 
+args: .External(C_rweibull, n, shape, scale), function (q, shape, scale = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pweibull, q, shape, scale, lower.tail, log.p), 10000, shape = 1)
+retn: 0.00634229975545841
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, shape, scale = 1) 
+args: .External(C_rweibull, n, shape, scale), function (q, shape, scale = 1, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_pweibull, q, shape, scale, lower.tail, log.p), 10000, shape = 4, scale = 4)
+retn: 0.00480974551898727
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 60, n = 100, k = 50)
+retn: 0.00734461270230979
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 6, n = 10, k = 5)
+retn: 0.00815824175824154
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (nn, m, n, k) 
+args: .External(C_rhyper, nn, m, n, k), function (q, m, n, k, lower.tail = TRUE, log.p = FALSE) 
+args: .External(C_phyper, q, m, n, k, lower.tail, log.p), 10000, m = 600, n = 1000, k = 500)
+retn: 0.00579104361432739
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rt, n, df) else rnorm(n, ncp)/sqrt(rchisq(n, df)/df)
+args: }, function (q, df, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pt, q, df, lower.tail, log.p) else .External(C_pnt, q, df, ncp, lower.tail, log.p)
+args: }, 10000, df = 20, ncp = 3)
+retn: 0.00844758248707456
+
+func: quote(superror)
+body: function (rfoo, pfoo, sample.size, ...) 
+body: {
+body:     x <- rfoo(sample.size, ...)
+body:     tx <- table(signif(x, 12))
+body:     xi <- as.numeric(names(tx))
+body:     f <- pfoo(xi, ...)
+body:     fhat <- cumsum(tx)/sample.size
+body:     max(abs(fhat - f))
+body: }
+args: list(function (n, df1, df2, ncp) 
+args: {
+args:     if (missing(ncp)) .External(C_rf, n, df1, df2) else (rchisq(n, df1, ncp = ncp)/df1)/(rchisq(n, df2)/df2)
+args: }, function (q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE) 
+args: {
+args:     if (missing(ncp)) .External(C_pf, q, df1, df2, lower.tail, log.p) else .External(C_pnf, q, df1, df2, ncp, lower.tail, log.p)
+args: }, 10000, df1 = 10, df2 = 2, ncp = 3)
+retn: 0.00597281518770321
+

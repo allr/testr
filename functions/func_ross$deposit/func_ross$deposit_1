@@ -1,0 +1,11 @@
+func: quote(ross$deposit)
+body: function (amount) 
+body: {
+body:     if (amount <= 0) 
+body:         stop("Deposits must be positive!\n")
+body:     total <<- total + amount
+body:     cat(amount, "deposited. Your balance is", total, "\n\n")
+body: }
+args: list(50)
+retn: NULL
+

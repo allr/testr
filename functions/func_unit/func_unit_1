@@ -1,0 +1,156 @@
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(0.25, "inches")
+retn: structure(0.25, unit = "inches", valid.unit = 2L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(0.5, "npc")
+retn: structure(0.5, unit = "npc", valid.unit = 0L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(1, "npc")
+retn: structure(1, unit = "npc", valid.unit = 0L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(c(0.25, 0.5, 0.75), "npc")
+retn: structure(c(0.25, 0.5, 0.75), unit = "npc", valid.unit = 0L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(1, "null")
+retn: structure(1, unit = "null", valid.unit = 5L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(0.5, "lines")
+retn: structure(0.5, unit = "lines", valid.unit = 3L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(1, "char")
+retn: structure(1, unit = "char", valid.unit = 18L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(c(0, 1), "npc")
+retn: structure(c(0, 1), unit = "npc", valid.unit = 0L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(c(1, 1), "null")
+retn: structure(c(1, 1), unit = "null", valid.unit = 5L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(c(1, 1, 1, 1, 1), "null")
+retn: structure(c(1, 1, 1, 1, 1), unit = "null", valid.unit = 5L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(0.1, "snpc")
+retn: structure(0.1, unit = "snpc", valid.unit = 6L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(0, "npc")
+retn: structure(0, unit = "npc", valid.unit = 0L, class = "unit")
+
+func: quote(unit)
+body: function (x, units, data = NULL) 
+body: {
+body:     x <- as.numeric(x)
+body:     units <- as.character(units)
+body:     if (length(x) == 0 || length(units) == 0) 
+body:         stop("'x' and 'units' must have length > 0")
+body:     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
+body: }
+args: list(c(1, 1, 1), "null")
+retn: structure(c(1, 1, 1), unit = "null", valid.unit = 5L, class = "unit")
+

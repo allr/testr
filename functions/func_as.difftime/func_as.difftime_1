@@ -1,0 +1,42 @@
+func: quote(as.difftime)
+body: function (tim, format = "%X", units = "auto") 
+body: {
+body:     if (inherits(tim, "difftime")) 
+body:         return(tim)
+body:     if (is.character(tim)) {
+body:         difftime(strptime(tim, format = format), strptime("0:0:0", format = "%X"), units = units)
+body:     }
+body:     else {
+body:         if (!is.numeric(tim)) 
+body:             stop("'tim' is not character or numeric")
+body:         if (units == "auto") 
+body:             stop("need explicit units for numeric conversion")
+body:         if (!(units %in% c("secs", "mins", "hours", "days", "weeks"))) 
+body:             stop("invalid units specified")
+body:         structure(tim, units = units, class = "difftime")
+body:     }
+body: }
+args: list("1.3")
+retn: structure(NA_real_, tzone = "", units = "secs", class = "difftime")
+
+func: quote(as.difftime)
+body: function (tim, format = "%X", units = "auto") 
+body: {
+body:     if (inherits(tim, "difftime")) 
+body:         return(tim)
+body:     if (is.character(tim)) {
+body:         difftime(strptime(tim, format = format), strptime("0:0:0", format = "%X"), units = units)
+body:     }
+body:     else {
+body:         if (!is.numeric(tim)) 
+body:             stop("'tim' is not character or numeric")
+body:         if (units == "auto") 
+body:             stop("need explicit units for numeric conversion")
+body:         if (!(units %in% c("secs", "mins", "hours", "days", "weeks"))) 
+body:             stop("invalid units specified")
+body:         structure(tim, units = units, class = "difftime")
+body:     }
+body: }
+args: list(structure(NA_real_, tzone = "", units = "secs", class = "difftime"))
+retn: structure(NA_real_, tzone = "", units = "secs", class = "difftime")
+

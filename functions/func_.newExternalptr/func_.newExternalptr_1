@@ -1,0 +1,6 @@
+func: quote(.newExternalptr)
+body: function () 
+body: .Call(C_R_externalptr_prototype_object)
+args: NULL
+retn: <pointer: 0x2aaaad4e59ac>
+

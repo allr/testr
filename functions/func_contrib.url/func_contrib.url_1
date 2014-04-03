@@ -1,0 +1,66 @@
+func: quote(contrib.url)
+body: function (repos, type = getOption("pkgType")) 
+body: {
+body:     if (type == "both") 
+body:         type <- "source"
+body:     if (is.null(repos)) 
+body:         return(NULL)
+body:     if ("@CRAN@" %in% repos && interactive()) {
+body:         cat(gettext("--- Please select a CRAN mirror for use in this session ---"), "\n", sep = "")
+body:         flush.console()
+body:         chooseCRANmirror()
+body:         m <- match("@CRAN@", repos)
+body:         nm <- names(repos)
+body:         repos[m] <- getOption("repos")["CRAN"]
+body:         if (is.null(nm)) 
+body:             nm <- rep("", length(repos))
+body:         nm[m] <- "CRAN"
+body:         names(repos) <- nm
+body:     }
+body:     if ("@CRAN@" %in% repos) 
+body:         stop("trying to use CRAN without setting a mirror")
+body:     ver <- paste(R.version$major, strsplit(R.version$minor, ".", fixed = TRUE)[[1L]][1L], sep = ".")
+body:     mac.path <- "macosx"
+body:     if (substr(type, 1L, 11L) == "mac.binary.") {
+body:         mac.path <- paste(mac.path, substring(type, 12L), sep = "/")
+body:         type <- "mac.binary"
+body:     }
+body:     res <- switch(type, source = paste(gsub("/$", "", repos), "src", "contrib", sep = "/"), mac.binary = paste(gsub("/$", "", repos), "bin", mac.path, "contrib", ver, sep = "/"), win.binary = paste(gsub("/$", "", repos), "bin", "windows", "contrib", ver, sep = "/"))
+body:     res
+body: }
+args: list(list(), "source")
+retn: "/src/contrib"
+
+func: quote(contrib.url)
+body: function (repos, type = getOption("pkgType")) 
+body: {
+body:     if (type == "both") 
+body:         type <- "source"
+body:     if (is.null(repos)) 
+body:         return(NULL)
+body:     if ("@CRAN@" %in% repos && interactive()) {
+body:         cat(gettext("--- Please select a CRAN mirror for use in this session ---"), "\n", sep = "")
+body:         flush.console()
+body:         chooseCRANmirror()
+body:         m <- match("@CRAN@", repos)
+body:         nm <- names(repos)
+body:         repos[m] <- getOption("repos")["CRAN"]
+body:         if (is.null(nm)) 
+body:             nm <- rep("", length(repos))
+body:         nm[m] <- "CRAN"
+body:         names(repos) <- nm
+body:     }
+body:     if ("@CRAN@" %in% repos) 
+body:         stop("trying to use CRAN without setting a mirror")
+body:     ver <- paste(R.version$major, strsplit(R.version$minor, ".", fixed = TRUE)[[1L]][1L], sep = ".")
+body:     mac.path <- "macosx"
+body:     if (substr(type, 1L, 11L) == "mac.binary.") {
+body:         mac.path <- paste(mac.path, substring(type, 12L), sep = "/")
+body:         type <- "mac.binary"
+body:     }
+body:     res <- switch(type, source = paste(gsub("/$", "", repos), "src", "contrib", sep = "/"), mac.binary = paste(gsub("/$", "", repos), "bin", mac.path, "contrib", ver, sep = "/"), win.binary = paste(gsub("/$", "", repos), "bin", "windows", "contrib", ver, sep = "/"))
+body:     res
+body: }
+args: list(NULL, "source")
+retn: NULL
+

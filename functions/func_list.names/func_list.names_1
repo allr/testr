@@ -1,0 +1,191 @@
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: <arguments too long, ignored>
+retn: ""
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(NULL)
+retn: ""
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(NULL, NULL)
+retn: c("", "")
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(list())
+retn: ""
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(FALSE)
+retn: ""
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(FALSE, FALSE)
+retn: c("", "")
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(c(1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L, 1L, 2L, 3L, 4L, 5L), structure(c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L), .Label = c("1", 
+args: "2", "3", "4", "5", "6"), class = "factor"))
+retn: c("blocks", "varieties")
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(structure(c(6L, 5L, 4L, 2L, 2L, 3L, 8L, 8L, 4L, 7L, 2L, 7L, 4L, 4L, 5L, 6L, 5L, 3L, 8L, 7L, 4L, 2L, 2L, 8L, 5L, 1L, 2L, 7L, 7L, 1L), .Label = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"), class = "factor"))
+retn: "statef"
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(structure(c(3L, 2L, 1L, 3L, 3L, 3L, 3L, 2L, 3L, 4L, 4L, 1L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 3L, 2L, 2L, 1L, 2L, 2L, 2L, 3L, 2L, 3L, 1L), .Label = c("(35,45]", "(45,55]", "(55,65]", "(65,75]"), class = "factor"), structure(c(6L, 5L, 4L, 2L, 2L, 3L, 8L, 8L, 4L, 7L, 2L, 7L, 4L, 4L, 5L, 6L, 5L, 3L, 8L, 7L, 4L, 2L, 2L, 8L, 5L, 1L, 2L, 7L, 7L, 1L), .Label = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"), class = "factor"))
+retn: c("incomef", "statef")
+
+func: quote(list.names)
+body: function (...) 
+body: {
+body:     l <- as.list(substitute(list(...)))[-1L]
+body:     nm <- names(l)
+body:     fixup <- if (is.null(nm)) 
+body:         seq_along(l)
+body:     else nm == ""
+body:     dep <- vapply(l[fixup], function(x) switch(deparse.level + 1, "", if (is.symbol(x)) as.character(x) else "", deparse(x, nlines = 1)[1L]), "")
+body:     if (is.null(nm)) 
+body:         dep
+body:     else {
+body:         nm[fixup] <- dep
+body:         nm
+body:     }
+body: }
+args: list(c(7.5, 19, 11.5, 19, 15.5, 15.5, 19, 4.5, 21, 15.5, 11.5, 9, 11.5, 11.5, 1, 7.5, 4.5, 4.5, 15.5, 2, 4.5))
+retn: "r"
+

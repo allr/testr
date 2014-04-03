@@ -1,0 +1,73 @@
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(10, 6)
+retn: c(10, 10, 10, 10, 10, 10)
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(1:6, c(10, 10, 10, 10, 10, 10))
+retn: c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 5L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L, 6L)
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(10L, 5L)
+retn: c(10L, 10L, 10L, 10L, 10L)
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(100L, 100L)
+retn: c(100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 
+retn: 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L)
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(" ", 1)
+retn: " "
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(FALSE, FALSE)
+retn: logical(0)
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(1, 1L)
+retn: 1
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(4L, 1L)
+retn: 4L
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(4L, 2L)
+retn: c(4L, 4L)
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(1L, 1L)
+retn: 1L
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(1, 0L)
+retn: numeric(0)
+
+func: quote(rep.int)
+body: function (x, times) 
+body: .Internal(rep.int(x, times))
+args: list(0L, 0L)
+retn: integer(0)
+

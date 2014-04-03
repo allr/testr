@@ -1,0 +1,1203 @@
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (.Object, ...) 
+args: {
+args:     .MlistDeprecated()
+args:     callNextMethod()
+args: }, target = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodsList", .Names = ".Object", package = "methods", class = structure("signature", package = "methods")), generic = structure("initialize", package = "methods"), class = structure("MethodDefinition", package = "methods")))
+retn: function (.Object, ...) 
+retn: {
+retn:     .MlistDeprecated()
+retn:     callNextMethod()
+retn: }
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: <arguments too long, ignored>
+retn: function (.Object, ...) 
+retn: {
+retn:     .MlistDeprecated()
+retn:     callNextMethod()
+retn: }
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (method, fname, envir) 
+args: {
+args:     callNextMethod()
+args:     assign(".nextMethod", method@nextMethod, envir = envir)
+args:     method
+args: }, target = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), defined = structure("MethodWithNext", .Names = "method", package = "methods", class = structure("signature", package = "methods")), generic = structure("loadMethod", package = "methods"), class = structure("MethodDefinition", package = "methods")))
+retn: function (method, fname, envir) 
+retn: {
+retn:     callNextMethod()
+retn:     assign(".nextMethod", method@nextMethod, envir = envir)
+retn:     method
+retn: }
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(c("!=", "$", "$<-", "%%", "%/%", "&", "*", "+", "-", "/", "<", "<=", "==", ">", ">=", "Arith", "Compare", "Complex", "Logic", "Math", "Math2", "Ops", "Summary", "[", "^", "abs", "acos", "acosh", "addNextMethod", "asin", "asinh", "atan", "atanh", "body<-", "cbind2", "ceiling", "coerce", "coerce<-", "cos", "cosh", "cummax", "cummin", "cumprod", "cumsum", "digamma", "exp", "expm1", "floor", "gamma", "initialize", "kronecker", "lgamma", "loadMethod", "log", "log10", "log1p", "log2", "rbind2", 
+args: "round", "show", "sign", "signif", "sin", "sinh", "slotsFromS3", "sqrt", "tan", "tanh", "trigamma", "trunc", "|"), package = c("base", "base", "base", "base", "base", "base", "base", "base", "base", "base", "base", "base", "base", "base", "base", "base", "methods", "base", "base", "base", "methods", "base", "base", "base", "base", "base", "base", "base", "methods", "base", "base", "base", "base", "base", "methods", "base", "methods", "methods", "base", "base", "base", "base", "base", "base", "base", 
+args: "base", "base", "base", "base", "methods", "base", "base", "methods", "base", "base", "base", "base", "methods", "base", "methods", "base", "base", "base", "base", "methods", "base", "base", "base", "base", "base", "base"), class = structure("ObjectsWithPackage", package = "methods")))
+retn: c("!=", "$", "$<-", "%%", "%/%", "&", "*", "+", "-", "/", "<", "<=", "==", ">", ">=", "Arith", "Compare", "Complex", "Logic", "Math", "Math2", "Ops", "Summary", "[", "^", "abs", "acos", "acosh", "addNextMethod", "asin", "asinh", "atan", "atanh", "body<-", "cbind2", "ceiling", "coerce", "coerce<-", "cos", "cosh", "cummax", "cummin", "cumprod", "cumsum", "digamma", "exp", "expm1", "floor", "gamma", "initialize", "kronecker", "lgamma", "loadMethod", "log", "log10", "log1p", "log2", "rbind2", "round", 
+retn: "show", "sign", "signif", "sin", "sinh", "slotsFromS3", "sqrt", "tan", "tanh", "trigamma", "trunc", "|")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(character(0), package = character(0), class = structure("ObjectsWithPackage", package = "methods")))
+retn: character(0)
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ..., k = 2) 
+args: UseMethod("AIC"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ..., k = 2) 
+retn: UseMethod("AIC")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ..., k = 2) 
+args: standardGeneric("AIC"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ..., k = 2) 
+retn: standardGeneric("AIC")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: UseMethod("BIC"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: UseMethod("BIC")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: standardGeneric("BIC"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: standardGeneric("BIC")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: UseMethod("coef"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: UseMethod("coef")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: standardGeneric("coef"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: standardGeneric("coef")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, parm, level = 0.95, ...) 
+args: UseMethod("confint"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, parm, level = 0.95, ...) 
+retn: UseMethod("confint")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, parm, level = 0.95, ...) 
+args: standardGeneric("confint"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, parm, level = 0.95, ...) 
+retn: standardGeneric("confint")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: UseMethod("logLik"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: UseMethod("logLik")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: standardGeneric("logLik"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: standardGeneric("logLik")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: UseMethod("nobs"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: UseMethod("nobs")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: standardGeneric("nobs"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: standardGeneric("nobs")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (x, y, ...) 
+args: UseMethod("plot"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "x", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "x", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (x, y, ...) 
+retn: UseMethod("plot")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (x, y, ...) 
+args: standardGeneric("plot"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "x", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "x", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (x, y, ...) 
+retn: standardGeneric("plot")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (fitted, ...) 
+args: UseMethod("profile"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "fitted", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "fitted", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (fitted, ...) 
+retn: UseMethod("profile")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (fitted, ...) 
+args: standardGeneric("profile"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "fitted", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "fitted", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (fitted, ...) 
+retn: standardGeneric("profile")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: UseMethod("summary"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: UseMethod("summary")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: standardGeneric("summary"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: standardGeneric("summary")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: UseMethod("update"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: UseMethod("update")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: standardGeneric("update"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: standardGeneric("update")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: UseMethod("vcov"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: UseMethod("vcov")
+
+func: quote(getDataPart)
+body: function (object) 
+body: {
+body:     if (identical(typeof(object), "S4")) {
+body:         value <- attr(object, ".Data")
+body:         if (is.null(value)) {
+body:             value <- attr(object, ".xData")
+body:             if (is.null(value)) 
+body:                 stop("Data part is undefined for general S4 object")
+body:         }
+body:         if (identical(value, .pseudoNULL)) 
+body:             return(NULL)
+body:         else return(value)
+body:     }
+body:     temp <- getClass(class(object))@slots
+body:     if (length(temp) == 0L) 
+body:         return(object)
+body:     if (is.na(match(".Data", names(temp)))) 
+body:         stop(gettextf("no '.Data' slot defined for class %s", dQuote(class(object))), domain = NA)
+body:     dataPart <- temp[[".Data"]]
+body:     switch(dataPart, numeric = , vector = , integer = , character = , logical = , complex = , list = attributes(object) <- NULL, matrix = , array = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "dim") <- attr(object, "dim")
+body:         attr(value, "dimnames") <- attr(object, "dimnames")
+body:         object <- value
+body:     }, ts = {
+body:         value <- object
+body:         attributes(value) <- NULL
+body:         attr(value, "ts") <- attr(object, "ts")
+body:         object <- value
+body:     }, if (is.na(match(dataPart, .BasicClasses))) {
+body:         attrVals <- attributes(object)
+body:         attrs <- names(attrVals)
+body:         attrs <- attrs[is.na(match(attrs, c("class", names(temp))))]
+body:         attributes(object) <- attrVals[attrs]
+body:     } else attributes(object) <- NULL)
+body:     object
+body: }
+args: list(structure(function (object, ...) 
+args: standardGeneric("vcov"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "object", package = "methods"), generic = character(0), class = structure("MethodDefinition", package = "methods")))
+retn: function (object, ...) 
+retn: standardGeneric("vcov")
+

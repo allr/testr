@@ -1,0 +1,64 @@
+func: quote(factor)
+body: function (x = character(), levels, labels = levels, exclude = NA, ordered = is.ordered(x), nmax = NA) 
+body: {
+body:     if (is.null(x)) 
+body:         x <- character()
+body:     nx <- names(x)
+body:     if (missing(levels)) {
+body:         y <- unique(x, nmax = nmax)
+body:         ind <- sort.list(y)
+body:         y <- as.character(y)
+body:         levels <- unique(y[ind])
+body:     }
+body:     force(ordered)
+body:     exclude <- as.vector(exclude, typeof(x))
+body:     x <- as.character(x)
+body:     levels <- levels[is.na(match(levels, exclude))]
+body:     f <- match(x, levels)
+body:     if (!is.null(nx)) 
+body:         names(f) <- nx
+body:     nl <- length(labels)
+body:     nL <- length(levels)
+body:     if (!any(nl == c(1L, nL))) 
+body:         stop(gettextf("invalid 'labels'; length %d should be 1 or %d", nl, nL), domain = NA)
+body:     levels(f) <- if (nl == nL) 
+body:         as.character(labels)
+body:     else paste0(labels, seq_along(levels))
+body:     class(f) <- c(if (ordered) "ordered", "factor")
+body:     f
+body: }
+args: list(c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld", "vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt", "wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw", "vic", "vic", "act"))
+retn: structure(c(6L, 5L, 4L, 2L, 2L, 3L, 8L, 8L, 4L, 7L, 2L, 7L, 4L, 4L, 5L, 6L, 5L, 3L, 8L, 7L, 4L, 2L, 2L, 8L, 5L, 1L, 2L, 7L, 7L, 1L), .Label = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"), class = "factor")
+
+func: quote(factor)
+body: function (x = character(), levels, labels = levels, exclude = NA, ordered = is.ordered(x), nmax = NA) 
+body: {
+body:     if (is.null(x)) 
+body:         x <- character()
+body:     nx <- names(x)
+body:     if (missing(levels)) {
+body:         y <- unique(x, nmax = nmax)
+body:         ind <- sort.list(y)
+body:         y <- as.character(y)
+body:         levels <- unique(y[ind])
+body:     }
+body:     force(ordered)
+body:     exclude <- as.vector(exclude, typeof(x))
+body:     x <- as.character(x)
+body:     levels <- levels[is.na(match(levels, exclude))]
+body:     f <- match(x, levels)
+body:     if (!is.null(nx)) 
+body:         names(f) <- nx
+body:     nl <- length(labels)
+body:     nL <- length(levels)
+body:     if (!any(nl == c(1L, nL))) 
+body:         stop(gettextf("invalid 'labels'; length %d should be 1 or %d", nl, nL), domain = NA)
+body:     levels(f) <- if (nl == nL) 
+body:         as.character(labels)
+body:     else paste0(labels, seq_along(levels))
+body:     class(f) <- c(if (ordered) "ordered", "factor")
+body:     f
+body: }
+args: list(structure(c(3L, 2L, 1L, 3L, 3L, 3L, 3L, 2L, 3L, 4L, 4L, 1L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 3L, 2L, 2L, 1L, 2L, 2L, 2L, 3L, 2L, 3L, 1L), .Label = c("(35,45]", "(45,55]", "(55,65]", "(65,75]", "(75,85]", "(85,95]", "(95,105]"), class = "factor"))
+retn: structure(c(3L, 2L, 1L, 3L, 3L, 3L, 3L, 2L, 3L, 4L, 4L, 1L, 3L, 3L, 3L, 3L, 3L, 2L, 2L, 3L, 2L, 2L, 1L, 2L, 2L, 2L, 3L, 2L, 3L, 1L), .Label = c("(35,45]", "(45,55]", "(55,65]", "(65,75]"), class = "factor")
+

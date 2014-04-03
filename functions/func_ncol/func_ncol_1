@@ -1,0 +1,126 @@
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(list(), .Dim = 0:1))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(logical(0), .Dim = 0:1))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(character(0), .Dim = 0:1))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(logical(0), .Dim = 0:1, .Dimnames = list(NULL, "c0")))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(FALSE, .Dim = c(1L, 1L)))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(NULL)
+retn: NULL
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(FALSE)
+retn: NULL
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(integer(0), .Dim = c(1L, 0L), class = "ftable", row.vars = structure(list(), .Names = character(0)), col.vars = structure(list(NULL), .Names = "")))
+retn: 0L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(c("", "", ""), .Dim = c(3L, 1L)))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(integer(0), .Dim = c(1L, 0L), class = "ftable", row.vars = structure(list(), .Names = character(0)), col.vars = structure(list(l0 = NULL), .Names = "l0")))
+retn: 0L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(c("l0", "  ", "  "), .Dim = c(3L, 1L)))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(integer(0), .Dim = c(1L, 0L), class = "ftable", row.vars = structure(list(), .Names = character(0)), col.vars = structure(list(c0 = NULL), .Names = "c0")))
+retn: 0L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(c("c0", "  ", "  "), .Dim = c(3L, 1L)))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(integer(0), .Dim = c(1L, 0L), class = "ftable", row.vars = structure(list(), .Names = character(0)), col.vars = structure(list(m0 = NULL), .Names = "m0")))
+retn: 0L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(c("m0", "  ", "  "), .Dim = c(3L, 1L)))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(integer(0), .Dim = c(1L, 0L), class = "ftable", row.vars = structure(list(), .Names = character(0)), col.vars = structure(list(df0 = NULL), .Names = "df0")))
+retn: 0L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(c("df0", "   ", "   "), .Dim = c(3L, 1L)))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(1L, .Dim = c(1L, 1L), class = "ftable", row.vars = structure(list(), .Names = character(0)), col.vars = structure(list("FALSE"), .Names = "")))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(c("", "", "", "FALSE", "     ", "    1"), .Dim = c(3L, 2L)))
+retn: 2L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(1L, .Dim = c(1L, 1L), class = "ftable", row.vars = structure(list("FALSE"), .Names = ""), col.vars = structure(list("FALSE"), .Names = "")))
+retn: 1L
+
+func: quote(ncol)
+body: function (x) 
+body: dim(x)[2L]
+args: list(structure(c("     ", "     ", "FALSE", "", "", "", "FALSE", "     ", "    1"), .Dim = c(3L, 3L)))
+retn: 3L
+

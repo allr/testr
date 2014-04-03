@@ -1,0 +1,60 @@
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(c(6L, 5L, 4L, 2L, 2L, 3L, 8L, 8L, 4L, 7L), trim = TRUE, drop0trailing = TRUE)
+retn: c("6", "5", "4", "2", "2", "3", "8", "8", "4", "7")
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(c(60, 49, 40, 61, 64, 60, 59, 54, 62, 69), trim = TRUE, drop0trailing = TRUE)
+retn: c("60", "49", "40", "61", "64", "60", "59", "54", "62", "69")
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(c(3L, 2L, 1L, 3L, 3L, 3L, 3L, 2L, 3L, 4L), trim = TRUE, drop0trailing = TRUE)
+retn: c("3", "2", "1", "3", "3", "3", "3", "2", "3", "4")
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(0.693147180559945, trim = TRUE, drop0trailing = TRUE)
+retn: "0.693"
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(NaN, trim = TRUE, drop0trailing = TRUE)
+retn: "NaN"
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(numeric(0), trim = TRUE, drop0trailing = TRUE)
+retn: character(0)
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(0, trim = TRUE, drop0trailing = TRUE)
+retn: "0"
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(1, trim = TRUE, drop0trailing = TRUE)
+retn: "1"
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(c(0, 0), trim = TRUE, drop0trailing = TRUE)
+retn: c("0", "0")
+
+func: quote(format)
+body: function (x, ...) 
+body: UseMethod("format")
+args: list(FALSE, trim = TRUE, drop0trailing = TRUE)
+retn: "FALSE"
+

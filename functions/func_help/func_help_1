@@ -1,0 +1,704 @@
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list(NULL, package = NULL)
+retn: structure("/home/roman/r-instrumented/library/base/help/NULL", call = quote(help(topic = NULL, package = NULL)), topic = "NULL", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("list", package = NULL)
+retn: structure("/home/roman/r-instrumented/library/base/help/list", call = quote(help(topic = "list", package = NULL)), topic = "list", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("l0", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "l0", package = NULL)), topic = "l0", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("c0", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "c0", package = NULL)), topic = "c0", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("m0", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "m0", package = NULL)), topic = "m0", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("df0", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "df0", package = NULL)), topic = "df0", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list(FALSE, package = NULL)
+retn: structure("/home/roman/r-instrumented/library/base/help/logical", call = quote(help(topic = FALSE, package = NULL)), topic = "FALSE", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("l0-l0", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "l0-l0", package = NULL)), topic = "l0-l0", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("c0-c0", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "c0-c0", package = NULL)), topic = "c0-c0", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("df0-df0", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "df0-df0", package = NULL)), topic = "df0-df0", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+
+func: quote(help)
+body: function (topic, package = NULL, lib.loc = NULL, verbose = getOption("verbose"), try.all.packages = getOption("help.try.all.packages"), help_type = getOption("help_type")) 
+body: {
+body:     types <- c("text", "html", "pdf")
+body:     if (!missing(package)) 
+body:         if (is.name(y <- substitute(package))) 
+body:             package <- as.character(y)
+body:     if (missing(topic)) {
+body:         if (!missing(package)) {
+body:             help_type <- if (!length(help_type)) 
+body:                 "text"
+body:             else match.arg(tolower(help_type), types)
+body:             if (interactive() && help_type == "html") {
+body:                 if (tools:::httpdPort == 0L) 
+body:                   tools::startDynamicHelp()
+body:                 if (tools:::httpdPort <= 0L) 
+body:                   return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:                 browser <- if (.Platform$GUI == "AQUA") {
+body:                   get("aqua.browser", envir = as.environment("tools:RGUI"))
+body:                 }
+body:                 else getOption("browser")
+body:                 browseURL(paste0("http://127.0.0.1:", tools:::httpdPort, "/library/", package, "/html/00Index.html"), browser)
+body:                 return(invisible())
+body:             }
+body:             else return(library(help = package, lib.loc = lib.loc, character.only = TRUE))
+body:         }
+body:         if (!missing(lib.loc)) 
+body:             return(library(lib.loc = lib.loc))
+body:         topic <- "help"
+body:         package <- "utils"
+body:         lib.loc <- .Library
+body:     }
+body:     ischar <- tryCatch(is.character(topic) && length(topic) == 1L, error = identity)
+body:     if (inherits(ischar, "error")) 
+body:         ischar <- FALSE
+body:     if (!ischar) {
+body:         reserved <- c("TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_")
+body:         stopic <- deparse(substitute(topic))
+body:         if (!is.name(substitute(topic)) && !stopic %in% reserved) 
+body:             stop("'topic' should be a name, length-one character vector or reserved word")
+body:         topic <- stopic
+body:     }
+body:     help_type <- if (!length(help_type)) 
+body:         "text"
+body:     else match.arg(tolower(help_type), types)
+body:     paths <- index.search(topic, find.package(package, lib.loc, verbose = verbose))
+body:     tried_all_packages <- FALSE
+body:     if (!length(paths) && is.logical(try.all.packages) && !is.na(try.all.packages) && try.all.packages && missing(package) && missing(lib.loc)) {
+body:         for (lib in .libPaths()) {
+body:             packages <- .packages(TRUE, lib)
+body:             packages <- packages[is.na(match(packages, .packages()))]
+body:             paths <- c(paths, index.search(topic, file.path(lib, packages)))
+body:         }
+body:         paths <- paths[paths != ""]
+body:         tried_all_packages <- TRUE
+body:     }
+body:     paths <- unique(paths)
+body:     attributes(paths) <- list(call = match.call(), topic = topic, tried_all_packages = tried_all_packages, type = help_type)
+body:     class(paths) <- "help_files_with_topic"
+body:     paths
+body: }
+args: list("FALSE-FALSE", package = NULL)
+retn: structure(character(0), call = quote(help(topic = "FALSE-FALSE", package = NULL)), topic = "FALSE-FALSE", tried_all_packages = FALSE, type = "text", class = "help_files_with_topic")
+

@@ -1,0 +1,12 @@
+func: quote(gettextf)
+body: function (fmt, ..., domain = NULL) 
+body: sprintf(gettext(fmt, domain = domain), ...)
+args: list("Function %s is a group generic; do not call it directly", character(0))
+retn: character(0)
+
+func: quote(gettextf)
+body: function (fmt, ..., domain = NULL) 
+body: sprintf(gettext(fmt, domain = domain), ...)
+args: list("Function %s is a group generic; do not call it directly", "'FALSE'")
+retn: "Function 'FALSE' is a group generic; do not call it directly"
+

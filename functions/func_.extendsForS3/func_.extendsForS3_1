@@ -1,0 +1,36 @@
+func: quote(.extendsForS3)
+body: function (Class) 
+body: extends(Class, maybe = FALSE)
+args: list(structure("MethodDefinition", package = "methods"))
+retn: c("MethodDefinition", "function", "PossibleMethod", "OptionalFunction")
+
+func: quote(.extendsForS3)
+body: function (Class) 
+body: extends(Class, maybe = FALSE)
+args: list(structure("signature", package = "methods"))
+retn: c("signature", "character", "vector", "data.frameRowLabels", "SuperClassMethod")
+
+func: quote(.extendsForS3)
+body: function (Class) 
+body: extends(Class, maybe = FALSE)
+args: list(structure("derivedDefaultMethod", package = "methods"))
+retn: c("derivedDefaultMethod", "MethodDefinition", "function", "PossibleMethod", "OptionalFunction", "optionalMethod")
+
+func: quote(.extendsForS3)
+body: function (Class) 
+body: extends(Class, maybe = FALSE)
+args: list(structure("sourceEnvironment", package = "methods"))
+retn: c("sourceEnvironment", ".environment", "environment", "refObject")
+
+func: quote(.extendsForS3)
+body: function (Class) 
+body: extends(Class, maybe = FALSE)
+args: list(structure("ObjectsWithPackage", package = "methods"))
+retn: c("ObjectsWithPackage", "character", "vector", "data.frameRowLabels", "SuperClassMethod")
+
+func: quote(.extendsForS3)
+body: function (Class) 
+body: extends(Class, maybe = FALSE)
+args: list(structure("standardGeneric", package = "methods"))
+retn: c("standardGeneric", "genericFunction", "function", "OptionalFunction", "PossibleMethod", "optionalMethod")
+

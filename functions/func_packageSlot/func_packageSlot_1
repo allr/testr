@@ -1,0 +1,12 @@
+func: quote(packageSlot)
+body: function (object) 
+body: attr(object, "package")
+args: list("named")
+retn: NULL
+
+func: quote(packageSlot)
+body: function (object) 
+body: attr(object, "package")
+args: list("connection")
+retn: NULL
+

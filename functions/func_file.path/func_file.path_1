@@ -1,0 +1,114 @@
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented", "library")
+retn: "/home/roman/r-instrumented/library"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented", "site-library")
+retn: "/home/roman/r-instrumented/site-library"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "translations", "DESCRIPTION")
+retn: "/home/roman/r-instrumented/library/translations/DESCRIPTION"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented", "bin", "pager")
+retn: "/home/roman/r-instrumented/bin/pager"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "utils", "R", "utils")
+retn: "/home/roman/r-instrumented/library/utils/R/utils"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "methods", "R", "methods")
+retn: "/home/roman/r-instrumented/library/methods/R/methods"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "grDevices", "R", "grDevices")
+retn: "/home/roman/r-instrumented/library/grDevices/R/grDevices"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "graphics", "R", "graphics")
+retn: "/home/roman/r-instrumented/library/graphics/R/graphics"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "stats", "R", "stats")
+retn: "/home/roman/r-instrumented/library/stats/R/stats"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library/base", "demo")
+retn: "/home/roman/r-instrumented/library/base/demo"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "tools", "R", "tools")
+retn: "/home/roman/r-instrumented/library/tools/R/tools"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "compiler", "R", "compiler")
+retn: "/home/roman/r-instrumented/library/compiler/R/compiler"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "KernSmooth", "R", "KernSmooth")
+retn: "/home/roman/r-instrumented/library/KernSmooth/R/KernSmooth"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "grid", "R", "grid")
+retn: "/home/roman/r-instrumented/library/grid/R/grid"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "splines", "R", "splines")
+retn: "/home/roman/r-instrumented/library/splines/R/splines"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("", "doc/html/R.css")
+retn: "/doc/html/R.css"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("", "doc/html/index.html")
+retn: "/doc/html/index.html"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented", "NEWS")
+retn: "/home/roman/r-instrumented/NEWS"
+
+func: quote(file.path)
+body: function (..., fsep = .Platform$file.sep) 
+body: .Internal(file.path(list(...), fsep))
+args: list("/home/roman/r-instrumented/library", "stats4", "R", "stats4")
+retn: "/home/roman/r-instrumented/library/stats4/R/stats4"
+

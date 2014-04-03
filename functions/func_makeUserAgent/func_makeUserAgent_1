@@ -1,0 +1,16 @@
+func: quote(makeUserAgent)
+body: function (format = TRUE) 
+body: {
+body:     agent <- getOption("HTTPUserAgent")
+body:     if (is.null(agent)) {
+body:         return(NULL)
+body:     }
+body:     if (length(agent) != 1L) 
+body:         stop(gettextf("%s option must be a length one character vector or NULL", sQuote("HTTPUserAgent")), domain = NA)
+body:     if (format) 
+body:         paste0("User-Agent: ", agent[1L], "\r\n")
+body:     else agent[1L]
+body: }
+args: NULL
+retn: "User-Agent: R (3.0.1 x86_64-unknown-linux-gnu x86_64 linux-gnu)\r\n"
+

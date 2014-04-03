@@ -1,0 +1,6 @@
+func: quote(logical)
+body: function (length = 0L) 
+body: .Internal(vector("logical", length))
+args: list(0)
+retn: logical(0)
+

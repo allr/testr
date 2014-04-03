@@ -1,0 +1,30 @@
+func: quote(weighted.residuals)
+body: function (obj, drop0 = TRUE) 
+body: {
+body:     w <- weights(obj)
+body:     r <- residuals(obj, type = "deviance")
+body:     if (drop0 && !is.null(w)) {
+body:         if (is.matrix(r)) 
+body:             r[w != 0, , drop = FALSE]
+body:         else r[w != 0]
+body:     }
+body:     else r
+body: }
+args: list(NULL)
+retn: NULL
+
+func: quote(weighted.residuals)
+body: function (obj, drop0 = TRUE) 
+body: {
+body:     w <- weights(obj)
+body:     r <- residuals(obj, type = "deviance")
+body:     if (drop0 && !is.null(w)) {
+body:         if (is.matrix(r)) 
+body:             r[w != 0, , drop = FALSE]
+body:         else r[w != 0]
+body:     }
+body:     else r
+body: }
+args: list(list())
+retn: NULL
+

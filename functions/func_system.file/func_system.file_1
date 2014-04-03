@@ -1,0 +1,23 @@
+func: quote(system.file)
+body: function (..., package = "base", lib.loc = NULL, mustWork = FALSE) 
+body: {
+body:     if (nargs() == 0L) 
+body:         return(file.path(.Library, "base"))
+body:     if (length(package) != 1L) 
+body:         stop("'package' must be of length 1")
+body:     packagePath <- find.package(package, lib.loc, quiet = TRUE)
+body:     ans <- if (length(packagePath)) {
+body:         FILES <- file.path(packagePath, ...)
+body:         present <- file.exists(FILES)
+body:         if (any(present)) 
+body:             FILES[present]
+body:         else ""
+body:     }
+body:     else ""
+body:     if (mustWork && identical(ans, "")) 
+body:         stop("no file found")
+body:     ans
+body: }
+args: list(package = "base")
+retn: "/home/roman/r-instrumented/library/base"
+

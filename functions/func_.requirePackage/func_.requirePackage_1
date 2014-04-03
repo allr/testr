@@ -1,0 +1,37 @@
+func: quote(.requirePackage)
+body: function (package, mustFind = TRUE) 
+body: {
+body:     value <- package
+body:     if (nzchar(package)) {
+body:         if (package %in% loadedNamespaces()) 
+body:             value <- getNamespace(package)
+body:         else {
+body:             if (identical(package, ".GlobalEnv")) 
+body:                 return(.GlobalEnv)
+body:             if (identical(package, "methods")) 
+body:                 return(topenv(parent.frame()))
+body:             if (exists(package, envir = .PackageEnvironments, inherits = FALSE)) 
+body:                 return(get(package, envir = .PackageEnvironments))
+body:         }
+body:     }
+body:     if (is.environment(value)) 
+body:         return(value)
+body:     topEnv <- options()$topLevelEnvironment
+body:     if (is.null(topEnv)) 
+body:         topEnv <- .GlobalEnv
+body:     if (exists(".packageName", topEnv, inherits = TRUE) && .identC(package, get(".packageName", topEnv))) 
+body:         return(topEnv)
+body:     if (nzchar(package) && require(package, character.only = TRUE)) {
+body:     }
+body:     else {
+body:         if (mustFind) 
+body:             stop(gettextf("unable to find required package %s", sQuote(package)), domain = NA)
+body:         else return(NULL)
+body:     }
+body:     value <- .asEnvironmentPackage(package)
+body:     assign(package, value, envir = .PackageEnvironments)
+body:     value
+body: }
+args: list("methods")
+retn: <environment>
+

@@ -1,0 +1,6 @@
+func: quote(aperm)
+body: function (a, perm, ...) 
+body: UseMethod("aperm")
+args: list(structure(1:6, .Dim = c(3L, 2L)), c(2, 1))
+retn: structure(c(1L, 4L, 2L, 5L, 3L, 6L), .Dim = 2:3)
+

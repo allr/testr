@@ -1,0 +1,39 @@
+func: quote(duplicated)
+body: function (x, incomparables = FALSE, ...) 
+body: UseMethod("duplicated")
+args: list(c("Date", "Date", "Date", "Date", "Date", "Date", "Date", "Date", "Date", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXct", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "POSIXlt", "array", "array", "call", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "complex", "data", "data", "data", "data", "data", "data", "data", "data", "data", 
+args: "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "data", "difftime", "double", "double", "double", "environment", "expression", "expression", "factor", "function", "function", "hexmode", "integer", "list", "list", "list", "list", "list", "list", "list", "list", "list", "logical", "logical", "matrix", "matrix", "matrix", "matrix", "matrix", "name", "null", "null", "numeric", "numeric_version", "octmode", "ordered", "package_version", "pairlist", 
+args: "qr", "raw", "single", "single", "symbol", "table", "table", "vector", "vector", "dendrogram", "dist", "formula", "hclust", "stepfun", "ts"))
+retn: c(FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, 
+retn: TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
+
+func: quote(duplicated)
+body: function (x, incomparables = FALSE, ...) 
+body: UseMethod("duplicated")
+args: list(structure(list(), class = "numeric_version"), FALSE, nmax = NA)
+retn: logical(0)
+
+func: quote(duplicated)
+body: function (x, incomparables = FALSE, ...) 
+body: UseMethod("duplicated")
+args: list(structure(list(a = 1L), .Names = "a", class = "numeric_version"), FALSE, nmax = NA)
+retn: FALSE
+
+func: quote(duplicated)
+body: function (x, incomparables = FALSE, ...) 
+body: UseMethod("duplicated")
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"), fromLast = FALSE, nmax = NA)
+retn: logical(0)
+
+func: quote(duplicated)
+body: function (x, incomparables = FALSE, ...) 
+body: UseMethod("duplicated")
+args: list(structure(expression(`character(0)` = integer(0)), .Names = "character(0)", row.names = character(0), class = "data.frame"), fromLast = FALSE, nmax = NA)
+retn: logical(0)
+
+func: quote(duplicated)
+body: function (x, incomparables = FALSE, ...) 
+body: UseMethod("duplicated")
+args: list(structure(list(c0 = structure(integer(0), .Label = character(0), class = "factor")), .Names = "c0", row.names = character(0), class = "data.frame"), fromLast = FALSE, nmax = NA)
+retn: logical(0)
+

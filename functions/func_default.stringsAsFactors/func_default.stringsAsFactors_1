@@ -1,0 +1,13 @@
+func: quote(default.stringsAsFactors)
+body: function () 
+body: {
+body:     val <- getOption("stringsAsFactors")
+body:     if (is.null(val)) 
+body:         val <- TRUE
+body:     if (!is.logical(val) || is.na(val) || length(val) != 1L) 
+body:         stop("options(\"stringsAsFactors\") not set to TRUE or FALSE")
+body:     val
+body: }
+args: NULL
+retn: TRUE
+

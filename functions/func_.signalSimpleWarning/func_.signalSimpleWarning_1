@@ -1,0 +1,3591 @@
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("longer object length is not a multiple of shorter object length", quote(2 * x + y))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NaNs produced", quote(sqrt(-17)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("closing unused connection 3 (isas-tests.R)", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("restarting interrupted promise evaluation", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("non-square matrix", quote(as.dist.default(x)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("inaccurate integer conversion in coercion", quote(lapply(strsplit(x[ok], "[.-]"), as.integer)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("out-of-range values treated as 0 in coercion to raw", quote(doTryCatch(return(expr), name, parentenv, handler)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NaNs produced", quote(log(-1)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("restarting interrupted promise evaluation", quote(withCallingHandlers(tryCatch(expr, error = function(e) e), warning = w.handler)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("! not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("! not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("%% not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("%% not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("%/% not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("%/% not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("& not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("& not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("* not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("* not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("+ not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("+ not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("- not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("- not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("/ not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("/ not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("< not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("< not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("<= not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("<= not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("> not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("> not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list(">= not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list(">= not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(mode)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("running command '/usr/bin/which 'FALSE' 2>/dev/null' had status 1", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("^ not meaningful for factors", quote(Ops.factor(left)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("^ not meaningful for factors", quote(Ops.factor(left, right)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NaNs produced", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(target)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(current)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(xx)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(x)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("corrupt data frame: columns will be truncated or padded with NAs", quote(format.data.frame(x, digits = digits, na.encode = FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(seq_len(nrows)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(seq_len(p)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("out-of-range values treated as 0 in coercion to raw", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("object 'integer(0)' not found", quote(rm(list = name, envir = .AutoloadEnv, inherits = FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("object 'FALSE' not found", quote(rm(list = name, envir = .AutoloadEnv, inherits = FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("invalid 'cutoff' value for 'deparse', using default", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("invalid 'cutoff' value for 'deparse', using default", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("invalid 'cutoff' value for 'deparse', using default", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("invalid 'cutoff' value for 'deparse', using default", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("invalid 'cutoff' value for 'deparse', using default", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(vec)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("there is no package called '0)'", quote(library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, warn.conflicts = warn.conflicts, quietly = quietly)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("closing unused connection 3 ()", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("corrupt data frame: columns will be truncated or padded with NAs", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("corrupt data frame: columns will be truncated or padded with NAs", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(pv)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("ICU is not supported on this build", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(min(dim(qr))))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("cannot open compressed file '.rdx', probable reason 'No such file or directory'", quote(gzfile(file, "rb")))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("cannot open compressed file 'FALSE.rdx', probable reason 'No such file or directory'", quote(gzfile(file, "rb")))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("value out of range in 'lgamma'", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NaNs produced", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NaNs produced", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(unclass(x), ...)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(n)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(min(x, na.rm = na.rm)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(x, na.rm = na.rm)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(na.last)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(m)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("there is no package called 'list'", quote(library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, warn.conflicts = warn.conflicts, quietly = quietly)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("there is no package called 'l0'", quote(library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, warn.conflicts = warn.conflicts, quietly = quietly)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("there is no package called 'c0'", quote(library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, warn.conflicts = warn.conflicts, quietly = quietly)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("there is no package called 'm0'", quote(library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, warn.conflicts = warn.conflicts, quietly = quietly)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("there is no package called 'df0'", quote(library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, warn.conflicts = warn.conflicts, quietly = quietly)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("there is no package called 'FALSE'", quote(library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE, warn.conflicts = warn.conflicts, quietly = quietly)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("nothing specified to be save()d", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no sink to remove", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(seq_len(nrow(x))))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(unlist(lapply(z, NROW)))))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(object)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(object[4L])))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("closing unused connection 3 (FALSE:FALSE)", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("FALSE", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("FALSEFALSE", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("data length exceeds size of matrix", quote(matrix(offset, nrow = 4L, ncol = ncol(x))))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("unable to open connection to X11 display ''", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("unable to open connection to X11 display ''", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("unable to open connection to X11 display ''", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("could not open BMP file ''", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(width)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(min(x)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(x)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("longer object length is not a multiple of shorter object length", quote(diff(x1) > 0 | diff(xr) > 0))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(mat)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(seq_len(n)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(z)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'convertUnit' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("the 'vp' argument is deprecated", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("the 'vp' argument is deprecated", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'drawDetails' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.arrows() has been deprecated;  use 'arrow' arguments to line drawing functions", quote(arrowsGrob(x = x, y = y, default.units = default.units, grob = grob, angle = angle, length = length, ends = ends, type = type, name = name, gp = gp, vp = vp)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("raster capture is not available for this device", quote(grid.Call(L_cap)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'gTree' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'convertHeight' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'convertWidth' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'convertX' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'convertY' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("this function is redundant and will disappear in future versions", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("grid.grob() is deprecated; please use grob() instead", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'popViewport' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'pushViewport' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.length' has been deprecated in favour of a unit method for the generic length function", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'f' is deprecated.\nUse 'current.transform' instead.\nSee help(\"Deprecated\")", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'df' was too small; have used 3", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'df' was too small; have used 1", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("calling anova.lm(<fake-lm-object>) ...", quote(anova.lm(object)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("cannot compute exact p-value with ties", quote(ansari.test.default(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("non-square matrix", quote(as.dist.default(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("non-square matrix", quote(as.dist.default(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("argument is not numeric or logical: returning NA", quote(mean.default(x)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(d)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(groups)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("non-intersecting series", quote(.cbind.ts(list(...), .makeNamesTs(...), dframe = dframe, union = FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(y)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(min(x[notna])))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(x[notna])))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("number of rows of result is not a multiple of vector length (arg 1)", quote(cbind(1, x)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("one-dimensional optimization by Nelder-Mead is unreliable:\nuse \"Brent\" or optimize() directly", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("one-dimensional optimization by Nelder-Mead is unreliable:\nuse \"Brent\" or optimize() directly", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(min(interval)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(interval)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NaNs produced", quote(qt(sig.level/tside, nu, lower.tail = FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(attr(object, "degree"))))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(rows)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(probs)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'k' must be odd!  Changing 'k' to 1", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to min; returning Inf", quote(min(w.l)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no non-missing arguments to max; returning -Inf", quote(max(w.r)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(seq_len(npcs)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(coef(object))))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(is.inf)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("first element used of 'length.out' argument", quote(seq_len(ny)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("extra argument  will be disregarded", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("extra argument  will be disregarded", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'start' value not changed", quote(window.default(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list(" Section NULL is unrecognized and will be dropped", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("the condition has length > 1 and only the first element will be used", quote(if (!file.exists(md5file)) return(NA)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(depMtrx)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("package 'FALSE' is not available (for R version 3.0.1)", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("problem copying FALSE/src/library/translations/inst to /tmp/RtmpK5mJUt/translations/inst: Not a directory", quote(file.copy(file.path(src, "inst"), dest, recursive = TRUE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("cannot open file 'FALSE/src/library/translations/DESCRIPTION.in': Not a directory", quote(file(con, "r")))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(value)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("running command '/usr/bin/which 'hunspell' 2>/dev/null' had status 1", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("running command '/usr/bin/which 'ispell' 2>/dev/null' had status 1", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("is.na() applied to non-(list or vector) of type 'NULL'", quote(is.na(a)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'list()'", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'l0'", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'c0'", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'm0'", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'df0'", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'FALSE' has a help file but no examples", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'list()'", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'l0'", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'c0'", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no help found for 'df0'", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no package 'FALSE' was found", quote(packageDescription(pkg)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'memory.limit()' is Windows-specific", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("'memory.size()' is Windows-specific", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("unable to access index for repository /src/contrib", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no package 'FALSE' was found", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("character(0)", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no package 'FALSE' was found", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no package 'FALSE' was found", quote(packageDescription(pkg, lib.loc = lib.loc, fields = "Version")))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("character(0)", quote(packageDescription(pkg, lib.loc = lib.loc, fields = "Version")))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("Not all arguments are of the same length, the following need to be recycled: given", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("Not all arguments are of the same length, the following need to be recycled: given, family", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no package 'FALSE' was found", quote(packageDescription(package, lib.loc)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("character(0)", quote(packageDescription(package, lib.loc)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(processFormat(format)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no package 'FALSE' was found", quote(FUN(FALSE[[1L]], ...)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("NAs introduced by coercion", quote(findLineNum(srcfile, line, nameonly, envir, lastenv)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("cannot open file 'Rprof.out': No such file or directory", quote(file(filename, "rt")))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("Use of the \"MethodsList\" meta data objects is deprecated. see ?MethodsList. (This warning is shown once per session.)", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("character(0)", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("character(0)", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("character(0)", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("character(0)", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("no methods found for 'FALSE'; cacheGenericsMetaData() will have no effect", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) instead", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f()))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(m0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(df0, df0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("direct use of coerce() is deprecated:  use as(from, class(to)) <- value instead", quote(f(FALSE, FALSE)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("\"getMethods\", along with other use of the \"MethodsList\" metadata objects, is deprecated. use \"findMethods\" instead. see ?MethodsList. (This warning is shown once per session.)", NULL)
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("generic function 'NULL' not found for removal", quote(f(NULL, NULL)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("generic function 'list()' not found for removal", quote(f(list(), list())))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("generic function 'NULL' not found for removal", quote(f(l0, l0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("generic function 'NULL' not found for removal", quote(f(c0, c0)))
+retn: NULL
+
+func: quote(.signalSimpleWarning)
+body: function (msg, call) 
+body: withRestarts({
+body:     .Internal(.signalCondition(simpleWarning(msg, call), msg, call))
+body:     .Internal(.dfltWarn(msg, call))
+body: }, muffleWarning = function() NULL)
+args: list("generic function 'NULL' not found for removal", quote(f(df0, df0)))
+retn: NULL
+

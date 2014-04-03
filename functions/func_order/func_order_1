@@ -1,0 +1,64 @@
+func: quote(order)
+body: function (..., na.last = TRUE, decreasing = FALSE) 
+body: {
+body:     z <- list(...)
+body:     if (any(unlist(lapply(z, is.object)))) {
+body:         z <- lapply(z, function(x) if (is.object(x)) 
+body:             xtfrm(x)
+body:         else x)
+body:         if (!is.na(na.last)) 
+body:             return(do.call("order", c(z, na.last = na.last, decreasing = decreasing)))
+body:     }
+body:     else if (!is.na(na.last)) {
+body:         if (length(z) == 1L && is.factor(zz <- z[[1L]]) && nlevels(zz) < 1e+05) 
+body:             return(.Internal(radixsort(zz, na.last, decreasing)))
+body:         else return(.Internal(order(na.last, decreasing, ...)))
+body:     }
+body:     if (any(diff(l.z <- vapply(z, length, 1L)) != 0L)) 
+body:         stop("argument lengths differ")
+body:     ans <- vapply(z, is.na, rep.int(NA, l.z[1L]))
+body:     ok <- if (is.matrix(ans)) 
+body:         !apply(ans, 1, any)
+body:     else !any(ans)
+body:     if (all(!ok)) 
+body:         return(integer())
+body:     z[[1L]][!ok] <- NA
+body:     ans <- do.call("order", c(z, decreasing = decreasing))
+body:     keep <- seq_along(ok)[ok]
+body:     ans[ans %in% keep]
+body: }
+args: list(numeric(0))
+retn: integer(0)
+
+func: quote(order)
+body: function (..., na.last = TRUE, decreasing = FALSE) 
+body: {
+body:     z <- list(...)
+body:     if (any(unlist(lapply(z, is.object)))) {
+body:         z <- lapply(z, function(x) if (is.object(x)) 
+body:             xtfrm(x)
+body:         else x)
+body:         if (!is.na(na.last)) 
+body:             return(do.call("order", c(z, na.last = na.last, decreasing = decreasing)))
+body:     }
+body:     else if (!is.na(na.last)) {
+body:         if (length(z) == 1L && is.factor(zz <- z[[1L]]) && nlevels(zz) < 1e+05) 
+body:             return(.Internal(radixsort(zz, na.last, decreasing)))
+body:         else return(.Internal(order(na.last, decreasing, ...)))
+body:     }
+body:     if (any(diff(l.z <- vapply(z, length, 1L)) != 0L)) 
+body:         stop("argument lengths differ")
+body:     ans <- vapply(z, is.na, rep.int(NA, l.z[1L]))
+body:     ok <- if (is.matrix(ans)) 
+body:         !apply(ans, 1, any)
+body:     else !any(ans)
+body:     if (all(!ok)) 
+body:         return(integer())
+body:     z[[1L]][!ok] <- NA
+body:     ans <- do.call("order", c(z, decreasing = decreasing))
+body:     keep <- seq_along(ok)[ok]
+body:     ans[ans %in% keep]
+body: }
+args: list(0)
+retn: 1L
+

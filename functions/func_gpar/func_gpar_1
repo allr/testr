@@ -1,0 +1,20 @@
+func: quote(gpar)
+body: function (...) 
+body: {
+body:     gp <- validGP(list(...))
+body:     class(gp) <- "gpar"
+body:     gp
+body: }
+args: NULL
+retn: structure(list(), class = "gpar")
+
+func: quote(gpar)
+body: function (...) 
+body: {
+body:     gp <- validGP(list(...))
+body:     class(gp) <- "gpar"
+body:     gp
+body: }
+args: list(col = "grey")
+retn: structure(list(col = "grey"), .Names = "col", class = "gpar")
+

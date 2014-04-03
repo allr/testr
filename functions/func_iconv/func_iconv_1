@@ -1,0 +1,30 @@
+func: quote(iconv)
+body: function (x, from = "", to = "", sub = NA, mark = TRUE, toRaw = FALSE) 
+body: {
+body:     if (!(is.character(x) || (is.list(x) && is.null(oldClass(x))))) 
+body:         x <- as.character(x)
+body:     .Internal(iconv(x, from, to, as.character(sub), mark, toRaw))
+body: }
+args: list("\xabLatin-1 accented chars\xbb: \xe9\xe8 \xf8\xd8 \xe5<\xc5 \xe6<\xc6 \xe9 \xe9\xe8", "latin1", "")
+retn: "«Latin-1 accented chars»: éè øØ å<Å æ<Æ é éè"
+
+func: quote(iconv)
+body: function (x, from = "", to = "", sub = NA, mark = TRUE, toRaw = FALSE) 
+body: {
+body:     if (!(is.character(x) || (is.list(x) && is.null(oldClass(x))))) 
+body:         x <- as.character(x)
+body:     .Internal(iconv(x, from, to, as.character(sub), mark, toRaw))
+body: }
+args: list("\xe9\xe8", "latin1", "")
+retn: "éè"
+
+func: quote(iconv)
+body: function (x, from = "", to = "", sub = NA, mark = TRUE, toRaw = FALSE) 
+body: {
+body:     if (!(is.character(x) || (is.list(x) && is.null(oldClass(x))))) 
+body:         x <- as.character(x)
+body:     .Internal(iconv(x, from, to, as.character(sub), mark, toRaw))
+body: }
+args: list("fa\xe7ile a ", "latin1", "UTF-8")
+retn: "façile a "
+

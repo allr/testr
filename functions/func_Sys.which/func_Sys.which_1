@@ -1,0 +1,32 @@
+func: quote(Sys.which)
+body: function (names) 
+body: {
+body:     res <- character(length(names))
+body:     names(res) <- names
+body:     which <- "/usr/bin/which"
+body:     if (!nzchar(which)) {
+body:         warning("'which' was not found on this platform")
+body:         return(res)
+body:     }
+body:     for (i in seq_along(names)) {
+body:         if (is.na(names[i])) {
+body:             res[i] <- NA
+body:             next
+body:         }
+body:         ans <- suppressWarnings(system(paste(which, shQuote(names[i])), intern = TRUE, ignore.stderr = TRUE))
+body:         if (grepl("solaris", R.version$os)) {
+body:             tmp <- strsplit(ans[1], " ", fixed = TRUE)[[1]]
+body:             if (identical(tmp[1:3], c("no", i, "in"))) 
+body:                 ans <- ""
+body:         }
+body:         res[i] <- if (length(ans)) 
+body:             ans[1]
+body:         else ""
+body:         if (!file.exists(res[i])) 
+body:             res[i] <- ""
+body:     }
+body:     res
+body: }
+args: list("qpdf")
+retn: structure("/usr/bin/qpdf", .Names = "qpdf")
+

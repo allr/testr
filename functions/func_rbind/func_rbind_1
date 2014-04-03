@@ -1,0 +1,12 @@
+func: quote(rbind)
+body: function (..., deparse.level = 1) 
+body: .Internal(rbind(deparse.level, ...))
+args: list(2, 3:4)
+retn: structure(c(2, 3, 2, 4), .Dim = c(2L, 2L))
+
+func: quote(rbind)
+body: function (..., deparse.level = 1) 
+body: .Internal(rbind(deparse.level, ...))
+args: list(1, structure(c(2, 3, 2, 4), .Dim = c(2L, 2L)))
+retn: structure(c(1, 2, 3, 1, 2, 4), .Dim = c(3L, 2L))
+

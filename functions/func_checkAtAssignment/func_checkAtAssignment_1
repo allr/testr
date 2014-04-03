@@ -1,0 +1,357 @@
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("MethodDefinition", package = "methods"), "target", structure("signature", package = "methods"))
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("derivedDefaultMethod", package = "methods"), "target", structure("signature", package = "methods"))
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("signature", package = "methods"), ".Data", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("signature", package = "methods"), "names", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("signature", package = "methods"), "package", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("MethodDefinition", package = "methods"), ".Data", "function")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("MethodDefinition", package = "methods"), "defined", structure("signature", package = "methods"))
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("MethodDefinition", package = "methods"), "generic", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("sourceEnvironment", package = "methods"), ".xData", "environment")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("ObjectsWithPackage", package = "methods"), ".Data", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("derivedDefaultMethod", package = "methods"), ".Data", "function")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("derivedDefaultMethod", package = "methods"), "defined", structure("signature", package = "methods"))
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), ".Data", structure("derivedDefaultMethod", package = "methods"))
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), "generic", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), "group", "list")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), "valueClass", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), "package", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), "signature", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("derivedDefaultMethod", package = "methods"), "generic", "character")
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), "default", structure("derivedDefaultMethod", package = "methods"))
+retn: TRUE
+
+func: quote(checkAtAssignment)
+body: function (cl, name, valueClass) 
+body: {
+body:     ClassDef <- getClass(cl)
+body:     slotClass <- elNamed(ClassDef@slots, name)
+body:     if (is.null(slotClass)) 
+body:         stop(gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl)), domain = NA)
+body:     if (.identC(slotClass, valueClass)) 
+body:         return(TRUE)
+body:     ok <- possibleExtends(valueClass, slotClass, ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
+body:     if (identical(ok, FALSE)) 
+body:         stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE", dQuote(valueClass), sQuote(name), dQuote(cl), slotClass), domain = NA)
+body:     TRUE
+body: }
+args: list(structure("standardGeneric", package = "methods"), "skeleton", "call")
+retn: TRUE
+

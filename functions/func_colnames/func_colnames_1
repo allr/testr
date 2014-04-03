@@ -1,0 +1,40 @@
+func: quote(colnames)
+body: function (x, do.NULL = TRUE, prefix = "col") 
+body: {
+body:     if (is.data.frame(x) && do.NULL) 
+body:         return(names(x))
+body:     dn <- dimnames(x)
+body:     if (!is.null(dn[[2L]])) 
+body:         dn[[2L]]
+body:     else {
+body:         nc <- NCOL(x)
+body:         if (do.NULL) 
+body:             NULL
+body:         else if (nc > 0L) 
+body:             paste0(prefix, seq_len(nc))
+body:         else character()
+body:     }
+body: }
+args: list(structure(integer(0), .Dim = 0:1, .Dimnames = list(NULL, "character(0)")))
+retn: "character(0)"
+
+func: quote(colnames)
+body: function (x, do.NULL = TRUE, prefix = "col") 
+body: {
+body:     if (is.data.frame(x) && do.NULL) 
+body:         return(names(x))
+body:     dn <- dimnames(x)
+body:     if (!is.null(dn[[2L]])) 
+body:         dn[[2L]]
+body:     else {
+body:         nc <- NCOL(x)
+body:         if (do.NULL) 
+body:             NULL
+body:         else if (nc > 0L) 
+body:             paste0(prefix, seq_len(nc))
+body:         else character()
+body:     }
+body: }
+args: list(structure(c(FALSE, FALSE), .Dim = 1:2, .Dimnames = list(NULL, c("as.ts(x)", "as.ts(y)"))))
+retn: c("as.ts(x)", "as.ts(y)")
+

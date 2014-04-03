@@ -1,0 +1,8 @@
+func: quote(RweaveLatex)
+body: function () 
+body: {
+body:     list(setup = RweaveLatexSetup, runcode = RweaveLatexRuncode, writedoc = RweaveLatexWritedoc, finish = RweaveLatexFinish, checkopts = RweaveLatexOptions)
+body: }
+args: NULL
+retn: <arguments too long, ignored>
+

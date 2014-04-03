@@ -1,0 +1,129 @@
+func: quote(sQuote)
+body: function (x) 
+body: {
+body:     if (!length(x)) 
+body:         return(character())
+body:     before <- after <- "'"
+body:     q <- getOption("useFancyQuotes")
+body:     if (!is.null(q)) {
+body:         if (identical(q, TRUE)) {
+body:             li <- l10n_info()
+body:             if (li$"UTF-8") 
+body:                 q <- "UTF-8"
+body:             if (!is.null(li$codepage) && li$codepage > 0L) {
+body:                 if (li$codepage >= 1250L && li$codepage <= 1258L || li$codepage == 874L) {
+body:                   before <- "\221"
+body:                   after <- "\222"
+body:                 }
+body:                 else {
+body:                   z <- iconv(c("\342\200\230", "\342\200\231"), "UTF-8", "")
+body:                   before <- z[1L]
+body:                   after <- z[2L]
+body:                 }
+body:             }
+body:         }
+body:         if (identical(q, "TeX")) {
+body:             before <- "`"
+body:             after <- "'"
+body:         }
+body:         if (identical(q, "UTF-8")) {
+body:             before <- "\342\200\230"
+body:             after <- "\342\200\231"
+body:         }
+body:         if (is.character(q) && length(q) >= 4L) {
+body:             before <- q[1L]
+body:             after <- q[2L]
+body:         }
+body:         Encoding(before) <- Encoding(after) <- "unknown"
+body:     }
+body:     paste0(before, x, after)
+body: }
+args: list("citation(\"pkgname\")")
+retn: "'citation(\"pkgname\")'"
+
+func: quote(sQuote)
+body: function (x) 
+body: {
+body:     if (!length(x)) 
+body:         return(character())
+body:     before <- after <- "'"
+body:     q <- getOption("useFancyQuotes")
+body:     if (!is.null(q)) {
+body:         if (identical(q, TRUE)) {
+body:             li <- l10n_info()
+body:             if (li$"UTF-8") 
+body:                 q <- "UTF-8"
+body:             if (!is.null(li$codepage) && li$codepage > 0L) {
+body:                 if (li$codepage >= 1250L && li$codepage <= 1258L || li$codepage == 874L) {
+body:                   before <- "\221"
+body:                   after <- "\222"
+body:                 }
+body:                 else {
+body:                   z <- iconv(c("\342\200\230", "\342\200\231"), "UTF-8", "")
+body:                   before <- z[1L]
+body:                   after <- z[2L]
+body:                 }
+body:             }
+body:         }
+body:         if (identical(q, "TeX")) {
+body:             before <- "`"
+body:             after <- "'"
+body:         }
+body:         if (identical(q, "UTF-8")) {
+body:             before <- "\342\200\230"
+body:             after <- "\342\200\231"
+body:         }
+body:         if (is.character(q) && length(q) >= 4L) {
+body:             before <- q[1L]
+body:             after <- q[2L]
+body:         }
+body:         Encoding(before) <- Encoding(after) <- "unknown"
+body:     }
+body:     paste0(before, x, after)
+body: }
+args: list(list())
+retn: character(0)
+
+func: quote(sQuote)
+body: function (x) 
+body: {
+body:     if (!length(x)) 
+body:         return(character())
+body:     before <- after <- "'"
+body:     q <- getOption("useFancyQuotes")
+body:     if (!is.null(q)) {
+body:         if (identical(q, TRUE)) {
+body:             li <- l10n_info()
+body:             if (li$"UTF-8") 
+body:                 q <- "UTF-8"
+body:             if (!is.null(li$codepage) && li$codepage > 0L) {
+body:                 if (li$codepage >= 1250L && li$codepage <= 1258L || li$codepage == 874L) {
+body:                   before <- "\221"
+body:                   after <- "\222"
+body:                 }
+body:                 else {
+body:                   z <- iconv(c("\342\200\230", "\342\200\231"), "UTF-8", "")
+body:                   before <- z[1L]
+body:                   after <- z[2L]
+body:                 }
+body:             }
+body:         }
+body:         if (identical(q, "TeX")) {
+body:             before <- "`"
+body:             after <- "'"
+body:         }
+body:         if (identical(q, "UTF-8")) {
+body:             before <- "\342\200\230"
+body:             after <- "\342\200\231"
+body:         }
+body:         if (is.character(q) && length(q) >= 4L) {
+body:             before <- q[1L]
+body:             after <- q[2L]
+body:         }
+body:         Encoding(before) <- Encoding(after) <- "unknown"
+body:     }
+body:     paste0(before, x, after)
+body: }
+args: list(FALSE)
+retn: "'FALSE'"
+

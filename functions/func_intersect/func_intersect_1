@@ -1,0 +1,29 @@
+func: quote(intersect)
+body: function (x, y) 
+body: {
+body:     y <- as.vector(y)
+body:     unique(y[match(as.vector(x), y, 0L)])
+body: }
+args: list(c("R", "array", "atomic", "call", "character", "complex", "data.frame", "double", "element", "environment", "expression", "factor", "finite", "function", "infinite", "integer", "language", "list", "loaded", "logical", "matrix", "na", "na.POSIXlt", "na.data.frame", "na.numeric_version", "na<-", "na<-.default", "na<-.factor", "name", "nan", "null", "numeric", "numeric.Date", "numeric.POSIXt", "numeric.difftime", "numeric_version", "object", "ordered", "package_version", "pairlist", "primitive", 
+args: "qr", "raw", "recursive", "symbol", "table", "unsorted", "vector", "empty.model", "leaf", "mts", "stepfun", "ts", "tskernel"), c("Date", "POSIXct", "POSIXlt", "array", "call", "character", "complex", "data.frame", "difftime", "double", "environment", "expression", "factor", "function", "hexmode", "integer", "list", "logical", "matrix", "name", "null", "numeric", "numeric_version", "octmode", "ordered", "package_version", "pairlist", "qr", "raw", "single", "symbol", "table", "vector", "dendrogram", 
+args: "dist", "formula", "hclust", "stepfun", "ts"))
+retn: c("array", "call", "character", "complex", "data.frame", "double", "environment", "expression", "factor", "function", "integer", "list", "logical", "matrix", "name", "null", "numeric", "numeric_version", "ordered", "package_version", "pairlist", "qr", "raw", "symbol", "table", "vector", "stepfun", "ts")
+
+func: quote(intersect)
+body: function (x, y) 
+body: {
+body:     y <- as.vector(y)
+body:     unique(y[match(as.vector(x), y, 0L)])
+body: }
+args: list(character(0), character(0))
+retn: character(0)
+
+func: quote(intersect)
+body: function (x, y) 
+body: {
+body:     y <- as.vector(y)
+body:     unique(y[match(as.vector(x), y, 0L)])
+body: }
+args: list("x", "y")
+retn: character(0)
+

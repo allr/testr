@@ -1,0 +1,247 @@
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(c(-5, -4.8, -4.6, -4.4, -4.2, -4, -3.8, -3.6, -3.4, -3.2, -3, -2.8, -2.6, -2.4, -2.2, -2, -1.8, -1.6, -1.4, -1.2, -1, -0.8, -0.6, -0.399999999999999, -0.199999999999999, 0, 0.2, 0.4, 0.600000000000001, 0.800000000000001, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.6, 4.8, 5), c(-5, -4.8, -4.6, -4.4, -4.2, -4, -3.8, -3.6, -3.4, -3.2, -3, -2.8, -2.6, -2.4, -2.2, -2, -1.8, -1.6, -1.4, -1.2, -1, -0.8, -0.6, -0.399999999999999, -0.199999999999999, 0, 0.2, 0.4, 
+args: 0.600000000000001, 0.800000000000001, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.6, 4.8, 5))
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(0:9, 0:9)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(4, 4)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(integer(0), structure(integer(0), .Dim = 0L), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is array")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(integer(0), structure(integer(0), .Label = character(0), class = "factor"), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is factor")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(integer(0), integer(0), tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(integer(0), structure(integer(0), .Dim = 0:1), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is matrix")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(integer(0), numeric(0), tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(integer(0), structure(integer(0), .Label = character(0), class = c("ordered", "factor")), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is ordered")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(NULL, NULL, tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(list(), structure(list(), .Dim = 0L), tol = 0)
+retn: "Attributes: < target is NULL, current is list >"
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(list(), structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame"), tol = 0)
+retn: "Attributes: < target is NULL, current is list >"
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(list(), list(), tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(list(), structure(list(), .Dim = 0:1), tol = 0)
+retn: "Attributes: < target is NULL, current is list >"
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(list(), structure(list(), class = "numeric_version"), tol = 0)
+retn: "Attributes: < target is NULL, current is list >"
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(list(), structure(list(), class = c("package_version", "numeric_version")), tol = 0)
+retn: "Attributes: < target is NULL, current is list >"
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, structure(1L, .Dim = 1L), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is array")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, structure(1L, .Label = "1", class = "factor"), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is factor")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, 1L, tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, structure(1L, .Dim = c(1L, 1L)), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is matrix")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, 1, tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, structure(1L, .Label = "1", class = c("ordered", "factor")), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is ordered")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, structure(1L, .Dim = 1L, .Dimnames = list("A"), class = "table"), tol = 0)
+retn: c("names for current but not for target", "Attributes: < target is NULL, current is list >", "target is numeric, current is table")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(1L, structure(1L, .Tsp = c(1, 1, 1), class = "ts"), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is ts")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(3.14159265358979, structure(3.14159265358979, .Dim = 1L), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is array")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(3.14159265358979, 3.14159265358979, tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(3.14159265358979, structure(3.14159265358979, .Dim = c(1L, 1L)), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is matrix")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(3.14159265358979, structure(3.14159265358979, .Dim = 1L, .Dimnames = list("A"), class = "table"), tol = 0)
+retn: c("names for current but not for target", "Attributes: < target is NULL, current is list >", "target is numeric, current is table")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(3.14159265358979, structure(3.14159265358979, .Tsp = c(1, 1, 1), class = "ts"), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is numeric, current is ts")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list("1.3", structure("1.3", .Dim = 1L), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is character, current is array")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list("1.3", "1.3", tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list("1.3", structure("1.3", .Dim = c(1L, 1L)), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is character, current is matrix")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list("1.3", structure("1.3", .Tsp = c(1, 1, 1), class = "ts"), tol = 0)
+retn: c("Attributes: < target is NULL, current is list >", "target is character, current is ts")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(a = 1), .Names = "a"), structure(list(a = 1), .Dim = 1L, .Dimnames = list("a")), tol = 0)
+retn: c("Attributes: < names for current but not for target >", "Attributes: < Length mismatch: comparison on first 0 components >")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(a = 1), .Names = "a"), structure(list(a = 1), .Names = "a", row.names = c(NA, -1L), class = "data.frame"), tol = 0)
+retn: c("Attributes: < names for current but not for target >", "Attributes: < Length mismatch: comparison on first 0 components >")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(a = 1), .Names = "a"), structure(list(a = 1), .Names = "a"), tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(a = 1), .Names = "a"), structure(list(1), .Dim = c(1L, 1L), .Dimnames = list("a", NULL)), tol = 0)
+retn: c("names for target but not for current", "Attributes: < names for current but not for target >", "Attributes: < Length mismatch: comparison on first 0 components >")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(a = 1), .Names = "a"), structure(list(a = 1L), .Names = "a", class = "numeric_version"), tol = 0)
+retn: c("Attributes: < names for current but not for target >", "Attributes: < Length mismatch: comparison on first 0 components >")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(a = 1), .Names = "a"), structure(list(a = 1), .Names = "a", .Tsp = c(1, 1, 1), class = "ts"), tol = 0)
+retn: c("Attributes: < names for current but not for target >", "Attributes: < Length mismatch: comparison on first 0 components >")
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"), structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"), tol = 0)
+retn: TRUE
+
+func: quote(all.equal)
+body: function (target, current, ...) 
+body: UseMethod("all.equal")
+args: list(structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)", row.names = character(0), class = "data.frame"), structure(list(`character(0)` = structure(integer(0), .Label = character(0), class = "factor")), .Names = "character(0)"), tol = 0)
+retn: c("Attributes: < names for target but not for current >", "Attributes: < Length mismatch: comparison on first 0 components >")
+

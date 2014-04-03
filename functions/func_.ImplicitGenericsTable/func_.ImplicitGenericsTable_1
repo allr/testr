@@ -1,0 +1,10 @@
+func: quote(.ImplicitGenericsTable)
+body: function (where) 
+body: {
+body:     if (!exists(.ImplicitGenericsMetaName, where, inherits = FALSE)) 
+body:         assign(.ImplicitGenericsMetaName, new.env(TRUE), where)
+body:     get(.ImplicitGenericsMetaName, where)
+body: }
+args: list(<environment>)
+retn: <environment>
+

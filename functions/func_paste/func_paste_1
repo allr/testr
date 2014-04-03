@@ -1,0 +1,409 @@
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list(c("X", "Y"), 1:10, sep = "")
+retn: c("X1", "Y2", "X3", "Y4", "X5", "Y6", "X7", "Y8", "X9", "Y10")
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("x[[i]]", collapse = " ")
+retn: "x[[i]]"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list(" ", collapse = "..")
+retn: " "
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("R-exts", ".so", sep = "")
+retn: "R-exts.so"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("x", collapse = " ")
+retn: "x"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "binom", sep = "")
+retn: "rbinom"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "binom", sep = "")
+retn: "pbinom"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "pois", sep = "")
+retn: "rpois"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "pois", sep = "")
+retn: "ppois"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "nbinom", sep = "")
+retn: "rnbinom"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "nbinom", sep = "")
+retn: "pnbinom"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "norm", sep = "")
+retn: "rnorm"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "norm", sep = "")
+retn: "pnorm"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "gamma", sep = "")
+retn: "rgamma"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "gamma", sep = "")
+retn: "pgamma"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "hyper", sep = "")
+retn: "rhyper"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "hyper", sep = "")
+retn: "phyper"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "signrank", sep = "")
+retn: "rsignrank"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "signrank", sep = "")
+retn: "psignrank"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "wilcox", sep = "")
+retn: "rwilcox"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "wilcox", sep = "")
+retn: "pwilcox"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "chisq", sep = "")
+retn: "rchisq"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "chisq", sep = "")
+retn: "pchisq"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "logis", sep = "")
+retn: "rlogis"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "logis", sep = "")
+retn: "plogis"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "t", sep = "")
+retn: "rt"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "t", sep = "")
+retn: "pt"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "beta", sep = "")
+retn: "rbeta"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "beta", sep = "")
+retn: "pbeta"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "cauchy", sep = "")
+retn: "rcauchy"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "cauchy", sep = "")
+retn: "pcauchy"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "f", sep = "")
+retn: "rf"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "f", sep = "")
+retn: "pf"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("r", "weibull", sep = "")
+retn: "rweibull"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("p", "weibull", sep = "")
+retn: "pweibull"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list(NULL, "R", sep = ".")
+retn: ".R"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("!", "testit", sep = ".")
+retn: "!.testit"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list(c("a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", 
+args: "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", 
+args: "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", 
+args: "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", 
+args: "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", 
+args: "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", 
+args: "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", 
+args: "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a "), collapse = "")
+retn: "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a "
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list(c0 = structure(integer(0), .Label = character(0), class = "factor"), sep = "\r")
+retn: character(0)
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list(sep = "\r")
+retn: character(0)
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("l0", collapse = " ")
+retn: "l0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("FALSE", collapse = " ")
+retn: "FALSE"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("", collapse = " ")
+retn: ""
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("NULL", collapse = " ")
+retn: "NULL"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("list()", collapse = " ")
+retn: "list()"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("c0", collapse = " ")
+retn: "c0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("m0", collapse = " ")
+retn: "m0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("df0", collapse = " ")
+retn: "df0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("as.POSIXct(x)", collapse = " ")
+retn: "as.POSIXct(x)"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("unclass(x)", collapse = " ")
+retn: "unclass(x)"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("data", collapse = " ")
+retn: "data"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("y", collapse = " ")
+retn: "y"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "")
+retn: "Series:  "
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "NULL")
+retn: "Series:  NULL"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "list()")
+retn: "Series:  list()"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "l0")
+retn: "Series:  l0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "c0")
+retn: "Series:  c0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "m0")
+retn: "Series:  m0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "df0")
+retn: "Series:  df0"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series: ", "FALSE")
+retn: "Series:  FALSE"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("Series", 1L)
+retn: "Series 1"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("R:", "R")
+retn: "R: R"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("R:", NULL)
+retn: "R: "
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("R:", list())
+retn: "R: "
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("R:", FALSE)
+retn: "R: FALSE"
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("R Core Team (", "2013", "). ", "R: A language and environment for statistical computing. ", "R Foundation for Statistical Computing, Vienna, Austria. ", "URL http://www.R-project.org/.", sep = "")
+retn: "R Core Team (2013). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/."
+
+func: quote(paste)
+body: function (..., sep = " ", collapse = NULL) 
+body: .Internal(paste(list(...), sep, collapse))
+args: list("We have invested a lot of time and effort in creating R,", "please cite it when using it for data analysis.", "See also", "'citation(\"pkgname\")'", "for citing R packages.", sep = " ")
+retn: "We have invested a lot of time and effort in creating R, please cite it when using it for data analysis. See also 'citation(\"pkgname\")' for citing R packages."
+

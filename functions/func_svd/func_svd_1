@@ -1,0 +1,24 @@
+func: quote(svd)
+body: function (x, nu = min(n, p), nv = min(n, p), LINPACK = FALSE) 
+body: {
+body:     if (LINPACK) 
+body:         warning("LINPACK = TRUE is defunct and will be ignored", domain = NA)
+body:     x <- as.matrix(x)
+body:     if (any(!is.finite(x))) 
+body:         stop("infinite or missing values in 'x'")
+body:     dx <- dim(x)
+body:     n <- dx[1L]
+body:     p <- dx[2L]
+body:     if (!n || !p) 
+body:         stop("a dimension is zero")
+body:     if (is.complex(x)) {
+body:         res <- La.svd(x, nu, nv)
+body:         return(list(d = res$d, u = if (nu) res$u, v = if (nv) Conj(t(res$vt))))
+body:     }
+body:     res <- La.svd(x, nu, nv)
+body:     list(d = res$d, u = if (nu) res$u, v = if (nv) t(res$vt))
+body: }
+args: list(structure(c(1, 1, 1, 1, 2, 3, 5, 2, 3), .Dim = c(3L, 3L)))
+retn: structure(list(d = c(7.10567256874091, 2.10665934693099, 0.267214785951885), u = structure(c(-0.699943268626316, -0.403869691117298, -0.589040485282232, -0.714180022714426, 0.401722382739201, 0.573206788482099, 0.0051298986668292, 0.821893180287535, -0.569618542830648), .Dim = c(3L, 3L)), v = structure(c(-0.238239720258573, -0.460871799963601, -0.854891232666137, 0.123773760046558, 0.8586509778363, -0.497391751625117, 0.963287024730975, -0.224311574064014, -0.14752093317855), .Dim = c(3L, 3L))), .Names = c("d", 
+retn: "u", "v"))
+

@@ -1,0 +1,6 @@
+func: quote(date)
+body: function () 
+body: .Internal(date())
+args: NULL
+retn: "Tue Mar 18 13:27:31 2014"
+

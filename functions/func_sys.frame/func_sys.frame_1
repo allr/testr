@@ -1,0 +1,6 @@
+func: quote(sys.frame)
+body: function (which = 0L) 
+body: .Internal(sys.frame(which))
+args: list(0L)
+retn: <environment>
+

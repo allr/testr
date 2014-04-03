@@ -1,0 +1,30 @@
+func: quote(ts.union)
+body: function (..., dframe = FALSE) 
+body: .cbind.ts(list(...), .makeNamesTs(...), dframe = dframe, union = TRUE)
+args: NULL
+retn: NULL
+
+func: quote(ts.union)
+body: function (..., dframe = FALSE) 
+body: .cbind.ts(list(...), .makeNamesTs(...), dframe = dframe, union = TRUE)
+args: list(NULL)
+retn: NULL
+
+func: quote(ts.union)
+body: function (..., dframe = FALSE) 
+body: .cbind.ts(list(...), .makeNamesTs(...), dframe = dframe, union = TRUE)
+args: list(NULL, NULL)
+retn: NULL
+
+func: quote(ts.union)
+body: function (..., dframe = FALSE) 
+body: .cbind.ts(list(...), .makeNamesTs(...), dframe = dframe, union = TRUE)
+args: list(list())
+retn: list()
+
+func: quote(ts.union)
+body: function (..., dframe = FALSE) 
+body: .cbind.ts(list(...), .makeNamesTs(...), dframe = dframe, union = TRUE)
+args: list(FALSE)
+retn: FALSE
+

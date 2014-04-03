@@ -1,0 +1,6 @@
+func: quote(dyn.load)
+body: function (x, local = TRUE, now = TRUE, ...) 
+body: .Internal(dyn.load(x, as.logical(local), as.logical(now), ""))
+args: list("R-exts.so")
+retn: structure(list(name = "R-exts", path = "/home/roman/r-instrumented/tests/R-exts.so", dynamicLookup = TRUE, handle = <pointer: 0x7283a90>, info = <pointer: 0x92e1a0>), .Names = c("name", "path", "dynamicLookup", "handle", "info"), class = "DLLInfo")
+
