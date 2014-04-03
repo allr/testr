@@ -32,7 +32,7 @@ testgen <- function(output.dir, ifile, verbose=FALSE) {
   if (missing(output.dir)) stop("A output directory must be provided!");
   if (!file.exists(ifile)) stop("Intermediate file doesn't exist!");
   bad.argv.file <- file.path(output.dir, "bad_arguments", fsep=.Platform$file.sep);
-  if (!file.create(bad.argv.file)) stop("Unable to create file: ", bad.argv.file);
+  if (!file.exists(bad.argv.file) && !file.create(bad.argv.file)) stop("Unable to create file: ", bad.argv.file);
   
   lines <- readLines(ifile);
   cache <- new.env();

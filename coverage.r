@@ -1,4 +1,3 @@
-# Copyright (c) 2013, Purdue University. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #
 # This code is free software; you can redistribute it and/or modify it
@@ -256,6 +255,7 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
 #' * root: the top directory of the instrumented VM source.
 #'
 reset <- function(root) {
+  cat("reset called\n")
   if (missing(root)) stop("A directory containing VM source files must be specified!");
   if (.Platform$OS.type=="unix") {
     cmd <- paste("find", root, "-name", "\'*.gcda\'", "-delete", sep=" ");
@@ -263,8 +263,8 @@ reset <- function(root) {
   } else if (.Platform$OS.type=="windows") {
     stop("Not supported yet! Let me find a Windows machine to test the command...");
   } else {
-    stop("Unknown operating system type: ", .Platform$OS.type);
+   stop("Unknown operating system type: ", .Platform$OS.type);
   }
 }
 
- 
+

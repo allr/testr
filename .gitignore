@@ -7,8 +7,13 @@ process_change.r
 process (copy).r
 tcFilter.R
 execute-tests.R
-
+UsefulCommands
 # Java compiled classes
 *.class
+
+.classpath
+.idea/
+.project
+testr.iml
 
 

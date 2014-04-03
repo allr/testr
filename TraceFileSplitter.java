@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class tc_split {
+public class TraceFileSplitter {
 
 	static String dirName = "functions";
 	static final String prefix = "func_";

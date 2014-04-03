@@ -1,3 +1,4 @@
+
 # Copyright (c) 2013, Purdue University. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #
@@ -67,6 +68,7 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
   if (!missing(testListener)) 
     if (! is.testListener(testListener))
       stop("Invalid function supported as a test listener.")
+  #files.before.fun.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
   verbose <<- verbose
   displayOnlyErrors <<- displayOnlyErrors
   stopOnError <<- stopOnError
@@ -77,6 +79,11 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
   if (file.info(root)$isdir){
     files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
+    # file sorting in natural order
+    # indexes <- sapply(files, FUN = determineFileIndex)
+    # fileIndexMatrix <- matrix(c(indexes, files), nrow=length(files))
+    # files <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
+    
     files <- Map(function (x) paste(root,"/",x, sep=""), files) 
   } else {
     files <- root
@@ -121,6 +128,10 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     cat("Overall:  ", "FAIL\n")
     FALSE
   }
+  # To clean R Working Directory
+  #files.after.filter.wd <- list.files(getwd(), all.files = TRUE)
+  #files.to.delete <- files.after.filter.wd[!(files.before.filter.wd %in% files.after.filter.wd)]
+  #file.remove(files.to.delete)
 } 
 
 #' Prettyprints the test, is intended to be used only internally. 
@@ -215,7 +226,8 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   # execute the test and grap warnings and errors
   result <- withCallingHandlers(
     tryCatch(
-      eval(code, envir = new.env(parent=baseenv())),
+#      eval(code, envir = new.env(parent=baseenv())),
+      eval(code, envir = new.env(parent=globalenv())),
       error = function(e) {
         errors <<- e$message
       }),
@@ -283,8 +295,23 @@ externalTestExecute <- function(){
   args <- commandArgs(trailingOnly = TRUE)
   if (length(args) == 1)  {
     runTests(args[1])
-  }else{
   }
+#  if (length(args) == 2)  {
+#    runTests(args[1], verbose = args[2])
+#  }
+#  if (length(args) == 3)  {
+#    runTests(args[1], verbose = args[2], stopOnError = args[3])
+# }
+  
+}
+
+determineFileIndex <- function(filename){
+  spl <- strsplit(filename, "_")
+  if (length(spl[[1]]) == 2)
+    index <- 0
+  else
+    index <- substr(spl[[1]][3], 1, nchar(spl[[1]][3]) - 2)
+  return (index)
 }
 
 externalTestExecute()

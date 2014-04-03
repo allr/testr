@@ -1,12 +1,14 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,50 +21,68 @@ public class ProcessTC {
 	private static volatile ConcurrentLinkedQueue<String> virtualMachines = new ConcurrentLinkedQueue<>();
 	private static volatile String tcResultLocation;
 	static ProcessTC pr = new ProcessTC();
-	private static volatile int correct = 0, failed = 0;
+	private static String tcDB;
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
-		if (args.length < 3)
-			throw new RuntimeException("Wrong number of arguments!");
-
+		if (args.length < 3) {
+			throw new RuntimeException(
+					"Usage <folder to process>\n"
+							+ "<filtering result location> <R vms file> OPTIONAL <TC DB Folder use NONE if no TC db> \n");
+		}
 		String tcFolder = args[0];
-		String virtualMachinesListFile = args[1];
-		tcResultLocation = args[2];
-		File tcs = new File(tcFolder);
-		if (!tcs.exists())
+		tcResultLocation = args[1];
+		String virtualMachinesFile = args[2];
+		if (args.length == 4) {
+			tcDB = args[3];
+			if (!folderExists(tcDB))
+				throw new RuntimeException(
+						"Specified folder with TC Databases does not exist!");
+			else
+				tcDB = new File(tcDB).getAbsolutePath();
+		}
+		if (!folderExists(tcFolder))
 			throw new RuntimeException(
 					"Specified folder with TCs does not exist!");
 
-		listFilesForFolder(tcs);
+		File tcFolderFile = new File(tcFolder);
+		listFilesForFolder(tcFolderFile);
+		readVMs(virtualMachinesFile);
 
-		BufferedReader br = new BufferedReader(new FileReader(
-				virtualMachinesListFile));
-		String line;
-		while ((line = br.readLine()) != null) {
-			virtualMachines.add(line);
-		}
-		br.close();
-		System.out.println("Number of files - " +  tcFileAddr.size());
+		System.out.println("Number of files - " + tcFileAddr.size());
 		int cores = Runtime.getRuntime().availableProcessors();
 		System.out.println("Number of available cores - " + cores);
 		System.out.println("Number of available VMs - "
 				+ virtualMachines.size());
 		int threads = cores < virtualMachines.size() ? cores : virtualMachines
 				.size();
-		// threads = 1;
 		ExecutorService executor = Executors.newFixedThreadPool(threads);
 		for (int i = 0; i < tcFileAddr.size() + threads; i++) {
 			Runnable worker = pr.new TCThread(i);
 			executor.execute(worker);
 		}
 		executor.shutdown();
+		// Think how to make it sleep or maybe delete this line
 		while (!executor.isTerminated()) {
 		}
 		System.out.println("Finished all threads");
-		System.out.println("Successful files - " + correct);
-		System.out.println("Failed file - " + failed);
+	}
 
+	private static boolean folderExists(String folderName) {
+		File folder = new File(folderName);
+		if (!folder.exists())
+			return false;
+		return true;
+	}
+
+	private static void readVMs(String virtualMachinesFile) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(
+				virtualMachinesFile));
+		String line;
+		while ((line = br.readLine()) != null) {
+			virtualMachines.add(line);
+		}
+		br.close();
 	}
 
 	private static void listFilesForFolder(final File folder) {
@@ -95,12 +115,18 @@ public class ProcessTC {
 					name = tcFileNames.poll();
 				}
 				BufferedWriter writer = new BufferedWriter(
+						// System dependent change it
 						new OutputStreamWriter(new FileOutputStream(
-								"/home/romantsegelskyi/rWD/info/" + name + "_info", true)));
+								"/home/roman/rWD/info//" + name + "_info", true)));
 				System.out.println("Starting file - " + file);
+				// In process.r <virtual machine><file><test case
+				// database><result folder>
+
 				String[] commands = { RSCRIPT, "--no-save", "--no-restore",
 						"--slave", "--quiet", "process.r", vm, file,
-						tcResultLocation };
+						tcResultLocation, tcDB };
+				if (tcDB == null)
+					commands = Arrays.copyOf(commands, commands.length - 1);
 				Runtime rt = Runtime.getRuntime();
 				Process proc = rt.exec(commands);
 				// proc.waitFor();
@@ -126,8 +152,10 @@ public class ProcessTC {
 
 					}
 				}
-				System.out.println("Finished File - " + file + ". Files left - " + tcFileAddr.size());
-				
+				writer.close();
+				System.out.println("Finished File - " + file
+						+ ". Files left - " + tcFileAddr.size());
+
 				virtualMachines.add(vm);
 				stdError.close();
 				stdInput.close();

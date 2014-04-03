@@ -14,7 +14,7 @@
 #'
 library(tools)
 
-filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
+filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
   after.tc.coverage.percentage <- 0
   if (!file.exists("testr/coverage.r") || !file.exists("testr/target.r"))
     stop("Please make sure that current working directory contains testr files")
@@ -48,6 +48,10 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
     db.coverage <- 0
   cat("TC Root - ", tc.root, "\n")
   all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
+  indexes <- sapply(all.tc, FUN = determineFileIndex)
+  fileIndexMatrix <- matrix(c(indexes, all.tc), nrow=length(all.tc))
+  all.tc <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
+  
   cat("Number of TC Files - ", length(all.tc), "\n")
   filename <- basename(all.tc[1])
   spl <- strsplit(filename, "_")
@@ -56,7 +60,7 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, clear.previous.
   else
     function.name <- spl[[1]][2]
 
-  tc.function.path <- file.path(tc.db.path, function.name, fsep = .Platform$file.sep)
+  tc.function.path <- file.path(tc.result.root, function.name, fsep = .Platform$file.sep)
   cat("TC function path in filter - ",tc.function.path, "\n")
   if (!file.exists(tc.function.path))
     dir.create(tc.function.path)
@@ -156,12 +160,12 @@ measureCoverageByDB <- function(r.home, source.folder, tc.db.path) {
   before.db.coverage.info <- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
   cmd <- paste(r.home, 
                "/bin/Rscript --no-save --no-restore --slave --quiet ", 
-               paste(run.script, tc.db.path, sep = ""), 
+               paste(run.script, tc.db.path, sep = " "), 
                sep = "")
   cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
   after.db.coverage.info <- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
   sink()
-  file.remove("db_out")
+#  file.remove("db_out")
   before.db.coverage.percentage <- calculateCoverage(before.db.coverage.info)
   if (is.nan(before.db.coverage.percentage)) 
     before.db.coverage.percentage <- 0
@@ -182,3 +186,13 @@ cleanTCDB <- function(tc.db.path){
   cmd <- paste("find", tc.db.path, "-name", '"*.[rR]"', "-delete", sep=" ");
   system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);
 }
+
+determineFileIndex <- function(filename){
+  spl <- strsplit(filename, "_")
+  if (length(spl[[1]]) == 2)
+    index <- 0
+  else
+    index <- substr(spl[[1]][3], 1, nchar(spl[[1]][3]) - 2)
+  return (index)
+}
+

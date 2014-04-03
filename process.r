@@ -7,23 +7,18 @@ library(tools)
 temp.dir <<- "temp"
 run.script <<- file_path_as_absolute("testr/target.r")
 
-processTC <- function(tc.file, tc.result.root, r.home, source.folder) {
+processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.folder, use.tc.db = TRUE) {
+  #files.before.filter.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
   r.home <<- r.home
   source.folder <<- source.folder
   tc.file <- file_path_as_absolute(tc.file)
+  tc.result.root <<- tc.result.root
   
   if (!file.exists(tc.result.root))
     dir.create(tc.result.root)
   if (!file.exists(temp.dir))
     dir.create(temp.dir)
   k <<- 1
-#  sink("info_tmp", append = TRUE)
-#  run.result <- runTests(tc.file)
-#  cat("\n")
-#  sink()
-#  before.processing.coverage.info <<- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
-#  full_coverage <- calculateCoverage(before.processing.coverage.info)
-#  cat("Before processing - ", full_coverage, "\n")
   n <- round(getNumberOfTC(tc.file) /16 + 0.00001)
   if (n < 1)
     n <- 1
@@ -33,15 +28,16 @@ processTC <- function(tc.file, tc.result.root, r.home, source.folder) {
                                         number.of.tc.per.file = n, 
                                         check.correctness = TRUE)
 #stop("Done with splitting!")
-#readline()
+  #readline()
   #stop()
   filterTCs(tc.root = split.paths[1], 
             r.home = r.home, 
             source.folder = source.folder, 
-            tc.db.path = tc.result.root, 
+            tc.db.path = tc.db, 
+            tc.result.root = tc.result.root,
             clear.previous.coverage = TRUE, 
             wipe.tc.database = FALSE, 
-            use.tc.db = FALSE) 
+            use.tc.db = use.tc.db) 
   #readline()
   temp.tc <- list.files(split.paths[2], 
                         full.names = TRUE)
@@ -52,16 +48,17 @@ processTC <- function(tc.file, tc.result.root, r.home, source.folder) {
     split.paths <- splitAndFindCorrectTCs(tc = split.paths[2], 
                                           tc.result.root = tc.result.root, 
                                           number.of.tc.per.file = n, 
-                                          check.correctness = FALSE)
+                                          check.correctness = TRUE)
     file.remove(temp.tc)
  #   readlines()
     filterTCs(tc.root = split.paths[1], 
               r.home = r.home, 
               source.folder = source.folder, 
-              tc.db.path = tc.result.root, 
+              tc.db.path = tc.db, 
+              tc.result.root = tc.result.root,
               clear.previous.coverage = TRUE, 
               wipe.tc.database = FALSE, 
-              use.tc.db = FALSE) 
+              use.tc.db = use.tc.db) 
  #   readline()
     temp.tc <- list.files(split.paths[2], full.names = TRUE)
     if (n == 1)
@@ -70,14 +67,23 @@ processTC <- function(tc.file, tc.result.root, r.home, source.folder) {
   }
   reset(r.home) 
   rm(list = ls(all = TRUE))
+  # to clean R Working Directory
+  #files.after.filter.wd <- list.files(getwd(), all.files = TRUE)
+ # files.to.delete <- files.after.filter.wd[!(files.before.filter.wd %in% files.after.filter.wd)]
+  #file.remove(files.to.delete)
 }
 
 splitAndFindCorrectTCs<- function(tc, tc.result.root, number.of.tc.per.file = 1, check.correctness = TRUE) {
   # In case tc is diretory, recursively call this function on all files in directory
   if (file.info(tc)$isdir){
     all.tc <- list.files(tc, recursive=TRUE, all.files = TRUE, pattern = "\\.[rR]$")
+    # natural order
+    indexes <- sapply(all.tc, FUN = determineFileIndex)
+    fileIndexMatrix <- matrix(c(indexes, all.tc), nrow=length(all.tc))
+    all.tc <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
     for (test.case in all.tc){
       tc.path <- file.path(tc, test.case, fsep = .Platform$file.sep)
+      
       path.temp <- splitAndFindCorrectTCs(tc.path, tc.result.root, number.of.tc.per.file, check.correctness)
     }
     return (path.temp);
@@ -181,12 +187,33 @@ determineFunctionName <- function(filename){
   return (function.name)
 }
 
-processTCfromCommandLine <- function(){
-  args <- commandArgs(trailingOnly = TRUE)
-  if (length(args) == 3)  {
-    processTC(tc.file = args[2], tc.result.root = args[3], r.home = args[1], source.folder = "src/main/")
-  }else{
-  }
+determineFileIndex <- function(filename){
+  spl <- strsplit(filename, "_")
+  if (length(spl[[1]]) == 2)
+    index <- 0
+  else
+    index <- substr(spl[[1]][3], 1, nchar(spl[[1]][3]) - 2)
+  return (index)
 }
 
+
+processTCfromCommandLine <- function(){
+  args <- commandArgs(trailingOnly = TRUE)
+  if (length(args) == 3)  
+    processTC(tc.file = args[2], 
+              tc.result.root = args[3],
+              r.home = args[1], 
+              source.folder = "src/main/",
+              use.tc.db = FALSE)
+  
+  if (length(args) == 4)
+    processTC(tc.file = args[2], 
+              tc.db = args[3],
+              tc.result.root = args[4],
+              r.home = args[1], 
+              source.folder = "src/main/",
+              use.tc.db = TRUE)
+  
+  }
+  
 processTCfromCommandLine()
