@@ -1,6 +1,0 @@
-func: quote(sys.nframe)
-body: function () 
-body: .Internal(sys.nframe())
-args: NULL
-retn: 3L
-

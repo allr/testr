@@ -1,6 +1,0 @@
-func: quote(sm.3RS)
-body: function (x, ...) 
-body: smooth(smooth(x, "3R", ...), "S", ...)
-args: list(c(1, 1, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1))
-retn: structure(c(1, 1, 1, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1), kind = "S", twiced = FALSE, changed = TRUE, call = quote(smooth(x = smooth(x, "3R", ...), kind = "S")), class = "tukeysmooth")
-

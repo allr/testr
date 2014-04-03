@@ -1,9 +1,0 @@
-func: quote(testit)
-body: function (x) 
-body: {
-body:     print(x)
-body:     stopifnot(identical(x, 1L))
-body: }
-args: list(1L)
-retn: NULL
-

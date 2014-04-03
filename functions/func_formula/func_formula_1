@@ -1,6 +1,0 @@
-func: quote(formula)
-body: function (x, ...) 
-body: UseMethod("formula")
-args: list(NULL)
-retn: structure(list(), class = "formula", .Environment = <environment>)
-

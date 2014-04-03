@@ -1,8 +1,0 @@
-func: quote(no.children)
-body: function (children) 
-body: {
-body:     length(ls(children, all.names = TRUE)) == 0
-body: }
-args: list(<environment>)
-retn: TRUE
-

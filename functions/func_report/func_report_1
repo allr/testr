@@ -1,9 +1,0 @@
-func: quote(report)
-body: function (x) 
-body: {
-body:     print(x)
-body:     stopifnot(x)
-body: }
-args: list(TRUE)
-retn: NULL
-

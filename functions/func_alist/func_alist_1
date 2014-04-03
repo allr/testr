@@ -1,6 +1,0 @@
-func: quote(alist)
-body: function (...) 
-body: as.list(sys.call())[-1L]
-args: list(a = quote())
-retn: structure(list(a = quote()), .Names = "a")
-

@@ -1,6 +1,0 @@
-func: quote(deviance)
-body: function (object, ...) 
-body: UseMethod("deviance")
-args: list(list())
-retn: NULL
-

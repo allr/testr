@@ -1,6 +1,0 @@
-func: quote(l10n_info)
-body: function () 
-body: .Internal(l10n_info())
-args: NULL
-retn: structure(list(MBCS = TRUE, `UTF-8` = TRUE, `Latin-1` = FALSE), .Names = c("MBCS", "UTF-8", "Latin-1"))
-

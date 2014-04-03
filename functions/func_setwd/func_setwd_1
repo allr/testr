@@ -1,6 +1,0 @@
-func: quote(setwd)
-body: function (dir) 
-body: .Internal(setwd(dir))
-args: list("/home/roman/r-instrumented/tests")
-retn: "/home/roman/r-instrumented/tests"
-

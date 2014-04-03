@@ -1,6 +1,0 @@
-func: quote(as.Date)
-body: function (x, ...) 
-body: UseMethod("as.Date")
-args: list("1970-01-01")
-retn: structure(0, class = "Date")
-

@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class CopyOfClosureFileSplitter {
+public class ClosureFileSplitter {
 
     static String dirName = "functions";
     static final String FILE_PREFIX = "func_";
@@ -22,6 +22,8 @@ public class CopyOfClosureFileSplitter {
     static final String BODY_PREFIX = "body:";
     static final String ARGS_PREFIX = "args:";
     static final String RETV_PREFIX = "retn:";
+    static final String SYM_PREFIX = "symb:";
+    static final String VSYM_PREFIX = "vsym:";
 
     static boolean discardCapture = false;
     static int totalFunctionCalls = 0;
@@ -58,21 +60,28 @@ public class CopyOfClosureFileSplitter {
                 // System.out.println(line);
                 checkCombined(line);
 
-                if (!line.startsWith(FUNC_NAME_PREFIX)) {
+                // Valid function capture starts with func: or symb:
+                if (!line.startsWith(FUNC_NAME_PREFIX) && !line.startsWith(SYM_PREFIX)) {
                     System.err.println("Function calls - " + totalFunctionCalls);
-                    System.err.println("ERROR" + line);
+                    System.err.println("ERROR - " + line);
                     System.exit(1);
                 }
 
-                String tmpline = line.substring(line.indexOf(':') + 2,
+                // Capture all variable before function
+                while (line.startsWith(SYM_PREFIX) || line.startsWith(VSYM_PREFIX)) {
+                    bufferGeneral.append(line + '\n');
+                    line = reader.readLine();
+                }
+
+                String tmpLine = line.substring(line.indexOf(':') + 2,
                         line.length());
-                funcName = tmpline.substring(6, tmpline.length() - 1); // quote removal
+                funcName = tmpLine.substring(6, tmpLine.length() - 1); // quote removal
                 // check if already encountered this function
 
                 if (functions.contains(funcName)) {
                     fileIndex = funcFileCounter.get(funcName);
-                    File forSizeCheck = new File(dirName + "/" + FILE_PREFIX
-                            + funcName + "/" + FILE_PREFIX + funcName + "_" + fileIndex);
+                    File forSizeCheck = new File(dirName + SYS_SEP + FILE_PREFIX
+                            + funcName + SYS_SEP + FILE_PREFIX + funcName + "_" + fileIndex);
                     if (forSizeCheck.length() > 500 * 1000 * 1000) { //500 MB files size
                         fileIndex++;
                         funcFileCounter.put(funcName, fileIndex);
@@ -80,9 +89,7 @@ public class CopyOfClosureFileSplitter {
                 }
                 bufferGeneral.append(line + "\n"); //to have the same
                 line = reader.readLine();
-//				while (line.startsWith(FUNC_NAME_PREFIX)) {
-//					line = reader.readLine();
-//				}
+
                 while (line.startsWith(PRIM_FUNC_PREFIX)) {
                     // bufferGeneral.append(line + '\n');
                     line = reader.readLine(); // just skip all PRIM for now
@@ -100,7 +107,7 @@ public class CopyOfClosureFileSplitter {
                 if (!functions.contains(funcName)) {
                     functions.add(funcName);
                     if (!discardCapture)
-                        createDir(dirName + "/" + FILE_PREFIX + funcName); // replace with separator
+                        createDir(dirName + SYS_SEP + FILE_PREFIX + funcName);
                     funcFileCounter.put(funcName, fileIndex);
                     HashSet<String> arguments = new HashSet<>();
                     arguments.add(bufferArguments.toString());
@@ -109,19 +116,21 @@ public class CopyOfClosureFileSplitter {
                     HashSet<String> arguments = funcArguments.get(funcName);
                     if (arguments.contains(bufferArguments.toString())) {
                         sameArguments = true;
+                    } else {
+                        arguments.add(bufferArguments.toString());
+                        funcArguments.put(funcName, arguments);
                     }
-                    arguments.add(bufferArguments.toString());
-                    funcArguments.put(funcName, arguments);
                 }
+                // null check for end of file
                 while (line != null && line.startsWith(RETV_PREFIX)) {
                     bufferGeneral.append(line + "\n");
                     line = reader.readLine();
                 }
-                bufferGeneral.append("\n");
+                bufferGeneral.append("\n"); // for now for simplicity there is a line break between captures
                 if (!discardCapture && !sameArguments) {
                     writer = new BufferedWriter(new OutputStreamWriter(
-                            new FileOutputStream(dirName + "/" + FILE_PREFIX
-                                    + funcName + "/" + FILE_PREFIX + funcName + "_"
+                            new FileOutputStream(dirName + SYS_SEP + FILE_PREFIX
+                                    + funcName + SYS_SEP + FILE_PREFIX + funcName + "_"
                                     + fileIndex, true)
                     ));
                     writer.write(bufferGeneral.toString());
@@ -146,12 +155,8 @@ public class CopyOfClosureFileSplitter {
 
     private static void createDir(String dirName) {
         File theDir = new File(dirName);
-
-        // if the directory does not exist, create it
         if (!theDir.exists()) {
-            // System.out.println("creating directory: " + dirName);
             boolean result = theDir.mkdir();
-
             if (!result) {
                 throw new RuntimeException("Could not create directory - "
                         + dirName + ". Please check previlages");

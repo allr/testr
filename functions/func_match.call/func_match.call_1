@@ -1,6 +1,0 @@
-func: quote(match.call)
-body: function (definition = NULL, call = sys.call(sys.parent()), expand.dots = TRUE) 
-body: .Internal(match.call(definition, call, expand.dots))
-args: list(expand.dots = FALSE)
-retn: quote(rm(... = list(method)))
-

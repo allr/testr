@@ -1,6 +1,0 @@
-func: quote(dirname)
-body: function (path) 
-body: .Internal(dirname(path))
-args: list("/home/roman/r-instrumented/library/translations/DESCRIPTION")
-retn: "/home/roman/r-instrumented/library/translations"
-

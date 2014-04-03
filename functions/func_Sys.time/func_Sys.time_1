@@ -1,6 +1,0 @@
-func: quote(Sys.time)
-body: function () 
-body: .POSIXct(.Internal(Sys.time()))
-args: NULL
-retn: structure(1395162597.32856, class = c("POSIXct", "POSIXt"))
-

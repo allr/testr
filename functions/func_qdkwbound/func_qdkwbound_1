@@ -1,6 +1,0 @@
-func: quote(qdkwbound)
-body: function (n, p) 
-body: sqrt(log(p/2)/(-2 * n))
-args: list(10000, 0.001)
-retn: 0.0194947460352041
-

@@ -1,6 +1,0 @@
-func: quote(double)
-body: function (length = 0L) 
-body: .Internal(vector("double", length))
-args: NULL
-retn: numeric(0)
-

@@ -1,6 +1,0 @@
-func: quote(convE)
-body: function (a, b) 
-body: .External("convolveE", a, b)
-args: list(c(1, 1, 1, 1, 1), c(1, 1, 1, 1, 1))
-retn: c(1, 2, 3, 4, 5, 4, 3, 2, 1)
-

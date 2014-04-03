@@ -1,6 +1,0 @@
-func: quote(stdout)
-body: function () 
-body: .Internal(stdout())
-args: NULL
-retn: structure(1L, class = c("terminal", "connection"))
-

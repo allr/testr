@@ -1,8 +1,0 @@
-func: quote(depth)
-body: function (vp) 
-body: {
-body:     UseMethod("depth")
-body: }
-args: list(structure(list(path = "GRID.VP.2", name = "GRID.VP.3", n = 2L), .Names = c("path", "name", "n"), class = c("vpPath", "path")))
-retn: 2L
-

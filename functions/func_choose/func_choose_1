@@ -1,6 +1,0 @@
-func: quote(choose)
-body: function (n, k) 
-body: .Internal(choose(n, k))
-args: list(1L, 0L)
-retn: 1
-

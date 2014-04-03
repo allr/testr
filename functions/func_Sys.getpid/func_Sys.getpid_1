@@ -1,6 +1,0 @@
-func: quote(Sys.getpid)
-body: function () 
-body: .Internal(Sys.getpid())
-args: NULL
-retn: 9542L
-

@@ -1,6 +1,0 @@
-func: quote(search)
-body: function () 
-body: .Internal(search())
-args: NULL
-retn: c(".GlobalEnv", "df0", "list()", "NULL", "package:stats", "package:graphics", "package:grDevices", "package:utils", "package:datasets", "package:methods", "Autoloads", "package:base")
-
