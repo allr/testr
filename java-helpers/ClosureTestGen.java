@@ -22,10 +22,13 @@ public class ClosureTestGen {
 	static boolean verbose = false;
 	static String TEST_GEN;
 	static volatile boolean done = false;
-	final static String FUNC_PREFIX = "func: ";
-	final static String BODY_PREFIX = "body: ";
-	final static String ARGS_PREFIX = "args: ";
-	final static String RETN_PREFIX = "retn: ";
+    static final String FUNC_NAME_PREFIX = "func: ";
+    static final String PRIM_FUNC_PREFIX = "prim: ";
+    static final String BODY_PREFIX = "body: ";
+    static final String ARGS_PREFIX = "args: ";
+    static final String RETV_PREFIX = "retn: ";
+    static final String SYM_PREFIX = "symb: ";
+    static final String VSYM_PREFIX = "vsym: ";
 
 	final static LinkedBlockingQueue<Path> ifileQueue = new LinkedBlockingQueue<Path>();
 
@@ -78,12 +81,13 @@ public class ClosureTestGen {
 				Charset.defaultCharset());
 		for (HashSet<FuncEntry> entries : entryMap.values()) {
 			for (FuncEntry entry : entries) {
+                writer.write(entry.symb);
 				writer.write(entry.func);
 				writer.write('\n');
 				writer.write(entry.body);
 				// writer.write('\n');
 				writer.write(entry.args);
-				writer.write('\n');
+		//		writer.write('\n');
 				writer.write(entry.retn);
 				writer.write('\n');
 			}
@@ -125,7 +129,15 @@ public class ClosureTestGen {
 		int s = ss[0];
 		FuncEntry entry = new FuncEntry();
 		assert (s < lines.length);
-		entry.func = lines[s++];
+
+        entry.symb = "";
+        while (lines[s].startsWith(SYM_PREFIX) || lines[s].startsWith(VSYM_PREFIX)) {
+            entry.symb += lines[s] + "\n";
+            s++;
+            assert (s < lines.length);
+        }
+
+        entry.func = lines[s++];
 		assert (s < lines.length);
 		entry.body = "";
 		while (lines[s].startsWith(BODY_PREFIX)) {
@@ -135,13 +147,13 @@ public class ClosureTestGen {
 		}
 		entry.args = "";
 		while (lines[s].startsWith(ARGS_PREFIX)) {
-			entry.args += lines[s].substring(ARGS_PREFIX.length());
+			entry.args += lines[s] + "\n";
 			s++;
 			assert (s < lines.length);
 		}
 		entry.retn = "";
-		while (s < lines.length && lines[s].startsWith(RETN_PREFIX)) {
-			entry.retn += lines[s].substring(RETN_PREFIX.length());
+		while (s < lines.length && lines[s].startsWith(RETV_PREFIX)) {
+			entry.retn += lines[s] + "\n";
 			s++;
 		}
 		s++;
@@ -185,13 +197,14 @@ public class ClosureTestGen {
 
 	static class FuncEntry {
 		String func;
+        String symb;
 		String body;
 		String args;
 		String retn;
 
 		@Override
 		public int hashCode() {
-			return func.hashCode() ^ body.hashCode() ^ args.hashCode()
+			return symb.hashCode() ^ func.hashCode() ^ body.hashCode() ^ args.hashCode()
 					^ retn.hashCode();
 		}
 
@@ -200,7 +213,7 @@ public class ClosureTestGen {
 			if (!(o instanceof FuncEntry))
 				return false;
 			FuncEntry o1 = (FuncEntry) o;
-			return o1.func.equals(func) && o1.body.equals(body)
+			return o1.symb.equals(symb) && o1.func.equals(func) && o1.body.equals(body)
 					&& o1.args.equals(args) && o1.retn.equals(retn);
 		}
 
@@ -219,7 +232,7 @@ public class ClosureTestGen {
 
 		void process(Path ifile) throws IOException {
 			Process proc = null;
-			// throw new RuntimeException("Forced exit");
+//		    throw new RuntimeException("Forced exit");
 			System.out.println("Processing file - " + ifile.toString());
 			proc = Runtime.getRuntime().exec(
 					new String[] { "Rscript", TEST_GEN,

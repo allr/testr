@@ -39,20 +39,63 @@ testgen <- function(output.dir, ifile, verbose=FALSE) {
   cache <- new.env();
   i <- 1
   while (i < length(lines)){
-    func <- lines[i];
-    j <- i + 1
-    body <- ""
-    while (substr(lines[j], 1, 4) == "body"){
-      body <- paste(body, substr(lines[j], 6, nchar(lines[j])))
-      body <- paste(body, "\n")
-      j <- j + 1
+    k_sym <- 1
+    k_value <- 1
+    symb <- vector()
+    vsym <- vector()
+    symb[k_sym] <- ""
+    vsym[k_value] <- ""
+    while (substr(lines[i], 1, 4) == "symb"){
+      symb[k_sym] <- paste(symb[k_sym], deparse.line(lines[i]), sep = "") 
+      i <- i + 1
+      k_sym <- k_sym + 1
+      symb[k_sym] <- ""
+      while (substr(lines[i], 1, 4) == "vsym"){
+        vsym[k_value] <- paste(vsym[k_value], 
+                               substr(lines[i], 6, nchar(lines[i])),
+                               "\n",
+                               sep="")
+        i <- i + 1
+      }
+      k_value <- k_value + 1
+      vsym[k_value] <- ""
     }
-    i <- j
-    args <- lines[i];
-    retn <- lines[i+1];
-    i <- i + 2
+    length(symb) <- length(symb) - 1
+    length(vsym) <- length(vsym) - 1
+    if (length(symb) != length(vsym))  # Sanity checks remove later
+      stop("Something is seriously wrong. Value or symbols")
+    if (substr(lines[i], 1, 4) != "func")
+      stop("Something is seriously wrong. Func")
+    
+    func <- deparse.line(lines[i])
+    i <- i + 1
+    body <- ""
+    while (substr(lines[i], 1, 4) == "body"){
+      body <- paste(body, 
+                    substr(lines[i], 6, nchar(lines[i])),
+                    "\n",
+                    sep="")
+      i <- i + 1
+    }
+    args <- ""
+    while (substr(lines[i], 1, 4) == "args"){
+      args <- paste(args, 
+                    substr(lines[i], 6, nchar(lines[i])),
+                    sep="")
+#      args <- paste(args, "\n")
+      i <- i + 1
+    }
+    retn <- ""
+    while (substr(lines[i], 1, 4) == "retn"){
+      retn <- paste(retn, 
+                    substr(lines[i], 6, nchar(lines[i])),
+                    sep="")
+#      retn <- paste(retn, "\n")
+      i <- i + 1
+    }
+    i <- i + 1
     tc.file <- ensure.tc.file(output.dir, func, cache);
-    feedback <- gen.func(func, body, args, retn);
+    feedback <- gen.func(symb, vsym, func, body, args, retn); # added symb and vsym
 #### see what we get
     if (feedback$'type' == "err") {
 #### the captured information is not usable
@@ -69,6 +112,18 @@ write(feedback$'msg', file=bad.argv.file, append=TRUE);
   }
 }
 
+# Like true false
+deparse.line <- function(l){
+  if (grepl("quote\\(", l)){
+    ret.line <- strsplit(l, "\\(")[[1]][2];
+    if (substr(ret.line, nchar(ret.line), nchar(ret.line)) == ")")
+      ret.line <- substr(ret.line, 0, nchar(ret.line) - 1)
+  }else{
+    ret.line <- substr(l, 6, nchar(l));     
+  }
+  ret.line
+}
+
 ensure.tc.file <- function(path, name, cache) {
   tc.file <- cache[[name]];
   if (is.null(tc.file)) {
@@ -79,35 +134,73 @@ ensure.tc.file <- function(path, name, cache) {
   return(tc.file);
 }
 
-gen.func <- function(func, body, argv, retn) {
+gen.func <- function(symb, vsym, func, body, argv, retn) {
   # check to see if it is bad arguments
   parseAndCheck <- function(what) {
     tryCatch({eval(parse(text=what))}, warning=print, error=function(e){valid<<-FALSE;});
   }
   mk.err <- function(msg) { list(type="err", msg=msg); }
   mk.src <- function(msg) { list(type="src", msg=msg); }
+  # check validity of symbol values
+  # we need additional vector
+  # using vector because need to keep track of indexes
+  temp.valid.vsym <- vector();
+  vsym.obj <- vector();
+  valid <- TRUE;
+  invalid.symbols <- vector();
+  if (length(symb) > 0 && symb[1] != ""){
+    for (i in 1:length(vsym)){
+#      vsym.obj[i] <- parseAndCheck(vsym[i]);
+      parseAndCheck(vsym[i]);
+      if (!valid){
+        invalid.symbols <- append(invalid.symbols, i)  
+      }
+    }
+  }
+  valid.vsym <- all(temp.valid.vsym);
+  # check validity of arguments
   valid <- TRUE;
   argv.obj <- parseAndCheck(argv);
   valid.argv <- valid;
+  # check validity of return values
   valid <- TRUE;
   retn.obj <- parseAndCheck(retn);
   valid.retn <- valid;
+
   # proper argument should always be packed in a list
-  if (!valid.argv || !valid.retn) { 
+  if (!valid.argv || !valid.retn) {
     return (mk.err(paste("func:", func, "\nbody:", body, "\nargv:", argv,"\nretn:", retn,"\n")));
   }  
   # TODO: potentially good arguments, alter it 
-#  argv.obj.lst <- alter.arguments(argv.obj);
-  args <- length(argv.obj); 
+  #  argv.obj.lst <- alter.arguments(argv.obj);
+
+  # get variables and values
+  var <- ""
+  if (length(symb) > 0 && symb[1] != "" && valid.vsym){
+    for (i in 1:length(symb)){
+      var <- paste(var, symb[i], "<-", vsym[i], "\n", sep=" ")
+    }
+  }
+  # other stuff
+  args <- length(argv.obj);
   f.search <- utils::getAnywhere(func)
   if (is.list(f.search$objs) & length(f.search$objs) == 0){
     call <- paste(func, "<-", body, "\n", sep="");
   }else{
     call <- paste(func, "<-",  "utils::getAnywhere(",func,")[1]",";\n", sep="")
   }
-  if (args > 0) { call <- paste(call, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep=""); }
-  else          { call <- paste(call, "argv <- list();", "\n", sep=""); }
-  call <- paste(call, "do.call(`", func, "`, argv);", sep="");
+  if (args > 0) {
+    call <- paste(call, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep="");
+  } else {
+    call <- paste(call, "argv <- list();", "\n", sep="");
+  }
+  if (grepl("`", func)){
+    call <- paste(call, "do.call(", func, ", argv);", sep="");
+  }else{ 
+    call <- paste(call, "do.call('", func, "', argv);", sep="");
+  }
+  if (length(symb) > 0 && symb[1] != "")
+    call <- paste(var, call, sep=""); # added because of variables
   src <- ""
   src <- paste(src, "expected <- eval(parse(text=", deparse(retn), "));\n",  sep="");
   src <- paste(src, "test(id=0, code={\n", call, "\n}, o=expected);\n", sep="")
@@ -117,4 +210,4 @@ gen.func <- function(func, body, argv, retn) {
 
 args <- commandArgs(trailingOnly=TRUE);
 testgen(args[1], args[2], TRUE);
-#testgen("temp", "~/Waterloo/rWD/testr/gen/2014_03_25_14_00_57/1395774523081")
+#testgen("temp", "~/Waterloo/rWD/testr/gen/2014_04_04_18_26_32//1396656018523")

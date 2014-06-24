@@ -156,6 +156,8 @@ compareResults <- function(a, b) {
   if (identical(all.equal(a, b), TRUE)) {
     TRUE
   } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
+    if (typeof(a) == "builtin" || typeof(b) == "builtin" || typeof(a) == 'special' || typeof(b) == 'special' || typeof(a) == 'closure' || typeof(b) == 'closure')
+	return(TRUE)
     aa = a[!is.na(a)]
     bb = b[!is.na(b)]
     ((length(aa) == 0) && (length(bb) == 0)) || identical(all.equal(aa, bb), TRUE)
