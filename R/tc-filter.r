@@ -12,14 +12,13 @@
 #' @param wipe.tc.database wheater delete previously accomulated test cases.
 #' @return list(after.tc.coverage.percentage)
 #'
-library(tools)
+require(tools)
 
 filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
   after.tc.coverage.percentage <- 0
   if (!file.exists("testr/coverage.r") || !file.exists("testr/target.r"))
     stop("Please make sure that current working directory contains testr files")
-  source("testr/coverage.r")
-  run.script <<- file_path_as_absolute("testr/target.r")
+  run.script <<- file_path_as_absolute("R/target.r")
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
   if (!file.exists(tc.root))

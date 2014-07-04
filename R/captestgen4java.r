@@ -208,6 +208,6 @@ gen.func <- function(symb, vsym, func, body, argv, retn) {
 }
 
 
-args <- commandArgs(trailingOnly=TRUE);
-testgen(args[1], args[2], TRUE);
+#args <- commandArgs(trailingOnly=TRUE);
+#testgen(args[1], args[2], TRUE);
 #testgen("temp", "~/Waterloo/rWD/testr/gen/2014_04_04_18_26_32//1396656018523")

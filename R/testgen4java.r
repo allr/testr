@@ -119,5 +119,5 @@ gen.func <- function(func, type, argv, retn) {
 }
 
 
-args <- commandArgs(trailingOnly=TRUE);
-testgen(args[1], args[2], TRUE);
+#args <- commandArgs(trailingOnly=TRUE);
+#testgen(args[1], args[2], TRUE);

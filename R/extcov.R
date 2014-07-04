@@ -18,4 +18,4 @@ externalMeasureCoverage <- function(){
   }
 }
 
-externalMeasureCoverage()
+#externalMeasureCoverage()

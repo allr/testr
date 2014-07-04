@@ -316,4 +316,4 @@ determineFileIndex <- function(filename){
   return (index)
 }
 
-externalTestExecute()
+#externalTestExecute()

@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+filtered-test-suite-prim/*
+java-helpers/*
+paper/*

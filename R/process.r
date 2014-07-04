@@ -216,4 +216,4 @@ processTCfromCommandLine <- function(){
   
   }
   
-processTCfromCommandLine()
+#processTCfromCommandLine()
