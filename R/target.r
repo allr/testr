@@ -23,7 +23,7 @@
 # target suite. This file is supposed to run on target
 
 #' @export
-#' Determines if given function is a proper testlisterenr listener or not. 
+#' @title Determines if given function is a proper testlisterenr listener or not. 
 #' 
 #' A test listener is a function that has exactly five arguments named "id", "name", "result", "filename" and "comments" in this order. The id is the unique id of the test within the runTests, name is the name of the test. Result is TRUE for passed test, or FALSE for a failed one. 
 #' 
@@ -36,7 +36,7 @@ is.testListener <- function(f) {
 }
 
 #' @export
-#' Launches the test suite on the target VM. 
+#' @title Launches the test suite on the target VM. 
 #' 
 #' runTests takes as an argument the root folder where the expanded test files are stored and then launches all tests found in all R (.r or .R) files recursively found in that location. Each test is executed and its output checked. Based on the optional arguments, different reporting methods can be used. 
 #' 
@@ -55,18 +55,10 @@ is.testListener <- function(f) {
 #' @return TRUE if all tests have passed, FALSE otherwise. 
 #' 
 #' @seealso test, is.testListener
-#' 
-#' @examples runTests("c:/tests", verbose = TRUE)
-#' 
-#' f <- function(id, name, result, filename, comments) {
-#'   if (result == "FAIL")
-#'       cat("Test",name,"failed.\n")
-#' }
-#' runTests("c:/tests", testListener = f)
 
-runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE, testListener = NULL) {
+runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE, testListener = NULL, clean.wd = FALSE) {
   if (!missing(testListener)) 
-    if (! is.testListener(testListener))
+    if (!is.testListener(testListener))
       stop("Invalid function supported as a test listener.")
   #files.before.fun.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
   verbose <<- verbose
@@ -79,11 +71,6 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
   if (file.info(root)$isdir){
     files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
-    # file sorting in natural order
-    # indexes <- sapply(files, FUN = determineFileIndex)
-    # fileIndexMatrix <- matrix(c(indexes, files), nrow=length(files))
-    # files <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
-    
     files <- Map(function (x) paste(root,"/",x, sep=""), files) 
   } else {
     files <- root
@@ -156,8 +143,8 @@ compareResults <- function(a, b) {
   if (identical(all.equal(a, b), TRUE)) {
     TRUE
   } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
-    if (typeof(a) == "builtin" || typeof(b) == "builtin" || typeof(a) == 'special' || typeof(b) == 'special' || typeof(a) == 'closure' || typeof(b) == 'closure')
-	return(TRUE)
+#     if (typeof(a) == "builtin" || typeof(b) == "builtin" || typeof(a) == 'special' || typeof(b) == 'special' || typeof(a) == 'closure' || typeof(b) == 'closure')
+# 	return(TRUE)
     aa = a[!is.na(a)]
     bb = b[!is.na(b)]
     ((length(aa) == 0) && (length(bb) == 0)) || identical(all.equal(aa, bb), TRUE)
@@ -187,30 +174,10 @@ compareResults <- function(a, b) {
 #' @param e String to find in the error messages (scalar or vector)
 #' @param name Name of the test. If no name is specified, the index of the test in the file will be used.
 #' 
-#' @returns TRUE if the test passes, FALSE otherwise
+#' @return TRUE if the test passes, FALSE otherwise
 #'
 #' @seealso runTests
-#' 
-#' @examples 
-#' test(id = 1, 
-#'   {
-#'     a = 1
-#'     b = 2
-#'     a + b
-#'   }, 2, name = "simple test")
-#' 
-#' test(id = 2, 
-#'   {
-#'     warning("example warning")
-#'     TRUE
-#'   }, TRUE, expectWarning = "warning", name = "warning example)
-
-#' test(id = 3,
-#'   {
-#'     stop("error")
-#'     TRUE
-#'   }, expectError = "error", name = "error example)
-#' 
+#' @export
 test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   appendComment <- function(...) {
     s <- list(...)[[1]]
@@ -226,20 +193,27 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   code <- substitute(code)
   comments <- NULL
   # execute the test and grap warnings and errors
+  # this part has troubles handling errors
+#   expected <- eval(parse(text=" structure(\"Error in parse(text = \\\"12iL\\\") : <text>:1:4: unexpected symbol\\n1: 12iL\\n      ^\\n\", class = \"try-error\", condition = structure(list(message = \"<text>:1:4: unexpected symbol\\n1: 12iL\\n      ^\", call = quote(parse(text = \"12iL\"))), .Names = c(\"message\", \"call\"), class = c(\"simpleError\", \"error\", \"condition\")))"));
+#   test(id=0, code={
+#     try<-utils::getAnywhere(try)[1];
+#     argv <- eval(parse(text=" list(quote(parse(text = \"12iL\")))"));
+#     do.call('try', argv);
+#   },e=expected);
+#     
   result <- withCallingHandlers(
     tryCatch(
-#      eval(code, envir = new.env(parent=baseenv())),
-      eval(code, envir = new.env(parent=globalenv())),
+      eval(code, envir = new.env(parent=baseenv())),
       error = function(e) {
         errors <<- e$message
       }),
-    warning = function(w) {
-      if (is.null(warnings))
-        warnings <<- w$message
-      else 
-        warnings <<- paste(warnings, w$message, sep = "; ")
-      invokeRestart("muffleWarning")
-    }
+      warning = function(w) {
+        if (is.null(warnings))
+          warnings <<- w$message
+        else 
+          warnings <<- paste(warnings, w$message, sep = "; ")
+        invokeRestart("muffleWarning")
+      }
   )
   # if we have an error, the result is irrelevant and should be NULL
   if (!is.null(errors)) {
@@ -293,20 +267,6 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   }
 }
 
-externalTestExecute <- function(){
-  args <- commandArgs(trailingOnly = TRUE)
-  if (length(args) == 1)  {
-    runTests(args[1])
-  }
-#  if (length(args) == 2)  {
-#    runTests(args[1], verbose = args[2])
-#  }
-#  if (length(args) == 3)  {
-#    runTests(args[1], verbose = args[2], stopOnError = args[3])
-# }
-  
-}
-
 determineFileIndex <- function(filename){
   spl <- strsplit(filename, "_")
   if (length(spl[[1]]) == 2)
@@ -316,4 +276,4 @@ determineFileIndex <- function(filename){
   return (index)
 }
 
-#externalTestExecute()
+

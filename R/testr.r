@@ -22,7 +22,7 @@
 # Generators -------------------------------------------------------------------------------------------------------------
 
 #' @export
-#' Checks that the given function has a proper signature for a generator content function. 
+#' @title Checks that the given function has a proper signature for a generator content function. 
 #' 
 #' A generator content function takes the index of the value to be returned that must be named i, the generator itself named g, and the environment of the current test called env. The environment is a list containing values of all previously defined generators in the particular test instance. 
 #' The function returns true if the given function has three arguments, named i, g and env. False otherwise.  
@@ -38,7 +38,7 @@ is.generatorContentFunction <- function(f) {
 }
 
 #' @export
-#' Creates new custom generator.
+#' @title Creates new custom generator.
 #' 
 #' A generator is identified by its content function which is called with the index of the value, the generator itself and already evaluated generators. The generator also must have assigned a name.
 #' 
@@ -52,11 +52,6 @@ is.generatorContentFunction <- function(f) {
 #' @return The generator object that can be passed to the test function.
 #' 
 #' @seealso is.generatorContentFunction, test
-#' 
-#' @examples
-#' customGenerator(a, function(i, g, env) { rep(g$foo, i) }, foo = 1, length = 10)
-#' # with other generator already defined
-#' customGenerator(d, function(i, g, env) { if (is.nan(env$a) TRUE else FALSE) }, dependsOn = a)
 customGenerator <- function(name, contentFunction, ..., dependsOn = NULL, length = 1) {
     if (! is.generatorContentFunction(contentFunction))
         stop("Generator content function must take exactly three arguments named i, g and env.")
@@ -94,7 +89,7 @@ customGenerator <- function(name, contentFunction, ..., dependsOn = NULL, length
 }
 
 #' @export
-#' Shorthand for customGenerator function. 
+#' @title Shorthand for customGenerator function. 
 #' 
 #' @aliases customGenerator
 #' @seealso customGenerator
@@ -104,7 +99,7 @@ cg <- customGenerator
 
 
 #' @export
-#' Creates new generator that is defined by a list of its values.
+#' @title Creates new generator that is defined by a list of its values.
 #' 
 #' This is a simplified version of the custom generator where instead of the content generator function, an actual list of the possible values for the generic is specified. 
 #' 
@@ -132,7 +127,7 @@ generator <- function(name, ..., dependsOn = NULL) {
 }
 
 #' @export
-#' A shorthand for simple generator function
+#' @title A shorthand for simple generator function
 #' 
 #' @seealso generator
 #' @examples
@@ -140,7 +135,7 @@ generator <- function(name, ..., dependsOn = NULL) {
 g <- generator
 
 #' @export 
-#' Determines if given object is an instance of generator. 
+#' @title Determines if given object is an instance of generator. 
 #' 
 #' A generator must inherit from a generator class. Likely this is produced by calling either customGenerator, or generator function. 
 #' @param o Object to be tested.
@@ -149,13 +144,12 @@ g <- generator
 #' @examples
 #' is.generator(1) # FALSE
 #' is.generator(generator(a, 1, 2, 3)) # TRUE
-#' is.customGenerator(cg(b, function(i, g, env) { 1 }, dependsOn = a)) # TRUE
 is.generator <- function(o) {
     inherits(o, "generator")
 }
 
 #' @export
-#' Determines if the given generator is dependent one.
+#' @title Determines if the given generator is dependent one.
 #' 
 #' @param g Generator to be tested.
 #' @return TRUE if the generator is dependent, FALSE if independent.
@@ -168,7 +162,7 @@ is.dependent.generator <- function(g) {
 }
 
 #' @export
-#' Determines if the given generator is independent, or not. 
+#' @title Determines if the given generator is independent, or not. 
 #' 
 #' @param g Generator to be tested.
 #' @return TRUE if the generator is independent, FALSE if dependent.
@@ -181,7 +175,7 @@ is.independent.generator <- function(g) {
 }
 
 #' @export
-#' Generic method for S3 dependent and independent generators. Checks that the generator is dependent
+#' @title Generic method for S3 dependent and independent generators. Checks that the generator is dependent
 #'
 #' @param g Generator to be tested.
 #' @return TRUE if the generator is dependent, FALSE if independent.
@@ -194,7 +188,7 @@ is.dependent <- function(o) {
 }
 
 #' @export
-#' Generic method for S3 dependent and independent generators. Checks that the generator is independent
+#' @title Generic method for S3 dependent and independent generators. Checks that the generator is independent
 #'
 #' @param g Generator to be tested.
 #' @return TRUE if the generator is independent, FALSE if dependent.
@@ -208,7 +202,7 @@ is.independent <- function(o) {
 
 
 #' @export
-#' Returns the length of a generator. 
+#' @title Returns the length of a generator. 
 #' 
 #' The length of a generator is number of unique values the generator can produce. This only has real meaning for independent generators as dependent generators can have length 1 which gets constantly reevaluated. 
 #' 
@@ -227,8 +221,9 @@ length.generator <- function(g) {
 # substitution ---------------------------------------------------------------------------------------------------------
 
 #' @export
-#' Substitutes given string or AST with the specified environment. 
+#' @title Substitutes given string or AST with the specified environment. 
 #' 
+#' @details
 #' This function works in a way similar to the substitute function known in R with two main differences: 
 #' 
 #' 1) if the argument code is character, a string replacement is used instead of substitution and a character with replaced portions is returned. 
@@ -300,7 +295,7 @@ testSubstituteAST <- function(ast, env) {
 # test generator -------------------------------------------------------------------------------------------------------
 
 #' @export
-#' Function that creates a test based on its code and checks. 
+#' @title Function that creates a test based on its code and checks. 
 #' 
 #' The function identifies new test, specifies its generators and their values and the checks used to verify its correctness. The test can optionally have a name specified.
 #' 
@@ -336,35 +331,8 @@ testSubstituteAST <- function(ast, env) {
 #' @param e Character of error messages expected. The messages can be either parts of the message or full lines. If there are multiple error messages all must be found within the test result. 
 #' @return NULL - the tests are added automatically to the makeTests. 
 #' @seealso makeTests, cg, g, testSubstitute
-#' @examples
-#' # simple test, no generators
-#' test( 1 + 2, o = 3)
-#' # test with generators, output specified
-#' test(g(a, 1, 2, 3),
-#'   g(b, 2, 4, 6, dependsOn = a) 
-#'   a + a,
-#'   o = b
-#' )
-#' # test with generators, output will be calculated before the expansion
-#' test(g(a, 1, 2, 3),
-#'   a + a,
-#' )
-#' # test with a warning and calculated output
-#' test({
-#'   warning("foobar")
-#'   1
-#' }, w = "foobar"
-#' )
-#' # evaluation of the output command
-#' test(
-#'   g(a, NA, NaN),
-#'   g(b, NA, NaN),
-#'   g(c, "+", "-", "*", "/"),
-#'   o = if (is.nan(a) && is.nan(b)) NaN else NA,
-#'   a %c% b
-#' )
 
-test <- function(..., name = NULL, o = NULL, w = NULL, e = NULL) {
+test1 <- function(..., name = NULL, o = NULL, w = NULL, e = NULL) {
     # convert name to character if required, preserve name null if unnamed
     if (typeof(name) != "character")
         name <- as.character(substitute(name))
@@ -531,7 +499,7 @@ enumerateTests <- function(name, code, w, e, separatedCommands,  o = NULL) {
 }
 
 #' @export 
-#' S3 method to expand a test to a string that can be stored to the expanded tests file. 
+#' @title S3 method to expand a test to a string that can be stored to the expanded tests file. 
 #' 
 #' Such a method must return the string corresponding to that test definition. May be overriden for different tests. 
 #' @param t Test to be expanded
@@ -569,7 +537,7 @@ expandTest.testInstance <- function(test, testId) {
 }
 
 #' @export
-#' Prettyprint for an expanded test instance. 
+#' @title Prettyprint for an expanded test instance. 
 #' 
 #' Prints the test name, generators and code with generators replaced. 
 #' 
@@ -584,7 +552,7 @@ print.testInstance <- function(t) {
 }
 
 #' @export
-#' Launches the test compiler that takes the unexpanded tests with generators and converts them to their expanded variants. 
+#' @title Launches the test compiler that takes the unexpanded tests with generators and converts them to their expanded variants. 
 #' 
 #' Recursively walks all tr (.tr and .TR) files on given root. For each file reads its tests, expands them and stores them to the same file but under the destRoot folder. 
 #' 

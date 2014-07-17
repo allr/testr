@@ -11,13 +11,12 @@
 #' @param clear.previous.coverage wheather to clear accomulated coverage of VM.
 #' @param wipe.tc.database wheater delete previously accomulated test cases.
 #' @return list(after.tc.coverage.percentage)
-#'
-require(tools)
+#' 
 
 filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
   after.tc.coverage.percentage <- 0
-  if (!file.exists("testr/coverage.r") || !file.exists("testr/target.r"))
-    stop("Please make sure that current working directory contains testr files")
+#  if (!file.exists("testr/coverage.r") || !file.exists("testr/target.r"))
+#   stop("Please make sure that current working directory contains testr files")
   run.script <<- file_path_as_absolute("R/target.r")
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
@@ -102,6 +101,7 @@ filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
   return (after.tc.coverage.percentage)
 }
 
+#' @title calculate local coverage 
 #' @description Function that measures coverage, returns as a result 2 data frames, 
 #' with detailed information of coverage by file and function. 
 #' This function preprocesses the result and returns a file percentage coverage. 
@@ -130,6 +130,7 @@ calculateCoverage <- function(coverage.data) {
   return (totalCovLine.file)
 }
 
+#' @title measure coverage by database
 #' @description measures coverage by test cases in TC database. 
 #' 
 #' @param r.home a directory containing VM.
@@ -173,6 +174,7 @@ measureCoverageByDB <- function(r.home, source.folder, tc.db.path) {
   return (after.db.coverage.percentage)
 } 
 
+#' @title clean database
 #' @description delete previously accomulated TCs in test case database. 
 #' 
 #' @param tc.db.path a directory containing previosly collected test cases.

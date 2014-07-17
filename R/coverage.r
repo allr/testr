@@ -18,6 +18,7 @@
 # or visit www.oracle.com if you need additional information or have any
 # questions.
 
+#' @export
 #' @title Coverage Report on Specified R Virtual Machine Source Code
 #'
 #' @description This function works with the GNU coverage tool, gcov, to report code coverage of the
@@ -28,9 +29,10 @@
 #'  and file. 
 #'
 #' @param root a directory or a single C file that contains or is instrumented VM source.
+#' @param verbose wheather to display resulting info
 #' @param exclude.header whether to include header files in statistics.
-#' @param file.detail whether to display statistic details for files.
-#' @param func.detail whether to display statistic details for functions.
+#' @param file.detail whether to display statistic details for files. Only works if verbose is true.
+#' @param func.detail whether to display statistic details for functions. Only works if verbose is true.
 #' @param file.keyword filtering the result by only including files whose names contain the keyword.
 #' @param func.keyword filtering the result by only including functions whose names contain the keyword.
 #' @param ignore.case whether the keywords should be case-sensitive.
@@ -55,98 +57,33 @@
 #'  by nature. In that, the object information is included in the file/function detail tables for
 #'  users' reference.
 #'
-#' @examples
-#'
-#' Sample 1 (no filter):
-#'
-#' \code{========-------- Coverage Report --------========}
-#'
-#' \code{>>> Configration:}
-#'
-#' \code{- src diretory:     /home/somebody/some_vm/src}
-#' \code{- file keyword:}
-#' \code{- func keyword:}
-#' \code{- igore case:       TRUE}
-#' \code{- exclude header:   FALSE}
-#'
-#' \code{>>> Coverage:}
-#'
-#' \code{* Line (file): 22 out of 30 (73.33%)}
-#' \code{* Line (func): 22 out of 30 (73.33%)}
-#' \code{* File:        7 out of 8 (87.5%)}
-#' \code{* Func:        7 out of 11 (63.64%)}
-#'
-#' \code{----------------   File Detail   ----------------
-#'
-#' \code{       Obj          File CovLn LOC CovLn%}
-#' \code{     add.c  src/static.h     2   4  50.00}
-#' \code{     add.c     src/add.c     5   5 100.00}
-#' \code{ include.c src/include.c     0   1   0.00}
-#' \code{    main.c src/regular.h     2   4  50.00}
-#' \code{    main.c src/include.c     1   1 100.00}
-#' \code{    main.c    src/main.c     6   6 100.00}
-#' \code{   minus.c  src/static.h     2   4  50.00}
-#' \code{   minus.c   src/minus.c     4   5  80.00}
-#'
-#' \code{----------------   Func Detail   ----------------}
-#'
-#' \code{       Obj         Func CovLn LOC CovLn%}
-#' \code{     add.c   static_add     2   2 100.00}
-#' \code{     add.c static_minus     0   2   0.00}
-#' \code{     add.c       my_add     5   5 100.00}
-#' \code{ include.c          one     0   1   0.00}
-#' \code{    main.c      reg_add     0   2   0.00}
-#' \code{    main.c    reg_minus     2   2 100.00}
-#' \code{    main.c          one     1   1 100.00}
-#' \code{    main.c         main     6   6 100.00}
-#' \code{   minus.c   static_add     0   2   0.00}
-#' \code{   minus.c static_minus     2   2 100.00}
-#' \code{   minus.c     my_minus     4   5  80.00}
-#'
-#' \code{=================================================}
-#'
-#' Sample 2 (filters used):
-#'
-#' \code{  ========-------- Coverage Report --------========}
-#'
-#' \code{  >>> Configration:}
-#'
-#' \code{- src diretory:     /home/somebody/some_vm/src}
-#' \code{- file keyword:     add}
-#' \code{- func keyword:     ad}
-#' \code{- igore case:       TRUE}
-#' \code{- exclude header:   TRUE}
-#'
-#' \code{>>> Coverage:}
-#'
-#' \code{* Line (file): 5 out of 5 (100%)}
-#' \code{* Line (func): 7 out of 7 (100%)}
-#' \code{* File:        1 out of 1 (100%)}
-#' \code{* Func:        2 out of 2 (100%)}
-#'
-#' \code{----------------   File Detail   ----------------}
-#'
-#' \code{   Obj      File CovLn LOC CovLn%}
-#' \code{ add.c src/add.c     5   5 100.00}
-#'
-#' \code{----------------   Func Detail   ----------------}
-#'
-#' \code{   Obj       Func CovLn LOC CovLn%}
-#' \code{ add.c static_add     2   2 100.00}
-#' \code{ add.c     my_add     5   5 100.00}
-#'
-#' \code{=================================================}
-#'
+#'@examples
+#'\dontrun{
+#'MeasureCoverage()
+#'}
 
-coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=FALSE, file.keyword="", func.keyword="", ignore.case=TRUE) {
-  if (missing(root)) stop("A directory containing VM source files must be specified!");
-  if (length(grep("[.]c$", root, ignore.case=TRUE))) { cfiles <- root }
-  else { cfiles <- list.files(path=root, recursive=TRUE, pattern=".c$") }
-  res <- c()
+MeasureCoverage <- function(root, verbose = TRUE, exclude.header=TRUE, file.detail=FALSE, func.detail=FALSE, file.keyword="", func.keyword="", ignore.case=TRUE) {
+  if (missing(root)) 
+    stop("A directory containing VM source files must be specified!");
+  if (.Platform$OS.type=="windows") {
+    stop("Not supported on Windows!");
+  } else {
+    stop("Unknown operating system type: ", .Platform$OS.type);
+  }
+  if (length(grep("[.]c$", root, ignore.case=TRUE))) { 
+    cfiles <- root 
+  } else { 
+    if (!length(list.files(path=root, recursive=TRUE, pattern=".gcda$")))
+      stop("No coverage information in the specified folder! .gcda files do not exist")
+    cfiles <- list.files(path=root, recursive=TRUE, pattern=".c$")
+  }
+  if (!length(cfiles))
+    stop("Root param has no files with .c extension")
+
   gcovOnSingleFile <- function(f) {
 	  path <- file.path(root, dirname(f), fsep=.Platform$file.sep);
 	  file <- file.path(root, f,          fsep=.Platform$file.sep);
-	  cmd <- paste("gcov", "-p", "-n", "-f",  "-o", path, file, sep=" ");
+	  cmd <- paste("gcov", "-p", "-f",  "-o", path, file, sep=" ");
 	  r <- system(cmd, intern=TRUE, ignore.stderr=TRUE);
 	  
 	  # for gcov4.7 output
@@ -215,53 +152,55 @@ coverage <- function(root, exclude.header=TRUE, file.detail=FALSE, func.detail=F
   totalCovFile     <- nrow(file.df[as.numeric(file.df$'CovLn')>0,]);
   totalCovFilePcnt <- round(totalCovFile / totalFile * 100, digits=2);
 
-  cat("========-------- Coverage Report --------========\n");
-  cat("\n");
-  cat(">>> Configration:\n");
-  cat("\n");
-  cat("- src root:         ", root,           "\n", sep="");
-  cat("- file keyword:     ", file.keyword,   "\n", sep="");
-  cat("- func keyword:     ", func.keyword,   "\n", sep="");
-  cat("- igore case:       ", ignore.case,    "\n", sep="");
-  cat("- exclude header:   ", exclude.header, "\n", sep="");
-  cat("\n");
-  cat(">>> Coverage:\n");
-  cat("\n");
-  cat("* Line (file): ", totalCovLine.file, " out of ", totalLine.file, " (", totalCovLinePcnt.file, "%)\n", sep="");
-  cat("* Line (func): ", totalCovLine.func, " out of ", totalLine.func, " (", totalCovLinePcnt.func, "%)\n", sep="");
-  cat("* File:        ", totalCovFile,      " out of ", totalFile,      " (", totalCovFilePcnt,      "%)\n", sep="");
-  cat("* Func:        ", totalCovFunc,      " out of ", totalFunc,      " (", totalCovFuncPcnt,      "%)\n", sep="");
-  if (file.detail) {
+  if (verbose){
+    cat("========-------- Coverage Report --------========\n");
     cat("\n");
-    cat("----------------   File Detail   ----------------\n");
+    cat(">>> Configration:\n");
     cat("\n");
-    print(file.df, row.names=FALSE);
+    cat("- src root:         ", root,           "\n", sep="");
+    cat("- file keyword:     ", file.keyword,   "\n", sep="");
+    cat("- func keyword:     ", func.keyword,   "\n", sep="");
+    cat("- igore case:       ", ignore.case,    "\n", sep="");
+    cat("- exclude header:   ", exclude.header, "\n", sep="");
+    cat("\n");
+    cat(">>> Coverage:\n");
+    cat("\n");
+    cat("* Line (file): ", totalCovLine.file, " out of ", totalLine.file, " (", totalCovLinePcnt.file, "%)\n", sep="");
+    cat("* Line (func): ", totalCovLine.func, " out of ", totalLine.func, " (", totalCovLinePcnt.func, "%)\n", sep="");
+    cat("* File:        ", totalCovFile,      " out of ", totalFile,      " (", totalCovFilePcnt,      "%)\n", sep="");
+    cat("* Func:        ", totalCovFunc,      " out of ", totalFunc,      " (", totalCovFuncPcnt,      "%)\n", sep="");
+    if (file.detail) {
+      cat("\n");
+      cat("----------------   File Detail   ----------------\n");
+      cat("\n");
+      print(file.df, row.names=FALSE);
+    }
+    if (func.detail) {
+      cat("\n");
+      cat("----------------   Func Detail   ----------------\n");
+      cat("\n");
+      print(func.df, row.names=FALSE);
+    }
+    cat("\n");
+    cat("=================================================\n");
   }
-  if (func.detail) {
-    cat("\n");
-    cat("----------------   Func Detail   ----------------\n");
-    cat("\n");
-    print(func.df, row.names=FALSE);
-  }
-  cat("\n");
-  cat("=================================================\n");
   return (list(file=file.df, func=func.df));
 }
 
-#' The coverage data is accumulated for every run. Invoke this function to reset whenever
-#' you want a fresh start. All it does is to delete the .gcda files.
+#' @export
+#' @title Reset coverage information
 #'
-#' Parameter:
-#' * root: the top directory of the instrumented VM source.
+#' @description This function deletes gcov information files (*.gcda) thus clearing any previously collected coverage information is erased.
+#' @param root a directory or a single C file that contains or is instrumented VM source.
 #'
-reset <- function(root) {
+ResetCoverageInfo <- function(root) {
   cat("reset called\n")
   if (missing(root)) stop("A directory containing VM source files must be specified!");
   if (.Platform$OS.type=="unix") {
     cmd <- paste("find", root, "-name", "\'*.gcda\'", "-delete", sep=" ");
     system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);
   } else if (.Platform$OS.type=="windows") {
-    stop("Not supported yet! Let me find a Windows machine to test the command...");
+    stop("Not supported on Windows!");
   } else {
    stop("Unknown operating system type: ", .Platform$OS.type);
   }

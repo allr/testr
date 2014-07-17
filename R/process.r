@@ -1,11 +1,6 @@
-source("testr/tc-filter.r")
-source("testr/target.r")
-source("testr/coverage.r")
-
-library(tools)
-
 temp.dir <<- "temp"
-run.script <<- file_path_as_absolute("testr/target.r")
+require(tools)
+##run.script <<- file_path_as_absolute("R/target.r")
 
 processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.folder, use.tc.db = TRUE) {
   #files.before.filter.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
@@ -208,8 +203,8 @@ processTCfromCommandLine <- function(){
   
   if (length(args) == 4)
     processTC(tc.file = args[2], 
-              tc.db = args[3],
-              tc.result.root = args[4],
+              tc.db = args[4],
+              tc.result.root = args[3],
               r.home = args[1], 
               source.folder = "src/main/",
               use.tc.db = TRUE)

@@ -105,4 +105,4 @@ Measure Code Coverage
 To invoke the reporter, call the following function located in coverage.r. The required argument is the the top level directory that
 contains the .gcda files. For details of the result report, see comments in coverarge.r.
 
-    coverage(<PATH_TO_GCDA_FILES>)
+    MeasureCoverage(<PATH_TO_GCDA_FILES>)
