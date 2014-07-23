@@ -52,9 +52,9 @@ TestGen <- function(root, output.dir, capture.type = 'c', use.get.anywhere = TRU
   }else{
     all.capture <- root
   }
-  cache <- new.env();
+  cache <<- new.env();
   if (capture.type=='b' || capture.type=='builtin'){
-    sapply(all.capture, ProcessBuiltin, output.dir, bad.argv.file)
+    Map(ProcessBuiltin, all.capture)
   } else if (capture.type=='c' || capture.type =='capture'){
     Map(ProcessClosure, all.capture)
   } else {
@@ -93,8 +93,8 @@ EnsureTCFile <- function(path, name, cache) {
 ProcessBuiltin <- function(capture.file){
   lines <- readLines(capture.file);
   RemovePrefix <- function(x)
-    substr(x, 7, nchar(x))
-  for(i in seq(1,length(lines),4)) {
+    substr(x, 8, nchar(x) - 1)
+  for(i in seq(1,length(lines),5)) {
     func <- RemovePrefix(lines[i]);
     type <- RemovePrefix(lines[i + 1]);
     args <- RemovePrefix(lines[i + 2]);

@@ -1,4 +1,3 @@
-
 # Copyright (c) 2013, Purdue University. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #
@@ -59,8 +58,9 @@ is.testListener <- function(f) {
 runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE, testListener = NULL, clean.wd = FALSE) {
   if (!missing(testListener)) 
     if (!is.testListener(testListener))
-      stop("Invalid function supported as a test listener.")
-  #files.before.fun.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
+    stop("Invalid function supported as a test listener.")
+  if (clean.wd)
+    files.before.fun.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
   verbose <<- verbose
   displayOnlyErrors <<- displayOnlyErrors
   stopOnError <<- stopOnError
@@ -71,7 +71,7 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
   if (file.info(root)$isdir){
     files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
-    files <- Map(function (x) paste(root,"/",x, sep=""), files) 
+    files <- sapply(files, function (x) paste(root,"/",x, sep="")) 
   } else {
     files <- root
   }
@@ -85,9 +85,7 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     if (!is.null(testListener))
       for (t in tests[-1])
         testListener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
-#    if (fails > 0){
     cat("  (pass = ", passes,", fail = ", fails, ", total = ", passes + fails, ")\n", sep = "")
-#    }
     totalFails <- totalFails + fails
     totalPasses <- totalPasses + passes
     if (summary == TRUE) {
@@ -115,10 +113,11 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     cat("Overall:  ", "FAIL\n")
     FALSE
   }
-  # To clean R Working Directory
-  #files.after.filter.wd <- list.files(getwd(), all.files = TRUE)
-  #files.to.delete <- files.after.filter.wd[!(files.before.filter.wd %in% files.after.filter.wd)]
-  #file.remove(files.to.delete)
+  if (clean.wd){
+    files.after.filter.wd <- list.files(getwd(), all.files = TRUE)
+    files.to.delete <- files.after.filter.wd[!(files.before.filter.wd %in% files.after.filter.wd)]
+    file.remove(files.to.delete)
+  }
 } 
 
 #' Prettyprints the test, is intended to be used only internally. 
@@ -267,13 +266,5 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   }
 }
 
-determineFileIndex <- function(filename){
-  spl <- strsplit(filename, "_")
-  if (length(spl[[1]]) == 2)
-    index <- 0
-  else
-    index <- substr(spl[[1]][3], 1, nchar(spl[[1]][3]) - 2)
-  return (index)
-}
 
 

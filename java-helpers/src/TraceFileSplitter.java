@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.file.*;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -17,8 +19,27 @@ public class TraceFileSplitter {
 	static final String prefix = "func_";
 	static final String SYS_SEP = System.getProperty("file.separator");
 	static final String SEP_REP = "sep";
+    static Path inputDir;
+    static Path outputDir;
+    static boolean verbose;
+    static CaptureType captureType;
 
-	public static void main(String[] args) throws IOException {
+    static void processArgument(String[] args) {
+        if (args.length < 3 || args.length > 5) {
+            System.out
+                    .println("Usage: TraceFileSplitter <input_dir> <output_dir> <builtin | closure> <optional: true | false>");
+            System.exit(0);
+        }
+        inputDir = FileSystems.getDefault().getPath(args[0]);
+        outputDir = FileSystems.getDefault().getPath(args[1]);
+        createDir(outputDir.toString());
+        captureType = CaptureType.findByAbbr(args[2]);
+        if (args.length > 3) {
+            verbose = Boolean.valueOf(args[3]);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
 		BufferedReader reader = null;
 		BufferedWriter writer = null;
 		StringBuilder bufferGeneral = new StringBuilder();
@@ -32,8 +53,7 @@ public class TraceFileSplitter {
 		Set<String> functions = new HashSet<>();
 		Map<String, Integer> funcFileCounter = new HashMap<>();
 		Map<String, HashSet<String>> funcArguments = new HashMap<>();
-		if (args.length != 1) dirName = args[1];
-		createDir(dirName);
+        processArgument(args);
 
 		System.out.println("Starting split");
 		try {
@@ -138,9 +158,8 @@ public class TraceFileSplitter {
 		System.out.println("Split finished");
 	}
 
-	private static void createDir(String dirName) {
-		File theDir = new File(dirName);
-
+	private static void createDir(String dir) {
+		File theDir = new File(dir);
 		// if the directory does not exist, create it
 		if (!theDir.exists()) {
 	//		System.out.println("creating directory: " + dirName);

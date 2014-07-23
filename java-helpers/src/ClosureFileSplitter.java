@@ -60,32 +60,6 @@ public class ClosureFileSplitter {
 				// System.out.println(line);
 				checkCombined(line);
 				
-//				if (line.equals(""))
-//					line = reader.readLine();
-				// Valid function capture starts with func: or symb:
-
-                // remove later because it just skips error for now
-//				while (!line.startsWith(FUNC_NAME_PREFIX)
-//						&& !line.startsWith(SYM_PREFIX)
-//						&& !line.startsWith(VSYM_PREFIX)) {
-//					line = reader.readLine();
-//				}
-//				if (!line.startsWith(FUNC_NAME_PREFIX)
-//						&& !line.startsWith(SYM_PREFIX)
-//						&& !line.startsWith(VSYM_PREFIX)) {
-//					 System.err
-//					 .println("Function calls - " + totalFunctionCalls);
-//					 System.err.println("ERROR - " + line);
-//					 System.err.println("ERROR - " + reader.readLine());
-//					 System.err.println("ERROR - " + reader.readLine());
-//					 System.err.println("ERROR - " + reader.readLine());
-//					
-//					 System.exit(1);
-//				}
-                //System.out.println(line);
-//                // Capture all variable before function
-//                if (reader == null)
-//                    System.out.println("AAAA");
                 while (line.startsWith("symb: ") || line.startsWith("vsym: ")) {
 					bufferGeneral.append(line + '\n');
 					line = reader.readLine();
