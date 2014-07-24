@@ -1,8 +1,8 @@
-rm(list=ls())
+# rm(list=ls())
 
-trace.file <- "closure.0"
+# trace.file <- "closure.0"
 
-file.create(trace.file)
+# file.create(trace.file)
 writing.down <<- FALSE
 
 write.down <- function(f.name, args, body, ret){
@@ -86,19 +86,19 @@ operators <- c("(",":","%sep%","[","[[", "$","@", "<-", "<<-","=", "[<-","[[<-",
 
 tested <- c("all", "any", "identical", "is.list")
 # for (func in tested){
-for (func in builtins(TRUE)){
-  writing.down <<- TRUE
-  if (!length(getAnywhere(func)$objs) == 0 &&
-        !func %in% blacklist &&
-        !grepl("<-", func) &&
-        !grepl("^\\$", func) &&
-        !(func %in% operators) &&
-        !func %in% keywords){
-    cat(func, "\n")
-    assign(func, decorate(func), envir = .GlobalEnv)
-  }
-  writing.down <<- FALSE
-}
+# for (func in builtins(TRUE)){
+#   writing.down <<- TRUE
+#   if (!length(getAnywhere(func)$objs) == 0 &&
+#         !func %in% blacklist &&
+#         !grepl("<-", func) &&
+#         !grepl("^\\$", func) &&
+#         !(func %in% operators) &&
+#         !func %in% keywords){
+#     cat(func, "\n")
+#     assign(func, decorate(func), envir = .GlobalEnv)
+#   }
+#   writing.down <<- FALSE
+# }
 # id <- function(i) i
 # decorate(any)
 # source("~/Dropbox/RProject//R-3.0.1/tests/any-all.R")

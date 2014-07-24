@@ -30,7 +30,7 @@
 #' @return TRUE if the function has the valid signature, FALSE otherwise
 #' @seealso runTests
 #' 
-is.testListener <- function(f) {
+IsTestListener <- function(f) {
   identical(names(formals(f)), c("id", "name", "result", "filename", "comments"))
 }
 
@@ -45,63 +45,61 @@ is.testListener <- function(f) {
 #' 
 #' @param root Folder where to recursively look for the expanded tests. The tests must be located in files with extension either r or R. All other files are ignored.
 #' @param verbose If TRUE, each test will be reported to the stdout as soon as it was executed and analyzed.
-#' @param summary If TRUE, at the end of each analyzed file, a summary of all its tests will be printed. The summary contains the name and id of the test, its result and possibly comments to the reason for its failure.
-#' @param displayOnlyErrors If TRUE, in either verbose mode, or summary, detailed information will only be printed about failed tests.
-#' @param stopOnError If TRUE, first failed test will also terminate the execution of the test suite.
-#' @param displayCodeOnError if TRUE, the code of the test will be displayed when the test fails (only relevant for verbose mode). To determine the code, deparse function is used.
-#' @param testListener A function that will be called for each test. If supplied, it must be a proper test listener function whuich is checked by the is.testListener function (a proper test listener function has exactly five arguments, id, name, result, filename and comments).
+#' @param file.summary If TRUE, at the end of each analyzed file, a summary of all its tests will be printed. The summary contains the name and id of the test, its result and possibly comments to the reason for its failure.
+#' @param display.only.errors If TRUE, in either verbose mode, or summary, detailed information will only be printed about failed tests.
+#' @param stop.on.error If TRUE, first failed test will also terminate the execution of the test suite.
+#' @param display.code.on.error if TRUE, the code of the test will be displayed when the test fails (only relevant for verbose mode). To determine the code, deparse function is used.
+#' @param test.listener A function that will be called for each test. If supplied, it must be a proper test listener function whuich is checked by the is.test.listener function (a proper test listener function has exactly five arguments, id, name, result, filename and comments).
 #'  
 #' @return TRUE if all tests have passed, FALSE otherwise. 
 #' 
-#' @seealso test, is.testListener
+#' @seealso test, IsTestListener
 
-runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors = FALSE, stopOnError = FALSE, displayCodeOnError = TRUE, testListener = NULL, clean.wd = FALSE) {
-  if (!missing(testListener)) 
-    if (!is.testListener(testListener))
+RunTests <- function(root, verbose = testr.option('verbose'), file.summary = testr.option('file.summary'), display.only.errors = testr.option('display.only.errors'), stop.on.error = testr.option('stop.on.error'), display.code.on.error = testr.option('display.code.on.error'), test.listener = NULL, clean.wd = FALSE) {
+  if (!missing(test.listener)) 
+    if (!IsTestListener(test.listener))
     stop("Invalid function supported as a test listener.")
-  if (clean.wd)
-    files.before.fun.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
-  verbose <<- verbose
-  displayOnlyErrors <<- displayOnlyErrors
-  stopOnError <<- stopOnError
-  displayCodeOnError <<- displayCodeOnError
   totalFails <- 0
   totalPasses <- 0
-  if (verbose)
-    cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
+  # remember files in working directory, not to delete them after
+  if (clean.wd)
+    files.before.fun.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
+  # cache parameters to use them in tests
+  cache$verbose <- verbose
+  cache$display.only.errors <- display.only.errors
+  cache$stop.on.error <- stop.on.error
+  cache$display.code.on.error <- display.code.on.error
+  # make list of test to run
   if (file.info(root)$isdir){
     files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
     files <- sapply(files, function (x) paste(root,"/",x, sep="")) 
   } else {
     files <- root
   }
+  if (verbose)
+    cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
+  # process every file
   for (filename in files) {
     cat(filename,"...\n")
-    tests <<- list(c("Test Name","Result", "Comments", "Id"))
-    fails <<- 0
-    passes <<- 0
+    cache$tests <- list(c("Test Name","Result", "Comments", "Id"))
+    cache$fails <- 0
+    cache$passes <- 0
     source(filename, local = FALSE)
     # invoke the test listener so that the results can be grabbed
-    if (!is.null(testListener))
-      for (t in tests[-1])
-        testListener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
-    cat("  (pass = ", passes,", fail = ", fails, ", total = ", passes + fails, ")\n", sep = "")
-    totalFails <- totalFails + fails
-    totalPasses <- totalPasses + passes
-    if (summary == TRUE) {
+    if (!is.null(test.listener))
+      for (t in cache$tests[-1])
+        test.listener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
+    cat("  (pass = ", cache$passes,", fail = ", cache$fails, ", total = ", cache$passes + cache$fails, ")\n", sep = "")
+    totalFails <- totalFails + cache$fails
+    totalPasses <- totalPasses + cache$passes
+    if (file.summary == TRUE) {
       cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
-      for (t in tests[-1])
-        print.test(t)
+      for (t in cache$tests[-1])
+        PrintTest(t)
       cat("\n")
     }
   }
-  rm(tests, envir = globalenv())
-  rm(fails, envir = globalenv())
-  rm(passes, envir = globalenv())
-  rm(verbose, envir = globalenv())
-  rm(displayOnlyErrors, envir = globalenv())
-  rm(stopOnError, envir = globalenv())
-  rm(displayCodeOnError, envir = globalenv())
+  # summarized results
   cat("\n-------- Results --------\n")
   cat("Passed:   ", totalPasses, "\n")
   cat("Failed:   ", totalFails, "\n")
@@ -113,23 +111,34 @@ runTests <- function(root, verbose = FALSE, summary = FALSE, displayOnlyErrors =
     cat("Overall:  ", "FAIL\n")
     FALSE
   }
+  # clean working directory
   if (clean.wd){
     files.after.filter.wd <- list.files(getwd(), all.files = TRUE)
     files.to.delete <- files.after.filter.wd[!(files.before.filter.wd %in% files.after.filter.wd)]
     file.remove(files.to.delete)
   }
+  # clean cache
+  rm(tests, envir = cache)
+  rm(fails, envir = cache)
+  rm(passes, envir = cache)
+  rm(verbose, envir = cache)
+  rm(display.only.errors, cache)
+  rm(stop.on.error, envir = cache)
+  rm(display.code.on.error, envir = cache)
 } 
 
 #' Prettyprints the test, is intended to be used only internally. 
-print.test <- function(test, code = NULL) {
-  if (displayOnlyErrors && identical(test[[2]], "PASS"))
+PrintTest <- function(test, code = NULL) {
+  display.only.errors <- ifelse(!is.null(cache$display.only.errors),cache$display.only.errors, testr.option('display.only.errors'))
+  display.code.on.error <- ifelse(!is.null(cache$display.code.on.error),cache$display.code.on.error, testr.option('display.code.on.error'))
+  if (display.only.errors && identical(test[[2]], "PASS"))
     return()
   if (nchar(test[[1]]) > 80)
     test[[1]] <- paste("...",substr(test[[1]], length(test[[1]])-77, length(test[[1]])), sep = "")
   cat(sprintf("%-80s", test[[1]]),if (test[[2]]) "PASS" else "FAIL","\n")
   if (test[[2]] == FALSE) {
     cat(" ",test[[3]], "\n")
-    if (displayCodeOnError && ! missing(code)) {
+    if (display.code.on.error && ! missing(code)) {
       cat("  Code:\n")
       for (l in deparse(code))
         cat("    ", l, "\n", sep="")
@@ -138,15 +147,21 @@ print.test <- function(test, code = NULL) {
 }
 
 #' Comparing the results, also only to be used internally
-compareResults <- function(a, b) {
+CompareResults <- function(a, b) {
   if (identical(all.equal(a, b), TRUE)) {
-    TRUE
+    return(TRUE)
   } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
-#     if (typeof(a) == "builtin" || typeof(b) == "builtin" || typeof(a) == 'special' || typeof(b) == 'special' || typeof(a) == 'closure' || typeof(b) == 'closure')
-# 	return(TRUE)
+    # special case for builtin/closure/special because is.na produces warnings on them and equality would have been caught earlier, 
+    # so if all.equal previously did not return TRUE, comparasion is wrong
+    if ((typeof(a) == "builtin" && typeof(b) == "builtin") ||
+        (typeof(a) == 'special' && typeof(b) == 'special') || 
+        (typeof(a) == 'closure' && typeof(b) == 'closure'))
+     	return(FALSE)
+    # remove NA's
     aa = a[!is.na(a)]
     bb = b[!is.na(b)]
-    ((length(aa) == 0) && (length(bb) == 0)) || identical(all.equal(aa, bb), TRUE)
+    return ((length(aa) == 0) && (length(bb) == 0)) || identical(all.equal(aa, bb), TRUE)
+    # TODO different types
     # we do not care about types of NA's, or should we -- I think this should be tested by a test rather than assumed here
     #    } else if (typeof(a) != typeof(b)) {
     #        FALSE
@@ -156,7 +171,7 @@ compareResults <- function(a, b) {
     #    if (is.na(a) && (is.na(b))) {
     #        TRUE
   } else {
-    FALSE        
+    return(FALSE)        
   }
 }
 
@@ -178,7 +193,15 @@ compareResults <- function(a, b) {
 #' @seealso runTests
 #' @export
 test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
-  appendComment <- function(...) {
+  tests <- ifelse(!is.null(cache$tests), cache$tests, list(c("Test Name","Result", "Comments", "Id")))
+  fails <- ifelse(!is.null(cache$fails), cache$fails, 0)
+  passes <- ifelse(!is.null(cache$passes), cache$passes, 0)
+  verbose <- ifelse(!is.null(cache$verbose),cache$verbose, testr.option('verbose'))
+  display.only.errors <- ifelse(!is.null(cache$display.only.errors),cache$display.only.errors, testr.option('display.only.errors'))
+  stop.on.error <- ifelse(!is.null(cache$stop.on.error),cache$stop.on.error, testr.option('stop.on.error'))
+  display.code.on.error <- ifelse(!is.null(cache$display.code.on.error),cache$display.code.on.error, testr.option('display.code.on.error'))
+  
+  AppendComment <- function(...) {
     s <- list(...)[[1]]
     for (o in list(...)[-1])
       s <- paste(s, paste(o, collapse = " "))
@@ -217,53 +240,59 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   # if we have an error, the result is irrelevant and should be NULL
   if (!is.null(errors)) {
     result <- TRUE
-  } else if (compareResults(result, o)) {
+  } else if (CompareResults(result, o)) {
     result <- TRUE
   } else {
-    appendComment("Expected",o, "got", result)
+    AppendComment("Expected",o, "got", result)
     result <- FALSE
   }
   # check the warnings
   if (missing(w)) {
     if (!is.null(w)) {
       result <- FALSE
-      appendComment("Expected no warnings, but", warnings,"found")
+      AppendComment("Expected no warnings, but", warnings,"found")
     }
   } else {
     for (ww in w) 
       if (length(grep(ww, warnings)) == 0) {
         result <- FALSE
-        appendComment("Warning", ww, "not found in", warnings)
+        AppendComment("Warning", ww, "not found in", warnings)
       }
   }
   # check the errors
   if (missing(e)) {
     if (!is.null(errors)) {
       result <- FALSE
-      appendComment("Expected no errors, but", errors,"found")
+      AppendComment("Expected no errors, but", errors,"found")
     }
   } else {
     for (ee in e) 
       if (length(grep(ee, errors)) == 0) {
         result <- FALSE
-        appendComment("Error", ee, "not found in ", errors)
+        AppendComment("Error", ee, "not found in ", errors)
       }
   }
   if (missing(name))
     name <- as.character(length(tests))
-  tests[[length(tests) + 1]] <<- c(paste("[",id,"] ",name, sep = ""), result, comments, id)
+  tests[[length(tests) + 1]] <- c(paste("[",id,"] ",name, sep = ""), result, comments, id)
   if (verbose)
-    print.test(tests[[length(tests)]], code)
+    PrintTest(tests[[length(tests)]], code)
   if (result) {
-    passes <<- passes + 1
-    TRUE
+    passes <- passes + 1
+    rv <- TRUE
   } else {
-    fails <<- fails + 1
-    if (stopOnError) {
+    fails <- fails + 1
+    if (stop.on.error) {
       stop("Test id ", id, " name " ,name," failed: ", comments)
     }
-    FALSE
+    rv <- FALSE
   }
+  if (!is.null(cache$tests)){
+    cache$tests <- tests
+    cache$passes <- passes
+    cache$fails <- fails
+  }
+  return (rv)
 }
 
 

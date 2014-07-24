@@ -1,5 +1,5 @@
-operators <- c("(",":","%sep%","[","[[", "$","@", "<-", "<<-","=", "[<-","[[<-","$<-", "@<-", "+","-","*","/", "^","%%","%*%","%/%","<","<=","==","!=",">=",">","|","||","&","&&","!")
-operators.count <- 0
+# operators <- c("(",":","%sep%","[","[[", "$","@", "<-", "<<-","=", "[<-","[[<-","$<-", "@<-", "+","-","*","/", "^","%%","%*%","%/%","<","<=","==","!=",">=",">","|","||","&","&&","!")
+# operators.count <- 0
 translateFastR <- function(root){
   if (file.info(root)$isdir){
     files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
@@ -31,11 +31,11 @@ translateFastR <- function(root){
   }
 }
 
-unlink("tests", TRUE)
-dir.create("tests")
-trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+# unlink("tests", TRUE)
+# dir.create("tests")
+# trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
-test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
+tested <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
 #   code <- expression(code)
   code <- sapply(deparse((substitute(code))), trim)
   res <- ""
