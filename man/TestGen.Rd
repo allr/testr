@@ -3,15 +3,13 @@
 \alias{TestGen}
 \title{Test Case generator based on capture files}
 \usage{
-TestGen(root, output.dir, capture.type = "c", use.get.anywhere = TRUE,
-  verbose = FALSE)
+TestGen(root, output.dir, use.get.anywhere = TRUE,
+  verbose = testrOptions("verbose"))
 }
 \arguments{
 \item{root}{a directory containg capture information or capture file}
 
 \item{output.dir}{directory where generated test cases will be saved}
-
-\item{capture.type}{type of capture information. Can be \code{builtin}|\code{b} or \code{capture}|\code{c}. Defaults to \code{c}}
 
 \item{verbose}{wheater display debug output}
 

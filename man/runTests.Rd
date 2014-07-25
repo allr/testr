@@ -9,7 +9,8 @@ By default, a text output is given on the standard output summarizing the number
 
 Note that since the runTests method also runs on the tested VM, the VM must at least support the functionality required by this function (and other functions used for the test analysis).}
 \usage{
-RunTests(root, verbose = testr.option("verbose"), summary = FALSE,
+RunTests(root, verbose = testr.option("verbose"),
+  file.summary = testr.option("file.summary"),
   display.only.errors = testr.option("display.only.errors"),
   stop.on.error = testr.option("stop.on.error"),
   display.code.on.error = testr.option("display.code.on.error"),
@@ -20,13 +21,13 @@ RunTests(root, verbose = testr.option("verbose"), summary = FALSE,
 
 \item{verbose}{If TRUE, each test will be reported to the stdout as soon as it was executed and analyzed.}
 
-\item{summary}{If TRUE, at the end of each analyzed file, a summary of all its tests will be printed. The summary contains the name and id of the test, its result and possibly comments to the reason for its failure.}
+\item{file.summary}{If TRUE, at the end of each analyzed file, a summary of all its tests will be printed. The summary contains the name and id of the test, its result and possibly comments to the reason for its failure.}
 
-\item{displayOnlyErrors}{If TRUE, in either verbose mode, or summary, detailed information will only be printed about failed tests.}
+\item{display.only.errors}{If TRUE, in either verbose mode, or summary, detailed information will only be printed about failed tests.}
 
-\item{stopOnError}{If TRUE, first failed test will also terminate the execution of the test suite.}
+\item{stop.on.error}{If TRUE, first failed test will also terminate the execution of the test suite.}
 
-\item{displayCodeOnError}{if TRUE, the code of the test will be displayed when the test fails (only relevant for verbose mode). To determine the code, deparse function is used.}
+\item{display.code.on.error}{if TRUE, the code of the test will be displayed when the test fails (only relevant for verbose mode). To determine the code, deparse function is used.}
 
 \item{test.listener}{A function that will be called for each test. If supplied, it must be a proper test listener function whuich is checked by the is.test.listener function (a proper test listener function has exactly five arguments, id, name, result, filename and comments).}
 }
@@ -43,6 +44,6 @@ By default, a text output is given on the standard output summarizing the number
 Note that since the runTests method also runs on the tested VM, the VM must at least support the functionality required by this function (and other functions used for the test analysis).
 }
 \seealso{
-test, is.test.listener
+test, IsTestListener
 }
 

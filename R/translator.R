@@ -35,7 +35,7 @@ translateFastR <- function(root){
 # dir.create("tests")
 # trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
-tested <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
+tests <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
 #   code <- expression(code)
   code <- sapply(deparse((substitute(code))), trim)
   res <- ""

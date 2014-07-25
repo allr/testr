@@ -26,12 +26,11 @@
 #'
 #' @param root a directory containg capture information or capture file
 #' @param output.dir directory where generated test cases will be saved
-#' @param capture.type type of capture information. Can be \code{builtin}|\code{b} or \code{capture}|\code{c}. Defaults to \code{c}
 #' @param verbose wheater display debug output
 #' @param use.get.anywhere whether to perform lookup for a closure in loaded namespaces
 #' @export
 
-TestGen <- function(root, output.dir, capture.type = 'c', use.get.anywhere = TRUE, verbose=FALSE) {
+TestGen <- function(root, output.dir, use.get.anywhere = TRUE, verbose=testrOptions('verbose')) {
   if (verbose) {
     cat("Output:", output.dir, "\n");
     cat("Root:", root, "\n");
@@ -52,20 +51,13 @@ TestGen <- function(root, output.dir, capture.type = 'c', use.get.anywhere = TRU
   }else{
     all.capture <- root
   }
-  cache <<- new.env();
-  if (capture.type=='b' || capture.type=='builtin'){
-    Map(ProcessBuiltin, all.capture)
-  } else if (capture.type=='c' || capture.type =='capture'){
-    Map(ProcessClosure, all.capture)
-  } else {
-    stop("Wrong value of type argument!")
-  }
-  for(f in ls(cache)) {
-    close(cache[[f]]);
+  cache$files <- list()
+  Map(ProcessCapture, all.capture)
+  for(f in cache$files) {
+    close(cache$files[[f]])
   }
   rm(output.dir, envir = globalenv())
   rm(bad.argv.file, envir = globalenv())
-  rm(cache, envir = globalenv())
 }
 
 #' @title Manage Test Case file
@@ -76,7 +68,7 @@ TestGen <- function(root, output.dir, capture.type = 'c', use.get.anywhere = TRU
 #' @param cache environment for caching already created files
 #' @seealso TestGen
 EnsureTCFile <- function(path, name, cache) {
-  tc.file <- cache[[name]];
+  tc.file <- cache$files[[name]];
   if (is.null(tc.file)) {
     name <- gsub(.Platform$file.sep, "sep", name);
     tc.file <- file.path(path, paste("tc_", name, ".r", sep=""), fsep=.Platform$file.sep);
@@ -85,42 +77,15 @@ EnsureTCFile <- function(path, name, cache) {
   return(tc.file);
 }
 
-#' @title Process File with Builtin capture information
-#'
-#' @description This function parses file with builtin capture information and generates test cases
-#' @param capture.file path to builtin capture file
-#' @seealso TestGen GenBuiltinTC
-ProcessBuiltin <- function(capture.file){
-  lines <- readLines(capture.file);
-  RemovePrefix <- function(x)
-    substr(x, 8, nchar(x) - 1)
-  for(i in seq(1,length(lines),5)) {
-    func <- RemovePrefix(lines[i]);
-    type <- RemovePrefix(lines[i + 1]);
-    args <- RemovePrefix(lines[i + 2]);
-    retn <- RemovePrefix(lines[i + 3]);
-    tc.file <- EnsureTCFile(output.dir, func, cache);
-    feedback <- GenBuiltinTC(func, type, args, retn);
-    #### see what we get
-    if (feedback$'type' == "err") {
-      #### the captured information is not usable
-      write(feedback$'msg', file=bad.argv.file, append=TRUE);
-    } else if (feedback$'type' == "src") {
-      #### good, we get the source code
-      write(feedback$'msg', file=tc.file, append=TRUE);
-    } else {
-      stop("Not reached!");
-    }
-  }
-}
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 #' @title Process File with Closure capture information
 #'
 #' @description This function parses file with closure capture information and generates test cases
 #' @param capture.file path to closure capture file
 #' @seealso TestGen GenClosureTC
-ProcessClosure <- function(capture.file){
-  lines <- readLines(capture.file);
+ProcessCapture<- function(capture.file){
+  lines <- readLines(capture.file)
   i <- 1
   while (i < length(lines)){
     k_sym <- 1
@@ -129,14 +94,14 @@ ProcessClosure <- function(capture.file){
     vsym <- vector()
     symb[k_sym] <- ""
     vsym[k_value] <- ""
-    while (substr(lines[i], 1, 4) == "symb"){
-      symb[k_sym] <- paste(symb[k_sym], deparse.line(lines[i]), sep = "") 
+    while (StartsWith(kSymbPrefix, lines[i])){
+      symb[k_sym] <- paste(symb[k_sym], SubstrLine(lines[i]), sep = "") 
       i <- i + 1
       k_sym <- k_sym + 1
       symb[k_sym] <- ""
-      while (substr(lines[i], 1, 4) == "vsym"){
+      while (StartsWith(kValSPrefix, lines[i])){
         vsym[k_value] <- paste(vsym[k_value], 
-                               substr(lines[i], 6, nchar(lines[i])),
+                               SubstrLine(lines[i]),
                                "\n",
                                sep="")
         i <- i + 1
@@ -146,40 +111,33 @@ ProcessClosure <- function(capture.file){
     }
     length(symb) <- length(symb) - 1
     length(vsym) <- length(vsym) - 1
-    if (length(symb) != length(vsym))  # Sanity checks remove later
-      stop("Something is seriously wrong. Value or symbols")
-    if (substr(lines[i], 1, 4) != "func")
-      stop("Something is seriously wrong. Func")
-    
-    func <- deparse.line(lines[i])
+    func <- SubstrLine(lines[i])
     i <- i + 1
     body <- ""
-    while (substr(lines[i], 1, 4) == "body"){
+    while (StartsWith(kBodyPrefix, lines[i])){
       body <- paste(body, 
-                    substr(lines[i], 6, nchar(lines[i])),
+                    SubstrLine(lines[i]),
                     "\n",
                     sep="")
       i <- i + 1
     }
     args <- ""
-    while (substr(lines[i], 1, 4) == "args"){
+    while (StartsWith(kArgsPrefix, lines[i])){
       args <- paste(args, 
-                    substr(lines[i], 6, nchar(lines[i])),
+                    SubstrLine(lines[i]),
                     sep="")
-      #      args <- paste(args, "\n")
       i <- i + 1
     }
     retn <- ""
-    while (substr(lines[i], 1, 4) == "retn"){
+    while (StartsWith(kRetvPrefix, lines[i])){
       retn <- paste(retn, 
-                    substr(lines[i], 6, nchar(lines[i])),
+                    SubstrLine(lines[i]),
                     sep="")
-      #      retn <- paste(retn, "\n")
       i <- i + 1
     }
     i <- i + 1
     tc.file <- EnsureTCFile(output.dir, func, cache);
-    feedback <- gen.closure.tc(symb, vsym, func, body, args, retn, use.get.anywhere = TRUE); # added symb and vsym
+    feedback <- GenerateTC(symb, vsym, func, body, args, retn, use.get.anywhere = TRUE); # added symb and vsym
     #### see what we get
     if (feedback$'type' == "err") {
       #### the captured information is not usable
@@ -191,73 +149,6 @@ ProcessClosure <- function(capture.file){
       stop("Not reached!");
     }
   }
-}
-
-#' @title Generates a testcase for builtin function
-#'
-#' @description This function generates a test case for builtin function using supplied arguments. All elements should be given as text.
-#' @param func builtin function name
-#' @param type builtin function type. Can be \code{I} or \code{P}
-#' @param argv input arguments for a builtin function call
-#' @param retn expected return value
-#' @seealso TestGen ProcessBuiltin
-GenBuiltinTC <- function(func, type, argv, retn) {
-  # check to see if it is bad arguments
-  ParseAndCheck <- function(what) {
-    tryCatch({eval(parse(text=what))}, warning=print, error=function(e){valid<<-FALSE;});
-  }
-  mk.err <- function(msg) { list(type="err", msg=msg); }
-  mk.src <- function(msg) { list(type="src", msg=msg); }
-  valid <- TRUE;
-  argv.obj <- ParseAndCheck(argv);
-  valid.argv <- valid;
-  valid <- TRUE;
-  retn.obj <- ParseAndCheck(retn);
-  valid.retn <- valid;
-  # proper argument should always be packed in a list
-  if (!valid.argv || !valid.retn) { 
-    return (mk.err(paste("func:", func, "\ntype:", type, "\nargv:", argv,"\nretn:", retn,"\n")));
-  }  
-  # TODO: potentially good arguments, alter it 
-  # argv.obj.lst <- alter.arguments(argv.obj);
-  args <- length(argv.obj); 
-  genPrimitive <- function() {
-    src <- "";
-    if (args > 0) { src <- paste(src, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep=""); }
-    else          { src <- paste(src, "argv <- list();", "\n", sep=""); }
-    src <- paste(src, "do.call(`", func, "`, argv);", sep="");
-    src;
-  }
-  genInternal <- function() {
-    src <- "";
-    if (args > 0) {
-      src <- paste(src, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep="");
-      src <- paste(src, ".Internal(`", func, "`(",  sep="");
-      src <- paste(src, "argv[[1]]",  sep="");
-      if (args > 1) { for (idx in 2:args) { src <- paste(src, ", argv[[",idx,"]]", sep=""); } }
-      src <- paste(src, "));", "\n", sep="");
-    } else {
-      src <- paste(src, ".Internal(`", func, "`());", sep="");
-    }
-    src;
-  }
-  code <- switch(type, "P"=genPrimitive(), "I"=genInternal());
-  # wrap the test source in the way that harness expected
-  src <- "";
-  src <- paste(src, "expected <- eval(parse(text=", deparse(retn), "));\n",  sep="");
-  src <- paste(src, "test(id=0, code={\n", code, "\n}, o=expected);\n", sep="")
-  list(type="src", msg=src);
-}
-
-deparse.line <- function(l){
-  if (grepl("quote\\(", l)){
-    ret.line <- strsplit(l, "\\(")[[1]][2];
-    if (substr(ret.line, nchar(ret.line), nchar(ret.line)) == ")")
-      ret.line <- substr(ret.line, 0, nchar(ret.line) - 1)
-  }else{
-    ret.line <- substr(l, 6, nchar(l));     
-  }
-  ret.line
 }
 
 #' @title Generates a testcase for closure function
@@ -271,7 +162,7 @@ deparse.line <- function(l){
 #' @param retn expected return value
 #' @param use.get.anywhere whether to try to get body of the function in the loaded namespaces
 #' @seealso TestGen ProcessClosure
-GenClosureTC<- function(symb, vsym, func, body, argv, retn,use.get.anywhere = TRUE) {
+GenerateTC<- function(symb, vsym, func, body, argv, retn, use.get.anywhere = TRUE) {
   # check to see if it is bad arguments
   ParseAndCheck <- function(what) {
     tryCatch({eval(parse(text=what)); TRUE}, warning=print, error=function(e){FALSE});
@@ -310,23 +201,24 @@ GenClosureTC<- function(symb, vsym, func, body, argv, retn,use.get.anywhere = TR
       variables <- paste(variables, symb[i], "<-", vsym[i], "\n", sep=" ")
     }
   }
-
-
+  call <- ""
   args <- length(eval(parse(text=argv)));
-  f.search <- utils::getAnywhere(func)
-  if (is.list(f.search$objs) && length(f.search$objs) == 0 && !use.get.anywhere){
-    if (ParseAndCheck(body)){
-      call <- paste(func, "<-", body, "\n", sep="");
-    } else {
-      return (mk.err(paste("func:", func, "\nbody:", body, "\nargv:", argv,"\nretn:", retn,"\n")));
+  if (body != ""){
+    f.search <- utils::getAnywhere(func)
+    if (is.list(f.search$objs) && length(f.search$objs) == 0 && !use.get.anywhere){
+      if (ParseAndCheck(body)){
+        call <- paste(func, "<-", body, "\n", sep="");
+      } else {
+        return (mk.err(paste("func:", func, "\nbody:", body, "\nargv:", argv,"\nretn:", retn,"\n")));
+      }
+    }else{
+      call <- paste(func, "<-",  "utils::getAnywhere(",func,")[1]",";\n", sep="")
     }
-  }else{
-    call <- paste(func, "<-",  "utils::getAnywhere(",func,")[1]",";\n", sep="")
   }
   if (args > 0) {
-    call <- paste(call, "argv <- eval(parse(text=", deparse(argv), "));", "\n", sep="");
+    call <- paste(call, "argv <- ", argv, "\n", sep="");
   } else {
-    call <- paste(call, "argv <- list();", "\n", sep="");
+    call <- paste(call, "argv <- list()", "\n", sep="");
   }
   if (grepl("`", func)){
     call <- paste(call, "do.call(", func, ", argv);", sep="");
@@ -335,8 +227,26 @@ GenClosureTC<- function(symb, vsym, func, body, argv, retn,use.get.anywhere = TR
   }
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep=""); # added because of variables
-  src <- paste("", "expected <- eval(parse(text=", deparse(retn), "));\n",  sep="");
+  src <- paste("", "expected <- ", retn, "\n",  sep="");
   src <- paste(src, "test(id=0, code={\n", call, "\n}, o=expected);\n", sep="")
   list(type="src", msg=src);
 }
 
+#' @title Removes prefixes and quote from line
+#'
+#' @description Used for processing capture file information. Deletes prefixes to get essential information
+#' @param l input line
+#' @seealso ProcessClosure
+SubstrLine <- function(l){
+  if (grepl("quote\\(", l)){
+    ret.line <- strsplit(l, "\\(")[[1]][2];
+    if (substr(ret.line, nchar(ret.line), nchar(ret.line)) == ")")
+      ret.line <- substr(ret.line, 0, nchar(ret.line) - 1)
+  }else{
+    ret.line <- substr(l, 7, nchar(l));     
+  }
+  ret.line
+}
+
+StartsWith <- function(prefix, x)
+  grepl(paste("^", prefix, sep=""), x)

@@ -1,104 +1,158 @@
-# rm(list=ls())
+kCaptureFile <- "capture"
+kCaptureFolder <- "capture"
+kSymbPrefix <- "symb: "
+kValSPrefix <- "vsym: "
+kFuncPrefix <- "func: "
+kBodyPrefix <- "body: "
+kTypePrefix <- "type: "
+kArgsPrefix <- "args: "
+kRetvPrefix <- "retv: "
+blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
+               ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", ".Machine")
+keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
+operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
+               "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
+for.testing <- c("all", "any", "identical", "is.list")
 
-# trace.file <- "closure.0"
 
-# file.create(trace.file)
-writing.down <<- FALSE
-
-write.down <- function(f.name, args, body, ret){
+#' @title Write down capture information 
+#' 
+#' This function is respinsible for writing down capture information for decorated function calls.
+#' @param fname function name
+#' @param fbody function body
+#' @param args arguments to function call
+#' @param retv return value of a specified function call with arguments
+#' @seealso Decorate
+#' 
+WriteCapInfo <- function(fname, fbody, args, retv){
   if (writing.down)
     return(FALSE)
   else 
     writing.down <<- TRUE
-  symb.prefix <- "symb: "
-  vsym.prefix <- "vsym: "
-  func.prefix <- "func: "
-  body.prefix <- "body: "
-  type.prefix <- "type: "
-  args.prefix <- "args: "
-  retn.prefix <- "retn: "
+  trace.file <- file.path(kCaptureFolder, paste(kCaptureFile, cache$capture.file.number, sep="."))
+  if (!file.exists(trace.file))
+    file.create(trace.file)
+  else if (file.info(trace.file)$size > 500 * 1000 * 1000)
+    cache$capture.file.number <- cache$capture.file.number + 1
   builtin <- FALSE
-#   func <- deparse(sc[[1]])
-  func <- f.name
   globals <- vector()
-#   if (!(func %in% builtins())){
-#     globals <- codetools::findGlobals(body)
-#     globals.environments <- sapply(globals, pryr::where) 
-#     globals.indexes <- sapply(globals.environments, identical, .GlobalEnv)
-#     globals <- globals[globals.indexes]
-#   } else {
+  if (!(fname %in% builtins())){
+    # TODO deal with External and C_norm
+    globals <- codetools::findGlobals(fbody)
+    globals.environments <- sapply(globals, pryr::where) 
+    globals.indexes <- sapply(globals.environments, identical, .GlobalEnv)
+    globals <- globals[globals.indexes]
+  } else {
     builtin <- TRUE
-    body.prefix <- type.prefix
-    if (func %in% builtins(TRUE))
-      body <- "I"
-    else body <- "P"
-#   }
-  # printing
-  for (g in globals){
-    cat(symb.prefix, g, "\n", file = trace.file, append = TRUE)
-    cat(vsym.prefix, deparse(eval(parse(text=paste(".GlobalEnv$", g, sep = "")))), "\n", file = trace.file, append = TRUE)
+    fbody <- NULL
   }
-  cat(func.prefix, func, "\n", file = trace.file, append = TRUE)
+  # printing
+  sink(trace.file, append = TRUE)
+  for (g in globals){
+    cat(kSymbPrefix, g, "\n", sep = "")
+    cat(kValPrefix, deparse(get(g)), "\n", sep = "")
+  }
+  cat(kFuncPrefix, fname, "\n", sep = "")
   if (!builtin)
-    body <- deparse(body)
-  for (sline in body)
-    cat(body.prefix, sline, "\n",file = trace.file, append = TRUE)
-  cat(args.prefix, deparse(args), "\n", file = trace.file, append = TRUE)
-  cat(retn.prefix, deparse(ret), "\n", file = trace.file, append = TRUE)
-  cat("\n", file = trace.file, append = TRUE)
+    fbody <- deparse(fbody)
+  for (sline in fbody)
+    cat(kBodyPrefix, sline, "\n", sep = "")
+  cat(kArgsPrefix, deparse(args), "\n", sep = "")
+  cat(kRetvPrefix, deparse(retv), "\n", sep = "")
+  cat("\n")
+  sink()
   writing.down <<- FALSE
 }
 
-decorate <- function(func.undec){
-  if (class(func.undec) == "function"){
-    force(func.undec)
-    f.body <- func.undec
-  }
-  else if (class(func.undec) == "character" && length(func.undec) <= 1){
-    assign(func.undec, utils::getAnywhere(func.undec)[1])
-    f.body <- utils::getAnywhere(func.undec)[1]
-  } else if (class(func.undec) == "character") {
-    sapply(func.undec, decorate)
-  } else {
-    stop("wrong argument type!")
-  } 
-  f.name <- func.undec
-#   cat("f.name - ", f.name, "\n")
-  func.dec <- function(...){
+#' @title Decorate function to capture calls and return values 
+#' 
+#' This function is respinsible for writing down capture information for decorated function calls.
+#' @param func function name as a character string
+#' @return decorated function
+#' @seealso WriteCapInfo
+#'
+Decorate <- function(func){
+  fbody <- utils::getAnywhere(func)[1]
+  func.decorated <- function(...){
     args <- list(...)
-    res <- f.body(...) 
-    sc <- match.call(expand.dots=TRUE)  
-#     cat(sc[[1]],"\n")
-    write.down(f.name, args, f.body, res)
-    return(res)
+    retv <- fbody(...) 
+    WriteCapInfo(func, fbody, args, retv)
+    return(retv)
   }
-  # problem with lists for now
-  return (func.dec)
-  # eval(substitute(func.undec <- func.dec), envir=.GlobalEnv)
+  return (func.decorated)
 }
 
-blacklist <- c("substr<-", "parent.env<-", "comment<-", 
-               "parent.frame", "parent.env", "match.call", 
-               "rm", "builtins", 
-               "retracemem", "restartFormals", "restartDescription", "requireNamespace", "source", "~")
-keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
-operators <- c("(",":","%sep%","[","[[", "$","@", "<-", "<<-","=", "[<-","[[<-","$<-", "@<-", "+","-","*","/", "^","%%","%*%","%/%","<","<=","==","!=",">=",">","|","||","&","&&","!")
-
-tested <- c("all", "any", "identical", "is.list")
-# for (func in tested){
-# for (func in builtins(TRUE)){
-#   writing.down <<- TRUE
-#   if (!length(getAnywhere(func)$objs) == 0 &&
-#         !func %in% blacklist &&
-#         !grepl("<-", func) &&
-#         !grepl("^\\$", func) &&
-#         !(func %in% operators) &&
-#         !func %in% keywords){
-#     cat(func, "\n")
-#     assign(func, decorate(func), envir = .GlobalEnv)
+#' @title Decorates function to capture calls and return values 
+#' 
+#' This function is respinsible for writing down capture information for decorated function calls.
+#' Replaces the function by decorated function in the global environment
+#' @param func function name as a character string
+#' @export 
+#' @seealso WriteCapInfo Decorate
+#'
+DecorateSubst <- function(func){
+    # TODO not a character argument
+#   if (class(func) == "function"){
+#     force(func)
+#     fname <- deparse(substitute(func))
 #   }
-#   writing.down <<- FALSE
-# }
-# id <- function(i) i
-# decorate(any)
-# source("~/Dropbox/RProject//R-3.0.1/tests/any-all.R")
+    if (class(func) == "character"){
+      fname <- func
+    } else {
+      stop("wrong argument type!")
+    } 
+    assign(fname, value = Decorate(fname), envir = .GlobalEnv)  
+}
+
+# eval(substitute(func.undec <- func.dec), envir=.GlobalEnv)
+
+#' @title Setup information capturing for list of function
+#' 
+#' This function is respinsible for setting up capturing for functions
+#' 
+#' @param flist function or list of functions to turn on capturing for
+#' @param verbose if to print what functions will be captured
+#' @seealso Decorate
+#' @export
+SetupCapture <- function(flist, verbose = testrOptions('verbose')){
+  if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
+    dir.create(kCaptureFolder)
+  if (is.null(cache$capture.file.number))
+    cache$capture.file.number <- 0
+  writing.down <<- TRUE
+  if (length(flist) > 1)
+    for (func in flist)
+      if (EligibleForCapture(func)){
+        if (verbose)
+          cat("capturing - ", func, "\n")
+        DecorateSubst(func)
+      }
+#   else
+#     assign(flist, value = Decorate(flist))
+  writing.down <<- FALSE
+}
+
+#' @title Check if function is eligible for wrapping to capture arguments and return values
+#' 
+#' This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
+#' This is an internal function and is supposed to be used in SetupCapture
+#' @param func function name to check
+#' @return TRUE/FALSE if can be captured or not
+#' @seealso SetupCapture
+EligibleForCapture <- function(func){
+  # TODO add support of closure passing
+  return (!length(getAnywhere(func)$objs) == 0 &&
+        !func %in% blacklist &&
+        !func %in% operators &&
+        !func %in% keywords)
+}
+  
+#' @title Setup capture of builtin functions
+#' 
+#' Sets up capturing of builtin functions
+#' @param internal wheather only internals should be captured, or all builtins
+#' @seealso SetupCapture
+#' @export
+BeginBuiltinCapture <- function(internal = FALSE){
+  SetupCapture(builtins(internal), verbose = TRUE)
+}
