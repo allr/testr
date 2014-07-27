@@ -7,6 +7,8 @@ kBodyPrefix <- "body: "
 kTypePrefix <- "type: "
 kArgsPrefix <- "args: "
 kRetvPrefix <- "retv: "
+kErrsPrefix <- "errs: "
+kWarnPrefix <- "warn: "
 blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
                ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", ".Machine")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
@@ -22,9 +24,11 @@ builtin.items <- builtins()
 #' @param fbody function body
 #' @param args arguments to function call
 #' @param retv return value of a specified function call with arguments
+#' @param errs caught errors during function call
+#' @param warns caught warnings during function call
 #' @seealso Decorate
 #' 
-WriteCapInfo <- function(fname, fbody, args, retv){
+WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
   if (cache$writing.down)
     return(FALSE)
   else 
@@ -38,7 +42,8 @@ WriteCapInfo <- function(fname, fbody, args, retv){
   globals <- vector()
   if (!(fname %in% builtins())){
      globals <- codetools::findGlobals(fbody)
-     globals <- globals[!globals %in% builtin.items && !grepl("^C_", globals)] ## for external C functions
+     globals <- globals[!globals %in% builtin.items]
+     globals <- globals[!grepl("^C_", globals)] ## for external C functions
   } else {
     builtin <- TRUE
     fbody <- NULL
@@ -47,7 +52,7 @@ WriteCapInfo <- function(fname, fbody, args, retv){
   sink(trace.file, append = TRUE)
   for (g in globals){
     cat(kSymbPrefix, g, "\n", sep = "")
-    cat(kValPrefix, deparse(get(g)), "\n", sep = "")
+    cat(kValSPrefix, deparse(get(g)), "\n", sep = "")
   }
   cat(kFuncPrefix, fname, "\n", sep = "")
   if (!builtin)
@@ -55,7 +60,14 @@ WriteCapInfo <- function(fname, fbody, args, retv){
   for (sline in fbody)
     cat(kBodyPrefix, sline, "\n", sep = "")
   cat(kArgsPrefix, deparse(args), "\n", sep = "")
-  cat(kRetvPrefix, deparse(retv), "\n", sep = "")
+  if (!is.null(warns))
+    for (line in warns)
+      cat(kWarnPrefix, line, "\n", sep = "")
+  if (is.null(errs))
+    cat(kRetvPrefix, deparse(retv), "\n", sep = "")
+  else
+    for (line in errs)
+      cat(kErrsPrefix, line, "\n", sep = "")
   cat("\n")
   sink()
   cache$writing.down <- FALSE
@@ -71,9 +83,20 @@ WriteCapInfo <- function(fname, fbody, args, retv){
 Decorate <- function(func){
   fbody <- utils::getAnywhere(func)[1]
   func.decorated <- function(...){
+    warns <- NULL
     args <- list(...)
-    retv <- fbody(...) 
-    WriteCapInfo(func, fbody, args, retv)
+    retv <- withCallingHandlers(fbody(...), 
+    error = function(e) {
+      errs <- e$message
+      WriteCapInfo(func, fbody, args, NULL, errs, warns)
+    },
+    warning = function(w) {
+      if (is.null(warns))
+        warns <<- w$message
+      else 
+        warns <<- c(warns, w$message)
+    })
+    WriteCapInfo(func, fbody, args, retv, NULL, deparse(warns))
     return(retv)
   }
   attr(func.decorated, "decorated") <- TRUE    

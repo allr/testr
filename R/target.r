@@ -215,28 +215,20 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   code <- substitute(code)
   comments <- NULL
   # execute the test and grap warnings and errors
-  # this part has troubles handling errors
-#   expected <- eval(parse(text=" structure(\"Error in parse(text = \\\"12iL\\\") : <text>:1:4: unexpected symbol\\n1: 12iL\\n      ^\\n\", class = \"try-error\", condition = structure(list(message = \"<text>:1:4: unexpected symbol\\n1: 12iL\\n      ^\", call = quote(parse(text = \"12iL\"))), .Names = c(\"message\", \"call\"), class = c(\"simpleError\", \"error\", \"condition\")))"));
-#   test(id=0, code={
-#     try<-utils::getAnywhere(try)[1];
-#     argv <- eval(parse(text=" list(quote(parse(text = \"12iL\")))"));
-#     do.call('try', argv);
-#   },e=expected);
-#     
   result <- withCallingHandlers(
     tryCatch(
       eval(code, envir = new.env(parent=baseenv())),
       error = function(e) {
         errors <<- e$message
-      }),
-      warning = function(w) {
-        if (is.null(warnings))
-          warnings <<- w$message
-        else 
-          warnings <<- paste(warnings, w$message, sep = "; ")
-        invokeRestart("muffleWarning")
-      }
-  )
+      }, silent = TRUE),
+    warning = function(w) {
+      if (is.null(warnings))
+        warnings <<- w$message
+      else 
+        warnings <<- paste(warnings, w$message, sep = "; ")
+      invokeRestart("muffleWarning")
+    })
+  
   # if we have an error, the result is irrelevant and should be NULL
   if (!is.null(errors)) {
     result <- TRUE

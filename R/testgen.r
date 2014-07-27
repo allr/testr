@@ -77,8 +77,37 @@ EnsureTCFile <- function(path, name, cache) {
   return(tc.file);
 }
 
-trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+ReadSymbolValues <- function(lines){
+  k_sym <- 1
+  k_value <- 1
+  symb <- vector()
+  vsym <- vector()
+  symb[k_sym] <- ""
+  vsym[k_value] <- ""
+  while (StartsWith(kSymbPrefix, lines[cache$i])){
+    symb[k_sym] <- paste(symb[k_sym], SubstrLine(lines[cache$i]), sep = "") 
+    cache$i <- cache$i + 1
+    k_sym <- k_sym + 1
+    symb[k_sym] <- ""
+    vsym[k_value] <- ReadValue(lines, kValSPrefix)
+    k_value <- k_value + 1
+    vsym[k_value] <- ""
+  }
+  length(symb) <- length(symb) - 1
+  length(vsym) <- length(vsym) - 1
+  return(list(symb, vsym))
+}
 
+ReadValue <- function(lines, prefix){
+  value <- vector()
+  j <- cache$i
+  while (StartsWith(prefix, lines[j])){
+    value <- c(value, SubstrLine(lines[j]))
+    j <- j + 1
+  }
+  cache$i <- j
+  return(paste(value, collapse="\n", sep=""))
+}
 #' @title Process File with Closure capture information
 #'
 #' @description This function parses file with closure capture information and generates test cases
@@ -86,58 +115,20 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 #' @seealso TestGen GenClosureTC
 ProcessCapture<- function(capture.file){
   lines <- readLines(capture.file)
-  i <- 1
-  while (i < length(lines)){
-    k_sym <- 1
-    k_value <- 1
-    symb <- vector()
-    vsym <- vector()
-    symb[k_sym] <- ""
-    vsym[k_value] <- ""
-    while (StartsWith(kSymbPrefix, lines[i])){
-      symb[k_sym] <- paste(symb[k_sym], SubstrLine(lines[i]), sep = "") 
-      i <- i + 1
-      k_sym <- k_sym + 1
-      symb[k_sym] <- ""
-      while (StartsWith(kValSPrefix, lines[i])){
-        vsym[k_value] <- paste(vsym[k_value], 
-                               SubstrLine(lines[i]),
-                               "\n",
-                               sep="")
-        i <- i + 1
-      }
-      k_value <- k_value + 1
-      vsym[k_value] <- ""
-    }
-    length(symb) <- length(symb) - 1
-    length(vsym) <- length(vsym) - 1
-    func <- SubstrLine(lines[i])
-    i <- i + 1
-    body <- ""
-    while (StartsWith(kBodyPrefix, lines[i])){
-      body <- paste(body, 
-                    SubstrLine(lines[i]),
-                    "\n",
-                    sep="")
-      i <- i + 1
-    }
-    args <- ""
-    while (StartsWith(kArgsPrefix, lines[i])){
-      args <- paste(args, 
-                    SubstrLine(lines[i]),
-                    sep="")
-      i <- i + 1
-    }
-    retn <- ""
-    while (StartsWith(kRetvPrefix, lines[i])){
-      retn <- paste(retn, 
-                    SubstrLine(lines[i]),
-                    sep="")
-      i <- i + 1
-    }
-    i <- i + 1
+  cache$i <- 1
+  while (cache$i < length(lines)){
+    symbol.values <- ReadSymbolValues(lines)
+    symb <- symbol.values[[1]]
+    vsym <- symbol.values[[2]]
+    func <- ReadValue(lines, kFuncPrefix)
+    body <- ReadValue(lines, kBodyPrefix)
+    args <- ReadValue(lines, kArgsPrefix)
+    warn <- ReadValue(lines, kWarnPrefix)
+    retv <- ReadValue(lines, kRetvPrefix)
+    errs <- ReadValue(lines, kErrsPrefix)
+    cache$i <- cache$i + 1
     tc.file <- EnsureTCFile(output.dir, func, cache);
-    feedback <- GenerateTC(symb, vsym, func, body, args, retn, use.get.anywhere = TRUE); # added symb and vsym
+    feedback <- GenerateTC(symb, vsym, func, body, args, warn, retv, errs, use.get.anywhere = TRUE); # added symb and vsym
     #### see what we get
     if (feedback$'type' == "err") {
       #### the captured information is not usable
@@ -159,10 +150,12 @@ ProcessCapture<- function(capture.file){
 #' @param func closure function name
 #' @param body closure body
 #' @param argv input arguments for a closure function call
-#' @param retn expected return value
+#' @param warn expected warnings
+#' @param retv expected return value
+#' @param retv expected errors
 #' @param use.get.anywhere whether to try to get body of the function in the loaded namespaces
 #' @seealso TestGen ProcessClosure
-GenerateTC<- function(symb, vsym, func, body, argv, retn, use.get.anywhere = TRUE) {
+GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.anywhere = TRUE) {
   # check to see if it is bad arguments
   ParseAndCheck <- function(what) {
     tryCatch({eval(parse(text=what)); TRUE}, warning=print, error=function(e){FALSE});
@@ -184,13 +177,13 @@ GenerateTC<- function(symb, vsym, func, body, argv, retn, use.get.anywhere = TRU
   }
   # check validity of arguments
   valid.argv <- ParseAndCheck(argv)
-  valid.retn <- ParseAndCheck(retn)
+  valid.retv <- ParseAndCheck(retv)
 #   argv.obj <- ParseAndCheck(argv);
-#   retn.obj <- ParseAndCheck(retn);
+#   retv.obj <- ParseAndCheck(retv);
   
   # proper argument should always be packed in a list
-  if (!valid.argv || !valid.retn) {
-    return (mk.err(paste("func:", func, "\nbody:", body, "\nargv:", argv,"\nretn:", retn,"\n")));
+  if (!valid.argv || !valid.retv) {
+    return (mk.err(paste("func:", func, "\nbody:", body, "\nargv:", argv,"\nretv:", retv,"\n")));
   }  
   # TODO: potentially good arguments, alter it 
   #  argv.obj.lst <- alter.arguments(argv.obj);
@@ -209,7 +202,7 @@ GenerateTC<- function(symb, vsym, func, body, argv, retn, use.get.anywhere = TRU
       if (ParseAndCheck(body)){
         call <- paste(func, "<-", body, "\n", sep="");
       } else {
-        return (mk.err(paste("func:", func, "\nbody:", body, "\nargv:", argv,"\nretn:", retn,"\n")));
+        return (mk.err(paste("func:", func, "\nbody:", body, "\nargv:", argv,"\nretv:", retv,"\n")));
       }
     }else{
       call <- paste(func, "<-",  "utils::getAnywhere(",func,")[1]",";\n", sep="")
@@ -227,8 +220,17 @@ GenerateTC<- function(symb, vsym, func, body, argv, retn, use.get.anywhere = TRU
   }
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep=""); # added because of variables
-  src <- paste("", "expected <- ", retn, "\n",  sep="");
-  src <- paste(src, "test(id=0, code={\n", call, "\n}, o=expected);\n", sep="")
+  src <- ""
+  src <- paste(src, "test(id=0, code={\n", call, "\n}, ", sep="")
+  if (warn != "")
+    src <- paste(src, 'w = ', warn, ",", sep = "")
+  if (errs != "")
+    src <- paste(src, 'e = ', deparse(errs), sep = "")
+  else {
+    src <- paste("expected <- ", retv, "\n", src, sep="");
+    src <- paste(src, "o = expected")
+  }
+  src <- paste(src, ");\n", sep="")
   list(type="src", msg=src);
 }
 
