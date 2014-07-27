@@ -10,7 +10,8 @@ kRetvPrefix <- "retv: "
 kErrsPrefix <- "errs: "
 kWarnPrefix <- "warn: "
 blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
-               ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", ".Machine")
+               ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 
+               ".Machine", "debug", "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", "c")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -36,8 +37,8 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
   trace.file <- file.path(kCaptureFolder, paste(kCaptureFile, cache$capture.file.number, sep="."))
   if (!file.exists(trace.file))
     file.create(trace.file)
-  else if (file.info(trace.file)$size > 500 * 1000 * 1000)
-    cache$capture.file.number <- cache$capture.file.number + 1
+  else if (file.info(trace.file)$size > testrOptions('capture.file.size'))
+    cache$capture.file.number <- cache$capture.file.number + 1 # improve here for while cycle
   builtin <- FALSE
   globals <- vector()
   if (!(fname %in% builtins())){
@@ -61,7 +62,7 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
     cat(kBodyPrefix, sline, "\n", sep = "")
   cat(kArgsPrefix, deparse(args), "\n", sep = "")
   if (!is.null(warns))
-    for (line in warns)
+    for (line in deparse(warns))
       cat(kWarnPrefix, line, "\n", sep = "")
   if (is.null(errs))
     cat(kRetvPrefix, deparse(retv), "\n", sep = "")
@@ -83,11 +84,15 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
 Decorate <- function(func){
   fbody <- utils::getAnywhere(func)[1]
   func.decorated <- function(...){
+#     if (cache$writing.down)
+#       return(fbody(...))
+#     cache$writing.down <- TRUE
     warns <- NULL
     args <- list(...)
     retv <- withCallingHandlers(fbody(...), 
     error = function(e) {
       errs <- e$message
+#       cache$writing.down <- FALSE
       WriteCapInfo(func, fbody, args, NULL, errs, warns)
     },
     warning = function(w) {
@@ -96,7 +101,8 @@ Decorate <- function(func){
       else 
         warns <<- c(warns, w$message)
     })
-    WriteCapInfo(func, fbody, args, retv, NULL, deparse(warns))
+#     cache$writing.down <- FALSE
+    WriteCapInfo(func, fbody, args, retv, NULL, warns)
     return(retv)
   }
   attr(func.decorated, "decorated") <- TRUE    

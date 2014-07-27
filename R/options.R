@@ -6,7 +6,8 @@
     'display.only.errors' = FALSE,
     'stop.on.error' = FALSE,
     'display.code.on.error' = FALSE,
-    'file.summary' = FALSE
+    'file.summary' = FALSE,
+    'capture.file.size' = 500 * 1000 * 1000
   ))
 }
 
