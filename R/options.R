@@ -12,6 +12,8 @@
 
 ## general (temporary) storage for pander's stuff
 cache           <- new.env()
+cache$capture.file.number <- 0
+cache$writing.down <- FALSE
 
 #' Querying/setting testr option
 #'

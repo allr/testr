@@ -13,7 +13,7 @@ keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "bre
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
 for.testing <- c("all", "any", "identical", "is.list")
-
+builtin.items <- builtins()
 
 #' @title Write down capture information 
 #' 
@@ -25,10 +25,10 @@ for.testing <- c("all", "any", "identical", "is.list")
 #' @seealso Decorate
 #' 
 WriteCapInfo <- function(fname, fbody, args, retv){
-  if (writing.down)
+  if (cache$writing.down)
     return(FALSE)
   else 
-    writing.down <<- TRUE
+    cache$writing.down <- TRUE
   trace.file <- file.path(kCaptureFolder, paste(kCaptureFile, cache$capture.file.number, sep="."))
   if (!file.exists(trace.file))
     file.create(trace.file)
@@ -37,11 +37,8 @@ WriteCapInfo <- function(fname, fbody, args, retv){
   builtin <- FALSE
   globals <- vector()
   if (!(fname %in% builtins())){
-    # TODO deal with External and C_norm
-    globals <- codetools::findGlobals(fbody)
-    globals.environments <- sapply(globals, pryr::where) 
-    globals.indexes <- sapply(globals.environments, identical, .GlobalEnv)
-    globals <- globals[globals.indexes]
+     globals <- codetools::findGlobals(fbody)
+     globals <- globals[!globals %in% builtin.items && !grepl("^C_", globals)] ## for external C functions
   } else {
     builtin <- TRUE
     fbody <- NULL
@@ -61,7 +58,7 @@ WriteCapInfo <- function(fname, fbody, args, retv){
   cat(kRetvPrefix, deparse(retv), "\n", sep = "")
   cat("\n")
   sink()
-  writing.down <<- FALSE
+  cache$writing.down <- FALSE
 }
 
 #' @title Decorate function to capture calls and return values 
@@ -79,6 +76,7 @@ Decorate <- function(func){
     WriteCapInfo(func, fbody, args, retv)
     return(retv)
   }
+  attr(func.decorated, "decorated") <- TRUE    
   return (func.decorated)
 }
 
@@ -91,17 +89,18 @@ Decorate <- function(func){
 #' @seealso WriteCapInfo Decorate
 #'
 DecorateSubst <- function(func){
-    # TODO not a character argument
-#   if (class(func) == "function"){
-#     force(func)
-#     fname <- deparse(substitute(func))
-#   }
-    if (class(func) == "character"){
+    if (class(func) == "function"){
+      fname <- as.character(substitute(func))
+    } else if (class(func) == "character"){
       fname <- func
     } else {
       stop("wrong argument type!")
     } 
-    assign(fname, value = Decorate(fname), envir = .GlobalEnv)  
+    fobj <- get(fname, envir = .GlobalEnv)
+    if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
+      warning("Functions was already decorated!")
+    else  
+      assign(fname, value = Decorate(fname), envir = .GlobalEnv)  
 }
 
 # eval(substitute(func.undec <- func.dec), envir=.GlobalEnv)
@@ -110,26 +109,22 @@ DecorateSubst <- function(func){
 #' 
 #' This function is respinsible for setting up capturing for functions
 #' 
-#' @param flist function or list of functions to turn on capturing for
+#' @param flist function or list of functions to turn on capturing for. List should be only as character.
 #' @param verbose if to print what functions will be captured
 #' @seealso Decorate
 #' @export
 SetupCapture <- function(flist, verbose = testrOptions('verbose')){
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
-  if (is.null(cache$capture.file.number))
-    cache$capture.file.number <- 0
-  writing.down <<- TRUE
-  if (length(flist) > 1)
-    for (func in flist)
-      if (EligibleForCapture(func)){
-        if (verbose)
-          cat("capturing - ", func, "\n")
-        DecorateSubst(func)
-      }
-#   else
-#     assign(flist, value = Decorate(flist))
-  writing.down <<- FALSE
+  cache$writing.down <- TRUE
+  for (func in flist){
+    if (EligibleForCapture(func)){
+      if (verbose)
+        cat("capturing - ", func, "\n")
+      DecorateSubst(func)
+    }
+  }
+  cache$writing.down <- FALSE
 }
 
 #' @title Check if function is eligible for wrapping to capture arguments and return values
@@ -140,7 +135,6 @@ SetupCapture <- function(flist, verbose = testrOptions('verbose')){
 #' @return TRUE/FALSE if can be captured or not
 #' @seealso SetupCapture
 EligibleForCapture <- function(func){
-  # TODO add support of closure passing
   return (!length(getAnywhere(func)$objs) == 0 &&
         !func %in% blacklist &&
         !func %in% operators &&
