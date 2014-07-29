@@ -1,19 +1,28 @@
-temp.dir <<- "temp"
-require(tools)
-##run.script <<- file_path_as_absolute("R/target.r")
-
+#' @title Write down capture information 
+#' 
+#' This function is respinsible for writing down capture information for decorated function calls.
+#' @param fname function name
+#' @param fbody function body
+#' @param args arguments to function call
+#' @param retv return value of a specified function call with arguments
+#' @param errs caught errors during function call
+#' @param warns caught warnings during function call
+#' @seealso Decorate
+#' 
 processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.folder, use.tc.db = TRUE) {
   #files.before.filter.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
-  r.home <<- r.home
-  source.folder <<- source.folder
+  # TODO clear cache after and working wd
+  temp.dir <- "temp.processing.tc"
+  cache$r.home <- r.home
+  cache$source.folder <- source.folder
   tc.file <- file_path_as_absolute(tc.file)
-  tc.result.root <<- tc.result.root
+  cache$tc.result.root <- tc.result.root
   
   if (!file.exists(tc.result.root))
     dir.create(tc.result.root)
   if (!file.exists(temp.dir))
     dir.create(temp.dir)
-  k <<- 1
+  cache$k <<- 1
   n <- round(getNumberOfTC(tc.file) /16 + 0.00001)
   if (n < 1)
     n <- 1

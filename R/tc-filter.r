@@ -13,31 +13,30 @@
 #' @return list(after.tc.coverage.percentage)
 #' 
 
-filterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
-  after.tc.coverage.percentage <- 0
-#  if (!file.exists("testr/coverage.r") || !file.exists("testr/target.r"))
-#   stop("Please make sure that current working directory contains testr files")
-  run.script <<- file_path_as_absolute("R/target.r")
+FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
+  # parameter checks
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
-  if (!file.exists(tc.root))
-    stop('Specified directory with Test Cases does not exist!'); 
   if (missing(r.home)) 
     stop('A directory containing VM source files must be specified!'); 
-  if (!file.exists(r.home))
-    stop('Specified directory of R_HOME does not exist!'); 
   if (missing(source.folder)) 
     stop('A directory containing source files must be specified!'); 
-  if (!file.exists(file.path(r.home,source.folder, fsep = .Platform$file.sep)))
-    stop('Specified source folder to check coverage does not exist!'); 
   if (missing(tc.db.path)) 
     stop("A directory containing TC DB files must be specified!");
+  if (!file.exists(tc.root))
+    stop('Specified directory with Test Cases does not exist!'); 
+  if (!file.exists(r.home))
+    stop('Specified directory of R_HOME does not exist!'); 
+  if (!file.exists(file.path(r.home,source.folder, fsep = .Platform$file.sep)))
+    stop('Specified source folder to check coverage does not exist!'); 
   if (!file.exists(tc.db.path))
     dir.create(tc.db.path)
+  
   if (clear.previous.coverage)
     reset(file.path(r.home, source.folder, fsep = .Platform$file.sep))
   if (wipe.tc.database)
     cleanTCDB(tc.db.path)
+  after.tc.coverage.percentage <- 0
   r.home <- file_path_as_absolute(r.home)
   tc.root <- file_path_as_absolute(tc.root)
   if (use.tc.db)

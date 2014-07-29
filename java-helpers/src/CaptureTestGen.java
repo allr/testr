@@ -1,34 +1,19 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.DirectoryStream;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
+import java.nio.file.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class ClosureTestGen {
+public class CaptureTestGen {
 
 	static Path inputDir;
 	static Path outputDir;
 	static boolean verbose = false;
 	static String TEST_GEN;
 	static volatile boolean done = false;
-    static final String FUNC_NAME_PREFIX = "func: ";
-    static final String PRIM_FUNC_PREFIX = "prim: ";
-    static final String BODY_PREFIX = "body: ";
-    static final String ARGS_PREFIX = "args: ";
-    static final String RETV_PREFIX = "retn: ";
-    static final String SYM_PREFIX = "symb: ";
-    static final String VSYM_PREFIX = "vsym: ";
 
 	final static LinkedBlockingQueue<Path> ifileQueue = new LinkedBlockingQueue<Path>();
 
@@ -83,12 +68,11 @@ public class ClosureTestGen {
 			for (FuncEntry entry : entries) {
                 writer.write(entry.symb);
 				writer.write(entry.func);
-				writer.write('\n');
 				writer.write(entry.body);
-				// writer.write('\n');
 				writer.write(entry.args);
-		//		writer.write('\n');
-				writer.write(entry.retn);
+				writer.write(entry.warn);
+                writer.write(entry.retv);
+                writer.write(entry.errs);
 				writer.write('\n');
 			}
 		}
@@ -124,43 +108,40 @@ public class ClosureTestGen {
 		}
 		return entryMap;
 	}
+    private static int s;
 
 	private static FuncEntry processEntry(String[] lines, int[] ss) {
-		int s = ss[0];
+		s = ss[0];
 		FuncEntry entry = new FuncEntry();
 		assert (s < lines.length);
-
-        entry.symb = "";
-        while (lines[s].startsWith(SYM_PREFIX) || lines[s].startsWith(VSYM_PREFIX)) {
-            entry.symb += lines[s] + "\n";
-            s++;
-            assert (s < lines.length);
-        }
-
-        entry.func = lines[s++];
-		assert (s < lines.length);
-		entry.body = "";
-		while (lines[s].startsWith(BODY_PREFIX)) {
-			entry.body += lines[s] + "\n";
-			s++;
-			assert (s < lines.length);
-		}
-		entry.args = "";
-		while (lines[s].startsWith(ARGS_PREFIX)) {
-			entry.args += lines[s] + "\n";
-			s++;
-			assert (s < lines.length);
-		}
-		entry.retn = "";
-		while (s < lines.length && lines[s].startsWith(RETV_PREFIX)) {
-			entry.retn += lines[s] + "\n";
-			s++;
-		}
-		s++;
-		ss[0] = s;
+        entry.symb = ReadSymbolValue(lines);
+        entry.func = ReadValue(lines, Prefixes.FUNC_PREFIX);
+        entry.body = ReadValue(lines, Prefixes.BODY_PREFIX);
+        entry.args = ReadValue(lines, Prefixes.ARGS_PREFIX);
+        entry.warn = ReadValue(lines, Prefixes.WARN_PREFIX);
+        entry.retv = ReadValue(lines, Prefixes.RETV_PREFIX);
+        entry.errs = ReadValue(lines, Prefixes.ERRS_PREFIX);
+		ss[0] = ++s;
 		return entry;
 	}
 
+    private static String ReadSymbolValue(String []lines){
+        String result = "";
+        while (lines[s].startsWith(Prefixes.SYM_PREFIX) || lines[s].startsWith(Prefixes.VSYM_PREFIX)) {
+            result += lines[s] + "\n";
+            s++;
+        }
+        return result;
+    }
+
+    private static String ReadValue(String []lines, String prefix){
+        String result = "";
+        while (s < lines.length && lines[s].startsWith(prefix)) {
+            result += lines[s] + "\n";
+            s++;
+        }
+        return result;
+    }
 	private static void setupWorkEnv() {
 		if (!Files.exists(inputDir, LinkOption.NOFOLLOW_LINKS)) {
 			System.err.println("Cannot find input directory: " + inputDir);
@@ -182,16 +163,15 @@ public class ClosureTestGen {
 	}
 
 	static void processArgument(String[] args) {
-		if (args.length < 3) {
+		if (args.length < 2) {
 			System.out
-					.println("Usage: TestGen <input_dir> <output_dir> <testgen.r> <optional: true | false>");
+					.println("Usage: CaptureTestGen <input_dir> <output_dir> <optional: true | false>");
 			System.exit(0);
 		}
 		inputDir = FileSystems.getDefault().getPath(args[0]);
 		outputDir = FileSystems.getDefault().getPath(args[1]);
-		TEST_GEN = args[2];
-		if (args.length > 3) {
-			verbose = Boolean.valueOf(args[3]);
+		if (args.length > 2) {
+			verbose = Boolean.valueOf(args[2]);
 		}
 	}
 
@@ -200,12 +180,14 @@ public class ClosureTestGen {
         String symb;
 		String body;
 		String args;
-		String retn;
+        String warn;
+		String retv;
+        String errs;
 
 		@Override
 		public int hashCode() {
 			return symb.hashCode() ^ func.hashCode() ^ body.hashCode() ^ args.hashCode()
-					^ retn.hashCode();
+					^ retv.hashCode();
 		}
 
 		@Override
@@ -214,7 +196,7 @@ public class ClosureTestGen {
 				return false;
 			FuncEntry o1 = (FuncEntry) o;
 			return o1.symb.equals(symb) && o1.func.equals(func) && o1.body.equals(body)
-					&& o1.args.equals(args) && o1.retn.equals(retn);
+					&& o1.args.equals(args) && o1.retv.equals(retv);
 		}
 
 	}
@@ -234,10 +216,11 @@ public class ClosureTestGen {
 			Process proc = null;
 //		    throw new RuntimeException("Forced exit");
 			System.out.println("Processing file - " + ifile.toString());
-			proc = Runtime.getRuntime().exec(
-					new String[] { "Rscript", TEST_GEN,
-							outputDir.toAbsolutePath().toString(),
-							ifile.toAbsolutePath().toString() });
+            String testGen = "R -q -e " + "library(testr) -e TestGen(\"" + ifile.toAbsolutePath().toString() + "\"," + "\"" + outputDir.toAbsolutePath().toString() + "\");";
+//            String testGen = "R -q -e cat(\"Roman\")";
+            System.out.println(testGen);
+//		    throw new RuntimeException("Forced exit");
+            proc = Runtime.getRuntime().exec(testGen);
 			boolean doneWait = false;
 			while (!doneWait) {
 				try {
@@ -247,6 +230,18 @@ public class ClosureTestGen {
 					doneWait = false;
 				}
 			}
+//            String line;
+//            BufferedReader in = new BufferedReader(
+//                    new InputStreamReader(proc.getInputStream()) );
+//            while ((line = in.readLine()) != null) {
+//                System.out.println(line);
+//            }
+//            in = new BufferedReader(
+//                    new InputStreamReader(proc.getErrorStream()) );
+//            while ((line = in.readLine()) != null) {
+//                System.out.println(line);
+//            }
+//            in.close();
 			Files.delete(ifile);
 		}
 	}
