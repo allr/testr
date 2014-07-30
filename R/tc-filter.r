@@ -13,7 +13,7 @@
 #' @return list(after.tc.coverage.percentage)
 #' 
 
-FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1) {
+FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1, verbose = testrOptions('verbose')) {
   # parameter checks
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
@@ -43,22 +43,21 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
     db.coverage <- measureCoverageByDB(r.home, source.folder, tc.db.path)
   else
     db.coverage <- 0
-  cat("TC Root - ", tc.root, "\n")
-  all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
-  indexes <- sapply(all.tc, FUN = determineFileIndex)
-  fileIndexMatrix <- matrix(c(indexes, all.tc), nrow=length(all.tc))
-  all.tc <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
   
-  cat("Number of TC Files - ", length(all.tc), "\n")
-  filename <- basename(all.tc[1])
-  spl <- strsplit(filename, "_")
-  if (length(spl[[1]]) == 2)
-    function.name <- substr(spl[[1]][2], 1, nchar(spl[[1]][2]) - 2)
-  else
-    function.name <- spl[[1]][2]
+  if (verbose) cat("TC Root - ", tc.root, "\n")
+  
+  all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
+#   indexes <- sapply(all.tc, FUN = determineFileIndex)
+#   fileIndexMatrix <- matrix(c(indexes, all.tc), nrow=length(all.tc))
+#   all.tc <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
+  
+  if (verbose) cat("Number of TC Files - ", length(all.tc), "\n")
 
+  function.name <- GetFunctionName(basename(all.tc[1]))
   tc.function.path <- file.path(tc.result.root, function.name, fsep = .Platform$file.sep)
-  cat("TC function path in filter - ",tc.function.path, "\n")
+  
+  if (verbose) cat("TC function path in filter - ",tc.function.path, "\n")
+
   if (!file.exists(tc.function.path))
     dir.create(tc.function.path)
   i <- 1
@@ -187,12 +186,7 @@ cleanTCDB <- function(tc.db.path){
   system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);
 }
 
-determineFileIndex <- function(filename){
+GetFunctionName <- function(filename){
   spl <- strsplit(filename, "_")
-  if (length(spl[[1]]) == 2)
-    index <- 0
-  else
-    index <- substr(spl[[1]][3], 1, nchar(spl[[1]][3]) - 2)
-  return (index)
+  ifelse((length(spl[[1]]) == 2), substr(spl[[1]][2], 1, nchar(spl[[1]][2]) - 2), spl[[1]][2])
 }
-

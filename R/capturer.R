@@ -11,7 +11,8 @@ kErrsPrefix <- "errs: "
 kWarnPrefix <- "warn: "
 blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
                ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 
-               ".Machine", "debug", "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", "c")
+               ".Machine", "debug", "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", 
+               "c", "try", "missing", "load")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -165,6 +166,7 @@ SetupCapture <- function(flist, verbose = testrOptions('verbose')){
 #' @seealso SetupCapture
 EligibleForCapture <- function(func){
   return (!length(getAnywhere(func)$objs) == 0 &&
+        class(getAnywhere(func)[1]) == "function" &&
         !func %in% blacklist &&
         !func %in% operators &&
         !func %in% keywords)
