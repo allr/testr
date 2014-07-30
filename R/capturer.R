@@ -12,7 +12,7 @@ kWarnPrefix <- "warn: "
 blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
                ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 
                ".Machine", "debug", "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", 
-               "c", "try", "missing", "load")
+               "c", "try", "assign")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -89,8 +89,8 @@ Decorate <- function(func){
 #       return(fbody(...))
 #     cache$writing.down <- TRUE
     warns <- NULL
-    args <- list(...)
-    retv <- withCallingHandlers(fbody(...), 
+    args <- lapply(as.list(match.call())[-1], eval)
+    retv <- withCallingHandlers(do.call(fbody, args), 
     error = function(e) {
       errs <- e$message
 #       cache$writing.down <- FALSE
@@ -106,7 +106,8 @@ Decorate <- function(func){
     WriteCapInfo(func, fbody, args, retv, NULL, warns)
     return(retv)
   }
-  attr(func.decorated, "decorated") <- TRUE    
+  attr(func.decorated, "decorated") <- TRUE
+  formals(func.decorated) <- formals(fbody)
   return (func.decorated)
 }
 
