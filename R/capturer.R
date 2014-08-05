@@ -87,14 +87,47 @@ Decorate <- function(func){
   func.decorated <- function(...){
 #     if (cache$writing.down)
 #       return(fbody(...))
+    
 #     cache$writing.down <- TRUE
     warns <- NULL
-    args <- lapply(as.list(match.call())[-1], eval)
+#     ef <- function(q) ifelse(q == "", q, eval(q))
+    
+#     args.list <- as.list(match.call())[-1]
+#     args <- list()
+#     for (i in 1:length(args.list)){
+#       if (args.list[[i]] != "")
+#         el <- eval(args.list[[i]])
+#       else el <- args.list[[i]]
+#       args[[length(args) + 1]] <- el
+#     }
+#     args <- lapply(args.list, ef)
+#     if (is.null(formals(body))){
+#       args <- list(...)
+#     } else {
+#       args.list <- as.list(match.call())[-1]
+#       args <- lapply(args.list, function(x) eval(x))
+#     }
+#     if (is.null(formals(fbody)))
+#       args <- list(...)
+#     else{
+#       args.list <- as.list(match.call())[-1]
+#       for (i in 1:length(args.list)){
+#         if (args.list[[i]] != ""){
+#           el <- eval(args.list[[i]])
+#           args[[names(args.list)[i]]] <- el
+#         }
+#       }
+#       args <- lapply(names(as.list(match.call())[-1]), function(q) force(get(q)))
+#     }
+
+    args <- list(...)
+#     args <- lapply(names(as.list(match.call())[-1]), function(x) force(get(x)))
+#     args <- as.list(match.call())[-1]
     retv <- withCallingHandlers(do.call(fbody, args), 
     error = function(e) {
       errs <- e$message
 #       cache$writing.down <- FALSE
-      WriteCapInfo(func, fbody, args, NULL, errs, warns)
+      WriteCapInfo(func, fbody, args, NULLf, errs, warns)
     },
     warning = function(w) {
       if (is.null(warns))
@@ -107,7 +140,8 @@ Decorate <- function(func){
     return(retv)
   }
   attr(func.decorated, "decorated") <- TRUE
-  formals(func.decorated) <- formals(fbody)
+#   if (!is.null(formals(fbody)))
+#     formals(func.decorated) <- formals(fbody)
   return (func.decorated)
 }
 

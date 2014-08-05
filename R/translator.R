@@ -22,10 +22,10 @@ translateFastR <- function(root){
       operators.count <- operators.count + 1
     }      
     sink(paste("tests/Testrgen", f.name, ".java", sep=""), append=TRUE)
-    cat("\n\t@Test\n\tpublic void test", f.name, f.number, "(){", "\n", sep="")
-    cat("\t\t")
+    cat("\n    @Test\n    public void test", f.name, f.number, "() {", "\n", sep="")
+    cat("        ")
     source(filename, local = FALSE)
-    cat("\t}\n")
+    cat("    }\n")
     sink()
     cache[[f.name]] <- f.number + 1
   }
