@@ -12,7 +12,16 @@ kWarnPrefix <- "warn: "
 blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
                ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 
                ".Machine", "debug", "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", 
-               "c", "try", "assign")
+               "c", "try", 
+               "assign", # because assignment is in parent.frame
+               "NextMethod", # no idea why
+               "formals", "body", # because get is in parent.frame
+               "setwd", # path of capture files are relative to WD, change that
+               "save", "load", #no idea why
+               "deparse",
+               "rawConnection",
+               "remove",
+               "eval", "attach")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -85,48 +94,30 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
 Decorate <- function(func){
   fbody <- utils::getAnywhere(func)[1]
   func.decorated <- function(...){
-#     if (cache$writing.down)
-#       return(fbody(...))
-    
-#     cache$writing.down <- TRUE
     warns <- NULL
-#     ef <- function(q) ifelse(q == "", q, eval(q))
-    
-#     args.list <- as.list(match.call())[-1]
-#     args <- list()
-#     for (i in 1:length(args.list)){
-#       if (args.list[[i]] != "")
-#         el <- eval(args.list[[i]])
-#       else el <- args.list[[i]]
-#       args[[length(args) + 1]] <- el
-#     }
-#     args <- lapply(args.list, ef)
-#     if (is.null(formals(body))){
-#       args <- list(...)
-#     } else {
-#       args.list <- as.list(match.call())[-1]
-#       args <- lapply(args.list, function(x) eval(x))
-#     }
-#     if (is.null(formals(fbody)))
-#       args <- list(...)
-#     else{
-#       args.list <- as.list(match.call())[-1]
-#       for (i in 1:length(args.list)){
-#         if (args.list[[i]] != ""){
-#           el <- eval(args.list[[i]])
-#           args[[names(args.list)[i]]] <- el
-#         }
-#       }
-#       args <- lapply(names(as.list(match.call())[-1]), function(q) force(get(q)))
-#     }
-
-    args <- list(...)
-#     args <- lapply(names(as.list(match.call())[-1]), function(x) force(get(x)))
-#     args <- as.list(match.call())[-1]
-    retv <- withCallingHandlers(do.call(fbody, args), 
+    args <- NULL
+    listm <- function(x){ #currently only needed for matrix(rnorm(20), ,2) Hack to deal with missing values
+      args <- NULL
+      args.list <- as.list(sys.call(sys.parent(4)))[-1]
+      args <- list()
+      for (i in 1:length(args.list)){
+        if (class(args.list[[i]]) != "call")
+          args <- c(args, args.list[[i]])
+        else
+          args <- c(args, list(eval(args.list[[i]])))
+#         args <- c(args, el)
+        #       args[[length(args) + 1]] <- ifelse(args.list[[i]]=="", args.list[[i]], eval(args.list[[i]]))
+      }
+      names(args) <- names(args.list) 
+      args
+    }
+    args.list <- as.list(match.call())[-1]
+    args <- tryCatch(list(...), error=listm)
+    if (is.null(args))
+      return(fbody(...))
+    retv <- withCallingHandlers(do.call(fbody, args, envir = parent.frame()), 
     error = function(e) {
       errs <- e$message
-#       cache$writing.down <- FALSE
       WriteCapInfo(func, fbody, args, NULLf, errs, warns)
     },
     warning = function(w) {
@@ -135,13 +126,10 @@ Decorate <- function(func){
       else 
         warns <<- c(warns, w$message)
     })
-#     cache$writing.down <- FALSE
     WriteCapInfo(func, fbody, args, retv, NULL, warns)
     return(retv)
   }
   attr(func.decorated, "decorated") <- TRUE
-#   if (!is.null(formals(fbody)))
-#     formals(func.decorated) <- formals(fbody)
   return (func.decorated)
 }
 
