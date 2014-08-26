@@ -15,13 +15,16 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "c", "try", 
                "assign", # because assignment is in parent.frame
                "NextMethod", # no idea why
-               "formals", "body", # because get is in parent.frame
                "setwd", # path of capture files are relative to WD, change that
                "save", "load", #no idea why
                "deparse",
                "rawConnection",
                "remove",
-               "eval", "attach")
+               "eval", "attach", 
+               "match.arg",
+               "Summary.Date",
+               ".handleSimpleError", 
+               "tryCatch")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -44,7 +47,9 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
     return(FALSE)
   else 
     cache$writing.down <- TRUE
-  trace.file <- file.path(kCaptureFolder, paste(kCaptureFile, cache$capture.file.number, sep="."))
+  if (is.null(cache$trace.file))
+      cache$trace.file <- file.path(getwd(), kCaptureFolder, paste(kCaptureFile, cache$capture.file.number, sep="."))
+  trace.file <- cache$trace.file
   if (!file.exists(trace.file))
     file.create(trace.file)
   else if (file.info(trace.file)$size > testrOptions('capture.file.size'))
@@ -94,6 +99,7 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
 Decorate <- function(func){
   fbody <- utils::getAnywhere(func)[1]
   func.decorated <- function(...){
+    cat("Func - ", func, "\n")
     warns <- NULL
     args <- NULL
     listm <- function(x){ #currently only needed for matrix(rnorm(20), ,2) Hack to deal with missing values
@@ -115,10 +121,11 @@ Decorate <- function(func){
     args <- tryCatch(list(...), error=listm)
     if (is.null(args))
       return(fbody(...))
-    retv <- withCallingHandlers(do.call(fbody, args, envir = parent.frame()), 
+    retv <- withCallingHandlers(do.call(fbody, args, envir = parent.frame(), quote = TRUE), 
     error = function(e) {
       errs <- e$message
-      WriteCapInfo(func, fbody, args, NULLf, errs, warns)
+      WriteCapInfo(func, fbody, args, NULL, errs, warns)
+      stop(errs)
     },
     warning = function(w) {
       if (is.null(warns))
@@ -126,10 +133,13 @@ Decorate <- function(func){
       else 
         warns <<- c(warns, w$message)
     })
+    if (func == "cbind")
+      retv <- fbody(...)
     WriteCapInfo(func, fbody, args, retv, NULL, warns)
     return(retv)
   }
   attr(func.decorated, "decorated") <- TRUE
+#   formals(func.decorated) <- formals(fbody)
   return (func.decorated)
 }
 
@@ -149,14 +159,22 @@ DecorateSubst <- function(func){
     } else {
       stop("wrong argument type!")
     } 
-    fobj <- get(fname, envir = .GlobalEnv)
+    gAobj <- utils::getAnywhere(fname) # getAnywhere object
+    fobj <-  gAobj[1]
+    where <- gAobj$where[1]
     if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
       warning("Functions was already decorated!")
-    else  
-      assign(fname, value = Decorate(fname), envir = .GlobalEnv)  
+    else {
+#       if (where != '.GlobalEnv'){
+#         where <-  gsub("package:(.*)", "\\1", gAobj$where[1])
+#         unlockBinding(fname, env = getNamespace(where))
+#         assign(fname, value = Decorate(fname), envir = getNamespace(where))  
+#       } else {
+        assign(fname, value = Decorate(fname), envir = .GlobalEnv)
+#       }
+    } 
 }
 
-# eval(substitute(func.undec <- func.dec), envir=.GlobalEnv)
 
 #' @title Setup information capturing for list of function
 #' 
