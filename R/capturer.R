@@ -15,13 +15,17 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "c", "try", 
                "assign", # because assignment is in parent.frame
                "NextMethod", # no idea why
-               "formals", "body", # because get is in parent.frame
                "setwd", # path of capture files are relative to WD, change that
                "save", "load", #no idea why
                "deparse",
                "rawConnection",
                "remove",
-               "eval", "attach")
+               "eval", "attach", 
+               "match.arg",
+               "Summary.Date",
+               ".handleSimpleError", 
+               "tryCatch",
+               "detach","matrix", "parent.frame")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -94,6 +98,7 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
 Decorate <- function(func){
   fbody <- utils::getAnywhere(func)[1]
   func.decorated <- function(...){
+    cat("Func - ", func, "\n")
     warns <- NULL
     args <- NULL
     listm <- function(x){ #currently only needed for matrix(rnorm(20), ,2) Hack to deal with missing values
@@ -115,7 +120,7 @@ Decorate <- function(func){
     args <- tryCatch(list(...), error=listm)
     if (is.null(args))
       return(fbody(...))
-    retv <- withCallingHandlers(do.call(fbody, args, envir = parent.frame()), 
+    retv <- withCallingHandlers(do.call(fbody, args, envir = environment(), quote = TRUE), 
     error = function(e) {
       errs <- e$message
       WriteCapInfo(func, fbody, args, NULLf, errs, warns)
@@ -126,6 +131,8 @@ Decorate <- function(func){
       else 
         warns <<- c(warns, w$message)
     })
+    if (func == 'cbind')
+      retv <- fbody(...)
     WriteCapInfo(func, fbody, args, retv, NULL, warns)
     return(retv)
   }
