@@ -76,8 +76,8 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
       before.tc.coverage.percentage <- 0
     sink()
     cmd <- paste(r.home, 
-                   "/bin/Rscript --no-save --no-restore --slave --quiet ", 
-                   paste(run.script, shQuote(tc.full.path), sep = " "), 
+                   "/bin/R -q -e library(testr) -e RunTests(", 
+                   shQuote(tc.full.path), ")", 
                    sep = "")
     cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
     sink(info.file, append = TRUE)
@@ -157,8 +157,8 @@ measureCoverageByDB <- function(r.home, source.folder, tc.db.path) {
   sink("db_out")
   before.db.coverage.info <- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
   cmd <- paste(r.home, 
-               "/bin/Rscript --no-save --no-restore --slave --quiet ", 
-               paste(run.script, tc.db.path, sep = " "), 
+               "/bin/R -q -e library(testr) -e RunTests(", 
+               shQuote(tc.db.path),")",, 
                sep = "")
   cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
   after.db.coverage.info <- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))

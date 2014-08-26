@@ -38,7 +38,7 @@ public class CaptureFileSplitter {
 
     private static void doSplitting(String fineName) {
         String line;
-        String funcName;
+        String funcName = "";
         System.out.println("Starting split");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
                 new FileInputStream(fineName)))){
@@ -46,10 +46,21 @@ public class CaptureFileSplitter {
                 totalFunctionCalls++;
                 // symbols and values
                 line = ReadSymbolValues(reader, line);
-
+                   while (line.equals(""))
+                       line = reader.readLine();
                 // might be needed quote removal
-                funcName = line.substring(line.indexOf(':') + 2,
-                        line.length());
+                try{
+                    funcName = line.substring(line.indexOf(':') + 2,
+                            line.length());
+                } catch (StringIndexOutOfBoundsException e){
+                    System.out.println(line);
+                    System.out.println(reader.readLine());
+                    System.out.println(reader.readLine());
+                    System.out.println(reader.readLine());
+                    System.out.println("\n\n\n");
+                    System.exit(1);;
+
+                }
                 if (verbose)
                     System.out.println("function name - " + funcName);
                 // check if already encountered this function
