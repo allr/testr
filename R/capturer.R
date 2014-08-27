@@ -25,7 +25,8 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "Summary.Date",
                ".handleSimpleError", 
                "tryCatch",
-               "detach","matrix", "parent.frame")
+               "detach",
+               "library", "sink")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -101,6 +102,7 @@ Decorate <- function(func){
     cat("Func - ", func, "\n")
     warns <- NULL
     args <- NULL
+    quote <- ifelse(func %in% c("matrix"), FALSE, TRUE)
     listm <- function(x){ #currently only needed for matrix(rnorm(20), ,2) Hack to deal with missing values
       args <- NULL
       args.list <- as.list(sys.call(sys.parent(4)))[-1]
@@ -120,19 +122,20 @@ Decorate <- function(func){
     args <- tryCatch(list(...), error=listm)
     if (is.null(args))
       return(fbody(...))
-    retv <- withCallingHandlers(do.call(fbody, args, envir = environment(), quote = TRUE), 
-    error = function(e) {
-      errs <- e$message
-      WriteCapInfo(func, fbody, args, NULLf, errs, warns)
-    },
-    warning = function(w) {
-      if (is.null(warns))
-        warns <<- w$message
-      else 
-        warns <<- c(warns, w$message)
-    })
-    if (func == 'cbind')
+    if (func %in% c('cbind', '[<-.data.frame'))
       retv <- fbody(...)
+    else
+      retv <- withCallingHandlers(do.call(fbody, args, envir = environment(), quote = quote), 
+      error = function(e) {
+        errs <- e$message
+        WriteCapInfo(func, fbody, args, NULL, errs, warns)
+      },
+      warning = function(w) {
+        if (is.null(warns))
+          warns <<- w$message
+        else 
+          warns <<- c(warns, w$message)
+      })
     WriteCapInfo(func, fbody, args, retv, NULL, warns)
     return(retv)
   }
