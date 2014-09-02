@@ -97,7 +97,10 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
 #' @seealso WriteCapInfo
 #'
 Decorate <- function(func){
+  # find function body
   function.body <- utils::getAnywhere(func)[1]
+
+  # create a wrapper closure and return in
   decorated.function <- function(...){
     # helper function for arguments evaluation
     evaluate.args <- function(args.list){
@@ -111,53 +114,40 @@ Decorate <- function(func){
       }
       args.list
     }
-    preprocess.args <- function(x){
-      d <- deparse(x)
-      if (class(x) != "name")
-        paste(d, collapse = "")
-      else
-        x
-    }
     cat("Capturing function - ", func, "\n")
     warns <- NULL
-    args <- as.list(sys.call())[-1]
-#     if (is.null(formals(function.body)))
-      args <- tryCatch(list(...), error=function(x) evaluate.args(args))
-#     else
-#       args <- evaluate.args(args)
-    environment(function.body) <- environment()
-#     function.call <- paste("function.body", 
-#                     "(", 
-#                     paste(lapply(args, preprocess.args), collapse = ","), 
-#                     ")", 
-#                     sep = "")
-#     function.call.expression <- tryCatch(parse(text=function.call), error=function(x) sys.call()) 
-#     sn <- sys.nframe()
+    args <- as.list(sys.call())[-1] # character vector of arguments
+    args <- tryCatch(list(...), error=function(x) evaluate.args(args))  # try automatic evaluation, if not use helper function for evaluation
+    
+    # fix for delaying evalutions for some functions
     quote <- TRUE
     if (func %in% c('matrix', 'print'))
       quote <- FALSE
+    
+    # try evaluation function. Get return value, errors and warnings
+    return.value <- withCallingHandlers(
+      do.call(function.body, args, quote=quote, envir=environment()), 
+      error = function(e) {
+        errs <- e$message
+        testr:::WriteCapInfo(func, function.body, args, NULL, errs, warns)
+        stop(errs)
+      },
+      warning = function(w) {
+        if (is.null(warns))
+          warns <<- w$message
+        else 
+          warns <<- c(warns, w$message)
+      })
+    
+    # special fix for cbind, somehow do.call loses colnames
     if (func == "cbind")
-      return.value <- function.body(...)
-    else
-      return.value <- withCallingHandlers(
-#       do.call(eval, list(f.call.e), envir = environment(), quote = TRUE),
-#              eval(function.call.expression),
-                                     do.call(function.body, args, quote=quote, envir=environment()), 
-    error = function(e) {
-      errs <- e$message
-      WriteCapInfo(func, function.body, args, NULL, errs, warns)
-#       stop(errs)
-    },
-    warning = function(w) {
-      if (is.null(warns))
-        warns <<- w$message
-      else 
-        warns <<- c(warns, w$message)
-    })
-    WriteCapInfo(func, function.body, args, return.value, NULL, warns)
+      return.value <- function.body(...)    
+    
+    testr:::WriteCapInfo(func, function.body, args, return.value, NULL, warns)
     return(return.value)
   }
   attr(decorated.function, "decorated") <- TRUE
+  environment(decorated.function) <- as.environment(c(as.list(environment(function.body)), func=func, function.body=function.body))
 #   if (!typeof(function.body) %in% c('special', 'builtin'))
 #     formals(decorated.function) <- formals(function.body)
   return (decorated.function)
