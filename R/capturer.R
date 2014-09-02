@@ -24,7 +24,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "match.arg",
                "Summary.Date",
                ".handleSimpleError", 
-               "tryCatch")
+               "tryCatch", "detach")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
@@ -97,53 +97,56 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
 #' @seealso WriteCapInfo
 #'
 Decorate <- function(func){
-  fbody <- utils::getAnywhere(func)[1]
-  func.decorated <- function(...){
-    fbody <- fbody
-    cat("Func - ", func, "\n")
-    full.args.list <- formals(fbody)
-    warns <- NULL
-    listm <- function(x){ #currently only needed for matrix(rnorm(20), ,2) Hack to deal with missing values
-      args <- NULL
-      args.list <- x
-      for (i in 2:length(args.list)){
-        if (class(args.list[[i]]) == "call"){
-          args.list[[i]] <- tryCatch(eval(args.list[[i]]), error = function(x) args.list[[i]])
+  function.body <- utils::getAnywhere(func)[1]
+  decorated.function <- function(...){
+    # helper function for arguments evaluation
+    evaluate.args <- function(args.list){
+      for (i in 1:length(args.list)){
+        if (class(args.list[[i]]) %in% c("call", "name")){
+          succ <- TRUE
+          args.list[[i]] <- tryCatch(eval(args.list[[i]]), error = function(x) {succ <<- FALSE; args.list[[i]]})
+          if (!succ)
+            args.list[[i]] <- tryCatch(get(names(args.list)[i]), error = function(x) args.list[[i]])
         }
       }
       args.list
     }
-    new.call <- sys.call()
-#     for (param in names(args.list))
-#         full.args.list[param] <- args.list[param]
-    new.call <- listm(new.call)
-    new.call[[1]] <- `fbody`;
-    args <- as.list(new.call[2:length(new.call)])
-#    wargs <- tryCatch(list(...), error=function(x) args)
-#     if (is.null(args))
-#       return(fbody(...))
-# f1 <- function(x){
-#   d <- deparse(x)
-#   if (class(x) != "name")
-#     paste(d, collapse = "")
-#   else
-#     x
-# }
-#     f.call <- paste("fbody", 
+    preprocess.args <- function(x){
+      d <- deparse(x)
+      if (class(x) != "name")
+        paste(d, collapse = "")
+      else
+        x
+    }
+    cat("Capturing function - ", func, "\n")
+    warns <- NULL
+    args <- as.list(sys.call())[-1]
+#     if (is.null(formals(function.body)))
+      args <- tryCatch(list(...), error=function(x) evaluate.args(args))
+#     else
+#       args <- evaluate.args(args)
+    environment(function.body) <- environment()
+#     function.call <- paste("function.body", 
 #                     "(", 
-#                     paste(lapply(args, f1), collapse = ","), 
+#                     paste(lapply(args, preprocess.args), collapse = ","), 
 #                     ")", 
 #                     sep = "")
-#     f.call.e <- tryCatch(parse(text=new.call), error=function(x) sys.call()) 
-    sn <- sys.nframe()
-    retv <- withCallingHandlers(
+#     function.call.expression <- tryCatch(parse(text=function.call), error=function(x) sys.call()) 
+#     sn <- sys.nframe()
+    quote <- TRUE
+    if (func %in% c('matrix', 'print'))
+      quote <- FALSE
+    if (func == "cbind")
+      return.value <- function.body(...)
+    else
+      return.value <- withCallingHandlers(
 #       do.call(eval, list(f.call.e), envir = environment(), quote = TRUE),
-      eval(new.call, envir = as.list(environment(), all.names=T), enclos = parent.frame()),
-#                                      do.call(fbody, args, envir = environment(), quote = TRUE), 
+#              eval(function.call.expression),
+                                     do.call(function.body, args, quote=quote, envir=environment()), 
     error = function(e) {
       errs <- e$message
-      WriteCapInfo(func, fbody, args, NULL, errs, warns)
-      stop(errs)
+      WriteCapInfo(func, function.body, args, NULL, errs, warns)
+#       stop(errs)
     },
     warning = function(w) {
       if (is.null(warns))
@@ -151,15 +154,13 @@ Decorate <- function(func){
       else 
         warns <<- c(warns, w$message)
     })
-    if (func == "cbind")
-      retv <- fbody(...)
-    WriteCapInfo(func, fbody, args, retv, NULL, warns)
-    return(retv)
+    WriteCapInfo(func, function.body, args, return.value, NULL, warns)
+    return(return.value)
   }
-  attr(func.decorated, "decorated") <- TRUE
-#   if (!typeof(fbody) %in% c('special', 'builtin'))
-#     formals(func.decorated) <- formals(fbody)
-  return (func.decorated)
+  attr(decorated.function, "decorated") <- TRUE
+#   if (!typeof(function.body) %in% c('special', 'builtin'))
+#     formals(decorated.function) <- formals(function.body)
+  return (decorated.function)
 }
 
 #' @title Decorates function to capture calls and return values 
