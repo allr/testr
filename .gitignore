@@ -10,12 +10,10 @@ execute-tests.R
 UsefulCommands
 # Java compiled classes
 *.class
-
 .classpath
 .idea/
 .project
 testr.iml
 .Rproj.user/
-
-
 .Rproj.user
+.Rhistory

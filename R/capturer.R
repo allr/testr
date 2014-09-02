@@ -49,7 +49,9 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
     return(FALSE)
   else 
     cache$writing.down <- TRUE
-  trace.file <- file.path(kCaptureFolder, paste(kCaptureFile, cache$capture.file.number, sep="."))
+  if (is.null(cache$trace.file))
+      cache$trace.file <- file.path(getwd(), kCaptureFolder, paste(kCaptureFile, cache$capture.file.number, sep="."))
+  trace.file <- cache$trace.file
   if (!file.exists(trace.file))
     file.create(trace.file)
   else if (file.info(trace.file)$size > testrOptions('capture.file.size'))
@@ -97,38 +99,40 @@ WriteCapInfo <- function(fname, fbody, args, retv, errs, warns){
 #' @seealso WriteCapInfo
 #'
 Decorate <- function(func){
-  fbody <- utils::getAnywhere(func)[1]
-  func.decorated <- function(...){
-    cat("Func - ", func, "\n")
-    warns <- NULL
-    args <- NULL
-    quote <- ifelse(func %in% c("matrix"), FALSE, TRUE)
-    listm <- function(x){ #currently only needed for matrix(rnorm(20), ,2) Hack to deal with missing values
-      args <- NULL
-      args.list <- as.list(sys.call(sys.parent(4)))[-1]
-      args <- list()
+  # find function body
+  function.body <- utils::getAnywhere(func)[1]
+
+  # create a wrapper closure and return in
+  decorated.function <- function(...){
+    # helper function for arguments evaluation
+    evaluate.args <- function(args.list){
       for (i in 1:length(args.list)){
-        if (class(args.list[[i]]) != "call")
-          args <- c(args, args.list[[i]])
-        else
-          args <- c(args, list(eval(args.list[[i]])))
-#         args <- c(args, el)
-        #       args[[length(args) + 1]] <- ifelse(args.list[[i]]=="", args.list[[i]], eval(args.list[[i]]))
+        if (class(args.list[[i]]) %in% c("call", "name")){
+          succ <- TRUE
+          args.list[[i]] <- tryCatch(eval(args.list[[i]]), error = function(x) {succ <<- FALSE; args.list[[i]]})
+          if (!succ)
+            args.list[[i]] <- tryCatch(get(names(args.list)[i]), error = function(x) args.list[[i]])
+        }
       }
-      names(args) <- names(args.list) 
-      args
+      args.list
     }
-    args.list <- as.list(match.call())[-1]
-    args <- tryCatch(list(...), error=listm)
-    if (is.null(args))
-      return(fbody(...))
-    if (func %in% c('cbind', '[<-.data.frame'))
-      retv <- fbody(...)
-    else
-      retv <- withCallingHandlers(do.call(fbody, args, envir = environment(), quote = quote), 
+    cat("Capturing function - ", func, "\n")
+    warns <- NULL
+    args <- as.list(sys.call())[-1] # character vector of arguments
+    args <- tryCatch(list(...), error=function(x) evaluate.args(args))  # try automatic evaluation, if not use helper function for evaluation
+    
+    # fix for delaying evalutions for some functions
+    quote <- TRUE
+    if (func %in% c('matrix', 'print'))
+      quote <- FALSE
+    
+    # try evaluation function. Get return value, errors and warnings
+    return.value <- withCallingHandlers(
+      do.call(function.body, args, quote=quote, envir=environment()), 
       error = function(e) {
         errs <- e$message
-        WriteCapInfo(func, fbody, args, NULL, errs, warns)
+        testr:::WriteCapInfo(func, function.body, args, NULL, errs, warns)
+        stop(errs)
       },
       warning = function(w) {
         if (is.null(warns))
@@ -136,11 +140,19 @@ Decorate <- function(func){
         else 
           warns <<- c(warns, w$message)
       })
-    WriteCapInfo(func, fbody, args, retv, NULL, warns)
-    return(retv)
+
+    # special fix for cbind, somehow do.call loses colnames
+    if (func == "cbind")
+      return.value <- function.body(...)    
+    
+    testr:::WriteCapInfo(func, function.body, args, return.value, NULL, warns)
+    return(return.value)
   }
-  attr(func.decorated, "decorated") <- TRUE
-  return (func.decorated)
+  attr(decorated.function, "decorated") <- TRUE
+#   environment(decorated.function) <- as.environment(c(as.list(environment(function.body)), func=func, function.body=function.body))
+#   if (!typeof(function.body) %in% c('special', 'builtin'))
+#     formals(decorated.function) <- formals(function.body)
+  return (decorated.function)
 }
 
 #' @title Decorates function to capture calls and return values 
@@ -159,14 +171,22 @@ DecorateSubst <- function(func){
     } else {
       stop("wrong argument type!")
     } 
-    fobj <- get(fname, envir = .GlobalEnv)
+    gAobj <- utils::getAnywhere(fname) # getAnywhere object
+    fobj <-  gAobj[1]
+    where <- gAobj$where[1]
     if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
       warning("Functions was already decorated!")
-    else  
-      assign(fname, value = Decorate(fname), envir = .GlobalEnv)  
+    else {
+#       if (where != '.GlobalEnv'){
+#         where <-  gsub("package:(.*)", "\\1", gAobj$where[1])
+#         unlockBinding(fname, env = getNamespace(where))
+#         assign(fname, value = Decorate(fname), envir = getNamespace(where))  
+#       } else {
+        assign(fname, value = Decorate(fname), envir = .GlobalEnv)
+#       }
+    } 
 }
 
-# eval(substitute(func.undec <- func.dec), envir=.GlobalEnv)
 
 #' @title Setup information capturing for list of function
 #' 
