@@ -1,5 +1,14 @@
+## general (temporary) storage for testr's stuff
+cache           <- new.env()
+cache$capture.file.number <- 0
+cache$writing.down <- FALSE
+
 .onLoad <- function(libname, pkgname)
 {
+  if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
+    dir.create(kCaptureFolder)
+  cache$trace.folder.path <- file.path(getwd(), kCaptureFolder)
+  
   ## testr settings
   options('testr' = list(
     'verbose' = FALSE,
@@ -9,12 +18,8 @@
     'file.summary' = FALSE,
     'capture.file.size' = 50 * 1000 * 1000
   ))
+  
 }
-
-## general (temporary) storage for pander's stuff
-cache           <- new.env()
-cache$capture.file.number <- 0
-cache$writing.down <- FALSE
 
 #' Querying/setting testr option
 #'
