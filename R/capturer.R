@@ -31,7 +31,8 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "library", "sink",
 #                "sys.parent", "unlockBinding", "which", "sys.call", 
 #                "strsplit", "structure", "stopifnot", "topenv", "stdout", "parent.frame", "match", "search", 
-               "environment"
+               "environment",
+                "options"
                )
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
@@ -114,18 +115,38 @@ Decorate <- function(func){
     formals(decorated.function) <- formals(function.body) 
     args.names <- names(formals(function.body))
     args.touch <- "args <- list(); args.names <- vector(); i <- 1;"
+#     touch.arg <- function(arg, arg.name){
+#       if (!missing(arg)) {
+#         args.names <<- c(args.names, arg.name)
+#         i <<- i + 1
+#         if (is.null(arg)) {
+#           list(NULL)
+#         }
+#         else {
+#           arg
+#         }
+#       }
+#     }
+    
     for (i in 1:length(args.names))
       if (args.names[i] == '...'){
-        args.touch <- c(args.touch, "dot.args <- list(...); args <- c(args, dot.args); i <- i + length(dot.args); args.names <- c(args.names, rep('', length(dot.args)));")        
-      } else {
         args.touch <- c(args.touch, 
+                        "dot.args <- list(...); 
+                        args <- c(args, dot.args); 
+                        i <- i + length(dot.args); 
+                        if (is.null(names(dot.args))) {
+                        args.names <- c(args.names, rep('', length(dot.args)));}else{ args.names <- c(args.names, names(dot.args))}
+                          ")        
+      } else {
+#         args.touch <- c(args.touch, paste("touch.arg(", arg.names[i], ", ", '"', arg.names[i], '"'))
+                args.touch <- c(args.touch, 
                         paste("if(!missing(",args.names[i] ,")) {", sep = ""), 
                         paste("\nif(is.null(", args.names[i], "))", paste("{args[i] <- list(NULL)\n", sep = ""), 
                               "}else{",
                               "args[[i]]", " <- ", args.names[i], sep = ""), "};", paste("args.names <- c(args.names, '", args.names[i],"'); i <- i + 1;}\n", sep = ""))
       }
   
-    args.touch <- c(args.touch, "names(args) <- args.names")
+    args.touch <- c(args.touch, "names(args) <- args.names;", "args <- lapply(args, function(x) if(is.call(x)) enquote(x) else x)")
     args.code <- paste(args.touch, collapse = "")
     args.code.expression <- parse(text = args.code)
   } else {
@@ -133,25 +154,33 @@ Decorate <- function(func){
   }
   initializations <- expression(warns <- NULL)
   envir.change <- expression(environment(function.body) <- environment())
-  ret.value <- expression(
-    return.value <- withCallingHandlers(
-      do.call(function.body, args, envir = environment()), 
-      error = function(e) {
-        errs <- e$message
-        WriteCapInfo(func, function.body, args, NULL, errs, warns)
-        stop(errs)
-      },
-      warning = function(w) {
-        if (is.null(warns))
-          warns <<- w$message
-        else 
-          warns <<- c(warns, w$message)
-      }))
-    
+#   args.list <- vector()
+#   for (i in 1:length(args.names))
+#     if (args.names[i] == '...')
+#       args.list <- c(args.list, "...")
+#     else
+#       args.list <- c(args.list, paste(args.names[i], "=", args.names[i], sep = ""))
+#   function.call <- parse(text=paste("function.body(", paste(args.list, collapse = ","), ")", sep=""))
+#       do.call(function.body, args, envir = environment(), quote = TRUE), ",
+ret.value <- expression(
+  return.value <- withCallingHandlers(                     
+    do.call(function.body, args, envir = environment(), quote = TRUE),           
+    error = function(e) {
+      errs <- e$message
+      WriteCapInfo(func, function.body, args, NULL, errs, warns)
+      stop(errs)
+    },
+    warning = function(w) {
+      if (is.null(warns))
+        warns <<- w$message
+      else 
+        warns <<- c(warns, w$message)
+    })
+)
     # special fix for cbind, somehow do.call loses colnames
   special.hacks <- expression(  
     if (func == "cbind")
-        return.value <- function.body(...)    
+        return.value <- function.body(..., deparse.level = deparse.level)    
   )
   main.write.down <- expression(WriteCapInfo(func, function.body, args, return.value, NULL, warns))
   function.return <- expression(return.value)  
