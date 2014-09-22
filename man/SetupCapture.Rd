@@ -5,10 +5,12 @@
 
 This function is respinsible for setting up capturing for functions}
 \usage{
-SetupCapture(flist)
+SetupCapture(flist, verbose = testrOptions("verbose"))
 }
 \arguments{
-\item{flist}{function or list of functions to turn on capturing for}
+\item{flist}{function or list of functions to turn on capturing for. List should be only as character.}
+
+\item{verbose}{if to print what functions will be captured}
 }
 \description{
 Setup information capturing for list of function

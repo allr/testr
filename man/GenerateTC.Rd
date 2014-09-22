@@ -3,7 +3,8 @@
 \alias{GenerateTC}
 \title{Generates a testcase for closure function}
 \usage{
-GenerateTC(symb, vsym, func, body, argv, retn, use.get.anywhere = TRUE)
+GenerateTC(symb, vsym, func, body, argv, warn, retv, errs,
+  use.get.anywhere = TRUE)
 }
 \arguments{
 \item{symb}{symbols to be initialized before the call}
@@ -16,7 +17,11 @@ GenerateTC(symb, vsym, func, body, argv, retn, use.get.anywhere = TRUE)
 
 \item{argv}{input arguments for a closure function call}
 
-\item{retn}{expected return value}
+\item{warn}{expected warnings}
+
+\item{retv}{expected return value}
+
+\item{retv}{expected errors}
 
 \item{use.get.anywhere}{whether to try to get body of the function in the loaded namespaces}
 }

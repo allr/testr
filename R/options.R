@@ -21,6 +21,10 @@ cache$writing.down <- FALSE
   
 }
 
+set.cache <- function(x, value){
+  assign(x, value, envir = cache)
+}
+
 #' Querying/setting testr option
 #'
 #' To list all \code{testr} options, just run this function without any parameters provided. To query only one value, pass the first parameter. To set that, use the \code{value} parameter too.

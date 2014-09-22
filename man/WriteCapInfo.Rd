@@ -5,7 +5,7 @@
 
 This function is respinsible for writing down capture information for decorated function calls.}
 \usage{
-WriteCapInfo(fname, fbody, args, retv)
+WriteCapInfo(fname, fbody, args, retv, errs, warns)
 }
 \arguments{
 \item{fname}{function name}
@@ -15,6 +15,10 @@ WriteCapInfo(fname, fbody, args, retv)
 \item{args}{arguments to function call}
 
 \item{retv}{return value of a specified function call with arguments}
+
+\item{errs}{caught errors during function call}
+
+\item{warns}{caught warnings during function call}
 }
 \description{
 Write down capture information

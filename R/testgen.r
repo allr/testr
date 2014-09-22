@@ -47,7 +47,7 @@ TestGen <- function(root, output.dir, use.get.anywhere = TRUE, verbose=testrOpti
   if (!file.exists(bad.argv.file) && !file.create(bad.argv.file)) stop("Unable to create file: ", bad.argv.file);
   
   if (file.info(root)$isdir){
-    all.capture <- list.files(root, recursive=TRUE, all.files = TRUE)
+    all.capture <- lapply(list.files(root, recursive=TRUE, all.files = TRUE), function(x) file.path(root,x))
   }else{
     all.capture <- root
   }
