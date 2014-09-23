@@ -134,20 +134,20 @@ BodyReplace <- function(where.replace, by.what){
   as.call(where.replace)
 }
 
-GenerateArgsFunction <- function(formals){
-  args.names <- names(formals)
+GenerateArgsFunction <- function(names.formals){
+  args.names <- names.formals
   function.header <- paste("GetArgs <- function(", 
                            paste(args.names, collapse=","), 
                                  ")", 
                                  sep="")
-  args.names <- sapply(args.names, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
   args.touch <- "args <- list();\n args.names <- vector();\n `_i` <- 1;\n args.list <- as.list(sys.call()[-1]);"
-  for (i in 1:length(args.names))
-    if (args.names[i] == '...'){
-      code.template <- "
-      if (!missing(...)) {
-        succ <- TRUE
-        tryCatch(list(...), error=function(x) succ <<- FALSE)
+  if (length(args.names) > 0)
+    for (i in 1:length(args.names))
+      if (args.names[i] == '...'){
+        code.template <- "
+        if (!missing(...)) {
+          succ <- TRUE
+          tryCatch(list(...), error=function(x) succ <<- FALSE)
         if (!succ){
           args[[`_i`]] <- substitute(...)
         } else {
@@ -161,9 +161,9 @@ GenerateArgsFunction <- function(formals){
           }
         }
       }\n"
-      args.touch <- c(args.touch, code.template)
-    } else {
-      code.template <- "
+        args.touch <- c(args.touch, code.template)
+      } else {
+        code.template <- "
       if (length(%s) > 1 || %s != '_MissingArg') {
         succ <- TRUE
         tryCatch(%s, error=function(x) succ <<- FALSE)
@@ -182,10 +182,10 @@ GenerateArgsFunction <- function(formals){
         `_i` <- `_i` + 1 
       }
       args.names <- c(args.names, '%s');\n";
-      args.rep <- rep(args.names[i], 8)
-      names(args.rep) <- NULL
-      args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
-    }
+        args.rep <- rep(args.names[i], 8)
+        names(args.rep) <- NULL
+        args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
+      }
   args.touch <- c(function.header, "{", args.touch, "names(args) <- args.names;", "lapply(args, function(x) if(is.call(x)) enquote(x) else x)","}")
   args.code <- paste(args.touch, collapse = "\n")
   args.code
@@ -202,10 +202,11 @@ Decorate <- function(func){
   function.body <- utils::getAnywhere(func)[1]
   saved.function.body <- function.body
   fb <- NULL
-  fformals <- formals(function.body)
-  func.args <- parse(text=GenerateArgsFunction(fformals))
+  names.formals <- names(formals(function.body))
+  names.formals <- sapply(names.formals, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
+  func.args <- parse(text=GenerateArgsFunction(names.formals))
   args.code <- parse(text=sprintf("args <- GetArgs(%s)", 
-                                  paste(sapply(names(fformals), 
+                                  paste(sapply(names.formals, 
                                                function(x) if(x!='...') sprintf("%s = if(!missing(%s)) %s else '_MissingArg'", x, x, x) else x), 
                                         collapse = ",")))
                      
