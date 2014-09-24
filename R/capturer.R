@@ -219,17 +219,19 @@ Decorate <- function(func){
 #     cache.false <- expression(testr:::cache$writing.down <- FALSE)
     main.write.down <- parse(text=paste("testr:::WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
     fb <- BodyReplace(fb, c(args.code, main.write.down))
-    if (fb[[1]] != '{'){
+    if (as.list(fb)[[1]] != '{'){
       last.line <- fb
-      
       last.line <- parse(text=paste("return.value <- ", paste(deparse(last.line), collapse = ""), sep=""))
-      fb <- as.call(c(as.name("{"), func.args, last.line, args.code, main.write.down, expression(return.value)))
+      fb <- as.call(c(as.name("{"), func.args, args.code, last.line, main.write.down, expression(return.value)))
     } else {
       last.line <- deparse(fb[[length(fb)]])
 #       last.line <- parse(text=paste("return.value <- ", sprintf("tryCatch({%s})", paste(unlist(as.list(fb))[2:length(fb)], collapse =";")), sep=""))
-            
       last.line <- parse(text=paste("return.value <- ", paste(last.line, collapse="\n"), sep=""))
-      fb <- as.call(c(as.name("{"), func.args, args.code, unlist(as.list(fb))[2:(length(fb) - 1)], last.line, main.write.down, expression(return.value)))
+      if ((length(fb) - 1) < 2){
+        fb <- as.call(c(as.name("{"), func.args, args.code, last.line, main.write.down, expression(return.value)))
+      }else{
+        fb <- as.call(c(as.name("{"), func.args, args.code, unlist(as.list(fb))[2:(length(fb) - 1)], last.line, main.write.down, expression(return.value)))
+      }
     }
     body(function.body) <- fb
   }
