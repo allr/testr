@@ -164,7 +164,6 @@ GenerateArgsFunction <- function(names.formals){
         args.touch <- c(args.touch, code.template)
       } else {
         code.template <- "
-      if (length(%s) > 1 || %s != '_MissingArg') {
         succ <- TRUE
         tryCatch(%s, error=function(x) succ <<- FALSE)
         if (!succ){
@@ -177,12 +176,8 @@ GenerateArgsFunction <- function(names.formals){
           }
         }
         `_i` <- `_i` + 1;
-      } else {
-        args[[`_i`]] <- %s
-        `_i` <- `_i` + 1 
-      }
-      args.names <- c(args.names, '%s');\n";
-        args.rep <- rep(args.names[i], 8)
+        args.names <- c(args.names, '%s');\n";
+        args.rep <- rep(args.names[i], 10)
         names(args.rep) <- NULL
         args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
       }
@@ -203,11 +198,19 @@ Decorate <- function(func){
   saved.function.body <- function.body
   fb <- NULL
   names.formals <- names(formals(function.body))
+  argument.pass <- "%s = if(!missing(%s)) 
+                            if(is.function(%s)) 
+                              substitute(%s)
+                            else %s
+                          else '_MissingArg'"
   names.formals <- sapply(names.formals, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
   func.args <- parse(text=GenerateArgsFunction(names.formals))
   args.code <- parse(text=sprintf("args <- GetArgs(%s)", 
                                   paste(sapply(names.formals, 
-                                               function(x) if(x!='...') sprintf("%s = if(!missing(%s)) %s else '_MissingArg'", x, x, x) else x), 
+                                               function(x) if(x != '...' && x != 'expr') 
+                                                 sprintf(argument.pass, x, x, x, x, x) 
+                                               else if (x == 'expr') 'substitute(expr)' 
+                                               else x), 
                                         collapse = ",")))
                      
   if (!is.null(body(function.body))) {
@@ -216,14 +219,17 @@ Decorate <- function(func){
 #     cache.false <- expression(testr:::cache$writing.down <- FALSE)
     main.write.down <- parse(text=paste("testr:::WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
     fb <- BodyReplace(fb, c(args.code, main.write.down))
-    if (length(deparse(fb)) == 1 || fb[[1]] == '.Internal'){
+    if (fb[[1]] != '{'){
       last.line <- fb
-      last.line <- parse(text=paste("return.value <- ", deparse(last.line), sep=""))
+      
+      last.line <- parse(text=paste("return.value <- ", paste(deparse(last.line), collapse = ""), sep=""))
       fb <- as.call(c(as.name("{"), func.args, last.line, args.code, main.write.down, expression(return.value)))
     } else {
       last.line <- deparse(fb[[length(fb)]])
+#       last.line <- parse(text=paste("return.value <- ", sprintf("tryCatch({%s})", paste(unlist(as.list(fb))[2:length(fb)], collapse =";")), sep=""))
+            
       last.line <- parse(text=paste("return.value <- ", paste(last.line, collapse="\n"), sep=""))
-      fb <- as.call(c(as.name("{"), func.args, unlist(as.list(fb))[2:(length(fb) - 1)], last.line, args.code, main.write.down, expression(return.value)))
+      fb <- as.call(c(as.name("{"), func.args, args.code, unlist(as.list(fb))[2:(length(fb) - 1)], last.line, main.write.down, expression(return.value)))
     }
     body(function.body) <- fb
   }
