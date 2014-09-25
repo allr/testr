@@ -11,7 +11,7 @@ kErrsPrefix <- "errs: "
 kWarnPrefix <- "warn: "
 blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
                ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 
-               ".Machine", 
+               ".Machine", "on.exit", 
                "debug", "undebug",
                "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", 
                "c", "try", 
@@ -23,11 +23,10 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "remove",
                "eval", "attach", 
                "match.arg",
-               "Summary.Date",
                ".handleSimpleError", 
                "tryCatch",
                "detach",
-               "library", "sink", "formatC",
+               "library", "sink", "UseMethod",
                # something problematic
                "loadNamespace", "loadedNamespaces", "loadNamespaceInfo", "load", "unloadNamespace", "identity",
                # weird things happend when trying to unlock binding. Some of those might be wrong
@@ -113,6 +112,33 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
 #   cache$writing.down <- FALSE
 }
 
+DecorateBody <- function(func){
+  # find function body
+  function.body <- utils::getAnywhere(func)[1]
+  # create a wrapper closure and return in
+  decorated.function <- function(...){
+    warns <- NULL
+    args <- list(...)
+    environment(function.body) <- environment()
+    return.value <- withCallingHandlers(
+      do.call(function.body, args, envir = environment(), quote = TRUE), 
+      error = function(e) {
+        errs <- e$message
+        WriteCapInfo(func, args, NULL, errs, warns)
+        stop(errs)
+      },
+      warning = function(w) {
+        if (is.null(warns))
+          warns <<- w$message
+        else 
+          warns <<- c(warns, w$message)
+      }) 
+      WriteCapInfo(func, args, return.value, NULL, warns)
+      return.value
+  }
+  attr(decorated.function, "decorated") <- TRUE
+  return (decorated.function)
+}
 
 BodyReplace <- function(where.replace, by.what){
   if (length(where.replace) == 1)
@@ -193,7 +219,7 @@ GenerateArgsFunction <- function(names.formals){
 #' @seealso WriteCapInfo
 #'
 #' @export
-Decorate <- function(func){
+ReplaceBody <- function(func){
   function.body <- utils::getAnywhere(func)[1]
   saved.function.body <- function.body
   fb <- NULL
@@ -247,7 +273,7 @@ Decorate <- function(func){
 #' @export 
 #' @seealso WriteCapInfo Decorate
 #'
-DecorateSubst <- function(func, envir = .GlobalEnv){
+DecorateSubst <- function(func, envir = .GlobalEnv, use.prim = FALSE){
   if (class(func) == "function"){
     fname <- as.character(substitute(func))
   } else if (class(func) == "character"){
@@ -257,20 +283,27 @@ DecorateSubst <- function(func, envir = .GlobalEnv){
   } 
   gAobj <- utils::getAnywhere(fname) # getAnywhere object
   fobj <-  gAobj[1]
-  if (("generic" %in% ftype(fobj)) || "primitive" %in% ftype(fobj))
-    return(NULL)
+  prim.generics <- ls(.GenericArgsEnv)
+  prim <- ls(.ArgsEnv)
+#   if ((func %in% prim.generics))
+#      return(NULL)
   where <- gAobj$where[1]
   if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
     warning("Functions was already decorated!")
   else {
-#     if (!identical(where, .GlobalEnv)){
+    if (use.prim && ((fname %in% prim) || (fname %in% prim.generics))){
+      assign(fname, value = DecorateBody(fname), envir = .GlobalEnv)
+    } else {
+      assign(fname, value = ReplaceBody(fname), envir = .GlobalEnv)
+    }
+    #     if (!identical(where, .GlobalEnv)){
 #       where <-  gsub("package:(.*)", "\\1", gAobj$where[1])
 #       env <- getNamespace(where)
 #       if (bindingIsLocked(fname, env = env))
 #         unlockBinding(fname, env = env)
 #       assign(fname, value = Decorate(fname), envir = env)
 #     } else {
-      assign(fname, value = Decorate(fname), envir = .GlobalEnv)
+#       assign(fname, value = ReplaceBody(fname), envir = .GlobalEnv)
 #     }
   }
 } 

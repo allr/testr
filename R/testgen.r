@@ -195,7 +195,7 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
     }
   }
   call <- ""
-  args <- length(eval(parse(text=argv)));
+  args <- eval(parse(text=argv));
   if (body != ""){
     f.search <- utils::getAnywhere(func)
     if (is.list(f.search$objs) && length(f.search$objs) == 0 && !use.get.anywhere){
@@ -208,15 +208,21 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
       call <- paste(func, "<-",  "utils::getAnywhere(",func,")[1]",";\n", sep="")
     }
   }
-  if (args > 0) {
-    call <- paste(call, "argv <- ", argv, "\n", sep="");
+  if ("_MissingArg" %in% args){
+    call <- paste(call, func, sep="")
+    not.m <- which(args != "_MissingArg")
+    m <- which(args == "_MissingArg")
+    ind <- sort(c(not.m,m[m < max(not.m)]))
+    args <- args[ind]
+    args[args == "_MissingArg"] <- ''
+    call <- paste(call, sprintf("(%s)\n", paste(args, collapse=",\n\t")), sep="")
   } else {
-    call <- paste(call, "argv <- list()", "\n", sep="");
-  }
-  if (grepl("`", func)){
-    call <- paste(call, "do.call(", func, ", argv);", sep="");
-  }else{ 
-    call <- paste(call, "do.call('", func, "', argv);", sep="");
+    if (length(args) > 0) {
+      call <- paste(call, "argv <- ", argv, "\n", sep="");
+    } else {
+      call <- paste(call, "argv <- list()", "\n", sep="");
+    }
+    call <- ifelse(grepl("`", func), paste(call, "do.call(", func, ", argv);", sep=""), paste(call, "do.call('", func, "', argv);", sep=""))
   }
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep=""); # added because of variables
