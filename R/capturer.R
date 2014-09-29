@@ -110,9 +110,8 @@ DecorateBody <- function(func){
   if (!is.null(formals(function.body))){    
     formals(decorated.function) <- formals(function.body) 
     args.names <- names(formals(function.body))
-    args.touch <- "args <- list(); 
-                   args.names <- vector(); 
-                   `_i` <- 1;"
+    args.touch <- "args <- list();\n args.names <- vector();\n `_i` <- 1;\n args.list <- as.list(sys.call()[-1]);"
+    
     for (i in 1:length(args.names))
       if (args.names[i] == '...'){
         code.template <- "
@@ -183,6 +182,7 @@ DecorateBody <- function(func){
       })
   )
   # special fix for cbind, somehow do.call loses colnames
+  cbind.hack <- expression(if(func == "cbind") return.value <- function.body(..., deparse.level = deparse.level))
   main.write.down <- expression(WriteCapInfo(func, args, return.value, NULL, warns))
   function.return <- expression(return.value)  
   body(decorated.function) <- as.call(c(as.name("{"), 
@@ -190,6 +190,7 @@ DecorateBody <- function(func){
                                         initializations, 
                                         envir.change, 
                                         ret.value,
+                                        cbind.hack,
                                         main.write.down,
                                         function.return))
   attr(decorated.function, "decorated") <- TRUE
@@ -347,7 +348,7 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
   if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
     warning(paste(fname, " was already decorated!"))
   else {
-    if (capture.generics && suppressWarnings(length(methods(rep.Date))) > 0) { # check for generic, seems to be most consistent one
+    if (capture.generics && suppressWarnings(length(methods(fname))) > 0) { # check for generic, seems to be most consistent one
       assign(fname, value = DecorateBody(fname), envir = .GlobalEnv)
     } else {
       assign(fname, value = ReplaceBody(fname), envir = .GlobalEnv)
