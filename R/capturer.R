@@ -149,13 +149,13 @@ DecorateBody <- function(func){
           args.names <- c(args.names, '%s');
           `_i` <- `_i` + 1;
         } else {
-          if (`_i` < length(args.list)) {
+          if (`_i` < length(args.list) && names(args.list)[`_i`] == '%s') {
             args[[`_i`]] <- args.list[[`_i`]]
             args.names <- c(args.names, '')
             `_i` <- `_i` + 1
           } 
         };\n";
-        args.rep <- rep(args.names[i], 6)
+        args.rep <- rep(args.names[i], 7)
         names(args.rep) <- NULL
         args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
       }
@@ -171,7 +171,7 @@ DecorateBody <- function(func){
       do.call(function.body, args, envir = environment(), quote = TRUE),           
       error = function(e) {
         errs <- e$message
-        WriteCapInfo(func, function.body, args, NULL, errs, warns)
+        WriteCapInfo(func, args, NULL, errs, warns)
         stop(errs)
       },
       warning = function(w) {
