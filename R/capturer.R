@@ -30,27 +30,17 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                # something problematic
                "loadNamespace", "loadedNamespaces", "loadNamespaceInfo", "load", "unloadNamespace", "identity",
                # weird things happend when trying to unlock binding. Some of those might be wrong
-               
-#                "unlockBinding", "which", "sys.call", 
-#                "strsplit", "structure", "stopifnot", "topenv", "stdout", "search",
                 "match",
                 "options", "ls", "sys.call", "stdout", "cat", "do.call", "match.call", 
                 # messes up RStudio
                 "textConnection", "scan", "require"
-                # fails in glm(y1 ~ offset(y2))
-#                 "lapply",
-                # str(pl <- as.pairlist(ps.options()))
-#                 "formals"
-          )
-#                )
+                )
 
-need.replacement <- c("[<-.data.frame", "[<-", "[.data.frame", "transform.data.frame", "[.factor", "formals", "body", "assign", "with.default")
 sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
 env <- c("environment", "environment<-", "parent.frame", "parent.env", "parent.env<-")
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
-for.testing <- c("all", "any", "identical", "is.list")
 builtin.items <- builtins()
 
 #' @title Write down capture information 
@@ -80,9 +70,9 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   builtin <- FALSE
   globals <- vector()
   if (!(fname %in% builtins())){
-     globals <- codetools::findGlobals(fbody)
-     globals <- globals[!globals %in% builtin.items]
-     globals <- globals[!grepl("^C_", globals)] ## for external C functions
+#      globals <- codetools::findGlobals(fbody)
+#      globals <- globals[!globals %in% builtin.items]
+#      globals <- globals[!grepl("^C_", globals)] ## for external C functions
   } else {
     builtin <- TRUE
     fbody <- NULL
@@ -116,15 +106,73 @@ DecorateBody <- function(func){
   # find function body
   function.body <- utils::getAnywhere(func)[1]
   # create a wrapper closure and return in
-  decorated.function <- function(...){
-    warns <- NULL
-    args <- list(...)
-    environment(function.body) <- environment()
-    return.value <- withCallingHandlers(
-      do.call(function.body, args, envir = environment(), quote = TRUE), 
+  decorated.function <- function(...){}
+  if (!is.null(formals(function.body))){    
+    formals(decorated.function) <- formals(function.body) 
+    args.names <- names(formals(function.body))
+    args.touch <- "args <- list(); 
+                   args.names <- vector(); 
+                   `_i` <- 1;"
+    for (i in 1:length(args.names))
+      if (args.names[i] == '...'){
+        code.template <- "
+        if (!missing(...)) {
+          succ <- TRUE
+          tryCatch(list(...), error=function(x) succ <<- FALSE)
+        if (!succ){
+          args[[`_i`]] <- substitute(...)
+        } else {
+          dot.args <- list(...)
+          args <- c(args, dot.args)
+          `_i` <- `_i` + length(dot.args)
+          if (is.null(names(dot.args))) {
+            args.names <- c(args.names, rep('', length(dot.args)))
+          } else {
+            args.names <- c(args.names, names(dot.args))
+          }
+        }
+      }\n"
+        args.touch <- c(args.touch, code.template)
+      } else {
+        code.template <- "
+        if (!missing(%s)) {
+          succ <- TRUE
+          tryCatch(%s, error=function(x) succ <<- FALSE)
+          if (!succ){
+            args[[`_i`]] <- substitute(%s)
+          } else {
+            if (is.null(%s)) {
+              args[`_i`] <- list(NULL)
+            } else {
+              args[[`_i`]] <- %s
+            }
+          }
+          args.names <- c(args.names, '%s');
+          `_i` <- `_i` + 1;
+        } else {
+          if (`_i` < length(args.list)) {
+            args[[`_i`]] <- args.list[[`_i`]]
+            args.names <- c(args.names, '')
+            `_i` <- `_i` + 1
+          } 
+        };\n";
+        args.rep <- rep(args.names[i], 6)
+        names(args.rep) <- NULL
+        args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
+      }
+    args.code <- paste(args.touch, collapse = "")
+    args.code.expression <- parse(text = args.code)
+  } else {
+    args.code.expression <- expression(args <- list(...)) 
+  }
+  initializations <- expression(warns <- NULL)
+  envir.change <- expression(environment(function.body) <- environment())
+  ret.value <- expression(
+    return.value <- withCallingHandlers(                     
+      do.call(function.body, args, envir = environment(), quote = TRUE),           
       error = function(e) {
         errs <- e$message
-        WriteCapInfo(func, args, NULL, errs, warns)
+        WriteCapInfo(func, function.body, args, NULL, errs, warns)
         stop(errs)
       },
       warning = function(w) {
@@ -132,13 +180,21 @@ DecorateBody <- function(func){
           warns <<- w$message
         else 
           warns <<- c(warns, w$message)
-      }) 
-      WriteCapInfo(func, args, return.value, NULL, warns)
-      return.value
-  }
+      })
+  )
+  # special fix for cbind, somehow do.call loses colnames
+  main.write.down <- expression(WriteCapInfo(func, args, return.value, NULL, warns))
+  function.return <- expression(return.value)  
+  body(decorated.function) <- as.call(c(as.name("{"), 
+                                        args.code.expression, 
+                                        initializations, 
+                                        envir.change, 
+                                        ret.value,
+                                        main.write.down,
+                                        function.return))
   attr(decorated.function, "decorated") <- TRUE
   return (decorated.function)
-}
+  }
 
 BodyReplace <- function(where.replace, by.what){
   if (length(where.replace) == 1)
@@ -273,7 +329,7 @@ ReplaceBody <- function(func){
 #' @export 
 #' @seealso WriteCapInfo Decorate
 #'
-DecorateSubst <- function(func, envir = .GlobalEnv, use.prim = FALSE){
+DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
   if (class(func) == "function"){
     fname <- as.character(substitute(func))
   } else if (class(func) == "character"){
@@ -289,14 +345,14 @@ DecorateSubst <- function(func, envir = .GlobalEnv, use.prim = FALSE){
 #      return(NULL)
   where <- gAobj$where[1]
   if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
-    warning("Functions was already decorated!")
+    warning(paste(fname, " was already decorated!"))
   else {
-    if (use.prim && ((fname %in% prim) || (fname %in% prim.generics))){
+    if (capture.generics && suppressWarnings(length(methods(rep.Date))) > 0) { # check for generic, seems to be most consistent one
       assign(fname, value = DecorateBody(fname), envir = .GlobalEnv)
     } else {
       assign(fname, value = ReplaceBody(fname), envir = .GlobalEnv)
     }
-    #     if (!identical(where, .GlobalEnv)){
+#     if (!identical(where, .GlobalEnv)){
 #       where <-  gsub("package:(.*)", "\\1", gAobj$where[1])
 #       env <- getNamespace(where)
 #       if (bindingIsLocked(fname, env = env))

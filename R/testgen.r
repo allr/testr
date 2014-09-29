@@ -246,7 +246,7 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
 #' @param l input line
 #' @seealso ProcessClosure
 SubstrLine <- function(l){
-  if (grepl("quote\\(", l)){
+  if (grepl("^quote\\(", l)){
     ret.line <- strsplit(l, "\\(")[[1]][2];
     if (substr(ret.line, nchar(ret.line), nchar(ret.line)) == ")")
       ret.line <- substr(ret.line, 0, nchar(ret.line) - 1)
