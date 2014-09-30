@@ -47,10 +47,7 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
   if (verbose) cat("TC Root - ", tc.root, "\n")
   
   all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
-#   indexes <- sapply(all.tc, FUN = determineFileIndex)
-#   fileIndexMatrix <- matrix(c(indexes, all.tc), nrow=length(all.tc))
-#   all.tc <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
-  
+
   if (verbose) cat("Number of TC Files - ", length(all.tc), "\n")
 
   function.name <- GetFunctionName(basename(all.tc[1]))

@@ -81,13 +81,8 @@ splitAndFindCorrectTCs<- function(tc, tc.result.root, number.of.tc.per.file = 1,
   # In case tc is diretory, recursively call this function on all files in directory
   if (file.info(tc)$isdir){
     all.tc <- list.files(tc, recursive=TRUE, all.files = TRUE, pattern = "\\.[rR]$")
-    # natural order
-    indexes <- sapply(all.tc, FUN = determineFileIndex)
-    fileIndexMatrix <- matrix(c(indexes, all.tc), nrow=length(all.tc))
-    all.tc <- fileIndexMatrix[order(as.numeric(fileIndexMatrix[,1])), 2]
     for (test.case in all.tc){
       tc.path <- file.path(tc, test.case, fsep = .Platform$file.sep)
-      
       path.temp <- splitAndFindCorrectTCs(tc.path, tc.result.root, number.of.tc.per.file, check.correctness)
     }
     return (path.temp);
@@ -135,7 +130,7 @@ splitAndFindCorrectTCs<- function(tc, tc.result.root, number.of.tc.per.file = 1,
     if (check.correctness){
       info.file <- file.path(function.path, paste0(function.name, "_info", sep = ""), fsep = .Platform$file.sep)
       sink(info.file, append = TRUE)
-      run.result <- runTests(tc.temp)
+      run.result <- RunTests(tc.temp)
       cat("\n")
       sink()  
       file.remove(info.file)

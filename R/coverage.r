@@ -67,8 +67,6 @@ MeasureCoverage <- function(root, verbose = TRUE, exclude.header=TRUE, file.deta
     stop("A directory containing VM source files must be specified!");
   if (.Platform$OS.type=="windows") {
     stop("Not supported on Windows!");
-  } else {
-    stop("Unknown operating system type: ", .Platform$OS.type);
   }
   if (length(grep("[.]c$", root, ignore.case=TRUE))) { 
     cfiles <- root 

@@ -348,7 +348,7 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
   if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
     warning(paste(fname, " was already decorated!"))
   else {
-    if (capture.generics && suppressWarnings(length(methods(fname))) > 0) { # check for generic, seems to be most consistent one
+    if (capture.generics && "generic" %in% ftype(fobj)) { # check for generic, seems to be most consistent one
       assign(fname, value = DecorateBody(fname), envir = .GlobalEnv)
     } else {
       assign(fname, value = ReplaceBody(fname), envir = .GlobalEnv)
