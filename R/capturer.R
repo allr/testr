@@ -162,6 +162,7 @@ DecorateBody <- function(func){
   }
   initializations <- expression(warns <- NULL)
 #  envir.change <- expression(environment(function.body) <- environment())
+  args.enquote <- expression(args <- lapply(args, function(x) if (is.language(x) && !is.symbol(x)) enquote(x) else x))
   envir.change <- expression(if (!is.null(body(function.body))) 
 				body(function.body) <- as.call(c(
 								as.name("{"), 
@@ -190,6 +191,7 @@ DecorateBody <- function(func){
                                         args.code.expression, 
                                         initializations, 
                                         envir.change, 
+                                        args.enquote,
                                         ret.value,
 #                                         cbind.hack,
                                         main.write.down,
