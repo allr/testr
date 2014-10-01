@@ -144,7 +144,7 @@ DecorateBody <- function(func){
           }
           `_i` <- `_i` + 1;
         } else {
-          if (`_i` < length(args.list) && names(args.list)[`_i`] == '%s') {
+          if (`_i` < length(args.list) && !is.null(names(args.list)[`_i`]) && names(args.list)[`_i`] == '%s') {
             args[[`_i`]] <- args.list[[`_i`]]
             `_i` <- `_i` + 1
           } 
@@ -351,8 +351,10 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
   if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
     warning(paste(fname, " was already decorated!"))
   else {
-    if (capture.generics && "generic" %in% ftype(fobj)) { # check for generic, seems to be most consistent one
-      assign(fname, value = DecorateBody(fname), envir = .GlobalEnv)
+    if ("generic" %in% ftype(fobj)) { # check for generic, seems to be most consistent one
+      if (capture.generics)
+        assign(fname, value = DecorateBody(fname), envir = .GlobalEnv)
+      else return(NULL)
     } else {
       assign(fname, value = ReplaceBody(fname), envir = .GlobalEnv)
     }
@@ -378,14 +380,14 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
 #' @param verbose if to print what functions will be captured
 #' @seealso Decorate
 #' @export
-SetupCapture <- function(flist, verbose = testrOptions('verbose')){
+SetupCapture <- function(flist, verbose = testrOptions('verbose'), capture.generics = TRUE){
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
   set.cache("writing.down", TRUE)
 #   cache$writing.down <- TRUE
   for (func in flist){
     if (EligibleForCapture(func)){
-      if (!is.null(DecorateSubst(func)) && verbose)
+      if (!is.null(DecorateSubst(func, capture.generics = capture.generics)) && verbose)
         cat("capturing - ", func, "\n")
       
     }
@@ -416,6 +418,6 @@ EligibleForCapture <- function(func){
 #' @param internal wheather only internals should be captured, or all builtins
 #' @seealso SetupCapture
 #' @export
-BeginBuiltinCapture <- function(internal = FALSE, indexes = 1:length(builtins(internal))){
-  SetupCapture(builtins(internal)[indexes], verbose = TRUE)
+BeginBuiltinCapture <- function(internal = FALSE, indexes = 1:length(builtins(internal)), capture.generics = TRUE){
+  SetupCapture(builtins(internal)[indexes], verbose = TRUE, capture.generics = capture.generics)
 }
