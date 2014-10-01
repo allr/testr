@@ -13,7 +13,11 @@
 #' @return list(after.tc.coverage.percentage)
 #' 
 
-FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root, clear.previous.coverage = TRUE, wipe.tc.database = FALSE, use.tc.db = TRUE, k = 1, verbose = testrOptions('verbose')) {
+FilterTCs<- function(tc.root, r.home, source.folder, 
+                     tc.db.path, tc.result.root, 
+                     clear.previous.coverage = TRUE, 
+                     wipe.tc.database = FALSE, k = 1, 
+                     verbose = testrOptions('verbose')) {
   # parameter checks
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
@@ -21,16 +25,12 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
     stop('A directory containing VM source files must be specified!'); 
   if (missing(source.folder)) 
     stop('A directory containing source files must be specified!'); 
-  if (missing(tc.db.path)) 
-    stop("A directory containing TC DB files must be specified!");
   if (!file.exists(tc.root))
     stop('Specified directory with Test Cases does not exist!'); 
   if (!file.exists(r.home))
     stop('Specified directory of R_HOME does not exist!'); 
   if (!file.exists(file.path(r.home,source.folder, fsep = .Platform$file.sep)))
     stop('Specified source folder to check coverage does not exist!'); 
-  if (!file.exists(tc.db.path))
-    dir.create(tc.db.path)
   
   if (clear.previous.coverage)
     reset(file.path(r.home, source.folder, fsep = .Platform$file.sep))
@@ -39,11 +39,8 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
   after.tc.coverage.percentage <- 0
   r.home <- file_path_as_absolute(r.home)
   tc.root <- file_path_as_absolute(tc.root)
-  if (use.tc.db)
-    db.coverage <- measureCoverageByDB(r.home, source.folder, tc.db.path)
-  else
-    db.coverage <- 0
-  
+  db.coverage <-ifelse(!is.null(tc.db), measureCoverageByDB(r.home, source.folder, tc.db.path), db.coverage <- 0)
+
   if (verbose) cat("TC Root - ", tc.root, "\n")
   
   all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
@@ -52,11 +49,10 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
 
   function.name <- GetFunctionName(basename(all.tc[1]))
   tc.function.path <- file.path(tc.result.root, function.name, fsep = .Platform$file.sep)
-  
-  if (verbose) cat("TC function path in filter - ",tc.function.path, "\n")
-
   if (!file.exists(tc.function.path))
     dir.create(tc.function.path)
+  if (verbose) cat("TC function path in filter - ",tc.function.path, "\n")
+
   i <- 1
   coverageChangeMeasureForSingleTCFile <- function(tc) {
     cat(tc, "\n")
@@ -64,7 +60,7 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
     cat(tc.full.path, "\n")
     tc.full.path <- file_path_as_absolute(tc.full.path)
     tc <- basename(tc)
-    info.file <- file.path(tc.db.path, paste(function.name,"info", sep = "_"), fsep = .Platform$file.sep)
+    info.file <- file.path(tc.root, paste(function.name,"info", sep = "_"), fsep = .Platform$file.sep)
     sink(info.file, append = TRUE)
     cat(tc, "\n")
     before.tc.coverage.info <<- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))

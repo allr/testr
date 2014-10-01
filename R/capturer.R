@@ -110,6 +110,8 @@ DecorateBody <- function(func){
   if (!is.null(formals(function.body))){    
     formals(decorated.function) <- formals(function.body) 
     args.names <- names(formals(function.body))
+    args.names <- sapply(args.names, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
+    
     args.touch <- "args <- list();\n args.names <- vector();\n `_i` <- 1;\n args.list <- as.list(sys.call()[-1]);"
     
     for (i in 1:length(args.names))
@@ -165,7 +167,11 @@ DecorateBody <- function(func){
     args.code.expression <- expression(args <- list(...)) 
   }
   initializations <- expression(warns <- NULL)
-  envir.change <- expression(environment(function.body) <- environment())
+  envir.change <- expression(if (!is.null(body(function.body)))
+    body(function.body) <- as.call(c(
+      as.name("{"),
+      expression(for(`_n` in ls(sys.frame(-3), all.names=TRUE)) if (grepl("^[.][a_zA-Z]",`_n`)) assign(`_n`, get(`_n`, sys.frame(-3)))),
+      body(function.body))))
   ret.value <- expression(
     return.value <- withCallingHandlers(                     
       do.call(function.body, args, envir = environment(), quote = TRUE),           
@@ -182,7 +188,7 @@ DecorateBody <- function(func){
       })
   )
   # special fix for cbind, somehow do.call loses colnames
-  cbind.hack <- expression(if(func == "cbind") return.value <- function.body(..., deparse.level = deparse.level))
+#   cbind.hack <- expression(if(func == "cbind") return.value <- function.body(..., deparse.level = deparse.level))
   main.write.down <- expression(WriteCapInfo(func, args, return.value, NULL, warns))
   function.return <- expression(return.value)  
   body(decorated.function) <- as.call(c(as.name("{"), 
@@ -190,7 +196,7 @@ DecorateBody <- function(func){
                                         initializations, 
                                         envir.change, 
                                         ret.value,
-                                        cbind.hack,
+#                                         cbind.hack,
                                         main.write.down,
                                         function.return))
   attr(decorated.function, "decorated") <- TRUE

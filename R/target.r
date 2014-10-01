@@ -106,10 +106,10 @@ RunTests <- function(root, verbose = testr.option('verbose'), file.summary = tes
   cat("Total:    ", totalPasses + totalFails, "\n")
   if (totalFails == 0) {
     cat("Overall:  ", "PASS\n")
-    TRUE
+    return(TRUE)
   } else {
     cat("Overall:  ", "FAIL\n")
-    FALSE
+    return(FALSE)
   }
   # clean working directory
   if (clean.wd){

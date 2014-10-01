@@ -9,7 +9,7 @@
 #' @param warns caught warnings during function call
 #' @seealso Decorate
 #' 
-processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.folder, use.tc.db = TRUE) {
+processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.folder) {
   #files.before.filter.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
   # TODO clear cache after and working wd
   temp.dir <- "temp.processing.tc"
@@ -22,7 +22,8 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
     dir.create(tc.result.root)
   if (!file.exists(temp.dir))
     dir.create(temp.dir)
-  cache$k <<- 1
+  k <<- 1
+  
   n <- round(getNumberOfTC(tc.file) /16 + 0.00001)
   if (n < 1)
     n <- 1
@@ -31,7 +32,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
                                         tc.result.root = tc.result.root, 
                                         number.of.tc.per.file = n, 
                                         check.correctness = TRUE)
-#stop("Done with splitting!")
+  #stop("Done with splitting!")
   #readline()
   #stop()
   filterTCs(tc.root = split.paths[1], 
@@ -40,8 +41,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
             tc.db.path = tc.db, 
             tc.result.root = tc.result.root,
             clear.previous.coverage = TRUE, 
-            wipe.tc.database = FALSE, 
-            use.tc.db = use.tc.db) 
+            wipe.tc.database = FALSE) 
   #readline()
   temp.tc <- list.files(split.paths[2], 
                         full.names = TRUE)
@@ -61,8 +61,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
               tc.db.path = tc.db, 
               tc.result.root = tc.result.root,
               clear.previous.coverage = TRUE, 
-              wipe.tc.database = FALSE, 
-              use.tc.db = use.tc.db) 
+              wipe.tc.database = FALSE) 
  #   readline()
     temp.tc <- list.files(split.paths[2], full.names = TRUE)
     if (n == 1)
