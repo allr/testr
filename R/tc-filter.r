@@ -33,7 +33,7 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
     dir.create(tc.db.path)
   
   if (clear.previous.coverage)
-    reset(file.path(r.home, source.folder, fsep = .Platform$file.sep))
+    ResetCoverageInfo(file.path(r.home, source.folder, fsep = .Platform$file.sep))
   if (wipe.tc.database)
     cleanTCDB(tc.db.path)
   after.tc.coverage.percentage <- 0
@@ -67,18 +67,21 @@ FilterTCs<- function(tc.root, r.home, source.folder, tc.db.path, tc.result.root,
     info.file <- file.path(tc.db.path, paste(function.name,"info", sep = "_"), fsep = .Platform$file.sep)
     sink(info.file, append = TRUE)
     cat(tc, "\n")
-    before.tc.coverage.info <<- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
+    before.tc.coverage.info <<- tryCatch(MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep)), error=function(x) 0)
+    if (length(before.tc.coverage.info) > 1 )
     before.tc.coverage.percentage <<- calculateCoverage(before.tc.coverage.info)
+    else
+    before.tc.coverage.percentage <<- 0
     if (is.nan(before.tc.coverage.percentage)) 
       before.tc.coverage.percentage <- 0
     sink()
     cmd <- paste(r.home, 
-                   "/bin/R -q -e library(testr) -e RunTests(", 
-                   shQuote(tc.full.path), ")", 
+                   "/bin/R -q -e 'library(testr)' -e \"RunTests(", 
+                   shQuote(tc.full.path), ")\"", 
                    sep = "")
     cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
     sink(info.file, append = TRUE)
-    after.tc.coverage.info <<- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
+    after.tc.coverage.info <<- MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
     after.tc.coverage.percentage <<- calculateCoverage(after.tc.coverage.info)
     sink()
     if (after.tc.coverage.percentage > before.tc.coverage.percentage) {

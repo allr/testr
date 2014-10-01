@@ -8,11 +8,12 @@
 #' @param errs caught errors during function call
 #' @param warns caught warnings during function call
 #' @seealso Decorate
+#' @export
 #' 
 processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.folder, use.tc.db = TRUE) {
   #files.before.filter.wd <- list.files(getwd(), all.files = TRUE) # to clean R Working Directory
   # TODO clear cache after and working wd
-  temp.dir <- "temp.processing.tc"
+  temp.dir <<- "temp.processing.tc"
   cache$r.home <- r.home
   cache$source.folder <- source.folder
   tc.file <- file_path_as_absolute(tc.file)
@@ -22,7 +23,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
     dir.create(tc.result.root)
   if (!file.exists(temp.dir))
     dir.create(temp.dir)
-  cache$k <<- 1
+  k <<- 1
   n <- round(getNumberOfTC(tc.file) /16 + 0.00001)
   if (n < 1)
     n <- 1
@@ -34,7 +35,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
 #stop("Done with splitting!")
   #readline()
   #stop()
-  filterTCs(tc.root = split.paths[1], 
+  FilterTCs(tc.root = split.paths[1], 
             r.home = r.home, 
             source.folder = source.folder, 
             tc.db.path = tc.db, 
@@ -55,7 +56,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
                                           check.correctness = TRUE)
     file.remove(temp.tc)
  #   readlines()
-    filterTCs(tc.root = split.paths[1], 
+    FilterTCs(tc.root = split.paths[1], 
               r.home = r.home, 
               source.folder = source.folder, 
               tc.db.path = tc.db, 
@@ -69,7 +70,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = "None", r.home, source.fo
       n <- 0
     n <- round(n / 2 + 0.00001)
   }
-  reset(r.home) 
+  ResetCoverageInfo(r.home) 
   rm(list = ls(all = TRUE))
   # to clean R Working Directory
   #files.after.filter.wd <- list.files(getwd(), all.files = TRUE)
@@ -159,8 +160,8 @@ splitAndFindCorrectTCs<- function(tc, tc.result.root, number.of.tc.per.file = 1,
     }
   }
   cat("Correct/Fail: ", correct.tcs, "/", failed.tcs, "\n")
-  if (correct.tcs == 0)
-    stop("No correct TCs left!")
+  #if (correct.tcs == 0)
+  #  stop("No correct TCs left!")
   return (c(function.path, file.path(tc.result.root, function.name, fsep = .Platform$file.sep)))
 }
 
@@ -169,7 +170,8 @@ getNumberOfTC <- function(path){
   lines <- readLines(con)
   close(con)
   if (length(lines) == 0)
-    stop("Empty file\n")
+    return(0);
+    #stop("Empty file\n")
   tests.starts <- grep("test\\(id",lines)
   if (length(grep("expected", lines[tests.starts - 1]))==length(tests.starts)){
     tests.starts <- tests.starts - 1

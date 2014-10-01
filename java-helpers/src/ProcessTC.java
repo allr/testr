@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ProcessTC {
-	private static String RSCRIPT = "Rscript";
+	private static String RSCRIPT = "R";
 	private static volatile ConcurrentLinkedQueue<String> tcFileAddr = new ConcurrentLinkedQueue<>();
 	private static volatile ConcurrentLinkedQueue<String> tcFileNames = new ConcurrentLinkedQueue<>();
 	private static volatile ConcurrentLinkedQueue<String> virtualMachines = new ConcurrentLinkedQueue<>();
@@ -119,14 +119,10 @@ public class ProcessTC {
 						new OutputStreamWriter(new FileOutputStream(
 								"/home/roman/rWD/info//" + name + "_info", true)));
 				System.out.println("Starting file - " + file);
-				// In process.r <virtual machine><file><test case
-				// database><result folder>
-
-				String[] commands = { RSCRIPT, "--no-save", "--no-restore",
-						"--slave", "--quiet", "process.r", vm, file,
-						tcResultLocation, tcDB };
-				if (tcDB == null)
-					commands = Arrays.copyOf(commands, commands.length - 1);
+				String processCall = String.format("-e \'processTC(\'%s\', \'%s\', tc.db = \'%s\', r.home=\'%s\', source.folder = \'src.main\') \'", 
+					file, tcResultLocation, (tc.db == null) ? "NULL" : tc.db, vm);
+				String[] commands = { R, "--no-save", "--no-restore",
+						"--slave", "--quiet", "-e 'library(testr)",  processCall};
 				Runtime rt = Runtime.getRuntime();
 				Process proc = rt.exec(commands);
 				// proc.waitFor();

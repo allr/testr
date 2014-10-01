@@ -81,7 +81,7 @@ MeasureCoverage <- function(root, verbose = TRUE, exclude.header=TRUE, file.deta
   gcovOnSingleFile <- function(f) {
 	  path <- file.path(root, dirname(f), fsep=.Platform$file.sep);
 	  file <- file.path(root, f,          fsep=.Platform$file.sep);
-	  cmd <- paste("gcov", "-p", "-f",  "-o", path, file, sep=" ");
+          cmd <- paste("gcov", "-p", "-n", "-f",  "-o", path, file, sep=" ");
 	  r <- system(cmd, intern=TRUE, ignore.stderr=TRUE);
 	  
 	  # for gcov4.7 output
