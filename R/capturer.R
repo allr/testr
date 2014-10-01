@@ -113,7 +113,7 @@ DecorateBody <- function(func){
     args.names <- sapply(args.names, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
     args.touch <- "args <- list();\n args.names <- vector();\n `_i` <- 1;\n args.list <- as.list(sys.call()[-1]);"
     
-    for (i in 1:length(args.names))
+    for (i in 1:length(args.names)){
       if (args.names[i] == '...'){
         code.template <- "
         if (!missing(...)) {
@@ -125,11 +125,6 @@ DecorateBody <- function(func){
           dot.args <- list(...)
           args <- c(args, dot.args)
           `_i` <- `_i` + length(dot.args)
-          if (is.null(names(dot.args))) {
-            args.names <- c(args.names, rep('', length(dot.args)))
-          } else {
-            args.names <- c(args.names, names(dot.args))
-          }
         }
       }\n"
         args.touch <- c(args.touch, code.template)
@@ -147,12 +142,10 @@ DecorateBody <- function(func){
               args[[`_i`]] <- %s
             }
           }
-          args.names <- c(args.names, '%s');
           `_i` <- `_i` + 1;
         } else {
           if (`_i` < length(args.list) && names(args.list)[`_i`] == '%s') {
             args[[`_i`]] <- args.list[[`_i`]]
-            args.names <- c(args.names, '')
             `_i` <- `_i` + 1
           } 
         };\n";
@@ -160,7 +153,9 @@ DecorateBody <- function(func){
         names(args.rep) <- NULL
         args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
       }
-    args.code <- paste(args.touch, collapse = "")
+    }
+    args.code <- paste(args.touch,  collapse = "")
+    args.code <- paste(args.code, "\nnames(args) <- names(args.list);\n")
     args.code.expression <- parse(text = args.code)
   } else {
     args.code.expression <- expression(args <- list(...)) 
@@ -174,7 +169,7 @@ DecorateBody <- function(func){
                                          			body(function.body))))
   ret.value <- expression(
     return.value <- withCallingHandlers(                     
-      do.call(function.body, args, envir = environment(), quote = TRUE),           
+      do.call(function.body, args, envir = environment()),           
       error = function(e) {
         errs <- e$message
         WriteCapInfo(func, args, NULL, errs, warns)
