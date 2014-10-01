@@ -111,7 +111,6 @@ DecorateBody <- function(func){
     formals(decorated.function) <- formals(function.body) 
     args.names <- names(formals(function.body))
     args.names <- sapply(args.names, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
-
     args.touch <- "args <- list();\n args.names <- vector();\n `_i` <- 1;\n args.list <- as.list(sys.call()[-1]);"
     
     for (i in 1:length(args.names))
@@ -189,7 +188,7 @@ DecorateBody <- function(func){
       })
   )
   # special fix for cbind, somehow do.call loses colnames
-  cbind.hack <- expression(if(func == "cbind") return.value <- function.body(..., deparse.level = deparse.level))
+#   cbind.hack <- expression(if(func == "cbind") return.value <- function.body(..., deparse.level = deparse.level))
   main.write.down <- expression(WriteCapInfo(func, args, return.value, NULL, warns))
   function.return <- expression(return.value)  
   body(decorated.function) <- as.call(c(as.name("{"), 
@@ -197,7 +196,7 @@ DecorateBody <- function(func){
                                         initializations, 
                                         envir.change, 
                                         ret.value,
-          #                              cbind.hack,
+#                                         cbind.hack,
                                         main.write.down,
                                         function.return))
   attr(decorated.function, "decorated") <- TRUE
