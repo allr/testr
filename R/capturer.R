@@ -42,6 +42,34 @@ keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "bre
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
 builtin.items <- builtins()
+code.template.dots <- "
+        if (!missing(...)) {
+          succ <- TRUE
+          a <- tryCatch(list(...), error = function(x) succ <<- FALSE)
+          if (succ){
+            args <- c(args, a)
+          } else {
+            all.ind <- 1:length(args.list)
+            if(length(ind) > 0) 
+              ind <- all.ind[-ind] 
+            else 
+              ind <- all.ind
+            for (i in ind){
+              succ <- TRUE
+              e <- tryCatch(eval(args.list[[i]]), error=function(x) succ <<- FALSE)
+              j <- ifelse(is.null(names.args.list) || names.args.list[i] == '', length(args) + 1, names.args.list[i])
+              if (succ && !is.function(e)){
+                if (is.null(e)) {
+                  args[j] <- list(NULL)
+                } else {
+                  args[[j]] <- e
+                }
+              } else {
+                args[[j]] <- args.list[[i]]
+              }
+            }
+          }
+        }\n"
 
 #' @title Write down capture information 
 #' 
@@ -115,8 +143,7 @@ DecorateBody <- function(func){
                    args.names <- names(formals(function.body));
                    ind <- vector();
                    args.list <- as.list(match.call()[-1]);
-                   names.args.list <- names(args.list)
-                   args <- list()"
+                   names.args.list <- names(args.list)"
     for (i in 1:length(args.names)){
       if (args.names[i] != '...'){
 	code.template <- "
@@ -141,39 +168,17 @@ DecorateBody <- function(func){
       }
     }
     if ('...' %in% args.names){
-      code.template <- "
-        if (!missing(...)) {
-          succ <- TRUE
-          a <- tryCatch(list(...), error = function(x) succ <<- FALSE)
-          args <- c(args, a)
-          if (!succ){
-            all.ind <- 1:length(args)
-            if(length(ind) > 0) 
-              ind <- all.ind[-ind] 
-            else 
-              ind <- all.ind
-            for (i in ind){
-              succ <- TRUE
-              e <- tryCatch(eval(args.list[[i]]), error=function(x) succ <<- FALSE)
-              if (succ){
-                if (is.null(e)) {
-                  args[names.args.list[i]] <- list(NULL)
-                } else {
-                  args[[names.args.list[i]]] <- e
-                }
-              } else {
-                args[names.args.list[i]] <- args.list[[i]]
-              }
-            }
-          }
-        }\n"
-      args.touch <- c(args.touch, code.template)
+      args.touch <- c(args.touch, code.template.dots)
     } 
     args.code <- paste(args.touch,  collapse = "")
 #     args.code <- paste(args.code, "\nnames(args) <- names(args.list);\n")
     args.code.expression <- parse(text = args.code)
   } else {
-    args.code.expression <- expression(args <- list(...)) 
+    args.code.expression <- parse(text=paste("args <- list();
+                                             args.names <- names(formals(function.body));
+                                             ind <- vector();
+                                             args.list <- as.list(match.call()[-1]);
+                                             names.args.list <- names(args.list)", code.template.dots))
   }
   initializations <- expression(warns <- NULL)
 #  envir.change <- expression(environment(function.body) <- environment())
@@ -336,8 +341,8 @@ ReplaceBody <- function(func){
     }
     body(function.body) <- fb
   }
-  attr(function.body, "decorated") <- TRUE
-  attr(function.body, "original.body") <- saved.function.body
+   attr(function.body, "decorated") <- TRUE
+#   attr(function.body, "original.body") <- saved.function.body
   function.body
 }
 #' @title Decorates function to capture calls and return values 
@@ -366,8 +371,8 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
   if (!is.null(attr(fobj, "decorated")) && attr(fobj, "decorated"))
     warning(paste(fname, " was already decorated!"))
   else {
-    if ("generic" %in% ftype(fobj)) { # check for generic, seems to be most consistent one
-      if (capture.generics)
+    if ("generic" %in% ftype(fobj) || fname %in% prim) { # check for generic, seems to be most consistent one
+      if (capture.generics || fname %in% prim) 
         assign(fname, value = DecorateBody(fname), envir = .GlobalEnv)
       else return(NULL)
     } else {
