@@ -113,22 +113,11 @@ DecorateBody <- function(func){
     args.names <- sapply(args.names, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
     args.touch <- "args <- list();
                    args.names <- names(formals(function.body));
-                   `_i` <- 1;
+                   ind <- vector();
                    args <- as.list(match.call()[-1]);"
     
     for (i in 1:length(args.names)){
-      if (args.names[i] == '...'){
-        code.template <- "
-        if (!missing(...)) {
-          ind <- which(names(args) != args.names)
-          for (i in ind){
-            succ <- TRUE
-            e <- tryCatch(eval(args[[i]]), error=function(x) succ <<- FALSE)
-            if (succ) args[[i]] <- e
-          }
-        }\n"
-        args.touch <- c(args.touch, code.template)
-      } else {
+      if (args.names[i] != '...'){
         code.template <- "
         if (!missing(%s)) {
           succ <- TRUE
@@ -140,11 +129,29 @@ DecorateBody <- function(func){
               args[['%s']] <- e
             }
           }
+          ind <- c(ind, which(args=='%s'))
         }\n";
-        args.rep <- rep(args.names[i], 4)
+        args.rep <- rep(args.names[i], 5)
         names(args.rep) <- NULL
         args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
       }
+    }
+    if ('...' %in% args.names){
+      code.template <- "
+        if (!missing(...)) {
+          all.ind <- 1:length(args)
+          if(length(ind) > 0) 
+            ind <- all.ind[-ind] 
+          else 
+            ind <- all.ind
+          for (i in ind){
+            succ <- TRUE
+            e <- tryCatch(eval(args[[i]]), error=function(x) succ <<- FALSE)
+            if (succ) args[[i]] <- e
+          }
+        }\n"
+      args.touch <- c(args.touch, code.template)
+    } else {
     }
     args.code <- paste(args.touch,  collapse = "")
 #     args.code <- paste(args.code, "\nnames(args) <- names(args.list);\n")
@@ -244,7 +251,6 @@ GenerateArgsFunction <- function(names.formals){
         code.template <- "
         succ <- TRUE
         tryCatch(%s, error=function(x) succ <<- FALSE)
-        if (!succ){
           args[[`_i`]] <- substitute(%s)
         } else {
           if (is.null(%s)) {
