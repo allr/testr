@@ -114,24 +114,28 @@ DecorateBody <- function(func){
     args.touch <- "args <- list();
                    args.names <- names(formals(function.body));
                    ind <- vector();
-                   args <- as.list(match.call()[-1]);"
-    
+                   args.list <- as.list(match.call()[-1]);
+                   names.args.list <- names(args.list)
+                   args <- list()"
     for (i in 1:length(args.names)){
       if (args.names[i] != '...'){
-        code.template <- "
+	code.template <- "
         if (!missing(%s)) {
           succ <- TRUE
-          e <- tryCatch(eval(%s), error=function(x) succ <<- FALSE)
+          e <- tryCatch(%s, error=function(x) succ <<- FALSE)
           if (succ){
             if (is.null(e)) {
-              args['%s'] <- list(NULL)
+              if (grepl('`', '%s'))
+                args[%s] <- list(NULL)
+              else 
+                args['%s'] <- list(NULL)
             } else {
-              args[['%s']] <- e
+              args$%s <- e
             }
           }
           ind <- c(ind, which(args=='%s'))
         }\n";
-        args.rep <- rep(args.names[i], 5)
+        args.rep <- rep(args.names[i], 7)
         names(args.rep) <- NULL
         args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
       }
@@ -139,20 +143,32 @@ DecorateBody <- function(func){
     if ('...' %in% args.names){
       code.template <- "
         if (!missing(...)) {
-          all.ind <- 1:length(args)
-          if(length(ind) > 0) 
-            ind <- all.ind[-ind] 
-          else 
-            ind <- all.ind
-          for (i in ind){
-            succ <- TRUE
-            e <- tryCatch(eval(args[[i]]), error=function(x) succ <<- FALSE)
-            if (succ) args[[i]] <- e
+          succ <- TRUE
+          a <- tryCatch(list(...), error = function(x) succ <<- FALSE)
+          args <- c(args, a)
+          if (!succ){
+            all.ind <- 1:length(args)
+            if(length(ind) > 0) 
+              ind <- all.ind[-ind] 
+            else 
+              ind <- all.ind
+            for (i in ind){
+              succ <- TRUE
+              e <- tryCatch(eval(args.list[[i]]), error=function(x) succ <<- FALSE)
+              if (succ){
+                if (is.null(e)) {
+                  args[names.args.list[i]] <- list(NULL)
+                } else {
+                  args[[names.args.list[i]]] <- e
+                }
+              } else {
+                args[names.args.list[i]] <- args.list[[i]]
+              }
+            }
           }
         }\n"
       args.touch <- c(args.touch, code.template)
-    } else {
-    }
+    } 
     args.code <- paste(args.touch,  collapse = "")
 #     args.code <- paste(args.code, "\nnames(args) <- names(args.list);\n")
     args.code.expression <- parse(text = args.code)
@@ -251,6 +267,7 @@ GenerateArgsFunction <- function(names.formals){
         code.template <- "
         succ <- TRUE
         tryCatch(%s, error=function(x) succ <<- FALSE)
+        if (!succ){
           args[[`_i`]] <- substitute(%s)
         } else {
           if (is.null(%s)) {
