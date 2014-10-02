@@ -111,51 +111,43 @@ DecorateBody <- function(func){
     formals(decorated.function) <- formals(function.body) 
     args.names <- names(formals(function.body))
     args.names <- sapply(args.names, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
-    args.touch <- "args <- list();\n args.names <- vector();\n `_i` <- 1;\n args.list <- as.list(sys.call()[-1]);"
+    args.touch <- "args <- list();
+                   args.names <- names(formals(function.body));
+                   `_i` <- 1;
+                   args <- as.list(match.call()[-1]);"
     
     for (i in 1:length(args.names)){
       if (args.names[i] == '...'){
         code.template <- "
         if (!missing(...)) {
-          succ <- TRUE
-          tryCatch(list(...), error=function(x) succ <<- FALSE)
-        if (!succ){
-          args[[`_i`]] <- substitute(...)
-        } else {
-          dot.args <- list(...)
-          args <- c(args, dot.args)
-          `_i` <- `_i` + length(dot.args)
-        }
-      }\n"
+          ind <- which(names(args) != args.names)
+          for (i in ind){
+            succ <- TRUE
+            e <- tryCatch(eval(args[[i]]), error=function(x) succ <<- FALSE)
+            if (succ) args[[i]] <- e
+          }
+        }\n"
         args.touch <- c(args.touch, code.template)
       } else {
         code.template <- "
         if (!missing(%s)) {
           succ <- TRUE
-          tryCatch(%s, error=function(x) succ <<- FALSE)
-          if (!succ){
-            args[[`_i`]] <- substitute(%s)
-          } else {
-            if (is.null(%s)) {
-              args[`_i`] <- list(NULL)
+          e <- tryCatch(eval(%s), error=function(x) succ <<- FALSE)
+          if (succ){
+            if (is.null(e)) {
+              args['%s'] <- list(NULL)
             } else {
-              args[[`_i`]] <- %s
+              args[['%s']] <- e
             }
           }
-          `_i` <- `_i` + 1;
-        } else {
-          if (`_i` < length(args.list) && !is.null(names(args.list)[`_i`]) && names(args.list)[`_i`] == '%s') {
-            args[[`_i`]] <- args.list[[`_i`]]
-            `_i` <- `_i` + 1
-          } 
-        };\n";
-        args.rep <- rep(args.names[i], 7)
+        }\n";
+        args.rep <- rep(args.names[i], 4)
         names(args.rep) <- NULL
         args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
       }
     }
     args.code <- paste(args.touch,  collapse = "")
-    args.code <- paste(args.code, "\nnames(args) <- names(args.list);\n")
+#     args.code <- paste(args.code, "\nnames(args) <- names(args.list);\n")
     args.code.expression <- parse(text = args.code)
   } else {
     args.code.expression <- expression(args <- list(...)) 
