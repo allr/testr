@@ -46,7 +46,7 @@ public class CaptureFileSplitter {
                 totalFunctionCalls++;
                 // symbols and values
                 line = ReadSymbolValues(reader, line);
-                   while (line.equals(""))
+                   while (!line.startsWith("func:"))
                        line = reader.readLine();
                 // might be needed quote removal
                 try{

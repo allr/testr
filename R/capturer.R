@@ -26,9 +26,9 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                ".handleSimpleError", 
                "tryCatch",
                "detach",
-               "library", "sink", "UseMethod",
+               "library", "sink", "UseMethod", "unloadNamespace",
                # something problematic
-               "loadNamespace", "loadedNamespaces", "loadNamespaceInfo", "load", "unloadNamespace", "identity",
+               "loadNamespace", "loadedNamespaces", "loadNamespaceInfo", "load", "unloadNamespace", "standardGeneric", "identity","missing",
                # weird things happend when trying to unlock binding. Some of those might be wrong
                 "match",
                 "options", "ls", "sys.call", "stdout", "cat", "do.call", "match.call", 
@@ -160,7 +160,7 @@ DecorateBody <- function(func){
               args$%s <- e
             }
           }
-          ind <- c(ind, which(args=='%s'))
+          ind <- c(ind, which(names.args.list=='%s'))
         }\n";
         args.rep <- rep(args.names[i], 7)
         names(args.rep) <- NULL
@@ -182,7 +182,7 @@ DecorateBody <- function(func){
   }
   initializations <- expression(warns <- NULL)
 #  envir.change <- expression(environment(function.body) <- environment())
-  args.enquote <- expression(args <- lapply(args, function(x) if (is.language(x) && !is.symbol(x)) enquote(x) else x))
+  args.enquote <- expression(args <- lapply(args, function(x) if (is.language(x)) enquote(x) else x))
   envir.change <- expression(if (!is.null(body(function.body))) 
 				body(function.body) <- as.call(c(
 								as.name("{"), 

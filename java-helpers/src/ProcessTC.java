@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ProcessTC {
-	private static String RSCRIPT = "R";
+	private static String R = "R";
 	private static volatile ConcurrentLinkedQueue<String> tcFileAddr = new ConcurrentLinkedQueue<>();
 	private static volatile ConcurrentLinkedQueue<String> tcFileNames = new ConcurrentLinkedQueue<>();
 	private static volatile ConcurrentLinkedQueue<String> virtualMachines = new ConcurrentLinkedQueue<>();
@@ -27,7 +27,7 @@ public class ProcessTC {
 			InterruptedException {
 		if (args.length < 3) {
 			throw new RuntimeException(
-					"Usage <folder to process>\n"
+					"Usage : <folder to process>\n"
 							+ "<filtering result location> <R vms file> OPTIONAL <TC DB Folder use NONE if no TC db> \n");
 		}
 		String tcFolder = args[0];
@@ -44,7 +44,8 @@ public class ProcessTC {
 		if (!folderExists(tcFolder))
 			throw new RuntimeException(
 					"Specified folder with TCs does not exist!");
-
+		if (!folderExists("info"))
+			(new File("info")).mkdir();
 		File tcFolderFile = new File(tcFolder);
 		listFilesForFolder(tcFolderFile);
 		readVMs(virtualMachinesFile);
@@ -117,14 +118,14 @@ public class ProcessTC {
 				BufferedWriter writer = new BufferedWriter(
 						// System dependent change it
 						new OutputStreamWriter(new FileOutputStream(
-								"/home/roman/rWD/info//" + name + "_info", true)));
+								"./info/" + name + "_info", true)));
 				System.out.println("Starting file - " + file);
-				String processCall = String.format("-e \'processTC(\'%s\', \'%s\', tc.db = \'%s\', r.home=\'%s\', source.folder = \'src.main\') \'", 
-					file, tcResultLocation, (tc.db == null) ? "NULL" : tc.db, vm);
-				String[] commands = { R, "--no-save", "--no-restore",
-						"--slave", "--quiet", "-e 'library(testr)",  processCall};
+				String processCall = String.format("-e processTC(\'%s\',\'%s\',%s,\'%s\',\'src/main\')", 
+					file, tcResultLocation, (tcDB == null) ? "NULL" : "'" + tcDB + "'", vm);
+				String command = "R -q -e library(testr) -e library(tools) " + processCall;
+				writer.write(command + "\n");
 				Runtime rt = Runtime.getRuntime();
-				Process proc = rt.exec(commands);
+				Process proc = rt.exec(command);
 				// proc.waitFor();
 
 				BufferedReader stdInput = new BufferedReader(
