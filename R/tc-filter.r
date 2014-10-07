@@ -39,7 +39,7 @@ FilterTCs<- function(tc.root, r.home, source.folder,
   after.tc.coverage.percentage <- 0
   r.home <- file_path_as_absolute(r.home)
   tc.root <- file_path_as_absolute(tc.root)
-  db.coverage <-ifelse(!is.null(tc.db), measureCoverageByDB(r.home, source.folder, tc.db.path), db.coverage <- 0)
+  db.coverage <-ifelse(!is.null(tc.db.path), measureCoverageByDB(r.home, source.folder, tc.db.path), db.coverage <- 0)
 
   if (verbose) cat("TC Root - ", tc.root, "\n")
   

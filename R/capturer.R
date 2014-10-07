@@ -87,8 +87,9 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
 #   else 
 #     cache$writing.down <- TRUE
   # tracing file setup
-  fbody <- getAnywhere(fname)[1]
-  fbody <- attr(fbody, "original")
+#   fbody <- getAnywhere(fname)[1]
+#   fbody <- attr(fbody, "original")
+  fbody <- NULL
   trace.file <- file.path(cache$trace.folder.path, paste(kCaptureFile, cache$capture.file.number, sep="."))
   if (!file.exists(trace.file))
     file.create(trace.file)
@@ -116,12 +117,14 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
     fbody <- deparse(fbody)
   for (sline in fbody)
     cat(kBodyPrefix, sline, "\n", sep = "")
-  cat(kArgsPrefix, deparse(args), "\n", sep = "")
+  for (sline in deparse(args))
+    cat(kArgsPrefix, sline, "\n", sep = "")
   if (!is.null(warns))
     for (line in deparse(warns))
       cat(kWarnPrefix, line, "\n", sep = "")
   if (is.null(errs))
-    cat(kRetvPrefix, deparse(retv), "\n", sep = "")
+    for (sline in deparse(retv))
+      cat(kRetvPrefix, sline, "\n", sep = "")
   else
     for (line in errs)
       cat(kErrsPrefix, line, "\n", sep = "")

@@ -209,13 +209,13 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
     }
   }
   if ("_MissingArg" %in% args){
-    call <- paste(call, func, sep="")
+    call <- paste(call, paste('`',func, '`', sep=""), sep="")
     not.m <- which(args != "_MissingArg")
     m <- which(args == "_MissingArg")
     ind <- sort(c(not.m,m[m < max(not.m)]))
     args <- args[ind]
     args[args == "_MissingArg"] <- ''
-    call <- paste(call, sprintf("(%s)\n", paste(sapply(args, function(x) deparse(x)), collapse=",\n\t")), sep="")
+    call <- paste(call, sprintf("(%s)\n", paste(args, sep = ",\n")), sep="")
   } else {
     if (length(args) > 0) {
       call <- paste(call, "argv <- ", argv, "\n", sep="");
