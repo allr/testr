@@ -215,7 +215,7 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
     ind <- sort(c(not.m,m[m < max(not.m)]))
     args <- args[ind]
     args[args == "_MissingArg"] <- ''
-    call <- paste(call, sprintf("(%s)\n", paste(args, sep = ",\n")), sep="")
+    call <- paste(call, sprintf("(%s)\n", paste(sapply(args, function(x) paste(deparse(x), collapse = "\n")), collapse = ",\n")), sep="")
   } else {
     if (length(args) > 0) {
       call <- paste(call, "argv <- ", argv, "\n", sep="");

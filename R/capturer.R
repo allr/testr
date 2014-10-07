@@ -5,7 +5,7 @@ kValSPrefix <- "vsym: "
 kFuncPrefix <- "func: "
 kBodyPrefix <- "body: "
 kTypePrefix <- "type: "
-kArgsPrefix <- "args: "
+kArgsPrefix <- "argv: "
 kRetvPrefix <- "retv: "
 kErrsPrefix <- "errs: "
 kWarnPrefix <- "warn: "
@@ -117,15 +117,28 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
     fbody <- deparse(fbody)
   for (sline in fbody)
     cat(kBodyPrefix, sline, "\n", sep = "")
-  for (sline in deparse(args))
+  args <- lapply(args, function(x) if (is.language(x)) as.expression(x) else x)
+  if (!is.language(retv))
+    retv <- lapply(retv, function(x) if (is.language(x)) as.expression(x) else x) 
+  else 
+    retv <- as.expression(retv)
+  da <- deparse(args)
+  da <- gsub("list", "alist", da)
+  da <- gsub("\\*tmp\\*", "`*tmp*`", da)
+#   da <- gsub("^alist", "list", da)
+#   da <- gsub("^structure\\(alist", "structure(list", da)
+  for (sline in da)
     cat(kArgsPrefix, sline, "\n", sep = "")
   if (!is.null(warns))
     for (line in deparse(warns))
       cat(kWarnPrefix, line, "\n", sep = "")
-  if (is.null(errs))
-    for (sline in deparse(retv))
+  if (is.null(errs)){
+    dr <- deparse(retv)
+    dr <- gsub("list", "alist", dr)
+    dr <- gsub("\\*tmp\\*", "`*tmp*`", dr)
+    for (sline in dr)
       cat(kRetvPrefix, sline, "\n", sep = "")
-  else
+  } else
     for (line in errs)
       cat(kErrsPrefix, line, "\n", sep = "")
   cat("\n")
@@ -307,11 +320,18 @@ ReplaceBody <- function(func){
   saved.function.body <- function.body
   fb <- NULL
   names.formals <- names(formals(function.body))
+#   argument.pass <- "%s = if(!missing(%s)) 
+#                             if(is.function(%s)) 
+#                               substitute(%s)
+#                             else %s
+#                           else '_MissingArg'"
   argument.pass <- "%s = if(!missing(%s)) 
-                            if(is.function(%s)) 
-                              substitute(%s)
-                            else %s
-                          else '_MissingArg'"
+#                             if(is.function(%s)) 
+#                               substitute(%s)
+#   else 
+                            %s
+                            else '_MissingArg'"
+  
   names.formals <- sapply(names.formals, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
   func.args <- parse(text=GenerateArgsFunction(names.formals))
   args.code <- parse(text=sprintf("args <- GetArgs(%s)", 
