@@ -117,13 +117,14 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
     fbody <- deparse(fbody)
   for (sline in fbody)
     cat(kBodyPrefix, sline, "\n", sep = "")
+  
   args <- lapply(args, function(x) if (is.language(x)) as.expression(x) else x)
   if (!is.language(retv))
     retv <- lapply(retv, function(x) if (is.language(x)) as.expression(x) else x) 
   else 
     retv <- as.expression(retv)
   da <- deparse(args)
-  da <- gsub("list", "alist", da)
+#   da <- gsub("list", "alist", da)
   da <- gsub("\\*tmp\\*", "`*tmp*`", da)
 #   da <- gsub("^alist", "list", da)
 #   da <- gsub("^structure\\(alist", "structure(list", da)
@@ -134,7 +135,7 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
       cat(kWarnPrefix, line, "\n", sep = "")
   if (is.null(errs)){
     dr <- deparse(retv)
-    dr <- gsub("list", "alist", dr)
+#     dr <- gsub("list", "alist", dr)
     dr <- gsub("\\*tmp\\*", "`*tmp*`", dr)
     for (sline in dr)
       cat(kRetvPrefix, sline, "\n", sep = "")

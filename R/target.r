@@ -148,7 +148,7 @@ PrintTest <- function(test, code = NULL) {
 
 #' Comparing the results, also only to be used internally
 CompareResults <- function(a, b) {
-  if (length(a) > 1 && (a[[1]] == '{' || deparse(a[[1]]) %in% operators))
+  if (is.list(a) && length(a) > 1 && (a[[1]] == '{' || deparse(a[[1]]) %in% operators))
     a <- as.expression(a)
   if (identical(all.equal(a, b), TRUE)) {
     return(TRUE)
