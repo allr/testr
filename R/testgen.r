@@ -51,6 +51,7 @@ TestGen <- function(root, output.dir, use.get.anywhere = TRUE, verbose=testrOpti
   }else{
     all.capture <- root
   }
+  cache$tID <- list()
   cache$files <- list()
   Map(ProcessCapture, all.capture)
   for(f in cache$files) {
@@ -121,6 +122,10 @@ ProcessCapture<- function(capture.file){
     symb <- symbol.values[[1]]
     vsym <- symbol.values[[2]]
     func <- ReadValue(lines, kFuncPrefix)
+    if (is.null(cache$tID[[func]]))
+      cache$tID[[func]] <- 0
+    else
+      cache$tID[[func]] <- cache$tID[[func]] + 1
     body <- ReadValue(lines, kBodyPrefix)
     args <- ReadValue(lines, kArgsPrefix)
     warn <- ReadValue(lines, kWarnPrefix)
@@ -227,7 +232,7 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep=""); # added because of variables
   src <- ""
-  src <- paste(src, "test(id=0, code={\n", call, "\n}, ", sep="")
+  src <- paste(src, "test(id=",cache$tID[[func]],", code={\n", call, "\n}, ", sep="")
   if (warn != "")
     src <- paste(src, 'w = ', warn, ",", sep = "")
   if (errs != "")

@@ -82,78 +82,69 @@ code.template.dots <- "
 #' @seealso Decorate
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
-#   if (cache$writing.down)
-#     return(FALSE)
-#   else 
-#     cache$writing.down <- TRUE
+  #   if (cache$writing.down)
+  #     return(FALSE)
+  #   else 
+  #     cache$writing.down <- TRUE
   # tracing file setup
-#   fbody <- getAnywhere(fname)[1]
-#   fbody <- attr(fbody, "original")
+  #   fbody <- getAnywhere(fname)[1]
+  #   fbody <- attr(fbody, "original")
   fbody <- NULL
   trace.file <- file.path(cache$trace.folder.path, paste(kCaptureFile, cache$capture.file.number, sep="."))
   if (!file.exists(trace.file))
     file.create(trace.file)
   else if (file.info(trace.file)$size > testrOptions('capture.file.size'))
     cache$capture.file.number <- cache$capture.file.number + 1 # improve here for while cycle
-
+  
   builtin <- FALSE
   globals <- vector()
   if (!(fname %in% builtins())){
-#      globals <- codetools::findGlobals(fbody)
-#      globals <- globals[!globals %in% builtin.items]
-#      globals <- globals[!grepl("^C_", globals)] ## for external C functions
+    #      globals <- codetools::findGlobals(fbody)
+    #      globals <- globals[!globals %in% builtin.items]
+    #      globals <- globals[!grepl("^C_", globals)] ## for external C functions
   } else {
     builtin <- TRUE
     fbody <- NULL
   }
+  for (i in 1:length(args))
+    if (is.language(args[[i]])) args[[i]] <- as.expression(x)
+  dargs <- deparse(args)
+  #   da <- gsub("list", "alist", da)
+  dargs <- gsub("\\*tmp\\*", "`*tmp*`", dargs)
+  #   da <- gsub("^alist", "list", da)
+  #   da <- gsub("^structure\\(alist", "structure(list", da)
+  
+  if (is.language(retv)){
+    retv <- as.expression(retv)
+  } else {
+    for (i in 1:length(retv))
+      if (is.language(retv[[i]])) retv[[i]] <- as.expression(x)
+  }
+  dretv <- deparse(retv)
+  #     dr <- gsub("list", "alist", dr)
+  dretv <- gsub("\\*tmp\\*", "`*tmp*`", dretv)
+  
   # printing
+  print.capture <- function(x, prefix)
+    if (x != "NULL")
+      if (length(x) < 100) sapply(x, function(y) cat(prefix, y, "\n", sep="")) else cat(prefix, "<too long>\n")
+
   sink(trace.file, append = TRUE)
+  
   for (g in globals){
     cat(kSymbPrefix, g, "\n", sep = "")
     cat(kValSPrefix, deparse(get(g)), "\n", sep = "")
   }
+
   cat(kFuncPrefix, fname, "\n", sep = "")
-  if (!builtin)
-    fbody <- deparse(fbody)
-  for (sline in fbody)
-    cat(kBodyPrefix, sline, "\n", sep = "")
-  if (is.list(args))
-  	args <- lapply(args, function(x) if (is.language(x)) as.expression(x) else x)
-  if (!is.language(retv)){
-	if (is.list(retv))
-    	  retv <- lapply(retv, function(x) if (is.language(x)) as.expression(x) else x) 
-  }
-  else 
-    retv <- as.expression(retv)
-  da <- deparse(args)
-#   da <- gsub("list", "alist", da)
-  da <- gsub("\\*tmp\\*", "`*tmp*`", da)
-#   da <- gsub("^alist", "list", da)
-#   da <- gsub("^structure\\(alist", "structure(list", da)
-  if (length(da) < 100){
-    for (sline in da)
-      cat(kArgsPrefix, sline, "\n", sep = "")
-  } else {
-    cat(kArgsPrefix, "<arguments too long>", "\n");
-  }
-  if (!is.null(warns))
-    for (line in deparse(warns))
-      cat(kWarnPrefix, line, "\n", sep = "")
-  if (is.null(errs)){
-    dr <- deparse(retv)
-#     dr <- gsub("list", "alist", dr)
-    dr <- gsub("\\*tmp\\*", "`*tmp*`", dr)
-    if (length(dr) < 100)
-      for (sline in dr)
-        cat(kRetvPrefix, sline, "\n", sep = "")
-    else 
-      cat(kRetvPrefix, "<retv too long>\n");
-  } else
-    for (line in errs)
-      cat(kErrsPrefix, line, "\n", sep = "")
+  print.capture(deparse(fbody), kBodyPrefix)
+  print.capture(dargs, kArgsPrefix)
+  print.capture(deparse(warns), kWarnPrefix)
+  print.capture(dretv, kRetvPrefix)
+  print.capture(deparse(errs), kErrsPrefix)
   cat("\n")
   sink()
-#   cache$writing.down <- FALSE
+  #   cache$writing.down <- FALSE
 }
 
 DecorateBody <- function(func){

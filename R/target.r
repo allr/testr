@@ -148,16 +148,15 @@ PrintTest <- function(test, code = NULL) {
 
 #' Comparing the results, also only to be used internally
 CompareResults <- function(a, b) {
-   if (is.list(a) && length(a) > 1 && !is.null(a[[1]]) && !is.na(a[[1]]) && (a[[1]] == '{' || any(deparse(a[[1]]) %in% operators)))
+  if(is.language(a))
     a <- as.expression(a)
   if (identical(all.equal(a, b), TRUE)) {
     return(TRUE)
   } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
     # special case for builtin/closure/special because is.na produces warnings on them and equality would have been caught earlier, 
     # so if all.equal previously did not return TRUE, comparasion is wrong
-    if ((typeof(a) == "builtin" && typeof(b) == "builtin") ||
-        (typeof(a) == 'special' && typeof(b) == 'special') || 
-        (typeof(a) == 'closure' && typeof(b) == 'closure'))
+    if ((typeof(a) %in% c("builtin", 'special', 'closure')) || 
+           (typeof(b) %in% c("builtin", 'special', 'closure')))
      	return(FALSE)
     # remove NA's
     aa = a[!is.na(a)]
@@ -206,7 +205,7 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   AppendComment <- function(...) {
     s <- list(...)[[1]]
     for (o in list(...)[-1])
-      s <- paste(s, paste(o, collapse = " "))
+      s <- paste(s, paste(deparse(o), collapse = " "))
     if (is.null(comments))
       comments <<- s
     else
