@@ -148,7 +148,7 @@ public class CaptureFileSplitter {
             File forSizeCheck = new File(dirName + SYS_SEP
                     + FILE_PREFIX + funcName + SYS_SEP + FILE_PREFIX
                     + funcName + "_" + fileIndex);
-            if (forSizeCheck.length() > 500 * 1000 * 1000) { // 500 MB
+            if (forSizeCheck.length() > 10 * 1000 * 1000) { // 50 MB
                 fileIndex++;
                 funcFileCounter.put(funcName, fileIndex);
             }

@@ -117,10 +117,12 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
     fbody <- deparse(fbody)
   for (sline in fbody)
     cat(kBodyPrefix, sline, "\n", sep = "")
-  
-  args <- lapply(args, function(x) if (is.language(x)) as.expression(x) else x)
-  if (!is.language(retv))
-    retv <- lapply(retv, function(x) if (is.language(x)) as.expression(x) else x) 
+  if (is.list(args))
+  	args <- lapply(args, function(x) if (is.language(x)) as.expression(x) else x)
+  if (!is.language(retv)){
+	if (is.list(retv))
+    	  retv <- lapply(retv, function(x) if (is.language(x)) as.expression(x) else x) 
+  }
   else 
     retv <- as.expression(retv)
   da <- deparse(args)
@@ -128,8 +130,12 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   da <- gsub("\\*tmp\\*", "`*tmp*`", da)
 #   da <- gsub("^alist", "list", da)
 #   da <- gsub("^structure\\(alist", "structure(list", da)
-  for (sline in da)
-    cat(kArgsPrefix, sline, "\n", sep = "")
+  if (length(da) < 100){
+    for (sline in da)
+      cat(kArgsPrefix, sline, "\n", sep = "")
+  } else {
+    cat(kArgsPrefix, "<arguments too long>", "\n");
+  }
   if (!is.null(warns))
     for (line in deparse(warns))
       cat(kWarnPrefix, line, "\n", sep = "")
@@ -137,8 +143,11 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
     dr <- deparse(retv)
 #     dr <- gsub("list", "alist", dr)
     dr <- gsub("\\*tmp\\*", "`*tmp*`", dr)
-    for (sline in dr)
-      cat(kRetvPrefix, sline, "\n", sep = "")
+    if (length(dr) < 100)
+      for (sline in dr)
+        cat(kRetvPrefix, sline, "\n", sep = "")
+    else 
+      cat(kRetvPrefix, "<retv too long>\n");
   } else
     for (line in errs)
       cat(kErrsPrefix, line, "\n", sep = "")
@@ -377,7 +386,7 @@ ReplaceBody <- function(func){
 #' @export 
 #' @seealso WriteCapInfo Decorate
 #'
-DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
+DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE, capture.primitives = TRUE){
   if (class(func) == "function"){
     fname <- as.character(substitute(func))
   } else if (class(func) == "character"){
@@ -424,14 +433,14 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE){
 #' @param verbose if to print what functions will be captured
 #' @seealso Decorate
 #' @export
-SetupCapture <- function(flist, verbose = testrOptions('verbose'), capture.generics = TRUE){
+SetupCapture <- function(flist, verbose = testrOptions('verbose'), capture.generics = TRUE, capture.primitives = capture.primitives){
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
   set.cache("writing.down", TRUE)
 #   cache$writing.down <- TRUE
   for (func in flist){
     if (EligibleForCapture(func)){
-      if (!is.null(DecorateSubst(func, capture.generics = capture.generics)) && verbose)
+      if (!is.null(DecorateSubst(func, capture.generics = capture.generics, capture.primitives = capture.primitives)) && verbose)
         cat("capturing - ", func, "\n")
       
     }
@@ -462,6 +471,6 @@ EligibleForCapture <- function(func){
 #' @param internal wheather only internals should be captured, or all builtins
 #' @seealso SetupCapture
 #' @export
-BeginBuiltinCapture <- function(internal = FALSE, indexes = 1:length(builtins(internal)), capture.generics = TRUE){
-  SetupCapture(builtins(internal)[indexes], verbose = TRUE, capture.generics = capture.generics)
+BeginBuiltinCapture <- function(internal = FALSE, indexes = 1:length(builtins(internal)), capture.generics = TRUE, capture.primitives = TRUE){
+  SetupCapture(builtins(internal)[indexes], verbose = TRUE, capture.generics = capture.generics, capture.primitives = capture.primitives)
 }

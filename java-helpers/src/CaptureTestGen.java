@@ -135,12 +135,13 @@ public class CaptureTestGen {
     }
 
     private static String ReadValue(String []lines, String prefix){
-        String result = "";
+        StringBuilder result = new StringBuilder() ;
         while (s < lines.length && lines[s].startsWith(prefix)) {
-            result += lines[s] + "\n";
-            s++;
+            result.append(lines[s]);
+	    result.append("\n");
+	    s++;
         }
-        return result;
+        return result.toString();
     }
 	private static void setupWorkEnv() {
 		if (!Files.exists(inputDir, LinkOption.NOFOLLOW_LINKS)) {
@@ -218,9 +219,8 @@ public class CaptureTestGen {
 			System.out.println("Processing file - " + ifile.toString());
             String testGen = "R -q -e " + "library(testr) -e TestGen(\"" + ifile.toAbsolutePath().toString() + "\"," + "\"" + outputDir.toAbsolutePath().toString() + "\");";
 //            String testGen = "R -q -e cat(\"Roman\")";
-            System.out.println(testGen);
-//		    throw new RuntimeException("Forced exit");
-            proc = Runtime.getRuntime().exec(testGen);
+       //     System.out.println(testGen);
+           proc = Runtime.getRuntime().exec(testGen);
 			boolean doneWait = false;
 			while (!doneWait) {
 				try {
