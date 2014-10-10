@@ -7,7 +7,7 @@ cache$writing.down <- FALSE
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
-  cache$trace.folder.path <- file.path(getwd(), kCaptureFolder)
+  cache$trace.folder.path <-  kCaptureFolder
   
   ## testr settings
   options('testr' = list(

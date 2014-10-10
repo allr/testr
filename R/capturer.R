@@ -1,5 +1,5 @@
 kCaptureFile <- "capture"
-kCaptureFolder <- "capture"
+kCaptureFolder <- "~/RProject/R1/tests/capture"
 kSymbPrefix <- "symb: "
 kValSPrefix <- "vsym: "
 kFuncPrefix <- "func: "
@@ -106,8 +106,9 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
     builtin <- TRUE
     fbody <- NULL
   }
+  if (!is.environment(args) && length(args) > 0)
   for (i in 1:length(args))
-    if (is.language(args[[i]])) args[[i]] <- as.expression(x)
+    if (is.language(args[[i]])) args[[i]] <- as.expression(args[[i]])
   dargs <- deparse(args)
   #   da <- gsub("list", "alist", da)
   dargs <- gsub("\\*tmp\\*", "`*tmp*`", dargs)
@@ -117,8 +118,9 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   if (is.language(retv)){
     retv <- as.expression(retv)
   } else {
-    for (i in 1:length(retv))
-      if (is.language(retv[[i]])) retv[[i]] <- as.expression(x)
+#    if (!is.environment(retv) && is.list(retv) && length(retv) > 0)
+#    for (v in retv)
+#      if (!missing(v) && is.language(v)) retv[which(retv == v)] <- as.expression(v)
   }
   dretv <- deparse(retv)
   #     dr <- gsub("list", "alist", dr)
@@ -126,7 +128,7 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   
   # printing
   print.capture <- function(x, prefix)
-    if (x != "NULL")
+    if (x[1] != "NULL")
       if (length(x) < 100) sapply(x, function(y) cat(prefix, y, "\n", sep="")) else cat(prefix, "<too long>\n")
 
   sink(trace.file, append = TRUE)
