@@ -151,13 +151,13 @@ measureCoverageByDB <- function(r.home, source.folder, tc.db.path) {
   }
   tc.db.path <- file_path_as_absolute(tc.db.path)
   sink("db_out")
-  before.db.coverage.info <- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
+  before.db.coverage.info <- tryCatch(MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep)), error=function(x) cat(x$message))
   cmd <- paste(r.home, 
-               "/bin/R -q -e library(testr) -e RunTests(", 
-               shQuote(tc.db.path),")",, 
+               "/bin/R -q -e \"RunTests(", 
+               shQuote(tc.db.path),")\"", 
                sep = "")
   cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
-  after.db.coverage.info <- coverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
+  after.db.coverage.info <- MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
   sink()
 #  file.remove("db_out")
   before.db.coverage.percentage <- calculateCoverage(before.db.coverage.info)
