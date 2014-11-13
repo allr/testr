@@ -1,31 +1,58 @@
 # operators <- c("(",":","%sep%","[","[[", "$","@", "<-", "<<-","=", "[<-","[[<-","$<-", "@<-", "+","-","*","/", "^","%%","%*%","%/%","<","<=","==","!=",">=",">","|","||","&","&&","!")
 # operators.count <- 0
-translateFastR <- function(root){
+# gsub("(.*)argv <- (.*)do.call(.*)", "\\2", c)
+
+get.all.files <- function(root, pattern = ".[rR]$", full.names = T){
   if (file.info(root)$isdir){
-    files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
-    files <- Map(function (x) paste(root,"/",x, sep=""), files) 
+    files <- list.files(root, pattern=pattern, recursive = TRUE, all.files = TRUE, full.names = full.names) 
   } else {
     files <- root
   }
-  cache <- new.env();
+  files
+}
+
+translateFastR <- function(root, test.folder = "tests/"){
+  files <- get.all.files(root)
+  test.files <- vector()
+  if (file.exists(test.folder)){
+    if (!file.info(test.folder)$isdir) stop("Specified location of tests is not a folder")
+    test.files <- get.all.files(test.folder, pattern = ".java$", full.names = F)
+    test.files <- sapply(test.files, function(x) gsub("Testrgen(.*).java", "\\1", x))
+  } else {
+    dir.create(test.folder)
+  }
+  cache <- new.env()
   for (filename in files) {
     cat(filename, "\n")
     f.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
     f.name <- gsub("\\.", "", f.name)
-    f.name <- gsub("<-", "assign", f.name)
+    f.name <- gsub("<-", "_assign_", f.name)
+    f.name <- gsub("\\[", "_extract1_", f.name)
+    f.name <- gsub("\\$", "_extract2_", f.name)
     f.number <- cache[[f.name]]
-    if (is.null(f.number))
-      f.number <- 1
+    if (is.null(f.number)) {
+      if (f.name %in% test.files) {
+        file.name <- sprintf("%s/Testrgen%s.java", test.folder, f.name)
+        test.file <- readLines(file.name)
+        test.file <- test.file[1:(length(test.file) - 1)]
+        writeLines(test.file, file.name)
+        f.number <- length(grep("public void", test.file)) + 1
+      } else {
+        f.number <- 1
+      }
+    }
     if (f.name %in% operators){
       f.name <- "operators"
       f.number <- operators.count
       operators.count <- operators.count + 1
     }      
-    sink(paste("tests/Testrgen", f.name, ".java", sep=""), append=TRUE)
-    cat("\n    @Test\n    public void test", f.name, f.number, "() {", "\n", sep="")
-    cat("        ")
-    source(filename, local = FALSE)
-    cat("    }\n")
+    sink(paste(test.folder, "/Testrgen", f.name, ".java", sep=""), append=TRUE)
+    cat("\n\t@Test\n\tpublic void test", f.name, f.number, "() {", "\n", sep="")
+    cat("\t\t")
+    temp.env <- new.env();
+    temp.env$test <- test.fastr
+    with(temp.env, source(filename, local = TRUE))
+    cat("\t}\n")
     sink()
     cache[[f.name]] <- f.number + 1
   }
@@ -33,46 +60,13 @@ translateFastR <- function(root){
 
 # unlink("tests", TRUE)
 # dir.create("tests")
-# trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
-tests <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
-#   code <- expression(code)
-  code <- sapply(deparse((substitute(code))), trim)
-  res <- ""
-  for (line in code){
-    if (!grepl("^\\{", line) && !grepl("^\\}", line)){
-      if (grepl("^argv <-", line)){
-        eval(parse(text=line));
-        args <- length(argv);
-        if (args > 0){
-#           argv <- deparse(argv)
-          argv <- substr(line, 28, nchar(line) - 3)          
-          #           argv <- gsub("argv <- eval(parse(text=\"(.*)\"", "\\1", line)
-          argv <- gsub('"',"'", argv)
-          argv <- paste(argv, collapse="", sep="")
-          res <- paste('argv <- ',argv, ';', sep="");
-        }
-        
-      } else
-      if (grepl("^do.call\\(", line)){
-        name <- gsub("do.call\\((.*),(.*))", "\\1", line)
-        res <- paste(res, name, "(", sep = "")
-        if (args > 0) { 
-          for (idx in 1:args) { 
-            res <- paste(res, "argv[[",idx,"]],", sep=""); 
-          } 
-          res <- gsub(",$", ");", res)
-        } else {
-          res <- paste(res, ");")
-        }
-      } else {
-        res <- paste(res, line)
-      }
-    }
-  }
-  res <- paste("assertEval(\"", res, "\");\n", sep="")
-#   res <- gsub("'", "\\\\'", res)
-  cat(res)
+
+test.fastr <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
+  str <- gsub('"', "'", as.list(substitute(code)[-1]))   
+  str <- dQuote(paste(str, collapse = "\n\t\t            "))         
+  res <- sprintf("assertEval(%s);\n", str)
+  cat(res)  
 }
 
 OrginizeTests <- function(root){
@@ -81,7 +75,8 @@ OrginizeTests <- function(root){
     f.conn <- file(paste(root, filename, sep="/"), 'r+') 
     lines <- readLines(f.conn) 
     class.name <- gsub("(.*).java", "\\1", filename)
-    writeLines(c("/*",  
+    if (!grepl("This material", lines)){
+      writeLines(c("/*",  
                  " * This material is distributed under the GNU General Public License",
                  " * Version 2. You may review the terms of this license at", 
                  " * http://www.gnu.org/licenses/gpl-2.0.html",
@@ -97,6 +92,9 @@ OrginizeTests <- function(root){
                  lines,
                  "}"), 
                con = f.conn) 
+    } else {
+      cat("}\n", con = f.conn)
+    }
     close(f.conn) 
   }
 }
