@@ -1,5 +1,5 @@
 kCaptureFile <- "capture"
-kCaptureFolder <- "~/RProject/R1/tests/capture"
+kCaptureFolder <- "capture"
 kSymbPrefix <- "symb: "
 kValSPrefix <- "vsym: "
 kFuncPrefix <- "func: "
@@ -80,6 +80,7 @@ code.template.dots <- "
 #' @param errs caught errors during function call
 #' @param warns caught warnings during function call
 #' @seealso Decorate
+#' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
   #   if (cache$writing.down)
@@ -131,7 +132,7 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
     if (x[1] != "NULL")
       if (length(x) < 100) sapply(x, function(y) cat(prefix, y, "\n", sep="")) else cat(prefix, "<too long>\n")
 
-  sink(trace.file, append = TRUE)
+#  sink(trace.file, append = TRUE)
   
   for (g in globals){
     cat(kSymbPrefix, g, "\n", sep = "")
@@ -145,7 +146,7 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   print.capture(dretv, kRetvPrefix)
   print.capture(deparse(errs), kErrsPrefix)
   cat("\n")
-  sink()
+#  sink()
   #   cache$writing.down <- FALSE
 }
 
@@ -337,7 +338,7 @@ ReplaceBody <- function(func){
   
   names.formals <- sapply(names.formals, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
   func.args <- parse(text=GenerateArgsFunction(names.formals))
-  args.code <- parse(text=sprintf("args <- GetArgs(%s)", 
+  args.code <- parse(text=sprintf("environment(GetArgs) <- testr:::cache; args <- GetArgs(%s)", 
                                   paste(sapply(names.formals, 
                                                function(x) if(x != '...' && x != 'expr') 
                                                  sprintf(argument.pass, x, x, x, x, x) 
@@ -349,7 +350,7 @@ ReplaceBody <- function(func){
     fb <- body(function.body)
 #     early.return <- expression(if(testr:::cache$writing.down) return(return.value) else testr:::cache.writing.down <- TRUE)
 #     cache.false <- expression(testr:::cache$writing.down <- FALSE)
-    main.write.down <- parse(text=paste("testr:::WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
+    main.write.down <- parse(text=paste("environment(WriteCapInfo) <- testr:::cache; WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
     fb <- BodyReplace(fb, c(args.code, main.write.down))
     if (as.list(fb)[[1]] != '{'){
       last.line <- fb
