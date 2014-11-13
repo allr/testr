@@ -46,7 +46,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
   temp.tc <- list.files(split.paths[2], 
                         full.names = TRUE)
   n <- round(n / 2 + 0.00001)
-  while (n >= 1){
+  while (n >= 1 && length(list.files(split.paths[2])) != 0){
     cat("n - ", n, "\n")
     k <<- 1
     split.paths <- splitAndFindCorrectTCs(tc = split.paths[2], 
@@ -98,17 +98,23 @@ splitAndFindCorrectTCs<- function(tc, tc.result.root, number.of.tc.per.file = 1,
   close(con)
   if (length(lines) == 0)
     stop("Empty file\n")
-  tests.starts <- grep("test\\(id",lines)
-  if (length(grep("expected", lines[tests.starts - 1])) == length(tests.starts)){
-    tests.starts <- tests.starts - 1
-  }
-  if (length(tests.starts) > 1){
-    tests.ends <- tests.starts[2 : length(tests.starts)]
-    tests.ends <- tests.ends - 1
-    tests.ends <- append(tests.ends, length(lines))
-  }
-  else
-    tests.ends <- length(lines)
+  tests.starts <- head(c(1, which(lines == "") + 1), -1)
+  if (length(tests.starts) == 0) tests.starts <- head(c(1, which(lines == " ") + 1), -1)
+  tests.ends <- which(lines == "")
+  if (length(tests.ends) == 0) tests.ends <- which(lines == " ")
+
+
+#  tests.starts <- grep("test\\(id",lines)
+#  if (length(grep("expected", lines[tests.starts - 1])) == length(tests.starts)){
+#    tests.starts <- tests.starts - 1
+#  }
+#  if (length(tests.starts) > 1){
+#    tests.ends <- tests.starts[2 : length(tests.starts)]
+#    tests.ends <- tests.ends - 1
+#    tests.ends <- append(tests.ends, length(lines))
+#  }
+#  else
+#    tests.ends <- length(lines)
   
   cat("File ", tc, "\n")
   cat("Number of TCs in file - ", length(tests.starts), "\n")
@@ -121,10 +127,9 @@ splitAndFindCorrectTCs<- function(tc, tc.result.root, number.of.tc.per.file = 1,
       dir.create(function.path)
     }
     tc.temp <- file.path(function.path, paste0(function.name, "_tmp", ".R", sep = ""), fsep = .Platform$file.sep)
-    sink(tc.temp)
-    for (j in tests.starts[i]:tests.ends[i])
-      cat(lines[j], "\n")
-    sink()
+    tc.file <- file(tc.temp)
+    writeLines(lines[tests.starts[i]:tests.ends[i]], tc.file)
+    close(tc.file)
     tc.temp <- file_path_as_absolute(tc.temp)
     if (check.correctness){
       info.file <- file.path(function.path, paste0(function.name, "_info", sep = ""), fsep = .Platform$file.sep)

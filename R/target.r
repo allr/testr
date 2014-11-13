@@ -150,13 +150,13 @@ PrintTest <- function(test, code = NULL) {
 CompareResults <- function(a, b) {
   if(is.language(a))
     a <- as.expression(a)
-  if (identical(all.equal(a, b), TRUE)) {
+  if (identical(all.equal(a, b), TRUE) || identical(as.expression(a), as.expression(b))) {
     return(TRUE)
-  } else if (identical(all.equal(is.na(a),is.na(b)), TRUE)) {
+  } else if (identical(all.equal(is.na(a),is.na(b)), TRUE))  {
     # special case for builtin/closure/special because is.na produces warnings on them and equality would have been caught earlier, 
     # so if all.equal previously did not return TRUE, comparasion is wrong
-    if ((typeof(a) %in% c("builtin", 'special', 'closure')) || 
-           (typeof(b) %in% c("builtin", 'special', 'closure')))
+    if ((typeof(a) %in% c("builtin", 'special', 'closure', 'symbol')) || 
+           (typeof(b) %in% c("builtin", 'special', 'closure', 'symbol')))
      	return(FALSE)
     # remove NA's
     aa = a[!is.na(a)]
