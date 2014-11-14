@@ -1,5 +1,5 @@
 kCaptureFile <- "capture"
-kCaptureFolder <- "~/RProject/R1/tests/capture"
+kCaptureFolder <- "capture"
 kSymbPrefix <- "symb: "
 kValSPrefix <- "vsym: "
 kFuncPrefix <- "func: "
