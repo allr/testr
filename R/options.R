@@ -18,15 +18,17 @@ cache$writing.down <- FALSE
     'file.summary' = FALSE,
     'capture.file.size' = 50 * 1000 * 1000
   ))
-  globals <- c('<<-','<-','-',':::','!','[','[<-','[[<-','{','+','as.list','c','enquote','if','.Internal','is.call','is.null','lapply','list','missing','names<-','substitute','sys.call','tryCatch','vector')  
-  for (elem in ls(getNamespace("testr"))) {
-    e <- tryCatch(get(elem, env = getNamespace("testr")), error = function(x) NULL)
-    if (is.function(e))
-      globals <- c(globals, findGlobals(e))
-  } 
-
-  globals <- unique(globals)
-  globals <- intersect(builtins(), globals)
+  require(codetools)
+  require(pryr)
+#   globals <- c('<<-','<-','-',':::','!','[','[<-','[[<-','{','+','as.list','c','enquote','if','.Internal','is.call','is.null','lapply','list','missing','names<-','substitute','sys.call','tryCatch','vector')  
+#   for (elem in ls(getNamespace("testr"))) {
+#     e <- tryCatch(get(elem, env = getNamespace("testr")), error = function(x) NULL)
+#     if (is.function(e))
+#       globals <- c(globals, findGlobals(e))
+#   } 
+# 
+#   globals <- unique(globals)
+#   globals <- intersect(builtins(), globals)
   globals <- builtins()
   for (elem in globals){
     e <- tryCatch(get(elem), error = function(x) NULL)

@@ -23,6 +23,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "remove",
                "eval", "attach", 
                "match.arg",
+               
                ".handleSimpleError", 
                "tryCatch",
                "detach",
@@ -42,34 +43,41 @@ keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "bre
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
 builtin.items <- builtins()
+
 code.template.dots <- "
         if (!missing(...)) {
           succ <- TRUE
-          a <- tryCatch(list(...), error = function(x) succ <<- FALSE)
-          if (succ){
-            args <- c(args, a)
+          tryCatch(list(...), error=function(x) succ <<- FALSE)
+        if (!succ){
+          args[[`_i`]] <- substitute(...)
+        } else {
+          dot.args <- list(...)
+          args <- c(args, dot.args)
+          `_i` <- `_i` + length(dot.args)
+          if (is.null(names(dot.args))) {
+            args.names <- c(args.names, rep('', length(dot.args)))
           } else {
-            all.ind <- 1:length(args.list)
-            if(length(ind) > 0) 
-              ind <- all.ind[-ind] 
-            else 
-              ind <- all.ind
-            for (i in ind){
-              succ <- TRUE
-              e <- tryCatch(eval(args.list[[i]]), error=function(x) succ <<- FALSE)
-              j <- ifelse(is.null(names.args.list) || names.args.list[i] == '', length(args) + 1, names.args.list[i])
-              if (succ && !is.function(e)){
-                if (is.null(e)) {
-                  args[j] <- list(NULL)
-                } else {
-                  args[[j]] <- e
-                }
-              } else {
-                args[[j]] <- args.list[[i]]
-              }
+            args.names <- c(args.names, names(dot.args))
+          }
+        }
+      }\n"
+
+code.template.args <- "
+        succ <- TRUE
+        if (!missing(%s)){
+          tryCatch(%s, error=function(x) succ <<- FALSE)
+          if (!succ){
+            args[[`_i`]] <- substitute(%s)
+          } else {
+            if (is.null(%s)) {
+              args[`_i`] <- list(NULL)
+            } else {
+              args[[`_i`]] <- %s
             }
           }
-        }\n"
+          `_i` <- `_i` + 1;
+          args.names <- c(args.names, '%s');
+        }\n";
 
 #' @title Write down capture information 
 #' 
@@ -83,13 +91,6 @@ code.template.dots <- "
 #' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
-  #   if (cache$writing.down)
-  #     return(FALSE)
-  #   else 
-  #     cache$writing.down <- TRUE
-  # tracing file setup
-  #   fbody <- getAnywhere(fname)[1]
-  #   fbody <- attr(fbody, "original")
   fbody <- NULL
   trace.file <- file.path(cache$trace.folder.path, paste(kCaptureFile, cache$capture.file.number, sep="."))
   if (!file.exists(trace.file))
@@ -119,26 +120,24 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   if (is.language(retv)){
     retv <- as.expression(retv)
   } else {
-#    if (!is.environment(retv) && is.list(retv) && length(retv) > 0)
-#    for (v in retv)
-#      if (!missing(v) && is.language(v)) retv[which(retv == v)] <- as.expression(v)
   }
   dretv <- deparse(retv)
-  #     dr <- gsub("list", "alist", dr)
   dretv <- gsub("\\*tmp\\*", "`*tmp*`", dretv)
   
   # printing
   print.capture <- function(x, prefix)
     if (x[1] != "NULL")
-      if (length(x) < 100) sapply(x, function(y) cat(prefix, y, "\n", sep="")) else cat(prefix, "<too long>\n")
+      if (length(x) < 100) {
+        for (i in 1:length(x))
+          cat(prefix, x[i], "\n", sep="")
+      } else
+          cat(prefix, "<too long>\n")
 
-#  sink(trace.file, append = TRUE)
-  
+  sink(trace.file, append = TRUE)
   for (g in globals){
     cat(kSymbPrefix, g, "\n", sep = "")
     cat(kValSPrefix, deparse(get(g)), "\n", sep = "")
   }
-
   cat(kFuncPrefix, fname, "\n", sep = "")
   print.capture(deparse(fbody), kBodyPrefix)
   print.capture(dargs, kArgsPrefix)
@@ -146,8 +145,7 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   print.capture(dretv, kRetvPrefix)
   print.capture(deparse(errs), kErrsPrefix)
   cat("\n")
-#  sink()
-  #   cache$writing.down <- FALSE
+  sink()
 }
 
 DecorateBody <- function(func){
@@ -155,51 +153,20 @@ DecorateBody <- function(func){
   function.body <- utils::getAnywhere(func)[1]
   # create a wrapper closure and return in
   decorated.function <- function(...){}
-  if (!is.null(formals(function.body))){    
-    formals(decorated.function) <- formals(function.body) 
-    args.names <- names(formals(function.body))
-    args.names <- sapply(args.names, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
-    args.touch <- "args <- list();
-                   args.names <- names(formals(function.body));
-                   ind <- vector();
-                   args.list <- as.list(match.call()[-1]);
-                   names.args.list <- names(args.list)"
-    for (i in 1:length(args.names)){
-      if (args.names[i] != '...'){
-	code.template <- "
-        if (!missing(%s)) {
-          succ <- TRUE
-          e <- tryCatch(%s, error=function(x) succ <<- FALSE)
-          if (succ){
-            if (is.null(e)) {
-              if (grepl('`', '%s'))
-                args[%s] <- list(NULL)
-              else 
-                args['%s'] <- list(NULL)
-            } else {
-              args$%s <- e
-            }
-          }
-          ind <- c(ind, which(names.args.list=='%s'))
-        }\n";
-        args.rep <- rep(args.names[i], 7)
-        names(args.rep) <- NULL
-        args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
-      }
-    }
-    if ('...' %in% args.names){
-      args.touch <- c(args.touch, code.template.dots)
-    } 
-    args.code <- paste(args.touch,  collapse = "")
-#     args.code <- paste(args.code, "\nnames(args) <- names(args.list);\n")
-    args.code.expression <- parse(text = args.code)
-  } else {
-    args.code.expression <- parse(text=paste("args <- list();
-                                             args.names <- names(formals(function.body));
-                                             ind <- vector();
-                                             args.list <- as.list(match.call()[-1]);
-                                             names.args.list <- names(args.list)", code.template.dots))
-  }
+  names.formals <- names(formals(function.body))
+  argument.pass <- "%s = if(!missing(%s)) 
+                            %s
+                            else '_MissingArg'"
+  formals(decorated.function) <- formals(function.body) 
+  names.formals <- sapply(names.formals, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
+  func.args <- parse(text=GenerateArgsFunction(names.formals))
+  args.code <- parse(text=sprintf("environment(GetArgs) <- testr:::cache; environment(WriteCapInfo) <- testr:::cache; args <- GetArgs(%s)", 
+                                  paste(sapply(names.formals, 
+                                               function(x) if(x != '...' && x != 'expr') 
+                                                 sprintf(argument.pass, x, x, x, x, x) 
+                                               else if (x == 'expr') 'substitute(expr)' 
+                                               else x), 
+                                        collapse = ",")))
   initializations <- expression(warns <- NULL)
 #  envir.change <- expression(environment(function.body) <- environment())
   args.enquote <- expression(args <- lapply(args, function(x) if (is.language(x)) enquote(x) else x))
@@ -228,7 +195,8 @@ DecorateBody <- function(func){
   main.write.down <- expression(WriteCapInfo(func, args, return.value, NULL, warns))
   function.return <- expression(return.value)  
   body(decorated.function) <- as.call(c(as.name("{"), 
-                                        args.code.expression, 
+                                        func.args,
+                                        args.code, 
                                         initializations, 
                                         envir.change, 
                                         args.enquote,
@@ -270,47 +238,17 @@ GenerateArgsFunction <- function(names.formals){
   if (length(args.names) > 0)
     for (i in 1:length(args.names))
       if (args.names[i] == '...'){
-        code.template <- "
-        if (!missing(...)) {
-          succ <- TRUE
-          tryCatch(list(...), error=function(x) succ <<- FALSE)
-        if (!succ){
-          args[[`_i`]] <- substitute(...)
-        } else {
-          dot.args <- list(...)
-          args <- c(args, dot.args)
-          `_i` <- `_i` + length(dot.args)
-          if (is.null(names(dot.args))) {
-            args.names <- c(args.names, rep('', length(dot.args)))
-          } else {
-            args.names <- c(args.names, names(dot.args))
-          }
-        }
-      }\n"
-        args.touch <- c(args.touch, code.template)
+        args.touch <- c(args.touch, code.template.dots)
       } else {
-        code.template <- "
-        succ <- TRUE
-        tryCatch(%s, error=function(x) succ <<- FALSE)
-        if (!succ){
-          args[[`_i`]] <- substitute(%s)
-        } else {
-          if (is.null(%s)) {
-            args[`_i`] <- list(NULL)
-          } else {
-            args[[`_i`]] <- %s
-          }
-        }
-        `_i` <- `_i` + 1;
-        args.names <- c(args.names, '%s');\n";
         args.rep <- rep(args.names[i], 10)
         names(args.rep) <- NULL
-        args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
+        args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template.args, args.rep))))
       }
   args.touch <- c(function.header, "{", args.touch, "names(args) <- args.names;", "lapply(args, function(x) if(is.call(x)) enquote(x) else x)","}")
   args.code <- paste(args.touch, collapse = "\n")
   args.code
 }
+
 #' @title Decorate function to capture calls and return values 
 #' 
 #' This function is respinsible for writing down capture information for decorated function calls.
@@ -324,15 +262,7 @@ ReplaceBody <- function(func){
   saved.function.body <- function.body
   fb <- NULL
   names.formals <- names(formals(function.body))
-#   argument.pass <- "%s = if(!missing(%s)) 
-#                             if(is.function(%s)) 
-#                               substitute(%s)
-#                             else %s
-#                           else '_MissingArg'"
   argument.pass <- "%s = if(!missing(%s)) 
-#                             if(is.function(%s)) 
-#                               substitute(%s)
-#   else 
                             %s
                             else '_MissingArg'"
   
@@ -387,7 +317,12 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE, cap
     fname <- func
   } else {
     stop("wrong argument type!")
-  } 
+  }   
+  cache$func <- func
+  cache$fname <- fname
+  cache$capture.generics <- capture.generics
+  cache$capture.primitives <- capture.primitives
+  local({
   gAobj <- utils::getAnywhere(fname) # getAnywhere object
   fobj <-  gAobj[1]
   prim.generics <- ls(.GenericArgsEnv)
@@ -401,9 +336,9 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE, cap
     env <- .GlobalEnv
     if (!identical(where, .GlobalEnv)){
       where <-  gsub("package:(.*)", "\\1", gAobj$where[1])
-      env <- getNamespace(where)
-      if (bindingIsLocked(fname, env = env))
-        unlockBinding(fname, env = env)
+     env <- getNamespace(where)
+     if (bindingIsLocked(fname, env = env))
+       unlockBinding(fname, env = env)
     }
     if ("generic" %in% ftype(fobj) || fname %in% prim) { # check for generic, seems to be most consistent one
       if (capture.generics || fname %in% prim) 
@@ -413,6 +348,7 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE, cap
       assign(fname, value = ReplaceBody(fname), envir = env)
     }
   }
+  }, env = cache)
 } 
 
 
