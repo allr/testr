@@ -45,12 +45,12 @@ copyright.header <- c("/*",
 #' @export
 #'
 TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
-
+  fastr.test.files <- vector()
   # test.folder sanity check
   if (file.exists(fastr.test.folder)){
     if (!file.info(fastr.test.folder)$isdir) stop("Specified location of tests is not a folder")
     fastr.test.files <- GetAllFiles(fastr.test.folder, pattern = ".java$", full.names = F)
-    fastr.test.files <- sapply(fastr.test.files, function(x) gsub("Testrgen(.*).java", "\\1", x))
+    fastr.test.files <- sapply(fastr.test.files, function(x) gsub("TestrGenBuiltin(.*).java", "\\1", x))
   } else {
     dir.create(fastr.test.folder)
   }
@@ -66,15 +66,15 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
     if (is.null(function.cache.entry)) {
       function.cache.entry <- list()
       if (function.name %in% fastr.test.files) {
-        fastr.test.file <- sprintf("%s/Testrgen%s.java", fastr.test.folder, function.name)
+        fastr.test.file <- sprintf("%s/TestrGenBuiltin%s.java", fastr.test.folder, function.name)
         fastr.test.code <- readLines(fastr.test.file)
         fastr.test.code <- fastr.test.code[1:(length(fastr.test.code) - 1)]
         
-        function.cache.entry$number <- length(grep("public void ", fastr.test.code)) + 1
+        function.cache.entry$number <- length(grep("@Test", fastr.test.code)) + 2
         function.cache.entry$code <- fastr.test.code
       } else {
         function.cache.entry$number <- 1
-        function.cache.entry$code <- c(copyright.header, sprintf("public class Testrgen%s extends TestBase {", function.name))
+        function.cache.entry$code <- c(copyright.header, sprintf("public class TestrGenBuiltin%s extends TestBase {", function.name))
       }
     }
     # for operators unify under same file
@@ -96,7 +96,7 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
   # generate write down information to Java testcase files
   for (function.name in names(function.cache)){
     entry <- function.cache[[function.name]]
-    file.name <- paste(fastr.test.folder, "/Testrgen", function.name, ".java", sep="")
+    file.name <- paste(fastr.test.folder, "/TestrGenBuiltin", function.name, ".java", sep="")
     writeLines(c(entry$code, "}"), file.name)
   }
 }
