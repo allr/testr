@@ -6,7 +6,8 @@
 This function is respinsible for writing down capture information for decorated function calls.
 Replaces the function by decorated function in the global environment}
 \usage{
-DecorateSubst(func, envir = .GlobalEnv, capture.generics = TRUE)
+DecorateSubst(func, envir = .GlobalEnv, capture.generics = TRUE,
+  capture.primitives = TRUE)
 }
 \arguments{
 \item{func}{function name as a character string}

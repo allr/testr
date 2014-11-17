@@ -14,6 +14,11 @@ ExtractFunctionName <- function(filename, modify.characters = TRUE){
     function.name <- gsub("<-", "assign_", function.name)
     function.name <- gsub("\\[", "extract_parentasis_", function.name)
     function.name <- gsub("\\$", "extract_dollar_", function.name)
+    function.name <- gsub("\\+", "plus_", function.name)
+    function.name <- gsub("\\-", "minus_", function.name)
+    function.name <- gsub("&", "and_", function.name)
+    function.name <- gsub("\\*", "times_", function.name)
+
   }
   function.name
 }
@@ -44,13 +49,13 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
   # test.folder sanity check
   if (file.exists(fastr.test.folder)){
     if (!file.info(fastr.test.folder)$isdir) stop("Specified location of tests is not a folder")
-    fastr.test.files <- get.all.files(fastr.test.folder, pattern = ".java$", full.names = F)
+    fastr.test.files <- GetAllFiles(fastr.test.folder, pattern = ".java$", full.names = F)
     fastr.test.files <- sapply(fastr.test.files, function(x) gsub("Testrgen(.*).java", "\\1", x))
   } else {
     dir.create(fastr.test.folder)
   }
   
-  r.test.files <- get.all.files(r.test.folder)
+  r.test.files <- GetAllFiles(r.test.folder)
   # cache for storing information about functions (code and test case count)
   function.cache <- list()
   
@@ -60,16 +65,16 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
 
     if (is.null(function.cache.entry)) {
       function.cache.entry <- list()
-      if (function.name %in% test.files) {
-        fastr.test.file <- sprintf("%s/Testrgen%s.java", test.folder, function.name)
+      if (function.name %in% fastr.test.files) {
+        fastr.test.file <- sprintf("%s/Testrgen%s.java", fastr.test.folder, function.name)
         fastr.test.code <- readLines(fastr.test.file)
         fastr.test.code <- fastr.test.code[1:(length(fastr.test.code) - 1)]
         
-        function.cache.entry$number <- length(grep("public void", fastr.test.code)) + 1
+        function.cache.entry$number <- length(grep("public void ", fastr.test.code)) + 1
         function.cache.entry$code <- fastr.test.code
       } else {
         function.cache.entry$number <- 1
-        function.cache.entry$code <- c(copyright.header, sprintf("public class %s extends TestBase {", function.name))
+        function.cache.entry$code <- c(copyright.header, sprintf("public class Testrgen%s extends TestBase {", function.name))
       }
     }
     # for operators unify under same file
@@ -91,13 +96,15 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
   # generate write down information to Java testcase files
   for (function.name in names(function.cache)){
     entry <- function.cache[[function.name]]
-    file.name <- paste(test.folder, "/Testrgen", function.name, ".java", sep="")
+    file.name <- paste(fastr.test.folder, "/Testrgen", function.name, ".java", sep="")
     writeLines(c(entry$code, "}"), file.name)
   }
 }
 
 TestFastr <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
-  str <- gsub('"', "'", as.list(substitute(code)[-1])) # extract statements from code and replace double quotes with single ones   
-  str <- dQuote(paste(str, collapse = "\n\t\t            "))         
-  sprintf("\t\tassertEval(%s);\n", str)  
+  str <- deparse(as.list(substitute(code)[-1])) # extract statements from code and replace double quotes with single ones   
+  str <- gsub('"', "\\\\'", str)
+  str <- paste(str, collapse = '"+\n\t\t\t"', sep="")         
+  res <- sprintf("\t\tassertEval(\"%s\");\n", str)  
+  res 
 }

@@ -5,7 +5,8 @@
 
 This function is respinsible for setting up capturing for functions}
 \usage{
-SetupCapture(flist, verbose = testrOptions("verbose"))
+SetupCapture(flist, verbose = testrOptions("verbose"),
+  capture.generics = TRUE, capture.primitives = capture.primitives)
 }
 \arguments{
 \item{flist}{function or list of functions to turn on capturing for. List should be only as character.}
