@@ -3,6 +3,12 @@ cache           <- new.env()
 cache$capture.file.number <- 0
 cache$writing.down <- FALSE
 
+cache$function.types <- list()
+
+cache$prim.generics <- ls(.GenericArgsEnv)
+
+cache$prim <- ls(.ArgsEnv) 
+
 .onLoad <- function(libname, pkgname)
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
@@ -20,6 +26,8 @@ cache$writing.down <- FALSE
   ))
   require(codetools)
   require(pryr)
+  require(utils)
+  
 #   globals <- c('<<-','<-','-',':::','!','[','[<-','[[<-','{','+','as.list','c','enquote','if','.Internal','is.call','is.null','lapply','list','missing','names<-','substitute','sys.call','tryCatch','vector')  
 #   for (elem in ls(getNamespace("testr"))) {
 #     e <- tryCatch(get(elem, env = getNamespace("testr")), error = function(x) NULL)
@@ -32,8 +40,10 @@ cache$writing.down <- FALSE
   globals <- builtins()
   for (elem in globals){
     e <- tryCatch(get(elem), error = function(x) NULL)
-    if (is.function(e))
+    if (is.function(e)){
       cache[[elem]] <- e
+      cache$function.types[[elem]] <- ftype(e)
+    }
   }
 }
 

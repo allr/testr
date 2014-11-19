@@ -17,3 +17,5 @@ testr.iml
 .Rproj.user/
 .Rproj.user
 .Rhistory
+# C/C++
+*.*o
