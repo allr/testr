@@ -99,7 +99,8 @@ SEXP deparse( SEXP x){
       Language call("deparse", x) ;    
       return deparse_fun(call, Rf_ScalarInteger(0), CDR(call), R_GlobalEnv ) ; 
 }
-std::fstream tracefile;
+
+std::ofstream tracefile;
   
 void printCapture(CharacterVector x, std::string prefix) {
       if (x[0] != "NULL"){
@@ -114,7 +115,8 @@ void printCapture(CharacterVector x, std::string prefix) {
 
 // [[Rcpp::export]]
 void WriteCapInfo_cpp (CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns, CharacterVector outputfile) {
-  tracefile.open(Rcpp::as<std::string>(outputfile[0]), std::ios::app);
+  std::string outputFileName = Rcpp::as<std::string>(outputfile[0]);
+  tracefile.open(outputFileName.c_str(), std::ios::app);
   printCapture(fname, kFuncPrefix);
   printCapture(deparse(args), kArgsPrefix);
   printCapture(deparse(warns), kWarnPrefix);
