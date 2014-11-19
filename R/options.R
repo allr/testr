@@ -42,9 +42,9 @@ cache$prim <- ls(.ArgsEnv)
     e <- tryCatch(get(elem), error = function(x) NULL)
     if (is.function(e)){
       cache[[elem]] <- e
-      cache$function.types[[elem]] <- ftype(e)
     }
   }
+  cache$function.types <- readRDS("~/RProject/testr/function.types")
 }
 
 set.cache <- function(x, value){

@@ -23,8 +23,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // WriteCapInfo_cpp
-void WriteCapInfo_cpp(CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns);
-RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP argsSEXP, SEXP retvSEXP, SEXP errsSEXP, SEXP warnsSEXP) {
+void WriteCapInfo_cpp(CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns, CharacterVector outputfile);
+RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP argsSEXP, SEXP retvSEXP, SEXP errsSEXP, SEXP warnsSEXP, SEXP outputfileSEXP) {
 BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
@@ -33,7 +33,8 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< SEXP >::type retv(retvSEXP );
         Rcpp::traits::input_parameter< SEXP >::type errs(errsSEXP );
         Rcpp::traits::input_parameter< SEXP >::type warns(warnsSEXP );
-        WriteCapInfo_cpp(fname, args, retv, errs, warns);
+        Rcpp::traits::input_parameter< CharacterVector >::type outputfile(outputfileSEXP );
+        WriteCapInfo_cpp(fname, args, retv, errs, warns, outputfile);
     }
     return R_NilValue;
 END_RCPP

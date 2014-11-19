@@ -1,5 +1,7 @@
 #include <Rcpp.h>
 #include <R.h>
+#include <iostream>
+#include <fstream>
 using namespace Rcpp;
 
 // Below is a simple example of exporting a C++ function to R. You can
@@ -97,25 +99,28 @@ SEXP deparse( SEXP x){
       Language call("deparse", x) ;    
       return deparse_fun(call, Rf_ScalarInteger(0), CDR(call), R_GlobalEnv ) ; 
 }
-
+std::fstream tracefile;
+  
 void printCapture(CharacterVector x, std::string prefix) {
       if (x[0] != "NULL"){
         if (x.length() < 100) {
           for (int i = 0; i < x.length(); i++)
-            Rcout << prefix << x[i] << std::endl;
+            tracefile << prefix << x[i] << std::endl;
         } else {
-            Rcout << prefix << "<too long>" << std::endl;
+            tracefile << prefix << "<too long>" << std::endl;
         }
       }
 }
 
 // [[Rcpp::export]]
-void WriteCapInfo_cpp (CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns) {
+void WriteCapInfo_cpp (CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns, CharacterVector outputfile) {
+  tracefile.open(Rcpp::as<std::string>(outputfile[0]), std::ios::app);
   printCapture(fname, kFuncPrefix);
   printCapture(deparse(args), kArgsPrefix);
   printCapture(deparse(warns), kWarnPrefix);
   printCapture(deparse(retv), kRetvPrefix);
   printCapture(deparse(errs), kErrsPrefix);
-  Rcout << std::endl;
+  tracefile<< std::endl;
+  tracefile.close();
 }
 

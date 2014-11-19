@@ -85,6 +85,8 @@ code.template.dots <- "
 #' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
+  if (cache$writing.down)
+    return(NULL);
   trace.file <- file.path(cache$trace.folder.path, paste(kCaptureFile, cache$capture.file.number, sep="."))
   if (!file.exists(trace.file))
     file.create(trace.file)
@@ -118,10 +120,10 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   dretv <- deparse(retv)
   #     dr <- gsub("list", "alist", dr)
   dretv <- gsub("\\*tmp\\*", "`*tmp*`", dretv)
-  
-  sink(trace.file, append = TRUE)
-  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
-  sink()
+#   
+#   sink(trace.file, append = TRUE)
+  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns, trace.file)
+#   sink()
 }
 #' @title Decorate function to capture calls and return values 
 #' 
@@ -377,7 +379,7 @@ SetupCapture <- function(flist, verbose = testrOptions('verbose'), capture.gener
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
   set.cache("writing.down", TRUE)
-  #   cache$writing.down <- TRUE
+#     cache$writing.down <- TRUE
   for (func in flist){
     if (EligibleForCapture(func)){
       cat("capturing - ", func, "\n")
