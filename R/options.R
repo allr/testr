@@ -3,12 +3,18 @@ cache           <- new.env()
 cache$capture.file.number <- 0
 cache$writing.down <- FALSE
 
+cache$function.types <- list()
+
+cache$prim.generics <- ls(.GenericArgsEnv)
+
+cache$prim <- ls(.ArgsEnv) 
+
 .onLoad <- function(libname, pkgname)
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
-  cache$trace.folder.path <-  kCaptureFolder
-  
+  cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
+  print("aaaaa\n"); 
   ## testr settings
   options('testr' = list(
     'verbose' = FALSE,
@@ -18,7 +24,27 @@ cache$writing.down <- FALSE
     'file.summary' = FALSE,
     'capture.file.size' = 50 * 1000 * 1000
   ))
+  require(codetools)
+  require(pryr)
+  require(utils)
   
+#   globals <- c('<<-','<-','-',':::','!','[','[<-','[[<-','{','+','as.list','c','enquote','if','.Internal','is.call','is.null','lapply','list','missing','names<-','substitute','sys.call','tryCatch','vector')  
+#   for (elem in ls(getNamespace("testr"))) {
+#     e <- tryCatch(get(elem, env = getNamespace("testr")), error = function(x) NULL)
+#     if (is.function(e))
+#       globals <- c(globals, findGlobals(e))
+#   } 
+# 
+#   globals <- unique(globals)
+#   globals <- intersect(builtins(), globals)
+  globals <- builtins()
+  for (elem in globals){
+    e <- tryCatch(get(elem), error = function(x) NULL)
+    if (is.function(e)){
+      cache[[elem]] <- e
+      cache$function.types[[elem]] <- ftype(e)
+    }
+  }
 }
 
 set.cache <- function(x, value){
