@@ -102,9 +102,10 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
 }
 
 TestFastr <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
-  str <- deparse(as.list(substitute(code)[-1])) # extract statements from code and replace double quotes with single ones   
+  str <- as.list(substitute(code))[-1] # extract statements from code and replace double quotes with single ones   
+  str <- lapply(str, function(x) paste(deparse(x), collapse = ""))
   str <- gsub('"', "\\\\'", str)
-  str <- paste(str, collapse = '"+\n\t\t\t"', sep="")         
+  str <- paste(str, collapse = ';"+\n\t\t\t"', sep="")         
   res <- sprintf("\t\tassertEval(\"%s\");\n", str)  
   res 
 }
