@@ -98,10 +98,10 @@ splitAndFindCorrectTCs<- function(tc, tc.result.root, number.of.tc.per.file = 1,
   close(con)
   if (length(lines) == 0)
     stop("Empty file\n")
-  tests.starts <- head(c(1, which(lines == "") + 1), -1)
-  if (length(tests.starts) == 0) tests.starts <- head(c(1, which(lines == " ") + 1), -1)
-  tests.ends <- which(lines == "")
-  if (length(tests.ends) == 0) tests.ends <- which(lines == " ")
+  tests.starts <- head(c(1, grep("^[ ]*$", lines) + 1), -1)
+  if (length(tests.starts) == 0) tests.starts <- head(c(1, grep("^[ ]*$", lines) + 1), -1)
+  tests.ends <- grep("^[ ]*$", lines)
+  if (length(tests.ends) == 0) tests.ends <- grep("^[ ]*$", lines)
 
 
 #  tests.starts <- grep("test\\(id",lines)
