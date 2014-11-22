@@ -1,28 +1,3 @@
-GetAllFiles <- function(root, pattern = ".[rR]$", full.names = T){
-  if (file.info(root)$isdir){
-    files <- list.files(root, pattern=pattern, recursive = TRUE, all.files = TRUE, full.names = full.names) 
-  } else {
-    files <- root
-  }
-  files
-}
-
-ExtractFunctionName <- function(filename, modify.characters = TRUE){
-  function.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
-  if (modify.characters){
-    function.name <- gsub("\\.", "", function.name)
-    function.name <- gsub("<-", "assign_", function.name)
-    function.name <- gsub("\\[", "extract_parentasis_", function.name)
-    function.name <- gsub("\\$", "extract_dollar_", function.name)
-    function.name <- gsub("\\+", "plus_", function.name)
-    function.name <- gsub("\\-", "minus_", function.name)
-    function.name <- gsub("&", "and_", function.name)
-    function.name <- gsub("\\*", "times_", function.name)
-
-  }
-  function.name
-}
-
 copyright.header <- c("/*",  
                       " * This material is distributed under the GNU General Public License",
                       " * Version 2. You may review the terms of this license at", 
@@ -39,12 +14,22 @@ copyright.header <- c("/*",
 #' @title Translate Test Cases to FastR style
 #' 
 #' This function is respinsible generating Java testcases for FastR. 
-#' If there is a folder with already existing test cases translated from TestR to FastR, then the function will append test cases to proper files in that folder
+#' If there is a folder with already existing test cases translated from TestR to FastR, then the function will append test cases to proper files in that folder.
+#' Uses unility function for extraction of test case information. Idea is that to instead of running a test when calling test function, it collects test information and converts it to FastR test
 #' @param r.test.root folder with R testcases
 #' @param fastr.test.folder folder with FastR test cases in Java
 #' @export
 #'
-TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
+FastrTranslate <- function(r.test.folder, fastr.test.folder = "tests/"){
+  # unility function for extraction of test case information. Replaces o
+  FastrTest <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
+    str <- as.list(substitute(code))[-1] # extract statements from code and replace double quotes with single ones   
+    str <- lapply(str, function(x) paste(deparse(x), collapse = ""))
+    str <- gsub('"', "\\\\'", str)
+    str <- paste(str, collapse = ';"+\n\t\t\t"', sep="")         
+    res <- sprintf("\t\tassertEval(\"%s\");\n", str)  
+    res 
+  }
   fastr.test.files <- vector()
   # test.folder sanity check
   if (file.exists(fastr.test.folder)){
@@ -74,7 +59,8 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
         function.cache.entry$code <- fastr.test.code
       } else {
         function.cache.entry$number <- 1
-        function.cache.entry$code <- c(copyright.header, sprintf("public class TestrGenBuiltin%s extends TestBase {", function.name))
+        function.cache.entry$code <- c(copyright.header, sprintf("// Checkstyle: stop line length check\n
+                                                                 public class TestrGenBuiltin%s extends TestBase {", function.name))
       }
     }
     # for operators unify under same file
@@ -85,7 +71,7 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
     
     # evaluate R test file in special environment with replaces test function
     temp.env <- new.env();
-    temp.env$test <- TestFastr
+    temp.env$test <- FastrTest
     with(temp.env, res <- source(filename, local = TRUE)$value)
     # create Java testcase
     test.code <- sprintf("\n\t@Test\n\tpublic void test%s%d() {\n%s\t}\n", function.name, function.cache.entry$number, temp.env$res)
@@ -101,11 +87,36 @@ TranslateFastr <- function(r.test.folder, fastr.test.folder = "tests/"){
   }
 }
 
-TestFastr <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
-  str <- as.list(substitute(code))[-1] # extract statements from code and replace double quotes with single ones   
-  str <- lapply(str, function(x) paste(deparse(x), collapse = ""))
-  str <- gsub('"', "\\\\'", str)
-  str <- paste(str, collapse = ';"+\n\t\t\t"', sep="")         
-  res <- sprintf("\t\tassertEval(\"%s\");\n", str)  
-  res 
+#' @title Function that tags failing test cases for FastR as ignored
+#' 
+#' This function tags test cases with Ignore preporcessor. It requires a file with results of running tests
+#' @param fastr.test.root folder with FastR test cases
+#' @param result.file file with result of running FastR test cases
+#' @export
+#'
+FastrTagIgnored <- function(fastr.test.root, result.file) {
+  lines <- readLines(result.file)
+  tests <- vector()
+  for (line in lines)
+    if (grepl("Micro-test failure", line))
+      tests <- c(tests, gsub("Micro-test failure: (.*)\\((.*)\\)", "\\1", line))
+  
+  trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+  
+  files <- GetAllFiles(fastr.test.root, pattern = "*.java", TRUE)
+  for (tc.file in files){
+    lines <- readLines(tc.file)
+    sink(tc.file)
+    for (i in 1:length(lines)){
+      line <- lines[i]
+      cat(line, "\n", sep="")
+      if (i < length(lines) && grepl("@Test", line)){
+        tc.name <- gsub("public void (.*)\\((.*)", "\\1", trim(lines[i + 1]))
+        if (tc.name %in% tests)
+          cat("    @Ignore\n")
+      }
+    }
+    cat("\n")
+    sink()
+  }
 }
