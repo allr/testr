@@ -82,49 +82,17 @@ code.template.dots <- "
 #' @param errs caught errors during function call
 #' @param warns caught warnings during function call
 #' @seealso Decorate
+#' @useDynLib testr
+#' @importFrom Rcpp evalCpp
 #' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
   if (cache$writing.down)
     return(NULL);
-  trace.file <- file.path(cache$trace.folder.path, paste(kCaptureFile, cache$capture.file.number, sep="."))
-  if (!file.exists(trace.file))
-    file.create(trace.file)
-  else if (file.info(trace.file)$size > testrOptions('capture.file.size'))
-    cache$capture.file.number <- cache$capture.file.number + 1 # improve here for while cycle
-  
-  fbody <- NULL
-  builtin <- FALSE
-  globals <- vector()
-  if (!(fname %in% builtins())){
-    #      globals <- codetools::findGlobals(fbody)
-    #      globals <- globals[!globals %in% builtin.items]
-    #      globals <- globals[!grepl("^C_", globals)] ## for external C functions
-  } else {
-    builtin <- TRUE
-    fbody <- NULL
-  }
-  
-  if (!is.environment(args) && length(args) > 0)
-    for (i in 1:length(args))
-      if (is.language(args[[i]])) args[[i]] <- as.expression(args[[i]])
-  dargs <- deparse(args)
-  #   da <- gsub("list", "alist", da)
-  dargs <- gsub("\\*tmp\\*", "`*tmp*`", dargs)
-  #   da <- gsub("^alist", "list", da)
-  #   da <- gsub("^structure\\(alist", "structure(list", da)
-  
-  if (is.language(retv)){
-    retv <- as.expression(retv)
-  } 
-  dretv <- deparse(retv)
-  #     dr <- gsub("list", "alist", dr)
-  dretv <- gsub("\\*tmp\\*", "`*tmp*`", dretv)
-#   
-#   sink(trace.file, append = TRUE)
-  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns, trace.file)
-#   sink()
+  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
 }
+
+
 #' @title Decorate function to capture calls and return values 
 #' 
 #' This function is respinsible for writing down capture information for decorated function calls.

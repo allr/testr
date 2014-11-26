@@ -2,7 +2,10 @@
 #include <R.h>
 #include <iostream>
 #include <fstream>
+#include <sys/stat.h>
+#define MAX_FILE_SIZE 50 * 1000000
 using namespace Rcpp;
+using namespace std;
 
 // Below is a simple example of exporting a C++ function to R. You can
 // source this function into an R session using the Rcpp::sourceCpp 
@@ -113,16 +116,31 @@ void printCapture(CharacterVector x, std::string prefix) {
       }
 }
 
+int captureFileNumber = 0;
+
 // [[Rcpp::export]]
-void WriteCapInfo_cpp (CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns, CharacterVector outputfile) {
-  std::string outputFileName = Rcpp::as<std::string>(outputfile[0]);
-  tracefile.open(outputFileName.c_str(), std::ios::app);
+void WriteCapInfo_cpp (CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns) {
+  Environment testr = Environment::namespace_env("testr");
+  Environment cache = testr.get("cache");
+  string traceFile = as<string>(cache.get("trace.folder.path"));
+  traceFile += "/";
+  traceFile += as<string>(testr.get("kCaptureFile"));
+  traceFile += "."; 
+  traceFile += to_string(captureFileNumber);
+  tracefile.open(traceFile.c_str(), std::ios::app);
   printCapture(fname, kFuncPrefix);
   printCapture(deparse(args), kArgsPrefix);
   printCapture(deparse(warns), kWarnPrefix);
   printCapture(deparse(retv), kRetvPrefix);
   printCapture(deparse(errs), kErrsPrefix);
-  tracefile<< std::endl;
+  tracefile << std::endl;
   tracefile.close();
+  // get file size
+  struct stat stat_buf;
+  int rc = stat(traceFile.c_str(), &stat_buf);
+//  printf("file %s\n", traceFile.c_str());
+  if (stat_buf.st_size > MAX_FILE_SIZE)
+    captureFileNumber++;
+//  printf("file size - %d\n", stat_buf.st_size);
 }
 

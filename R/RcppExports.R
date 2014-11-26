@@ -5,7 +5,7 @@ DecorateSubst_cpp <- function(packages, name, captureGenerics, functionTypes, pr
     invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', packages, name, captureGenerics, functionTypes, primGenerics, prim))
 }
 
-WriteCapInfo_cpp <- function(fname, args, retv, errs, warns, outputfile) {
-    invisible(.Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns, outputfile))
+WriteCapInfo_cpp <- function(fname, args, retv, errs, warns) {
+    invisible(.Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns))
 }
 

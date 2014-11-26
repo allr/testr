@@ -25,8 +25,8 @@ cache$prim <- ls(.ArgsEnv)
     'capture.file.size' = 50 * 1000 * 1000
   ))
   require(codetools)
-  require(pryr)
-  require(utils)
+#   require(pryr)
+#   require(utils)
   
 #   globals <- c('<<-','<-','-',':::','!','[','[<-','[[<-','{','+','as.list','c','enquote','if','.Internal','is.call','is.null','lapply','list','missing','names<-','substitute','sys.call','tryCatch','vector')  
 #   for (elem in ls(getNamespace("testr"))) {

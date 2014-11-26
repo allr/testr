@@ -22,9 +22,25 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// GetArgs
+SEXP GetArgs(SEXP mode, SEXP length);
+RcppExport SEXP testr_GetArgs(SEXP modeSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type mode(modeSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type length(lengthSEXP );
+        SEXP __result = GetArgs(mode, length);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // WriteCapInfo_cpp
-void WriteCapInfo_cpp(CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns, CharacterVector outputfile);
-RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP argsSEXP, SEXP retvSEXP, SEXP errsSEXP, SEXP warnsSEXP, SEXP outputfileSEXP) {
+void WriteCapInfo_cpp(CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns);
+RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP argsSEXP, SEXP retvSEXP, SEXP errsSEXP, SEXP warnsSEXP) {
 BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
@@ -33,8 +49,7 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< SEXP >::type retv(retvSEXP );
         Rcpp::traits::input_parameter< SEXP >::type errs(errsSEXP );
         Rcpp::traits::input_parameter< SEXP >::type warns(warnsSEXP );
-        Rcpp::traits::input_parameter< CharacterVector >::type outputfile(outputfileSEXP );
-        WriteCapInfo_cpp(fname, args, retv, errs, warns, outputfile);
+        WriteCapInfo_cpp(fname, args, retv, errs, warns);
     }
     return R_NilValue;
 END_RCPP
