@@ -9,6 +9,9 @@ cache$prim.generics <- ls(.GenericArgsEnv)
 
 cache$prim <- ls(.ArgsEnv) 
 
+#' @export
+compiledArgsFunctions <- new.env()
+
 .onLoad <- function(libname, pkgname)
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
@@ -63,14 +66,7 @@ set.cache <- function(x, value){
 #' @param o option name (string). See below.
 #' @param value value to assign (optional)
 #' @export
-#' @seealso \code{\link{evalsOptions}}
-#' @aliases pander.option
-#' @note \code{pander.option} is deprecated and is to be removed in future releases.
-#' @examples \dontrun{
-#' panderOptions()
-#' panderOptions('digits')
-#' panderOptions('digits', 5)
-#' }
+#' 
 testrOptions <- function(o, value) {
   
   res <- getOption('testr')

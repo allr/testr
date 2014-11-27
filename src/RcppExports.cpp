@@ -23,15 +23,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // GetArgs
-SEXP GetArgs(SEXP mode, SEXP length);
-RcppExport SEXP testr_GetArgs(SEXP modeSEXP, SEXP lengthSEXP) {
+SEXP GetArgs(Environment evalFrame, SEXP x, List dotArgs);
+RcppExport SEXP testr_GetArgs(SEXP evalFrameSEXP, SEXP xSEXP, SEXP dotArgsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type mode(modeSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type length(lengthSEXP );
-        SEXP __result = GetArgs(mode, length);
+        Rcpp::traits::input_parameter< Environment >::type evalFrame(evalFrameSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type x(xSEXP );
+        Rcpp::traits::input_parameter< List >::type dotArgs(dotArgsSEXP );
+        SEXP __result = GetArgs(evalFrame, x, dotArgs);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

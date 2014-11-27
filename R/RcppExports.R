@@ -5,6 +5,10 @@ DecorateSubst_cpp <- function(packages, name, captureGenerics, functionTypes, pr
     invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', packages, name, captureGenerics, functionTypes, primGenerics, prim))
 }
 
+GetArgs <- function(evalFrame, x, dotArgs) {
+    .Call('testr_GetArgs', PACKAGE = 'testr', evalFrame, x, dotArgs)
+}
+
 WriteCapInfo_cpp <- function(fname, args, retv, errs, warns) {
     invisible(.Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns))
 }

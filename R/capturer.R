@@ -208,56 +208,48 @@ BodyReplace <- function(where.replace, by.what){
   as.call(where.replace)
 }
 
+ChangeNames <- function(x){
+  x <- if (grepl("^_", x)) paste("`", x, "`", sep='') else x
+  x <- if (x == '...') "dotArgs" else x
+  x <- gsub("\\.", "", x)
+  x
+}
+
 GenerateArgsFunction <- function(names.formals){
-  args.names <- names.formals
-  function.header <- paste("GetArgs <- function(", 
-                           paste(args.names, collapse=","), 
-                           ")", 
-                           sep="")
-  args.touch <- "args <- list();\n args.names <- vector();\n `_i` <- 1;\n args.list <- as.list(sys.call()[-1]);"
-  if (length(args.names) > 0)
-    for (i in 1:length(args.names))
-      if (args.names[i] == '...'){
+  names.formals.rcpp <- sapply(names.formals, ChangeNames)
+
+  function.header <- if (is.null(names.formals)) "SEXP GetArgs(Environment evalFrame)" 
+                      else sprintf("SEXP GetArgs(Environment evalFrame, %s)", 
+                                    paste(sapply(names.formals.rcpp, 
+                                                 function(x) if (x != "dotArgs") sprintf("SEXP %s", x) else "List dotArgs"), 
+                                    collapse = ","))
+  initializations <- "List args;\n"
+  args.touch <- vector()
+  if (length(names.formals) > 0)
+    for (i in 1:length(names.formals))
+      if (names.formals[i] == '...'){
         code.template <- "
-        if (!missing(...)) {
-          succ <- TRUE
-          tryCatch(list(...), error=function(x) succ <<- FALSE)
-        if (!succ){
-          args[[`_i`]] <- substitute(...)
-        } else {
-          dot.args <- list(...)
-          args <- c(args, dot.args)
-          `_i` <- `_i` + length(dot.args)
-          if (is.null(names(dot.args))) {
-            args.names <- c(args.names, rep('', length(dot.args)))
-          } else {
-            args.names <- c(args.names, names(dot.args))
+          int n = dotArgs.length();
+          StringVector dotNames = dotArgs.attr(\"names\");
+          StringVector names = args.attr(\"names\");
+          for( int i=0; i<n; i++){
+              args.push_back(Rcpp_eval(dotArgs[i], evalFrame)) ;    
+              names.push_back(dotNames[i]);
           }
-        }
-      }\n"
+          args.attr(\"names\") = names; \n"
         args.touch <- c(args.touch, code.template)
       } else {
         code.template <- "
-        succ <- TRUE
-        tryCatch(%s, error=function(x) succ <<- FALSE)
-        if (!succ){
-          args[[`_i`]] <- substitute(%s)
-        } else {
-          if (is.null(%s)) {
-            args[`_i`] <- list(NULL)
-          } else {
-            args[[`_i`]] <- %s
+          try {
+            %s = Rcpp_eval(%s, evalFrame);
+          } catch(...) {
           }
-        }
-        `_i` <- `_i` + 1;
-        args.names <- c(args.names, '%s');\n";
-        args.rep <- rep(args.names[i], 10)
-        names(args.rep) <- NULL
-        args.touch <- c(args.touch, do.call(sprintf, as.list(c(fmt=code.template, args.rep))))
+          args[\"%s\"] = %s;"
+        args.touch <- c(args.touch, sprintf(code.template, names.formals.rcpp[i], names.formals.rcpp[i], names.formals[i], names.formals.rcpp[i]))
       }
-  args.touch <- c(function.header, "{", args.touch, "names(args) <- args.names;", "lapply(args, function(x) if(is.call(x)) enquote(x) else x)","}")
-  args.code <- paste(args.touch, collapse = "\n")
-  args.code
+  function.body <- sprintf("{\n%s\n}", paste(initializations, paste(args.touch, collapse = "\n"), "return args;", sep="\n"))
+  args.touch <- paste(function.header, function.body, sep = "")
+  Rcpp::cppFunction(args.touch)
 }
 
 #' @title Decorate function to capture calls and return values 
@@ -269,44 +261,47 @@ GenerateArgsFunction <- function(names.formals){
 #'
 #' @export
 ReplaceBody <- function(func, function.body){
-  fb <- NULL
   names.formals <- names(formals(function.body))
   argument.pass <- "%s = if(!missing(%s)) 
-                            %s
+                            substitute(%s)
                             else '_MissingArg'"
+  names.formals.rcpp <- sapply(names.formals, ChangeNames)
   
-  names.formals <- sapply(names.formals, function(x) if (grepl("^_", x)) paste("`", x, "`", sep='') else x)
-  func.args <- parse(text=GenerateArgsFunction(names.formals))
-  args.code <- parse(text=sprintf("environment(GetArgs) <- testr:::cache; args <- GetArgs(%s)", 
-                                  paste(sapply(names.formals, 
-                                               function(x) if(x != '...' && x != 'expr') 
-                                                 sprintf(argument.pass, x, x, x, x, x) 
-                                               else if (x == 'expr') 'substitute(expr)' 
-                                               else x), 
-                                        collapse = ",")))
+  compiledArgsFunctions[[func]]<- GenerateArgsFunction(names.formals)
   
-  if (!is.null(body(function.body))) {
-    fb <- body(function.body)
-    #     early.return <- expression(if(testr:::cache$writing.down) return(return.value) else testr:::cache.writing.down <- TRUE)
-    #     cache.false <- expression(testr:::cache$writing.down <- FALSE)
-    main.write.down <- parse(text=paste("environment(WriteCapInfo) <- testr:::cache; WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
-    fb <- BodyReplace(fb, c(args.code, main.write.down))
-    if (as.list(fb)[[1]] != '{'){
-      last.line <- fb
-      last.line <- parse(text=paste("return.value <- ", paste(deparse(last.line), collapse = ""), sep=""))
-      fb <- as.call(c(as.name("{"), func.args, args.code, last.line, main.write.down, expression(return.value)))
-    } else {
-      last.line <- deparse(fb[[length(fb)]])
-      #       last.line <- parse(text=paste("return.value <- ", sprintf("tryCatch({%s})", paste(unlist(as.list(fb))[2:length(fb)], collapse =";")), sep=""))
-      last.line <- parse(text=paste("return.value <- ", paste(last.line, collapse="\n"), sep=""))
-      if ((length(fb) - 1) < 2){
-        fb <- as.call(c(as.name("{"), func.args, args.code, last.line, main.write.down, expression(return.value)))
-      }else{
-        fb <- as.call(c(as.name("{"), func.args, args.code, unlist(as.list(fb))[2:(length(fb) - 1)], last.line, main.write.down, expression(return.value)))
-      }
+  func.args <- parse(text=paste(
+    sprintf("arg.names <- %s;", paste(deparse(names.formals), collapse ="")), 
+    "dots <- as.list(match.call()[-1])
+    dots <- dots[!names(dots) %in% arg.names];", sep = "\n")
+  )
+  get.args.arguments <- vector()
+  args.code <- parse(text="args <- GetArgs(sys.frame())")
+  if (length(names.formals) > 0){
+    for (i in 1:length(names.formals)){
+      get.args.arguments <- c(get.args.arguments, 
+                            if (names.formals[i] != '...') 
+                              sprintf("%s = %s", names.formals.rcpp[i], names.formals[i])
+                            else
+                              'dots')
     }
-    body(function.body) <- fb
+    args.code <- parse(text=sprintf("args <- GetArgs(sys.frame(), %s)", paste(get.args.arguments, collapse = ",")))
   }
+  if (!is.null(body(function.body))) {
+    main.write.down <- parse(text=paste("WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
+    new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))
+    last.line <- if (as.list(new.fb)[[1]] != '{') new.fb else new.fb[[length(new.fb)]]
+    last.line <- parse(text=paste("return.value <- ", paste(deparse(last.line), collapse = "\n"), sep=""))
+    code <- if (length(new.fb) > 2 && as.list(new.fb)[[1]] == '{') unlist(as.list(new.fb))[2:(length(new.fb) - 1)] else ""
+    new.fb <- as.call(c(as.name("{"), 
+                    parse(text=sprintf("GetArgs <- compiledArgsFunctions$%s;\n", func)), 
+                    func.args, 
+                    args.code, 
+                    parse(text=code), 
+                    last.line, 
+                    main.write.down, 
+                    expression(return.value)))
+  }
+  body(function.body) <- new.fb
   attr(function.body, "decorated") <- TRUE
   #   attr(function.body, "original.body") <- saved.function.body
   function.body
