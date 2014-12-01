@@ -12,6 +12,9 @@ cache$prim <- ls(.ArgsEnv)
 #' @export
 compiledArgsFunctions <- new.env()
 
+#' @export
+codeArgsFunctions <- new.env()
+
 .onLoad <- function(libname, pkgname)
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
@@ -40,13 +43,15 @@ compiledArgsFunctions <- new.env()
 # 
 #   globals <- unique(globals)
 #   globals <- intersect(builtins(), globals)
-  globals <- builtins()
-  for (elem in globals){
-    e <- tryCatch(get(elem), error = function(x) NULL)
-    if (is.function(e)){
-      cache[[elem]] <- e
-    }
-  }
+#   cache$internals <- new.env()
+#   globals <- c(builtins(), builtins(T))
+#   for (elem in globals){
+#     e <- tryCatch(get(elem), error = function(x) NULL)
+#     if (is.function(e)){
+#       cache$internals[[elem]] <- e
+# #       cache$function.types[[elem]] <- ftype(e)
+#     }
+#   }
   cache$function.types <- readRDS("~/RProject/testr/function.types")
 }
 

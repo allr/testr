@@ -119,7 +119,7 @@ void printCapture(CharacterVector x, std::string prefix) {
 int captureFileNumber = 0;
 
 // [[Rcpp::export]]
-void WriteCapInfo_cpp (CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns) {
+void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, SEXP warns) {
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
   string traceFile = as<string>(cache.get("trace.folder.path"));
@@ -138,9 +138,7 @@ void WriteCapInfo_cpp (CharacterVector fname, SEXP args, SEXP retv, SEXP errs, S
   // get file size
   struct stat stat_buf;
   int rc = stat(traceFile.c_str(), &stat_buf);
-//  printf("file %s\n", traceFile.c_str());
   if (stat_buf.st_size > MAX_FILE_SIZE)
     captureFileNumber++;
-//  printf("file size - %d\n", stat_buf.st_size);
 }
 

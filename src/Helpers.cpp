@@ -12,7 +12,7 @@ bool contains(Rcpp::CharacterVector v, string elem){
 
 // [[Rcpp::export]]
 void DecorateSubst_cpp(Rcpp::CharacterVector packages, Rcpp::CharacterVector name, bool captureGenerics, 
-          Rcpp::CharacterVector functionTypes, Rcpp::CharacterVector primGenerics, Rcpp::CharacterVector prim) {
+   Rcpp::CharacterVector functionTypes, Rcpp::CharacterVector primGenerics, Rcpp::CharacterVector prim) {
    Rcpp::Function DecorateBody("DecorateBody");
    Rcpp::Function ReplaceBody("ReplaceBody");
    Rcpp::Environment testr("package:testr");
@@ -21,7 +21,7 @@ void DecorateSubst_cpp(Rcpp::CharacterVector packages, Rcpp::CharacterVector nam
    Rcpp::Environment env;
    string envir_name;
    Rcpp::Environment envir;
-   
+//   Rcout << "Trying to capture - " << functionName << endl;
    for (int i = 0; i < packages.length(); i++){
      envir = Rcpp::Environment(Rcpp::as<std::string>(packages[i]));
      bool b = envir.exists(functionName);
@@ -31,15 +31,19 @@ void DecorateSubst_cpp(Rcpp::CharacterVector packages, Rcpp::CharacterVector nam
         envir_name = Rcpp::as<std::string>(packages[i]);
      }
    }
-   string namespace_name = envir_name.substr(8, string::npos);
-   Rcpp::Environment x = Rcpp::Environment::namespace_env(namespace_name);
-   x.unlockBinding(functionName);
-   if (captureGenerics && (contains(functionTypes, "generic") || contains(prim, functionName))){
-//     return DecorateBody(name, obj);
-      x.assign(functionName, DecorateBody(name, obj));  
+   Rcpp::Environment x;
+   if (envir_name != ".GlobalEnv"){
+      string namespace_name = envir_name.substr(8, string::npos);
+      x = Rcpp::Environment::namespace_env(namespace_name);
+      x.unlockBinding(functionName);
    } else {
-//     return ReplaceBody(name, obj);
+      x = Rcpp::Environment::global_env();
+   }
+   if (captureGenerics && (contains(functionTypes, "generic") || contains(prim, functionName))){
+//      x.assign(functionName, DecorateBody(name, obj));  
+   } else {
       x.assign(functionName, ReplaceBody(name, obj));  
+      Rcpp::Rcout << "Capturing - " << functionName << endl; 
    }
    x.lockBinding(functionName);
 }

@@ -5,6 +5,23 @@
 
 using namespace Rcpp;
 
+// GetArgs
+SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv);
+RcppExport SEXP testr_GetArgs(SEXP evalFrameSEXP, SEXP missingArgsSEXP, SEXP dotsEnvSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< Environment >::type evalFrame(evalFrameSEXP );
+        Rcpp::traits::input_parameter< List >::type missingArgs(missingArgsSEXP );
+        Rcpp::traits::input_parameter< Environment >::type dotsEnv(dotsEnvSEXP );
+        SEXP __result = GetArgs(evalFrame, missingArgs, dotsEnv);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // DecorateSubst_cpp
 void DecorateSubst_cpp(Rcpp::CharacterVector packages, Rcpp::CharacterVector name, bool captureGenerics, Rcpp::CharacterVector functionTypes, Rcpp::CharacterVector primGenerics, Rcpp::CharacterVector prim);
 RcppExport SEXP testr_DecorateSubst_cpp(SEXP packagesSEXP, SEXP nameSEXP, SEXP captureGenericsSEXP, SEXP functionTypesSEXP, SEXP primGenericsSEXP, SEXP primSEXP) {
@@ -22,31 +39,14 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// GetArgs
-SEXP GetArgs(Environment evalFrame, SEXP x, List dotArgs);
-RcppExport SEXP testr_GetArgs(SEXP evalFrameSEXP, SEXP xSEXP, SEXP dotArgsSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< Environment >::type evalFrame(evalFrameSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type x(xSEXP );
-        Rcpp::traits::input_parameter< List >::type dotArgs(dotArgsSEXP );
-        SEXP __result = GetArgs(evalFrame, x, dotArgs);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
 // WriteCapInfo_cpp
-void WriteCapInfo_cpp(CharacterVector fname, SEXP args, SEXP retv, SEXP errs, SEXP warns);
+void WriteCapInfo_cpp(CharacterVector fname, List args, SEXP retv, SEXP errs, SEXP warns);
 RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP argsSEXP, SEXP retvSEXP, SEXP errsSEXP, SEXP warnsSEXP) {
 BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type fname(fnameSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type args(argsSEXP );
+        Rcpp::traits::input_parameter< List >::type args(argsSEXP );
         Rcpp::traits::input_parameter< SEXP >::type retv(retvSEXP );
         Rcpp::traits::input_parameter< SEXP >::type errs(errsSEXP );
         Rcpp::traits::input_parameter< SEXP >::type warns(warnsSEXP );

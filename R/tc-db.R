@@ -158,7 +158,9 @@ GetAllFiles <- function(root, pattern = ".[rR]$", full.names = T){
 #' @param modify.characters if special characters should be removed
 #'
 ExtractFunctionName <- function(filename, modify.characters = TRUE){
-  function.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
+  function.name <- filename
+  if (grepl(".[rR]$", filename))
+    function.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
   if (function.name %in% operators) function.name <- "operators"
   if (modify.characters){
     function.name <- gsub("\\.", "", function.name)
