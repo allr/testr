@@ -26,7 +26,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "missing",
                "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible",
                # messes up RStudio
-               "textConnection", "require", "with", "get",
+               "textConnection", "require", "with", "get", "sink", "eval",
                "sprintf", "parse", "paste"
 )
 
@@ -194,6 +194,7 @@ ChangeNames <- function(x){
 #'
 #' @export
 ReplaceBody <- function(func, function.body){
+  if (is.null(body(function.body))) return(NULL);
   names.formals <- names(formals(function.body))
   argument.pass <- "%s = missing(%s)"
   names.formals.rcpp <- sapply(names.formals, ChangeNames)
@@ -236,7 +237,7 @@ ReplaceBody <- function(func, function.body){
 #' @export 
 #' @seealso WriteCapInfo Decorate
 #'
-DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE, capture.primitives = TRUE){
+DecorateSubst <- function(func, envir = .GlobalEnv){
   if (class(func) == "function"){
     fname <- as.character(substitute(func))
   } else if (class(func) == "character"){
@@ -244,10 +245,8 @@ DecorateSubst <- function(func, envir = .GlobalEnv, capture.generics = TRUE, cap
   } else {
     stop("wrong argument type!")
   }    
-  #   if (!is.null(attr(function.obj, "decorated")) && attr(function.obj, "decorated"))
-  #     warning(paste(fname, " was already decorated!"))
-  .Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', search(), fname, capture.generics, 
-        if (is.null(cache$function.types[[fname]])) "function" else cache$function.types[[fname]] , cache$prim.generics, cache$prim)
+  invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', search(), fname, 
+        if (is.null(cache$function.types[[fname]])) "function" else cache$function.types[[fname]]))
 } 
 
 
@@ -295,6 +294,6 @@ EligibleForCapture <- function(func){
 #' @param internal wheather only internals should be captured, or all builtins
 #' @seealso SetupCapture
 #' @export
-BeginBuiltinCapture <- function(internal = FALSE, indexes = 1:length(builtins(internal)), capture.generics = TRUE, capture.primitives = TRUE){
-  SetupCapture(builtins(internal)[indexes], verbose = TRUE, capture.generics = capture.generics, capture.primitives = capture.primitives)
+BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal)){
+  SetupCapture(functions, verbose = TRUE)
 }

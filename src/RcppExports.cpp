@@ -23,20 +23,20 @@ BEGIN_RCPP
 END_RCPP
 }
 // DecorateSubst_cpp
-void DecorateSubst_cpp(Rcpp::CharacterVector packages, Rcpp::CharacterVector name, bool captureGenerics, Rcpp::CharacterVector functionTypes, Rcpp::CharacterVector primGenerics, Rcpp::CharacterVector prim);
-RcppExport SEXP testr_DecorateSubst_cpp(SEXP packagesSEXP, SEXP nameSEXP, SEXP captureGenericsSEXP, SEXP functionTypesSEXP, SEXP primGenericsSEXP, SEXP primSEXP) {
+bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes);
+RcppExport SEXP testr_DecorateSubst_cpp(SEXP packagesSEXP, SEXP nameSEXP, SEXP functionTypesSEXP) {
 BEGIN_RCPP
+    SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type packages(packagesSEXP );
-        Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type name(nameSEXP );
-        Rcpp::traits::input_parameter< bool >::type captureGenerics(captureGenericsSEXP );
-        Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type functionTypes(functionTypesSEXP );
-        Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type primGenerics(primGenericsSEXP );
-        Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type prim(primSEXP );
-        DecorateSubst_cpp(packages, name, captureGenerics, functionTypes, primGenerics, prim);
+        Rcpp::traits::input_parameter< CharacterVector >::type packages(packagesSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type name(nameSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type functionTypes(functionTypesSEXP );
+        bool __result = DecorateSubst_cpp(packages, name, functionTypes);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
-    return R_NilValue;
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
 // WriteCapInfo_cpp
