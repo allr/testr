@@ -259,13 +259,13 @@ DecorateSubst <- function(func, envir = .GlobalEnv){
 #' @param verbose if to print what functions will be captured
 #' @seealso Decorate
 #' @export
-SetupCapture <- function(flist, verbose = testrOptions('verbose'), capture.generics = TRUE, capture.primitives = capture.primitives){
+SetupCapture <- function(flist, verbose = testrOptions('verbose')){
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
   set.cache("writing.down", TRUE)
   for (func in flist){
     if (EligibleForCapture(func)){
-      DecorateSubst(func, capture.generics = capture.generics, capture.primitives = capture.primitives)
+      DecorateSubst(func)
     }
   }
   set.cache("writing.down", FALSE)

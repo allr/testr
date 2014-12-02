@@ -1,14 +1,9 @@
 #include <Rcpp.h>
+#include "testr.h"
 using namespace std;
 using namespace Rcpp;
 
-bool contains(CharacterVector v, string elem){
-  for (int i = 0; i < v.length(); i++){
-    if (elem == as<string>(v[i]))
-    return true;
-  } 
-  return false;
-}
+map<string, SEXP> decorationChanges;
 
 // [[Rcpp::export]]
 bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes) {
@@ -22,15 +17,10 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
   Environment envir;
   Function warning("warning");
   string functionName = as<std::string>(name[0]); 
-  for (int i = 0; i < packages.length(); i++){
-    envir = Environment(as<std::string>(packages[i]));
-    if (envir.exists(functionName)) {
-      obj = envir.get(functionName);
-      robj = RObject(obj);
-      envir_name = as<std::string>(packages[i]);
-      break;
-    }
-  }
+  envir_name = getFunctionEnvironmentName(functionName);
+  envir = Environment(envir_name);
+  obj = envir.get(functionName);
+  robj = RObject(obj);
   if (!robj.hasAttribute("decorated")){
     if (envir_name != ".GlobalEnv"){
       string namespace_name = envir_name.substr(8, string::npos);
@@ -47,6 +37,7 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
         robj = RObject(DecorateBody(name, obj));
         Rcout << "DCapturing - " << functionName << endl; 
       }
+      decorationChanges.insert(pair<string, SEXP>(functionName, obj));
       robj.attr("decorated") = true;
       envir_namespace.assign(functionName, robj);  
     }
@@ -56,5 +47,21 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
     warning("Already decorated!");
     return false;
   }
+}
+
+// [[Rcpp::export]]
+bool UndecorateCpp(CharacterVector name){
+  string functionName = as<string>(name[0]);
+  Environment envir;
+  Function warning("warning");
+  if (decorationChanges.find(functionName) != decorationChanges.end()){
+    envir = getFunctionEnvironmentName(functionName);
+    envir.unlockBinding(functionName);
+    envir.assign(functionName, decorationChanges[functionName]);
+    envir.lockBinding(functionName);
+  } else {
+    warning("Function was not decorated");
+  }
+  return true;
 }
 

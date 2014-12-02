@@ -5,23 +5,6 @@
 
 using namespace Rcpp;
 
-// GetArgs
-SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv);
-RcppExport SEXP testr_GetArgs(SEXP evalFrameSEXP, SEXP missingArgsSEXP, SEXP dotsEnvSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< Environment >::type evalFrame(evalFrameSEXP );
-        Rcpp::traits::input_parameter< List >::type missingArgs(missingArgsSEXP );
-        Rcpp::traits::input_parameter< Environment >::type dotsEnv(dotsEnvSEXP );
-        SEXP __result = GetArgs(evalFrame, missingArgs, dotsEnv);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
 // DecorateSubst_cpp
 bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes);
 RcppExport SEXP testr_DecorateSubst_cpp(SEXP packagesSEXP, SEXP nameSEXP, SEXP functionTypesSEXP) {
@@ -33,6 +16,38 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< CharacterVector >::type name(nameSEXP );
         Rcpp::traits::input_parameter< CharacterVector >::type functionTypes(functionTypesSEXP );
         bool __result = DecorateSubst_cpp(packages, name, functionTypes);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// UndecorateCpp
+bool UndecorateCpp(CharacterVector name);
+RcppExport SEXP testr_UndecorateCpp(SEXP nameSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type name(nameSEXP );
+        bool __result = UndecorateCpp(name);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// GetArgs
+SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv);
+RcppExport SEXP testr_GetArgs(SEXP evalFrameSEXP, SEXP missingArgsSEXP, SEXP dotsEnvSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< Environment >::type evalFrame(evalFrameSEXP );
+        Rcpp::traits::input_parameter< List >::type missingArgs(missingArgsSEXP );
+        Rcpp::traits::input_parameter< Environment >::type dotsEnv(dotsEnvSEXP );
+        SEXP __result = GetArgs(evalFrame, missingArgs, dotsEnv);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

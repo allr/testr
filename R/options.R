@@ -20,7 +20,6 @@ codeArgsFunctions <- new.env()
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
-  print("aaaaa\n"); 
   ## testr settings
   options('testr' = list(
     'verbose' = FALSE,
