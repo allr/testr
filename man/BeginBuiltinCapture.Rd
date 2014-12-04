@@ -5,9 +5,7 @@
 
 Sets up capturing of builtin functions}
 \usage{
-BeginBuiltinCapture(internal = FALSE,
-  indexes = 1:length(builtins(internal)), capture.generics = TRUE,
-  capture.primitives = TRUE)
+BeginBuiltinCapture(internal = FALSE, functions = builtins(internal))
 }
 \arguments{
 \item{internal}{wheather only internals should be captured, or all builtins}

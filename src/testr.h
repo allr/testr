@@ -65,6 +65,6 @@ extern FUNTAB	R_FunTab[];	    /* Built in functions */
  
 CCODE get_internal(std::string);
 SEXP search();
-bool contains(Rcpp::CharacterVector, std::string);
+bool contains(Rcpp11::CharacterVector, std::string);
 std::string getFunctionEnvironmentName(std::string &functionName);
 SEXP deparse(SEXP);

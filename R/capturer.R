@@ -24,10 +24,11 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                # something problematic
                "standardGeneric", "identity",
                "missing",
-               "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible",
+               "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible", "structure", "stopifnot", "names<-", "names",
                # messes up RStudio
-               "textConnection", "require", "with", "get", "sink", "eval",
-               "sprintf", "parse", "paste"
+               "textConnection", "require", "with", "get", "sink", "eval", "mode", "mode<-", "match", "match.arg", "storage.mode", "storage.mode<-", "lapply",
+               "sprintf", "parse", "paste", "match.call", "match.fun", "paste0", "sapply", "evalq", "deparse", "exists", "environment", "conditionMessage.condition", "simpleError", "as.name",
+               "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch"
 )
 
 sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
@@ -107,6 +108,7 @@ DecorateBody <- function(func, function.body){
   }
   argument.pass <- "%s = missing(%s)"
   names.formals.rcpp <- sapply(names.formals, ChangeNames)
+  names.formals <- sapply(names.formals, ChangeNames, FALSE)
   args.code <- expression(missingArgs <- list())
   if (length(names.formals) > 0){
     get.args.arguments <- vector()
@@ -178,10 +180,12 @@ BodyReplace <- function(where.replace, by.what){
   as.call(where.replace)
 }
 
-ChangeNames <- function(x){
+ChangeNames <- function(x, cpp = TRUE){
   x <- if (grepl("^_|<-", x)) paste("`", x, "`", sep='') else x
-  x <- if (x == '...') "dotArgs" else x
-  x <- gsub("\\.", "", x)
+  if (cpp) {
+    x <- if (x == '...') "dotArgs" else x
+    x <- gsub("\\.", "", x)
+  }
   x
 }
 
@@ -198,6 +202,7 @@ ReplaceBody <- function(func, function.body){
   names.formals <- names(formals(function.body))
   argument.pass <- "%s = missing(%s)"
   names.formals.rcpp <- sapply(names.formals, ChangeNames)
+  names.formals <- sapply(names.formals, ChangeNames, FALSE)
   args.code <- expression(missingArgs <- list())
   if (length(names.formals) > 0){
     get.args.arguments <- vector()
@@ -208,7 +213,7 @@ ReplaceBody <- function(func, function.body){
     }
     args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
   }  
-  get.args.code <- parse(text="args <- testr:::GetArgs(sys.frame(), missingArgs, environment())")
+  get.args.code <- parse(text="args <- GetArgs(sys.frame(), missingArgs, environment())")
   if (!is.null(body(function.body))) {
     main.write.down <- parse(text=paste("WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
     new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))
@@ -221,7 +226,7 @@ ReplaceBody <- function(func, function.body){
                     parse(text=code), 
                     last.line, 
                     main.write.down, 
-                    expression(if (is.null(return.value)) invisible() else return.value)))
+                    expression(return.value)))
   }
   body(function.body) <- new.fb
   attr(function.body, "decorated") <- TRUE
@@ -245,7 +250,8 @@ DecorateSubst <- function(func, envir = .GlobalEnv){
   } else {
     stop("wrong argument type!")
   }    
-  invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', search(), fname, 
+#   cat(fname, "\n")
+  invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', fname, 
         if (is.null(cache$function.types[[fname]])) "function" else cache$function.types[[fname]]))
 } 
 

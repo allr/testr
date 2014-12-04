@@ -1,5 +1,5 @@
-#include <Rcpp.h>
-using namespace Rcpp;
+#include <Rcpp11>
+using namespace Rcpp11;
 using namespace std;
 
 List force_dots(Environment env){
@@ -26,7 +26,7 @@ List dots_example(Environment dots){
   return args ;
 }
 
-// [[Rcpp::export]]
+// [[export]]
 SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv){
   List args;
   CharacterVector envNames = dotsEnv.ls(false);

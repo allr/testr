@@ -1,6 +1,6 @@
-#include <Rcpp.h>
+#include <Rcpp11>
 #include "testr.h"
-using namespace Rcpp;
+using namespace Rcpp11;
 using namespace std;
 
 CCODE get_internal(string name)

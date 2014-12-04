@@ -1,12 +1,12 @@
-#include <Rcpp.h>
+#include <Rcpp11>
 #include "testr.h"
 using namespace std;
-using namespace Rcpp;
+using namespace Rcpp11;
 
 map<string, SEXP> decorationChanges;
 
-// [[Rcpp::export]]
-bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes) {
+// [[export]]
+bool DecorateSubst_cpp(CharacterVector name, CharacterVector functionTypes) {
   Function DecorateBody("DecorateBody");
   Function ReplaceBody("ReplaceBody");
   Environment testr("package:testr");
@@ -14,6 +14,7 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
   RObject robj;
   Environment envir_namespace;
   string envir_name;
+  
   Environment envir;
   Function warning("warning");
   string functionName = as<std::string>(name[0]); 
@@ -21,6 +22,7 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
   envir = Environment(envir_name);
   obj = envir.get(functionName);
   robj = RObject(obj);
+  Rcout << functionName << endl;
   if (!robj.hasAttribute("decorated")){
     if (envir_name != ".GlobalEnv"){
       string namespace_name = envir_name.substr(8, string::npos);
@@ -29,19 +31,19 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
     } else {
       envir_namespace = Environment::global_env();
     }
-    if (!contains(functionTypes, "s3")){
+    if (!contains(functionTypes, "s3") || !contains(functionTypes, "generic") ){
       if (!contains(functionTypes, "primitive")) {
         robj = RObject(ReplaceBody(name, obj));
         Rcout << "RCapturing - " << functionName << endl; 
+        decorationChanges.insert(pair<string, SEXP>(functionName, obj));
+//        robj.attr("decorated") = true;
+        envir_namespace.assign(functionName, robj);  
       } else {
-        robj = RObject(DecorateBody(name, obj));
-        Rcout << "DCapturing - " << functionName << endl; 
+//        robj = RObject(DecorateBody(name, obj));
+//        Rcout << "DCapturing - " << functionName << endl; 
       }
-      decorationChanges.insert(pair<string, SEXP>(functionName, obj));
-      robj.attr("decorated") = true;
-      envir_namespace.assign(functionName, robj);  
     }
-    envir_namespace.lockBinding(functionName);
+//    envir_namespace.lockBinding(functionName);
     return true;
   } else {
     warning("Already decorated!");
@@ -49,7 +51,14 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
   }
 }
 
-// [[Rcpp::export]]
+//map<string, SEXP> funDec;
+//map<string, Environment> funEnv;
+//void fullDecorate(CharacterVector functions){
+//  
+//}
+
+
+// [[export]]
 bool UndecorateCpp(CharacterVector name){
   string functionName = as<string>(name[0]);
   Environment envir;

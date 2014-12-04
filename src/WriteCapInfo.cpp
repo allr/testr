@@ -1,10 +1,10 @@
-#include <Rcpp.h>
+#include <Rcpp11>
 #include <iostream>
 #include <fstream>
 #include "testr.h"
 #include <sys/stat.h>
 #define MAX_FILE_SIZE 50 * 1000000
-using namespace Rcpp;
+using namespace Rcpp11;
 using namespace std;
 
 std::string kSymbPrefix = "symb: ";
@@ -32,7 +32,7 @@ void printCapture(CharacterVector x, std::string prefix) {
 
 int captureFileNumber = 0;
 
-// [[Rcpp::export]]
+// [[export]]
 void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, SEXP warns) {
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
