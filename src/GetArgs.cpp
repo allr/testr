@@ -1,37 +1,22 @@
 #include <Rcpp11>
-using namespace Rcpp11;
+using namespace Rcpp;
 using namespace std;
 
-List force_dots(Environment env){
-  List promises;
-  int n = 0;
-  SEXP dots = env.find("...") ;
-  if( dots != R_MissingArg ){ 
-    while(dots != R_NilValue){
-      promises.push_back(CAR(dots)) ;
-      dots = CDR(dots);
-      n++;
-    }
-  }
+List force_dots(Dots& dots ){
+  int n = dots.size() ;
   List out(n) ;
-  for( int i=0; i<n; i++){
-    out[i] = Rcpp_eval( promises(i), env) ;    
-  }
-  return out ;
+    for( int i=0; i<n; i++){
+        out[i] = Rcpp_eval( dots.promise(i), dots.environment(i)) ;    
+    }
+    return out ;
 }
 
-
-List dots_example(Environment dots){
-  List args = force_dots(dots) ;
-  return args ;
-}
-
-// [[export]]
+// [[Rcpp::export]]
 SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv){
   List args;
+//  Dots dotsArgs = new Dots(dotsEnv);
   CharacterVector envNames = dotsEnv.ls(false);
   int n = envNames.length();
-  SEXP evaluatedArgument;
   for( int i=0; i<n; i++){
     string en = as<string>(envNames[i]);
     if (en != "missingArgs" && !as<bool>(missingArgs[en])){
@@ -57,6 +42,7 @@ SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv){
       }
     }
     SEXP evalA;
+    int k = args.length();
     for( int i=0; i<n; i++){
       SEXP pr = promises[i];
       try{
@@ -67,7 +53,7 @@ SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv){
         else
           evalA = pr;
       }
-      args.push_back(evalA);    
+      args[i + k] = evalA;   
     }
   }
   return args;

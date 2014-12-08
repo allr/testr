@@ -1,17 +1,15 @@
 #include <Rcpp11>
 #include "testr.h"
 using namespace std;
-using namespace Rcpp11;
-
+using namespace Rcpp;
 map<string, SEXP> decorationChanges;
 
-// [[export]]
+// [[Rcpp::export]]
 bool DecorateSubst_cpp(CharacterVector name, CharacterVector functionTypes) {
   Function DecorateBody("DecorateBody");
   Function ReplaceBody("ReplaceBody");
   Environment testr("package:testr");
   SEXP obj;
-  RObject robj;
   Environment envir_namespace;
   string envir_name;
   
@@ -21,9 +19,10 @@ bool DecorateSubst_cpp(CharacterVector name, CharacterVector functionTypes) {
   envir_name = getFunctionEnvironmentName(functionName);
   envir = Environment(envir_name);
   obj = envir.get(functionName);
-  robj = RObject(obj);
-  Rcout << functionName << endl;
-  if (!robj.hasAttribute("decorated")){
+  RObject robj(obj);
+  std::cout << functionName << endl;
+  SEXP decAttr = robj.attr("decorated");
+  if (decAttr == NULL){
     if (envir_name != ".GlobalEnv"){
       string namespace_name = envir_name.substr(8, string::npos);
       envir_namespace = Environment::namespace_env(namespace_name);
@@ -34,7 +33,7 @@ bool DecorateSubst_cpp(CharacterVector name, CharacterVector functionTypes) {
     if (!contains(functionTypes, "s3") || !contains(functionTypes, "generic") ){
       if (!contains(functionTypes, "primitive")) {
         robj = RObject(ReplaceBody(name, obj));
-        Rcout << "RCapturing - " << functionName << endl; 
+        std::cout << "RCapturing - " << functionName << endl; 
         decorationChanges.insert(pair<string, SEXP>(functionName, obj));
 //        robj.attr("decorated") = true;
         envir_namespace.assign(functionName, robj);  

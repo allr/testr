@@ -1,9 +1,9 @@
 #include <Rcpp11>
 #include "testr.h"
-using namespace Rcpp11;
+using namespace Rcpp;
 using namespace std;
 
-CCODE get_internal(string name)
+CCODE get_internal(std::string name)
 {
     FUNTAB* p = R_FunTab ;
     for( ; p->name != NULL; ++p ){
@@ -24,7 +24,7 @@ SEXP deparse(SEXP x)
 {
       CCODE deparse_fun = get_internal("deparse");
       Language call("deparse", x) ;    
-      return deparse_fun(call, Rf_ScalarInteger(0), CDR(call), R_GlobalEnv ) ; 
+      return deparse_fun(call, Rf_ScalarInteger(0), x, R_GlobalEnv ) ; 
 }
 
 bool contains(CharacterVector v, string elem){
