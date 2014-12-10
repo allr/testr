@@ -36,11 +36,14 @@ SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv){
     string en = as<string>(envNames[i]);
     if (en != "missingArgs" && !as<bool>(missingArgs[en])){
       SEXP a = dotsEnv.get(en);
-      SEXP ev;
-      try{
-        ev = Rcpp_eval(a, evalFrame);
-      } catch(...) {
-        ev = a;
+      SEXP ev = a;
+      if (TYPEOF(a) == PROMSXP) {
+        Promise pr(a);
+        try{
+          ev = Rcpp_eval(a, pr.environment());
+        } catch(...) {
+          ev = a;
+        }
       }
       args[en] = ev;
     }

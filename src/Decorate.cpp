@@ -29,13 +29,13 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
     } else {
       envir_namespace = Environment::global_env();
     }
-    if (!contains(functionTypes, "s3")){
+    if (!contains(functionTypes, "s3") || !contains(functionTypes,"generic")){
       if (!contains(functionTypes, "primitive")) {
         robj = RObject(ReplaceBody(name, obj));
         Rcout << "RCapturing - " << functionName << endl; 
       } else {
-        robj = RObject(DecorateBody(name, obj));
-        Rcout << "DCapturing - " << functionName << endl; 
+       // robj = RObject(DecorateBody(name, obj));
+     //   Rcout << "DCapturing - " << functionName << endl; 
       }
       decorationChanges.insert(pair<string, SEXP>(functionName, obj));
       robj.attr("decorated") = true;
@@ -44,7 +44,7 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
     envir_namespace.lockBinding(functionName);
     return true;
   } else {
-    warning("Already decorated!");
+    warning(functionName + " was already decorated!");
     return false;
   }
 }
@@ -53,6 +53,7 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
 bool UndecorateCpp(CharacterVector name){
   string functionName = as<string>(name[0]);
   Environment envir;
+  
   Function warning("warning");
   if (decorationChanges.find(functionName) != decorationChanges.end()){
     envir = getFunctionEnvironmentName(functionName);

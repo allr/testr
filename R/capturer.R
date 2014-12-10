@@ -27,7 +27,14 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible",
                # messes up RStudio
                "textConnection", "require", "with", "get", "sink", "eval",
-               "sprintf", "parse", "paste"
+               "sprintf", "parse", "paste", 
+               "textConnection", "require", "with", "get", "sink", "eval",
+               "parse", "paste", "paste0", "evalq", "deparse", "exists", "environment", "conditionMessage.condition", "simpleError", "as.name",
+               "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default", "asNamespace", "contributors", "close.connection",
+               "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
+               "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
+              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "merge.data.frame", "local"
+               
 )
 
 sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
@@ -197,7 +204,7 @@ ReplaceBody <- function(func, function.body){
   if (is.null(body(function.body))) return(NULL);
   names.formals <- names(formals(function.body))
   argument.pass <- "%s = missing(%s)"
-  names.formals.rcpp <- sapply(names.formals, ChangeNames)
+  names.formals <- sapply(names.formals, function(x) if (grepl("^_|<-", x)) paste("`", x, "`", sep='') else x)
   args.code <- expression(missingArgs <- list())
   if (length(names.formals) > 0){
     get.args.arguments <- vector()
@@ -221,7 +228,7 @@ ReplaceBody <- function(func, function.body){
                     parse(text=code), 
                     last.line, 
                     main.write.down, 
-                    expression(if (is.null(return.value)) invisible() else return.value)))
+                    expression(return.value)))
   }
   body(function.body) <- new.fb
   attr(function.body, "decorated") <- TRUE
