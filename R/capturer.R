@@ -124,7 +124,7 @@ DecorateBody <- function(func, function.body){
     }
     args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
   }  
-  get.args.code <- parse(text="args <- testr:::GetArgs(sys.frame(), missingArgs, environment());")
+  get.args.code <- parse(text="args <- tryCatch(testr:::GetArgs(sys.frame(), missingArgs, environment()), error=function(x) {});")
   initializations <- expression(warns <- NULL)
 #   args.enquote <- expression(args <- lapply(args, function(x) if (is.language(x)) enquote(x) else x))
   envir.change <- expression(if (!is.null(body(function.body))) 
@@ -215,7 +215,7 @@ ReplaceBody <- function(func, function.body){
     }
     args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
   }  
-  get.args.code <- parse(text="args <- testr:::GetArgs(sys.frame(), missingArgs, environment())")
+  get.args.code <- parse(text="args <- testr:::GetArgs(missingArgs, environment())")
   if (!is.null(body(function.body))) {
     main.write.down <- parse(text=paste("WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
     new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))

@@ -4,7 +4,7 @@ using namespace Rcpp;
 using namespace std;
 
 CCODE get_internal(string name)
-{
+{ 
     FUNTAB* p = R_FunTab ;
     for( ; p->name != NULL; ++p ){
         if( name == p->name )

@@ -8,7 +8,8 @@ map<string, SEXP> decorationChanges;
 // [[Rcpp::export]]
 bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes) {
   Function DecorateBody("DecorateBody");
-  Function ReplaceBody("ReplaceBody");
+  Function ReplaceBody("ReplaceBody"); 
+  
   Environment testr("package:testr");
   SEXP obj;
   RObject robj;

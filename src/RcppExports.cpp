@@ -38,16 +38,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // GetArgs
-SEXP GetArgs(Environment evalFrame, List missingArgs, Environment dotsEnv);
-RcppExport SEXP testr_GetArgs(SEXP evalFrameSEXP, SEXP missingArgsSEXP, SEXP dotsEnvSEXP) {
+SEXP GetArgs(List missingArgs, SEXP dotsE);
+RcppExport SEXP testr_GetArgs(SEXP missingArgsSEXP, SEXP dotsESEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< Environment >::type evalFrame(evalFrameSEXP );
         Rcpp::traits::input_parameter< List >::type missingArgs(missingArgsSEXP );
-        Rcpp::traits::input_parameter< Environment >::type dotsEnv(dotsEnvSEXP );
-        SEXP __result = GetArgs(evalFrame, missingArgs, dotsEnv);
+        Rcpp::traits::input_parameter< SEXP >::type dotsE(dotsESEXP );
+        SEXP __result = GetArgs(missingArgs, dotsE);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
