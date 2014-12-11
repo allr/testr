@@ -33,7 +33,8 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default", "asNamespace", "contributors", "close.connection",
                "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
                "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
-              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "merge.data.frame", "local"
+              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "merge.data.frame", "local",
+              "match", "match.arg"
                
 )
 
@@ -215,7 +216,7 @@ ReplaceBody <- function(func, function.body){
     }
     args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
   }  
-  get.args.code <- parse(text="args <- testr:::GetArgs(missingArgs, environment())")
+  get.args.code <- parse(text="args <- GetArgs1(missingArgs, environment())")
   if (!is.null(body(function.body))) {
     main.write.down <- parse(text=paste("WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
     new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))

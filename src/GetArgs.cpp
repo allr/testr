@@ -1,27 +1,16 @@
-#include <Rcpp.h>
+#include <Rcpp11>
 using namespace Rcpp;
 using namespace std;
 
-List force_dots(Environment env){
-  List promises;
-  int n = 0;
-  SEXP dots = env.find("...") ;
-  if( dots != R_MissingArg ){ 
-    while(dots != R_NilValue){
-      promises.push_back(CAR(dots)) ;
-      dots = CDR(dots);
-      n++;
-    }
-  }
-  List out(n) ;
-  for( int i=0; i<n; i++){
-    out[i] = Rcpp_eval( promises(i), env) ;    
-  }
-  return out ;
-}
-
 // [[Rcpp::export]]
-SEXP GetArgs(List missingArgs, SEXP dotsE){
+SEXP GetArgs1(List missingArgs, SEXP dotsE){
+  Environment testr = Environment::namespace_env("testr");
+  Environment cache = testr.get("cache");
+  LogicalVector wd = cache.get("writing.down");
+  bool writingDown = as<bool>(wd);
+  if (writingDown){
+    return R_NilValue;
+  }
   List args;
   Environment dotsEnv(dotsE);
   CharacterVector envNames = dotsEnv.ls(false);
@@ -41,44 +30,31 @@ SEXP GetArgs(List missingArgs, SEXP dotsE){
         } else {
           evalEnv = dotsE;
         }
-        SEXP x = Rf_lang3( Rf_install("try"), unevaluatedArg, Rf_ScalarLogical(TRUE) );
-        SET_TAG( CDDR(x), Rf_install("silent") );
-        SEXP res = Rf_eval( x, evalEnv) ;
-        if( inherits( res, "try-error" ) ){
-            Rcout << "YAY!" << endl;
-            evaluatedArg = unevaluatedArg;
-        } else 
-        {
-          evaluatedArg = res;
+        try{
+          evaluatedArg = Rcpp_eval(unevaluatedArg, evalEnv);
+        } catch(...) {
+          evaluatedArg = PRCODE(unevaluatedArg);        
         }
-//        Promise pr(unevaluatedArg);
-
-//        try{
-//          evaluatedArg = Rcpp_eval(unevaluatedArg, evalEnv);
-//        } catch(...) {
-////          evaluatedArg = Rf_eval(unevaluatedArg, dotsE);
-//          evaluatedArg = PRCODE(unevaluatedArg);        
-//        }
-          
+        args[name] = evaluatedArg;
       } else {
-        evaluatedArg = dotsEnv.get(name);
+        args[name] = unevaluatedArg;        
       }
-      
-      args[name] = evaluatedArg;
     }
   }
+  nArgs--;
   if (dotsEnv.exists("...")){
     SEXP dots = dotsEnv.get("...");
     vector<SEXP> promises;
-    nArgs = 0;
+    int dArgs = 0;
     if( dots != R_MissingArg ){ 
       while(dots != R_NilValue){
         promises.push_back(CAR(dots)) ;
         dots = CDR(dots);
-        nArgs++;
+        dArgs++;
       }
     }
-    for( int i=0; i<nArgs; i++){
+    List dotArgs(dArgs);
+    for( int i=0; i< dArgs; i++){
       unevaluatedArg = promises[i];
       if (TYPEOF(unevaluatedArg) == PROMSXP) {
         evalEnv = PRENV(unevaluatedArg);
@@ -94,8 +70,9 @@ SEXP GetArgs(List missingArgs, SEXP dotsE){
           evaluatedArg = unevaluatedArg;
         }
       }
-      args.push_back(evaluatedArg);
+      dotArgs[i] = evaluatedArg;
     }
   }
   return args;
 }
+
