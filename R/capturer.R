@@ -34,7 +34,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
                "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
               "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "merge.data.frame", "local",
-              "match", "match.arg"
+              "match", "match.arg", "typeof", "conditionCall.condition","as.list.default"
                
 )
 
@@ -88,7 +88,7 @@ code.template.dots <- "
 #' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
-#  cat(fname, "\n")
+ cat(fname, "\n")
   if (cache$writing.down)
     return(NULL);
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
@@ -216,7 +216,7 @@ ReplaceBody <- function(func, function.body){
     }
     args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
   }  
-  get.args.code <- parse(text="args <- GetArgs1(missingArgs, environment())")
+  get.args.code <- parse(text="args <- try(testr:::GetArgs(missingArgs, environment()), silent = TRUE)")
   if (!is.null(body(function.body))) {
     main.write.down <- parse(text=paste("WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
     new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))

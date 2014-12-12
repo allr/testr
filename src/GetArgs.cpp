@@ -1,4 +1,4 @@
-#include <Rcpp11>
+#include <Rcpp.h>
 using namespace Rcpp;
 using namespace std;
 
@@ -11,6 +11,7 @@ SEXP GetArgs1(List missingArgs, SEXP dotsE){
   if (writingDown){
     return R_NilValue;
   }
+  
   List args;
   Environment dotsEnv(dotsE);
   CharacterVector envNames = dotsEnv.ls(false);
@@ -22,23 +23,7 @@ SEXP GetArgs1(List missingArgs, SEXP dotsE){
     evaluatedArg = R_NilValue;
     string name = as<string>(envNames[i]);
     if (name != "missingArgs" && !as<bool>(missingArgs[name])){
-      SEXP nameSym = Rf_install(name.c_str());
-      unevaluatedArg = Rf_findVarInFrame( dotsE, nameSym );
-      if (unevaluatedArg != R_UnboundValue && TYPEOF(unevaluatedArg) == PROMSXP) {
-        if (!Rf_isNull(PRENV(unevaluatedArg))){
-          evalEnv = PRENV(unevaluatedArg);
-        } else {
-          evalEnv = dotsE;
-        }
-        try{
-          evaluatedArg = Rcpp_eval(unevaluatedArg, evalEnv);
-        } catch(...) {
-          evaluatedArg = PRCODE(unevaluatedArg);        
-        }
-        args[name] = evaluatedArg;
-      } else {
-        args[name] = unevaluatedArg;        
-      }
+        args[name] = dotsEnv.get(name); 
     }
   }
   nArgs--;
