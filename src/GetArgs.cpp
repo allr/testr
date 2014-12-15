@@ -3,7 +3,7 @@ using namespace Rcpp;
 using namespace std;
 
 // [[Rcpp::export]]
-SEXP GetArgs1(List missingArgs, SEXP dotsE){
+SEXP GetArgs(List missingArgs, SEXP dotsE){
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
   LogicalVector wd = cache.get("writing.down");
@@ -11,7 +11,6 @@ SEXP GetArgs1(List missingArgs, SEXP dotsE){
   if (writingDown){
     return R_NilValue;
   }
-  
   List args;
   Environment dotsEnv(dotsE);
   CharacterVector envNames = dotsEnv.ls(false);
@@ -23,7 +22,24 @@ SEXP GetArgs1(List missingArgs, SEXP dotsE){
     evaluatedArg = R_NilValue;
     string name = as<string>(envNames[i]);
     if (name != "missingArgs" && !as<bool>(missingArgs[name])){
-        args[name] = dotsEnv.get(name); 
+      SEXP nameSym = Rf_install(name.c_str());
+      unevaluatedArg = Rf_findVarInFrame(dotsE, nameSym);
+      if (unevaluatedArg != R_UnboundValue && TYPEOF(unevaluatedArg) == PROMSXP) {
+        SEXP prcode = PRCODE(unevaluatedArg);
+        if (!Rf_isNull(PRENV(unevaluatedArg))){
+          evalEnv = PRENV(unevaluatedArg);
+        } else {
+          evalEnv = dotsE;
+        }
+        int err = 0;
+        SEXP res = R_tryEvalSilent(unevaluatedArg, evalEnv, &err);
+        if(err){
+          evaluatedArg = prcode;
+        } else {
+          evaluatedArg = res;
+        }
+        args[name] = evaluatedArg; 
+      }
     }
   }
   nArgs--;
@@ -41,21 +57,22 @@ SEXP GetArgs1(List missingArgs, SEXP dotsE){
     List dotArgs(dArgs);
     for( int i=0; i< dArgs; i++){
       unevaluatedArg = promises[i];
-      if (TYPEOF(unevaluatedArg) == PROMSXP) {
-        evalEnv = PRENV(unevaluatedArg);
-      } else {
-        evalEnv = dotsEnv;
-      }
-      try{
-        evaluatedArg = Rcpp_eval(unevaluatedArg, evalEnv);
-      } catch(...) {
-        if (TYPEOF(unevaluatedArg) == PROMSXP) {
-          evaluatedArg = PRCODE(unevaluatedArg);        
+      if (unevaluatedArg != R_UnboundValue && TYPEOF(unevaluatedArg) == PROMSXP) {
+        SEXP prcode = PRCODE(unevaluatedArg);
+        if (!Rf_isNull(PRENV(unevaluatedArg))){
+          evalEnv = PRENV(unevaluatedArg);
         } else {
-          evaluatedArg = unevaluatedArg;
+          evalEnv = dotsE;
+        }
+        int err = 0;
+        SEXP res = R_tryEvalSilent(unevaluatedArg, evalEnv, &err);
+        if(err){
+          evaluatedArg = prcode;
+        } else {
+          evaluatedArg = res;
         }
       }
-      dotArgs[i] = evaluatedArg;
+      args.push_back(evaluatedArg);
     }
   }
   return args;

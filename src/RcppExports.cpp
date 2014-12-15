@@ -37,16 +37,16 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
-// GetArgs1
-SEXP GetArgs1(List missingArgs, SEXP dotsE);
-RcppExport SEXP testr_GetArgs1(SEXP missingArgsSEXP, SEXP dotsESEXP) {
+// GetArgs
+SEXP GetArgs(List missingArgs, SEXP dotsE);
+RcppExport SEXP testr_GetArgs(SEXP missingArgsSEXP, SEXP dotsESEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< List >::type missingArgs(missingArgsSEXP );
         Rcpp::traits::input_parameter< SEXP >::type dotsE(dotsESEXP );
-        SEXP __result = GetArgs1(missingArgs, dotsE);
+        SEXP __result = GetArgs(missingArgs, dotsE);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

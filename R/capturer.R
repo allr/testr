@@ -33,8 +33,8 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default", "asNamespace", "contributors", "close.connection",
                "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
                "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
-              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "merge.data.frame", "local",
-              "match", "match.arg", "typeof", "conditionCall.condition","as.list.default"
+              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local",
+              "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals"
                
 )
 
@@ -88,7 +88,7 @@ code.template.dots <- "
 #' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
- cat(fname, "\n")
+# cat(fname, "\n")
   if (cache$writing.down)
     return(NULL);
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
@@ -216,9 +216,9 @@ ReplaceBody <- function(func, function.body){
     }
     args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
   }  
-  get.args.code <- parse(text="args <- try(testr:::GetArgs(missingArgs, environment()), silent = TRUE)")
+  get.args.code <- parse(text="argsW <- testr:::GetArgs(missingArgs, environment())")
   if (!is.null(body(function.body))) {
-    main.write.down <- parse(text=paste("WriteCapInfo('",func,"',args, return.value, NULL, NULL)", sep=""))
+    main.write.down <- parse(text=paste("WriteCapInfo('",func,"',argsW, return.value, NULL, NULL)", sep=""))
     new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))
     last.line <- if (as.list(new.fb)[[1]] != '{') new.fb else new.fb[[length(new.fb)]]
     last.line <- parse(text=sprintf("return.value <- %s\n", paste(deparse(last.line), collapse = "\n")))

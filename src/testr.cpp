@@ -9,7 +9,7 @@ CCODE get_internal(string name)
     for( ; p->name != NULL; ++p ){
         if( name == p->name )
             return p->cfun ;
-    }
+    } 
     return NULL ;
 }
 

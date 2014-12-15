@@ -18,16 +18,16 @@ std::string kErrsPrefix = "errs: ";
 std::string kWarnPrefix = "warn: ";
 
 std::ofstream tracefile;
-  
+
 void printCapture(CharacterVector x, std::string prefix) {
-      if (x[0] != "NULL"){
-        if (x.length() < 100) {
-          for (int i = 0; i < x.length(); i++)
-            tracefile << prefix << x[i] << std::endl;
-        } else {
-            tracefile << prefix << "<too long>" << std::endl;
-        }
-      }
+  if (x[0] != "NULL"){
+    if (x.length() < 100) {
+      for (int i = 0; i < x.length(); i++)
+      tracefile << prefix << x[i] << std::endl;
+    } else {
+      tracefile << prefix << "<too long>" << std::endl;
+    }
+  }
 }
 
 int captureFileNumber = 0;
@@ -53,6 +53,6 @@ void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, S
   struct stat stat_buf;
   int rc = stat(traceFile.c_str(), &stat_buf);
   if (stat_buf.st_size > MAX_FILE_SIZE)
-    captureFileNumber++;
+  captureFileNumber++;
 }
 
