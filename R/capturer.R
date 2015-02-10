@@ -33,7 +33,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default", "asNamespace", "contributors", "close.connection",
                "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
                "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
-              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local",
+              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local", "merge.data.frame", 
               "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals"
                
 )

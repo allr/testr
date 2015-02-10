@@ -60,7 +60,7 @@ public class CaptureTestGen {
 			throws IOException {
 		Random random = new Random();
 		String ifileName = Long.toString(System.currentTimeMillis()
-				+ random.nextInt(10000000));
+				+ random.nextInt(200000000));
 		Path ifile = Files.createFile(outputDir.resolve(ifileName));
 		BufferedWriter writer = Files.newBufferedWriter(ifile,
 				Charset.defaultCharset());
