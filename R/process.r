@@ -16,7 +16,6 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
   temp.dir <<- "temp.processing.tc"
   cache$r.home <- r.home
   cache$source.folder <- source.folder
-  tc.file <- file_path_as_absolute(tc.file)
   cache$tc.result.root <- tc.result.root
   
   if (!file.exists(tc.result.root))
@@ -36,8 +35,6 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
   #readline()
   #stop()
   FilterTCs(tc.root = split.paths[1], 
-            r.home = r.home, 
-            source.folder = source.folder, 
             tc.db.path = tc.db, 
             tc.result.root = tc.result.root,
             clear.previous.coverage = TRUE, 
@@ -56,8 +53,6 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
     file.remove(temp.tc)
  #   readlines()
     FilterTCs(tc.root = split.paths[1], 
-              r.home = r.home, 
-              source.folder = source.folder, 
               tc.db.path = tc.db, 
               tc.result.root = tc.result.root,
               clear.previous.coverage = TRUE, 

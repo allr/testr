@@ -1,52 +1,31 @@
-#' @title Test Case filter based on coverage Report on Specified R Virtual Machine Source Code
+#' @title Test Case filter based on cov Report on Specified R Virtual Machine Source Code
 #'
-#' @description This function works with the GNU coverage tool, gcov, to report code coverage of the
+#' @description This function works with the GNU cov tool, gcov, to report code cov of the
 #'  tested R virtual machine. The VM must have been compiled with gcov support and executed at least
 #'  once before this function is executed for meanful statistics. 
 #'
 #' @param tc.root a directory containg test suite
-#' @param r.home a directory containing VM.
-#' @param source.folder a VM source files directory on which coverage should be measured. Must be inside r.home.
 #' @param tc.db.path a directory containing previosly collected test cases.
-#' @param clear.previous.coverage wheather to clear accomulated coverage of VM.
+#' @param clear.previous.cov wheather to clear accomulated cov of VM.
 #' @param wipe.tc.database wheater delete previously accomulated test cases.
-#' @return list(after.tc.coverage.percentage)
+#' @return list(after.tc.cov.percentage)
 #' 
-
-FilterTCs<- function(tc.root, r.home, source.folder, 
-                     tc.db.path, tc.result.root, 
+FilterTCs<- function(tc.root, tc.db.path, tc.result.root, 
                      clear.previous.coverage = TRUE, 
                      wipe.tc.database = FALSE, k = 1, 
                      verbose = testrOptions('verbose')) {
   # parameter checks
   if (missing(tc.root)) 
     stop('A directory containing Test Cases must be specified!'); 
-  if (missing(r.home)) 
-    stop('A directory containing VM source files must be specified!'); 
-  if (missing(source.folder)) 
-    stop('A directory containing source files must be specified!'); 
   if (!file.exists(tc.root))
     stop('Specified directory with Test Cases does not exist!'); 
-  if (!file.exists(r.home))
-    stop('Specified directory of R_HOME does not exist!'); 
-  if (!file.exists(file.path(r.home,source.folder, fsep = .Platform$file.sep)))
-    stop('Specified source folder to check coverage does not exist!'); 
-  
-  if (clear.previous.coverage)
-    ResetCoverageInfo(file.path(r.home, source.folder, fsep = .Platform$file.sep))
-  if (wipe.tc.database)
-    cleanTCDB(tc.db.path)
-  after.tc.coverage.percentage <- 0
-  r.home <- file_path_as_absolute(r.home)
-  tc.root <- file_path_as_absolute(tc.root)
-  db.coverage <-ifelse(!is.null(tc.db.path), measureCoverageByDB(r.home, source.folder, tc.db.path), db.coverage <- 0)
-
+  if (clear.previous.coverage) ResetCoverageInfo(file.path(cache$r.home, cache$source.folder, fsep = .Platform$file.sep))
+  if (wipe.tc.database) cleanTCDB(tc.db.path)
+  after.tc.cov.percentage <- 0
+  db.cov <- measureCoverageByDB(tc.db.path)
   if (verbose) cat("TC Root - ", tc.root, "\n")
-  
   all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
-
   if (verbose) cat("Number of TC Files - ", length(all.tc), "\n")
-
   function.name <- GetFunctionName(basename(all.tc[1]))
   tc.function.path <- file.path(tc.result.root, function.name, fsep = .Platform$file.sep)
   if (!file.exists(tc.function.path))
@@ -54,125 +33,144 @@ FilterTCs<- function(tc.root, r.home, source.folder,
   if (verbose) cat("TC function path in filter - ",tc.function.path, "\n")
 
   i <- 1
-  coverageChangeMeasureForSingleTCFile <- function(tc) {
-    cat(tc, "\n")
+  covChangeMeasureForSingleTCFile <- function(tc) {
     tc.full.path <- file.path(tc.root, tc, fsep = .Platform$file.sep)
-    cat(tc.full.path, "\n")
-    tc.full.path <- file_path_as_absolute(tc.full.path)
-    tc <- basename(tc)
     info.file <- file.path(tc.root, paste(function.name,"info", sep = "_"), fsep = .Platform$file.sep)
-    sink(info.file, append = TRUE)
-    cat(tc, "\n")
-    before.tc.coverage.info <<- tryCatch(MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep)), error=function(x) 0)
-    if (length(before.tc.coverage.info) > 1 )
-    before.tc.coverage.percentage <<- calculateCoverage(before.tc.coverage.info)
-    else
-    before.tc.coverage.percentage <<- 0
-    if (is.nan(before.tc.coverage.percentage)) 
-      before.tc.coverage.percentage <- 0
-    sink()
-    cmd <- paste(r.home, 
-                   "/bin/R -q -e 'library(testr)' -e \"RunTests(", 
-                   shQuote(tc.full.path), ")\"", 
-                   sep = "")
-    cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
-    sink(info.file, append = TRUE)
-    after.tc.coverage.info <<- MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
-    after.tc.coverage.percentage <<- calculateCoverage(after.tc.coverage.info)
-    sink()
-    if (after.tc.coverage.percentage > before.tc.coverage.percentage) {
-      cat("Coverage before running TC ", i, " from file ", before.tc.coverage.percentage, "\n")
-      cat("Coverage after running TC ", i, " from file ", after.tc.coverage.percentage, "\n")
+    out <- capture.output(
+      before.tc.cov.info <- tryCatch(MeasureCoverage(root = file.path(cache$r.home, cache$source.folder, fsep = .Platform$file.sep)), 
+                                     error=function(x) 0)
+    )
+    before.tc.cov.c <- ifelse(length(before.tc.cov.info) > 1, calculateCoverage(before.tc.cov.info), 0)
+    if (is.nan(before.tc.cov.c)) 
+      before.tc.cov.c <- 0
+    before.tc.cov.r <- ReportCoveragePercentage(readRDS("temp.processing.tc/cov.data"))
+    cov.data <- RunTestsMeasureCoverage(tc.full.path)
+    after.tc.cov.c <<- cov.data$c
+    after.tc.cov.r <<- cov.data$r
+
+    if (after.tc.cov.c > before.tc.cov.c || after.tc.cov.r > before.tc.cov.r) {
+      cat("C code coverage before running TC ", i, " from file ", before.tc.cov.c, "\n")
+      cat("C code coverage after running TC ", i, " from file ", after.tc.cov.c, "\n")
+      cat("R code coverage before running TC ", i, " from file ", before.tc.cov.r, "\n")
+      cat("R code coverage after running TC ", i, " from file ", after.tc.cov.r, "\n")
       file.copy(tc.full.path, tc.function.path, overwrite = FALSE)
+    } else {
+      cat("Test case ", i, "didn't increase coverage\n")
     }
     i <<- i + 1
     file.remove(tc.full.path)
   }
-  result <- Map(coverageChangeMeasureForSingleTCFile, all.tc)
-  cat("Coverage gain by TCs - ")
-  cat(after.tc.coverage.percentage - db.coverage)
-  cat("%\n")
-  return (after.tc.coverage.percentage)
+  result <- Map(covChangeMeasureForSingleTCFile, all.tc)
+  cat("C coverage gain by TCs - ", after.tc.cov.c - db.cov$c, "\n")
+  cat("R coverage gain by TCs - ", after.tc.cov.r - db.cov$r, "\n")
 }
 
-#' @title calculate local coverage 
-#' @description Function that measures coverage, returns as a result 2 data frames, 
-#' with detailed information of coverage by file and function. 
-#' This function preprocesses the result and returns a file percentage coverage. 
-#'
-#' @param coverage.data 2 dataframes with coverage information 
-#' @return total percentage of coverage by line
+#' @title Run Tests and Measure Coverage 
+#' 
+#' @param tc.full.path path of test.cases
+#' @param funcs R functions to measure coverage for
+RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
+  tmp_source <- file.path(getwd(), temp.dir, "tmp_source")
+  cov.info <- file.path(getwd(), temp.dir, "cov.data.p")
+  if (is.null(tc.full.path))
+    tc.full.path <- ""
+  if (missing(funcs)) {
+    funcs <- vector()
+    for (tc in tc.full.path) 
+      funcs <- c(funcs, GetFunctionName(basename(tc)))
+  }
+  command <- sprintf("
+library(rcov)
+library(testr)
+tmp_folder <- '%s'
+cov.data <- file.path(tmp_folder, 'cov.data')
+cov.data.clean <- file.path(tmp_folder, 'cov.data.clean')
+cov.funcs <- file.path(tmp_folder, 'cov.funcs')
+r.func <- %s
+PauseMonitorCoverage()
+if (file.exists(cov.funcs)){
+  cov.funcs <- readRDS(cov.funcs)
+  for (func in ls(cov.funcs)){
+    rcov:::reassignInEnv(func, cov.funcs[[func]], getNamespace('base'))
+  }
+  if (file.exists(cov.data)) cov.data <- readRDS(cov.data) else 
+  if (file.exists(cov.data.clean)) cov.data <- readRDS(cov.data.clean) else cov.data <- new.env()
+  rcov:::reassignInEnv('cov.cache', cov.data, getNamespace('rcov'))
+} else {
+  for (func in r.func) {
+    cat(func, '\n')
+    MonitorCoverage(func)
+  }
+  saveRDS(rcov:::cov.cache, cov.data.clean)
+  saveRDS(rcov:::cov.funcs, cov.funcs)
+}
+RunTests('%s', use.rcov = T)
+saveRDS(ReportCoveragePercentage(), '%s') 
+saveRDS(rcov:::cov.cache, file.path(tmp_folder, 'cov.data'))
+", file.path(getwd(), temp.dir), paste(deparse(funcs), collapse=""), tc.full.path, cov.info)
+  writeChar(con = tmp_source, command, eos = NULL)
+  cmd <- paste(cache$r.home, 
+               "/bin/R CMD BATCH --vanilla --slave -q ", 
+               tmp_source,
+               sep = "")
+  cmd.output <- system(cmd, intern = TRUE, ignore.stderr = F)
+  after.tc.cov.r <- readRDS(file = cov.info)
+  capture.output(after.tc.cov.info.gcov <- MeasureCoverage(root = file.path(cache$r.home, cache$source.folder, fsep = .Platform$file.sep)))
+  after.tc.cov.c <- calculateCoverage(after.tc.cov.info.gcov)
+  list(r=after.tc.cov.r, c=after.tc.cov.c)
+}
 
-calculateCoverage <- function(coverage.data) {
-  # line file coverage
-  totalLine.file <- sum(as.numeric(coverage.data$file$LOC))
-  totalCovLine.file <- sum(as.numeric(coverage.data$file$CovLn))
+#' @title calculate local cov 
+#' @description Function that measures cov, returns as a result 2 data frames, 
+#' with detailed information of cov by file and function. 
+#' This function preprocesses the result and returns a file percentage cov. 
+#'
+#' @param cov.data 2 dataframes with cov information 
+#' @return total percentage of cov by line
+calculateCoverage <- function(cov.data) {
+  # line file cov
+  totalLine.file <- sum(as.numeric(cov.data$file$LOC))
+  totalCovLine.file <- sum(as.numeric(cov.data$file$CovLn))
   totalCovLinePcnt.file <- round(totalCovLine.file/totalLine.file * 100, digits = 10)
-  # line func coverage
-  totalLine.func <- sum(as.numeric(coverage.data$func$LOC))
-  totalCovLine.func <- sum(as.numeric(coverage.data$func$CovLn))
+  # line func cov
+  totalLine.func <- sum(as.numeric(cov.data$func$LOC))
+  totalCovLine.func <- sum(as.numeric(cov.data$func$CovLn))
   totalCovLinePcnt.func <- round(totalCovLine.func/totalLine.func * 100, digits = 10)
-  # func coverage
-  totalFunc <- nrow(coverage.data$func)
-  totalCovFunc <- nrow(coverage.data$func[as.numeric(coverage.data$func$CovLn) > 0, ])
+  # func cov
+  totalFunc <- nrow(cov.data$func)
+  totalCovFunc <- nrow(cov.data$func[as.numeric(cov.data$func$CovLn) > 0, ])
   totalCovFuncPcnt <- round(totalCovFunc/totalFunc * 100, digits = 2)
-  # file coverage
-  totalFile <- nrow(coverage.data$file)
-  totalCovFile <- nrow(coverage.data$file[as.numeric(coverage.data$file$CovLn) > 0, ])
+  # file cov
+  totalFile <- nrow(cov.data$file)
+  totalCovFile <- nrow(cov.data$file[as.numeric(cov.data$file$CovLn) > 0, ])
   totalCovFilePcnt <- round(totalCovFile/totalFile * 100, digits = 2)
   #return(totalCovLinePcnt.file)
   return (totalCovLine.file)
 }
 
-#' @title measure coverage by database
-#' @description measures coverage by test cases in TC database. 
+#' @title measure cov by database
+#' @description measures cov by test cases in TC database. 
 #' 
 #' @param r.home a directory containing VM.
-#' @param source.folder a VM source files directory on which coverage should be measured. Must be inside r.home.
+#' @param source.folder a VM source files directory on which cov should be measured. Must be inside r.home.
 #' @param tc.db.path a directory containing previosly collected test cases.
-#' @return total percentage of coverage by line after running TCs for database on specified VM
-
-measureCoverageByDB <- function(r.home, source.folder, tc.db.path) {
-  if (missing(r.home)) 
-    stop('A directory containing VM source files must be specified!'); 
-  if (!file.exists(r.home))
-    stop('Specified directory of R_HOME does not exist!'); 
-  if (missing(source.folder)) 
-    stop('A directory containing source files must be specified!'); 
-  if (!file.exists(paste(r.home,source.folder, sep="/")))
-    stop('Specified source folder to check coverage does not exist!'); 
-  if (missing(tc.db.path)) 
-    stop("A directory containing TC DB files must be specified!");
-  if (!file.exists(tc.db.path))
-    stop('Specified directory with database of TCs does not exist!'); 
-  if (length(list.files(path = tc.db.path, recursive = TRUE)) == 0){
-    cat("TC Database is empty\n")
-    return (0)
-  }
-  tc.db.path <- file_path_as_absolute(tc.db.path)
-  sink("db_out")
-  before.db.coverage.info <- tryCatch(MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep)), error=function(x) cat(x$message))
-  cmd <- paste(r.home, 
-               "/bin/R -q -e \"RunTests(", 
-               shQuote(tc.db.path),")\"", 
-               sep = "")
-  cmd.output <- system(cmd, intern = TRUE, ignore.stderr = TRUE)
-  after.db.coverage.info <- MeasureCoverage(root = file.path(r.home, source.folder, fsep = .Platform$file.sep))
-  sink()
-#  file.remove("db_out")
-  before.db.coverage.percentage <- calculateCoverage(before.db.coverage.info)
-  if (is.nan(before.db.coverage.percentage)) 
-    before.db.coverage.percentage <- 0
-  after.db.coverage.percentage <- calculateCoverage(after.db.coverage.info)
-  cat(paste("Coverage by TCs in database ",after.db.coverage.percentage, '\n',sep=""))
-  return (after.db.coverage.percentage)
+#' @return total percentage of cov by line after running TCs for database on specified VM
+measureCoverageByDB <- function(tc.db.path) {
+  file.remove(file.path(temp.dir, "cov.data"))
+  out <- capture.output(
+    db.cov.info <- RunTestsMeasureCoverage(tc.db.path, funcs = c("agrep", "abbreviate", "as.data.frame.list"))
+  )
+  db.cov.c <- db.cov.info$c
+  db.cov.r <- db.cov.info$r
+  cat(paste("C Code coverage by TCs in database ", db.cov.c, '\n',sep=""))
+  cat(paste("R Code coverage by TCs in database ", db.cov.r, '\n',sep=""))
+  db.cov.info
 } 
 
 #' @title clean database
 #' @description delete previously accomulated TCs in test case database. 
 #' 
 #' @param tc.db.path a directory containing previosly collected test cases.
-
 cleanTCDB <- function(tc.db.path){
   if (missing(tc.db.path)) 
     stop("A directory containing TC DB files must be specified!");

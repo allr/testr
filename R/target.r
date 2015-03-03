@@ -55,7 +55,15 @@ IsTestListener <- function(f) {
 #' 
 #' @seealso test, IsTestListener
 
-RunTests <- function(root, verbose = testr.option('verbose'), file.summary = testr.option('file.summary'), display.only.errors = testr.option('display.only.errors'), stop.on.error = testr.option('stop.on.error'), display.code.on.error = testr.option('display.code.on.error'), test.listener = NULL, clean.wd = FALSE) {
+RunTests <- function(root, 
+                     verbose = testr.option('verbose'), 
+                     file.summary = testr.option('file.summary'), 
+                     display.only.errors = testr.option('display.only.errors'), 
+                     stop.on.error = testr.option('stop.on.error'), 
+                     display.code.on.error = testr.option('display.code.on.error'), 
+                     test.listener = NULL, 
+                     clean.wd = FALSE,
+                     use.rcov = FALSE) {
   if (!missing(test.listener)) 
     if (!IsTestListener(test.listener))
     stop("Invalid function supported as a test listener.")
@@ -69,6 +77,9 @@ RunTests <- function(root, verbose = testr.option('verbose'), file.summary = tes
   cache$display.only.errors <- display.only.errors
   cache$stop.on.error <- stop.on.error
   cache$display.code.on.error <- display.code.on.error
+  cache$use.rcov <- use.rcov
+  if (!file.exists(root) || is.null(root))
+    return(NULL)
   # make list of test to run
   if (file.info(root)$isdir){
     files <- list.files(root, pattern=".[rR]$", recursive = TRUE, all.files = TRUE) 
@@ -217,8 +228,12 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   comments <- NULL
   # execute the test and grap warnings and errors
   result <- withCallingHandlers(
-    tryCatch(
-      eval(code, envir = new.env(parent=baseenv())),
+    tryCatch({
+      if (cache$use.rcov) rcov::ResumeMonitorCoverage()
+      res <- eval(code, envir = new.env(parent=baseenv()))
+      if (cache$use.rcov) rcov::PauseMonitorCoverage()
+      res
+      },
       error = function(e) {
         errors <<- e$message
       }, silent = TRUE),
