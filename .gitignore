@@ -8,6 +8,7 @@ process (copy).r
 tcFilter.R
 execute-tests.R
 UsefulCommands
+.DS_Store
 # Java compiled classes
 *.class
 .classpath
@@ -19,3 +20,4 @@ testr.iml
 .Rhistory
 # C/C++
 *.*o
+

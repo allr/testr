@@ -1,55 +1,54 @@
-*** This is the testR reimplementation in R language. For the older testR version written in Python 3, please see the renamed testr-py repo
-*** on github:
-***
-*** https://github.com/allr/testr-py
-
-testR
+testR - test case generation for R
 =====
 
-TestR implementation in R. 
+TestR implementation in R. It provides a framework for unit tests generation from source code and for test execution, and filtering of test cases based on C code coverage using `gcov` and R code coverage using `rcov` (https://github.com/RomanTsegelskyi/rcov).
 
+This is the testR-py reimplementation and extension in R language. For the older testR version written in Python 3, please see the renamed testr-py repo
+on github: https://github.com/allr/testr-py
 
 Automatic Test Case Generation
 ==============================
 
-TestR includes tools to capture function calls in R programs and automatically convert them into test cases. Currently, only builtin functions
-will be captured because they don't have unevaluated promises in their arguments while the bodys are being executed according to the R 
-specification. Unevaluated promises needs to be handled specially, which will be dealt with in future work.
+TestR includes tools to capture function calls in R programs and automatically convert them into test cases. 
+Unevaluated promises needs to be handled specially, which will be dealt with in future work.
 
-This section explains how to generate the test case set given a set of R programs.
-
+It is possible to generate test and filter test cases with calling a single function from the `testr` package:
+```r
+```
+Which will capture function calls from source code, generate test cases and filter them based on C and R code coverage. Note that this call needs a R VM compiled with `gcov` support as explained in this [section](). For more details on the single steps, please look into further sections.
 
 Generate Capture File
 ---------------------
 
-The usage of functions in the R programs are traced and recorded in a text file named `capture`. To generate the capture file, one needs to the
-programs on the instrumented version of GNU-R, called `r-instrumented`, which is part of the `allr` project.
+The usage of different functions in the R programs are traced and recorded in a text file named `capture`. To decorate function for capturing output call:
 
-Checkout `r-instrumented` on branch `capture` by typing
-
-    git clone -b capture https://github.com/allr/r-instrumented <R_INSTRUMENTED_HOME>
-
-To trace the prgram `<R_PROG>`, type
-
-    <R_INSTRUMENTED_HOME>/bin/R --no-restore --no-save --slave --trace capture --tracedir <TRACE_DIR> -f <R_PROG>
-
-After the run, the traced information will be appended to file `<TRACE_DIR>/capture`.
+```r
+DecorateSubst(<FuncName>|<FuncObject>)
+```
 
 The capture file consists of entries, each of which is a record of a function call made in the execution with the following fields and the 
 function calls will be replayed in test cases if valid.
 
   - func: function name
-  - type: `P` | `I`, indicating if the function is primitive or internal.
   - args: list of deparsed argument objects
   - retn: deparsed returned objects
 
+For example,
+```r
+DecorateSubst(agrep)
+example(agrep)
+```
+
+Will generate tracing information for call to `agrep` in folder `capture` in current working directory.
 
 Generate Test Cases
 -------------------
 
-TestGen converts a given capture file into test case set. To do so, one needs to call the following function located in `testgen.r`:
+TestGen converts a given capture file into test case set. To do so, one needs to call `TestGen`:
 
-    testgen(<PATH_TO_CAPTURE_FILE>, <OUTPUT_DIR>)
+```r
+TestGen(<PATH_TO_CAPTURE_FILE>, <OUTPUT_DIR>)
+```
 
 Each run of TestGen will create a folder under `<OUTPUT_DIR>` named with the current date and time to store the test case set generated.
 The set consists of files with name `tc_<FUNC_NAME>.r`, where each function has its tests put together in a single file. A file named 
@@ -73,16 +72,16 @@ Run Test Cases
 The test cases are generated in the compatible format with the test harness of TestR. To run the test set under `<TC_DIR>`, call the
 following function in `target.r`:
 
-     runTests(<TC_DIR>)
+```r
+RunTests(<TC_DIR>)
+```
 
-
-Code Coverage Measurement
+Filtering generated test cases
 =========================
 
 One way to assess the completeness of the test set is to measure the code coverage rate. TestR includes a coverage reporter which 
-supports generating various forms of summary of C file coverage by processing the output of `gcov`. This section briefly explains
-how to use the reporter.
-
+supports generating various forms of summary of C file coverage by processing the output of `gcov`. Moreover `testR` uses [rcov](https://github.com/RomanTsegelskyi/rcov) for reporting R code coverage. This section briefly explains
+how to use the reporter and filtering of test cases based on coverage.
 
 Instrument GNU-R with GCOV
 --------------------------
@@ -99,10 +98,27 @@ related numbers, therefore you may want to verify the existence of .gcda files b
 look at http://gcc.gnu.org/onlinedocs/gcc/index.html#toc_Gcov.
 
 
-Measure Code Coverage
+Measure Code C Coverage
 ---------------------
 
 To invoke the reporter, call the following function located in coverage.r. The required argument is the the top level directory that
 contains the .gcda files. For details of the result report, see comments in coverarge.r.
 
     MeasureCoverage(<PATH_TO_GCDA_FILES>)
+
+Filtering generated test cases
+----------------
+
+To filter generated test cases in a single file call
+
+```r
+processTC(<TC_FILE>, <OUTPUT_DIR>, <R_HOME>, <SRC_DIR>)
+```
+
+Note that all test cases will be split into single files.
+
+Where,
+* `<TC_FILE>` is a generated file with test cases
+* `<OUTPUT_DIR>` is a folder with results, 
+* `<R_HOME>` is a R VM compiled with `gcov` support
+* `<SRC_DIR>` is a folder in R VM to measure coverage (by default `src/main')
