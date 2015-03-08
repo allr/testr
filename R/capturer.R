@@ -33,9 +33,11 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default", "asNamespace", "contributors", "close.connection",
                "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
                "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
-              "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local", "merge.data.frame", 
-              "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals"
-               
+               "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local", "merge.data.frame", 
+               "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals",
+               ".C", ".Call", ".External", ".Extrnal.graphics", ".External2", ".Fortran",
+               "as.call", "names<-", "names", "length", "is.pairlist", "is.null", "is.list", "invisible", "class<-", "class", 
+               "baseenv", "attributes<-", "as.environment", "as.character", ".Call.graphics" , "rep", "round", "max", "min"             
 )
 
 sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
@@ -88,7 +90,7 @@ code.template.dots <- "
 #' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
-# cat(fname, "\n")
+  # cat(fname, "\n")
   if (cache$writing.down)
     return(NULL);
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
@@ -105,64 +107,30 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
 #' @export
 DecorateBody <- function(func, function.body){
   # create a wrapper closure and return in
-  decorated.function <- function(...){}
-  if (!is.null(formals(function.body))){    
-    func <- ExtractFunctionName(func)
-    names.formals <- names(formals(function.body))
-    formals(decorated.function) <- formals(function.body) 
-  } else {
-    names.formals <- c("...")
-  }
-  argument.pass <- "%s = missing(%s)"
-  names.formals.rcpp <- sapply(names.formals, ChangeNames)
-  args.code <- expression(missingArgs <- list())
-  if (length(names.formals) > 0){
-    get.args.arguments <- vector()
-    for (i in 1:length(names.formals)){
-      get.args.arguments <- c(get.args.arguments, 
-                              if (names.formals[i] != '...') 
-                                sprintf(argument.pass, names.formals[i], names.formals[i], names.formals[i]))
-    }
-    args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
-  }  
-  get.args.code <- parse(text="args <- tryCatch(testr:::GetArgs(sys.frame(), missingArgs, environment()), error=function(x) {});")
-  initializations <- expression(warns <- NULL)
-#   args.enquote <- expression(args <- lapply(args, function(x) if (is.language(x)) enquote(x) else x))
-  envir.change <- expression(if (!is.null(body(function.body))) 
-    body(function.body) <- as.call(c(
-      as.name("{"), 
-      expression(for(`_n` in ls(sys.frame(-3), all.names=TRUE)) if (grepl("^[.][a_zA-Z]",`_n`)) assign(`_n`, get(`_n`, sys.frame(-3)))), 
-      body(function.body))))
-  ret.value <- expression(
-    return.value <- withCallingHandlers(                     
-      do.call(function.body, args, envir = environment()),           
-      error = function(e) {
-        errs <- e$message
-        WriteCapInfo(func, args, NULL, errs, warns)
-        stop(errs)
-      },
-      warning = function(w) {
-        if (is.null(warns))
-          warns <<- w$message
-        else 
-          warns <<- c(warns, w$message)
-      })
-  )
-  # special fix for cbind, somehow do.call loses colnames
-  #   cbind.hack <- expression(if(func == "cbind") return.value <- function.body(..., deparse.level = deparse.level))
-  main.write.down <- expression(WriteCapInfo(func, args, return.value, NULL, warns))
-  function.return <- expression(return.value)  
-  body(decorated.function) <- as.call(c(as.name("{"), 
-                                        args.code, 
-                                        get.args.code,
-                                        initializations, 
-                                        envir.change, 
-#                                         args.enquote,
-                                        ret.value,
-#                                         cbind.hack,
-                                        main.write.down,
-                                        function.return))
-  attr(decorated.function, "decorated") <- TRUE
+  decorated.function <- function (...) 
+  {
+    args <- testr:::GetArgs(list(), environment())
+    if (is.null(args)) 
+      args <- list()
+    names(args) <- names(as.list(sys.call()[-1]))
+    warns <- NULL
+    if (!is.null(body(function.body))) 
+      body(function.body) <- as.call(c(as.name("{"), 
+                                       expression(for (`_n` in ls(sys.frame(-3), all.names = TRUE)) 
+                                                        if (grepl("^[.][a_zA-Z]", `_n`)) assign(`_n`, get(`_n`, sys.frame(-3)))), body(function.body)))
+    return.value <- withCallingHandlers(do.call(function.body, 
+                                                args, envir = environment()), error = function(e) {
+                                                  errs <- e$message
+                                                  WriteCapInfo(func, args, NULL, errs, warns)
+                                                  stop(errs)
+                                                }, warning = function(w) {
+                                                  if (is.null(warns)) 
+                                                    warns <<- w$message
+                                                  else warns <<- c(warns, w$message)
+                                                })
+    WriteCapInfo(func, args, return.value, NULL, warns)
+    return.value
+  } 
   return (decorated.function)
 }
 
@@ -224,12 +192,12 @@ ReplaceBody <- function(func, function.body){
     last.line <- parse(text=sprintf("return.value <- %s\n", paste(deparse(last.line), collapse = "\n")))
     code <- if (length(new.fb) > 2 && as.list(new.fb)[[1]] == '{') unlist(as.list(new.fb))[2:(length(new.fb) - 1)] else ""
     new.fb <- as.call(c(as.name("{"), 
-                    args.code, 
-                    get.args.code,
-                    parse(text=code), 
-                    last.line, 
-                    main.write.down, 
-                    expression(return.value)))
+                        args.code, 
+                        get.args.code,
+                        parse(text=code), 
+                        last.line, 
+                        main.write.down, 
+                        expression(return.value)))
   }
   body(function.body) <- new.fb
   attr(function.body, "decorated") <- TRUE
@@ -254,7 +222,7 @@ DecorateSubst <- function(func, envir = .GlobalEnv){
     stop("wrong argument type!")
   }    
   invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', search(), fname, 
-        if (is.null(cache$function.types[[fname]])) "function" else cache$function.types[[fname]]))
+                  if (is.null(cache$function.types[[fname]])) "function" else cache$function.types[[fname]]))
 } 
 
 

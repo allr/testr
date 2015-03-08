@@ -7,10 +7,10 @@ map<string, SEXP> decorationChanges;
 
 // [[Rcpp::export]]
 bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes) {
-  Function DecorateBody("DecorateBody");
+  Function DecorateBody("DecorateBody");  
   Function ReplaceBody("ReplaceBody"); 
   
-  Environment testr("package:testr");
+  Environment testr("package:testr"); 
   SEXP obj;
   RObject robj;
   Environment envir_namespace;
@@ -35,8 +35,8 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
         robj = RObject(ReplaceBody(name, obj));
         Rcout << "RCapturing - " << functionName << endl; 
       } else {
-       // robj = RObject(DecorateBody(name, obj));
-     //   Rcout << "DCapturing - " << functionName << endl; 
+        robj = RObject(DecorateBody(name, obj));
+        Rcout << "DCapturing - " << functionName << endl; 
       }
       decorationChanges.insert(pair<string, SEXP>(functionName, obj));
       robj.attr("decorated") = true;

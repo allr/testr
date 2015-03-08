@@ -8,10 +8,10 @@ SEXP GetArgs(List missingArgs, SEXP dotsE){
   Environment cache = testr.get("cache");
   LogicalVector wd = cache.get("writing.down");
   bool writingDown = as<bool>(wd);
-  if (writingDown){
+  if (writingDown){ 
     return R_NilValue;
   }
-  List args;
+  List args(0);
   Environment dotsEnv(dotsE);
   CharacterVector envNames = dotsEnv.ls(false);
   int nArgs = envNames.length();
@@ -21,6 +21,7 @@ SEXP GetArgs(List missingArgs, SEXP dotsE){
   for( int i=0; i<nArgs; i++){
     evaluatedArg = R_NilValue;
     string name = as<string>(envNames[i]);
+    Rcout << "name = " << name << std::endl;
     if (name != "missingArgs" && !as<bool>(missingArgs[name])){
       SEXP nameSym = Rf_install(name.c_str());
       unevaluatedArg = Rf_findVarInFrame(dotsE, nameSym);
