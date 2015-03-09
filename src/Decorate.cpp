@@ -3,6 +3,7 @@
 using namespace std;
 using namespace Rcpp;
 
+
 map<string, SEXP> decorationChanges;
 
 // [[Rcpp::export]]

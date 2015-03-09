@@ -21,7 +21,6 @@ SEXP GetArgs(List missingArgs, SEXP dotsE){
   for( int i=0; i<nArgs; i++){
     evaluatedArg = R_NilValue;
     string name = as<string>(envNames[i]);
-    Rcout << "name = " << name << std::endl;
     if (name != "missingArgs" && !as<bool>(missingArgs[name])){
       SEXP nameSym = Rf_install(name.c_str());
       unevaluatedArg = Rf_findVarInFrame(dotsE, nameSym);

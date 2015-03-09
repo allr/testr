@@ -33,10 +33,10 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local", "merge.data.frame", 
                "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals",
                # for .Primitive and functions without body
-               ".C", ".Call", ".External", ".Extrnal.graphics", ".External2", ".Fortran",
+               ".C", ".Call", ".External", ".External.graphics", ".External2", ".Fortran",
                "as.call", "names<-", "names", "length", "is.pairlist", "is.null", "is.list", "invisible", "class<-", "class", 
                "baseenv", "attributes<-", "as.environment", "as.character", ".Call.graphics" , "rep", "round", "max", "min",
-               "length<-", "call", "attr<-", "as.numeric", "switch", "log2"
+               "length<-", "call", "attr<-", "as.numeric", "switch", "log2", "nargs", "as.double", "xtfrm"
 )
 
 sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
@@ -108,6 +108,7 @@ DecorateBody <- function(func, function.body){
   # create a wrapper closure and return in
   decorated.function <- function (...) 
   {
+#     cat(func, "\n")
     args <- testr:::GetArgs(list(), environment())
     if (is.null(args)) 
       args <- list()
