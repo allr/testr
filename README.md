@@ -6,6 +6,17 @@ TestR implementation in R. It provides a framework for unit tests generation fro
 This is the testR-py reimplementation and extension in R language. For the older testR version written in Python 3, please see the renamed testr-py repo
 on github: https://github.com/allr/testr-py
 
+# Installation
+Development of package just started recently and is far away from CRAN release yet.
+
+It can be installed easily with the nifty function of the devtools package from CRAN:
+
+```r
+    library(devtools)
+    install_github('allr/testr')
+```
+Or download the sources and build manually. If you're running R on Windows, you need to install Rtools.
+
 Automatic Test Case Generation
 ==============================
 
