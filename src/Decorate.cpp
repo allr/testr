@@ -28,6 +28,7 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
       string namespace_name = envir_name.substr(8, string::npos);
       envir_namespace = Environment::namespace_env(namespace_name);
       envir_namespace.unlockBinding(functionName);
+      envir.unlockBinding(functionName);
     } else {
       envir_namespace = Environment::global_env();
     }
@@ -41,8 +42,10 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
       }
       decorationChanges.insert(pair<string, SEXP>(functionName, obj));
       robj.attr("decorated") = true;
+      envir.assign(functionName, robj);
       envir_namespace.assign(functionName, robj);  
     }
+    envir.lockBinding(functionName);
     envir_namespace.lockBinding(functionName);
     return true;
   } else {

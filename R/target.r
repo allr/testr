@@ -230,7 +230,7 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   result <- withCallingHandlers(
     tryCatch({
       if (cache$use.rcov) rcov::ResumeMonitorCoverage()
-      res <- eval(code, envir = new.env(parent=baseenv()))
+      res <- eval(code, envir = new.env())
       if (cache$use.rcov) rcov::PauseMonitorCoverage()
       res
       },
