@@ -217,9 +217,9 @@ public class CaptureTestGen {
 			Process proc = null;
 //		    throw new RuntimeException("Forced exit");
 			System.out.println("Processing file - " + ifile.toString());
-            String testGen = "R -q -e " + "library(testr) -e TestGen(\"" + ifile.toAbsolutePath().toString() + "\"," + "\"" + outputDir.toAbsolutePath().toString() + "\");";
+            String testGen = "R -q -e library(testr) -e library(rcov) -e TestGen(\"" + ifile.toAbsolutePath().toString() + "\"," + "\"" + outputDir.toAbsolutePath().toString() + "\");";
 //            String testGen = "R -q -e cat(\"Roman\")";
-       //     System.out.println(testGen);
+            System.out.println(testGen);
            proc = Runtime.getRuntime().exec(testGen);
 			boolean doneWait = false;
 			while (!doneWait) {

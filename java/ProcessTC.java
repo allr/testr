@@ -122,7 +122,7 @@ public class ProcessTC {
 				System.out.println("Starting file - " + file);
 				String processCall = String.format("-e processTC(\'%s\',\'%s\',%s,\'%s\',\'src/main\')", 
 					file, tcResultLocation, (tcDB == null) ? "NULL" : "'" + tcDB + "'", vm);
-				String command = "R -q -e library(testr) -e library(tools) " + processCall;
+				String command = "R -q -e library(rcov) -e library(testr) -e library(tools) " + processCall;
 				writer.write(command + "\n");
 				Runtime rt = Runtime.getRuntime();
 				Process proc = rt.exec(command);

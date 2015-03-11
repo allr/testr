@@ -158,7 +158,7 @@ calculateCoverage <- function(cov.data) {
 measureCoverageByDB <- function(tc.db.path) {
   file.remove(file.path(temp.dir, "cov.data"))
   out <- capture.output(
-    db.cov.info <- RunTestsMeasureCoverage(tc.db.path, funcs = c("agrep", "abbreviate", "as.data.frame.list"))
+    db.cov.info <- RunTestsMeasureCoverage(tc.db.path, funcs = builtins()) 
   )
   db.cov.c <- db.cov.info$c
   db.cov.r <- db.cov.info$r

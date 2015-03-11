@@ -21,7 +21,7 @@ std::ofstream tracefile;
 
 void printCapture(CharacterVector x, std::string prefix) {
   if (x[0] != "NULL"){
-    if (x.length() < 100) {
+    if (x.length() < 1000) {
       for (int i = 0; i < x.length(); i++)
       tracefile << prefix << x[i] << std::endl;
     } else {
