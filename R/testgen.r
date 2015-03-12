@@ -40,7 +40,7 @@ TestGen <- function(root, output.dir, use.get.anywhere = TRUE, verbose=testrOpti
   if (!file.exists(output.dir) || !file.info(output.dir)$isdir)
     dir.create(output.dir)
   output.dir <<- output.dir
-
+  
   if (!file.exists(root)) stop("Intermediate file doesn't exist!");
   bad.argv.file <<- file.path(output.dir, "bad_arguments", fsep=.Platform$file.sep);
   
@@ -183,8 +183,8 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
   # check validity of arguments
   valid.argv <- ParseAndCheck(argv)
   valid.retv <- ParseAndCheck(retv)
-#   argv.obj <- ParseAndCheck(argv);
-#   retv.obj <- ParseAndCheck(retv);
+  #   argv.obj <- ParseAndCheck(argv);
+  #   retv.obj <- ParseAndCheck(retv);
   
   # proper argument should always be packed in a list
   if (!valid.argv || !valid.retv) {
@@ -213,22 +213,18 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
       call <- paste(func, "<-",  "utils::getAnywhere(",func,")[1]",";\n", sep="")
     }
   }
-#   if ("_MissingArg" %in% args){
-#     call <- paste(call, paste('`',func, '`', sep=""), sep="")
-    not.m <- c(which(args != "_MissingArg"), which(is.na(args)))
-#     m <- which(args == "_MissingArg")
-#     ind <- sort(c(not.m,m[m < max(not.m)]))
-    args <- args[unique(not.m)]
-#     args[args == "_MissingArg"] <- list(substitute())
-#     call <- paste(call, sprintf("(%s)\n", paste(sapply(args, function(x) paste(deparse(x), collapse = "\n")), collapse = ",\n")), sep="")
-#   } else {
-    if (length(args) > 0) {
-      call <- paste(call, "argv <- ", paste(deparse(args), collapse = "\n"), "\n", sep="");
-    } else {
-      call <- paste(call, "argv <- list()", "\n", sep="");
-    }
-    call <- ifelse(grepl("`", func), paste(call, "do.call(", func, ", argv);", sep=""), paste(call, "do.call('", func, "', argv);", sep=""))
-#   }
+  not.m <- c(which(args != "_MissingArg"), which(is.na(args)))
+  args <- args[unique(not.m)]
+  where <- unique(gsub(".*:(.*)", "\\1", getAnywhere(func)$where))
+  if (length(where) > 0 && where[1] != "base") {
+    call <- paste(call, sprintf("require(%s)", where[1]), "\n", sep = "")
+  }
+  if (length(args) > 0) {
+    call <- paste(call, "argv <- ", paste(deparse(args), collapse = "\n"), "\n", sep="");
+  } else {
+    call <- paste(call, "argv <- list()", "\n", sep="");
+  }
+  call <- ifelse(grepl("`", func), paste(call, "do.call(", func, ", argv);", sep=""), paste(call, "do.call('", func, "', argv);", sep=""))
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep=""); # added because of variables
   src <- ""
