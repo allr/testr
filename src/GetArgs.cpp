@@ -33,7 +33,7 @@ SEXP GetArgs(List missingArgs, SEXP dotsE){
         }
         int err = 0;
         SEXP res = R_tryEvalSilent(unevaluatedArg, evalEnv, &err);
-        if(err){
+        if(err || name == "data" || name == "call"){
           evaluatedArg = prcode;
         } else {
           evaluatedArg = res;

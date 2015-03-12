@@ -92,6 +92,10 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   # cat(fname, "\n")
   if (cache$writing.down)
     return(NULL);
+  args <- lapply(args, function(x) if(is.language(x)) enquote(x) else x)
+  attrs <- attributes(retv)
+  retv <- lapply(retv, function(x) if(is.language(x)) enquote(x) else x)
+  attributes(retv) <- attrs
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
 }
 

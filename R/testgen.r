@@ -220,11 +220,12 @@ GenerateTC<- function(symb, vsym, func, body, argv, warn, retv, errs, use.get.an
     call <- paste(call, sprintf("require(%s)", where[1]), "\n", sep = "")
   }
   if (length(args) > 0) {
-    call <- paste(call, "argv <- ", paste(deparse(args), collapse = "\n"), "\n", sep="");
+    args <- lapply(args, function(x) paste(deparse(x), collapse = "\n"))
+    call <- paste(call, sprintf("%s(%s)", func, paste(names(args), args, sep="=", collapse=",")), "\n", sep="")
   } else {
-    call <- paste(call, "argv <- list()", "\n", sep="");
+    call <- paste(call, func, "()", "\n", sep="");
   }
-  call <- ifelse(grepl("`", func), paste(call, "do.call(", func, ", argv);", sep=""), paste(call, "do.call('", func, "', argv);", sep=""))
+#   call <- ifelse(grepl("`", func), paste(call, "do.call(", func, ", argv);", sep=""), paste(call, "do.call('", func, "', argv);", sep=""))
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep=""); # added because of variables
   src <- ""

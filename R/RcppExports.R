@@ -13,10 +13,6 @@ GetArgs <- function(missingArgs, dotsE) {
     .Call('testr_GetArgs', PACKAGE = 'testr', missingArgs, dotsE)
 }
 
-exec <- function(args, what, name) {
-    .Call('testr_exec', PACKAGE = 'testr', args, what, name)
-}
-
 WriteCapInfo_cpp <- function(fname, args, retv, errs, warns) {
     invisible(.Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns))
 }
