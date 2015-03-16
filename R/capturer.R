@@ -35,8 +35,10 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                # for .Primitive and functions without body
                ".C", ".Call", ".External", ".External.graphics", ".External2", ".Fortran",
                "as.call", "names<-", "names", "length", "is.pairlist", "is.null", "is.list", "invisible", "class<-", "class", 
-               "baseenv", "attributes<-", "as.environment", "as.character", ".Call.graphics" , "rep", "round", "max", "min",
-               "length<-", "call", "attr<-", "as.numeric", "switch", "log2", "nargs", "as.double", "xtfrm"
+               "baseenv", "attributes<-", "as.environment", "as.character", ".Call.graphics" , 
+               "length<-", "call", "attr<-", "switch", "log2", "nargs", "as.numeric",
+#                "xtfrm", "as.double","rep", "round", "max", "min",
+               "attributes", "attributes<-", "is.language"
 )
 
 sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
@@ -92,10 +94,10 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   # cat(fname, "\n")
   if (cache$writing.down)
     return(NULL);
-  args <- lapply(args, function(x) if(is.language(x)) enquote(x) else x)
-  attrs <- attributes(retv)
-  retv <- lapply(retv, function(x) if(is.language(x)) enquote(x) else x)
-  attributes(retv) <- attrs
+#   args <- lapply(args, function(x) if(is.language(x)) enquote(x) else x)
+#   attrs <- attributes(retv)
+#   retv <- lapply(retv, function(x) if(is.language(x)) enquote(x) else x)
+#   attributes(retv) <- attrs
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
 }
 

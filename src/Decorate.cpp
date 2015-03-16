@@ -34,8 +34,8 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
     }
     if (!contains(functionTypes, "s3") || !contains(functionTypes,"generic")){
       if (!contains(functionTypes, "primitive")) {
-        robj = RObject(ReplaceBody(name, obj));
-        Rcout << "RCapturing - " << functionName << endl; 
+//        robj = RObject(ReplaceBody(name, obj));
+//        Rcout << "RCapturing - " << functionName << endl; 
       } else {
         robj = RObject(DecorateBody(name, obj));
         Rcout << "DCapturing - " << functionName << endl; 
