@@ -148,7 +148,7 @@ BodyReplace <- function(where.replace, by.what){
   if (where.replace[[1]] == 'function')
     return(as.call(where.replace))
   for (i in 1:length(where.replace)){
-    if (length(as.list(where.replace[[i]])) > 2) {
+    if (length(as.list(where.replace[[i]])) > 2 && !is.function(where.replace[[i]])) {
       where.replace[[i]] <- as.call(BodyReplace(where.replace[[i]], by.what))
     } else {
       if (length(where.replace[[i]]) > 1)
