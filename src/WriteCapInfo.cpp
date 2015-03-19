@@ -22,8 +22,9 @@ std::ofstream tracefile;
 void printCapture(CharacterVector x, std::string prefix) {
   if (x[0] != "NULL"){
     if (x.length() < 1000) {
-      for (int i = 0; i < x.length(); i++)
-      tracefile << prefix << x[i] << std::endl;
+      for (int i = 0; i < x.length(); i++) {
+        tracefile << prefix << x[i] << std::endl;
+      }
     } else {
       tracefile << prefix << "<too long>" << std::endl;
     }
@@ -36,6 +37,7 @@ int captureFileNumber = 0;
 void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, SEXP warns) {
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
+  Function dput("dputModified");
   string traceFile = as<string>(cache.get("trace.folder.path"));
   traceFile += "/";
   traceFile += as<string>(testr.get("kCaptureFile"));
@@ -43,15 +45,15 @@ void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, S
   traceFile += to_string(captureFileNumber);
   tracefile.open(traceFile.c_str(), std::ios::app);
   printCapture(fname, kFuncPrefix);
-  printCapture(deparse(args), kArgsPrefix);
-  printCapture(deparse(warns), kWarnPrefix);
-  printCapture(deparse(retv), kRetvPrefix);
-  printCapture(deparse(errs), kErrsPrefix);
+  printCapture(dput(args), kArgsPrefix);
+  printCapture(dput(warns), kWarnPrefix);
+  printCapture(dput(retv), kRetvPrefix);
+  printCapture(dput(errs), kErrsPrefix);
   tracefile << std::endl;
   tracefile.close();
   // get file size
   struct stat stat_buf;
-  int rc = stat(traceFile.c_str(), &stat_buf);
+  stat(traceFile.c_str(), &stat_buf);
   if (stat_buf.st_size > MAX_FILE_SIZE)
   captureFileNumber++;
 }

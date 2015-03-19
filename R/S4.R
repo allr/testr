@@ -17,7 +17,8 @@ ReplaceS4 <- function(env) {
                  target <- get(x, envir = table)
                  if (!is.null(target)) {
                    new.value <- testr:::ReplaceBody(name, target)
-                   setMethod(name, attr(target, "target"), new.value)
+#                    rcov:::reassignInEnv(name, new.value, table
+                     setMethod(name, attr(target, "target"), new.value, where = .GlobalEnv)
                  }
                }
                lapply(ls(table, all.names = TRUE), replacer)
