@@ -7,3 +7,4 @@ R/extcov.R
 capture_examples/
 genTests/
 reload.R
+^\.travis\.yml$
