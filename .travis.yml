@@ -6,5 +6,4 @@ r_binary_packages:
   - testthat
 
 r_github_packages:
-  - jimhester/covr
   - allr/testr
