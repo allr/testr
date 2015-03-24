@@ -4,6 +4,6 @@ library(testthat)
 context("Decoration")
 
 test_that('Decoration is correct', {
-  DecorateSubst(abbreviate)
+  Decorate(abbreviate)
   expect_equal(T,T)
 })
