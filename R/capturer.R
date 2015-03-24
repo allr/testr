@@ -178,6 +178,8 @@ ChangeNames <- function(x){
 #' @export
 ReplaceBody <- function(func, function.body){
   if (is.null(body(function.body))) return(NULL);
+  uses <- findGlobals(function.body, merge = FALSE)$functions
+  if (any(uses == "UseMethod")) return(NULL);
   args.code <- expression(missingArgs <- list())
   get.args.code <- parse(text="argsW <- testr:::GetArgs(environment())")
   if (!is.null(body(function.body))) {
@@ -215,8 +217,7 @@ DecorateSubst <- function(func, envir = .GlobalEnv){
   } else {
     stop("wrong argument type!")
   }    
-  invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', search(), fname, 
-                  if (is.null(cache$function.types[[fname]])) "function" else cache$function.types[[fname]]))
+  invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', search(), fname))
 } 
 
 

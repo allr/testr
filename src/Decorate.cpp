@@ -5,13 +5,12 @@ using namespace Rcpp;
 map<string, SEXP> decorationChanges;
 
 // [[Rcpp::export]]
-bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes) {
+bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name) {
   Function DecorateBody("DecorateBody");  
   Function ReplaceBody("ReplaceBody"); 
   
   Environment testr("package:testr"); 
   SEXP obj;
-  RObject robj;
   Environment envir_namespace;
   string envir_name;
   Environment envir;
@@ -20,7 +19,8 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
   envir_name = getFunctionEnvironmentName(functionName);
   envir = Environment(envir_name);
   obj = envir.get(functionName);
-  robj = RObject(obj);
+  Function robj = Function(obj);
+  RObject dec;
   if (!robj.hasAttribute("decorated")){
     if (envir_name != ".GlobalEnv"){
       string namespace_name = envir_name.substr(8, string::npos);
@@ -30,18 +30,18 @@ bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, Character
     } else {
       envir_namespace = Environment::global_env();
     }
-    if (!contains(functionTypes, "s3") || !contains(functionTypes,"generic")){
-      if (!contains(functionTypes, "primitive")) {
-        robj = RObject(ReplaceBody(name, obj));
-        Rcout << "RCapturing - " << functionName << endl; 
-      } else {
-        robj = RObject(DecorateBody(name, obj));
-        Rcout << "DCapturing - " << functionName << endl; 
-      }
+    if (robj.body() != R_NilValue) {
+      dec = RObject(ReplaceBody(name, obj));
+      Rcout << "RCapturing - " << functionName << endl; 
+    } else {
+      dec = RObject(DecorateBody(name, obj));
+      Rcout << "DCapturing - " << functionName << endl; 
+    }
+    if (dec != R_NilValue) {
       decorationChanges.insert(pair<string, SEXP>(functionName, obj));
-      robj.attr("decorated") = true;
-      envir.assign(functionName, robj);
-      envir_namespace.assign(functionName, robj);  
+      dec.attr("decorated") = true;
+      envir.assign(functionName, dec);
+      envir_namespace.assign(functionName, dec);  
     }
     envir.lockBinding(functionName);
     envir_namespace.lockBinding(functionName);

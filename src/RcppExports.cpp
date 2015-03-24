@@ -7,16 +7,15 @@
 using namespace Rcpp;
 
 // DecorateSubst_cpp
-bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name, CharacterVector functionTypes);
-RcppExport SEXP testr_DecorateSubst_cpp(SEXP packagesSEXP, SEXP nameSEXP, SEXP functionTypesSEXP) {
+bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name);
+RcppExport SEXP testr_DecorateSubst_cpp(SEXP packagesSEXP, SEXP nameSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type packages(packagesSEXP );
         Rcpp::traits::input_parameter< CharacterVector >::type name(nameSEXP );
-        Rcpp::traits::input_parameter< CharacterVector >::type functionTypes(functionTypesSEXP );
-        bool __result = DecorateSubst_cpp(packages, name, functionTypes);
+        bool __result = DecorateSubst_cpp(packages, name);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
