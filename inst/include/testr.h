@@ -1,6 +1,3 @@
-#include <Rcpp.h>
-using namespace Rcpp;
-using namespace std;
 typedef SEXP (*CCODE)(SEXP, SEXP, SEXP, SEXP);
  
 /* Information for Deparsing Expressions */
@@ -23,7 +20,7 @@ typedef enum {
     PP_SUBSET   = 15,
     PP_WHILE   = 16,
     PP_UNARY   = 17,
-    PP_DOLLAR   = 18,
+    PP_DOLLAR 	= 18,
     PP_FOREIGN 	= 19,
     PP_REPEAT 	= 20
 } PPkind;
@@ -71,4 +68,3 @@ SEXP search();
 bool contains(Rcpp::CharacterVector, std::string);
 std::string getFunctionEnvironmentName(std::string &functionName);
 SEXP deparse(SEXP);
-void WriteCapInfo_cpp (Rcpp::CharacterVector fname, Rcpp::List args, SEXP retv, SEXP errs, SEXP warns); 

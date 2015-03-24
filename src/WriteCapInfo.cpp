@@ -42,7 +42,9 @@ void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, S
   traceFile += "/";
   traceFile += as<string>(testr.get("kCaptureFile"));
   traceFile += "."; 
-  traceFile += to_string(captureFileNumber);
+  char numstr[21];
+  sprintf(numstr, "%d", captureFileNumber);
+  traceFile += numstr;
   tracefile.open(traceFile.c_str(), std::ios::app);
   printCapture(fname, kFuncPrefix);
   printCapture(dput(args), kArgsPrefix);
