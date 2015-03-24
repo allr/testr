@@ -115,7 +115,7 @@ DecorateBody <- function(func, function.body){
   decorated.function <- function (...) 
   {
 #     cat(func, "\n")
-    args <- testr:::GetArgs(list(), environment())
+    args <- testr:::GetArgs(environment())
     if (is.null(args)) 
       args <- list()
     if (length(names(as.list(sys.call()[-1]))) == length(args))
@@ -178,20 +178,8 @@ ChangeNames <- function(x){
 #' @export
 ReplaceBody <- function(func, function.body){
   if (is.null(body(function.body))) return(NULL);
-  names.formals <- names(formals(function.body))
-  argument.pass <- "%s = missing(%s)"
-  names.formals <- sapply(names.formals, function(x) if (grepl("^_|<-", x)) paste("`", x, "`", sep='') else x)
   args.code <- expression(missingArgs <- list())
-  if (length(names.formals) > 0){
-    get.args.arguments <- vector()
-    for (i in 1:length(names.formals)){
-      get.args.arguments <- c(get.args.arguments, 
-                              if (names.formals[i] != '...') 
-                                sprintf(argument.pass, names.formals[i], names.formals[i], names.formals[i]))
-    }
-    args.code <- parse(text=sprintf("missingArgs <- list(%s)", paste(get.args.arguments, collapse = ",")))
-  }  
-  get.args.code <- parse(text="argsW <- testr:::GetArgs(missingArgs, environment())")
+  get.args.code <- parse(text="argsW <- testr:::GetArgs(environment())")
   if (!is.null(body(function.body))) {
     main.write.down <- parse(text=paste("WriteCapInfo('",func,"',argsW, return.value, NULL, NULL)", sep=""))
     new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))
@@ -199,7 +187,6 @@ ReplaceBody <- function(func, function.body){
     last.line <- parse(text=sprintf("return.value <- %s\n", paste(deparse(last.line), collapse = "\n")))
     code <- if (length(new.fb) > 2 && as.list(new.fb)[[1]] == '{') unlist(as.list(new.fb))[2:(length(new.fb) - 1)] else ""
     new.fb <- as.call(c(as.name("{"), 
-                        args.code, 
                         get.args.code,
                         parse(text=code), 
                         last.line, 

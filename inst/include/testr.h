@@ -1,3 +1,5 @@
+#include <Rcpp.h>
+
 typedef SEXP (*CCODE)(SEXP, SEXP, SEXP, SEXP);
  
 /* Information for Deparsing Expressions */

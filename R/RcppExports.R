@@ -9,8 +9,8 @@ UndecorateCpp <- function(name) {
     .Call('testr_UndecorateCpp', PACKAGE = 'testr', name)
 }
 
-GetArgs <- function(missingArgs, dotsE) {
-    .Call('testr_GetArgs', PACKAGE = 'testr', missingArgs, dotsE)
+GetArgs <- function(dotsE) {
+    .Call('testr_GetArgs', PACKAGE = 'testr', dotsE)
 }
 
 WriteCapInfo_cpp <- function(fname, args, retv, errs, warns) {

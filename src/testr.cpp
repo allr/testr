@@ -1,4 +1,3 @@
-#include <Rcpp.h>
 #include "testr.h"
 using namespace Rcpp;
 using namespace std;

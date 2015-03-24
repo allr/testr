@@ -1,4 +1,3 @@
-#include <Rcpp.h>
 #include <iostream>
 #include <fstream>
 #include "testr.h"
