@@ -46,36 +46,6 @@ env <- c("environment", "environment<-", "parent.frame", "parent.env", "parent.e
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
-builtin.items <- builtins()
-
-code.template.dots <- "
-        if (!missing(...)) {
-          succ <- TRUE
-          a <- tryCatch(list(...), error = function(x) succ <<- FALSE)
-          if (succ){
-            args <- c(args, a)
-          } else {
-            all.ind <- 1:length(args.list)
-            if(length(ind) > 0) 
-              ind <- all.ind[-ind] 
-            else 
-              ind <- all.ind
-            for (i in ind){
-              succ <- TRUE
-              e <- tryCatch(eval(args.list[[i]]), error=function(x) succ <<- FALSE)
-              j <- ifelse(is.null(names.args.list) || names.args.list[i] == '', length(args) + 1, names.args.list[i])
-              if (succ && !is.function(e)){
-                if (is.null(e)) {
-                  args[j] <- list(NULL)
-                } else {
-                  args[[j]] <- e
-                }
-              } else {
-                args[[j]] <- args.list[[i]]
-              }
-            }
-          }
-        }\n"
 
 #' @title Write down capture information 
 #' 
@@ -91,114 +61,9 @@ code.template.dots <- "
 #' @export
 #' 
 WriteCapInfo <- function(fname, args, retv, errs, warns){
-  # cat(fname, "\n")
   if (cache$writing.down)
     return(NULL);
-#   args <- lapply(args, function(x) if(is.language(x)) enquote(x) else x)
-#   attrs <- attributes(retv)
-#   retv <- lapply(retv, function(x) if(is.language(x)) enquote(x) else x)
-#   attributes(retv) <- attrs
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
-}
-
-
-#' @title Decorate function to capture calls and return values 
-#' 
-#' This function is respinsible for writing down capture information for decorated function calls.
-#' @param func function name as a character string
-#' @return decorated function
-#' @seealso WriteCapInfo
-#'
-#' @export
-DecorateBody <- function(func, function.body){
-  # create a wrapper closure and return in
-  decorated.function <- function (...) 
-  {
-#     cat(func, "\n")
-    args <- testr:::GetArgs(environment())
-    if (is.null(args)) 
-      args <- list()
-    if (length(names(as.list(sys.call()[-1]))) == length(args))
-      names(args) <- names(as.list(sys.call()[-1]))
-    warns <- NULL
-    if (!is.null(body(function.body))) 
-      body(function.body) <- as.call(c(as.name("{"), 
-                                       expression(for (`_n` in ls(sys.frame(-3), all.names = TRUE)) 
-                                                        if (grepl("^[.][a_zA-Z]", `_n`)) assign(`_n`, get(`_n`, sys.frame(-3)))), body(function.body)))
-    return.value <- withCallingHandlers(do.call(function.body, 
-                                                args, envir = environment()), error = function(e) {
-                                                  errs <- e$message
-                                                  WriteCapInfo(func, args, NULL, errs, warns)
-                                                  stop(errs)
-                                                }, warning = function(w) {
-                                                  if (is.null(warns)) 
-                                                    warns <<- w$message
-                                                  else warns <<- c(warns, w$message)
-                                                })
-    WriteCapInfo(func, args, return.value, NULL, warns)
-    return.value
-  } 
-  return (decorated.function)
-}
-
-BodyReplace <- function(where.replace, by.what){
-  if (length(where.replace) == 1)
-    return (where.replace)
-  where.replace <- as.list(where.replace)
-  if (where.replace[[1]] == 'function')
-    return(as.call(where.replace))
-  for (i in 1:length(where.replace)){
-    if (length(as.list(where.replace[[i]])) > 2 && !is.function(where.replace[[i]])) {
-      where.replace[[i]] <- as.call(BodyReplace(where.replace[[i]], by.what))
-    } else {
-      if (length(where.replace[[i]]) > 1)
-        if (where.replace[[i]][[1]] == 'return'){
-          last.line <- parse(text=paste("return.value <- ", paste(deparse(where.replace[[i]][[2]]), collapse = "\n"), ";\n", sep=""))
-          where.replace[[i]] <- as.call(c(as.name("{"), last.line, by.what, expression(return(return.value))))
-        }
-    }
-  }
-  as.call(where.replace)
-}
-
-ChangeNames <- function(x){
-  x <- if (grepl("^_|<-", x)) paste("`", x, "`", sep='') else x
-  x <- if (x == '...') "dotArgs" else x
-  x <- gsub("\\.", "", x)
-  x
-}
-
-#' @title Replace function body with decoration hooks 
-#' 
-#' This function is responsible for changing function body to capture specific hooks
-#' @param func function name as a character string
-#' @return decorated function
-#' @seealso WriteCapInfo
-#'
-#' @export
-ReplaceBody <- function(func, function.body){
-  if (is.null(body(function.body))) return(NULL);
-  uses <- findGlobals(function.body, merge = FALSE)$functions
-  if (any(uses == "UseMethod")) return(NULL);
-  args.code <- expression(missingArgs <- list())
-  get.args.code <- parse(text="argsW <- testr:::GetArgs(environment())")
-  if (!is.null(body(function.body))) {
-    main.write.down <- parse(text=paste("WriteCapInfo('",func,"',argsW, return.value, NULL, NULL)", sep=""))
-    new.fb <- BodyReplace(body(function.body), c(args.code, main.write.down))
-    last.line <- if (as.list(new.fb)[[1]] != '{') new.fb else new.fb[[length(new.fb)]]
-    last.line <- parse(text=sprintf("return.value <- %s\n", paste(deparse(last.line), collapse = "\n")))
-    code <- if (length(new.fb) > 2 && as.list(new.fb)[[1]] == '{') unlist(as.list(new.fb))[2:(length(new.fb) - 1)] else ""
-    new.fb <- as.call(c(as.name("{"), 
-                        get.args.code,
-                        parse(text=code), 
-                        last.line, 
-                        main.write.down, 
-                        expression(return.value)))
-  }
-  body(function.body) <- new.fb
-  attr(function.body, "decorated") <- TRUE
-  #   attr(function.body, "original.body") <- saved.function.body
-  function.body
 }
 
 #' @title Decorates function to capture calls and return values 
@@ -209,7 +74,7 @@ ReplaceBody <- function(func, function.body){
 #' @export 
 #' @seealso WriteCapInfo Decorate
 #'
-DecorateSubst <- function(func, envir = .GlobalEnv){
+Decorate <- function(func, envir = .GlobalEnv){
   if (class(func) == "function"){
     fname <- as.character(substitute(func))
   } else if (class(func) == "character"){
@@ -217,9 +82,34 @@ DecorateSubst <- function(func, envir = .GlobalEnv){
   } else {
     stop("wrong argument type!")
   }    
-  invisible(.Call('testr_DecorateSubst_cpp', PACKAGE = 'testr', search(), fname))
+  exit.capturer <- function() {
+    testr:::WriteCapInfo(fname, 
+                   args = cache$arguments[[length(cache$arguments)]], 
+                   retv = NULL, errs = NULL, warns = NULL) 
+    cache$arguments <- cache$arguments[-length(cache$arguments)]
+  }
+  entry.capturer <- function() {
+    cache$arguments[[length(arguments) + 1]] <- testr:::GetArgs(sys.frame(sys.nframe() - 5))
+  } 
+  do.call(trace, list(what=fname, tracer=entry.capturer, exit=exit.capturer, print = FALSE))
 } 
 
+#' @title Decorates function to capture call argumens 
+#' 
+#' @param func function name as a character string
+#' @export 
+#' @seealso WriteCapInfo Decorate
+#'
+Undecorate <- function(func) {
+  if (class(func) == "function"){
+    fname <- as.character(substitute(func))
+  } else if (class(func) == "character"){
+    fname <- func
+  } else {
+    stop("wrong argument type!")
+  }  
+  do.call(untrace, fname)
+}
 
 
 #' @title Setup information capturing for list of function

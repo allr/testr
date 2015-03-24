@@ -3,9 +3,7 @@ cache           <- new.env()
 cache$capture.file.number <- 0
 cache$writing.down <- FALSE
 
-cache$prim.generics <- ls(.GenericArgsEnv)
-
-cache$prim <- ls(.ArgsEnv) 
+cache$arguments <- list()
 
 #' @export
 compiledArgsFunctions <- new.env()

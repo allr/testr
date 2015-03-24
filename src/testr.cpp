@@ -1,4 +1,5 @@
 #include "testr.h"
+#define USE_RINTERNALS
 using namespace Rcpp;
 using namespace std;
 
