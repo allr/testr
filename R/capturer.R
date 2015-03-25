@@ -1,51 +1,53 @@
-kCaptureFile <- "capture"
-kCaptureFolder <- "capture"
-kSymbPrefix <- "symb: "
-kValSPrefix <- "vsym: "
-kFuncPrefix <- "func: "
-kBodyPrefix <- "body: "
-kTypePrefix <- "type: "
-kArgsPrefix <- "argv: "
-kRetvPrefix <- "retv: "
-kErrsPrefix <- "errs: "
-kWarnPrefix <- "warn: "
-blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
-               ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 
-               ".Machine", "on.exit", 
-               "debug", "undebug",
-               "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", 
-               "c", "try", 
-               "NextMethod", # no idea why
-               "setwd", # path of capture files are relative to WD, change that
-               "rawConnection",
-               ".handleSimpleError", "tryCatch",
-               "library", "UseMethod", 
-               # something problematic
-               "standardGeneric", "identity","missing",
-               "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible",
-               # messes up RStudio
-               "sprintf", "parse", "paste", 
-               "textConnection", "require", "with", "get", "sink", "eval",
-               "parse", "paste", "paste0", "evalq", "deparse", "exists", "environment", "conditionMessage.condition", "simpleError", "as.name",
-               "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default", "asNamespace", "contributors", "close.connection",
-               "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
-               "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
-               "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local", "merge.data.frame", 
-               "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals",
-               # for .Primitive and functions without body
-               ".C", ".Call", ".External", ".External.graphics", ".External2", ".Fortran",
-               "as.call", "names<-", "names", "length", "is.pairlist", "is.null", "is.list", "invisible", "class<-", "class", 
-               "baseenv", "attributes<-", "as.environment", "as.character", ".Call.graphics" , 
-               "length<-", "call", "attr<-", "switch", "log2", "nargs", "as.numeric",
-#                "xtfrm", "as.double","rep", "round", "max", "min",
-               "attributes", "attributes<-", "is.language"
-)
+#' @title Decorates function to capture calls and return values 
+#' 
+#' This function is respinsible for writing down capture information for decorated function calls.
+#' Replaces the function by decorated function in the global environment
+#' @param func function name as a character string
+#' @export 
+#' @seealso WriteCapInfo Decorate
+#'
+Decorate <- function(func, envir = .GlobalEnv){
+  if (class(func) == "function"){
+    fname <- as.character(substitute(func))
+  } else if (class(func) == "character"){
+    fname <- func
+  } else {
+    stop("wrong argument type!")
+  }    
+  exit.capturer <- function() {
+#     testr:::WriteCapInfo(fname, 
+#                    args = cache$arguments[[length(cache$arguments)]], 
+#                    retv = NULL, errs = NULL, warns = NULL) 
+    cache$arguments <- cache$arguments[-length(cache$arguments)]
+  }
+  entry.capturer <- function() {
+    cache$arguments[[length(cache$arguments) + 1]] <- testr:::GetArgs(sys.frame(sys.nframe() - 5))
+  } 
+  do.call(trace, list(what=fname, tracer=entry.capturer, exit=exit.capturer, print = FALSE))
+  cache$decorated <- c(cache$decorated, fname)
+} 
 
-sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
-env <- c("environment", "environment<-", "parent.frame", "parent.env", "parent.env<-")
-keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
-operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
-               "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
+#' @title Undecorate function
+#' 
+#' Reset previously decorate function
+#' @param func function name as a character string
+#' @export 
+#' @seealso WriteCapInfo Decorate
+#'
+Undecorate <- function(func) {
+  if (class(func) == "function"){
+    fname <- as.character(substitute(func))
+  } else if (class(func) == "character"){
+    fname <- func
+  } else {
+    stop("wrong argument type!")
+  }  
+  ind <- which(fname %in% cache$decorated)
+  if (length(ind) == 0)
+    stop("Function was not decorated!")
+  do.call(untrace, list(fname))
+  cache$decorated <- cache$decorated[-ind]
+}
 
 #' @title Write down capture information 
 #' 
@@ -66,70 +68,19 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
 }
 
-#' @title Decorates function to capture calls and return values 
-#' 
-#' This function is respinsible for writing down capture information for decorated function calls.
-#' Replaces the function by decorated function in the global environment
-#' @param func function name as a character string
-#' @export 
-#' @seealso WriteCapInfo Decorate
-#'
-Decorate <- function(func, envir = .GlobalEnv){
-  if (class(func) == "function"){
-    fname <- as.character(substitute(func))
-  } else if (class(func) == "character"){
-    fname <- func
-  } else {
-    stop("wrong argument type!")
-  }    
-  exit.capturer <- function() {
-    testr:::WriteCapInfo(fname, 
-                   args = cache$arguments[[length(cache$arguments)]], 
-                   retv = NULL, errs = NULL, warns = NULL) 
-    cache$arguments <- cache$arguments[-length(cache$arguments)]
-  }
-  entry.capturer <- function() {
-    cache$arguments[[length(arguments) + 1]] <- testr:::GetArgs(sys.frame(sys.nframe() - 5))
-  } 
-  do.call(trace, list(what=fname, tracer=entry.capturer, exit=exit.capturer, print = FALSE))
-} 
-
-#' @title Decorates function to capture call argumens 
-#' 
-#' @param func function name as a character string
-#' @export 
-#' @seealso WriteCapInfo Decorate
-#'
-Undecorate <- function(func) {
-  if (class(func) == "function"){
-    fname <- as.character(substitute(func))
-  } else if (class(func) == "character"){
-    fname <- func
-  } else {
-    stop("wrong argument type!")
-  }  
-  do.call(untrace, fname)
-}
-
-
 #' @title Setup information capturing for list of function
 #' 
 #' This function is respinsible for setting up capturing for functions
 #' 
 #' @param flist function or list of functions to turn on capturing for. List should be only as character.
-#' @param verbose if to print what functions will be captured
 #' @seealso Decorate
 #' @export
-SetupCapture <- function(flist, verbose = testrOptions('verbose')){
-  if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
-    dir.create(kCaptureFolder)
-  set.cache("writing.down", TRUE)
+SetupCapture <- function(flist){
   for (func in flist){
     if (EligibleForCapture(func)){
-      DecorateSubst(func)
+      Decorate(func)
     }
   }
-  set.cache("writing.down", FALSE)
 }
 
 #' @title Check if function is eligible for wrapping to capture arguments and return values
@@ -153,8 +104,23 @@ EligibleForCapture <- function(func){
 #' 
 #' Sets up capturing of builtin functions
 #' @param internal wheather only internals should be captured, or all builtins
+#' @param functions list of functions to be decorate
+#' @param indexes specific indexes from functions vector
 #' @seealso SetupCapture
 #' @export
-BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal)){
-  SetupCapture(functions, verbose = TRUE)
+BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal), indexes){
+  if (!missing(indexes))
+    SetupCapture(functions)
+  else
+    SetupCapture(functions[indexes])
+}
+
+#' @title Clear decoration
+#' 
+#' Clear anything previously decorate
+#' @seealso Undecorate
+#' @export
+ClearDecoration <- function() {
+  for (fname in cache$decorated)
+    Undecorate(fname)
 }

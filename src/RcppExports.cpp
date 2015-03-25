@@ -6,37 +6,6 @@
 
 using namespace Rcpp;
 
-// DecorateSubst_cpp
-bool DecorateSubst_cpp(CharacterVector packages, CharacterVector name);
-RcppExport SEXP testr_DecorateSubst_cpp(SEXP packagesSEXP, SEXP nameSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type packages(packagesSEXP );
-        Rcpp::traits::input_parameter< CharacterVector >::type name(nameSEXP );
-        bool __result = DecorateSubst_cpp(packages, name);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// UndecorateCpp
-bool UndecorateCpp(CharacterVector name);
-RcppExport SEXP testr_UndecorateCpp(SEXP nameSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type name(nameSEXP );
-        bool __result = UndecorateCpp(name);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
 // GetArgs
 SEXP GetArgs(SEXP dotsE);
 RcppExport SEXP testr_GetArgs(SEXP dotsESEXP) {

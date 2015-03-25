@@ -4,13 +4,54 @@ cache$capture.file.number <- 0
 cache$writing.down <- FALSE
 
 cache$arguments <- list()
+cache$decorated <- vector()
 
-#' @export
-compiledArgsFunctions <- new.env()
+kCaptureFile <- "capture"
+kCaptureFolder <- "capture"
+kSymbPrefix <- "symb: "
+kValSPrefix <- "vsym: "
+kFuncPrefix <- "func: "
+kBodyPrefix <- "body: "
+kTypePrefix <- "type: "
+kArgsPrefix <- "argv: "
+kRetvPrefix <- "retv: "
+kErrsPrefix <- "errs: "
+kWarnPrefix <- "warn: "
 
-#' @export
-codeArgsFunctions <- new.env()
+blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
+               ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 
+               ".Machine", "on.exit", "debug", "undebug",
+               "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2", 
+               "c", "try", "NextMethod", "UseMethod",# no idea why
+               "setwd", # path of capture files are relative to WD, change that
+               "rawConnection", ".handleSimpleError", "tryCatch",
+               "library", # something problematic
+               "standardGeneric", "identity","missing",
+               "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible",
+               "sprintf", "parse", "paste", 
+               "textConnection", "require", "with", "get", "sink", "eval",
+               "parse", "paste", "paste0", "evalq", "deparse", "exists", "environment", "conditionMessage.condition", "simpleError", "as.name",
+               "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default", "asNamespace", "contributors", "close.connection",
+               "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked", "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
+               "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info", ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
+               "getNamespace", "isNamespace", "stdin", "stderr", "stop", "stopifnot", "structure", "local", "merge.data.frame", 
+               "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals",
+               # for .Primitive and functions without body
+               ".C", ".Call", ".External", ".External.graphics", ".External2", ".Fortran",
+               "as.call", "names<-", "names", "length", "is.pairlist", "is.null", "is.list", "invisible", "class<-", "class", 
+               "baseenv", "attributes<-", "as.environment", "as.character", ".Call.graphics" , 
+               "length<-", "call", "attr<-", "switch", "log2", "nargs", "as.numeric",
+               #                "xtfrm", "as.double","rep", "round", "max", "min",
+               "attributes", "attributes<-", "is.language", 
+               # errors with trace              
+               "match.call"
+)
 
+sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')
+env <- c("environment", "environment<-", "parent.frame", "parent.env", "parent.env<-")
+keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
+operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
+               "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
 .onLoad <- function(libname, pkgname)
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)

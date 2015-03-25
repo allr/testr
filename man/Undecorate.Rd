@@ -2,7 +2,9 @@
 % Please edit documentation in R/capturer.R
 \name{Undecorate}
 \alias{Undecorate}
-\title{Decorates function to capture call argumens}
+\title{Undecorate function
+
+Reset previously decorate function}
 \usage{
 Undecorate(func)
 }
@@ -10,7 +12,9 @@ Undecorate(func)
 \item{func}{function name as a character string}
 }
 \description{
-Decorates function to capture call argumens
+Undecorate function
+
+Reset previously decorate function
 }
 \seealso{
 WriteCapInfo Decorate
