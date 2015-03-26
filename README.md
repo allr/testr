@@ -7,6 +7,7 @@ This is the testR-py reimplementation and extension in R language. For the older
 on github: https://github.com/allr/testr-py
 
 [![Travis-CI Build Status](https://travis-ci.org/allr/testr.png?branch=master)](https://travis-ci.org/allr/testr)
+[![Coverage Status](https://coveralls.io/repos/allr/testr/badge.svg?branch=master)](https://coveralls.io/r/allr/testr?branch=master)
 
 # Installation
 Development of package just started recently and is far away from CRAN release yet.
