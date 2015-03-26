@@ -13,17 +13,15 @@ Decorate <- function(func, envir = .GlobalEnv){
     fname <- func
   } else {
     stop("wrong argument type!")
-  }    
+  }   
+  if (is_s3_generic(fname)) return(NULL);
   exit.capturer <- function() {
-#     testr:::WriteCapInfo(fname, 
-#                    args = cache$arguments[[length(cache$arguments)]], 
-#                    retv = NULL, errs = NULL, warns = NULL) 
-    cache$arguments <- cache$arguments[-length(cache$arguments)]
+      testr:::WriteCapInfo(fname)
   }
   entry.capturer <- function() {
-    cache$arguments[[length(cache$arguments) + 1]] <- testr:::GetArgs(sys.frame(sys.nframe() - 5))
+    testr:::SaveArgs(sys.frame(sys.nframe() - 5))
   } 
-  do.call(trace, list(what=fname, tracer=entry.capturer, exit=exit.capturer, print = FALSE))
+  do.call(trace, list(what=fname, tracer=entry.capturer, exit=exit.capturer, print = testrOptions('verbose')))
   cache$decorated <- c(cache$decorated, fname)
 } 
 
@@ -35,7 +33,7 @@ Decorate <- function(func, envir = .GlobalEnv){
 #' @seealso WriteCapInfo Decorate
 #'
 Undecorate <- function(func) {
-  if (class(func) == "function"){
+  if (class(func) == "functionWithTrace"){
     fname <- as.character(substitute(func))
   } else if (class(func) == "character"){
     fname <- func
@@ -62,10 +60,10 @@ Undecorate <- function(func) {
 #' @importFrom Rcpp evalCpp
 #' @export
 #' 
-WriteCapInfo <- function(fname, args, retv, errs, warns){
+WriteCapInfo <- function(fname){
   if (cache$writing.down)
     return(NULL);
-  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args, retv, errs, warns)
+  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname)
 }
 
 #' @title Setup information capturing for list of function
@@ -76,11 +74,13 @@ WriteCapInfo <- function(fname, args, retv, errs, warns){
 #' @seealso Decorate
 #' @export
 SetupCapture <- function(flist){
+  set.cache('writing.down', TRUE)
   for (func in flist){
     if (EligibleForCapture(func)){
       Decorate(func)
     }
-  }
+  }  
+  set.cache('writing.down', FALSE)
 }
 
 #' @title Check if function is eligible for wrapping to capture arguments and return values
@@ -109,7 +109,7 @@ EligibleForCapture <- function(func){
 #' @seealso SetupCapture
 #' @export
 BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal), indexes){
-  if (!missing(indexes))
+  if (missing(indexes))
     SetupCapture(functions)
   else
     SetupCapture(functions[indexes])
@@ -123,4 +123,15 @@ BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal)
 ClearDecoration <- function() {
   for (fname in cache$decorated)
     Undecorate(fname)
+}
+
+GetArgs <- function(dotsE) {
+  res <- .Call('testr_GetArgs', PACKAGE = 'testr', dotsE)
+  res
+}
+
+is_s3_generic <- function(fname) {
+  f <- get(fname, env = parent.frame(), mode = "function")
+  uses <- findGlobals(f, merge = FALSE)$functions
+  any(uses == "UseMethod")
 }

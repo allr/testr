@@ -10,11 +10,7 @@ std::string kSymbPrefix = "symb: ";
 std::string kValSPrefix = "vsym: ";
 std::string kFuncPrefix = "func: ";
 std::string kBodyPrefix = "body: ";
-std::string kTypePrefix = "type: ";
 std::string kArgsPrefix = "argv: ";
-std::string kRetvPrefix = "retv: ";
-std::string kErrsPrefix = "errs: ";
-std::string kWarnPrefix = "warn: ";
 
 std::ofstream tracefile;
 
@@ -33,10 +29,9 @@ void printCapture(CharacterVector x, std::string prefix) {
 int captureFileNumber = 0;
 
 // [[Rcpp::export]]
-void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, SEXP warns) {
+void WriteCapInfo_cpp (CharacterVector fname) {
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
-  Function dput("dputModified");
   string traceFile = as<string>(cache.get("trace.folder.path"));
   traceFile += "/";
   traceFile += as<string>(testr.get("kCaptureFile"));
@@ -46,10 +41,8 @@ void WriteCapInfo_cpp (CharacterVector fname, List args, SEXP retv, SEXP errs, S
   traceFile += numstr;
   tracefile.open(traceFile.c_str(), std::ios::app);
   printCapture(fname, kFuncPrefix);
-  printCapture(dput(args), kArgsPrefix);
-  printCapture(dput(warns), kWarnPrefix);
-  printCapture(dput(retv), kRetvPrefix);
-  printCapture(dput(errs), kErrsPrefix);
+  SEXP args = pop_args();
+  printCapture(deparse(args), kArgsPrefix);
   tracefile << std::endl;
   tracefile.close();
   // get file size

@@ -44,7 +44,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                #                "xtfrm", "as.double","rep", "round", "max", "min",
                "attributes", "attributes<-", "is.language", 
                # errors with trace              
-               "match.call"
+               "match.call", "load", "assign", "save", ".doTrace", "tracingState", "traceback", "trace" 
 )
 
 sys <- c('system.time','system.file','sys.status','sys.source','sys.save.image','sys.parents','sys.parent','sys.on.exit','sys.nframe','sys.load.image','sys.function','sys.frames','sys.frame','sys.calls','sys.call','R_system_version','.First.sys')

@@ -2,7 +2,14 @@
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
+std::vector<SEXP> trace_arguments;
+
+SEXP pop_args() {
+  SEXP args = trace_arguments.back();
+  trace_arguments.pop_back();
+  return args;
+}
+
 SEXP GetArgs(SEXP dotsE){
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
@@ -21,23 +28,34 @@ SEXP GetArgs(SEXP dotsE){
   for( int i=0; i<nArgs; i++){
     evaluatedArg = R_NilValue;
     string name = as<string>(envNames[i]);
+//    Rcout << "name - " << name << endl;
     SEXP nameSym = Rf_install(name.c_str());
     unevaluatedArg = Rf_findVarInFrame(dotsE, nameSym);
+    Language call("missing", nameSym) ; 
+    LogicalVector missing(do_missing(call, Rf_ScalarInteger(0), CDR(call), dotsE));
+    if (missing[0] == TRUE) {
+      continue;
+    }
     if (unevaluatedArg != R_UnboundValue && TYPEOF(unevaluatedArg) == PROMSXP) {
       SEXP prcode = PRCODE(unevaluatedArg);
       if (!Rf_isNull(PRENV(unevaluatedArg))){
+//        Rcout << "PREnv is not null" << endl;
         evalEnv = PRENV(unevaluatedArg);
       } else {
         evalEnv = dotsE;
       }
+      evalEnv = dotsE;
       int err = 0;
       SEXP res = R_tryEvalSilent(unevaluatedArg, evalEnv, &err);
-      if(err || name == "data" || name == "call"){
+      if(err){
+//        Rcout << "Error in promise eval - " << name << endl;
         evaluatedArg = prcode;
       } else {
         evaluatedArg = res;
       }
-      args[name] = evaluatedArg; 
+//      dotsEnv.assign(name, prcode);
+
+        args[name] = evaluatedArg; 
     }
   }
   nArgs--;
@@ -74,5 +92,11 @@ SEXP GetArgs(SEXP dotsE){
     }
   }
   return args;
+}
+
+// [[Rcpp::export]]
+void SaveArgs(SEXP env) {
+  SEXP args = GetArgs(env);
+  trace_arguments.push_back(args);
 }
 

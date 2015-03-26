@@ -6,33 +6,26 @@
 
 using namespace Rcpp;
 
-// GetArgs
-SEXP GetArgs(SEXP dotsE);
-RcppExport SEXP testr_GetArgs(SEXP dotsESEXP) {
+// SaveArgs
+void SaveArgs(SEXP env);
+RcppExport SEXP testr_SaveArgs(SEXP envSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type dotsE(dotsESEXP );
-        SEXP __result = GetArgs(dotsE);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
+        Rcpp::traits::input_parameter< SEXP >::type env(envSEXP );
+        SaveArgs(env);
     }
-    UNPROTECT(1);
-    return __sexp_result;
+    return R_NilValue;
 END_RCPP
 }
 // WriteCapInfo_cpp
-void WriteCapInfo_cpp(CharacterVector fname, List args, SEXP retv, SEXP errs, SEXP warns);
-RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP argsSEXP, SEXP retvSEXP, SEXP errsSEXP, SEXP warnsSEXP) {
+void WriteCapInfo_cpp(CharacterVector fname);
+RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP) {
 BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type fname(fnameSEXP );
-        Rcpp::traits::input_parameter< List >::type args(argsSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type retv(retvSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type errs(errsSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type warns(warnsSEXP );
-        WriteCapInfo_cpp(fname, args, retv, errs, warns);
+        WriteCapInfo_cpp(fname);
     }
     return R_NilValue;
 END_RCPP

@@ -70,3 +70,7 @@ SEXP search();
 bool contains(Rcpp::CharacterVector, std::string);
 std::string getFunctionEnvironmentName(std::string &functionName);
 SEXP deparse(SEXP);
+SEXP pop_args();
+
+extern "C" SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho);
+
