@@ -31,9 +31,7 @@ SEXP GetArgs(SEXP dotsE){
 //    Rcout << "name - " << name << endl;
     SEXP nameSym = Rf_install(name.c_str());
     unevaluatedArg = Rf_findVarInFrame(dotsE, nameSym);
-    Language call("missing", nameSym) ; 
-    LogicalVector missing(do_missing(call, Rf_ScalarInteger(0), CDR(call), dotsE));
-    if (missing[0] == TRUE) {
+    if (missing(nameSym, dotsE)) {
       continue;
     }
     if (unevaluatedArg != R_UnboundValue && TYPEOF(unevaluatedArg) == PROMSXP) {

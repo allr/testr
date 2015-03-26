@@ -27,6 +27,15 @@ SEXP deparse(SEXP x)
       return deparse_fun(call, Rf_ScalarInteger(0), CDR(call), R_GlobalEnv ) ; 
 }
 
+
+bool missing(SEXP x, SEXP env)
+{
+      CCODE missing_fun = get_internal("missing");
+      Language call("missing", x);
+      LogicalVector res(missing_fun(call, Rf_ScalarInteger(0), CDR(call), env));
+      return res[0] == TRUE; 
+}
+
 bool contains(CharacterVector v, string elem){
   for (int i = 0; i < v.length(); i++){
     if (elem == as<string>(v[i]))
