@@ -11,12 +11,7 @@ kCaptureFolder <- "capture"
 kSymbPrefix <- "symb: "
 kValSPrefix <- "vsym: "
 kFuncPrefix <- "func: "
-kBodyPrefix <- "body: "
-kTypePrefix <- "type: "
 kArgsPrefix <- "argv: "
-kRetvPrefix <- "retv: "
-kErrsPrefix <- "errs: "
-kWarnPrefix <- "warn: "
 
 blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(", 
                ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list", 

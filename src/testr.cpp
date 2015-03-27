@@ -13,7 +13,6 @@ CCODE get_internal(string name)
     return NULL ;
 }
 
-
 SEXP search(){
       CCODE search_fun = get_internal("search");
       Language call("search") ;    
