@@ -174,7 +174,7 @@ GenerateTC<- function(symb, vsym, func, argv) {
   retv <- tryCatch(eval(parse(text=call)), 
                    warning=function(w){cache$warns <- w$message}, 
                    error=function(e){cache$errs <- e$message})
-  
+  retv <- Quoter(retv)
   src <- ""
   src <- paste(src, "test(id=",cache$tID[[func]],", code={\n", call, "}, ", sep="")
   if (cache$warns != "")
@@ -191,6 +191,16 @@ GenerateTC<- function(symb, vsym, func, argv) {
 
 ParseAndCheck <- function(what) {
   tryCatch({eval(parse(text=what)); TRUE}, error=function(e){FALSE})
+}
+
+Quoter <- function(arg) {
+  if (is.list(arg)) {
+    org.attrs <- attributes(arg)
+    res <- lapply(arg, function(x) if(is.language(x)) enquote(x) else Quoter(x))
+    attributes(res) <- org.attrs
+    res
+  }
+  else arg
 }
 
 #' @title Removes prefixes and quote from line
