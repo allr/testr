@@ -6,6 +6,18 @@
 
 using namespace Rcpp;
 
+// try_eval_tracer
+void try_eval_tracer(SEXP env);
+RcppExport SEXP testr_try_eval_tracer(SEXP envSEXP) {
+BEGIN_RCPP
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type env(envSEXP );
+        try_eval_tracer(env);
+    }
+    return R_NilValue;
+END_RCPP
+}
 // WriteCapInfo_cpp
 void WriteCapInfo_cpp(CharacterVector fname, SEXP args_env);
 RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP args_envSEXP) {

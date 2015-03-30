@@ -34,7 +34,6 @@ SEXP GetArgs(SEXP dotsE){
       } else {
         evalEnv = dotsE;
       }
-      evalEnv = dotsE;
       int err = 0;
       SEXP res = R_tryEvalSilent(unevaluatedArg, evalEnv, &err);
       if(err){
@@ -79,4 +78,17 @@ SEXP GetArgs(SEXP dotsE){
     }
   }
   return args;
+}
+
+// [[Rcpp::export]]
+void try_eval_tracer(SEXP env) {
+  SEXP nameSym = Rf_install("what");
+  SEXP res = Rf_findVar( nameSym, env );
+  if (res == R_UnboundValue) {
+    Rcout << "Argument what not found" << endl;
+  }
+  if(TYPEOF(res) == PROMSXP){
+    int err;
+    res = R_tryEvalSilent(res, env, &err) ;
+  }
 }
