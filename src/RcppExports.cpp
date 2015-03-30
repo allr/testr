@@ -6,26 +6,15 @@
 
 using namespace Rcpp;
 
-// SaveArgs
-void SaveArgs(SEXP env);
-RcppExport SEXP testr_SaveArgs(SEXP envSEXP) {
-BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type env(envSEXP );
-        SaveArgs(env);
-    }
-    return R_NilValue;
-END_RCPP
-}
 // WriteCapInfo_cpp
-void WriteCapInfo_cpp(CharacterVector fname);
-RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP) {
+void WriteCapInfo_cpp(CharacterVector fname, SEXP args_env);
+RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP args_envSEXP) {
 BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type fname(fnameSEXP );
-        WriteCapInfo_cpp(fname);
+        Rcpp::traits::input_parameter< SEXP >::type args_env(args_envSEXP );
+        WriteCapInfo_cpp(fname, args_env);
     }
     return R_NilValue;
 END_RCPP

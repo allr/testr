@@ -15,26 +15,24 @@ FilterTCs<- function(tc.root, tc.db.path, tc.result.root,
                      wipe.tc.database = FALSE, k = 1, 
                      verbose = testrOptions('verbose')) {
   # parameter checks
-  if (missing(tc.root)) 
-    stop('A directory containing Test Cases must be specified!'); 
-  if (!file.exists(tc.root))
-    stop('Specified directory with Test Cases does not exist!'); 
+  if (missing(tc.root) || !file.exists(tc.root)) stop('Specified directory with Test Cases does not exist!'); 
   if (clear.previous.coverage) ResetCoverageInfo(file.path(cache$r.home, cache$source.folder, fsep = .Platform$file.sep))
   if (wipe.tc.database) cleanTCDB(tc.db.path)
-  after.tc.cov.percentage <- 0
+  
   db.cov <- measureCoverageByDB(tc.db.path)
+  
   if (verbose) cat("TC Root - ", tc.root, "\n")
   all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
   if (verbose) cat("Number of TC Files - ", length(all.tc), "\n")
+  
   function.name <- GetFunctionName(basename(all.tc[1]))
-  tc.function.path <- file.path(tc.result.root, function.name, fsep = .Platform$file.sep)
-  if (!file.exists(tc.function.path))
-    dir.create(tc.function.path)
+  tc.function.path <- file.path(tc.result.root, function.name)
+  if (!file.exists(tc.function.path)) dir.create(tc.function.path)
   if (verbose) cat("TC function path in filter - ",tc.function.path, "\n")
 
-  i <- 1
+  cache$i <- 1
   covChangeMeasureForSingleTCFile <- function(tc) {
-    tc.full.path <- file.path(tc.root, tc, fsep = .Platform$file.sep)
+    tc.full.path <- file.path(tc.root, tc)
     info.file <- file.path(tc.root, paste(function.name,"info", sep = "_"), fsep = .Platform$file.sep)
     out <- capture.output(
       before.tc.cov.info <- tryCatch(MeasureCoverage(root = file.path(cache$r.home, cache$source.folder, fsep = .Platform$file.sep)), 
@@ -49,15 +47,15 @@ FilterTCs<- function(tc.root, tc.db.path, tc.result.root,
     after.tc.cov.r <<- cov.data$r
 
     if (after.tc.cov.c > before.tc.cov.c || after.tc.cov.r > before.tc.cov.r) {
-      cat("C code coverage before running TC ", i, " from file ", before.tc.cov.c, "\n")
-      cat("C code coverage after running TC ", i, " from file ", after.tc.cov.c, "\n")
-      cat("R code coverage before running TC ", i, " from file ", before.tc.cov.r, "\n")
-      cat("R code coverage after running TC ", i, " from file ", after.tc.cov.r, "\n")
+      cat("C code coverage before running TC ", cache$i, " from file ", before.tc.cov.c, "\n")
+      cat("C code coverage after running TC ", cache$i, " from file ", after.tc.cov.c, "\n")
+      cat("R code coverage before running TC ", cache$i, " from file ", before.tc.cov.r, "\n")
+      cat("R code coverage after running TC ", cache$i, " from file ", after.tc.cov.r, "\n")
       file.copy(tc.full.path, tc.function.path, overwrite = FALSE)
     } else {
       cat("Test case ", i, "didn't increase coverage\n")
     }
-    i <<- i + 1
+    cache$i <- cache$i + 1
     file.remove(tc.full.path)
   }
   result <- Map(covChangeMeasureForSingleTCFile, all.tc)

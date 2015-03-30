@@ -29,7 +29,7 @@ void printCapture(CharacterVector x, std::string prefix) {
 int captureFileNumber = 0;
 
 // [[Rcpp::export]]
-void WriteCapInfo_cpp (CharacterVector fname) {
+void WriteCapInfo_cpp (CharacterVector fname, SEXP args_env) {
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
   string traceFile = as<string>(cache.get("trace.folder.path"));
@@ -41,8 +41,7 @@ void WriteCapInfo_cpp (CharacterVector fname) {
   traceFile += numstr;
   tracefile.open(traceFile.c_str(), std::ios::app);
   printCapture(fname, kFuncPrefix);
-  SEXP args = pop_args();
-  printCapture(deparse(args), kArgsPrefix);
+  printCapture(deparse(GetArgs(args_env)), kArgsPrefix);
   tracefile << std::endl;
   tracefile.close();
   // get file size

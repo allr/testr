@@ -72,6 +72,4 @@ std::string getFunctionEnvironmentName(std::string &functionName);
 SEXP deparse(SEXP);
 SEXP pop_args();
 bool missing(SEXP, SEXP);
-
-extern "C" SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho);
-
+SEXP GetArgs(SEXP);

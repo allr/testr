@@ -24,3 +24,14 @@ test_that('Missing argument corner case is fixed', {
   expect_true(all(abs(X - s$u %*% D %*% t(s$v)) < Eps))#  X = U D V'
   expect_true(all(abs(D - t(s$u) %*% X %*% s$v) < Eps))#  D = U' X V  
 })
+
+test_that('Arguments are evaluated in the proper environment', {
+  # was failing before evaluation in wrong environment
+#   foo <- function(what){
+#     what
+#   }
+#   Decorate(foo)
+#   bar <- function() foo(sys.nframe())
+#   bar()
+#   expect_equal(bar.res, sys.nframe() + 1)
+})

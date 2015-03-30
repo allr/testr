@@ -15,13 +15,12 @@ Decorate <- function(func, envir = .GlobalEnv){
     stop("wrong argument type!")
   }   
   if (is_s3_generic(fname)) return(NULL);
-  exit.capturer <- function() {
-      testr:::WriteCapInfo(fname)
-  }
-  entry.capturer <- function() {
-    testr:::SaveArgs(sys.frame(sys.nframe() - 5))
-  } 
-  do.call(trace, list(what=fname, tracer=entry.capturer, exit=exit.capturer, print = testrOptions('verbose')))
+  write.call <- call("WriteCapInfo", fname, quote(sys.frame(sys.nframe() - 4)))
+  tc <- call('trace', 
+             fname, 
+             quote(write.call),
+             print=quote(testrOptions('verbose')))
+  eval(tc)
   cache$decorated <- c(cache$decorated, fname)
 } 
 
@@ -51,19 +50,16 @@ Undecorate <- function(func) {
 #' 
 #' This function is respinsible for writing down capture information for decorated function calls.
 #' @param fname function name
-#' @param args arguments to function call
-#' @param retv return value of a specified function call with arguments
-#' @param errs caught errors during function call
-#' @param warns caught warnings during function call
+#' @param args.env environment to read arguments to function call from
 #' @seealso Decorate
 #' @useDynLib testr
 #' @importFrom Rcpp evalCpp
 #' @export
 #' 
-WriteCapInfo <- function(fname){
+WriteCapInfo <- function(fname, args.env){
   if (cache$writing.down)
     return(NULL);
-  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname)
+  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args.env)
 }
 
 #' @title Setup information capturing for list of function
