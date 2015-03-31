@@ -15,7 +15,7 @@ Decorate <- function(func, envir = .GlobalEnv){
     stop("wrong argument type!")
   }   
   if (is_s3_generic(fname)) return(NULL);
-  write.call <- call("WriteCapInfo", fname, quote(sys.frame(sys.nframe() - 4)))
+  write.call <- call("WriteCapInfo", fname, quote(sys.frame(-4)))
   tc <- call('trace', 
              fname, 
              quote(write.call),
@@ -128,6 +128,7 @@ GetArgs <- function(dotsE) {
 
 is_s3_generic <- function(fname) {
   f <- get(fname, env = parent.frame(), mode = "function")
+  if (is.null(body(f))) return(FALSE)
   uses <- findGlobals(f, merge = FALSE)$functions
   any(uses == "UseMethod")
 }

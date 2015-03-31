@@ -72,7 +72,7 @@ ProcessCapture<- function(capture.file){
     #### see what we get
     if (feedback$'type' == "err") {
       #### the captured information is not usable
-      write(feedback$'msg', file=bad.argv.file, append=TRUE);
+      write(feedback$'msg', file=cache$bad.argv.file, append=TRUE);
     } else if (feedback$'type' == "src") {
       #### good, we get the source code
       write(feedback$'msg', file=tc.file, append=TRUE);
@@ -161,26 +161,30 @@ GenerateTC<- function(symb, vsym, func, argv) {
   args <- eval(parse(text=argv));
   if (length(args) > 0) {
     args <- lapply(args, function(x) paste(deparse(x), collapse = "\n"))
-    call <- paste(call, sprintf("%s(%s)", func, paste(names(args), args, sep="=", collapse=",")), "\n", sep="")
+    if (!is.null(names(args)) && length(names(args)) == length(args))
+      call <- paste(call, sprintf("%s(%s)", func, paste(names(args), args, sep="=", collapse=",")), "\n", sep="")
+    else
+      call <- paste(call, sprintf("%s(%s)", func, paste(args, collapse=",")), "\n", sep="")
   } else {
     call <- paste(call, func, "()", "\n", sep="")
   }
   
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep="")
-  
-  cache$warns <- ""
-  cache$errs <- ""
-  retv <- tryCatch(eval(parse(text=call)), 
-                   warning=function(w){cache$warns <- w$message}, 
-                   error=function(e){cache$errs <- e$message})
+  cache$warns <- NULL
+  cache$errs <- NULL
+  retv <- withCallingHandlers(tryCatch(eval(parse(text=call), envir = new.env()), error=function(e){cache$errs <- e$message}, silent = T), 
+                   warning=function(w) {
+                     cache$warns <- ifelse(is.null(cache$warns), w$message, paste(cache$warns, w$message, sep="; "))
+                     invokeRestart("muffleWarning")
+                     })
   retv <- Quoter(retv)
   src <- ""
   src <- paste(src, "test(id=",cache$tID[[func]],", code={\n", call, "}, ", sep="")
-  if (cache$warns != "")
-    src <- paste(src, 'w = ', cache$warns, ",", sep = "")
-  if (cache$errs != "")
-    src <- paste(src, 'e = ', cache$errs, sep = "")
+  if (!is.null(cache$warns))
+    src <- paste(src, 'w = ', shQuote(cache$warns), ', ',  sep = "")
+  if (!is.null(cache$errs))
+    src <- paste(src, 'e = ', shQuote(cache$errs), sep = "")
   else {
     src <- paste("expected <- ", paste(deparse(retv), collapse = "\n"), "\n", src, sep="");
     src <- paste(src, "o = expected")
