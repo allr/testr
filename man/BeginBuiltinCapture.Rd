@@ -7,7 +7,7 @@
 Sets up capturing of builtin functions}
 \usage{
 BeginBuiltinCapture(internal = FALSE, functions = builtins(internal),
-  indexes, verbose = testrOptions("verbose"))
+  indexes)
 }
 \arguments{
 \item{internal}{wheather only internals should be captured, or all builtins}
@@ -15,8 +15,6 @@ BeginBuiltinCapture(internal = FALSE, functions = builtins(internal),
 \item{functions}{list of functions to be decorate}
 
 \item{indexes}{specific indexes from functions vector}
-
-\item{verbose}{if to output debug information}
 }
 \description{
 Setup capture of builtin functions

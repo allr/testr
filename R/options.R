@@ -47,6 +47,8 @@ env <- c("environment", "environment<-", "parent.frame", "parent.env", "parent.e
 keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "break")
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
+
+primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expression", "attr")
 .onLoad <- function(libname, pkgname)
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)

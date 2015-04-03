@@ -6,18 +6,12 @@
 
 This function is respinsible for writing down capture information for decorated function calls.}
 \usage{
-WriteCapInfo(fname, args, retv, errs, warns)
+WriteCapInfo(fname, args.env)
 }
 \arguments{
 \item{fname}{function name}
 
-\item{args}{arguments to function call}
-
-\item{retv}{return value of a specified function call with arguments}
-
-\item{errs}{caught errors during function call}
-
-\item{warns}{caught warnings during function call}
+\item{args.env}{environment to read arguments to function call from}
 }
 \description{
 Write down capture information

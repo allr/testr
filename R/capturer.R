@@ -93,7 +93,8 @@ EligibleForCapture <- function(func){
             !func %in% operators &&
             !func %in% keywords &&
             !func %in% sys &&
-            !func %in% env)
+            !func %in% env && 
+            !func %in% primitive.generics.fails)
 }
 
 #' @title Setup capture of builtin functions
