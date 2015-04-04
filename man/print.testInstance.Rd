@@ -6,7 +6,7 @@
 
 Prints the test name, generators and code with generators replaced.}
 \usage{
-\method{print}{testInstance}(t)
+print.testInstance(t)
 }
 \arguments{
 \item{t}{Test to be printed.}
