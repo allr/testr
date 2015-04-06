@@ -22,7 +22,7 @@ SEXP search(){
 SEXP deparse(SEXP x)
 {
       CCODE deparse_fun = get_internal("deparse");
-      Language call("deparse", x) ;    
+      Language call("deparse", x);    
       return deparse_fun(call, Rf_ScalarInteger(0), CDR(call), R_GlobalEnv ) ; 
 }
 

@@ -14,14 +14,55 @@ std::string kArgsPrefix = "argv: ";
 
 std::ofstream tracefile;
 
-void printCapture(CharacterVector x, std::string prefix) {
-  if (x[0] != "NULL"){
+void printCapture(SEXP args, std::string prefix) {
+  if (args == R_NilValue) 
+    return;
+  Rcout << TYPEOF(args) << std::endl;
+  if (TYPEOF(args) == LISTSXP || TYPEOF(args) == VECSXP) {
+    List argsL(args);
+    // problem is here
+    std::vector<std::string> names = argsL.names();
+    tracefile << prefix << "list(" << std::endl;
+    for (int i = 0; i < argsL.size(); i++) {
+      if (names[i] != "") {
+        tracefile << prefix << names[i] << "=" << std::endl;
+      }
+      printCapture(argsL[i], prefix);
+      if (i != argsL.size() - 1) {
+        tracefile << prefix << "," << std::endl;
+      }
+    }
+    tracefile << prefix << ")" << std::endl;
+  } else if (Rf_isS4(args)) {
+    Rcpp::S4 obj(args);
+    Function slotNames("slotNames"); 
+    CharacterVector snames = slotNames(obj);
+    tracefile << prefix << "new(\"" << as<std::string>(obj.attr("class")) << "\"" << std::endl;
+    for (int i = 0; i < snames.size(); i++) {
+      SEXP x1 = obj.slot(Rcpp::as<std::string>(snames[i]));
+      tracefile << prefix << "," << snames[i] << "=" << std::endl;
+      printCapture(x1, prefix);
+    }
+    tracefile << prefix << ")" << std::endl;    
+  } 
+  else {
+    if (TYPEOF(args) == LANGSXP) {
+      tracefile << prefix << "quote(" << std::endl;
+    }
+    if (TYPEOF(args) == STRSXP) {
+      tracefile << prefix << args << std::endl;
+      return;
+    }
+    CharacterVector x = deparse(args); 
     if (x.length() < 1000) {
       for (int i = 0; i < x.length(); i++) {
         tracefile << prefix << x[i] << std::endl;
       }
     } else {
       tracefile << prefix << "<too long>" << std::endl;
+    }
+    if (TYPEOF(args) == LANGSXP) {
+      tracefile << prefix << ")" << std::endl;
     }
   }
 }
@@ -40,8 +81,8 @@ void WriteCapInfo_cpp (CharacterVector fname, SEXP args_env) {
   sprintf(numstr, "%d", captureFileNumber);
   traceFile += numstr;
   tracefile.open(traceFile.c_str(), std::ios::app);
-  printCapture(fname, kFuncPrefix);
-  printCapture(deparse(GetArgs(args_env)), kArgsPrefix);
+  tracefile << kFuncPrefix << fname[0] << endl;
+  printCapture(GetArgs(args_env), kArgsPrefix);
   tracefile << std::endl;
   tracefile.close();
   // get file size
