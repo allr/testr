@@ -7,21 +7,20 @@
 ReplaceS4 <- function(env) {
   generics <- getGenerics(env)
   
+  replacer <- function(x, envir) {
+    target <- get(x, envir = envir)
+    if (!is.null(target)) {
+      do.call(trace, list(target, quote(print("tracing"))))
+#       new.value <- testr:::Decorate(target)
+    }
+  }
+  
   unlist(recursive = FALSE,
          Map(generics@.Data, generics@package, USE.NAMES = FALSE,
              f = function(name, package) {
                what <- methodsPackageMetaName("T", paste(name, package, sep = ":"))
-               
                table <- get(what, envir = env)
-               replacer <- function(x, envir) {
-                 target <- get(x, envir = table)
-                 if (!is.null(target)) {
-                   new.value <- testr:::ReplaceBody(name, target)
-#                    rcov:::reassignInEnv(name, new.value, table
-                     setMethod(name, attr(target, "target"), new.value, where = .GlobalEnv)
-                 }
-               }
-               lapply(ls(table, all.names = TRUE), replacer)
+               lapply(ls(table, all.names = TRUE), replacer, table)
              })
   )
 }

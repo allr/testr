@@ -17,29 +17,28 @@ std::ofstream tracefile;
 void printCapture(SEXP args, std::string prefix) {
   if (args == R_NilValue) 
     return;
-  Rcout << TYPEOF(args) << std::endl;
   if (TYPEOF(args) == LISTSXP || TYPEOF(args) == VECSXP) {
     List argsL(args);
     // problem is here
-    std::vector<std::string> names = argsL.names();
+    List names = argsL.names();
     tracefile << prefix << "list(" << std::endl;
     for (int i = 0; i < argsL.size(); i++) {
-      if (names[i] != "") {
-        tracefile << prefix << names[i] << "=" << std::endl;
+      if (names.size() > i) {
+        std::string name = as<std::string>(names[i]);
+        if (name != "") 
+          tracefile << prefix << name << "=" << std::endl;
       }
       printCapture(argsL[i], prefix);
-      if (i != argsL.size() - 1) {
+      if (i != argsL.size() - 1) 
         tracefile << prefix << "," << std::endl;
-      }
     }
     tracefile << prefix << ")" << std::endl;
   } else if (Rf_isS4(args)) {
     Rcpp::S4 obj(args);
-    Function slotNames("slotNames"); 
-    CharacterVector snames = slotNames(obj);
+    std::vector<std::string> snames= obj.attributeNames();
     tracefile << prefix << "new(\"" << as<std::string>(obj.attr("class")) << "\"" << std::endl;
     for (int i = 0; i < snames.size(); i++) {
-      SEXP x1 = obj.slot(Rcpp::as<std::string>(snames[i]));
+      SEXP x1 = obj.slot(snames[i]);
       tracefile << prefix << "," << snames[i] << "=" << std::endl;
       printCapture(x1, prefix);
     }
@@ -48,10 +47,6 @@ void printCapture(SEXP args, std::string prefix) {
   else {
     if (TYPEOF(args) == LANGSXP) {
       tracefile << prefix << "quote(" << std::endl;
-    }
-    if (TYPEOF(args) == STRSXP) {
-      tracefile << prefix << args << std::endl;
-      return;
     }
     CharacterVector x = deparse(args); 
     if (x.length() < 1000) {
