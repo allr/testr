@@ -6,20 +6,21 @@
 #' @export 
 #' @seealso WriteCapInfo Decorate
 #'
-Decorate <- function(func, envir = .GlobalEnv){
-  if (class(func) == "function"){
+Decorate <- function(func){
+  if (class(func) == "function" || class(func) == "standardGeneric"){
     fname <- as.character(substitute(func))
   } else if (class(func) == "character"){
     fname <- func
   } else {
     stop("wrong argument type!")
   }   
-  if (is_s3_generic(fname)) return(NULL);
+  if (is_s3_generic(fname, func)) return(NULL);
   write.call <- call("WriteCapInfo", fname, quote(sys.frame(-4)))
   tc <- call('trace', 
              fname, 
              quote(write.call),
-             print=quote(testrOptions('verbose')))
+             print=quote(testrOptions('verbose')),
+             where = .GlobalEnv)
   eval(tc)
   cache$decorated <- c(cache$decorated, fname)
 } 
@@ -127,9 +128,10 @@ GetArgs <- function(dotsE) {
   res
 }
 
-is_s3_generic <- function(fname) {
-  f <- get(fname, env = parent.frame(), mode = "function")
-  if (is.null(body(f))) return(FALSE)
-  uses <- findGlobals(f, merge = FALSE)$functions
+is_s3_generic <- function(fname, func) {
+  if (is.null(func)) 
+    func <- get(fname, mode = "function")
+  if (is.null(body(func))) return(FALSE)
+  uses <- findGlobals(func, merge = FALSE)$functions
   any(uses == "UseMethod")
 }
