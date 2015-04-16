@@ -10,11 +10,9 @@ using namespace Rcpp;
 void try_eval_tracer(SEXP env);
 RcppExport SEXP testr_try_eval_tracer(SEXP envSEXP) {
 BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type env(envSEXP );
-        try_eval_tracer(env);
-    }
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type env(envSEXP);
+    try_eval_tracer(env);
     return R_NilValue;
 END_RCPP
 }
@@ -22,12 +20,10 @@ END_RCPP
 void WriteCapInfo_cpp(CharacterVector fname, SEXP args_env);
 RcppExport SEXP testr_WriteCapInfo_cpp(SEXP fnameSEXP, SEXP args_envSEXP) {
 BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type fname(fnameSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type args_env(args_envSEXP );
-        WriteCapInfo_cpp(fname, args_env);
-    }
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type fname(fnameSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type args_env(args_envSEXP);
+    WriteCapInfo_cpp(fname, args_env);
     return R_NilValue;
 END_RCPP
 }

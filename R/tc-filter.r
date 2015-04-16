@@ -12,7 +12,7 @@
 #' 
 FilterTCs<- function(tc.root, tc.db.path, tc.result.root, 
                      clear.previous.coverage = TRUE, 
-                     wipe.tc.database = FALSE, k = 1, 
+                     wipe.tc.database = FALSE, 
                      verbose = testrOptions('verbose')) {
   # parameter checks
   if (missing(tc.root) || !file.exists(tc.root)) stop('Specified directory with Test Cases does not exist!'); 
