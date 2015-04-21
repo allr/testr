@@ -14,7 +14,7 @@ Decorate <- function(func, envir = .GlobalEnv){
   } else {
     stop("wrong argument type!")
   }   
-  if (is_s3_generic(fname)) return(NULL);
+  if (IsS3Generic(fname)) return(NULL);
   write.call <- call("WriteCapInfo", fname, quote(sys.frame(-4)))
   tc <- call('trace', 
              fname, 

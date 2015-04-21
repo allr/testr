@@ -19,7 +19,7 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
   if (!file.exists(tc.result.root))
     dir.create(tc.result.root)
   
-  n <- round(getNumberOfTC(tc.file) /16 + 0.00001)
+  n <- round(GetNumberOfTC(tc.file) /16 + 0.00001)
   if (n < 1)
     n <- 1
   
@@ -90,7 +90,6 @@ splitTCs<- function(tc.file, tc.split.root, number.of.tc.per.file = 1) {
   }
   
   # bulk fines together and then write it
-  file_seq <- c(seq(1, length(tests.starts), by = number.of.tc.per.file))
   res_list <- list()
   for (i in 1:length(tests.starts))
     res_list[[i]] <- lines[tests.starts[i]:tests.ends[i]]
