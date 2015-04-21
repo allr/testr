@@ -1,23 +1,3 @@
-# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-#
-# This code is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License version 2 only, as
-# published by the Free Software Foundation.
-#
-# This code is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-# version 2 for more details (a copy is included in the LICENSE file that
-# accompanied this code).
-#
-# You should have received a copy of the GNU General Public License version
-# 2 along with this work; if not, write to the Free Software Foundation,
-# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
-#
-# Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
-# or visit www.oracle.com if you need additional information or have any
-# questions.
-
 #' @export
 #' @title Coverage Report on Specified R Virtual Machine Source Code
 #'
@@ -57,14 +37,18 @@
 #'  by nature. In that, the object information is included in the file/function detail tables for
 #'  users' reference.
 #'
-#'@examples
-#'\dontrun{
-#'MeasureCoverage()
-#'}
-
-MeasureCoverage <- function(root, verbose = TRUE, exclude.header=TRUE, file.detail=FALSE, func.detail=FALSE, file.keyword="", func.keyword="", ignore.case=TRUE) {
+MeasureGCovCoverage <- function(root, 
+                                verbose = TRUE, 
+                                exclude.header=TRUE, 
+                                file.detail=FALSE, 
+                                func.detail=FALSE, 
+                                file.keyword="", 
+                                func.keyword="", 
+                                ignore.case=TRUE) {
   if (missing(root)) 
     stop("A directory containing VM source files must be specified!");
+  if (!file.exists(root) || root == "/" || root == "")
+    return(list(file=0, func=0, file.pcn=0, func.pcn=0))
   if (.Platform$OS.type=="windows") {
     stop("Not supported on Windows!");
   }
@@ -182,7 +166,10 @@ MeasureCoverage <- function(root, verbose = TRUE, exclude.header=TRUE, file.deta
     cat("\n");
     cat("=================================================\n");
   }
-  return (list(file=file.df, func=func.df));
+  return (list(file=file.df, 
+               func=func.df, 
+               file.pcn = totalCovLinePcnt.file, 
+               func.pcn =  totalCovLinePcnt.func));
 }
 
 #' @export
@@ -191,9 +178,10 @@ MeasureCoverage <- function(root, verbose = TRUE, exclude.header=TRUE, file.deta
 #' @description This function deletes gcov information files (*.gcda) thus clearing any previously collected coverage information is erased.
 #' @param root a directory or a single C file that contains or is instrumented VM source.
 #'
-ResetCoverageInfo <- function(root) {
+ResetGCovInfo <- function(root) {
   cat("reset called\n")
   if (missing(root)) stop("A directory containing VM source files must be specified!");
+  if (root == "/") return(NULL)
   if (.Platform$OS.type=="unix") {
     cmd <- paste("find", root, "-name", "\'*.gcda\'", "-delete", sep=" ");
     system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);

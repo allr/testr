@@ -57,8 +57,8 @@ Undecorate <- function(func) {
 #' @export
 #' 
 WriteCapInfo <- function(fname, args.env){
-  if (cache$writing.down)
-    return(NULL);
+  if (!testrOptions('capture.arguments'))
+    return(NULL)
   .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args.env)
 }
 
@@ -70,13 +70,11 @@ WriteCapInfo <- function(fname, args.env){
 #' @seealso Decorate
 #' @export
 SetupCapture <- function(flist){
-  set.cache('writing.down', TRUE)
-  for (func in flist){
-    if (EligibleForCapture(func)){
+  testrOptions('capture.arguments', FALSE)
+  for (func in flist)
+    if (EligibleForCapture(func))
       Decorate(func)
-    }
-  }  
-  set.cache('writing.down', FALSE)
+  testrOptions('capture.arguments', TRUE)
 }
 
 #' @title Check if function is eligible for wrapping to capture arguments and return values

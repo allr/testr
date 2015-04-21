@@ -1,26 +1,3 @@
-# Copyright (c) 2013, Purdue University. All rights reserved.
-# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-#
-# This code is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License version 2 only, as
-# published by the Free Software Foundation.
-#
-# This code is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-# version 2 for more details (a copy is included in the LICENSE file that
-# accompanied this code).
-#
-# You should have received a copy of the GNU General Public License version
-# 2 along with this work; if not, write to the Free Software Foundation,
-# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
-#
-# Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
-# or visit www.oracle.com if you need additional information or have any
-# questions.
-
-# Generators -------------------------------------------------------------------------------------------------------------
-
 #' @export
 #' @title Checks that the given function has a proper signature for a generator content function. 
 #' 
@@ -565,9 +542,6 @@ print.testInstance <- function(t) {
 #' @param showCode if TRUE, code of the expanded tests will also be printed to stdout
 #' @return NULL
 #' @seealso test
-#' @examples
-#' makeTests("c:/unexpandedTests", "c:/expandedTests", showCode <- TRUE)
-
 makeTests <- function(root, destRoot, showCode = FALSE) {
     total <- 0
     nFiles <- 0
@@ -596,5 +570,3 @@ makeTests <- function(root, destRoot, showCode = FALSE) {
     rm(tests, envir = globalenv())
     cat("Total", total, "tests created out of", nFiles, "files.\n")
 } 
-
-

@@ -8,6 +8,7 @@ Maintainer: Your Name <your@email.com>
 Description: More about what it does (maybe more than one line)
 License: GPL (>= 2)
 Imports: 
-    Rcpp (>= 0.11.3)
+    Rcpp (>= 0.11.3),
+    codetools
 LinkingTo: Rcpp
 Suggests: testthat

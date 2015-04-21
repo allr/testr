@@ -1,7 +1,7 @@
 ## general (temporary) storage for testr's stuff
 cache           <- new.env()
 cache$capture.file.number <- 0
-cache$writing.down <- FALSE
+cache$temp_dir <- "temp.dir"
 
 cache$arguments <- list()
 cache$decorated <- vector()
@@ -49,10 +49,14 @@ operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-"
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
 
 primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expression", "attr")
+
 .onLoad <- function(libname, pkgname)
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
+  unlink(cache$temp_dir, force = T, recursive = T)
+  dir.create(cache$temp_dir)
+  cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   ## testr settings
   options('testr' = list(
@@ -61,13 +65,9 @@ primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
     'stop.on.error' = FALSE,
     'display.code.on.error' = FALSE,
     'file.summary' = FALSE,
-    'capture.file.size' = 50 * 1000 * 1000
+    'capture.file.size' = 50 * 1000 * 1000,
+    'capture.argumens' = TRUE
   ))
-  require(codetools)
-}
-
-set.cache <- function(x, value){
-  assign(x, value, envir = cache)
 }
 
 #' Querying/setting testr option

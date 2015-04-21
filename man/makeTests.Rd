@@ -28,9 +28,6 @@ It is assumed that the tests are defined using the test function, but any object
 
 The recursive folders (if any) in the dest folder will be created automatically.
 }
-\examples{
-makeTests("c:/unexpandedTests", "c:/expandedTests", showCode <- TRUE)
-}
 \seealso{
 test
 }

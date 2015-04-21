@@ -10,8 +10,7 @@
 #' @seealso Decorate
 #' @export
 #' 
-processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.folder) {
-  cache$temp_dir <- tempdir()
+ProcessTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.folder) {
   cache$r.home <- r.home
   cache$source.folder <- source.folder
   cache$tc.result.root <- tc.result.root
@@ -19,11 +18,9 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
   if (!file.exists(tc.result.root))
     dir.create(tc.result.root)
   
-  n <- round(GetNumberOfTC(tc.file) /16 + 0.00001)
-  if (n < 1)
-    n <- 1
+  n <- ceiling(GetNumberOfTC(tc.file)/16)
   
-  splitTCs(tc = tc.file, 
+  SplitTCs(tc = tc.file, 
            tc.result.root = cache$temp_dir, 
            number.of.tc.per.file = n)
   
@@ -33,10 +30,9 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
             clear.previous.coverage = TRUE, 
             wipe.tc.database = FALSE) 
   
-  n <- round(n / 2 + 0.00001)
-  while (n >= 1 && length(list.files(split.paths[2])) != 0){
-    k <- 1
-    splitTCs(tc = tc.result.root, 
+  n <- ceiling(n/2)
+  while (n > 1) {
+    SplitTCs(tc = tc.result.root, 
              tc.result.root = cache$temp_dir, 
              number.of.tc.per.file = n, 
              check.correctness = TRUE)
@@ -45,17 +41,13 @@ processTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
               tc.result.root = tc.result.root,
               clear.previous.coverage = TRUE, 
               wipe.tc.database = FALSE) 
-    n <- round(n / 2 + 0.00001)
+    n <- ceiling(n/2)
   }
   ResetCoverageInfo(r.home) 
   rm(list = ls(all = TRUE))
-  # to clean R Working Directory
-  #files.after.filter.wd <- list.files(getwd(), all.files = TRUE)
-  # files.to.delete <- files.after.filter.wd[!(files.before.filter.wd %in% files.after.filter.wd)]
-  #file.remove(files.to.delete)
 }
 
-splitTCs<- function(tc.file, tc.split.root, number.of.tc.per.file = 1) {
+SplitTCs<- function(tc.file, tc.split.root, number.of.tc.per.file = 1) {
   # In case tc is diretory, recursively call this function on all files in directory
   if (file.info(tc.file)$isdir){
     all.tc <- list.files(tc.file, 
@@ -64,11 +56,11 @@ splitTCs<- function(tc.file, tc.split.root, number.of.tc.per.file = 1) {
                          pattern = "\\.[rR]$", 
                          full.names = T)
     for (test.case in all.tc)
-      splitTCs(test.case, tc.split.root, number.of.tc.per.file)
+      SplitTCs(test.case, tc.split.root, number.of.tc.per.file)
     return(NULL);
   }
   
-  function.name <- determineFunctionName(basename(tc.file))
+  function.name <- GetFunctionName(basename(tc.file))
   tc.split.root <- file.path(tc.split.root, function.name)
   if (!file.exists(tc.split.root)) 
     dir.create(tc.split.root)
@@ -102,6 +94,3 @@ splitTCs<- function(tc.file, tc.split.root, number.of.tc.per.file = 1) {
     if (i %% number.of.tc.per.file == 0) ntc <- ntc + 1
   } 
 }
-
-
-
