@@ -121,15 +121,3 @@ ClearDecoration <- function() {
   for (fname in cache$decorated)
     Undecorate(fname)
 }
-
-GetArgs <- function(dotsE) {
-  res <- .Call('testr_GetArgs', PACKAGE = 'testr', dotsE)
-  res
-}
-
-is_s3_generic <- function(fname) {
-  f <- get(fname, env = parent.frame(), mode = "function")
-  if (is.null(body(f))) return(FALSE)
-  uses <- findGlobals(f, merge = FALSE)$functions
-  any(uses == "UseMethod")
-}

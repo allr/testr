@@ -12,3 +12,15 @@ determineFunctionName <- function(filename){
     function.name <- spl[[1]][2]
   return (function.name)
 }
+
+#' @title Check if function is S3 generic
+#' 
+#' Determine if function has a call to UseMethod. In that case there is no need to capture it.
+#' @param fname function name
+#' @seealso Decorate
+is_s3_generic <- function(fname) {
+  f <- get(fname, env = parent.frame(), mode = "function")
+  if (is.null(body(f))) return(FALSE)
+  uses <- findGlobals(f, merge = FALSE)$functions
+  any(uses == "UseMethod")
+}
