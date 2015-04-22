@@ -54,8 +54,8 @@ primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
-  unlink(cache$temp_dir, force = T, recursive = T)
-  dir.create(cache$temp_dir)
+  if (!file.exists(cache$temp_dir) || !file.info(cache$temp_dir)$isdir)
+    dir.create(cache$temp_dir)
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   ## testr settings

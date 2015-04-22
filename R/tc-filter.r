@@ -46,8 +46,8 @@ FilterTCs<- function(tc.root, tc.result.root, tc.db.path = "",
       before.tc.cov.c <- 0
     before.tc.cov.r <- rcov::ReportCoveragePercentage(readRDS(file.path(cache$temp_dir, "cov.data")))
     cov.data <- RunTestsMeasureCoverage(tc.full.path)
-    after.tc.cov.c <<- cov.data$c
-    after.tc.cov.r <<- cov.data$r
+    after.tc.cov.c <- cov.data$c
+    after.tc.cov.r <- cov.data$r
 
     if (after.tc.cov.c > before.tc.cov.c || after.tc.cov.r > before.tc.cov.r) {
       cat("C code coverage before running TC ", cache$i, " from file ", before.tc.cov.c, "\n")
@@ -60,28 +60,15 @@ FilterTCs<- function(tc.root, tc.result.root, tc.db.path = "",
     }
     cache$i <- cache$i + 1
     file.remove(tc.full.path)
+    cov.data
   }
   result <- Map(covChangeMeasureForSingleTCFile, all.tc)
-  cat("C coverage gain by TCs - ", after.tc.cov.c - db.cov$c, "\n")
-  cat("R coverage gain by TCs - ", after.tc.cov.r - db.cov$r, "\n")
+  final.cov <- result[[length(result)]]
+  cat("C coverage gain by TCs - ", final.cov$c - db.cov$c, "\n")
+  cat("R coverage gain by TCs - ", final.cov$r - db.cov$r, "\n")
 }
 
-#' @title Run Tests and Measure Coverage 
-#' 
-#' @param tc.full.path path of test.cases
-#' @param funcs R functions to measure coverage for
-RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
-  tmp_source <- file.path(cache$temp_dir, "tmp_source")
-  cov.info <- file.path(cache$temp_dir, "cov.data.p")
-  if (is.null(tc.full.path))
-    tc.full.path <- ""
-  if (missing(funcs)) {
-    funcs <- vector()
-    for (tc in tc.full.path) 
-      funcs <- c(funcs, GetFunctionName(basename(tc)))
-  }
-  command <- sprintf("
-library(rcov)
+rtemplate <- "library(rcov)
 library(testr)
 tmp_folder <- '%s'
 cov.data <- file.path(tmp_folder, 'cov.data')
@@ -107,8 +94,26 @@ if (file.exists(cov.funcs)){
 }
 RunTests('%s', use.rcov = T)
 saveRDS(ReportCoveragePercentage(), '%s') 
-saveRDS(rcov:::cov.cache, file.path(tmp_folder, 'cov.data'))
-", cache$temp_dir, paste(deparse(funcs), collapse=""), tc.full.path, cov.info)
+saveRDS(rcov:::cov.cache, file.path(tmp_folder, 'cov.data'))"
+
+#' @title Run Tests and Measure Coverage 
+#' 
+#' @param tc.full.path path of test.cases
+#' @param funcs R functions to measure coverage for
+RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
+  tmp_source <- file.path(cache$temp_dir, "tmp_source")
+  cov.info <- file.path(cache$temp_dir, "cov.data.p")
+  if (is.null(tc.full.path))
+    tc.full.path <- ""
+  if (missing(funcs)) {
+    funcs <- vector()
+    for (tc in tc.full.path) 
+      funcs <- c(funcs, GetFunctionName(basename(tc)))
+  }
+  command <- sprintf(rtemplate, 
+                     tools::file_path_as_absolute(cache$temp_dir), 
+                     paste(deparse(funcs), collapse=""), 
+                     tc.full.path, cov.info)
   writeChar(con = tmp_source, command, eos = NULL)
   RCMD <- ifelse(cache$r.home == "", "R", file.path(cache$r.home, "bin/R"))
   cmd <- paste(RCMD,
