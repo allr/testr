@@ -2,29 +2,30 @@
 % Please edit documentation in R/process.r
 \name{ProcessTC}
 \alias{ProcessTC}
-\title{Write down capture information
+\title{Process Test Case file
 
-This function is respinsible for writing down capture information for decorated function calls.}
+This function is respinsible for splitting a file into single test cases and filtering out
+the unneeded file based or R and C code coverage}
 \usage{
-ProcessTC(tc.file, tc.result.root, tc.db = NULL, r.home, source.folder)
+ProcessTC(tc.file, tc.result.root, tc.db = NULL, r.home = NULL,
+  source.folder = NULL)
 }
 \arguments{
-\item{fname}{function name}
+\item{tc.file}{test case file to process}
 
-\item{fbody}{function body}
+\item{tc.result.root}{folder with resulting filtered test cases}
 
-\item{args}{arguments to function call}
+\item{tc.db}{folder with test case detabase}
 
-\item{retv}{return value of a specified function call with arguments}
+\item{r.home}{home directory of R VM with C code coverage support}
 
-\item{errs}{caught errors during function call}
-
-\item{warns}{caught warnings during function call}
+\item{source.folder}{folder in R VM to measure C code coverage of}
 }
 \description{
-Write down capture information
+Process Test Case file
 
-This function is respinsible for writing down capture information for decorated function calls.
+This function is respinsible for splitting a file into single test cases and filtering out
+the unneeded file based or R and C code coverage
 }
 \seealso{
 Decorate

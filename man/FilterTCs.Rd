@@ -4,8 +4,8 @@
 \alias{FilterTCs}
 \title{Test Case filter based on cov Report on Specified R Virtual Machine Source Code}
 \usage{
-FilterTCs(tc.root, tc.db.path, tc.result.root, r.home = "",
-  source.folder = "", clear.previous.coverage = TRUE,
+FilterTCs(tc.root, tc.result.root, tc.db.path = NULL, r.home = NULL,
+  source.folder = NULL, clear.previous.coverage = TRUE,
   wipe.tc.database = FALSE, verbose = testrOptions("verbose"))
 }
 \arguments{
