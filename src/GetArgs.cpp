@@ -3,13 +3,6 @@ using namespace Rcpp;
 using namespace std;
 
 SEXP GetArgs(SEXP dotsE){
-  Environment testr = Environment::namespace_env("testr");
-  Environment cache = testr.get("cache");
-  LogicalVector wd = cache.get("writing.down");
-  bool writingDown = as<bool>(wd);
-  if (writingDown){ 
-    return R_NilValue;
-  }
   List args(0);
   Environment dotsEnv(dotsE);
   CharacterVector envNames = dotsEnv.ls(false);

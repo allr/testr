@@ -193,36 +193,3 @@ GenerateTC<- function(symb, vsym, func, argv) {
   list(type="src", msg=src);
 }
 
-ParseAndCheck <- function(what) {
-  tryCatch({eval(parse(text=what)); TRUE}, error=function(e){FALSE})
-}
-
-Quoter <- function(arg) {
-  if (is.list(arg)) {
-    org.attrs <- attributes(arg)
-    res <- lapply(arg, function(x) if(is.language(x)) enquote(x) else Quoter(x))
-    attributes(res) <- org.attrs
-    res
-  }
-  else arg
-}
-
-#' @title Removes prefixes and quote from line
-#'
-#' @description Used for processing capture file information. Deletes prefixes to get essential information
-#' @param l input line
-#' @seealso ProcessClosure
-SubstrLine <- function(l){
-  if (grepl("^quote\\(", l)){
-    ret.line <- strsplit(l, "\\(")[[1]][2];
-    if (substr(ret.line, nchar(ret.line), nchar(ret.line)) == ")")
-      ret.line <- substr(ret.line, 0, nchar(ret.line) - 1)
-  }else{
-    ret.line <- substr(l, 7, nchar(l));     
-  }
-  ret.line
-}
-
-StartsWith <- function(prefix, x) {
-  grepl(paste("^", prefix, sep=""), x)
-}

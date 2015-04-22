@@ -1,18 +1,16 @@
-#' @title Write down capture information 
+#' @title Process Test Case file
 #' 
-#' This function is respinsible for writing down capture information for decorated function calls.
-#' @param fname function name
-#' @param fbody function body
-#' @param args arguments to function call
-#' @param retv return value of a specified function call with arguments
-#' @param errs caught errors during function call
-#' @param warns caught warnings during function call
+#' This function is respinsible for splitting a file into single test cases and filtering out 
+#' the unneeded file based or R and C code coverage
+#' @param tc.file test case file to process
+#' @param tc.result.root folder with resulting filtered test cases
+#' @param tc.db folder with test case detabase
+#' @param r.home home directory of R VM with C code coverage support
+#' @param source.folder folder in R VM to measure C code coverage of
 #' @seealso Decorate
 #' @export
 #' 
-ProcessTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.folder) {
-  cache$r.home <- r.home
-  cache$source.folder <- source.folder
+ProcessTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home = NULL, source.folder = NULL) {
   cache$tc.result.root <- tc.result.root
   
   if (!file.exists(tc.result.root))
@@ -20,53 +18,62 @@ ProcessTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home, source.fold
   
   n <- ceiling(GetNumberOfTC(tc.file)/16)
   
-  SplitTCs(tc = tc.file, 
-           tc.result.root = cache$temp_dir, 
+  SplitTCs(tc.root = tc.file, 
+           tc.split.root = cache$temp_dir, 
            number.of.tc.per.file = n)
   
   FilterTCs(tc.root = cache$temp_dir, 
             tc.db.path = tc.db, 
             tc.result.root = tc.result.root,
+            r.home = r.home,
+            source.folder = source.folder,
             clear.previous.coverage = TRUE, 
             wipe.tc.database = FALSE) 
   
-  n <- ceiling(n/2)
-  while (n > 1) {
-    SplitTCs(tc = tc.result.root, 
-             tc.result.root = cache$temp_dir, 
-             number.of.tc.per.file = n, 
-             check.correctness = TRUE)
+  while(n != 1) {
+    n <- ceiling(n/2)
+    SplitTCs(tc.root = tc.result.root, 
+             tc.split.root = cache$temp_dir, 
+             number.of.tc.per.file = n) 
+    file.remove(list.files(tc.result.root, recursive = T, full.names = T))
     FilterTCs(tc.root = cache$temp_dir, 
               tc.db.path = tc.db, 
               tc.result.root = tc.result.root,
+              r.home = r.home,
+              source.folder = source.folder,
               clear.previous.coverage = TRUE, 
               wipe.tc.database = FALSE) 
-    n <- ceiling(n/2)
   }
-  ResetCoverageInfo(r.home) 
-  rm(list = ls(all = TRUE))
 }
 
-SplitTCs<- function(tc.file, tc.split.root, number.of.tc.per.file = 1) {
+#' @title Split TestCase files
+#'
+#' This function takes a test cases files and splits them according to maximum number of tests per file 
+#' @param tc.root test case file/folder to split
+#' @param tc.split.root resulting location of split
+#' @param number.of.tc.per.file maximum number of test cases per file
+#' @seealso ProcessTC
+#'
+SplitTCs<- function(tc.root, tc.split.root, number.of.tc.per.file = 1) {
   # In case tc is diretory, recursively call this function on all files in directory
-  if (file.info(tc.file)$isdir){
-    all.tc <- list.files(tc.file, 
+  if (file.info(tc.root)$isdir){
+    all.tc <- list.files(tc.root, 
                          recursive=TRUE, 
                          all.files = TRUE, 
                          pattern = "\\.[rR]$", 
                          full.names = T)
     for (test.case in all.tc)
       SplitTCs(test.case, tc.split.root, number.of.tc.per.file)
-    return(NULL);
+    return(invisible())
   }
   
-  function.name <- GetFunctionName(basename(tc.file))
+  function.name <- GetFunctionName(basename(tc.root))
   tc.split.root <- file.path(tc.split.root, function.name)
   if (!file.exists(tc.split.root)) 
     dir.create(tc.split.root)
   file.index <- length(list.files(tc.split.root))
   
-  lines <- readLines(tc.file)
+  lines <- readLines(tc.root)
   if (length(lines) == 0)
     stop("Empty file\n")
   
@@ -77,7 +84,7 @@ SplitTCs<- function(tc.file, tc.split.root, number.of.tc.per.file = 1) {
   if (length(tests.ends) == 0) tests.ends <- grep("^[ ]*$", lines)
   
   if (testrOptions('verbose')) {
-    cat("File ", tc.file, "\n")
+    cat("File ", tc.root, "\n")
     cat("Number of TCs in file - ", length(tests.starts), "\n")
   }
   

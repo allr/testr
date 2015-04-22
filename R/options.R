@@ -1,7 +1,6 @@
 ## general (temporary) storage for testr's stuff
 cache           <- new.env()
 cache$capture.file.number <- 0
-cache$temp_dir <- "temp.dir"
 
 cache$arguments <- list()
 cache$decorated <- vector()
@@ -54,8 +53,9 @@ primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
 {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
-  if (!file.exists(cache$temp_dir) || !file.info(cache$temp_dir)$isdir)
-    dir.create(cache$temp_dir)
+  # make sure temp_dir is empty
+  cache$temp_dir <- tempdir()
+  CleanTempDir()
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   ## testr settings
@@ -66,7 +66,7 @@ primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
     'display.code.on.error' = FALSE,
     'file.summary' = FALSE,
     'capture.file.size' = 50 * 1000 * 1000,
-    'capture.argumens' = TRUE
+    'capture.arguments' = TRUE
   ))
 }
 
@@ -84,30 +84,20 @@ primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
 #' @export
 #' 
 testrOptions <- function(o, value) {
-  
   res <- getOption('testr')
-  
   ## just querying
   if (missing(value)) {
-    
     if (missing(o))
       return(res)
-    
     if (o %in% names(res))
       return(res[[o]])
-    
     stop('Wrong option queried.')
-    
   } else {
-    
     if (!o %in% names(res))
       stop(paste('Invalid option name:', o))
-    
     res[[o]] <- value
     options('testr' = res)
-    
   }
-  
 }
 
 #' @export

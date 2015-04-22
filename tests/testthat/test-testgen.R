@@ -18,6 +18,9 @@ test_that('Generate Abbreviate', {
   expect_true(file.exists("we"))
   expect_true(file.info("we")$isdir)
   expect_equal(length(list.files("we")), 3) # one is bad.args file
+  sink("out")
   expect_true(RunTests("we"))
+  sink()
+  file.remove("out")
   unlink("we", recursive = T)
 })

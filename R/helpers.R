@@ -34,3 +34,55 @@ GetNumberOfTC <- function(path){
     lines <- c(lines, readLines(file))
   length(grep("test\\(id",lines))
 }
+
+#' @title Clean temporary directory
+#'
+#' Make sure temp dir is empty by deleting unnecessary files
+CleanTempDir <- function() {
+  for (file in list.files(cache$temp_dir, full.names = T, pattern = "\\.RData|\\.[rR]$"))
+    file.remove(file)
+}
+
+ParseAndCheck <- function(what) {
+  tryCatch({eval(parse(text=what)); TRUE}, error=function(e){FALSE})
+}
+
+#' @title Quote language from evaluation
+#'
+#' In certain cases, language arguments (like calls), need to be quoated
+#' @param arg list of arguments
+#' @seealso GenerateTC
+Quoter <- function(arg) {
+  if (is.list(arg)) {
+    org.attrs <- attributes(arg)
+    res <- lapply(arg, function(x) if(is.language(x)) enquote(x) else Quoter(x))
+    attributes(res) <- org.attrs
+    res
+  }
+  else arg
+}
+
+#' @title Removes prefixes and quote from line
+#'
+#' @description Used for processing capture file information. Deletes prefixes to get essential information
+#' @param l input line
+#' @seealso ProcessClosure
+SubstrLine <- function(l){
+  if (grepl("^quote\\(", l)){
+    ret.line <- strsplit(l, "\\(")[[1]][2];
+    if (substr(ret.line, nchar(ret.line), nchar(ret.line)) == ")")
+      ret.line <- substr(ret.line, 0, nchar(ret.line) - 1)
+  }else{
+    ret.line <- substr(l, 7, nchar(l));     
+  }
+  ret.line
+}
+
+#' @title Check if line starts with prefix
+#'
+#' @param prefix prefix
+#' @param x text to be checked
+#' @seealso GenerateTC
+StartsWith <- function(prefix, x) {
+  grepl(paste("^", prefix, sep=""), x)
+}

@@ -10,7 +10,7 @@ test_that('Can decorate functions', {
       return(TRUE)
     obj <- get(x, envir = getNamespace('base'))
     if (is.function(obj))
-      class(obj) == "functionWithTrace" || !testr:::EligibleForCapture(x) || testr:::is_s3_generic(x)
+      class(obj) == "functionWithTrace" || !testr:::EligibleForCapture(x) || testr:::IsS3Generic(x)
     else
       TRUE
   })

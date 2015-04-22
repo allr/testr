@@ -10,8 +10,8 @@
 #' @param wipe.tc.database wheater delete previously accomulated test cases.
 #' @return list(after.tc.cov.percentage)
 #' 
-FilterTCs<- function(tc.root, tc.result.root, tc.db.path = "", 
-                     r.home = "", source.folder = "",
+FilterTCs<- function(tc.root, tc.result.root, tc.db.path = NULL, 
+                     r.home = NULL, source.folder = NULL,
                      clear.previous.coverage = TRUE, 
                      wipe.tc.database = FALSE, 
                      verbose = testrOptions('verbose')) {
@@ -37,14 +37,11 @@ FilterTCs<- function(tc.root, tc.result.root, tc.db.path = "",
   covChangeMeasureForSingleTCFile <- function(tc) {
     tc.full.path <- file.path(tc.root, tc)
     info.file <- file.path(tc.root, paste(function.name,"info", sep = "_"))
-    out <- capture.output(
-      before.tc.cov.info <- tryCatch(MeasureCoverage(root = file.path(cache$r.home, cache$source.folder)), 
-                                     error=function(x) 0)
-    )
-    before.tc.cov.c <- ifelse(length(before.tc.cov.info) > 1, calculateCoverage(before.tc.cov.info), 0)
-    if (is.nan(before.tc.cov.c)) 
-      before.tc.cov.c <- 0
-    before.tc.cov.r <- rcov::ReportCoveragePercentage(readRDS(file.path(cache$temp_dir, "cov.data")))
+    before.tc.cov.c <- 0
+    before.tc.cov.info <- tryCatch(MeasureGCovCoverage(root = file.path(cache$r.home, cache$source.folder), verbose=FALSE), 
+                                     error=function(x) list(file.pcn = 0))
+    before.tc.cov.c <- before.tc.cov.info$file.pcn
+    before.tc.cov.r <- rcov::ReportCoveragePercentage(readRDS(file.path(cache$temp_dir, "cov.data.RData")))
     cov.data <- RunTestsMeasureCoverage(tc.full.path)
     after.tc.cov.c <- cov.data$c
     after.tc.cov.r <- cov.data$r
@@ -66,14 +63,15 @@ FilterTCs<- function(tc.root, tc.result.root, tc.db.path = "",
   final.cov <- result[[length(result)]]
   cat("C coverage gain by TCs - ", final.cov$c - db.cov$c, "\n")
   cat("R coverage gain by TCs - ", final.cov$r - db.cov$r, "\n")
+  CleanTempDir()
 }
 
 rtemplate <- "library(rcov)
 library(testr)
 tmp_folder <- '%s'
-cov.data <- file.path(tmp_folder, 'cov.data')
-cov.data.clean <- file.path(tmp_folder, 'cov.data.clean')
-cov.funcs <- file.path(tmp_folder, 'cov.funcs')
+cov.data <- file.path(tmp_folder, 'cov.data.RData')
+cov.data.clean <- file.path(tmp_folder, 'cov.data.clean.RData')
+cov.funcs <- file.path(tmp_folder, 'cov.funcs.RData')
 r.func <- %s
 PauseMonitorCoverage()
 if (file.exists(cov.funcs)){
@@ -94,15 +92,15 @@ if (file.exists(cov.funcs)){
 }
 RunTests('%s', use.rcov = T)
 saveRDS(ReportCoveragePercentage(), '%s') 
-saveRDS(rcov:::cov.cache, file.path(tmp_folder, 'cov.data'))"
+saveRDS(rcov:::cov.cache, file.path(tmp_folder, 'cov.data.RData'))"
 
 #' @title Run Tests and Measure Coverage 
 #' 
 #' @param tc.full.path path of test.cases
 #' @param funcs R functions to measure coverage for
 RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
-  tmp_source <- file.path(cache$temp_dir, "tmp_source")
-  cov.info <- file.path(cache$temp_dir, "cov.data.p")
+  tmp_source <- file.path(cache$temp_dir, "tmp_source.R")
+  cov.info <- file.path(cache$temp_dir, "cov.data.p.RData")
   if (is.null(tc.full.path))
     tc.full.path <- ""
   if (missing(funcs)) {
@@ -115,7 +113,7 @@ RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
                      paste(deparse(funcs), collapse=""), 
                      tc.full.path, cov.info)
   writeChar(con = tmp_source, command, eos = NULL)
-  RCMD <- ifelse(cache$r.home == "", "R", file.path(cache$r.home, "bin/R"))
+  RCMD <- ifelse(is.null(cache$r.home), "R", file.path(cache$r.home, "bin/R"))
   cmd <- paste(RCMD,
                " CMD BATCH --vanilla --slave -q ", 
                tmp_source,
@@ -124,6 +122,7 @@ RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
   after.tc.cov.r <- readRDS(file = cov.info)
   after.tc.cov.info.gcov <- MeasureGCovCoverage(root = file.path(cache$r.home, cache$source.folder), verbose = FALSE)
   after.tc.cov.c <- after.tc.cov.info.gcov$file.pcn
+  file.remove(tmp_source)
   list(r=after.tc.cov.r, c=after.tc.cov.c)
 }
 
@@ -135,9 +134,14 @@ RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
 #' @param tc.db.path a directory containing previosly collected test cases.
 #' @return total percentage of cov by line after running TCs for database on specified VM
 MeasureCoverageByDB <- function(tc.db.path) {
-  file.remove(file.path(cache$temp_dir, "cov.data"))
+  # clear previous information
+  cov.data <- file.path(cache$temp_dir, 'cov.data.RData')
+  suppressWarnings(file.remove(cov.data))
+  
+  if (is.null(tc.db.path))
+    tc.db.path <- ""
   out <- capture.output(
-    db.cov.info <- RunTestsMeasureCoverage(tc.db.path, funcs = builtins(T)) 
+    db.cov.info <- RunTestsMeasureCoverage(tc.db.path, funcs = builtins()) 
   )
   db.cov.c <- db.cov.info$c
   db.cov.r <- db.cov.info$r

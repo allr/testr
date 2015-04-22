@@ -47,7 +47,7 @@ MeasureGCovCoverage <- function(root,
                                 ignore.case=TRUE) {
   if (missing(root)) 
     stop("A directory containing VM source files must be specified!");
-  if (!file.exists(root) || root == "/" || root == "")
+  if (length(root) == 0 || !file.exists(root))
     return(list(file=0, func=0, file.pcn=0, func.pcn=0))
   if (.Platform$OS.type=="windows") {
     stop("Not supported on Windows!");
@@ -181,7 +181,7 @@ MeasureGCovCoverage <- function(root,
 ResetGCovInfo <- function(root) {
   cat("reset called\n")
   if (missing(root)) stop("A directory containing VM source files must be specified!");
-  if (root == "/") return(NULL)
+  if (length(root) == 0) return(invisible())
   if (.Platform$OS.type=="unix") {
     cmd <- paste("find", root, "-name", "\'*.gcda\'", "-delete", sep=" ");
     system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);
