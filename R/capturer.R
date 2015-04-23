@@ -3,25 +3,33 @@
 #' This function is respinsible for writing down capture information for decorated function calls.
 #' Replaces the function by decorated function in the global environment
 #' @param func function name as a character string
+#' @param package name of package to look for function
 #' @export 
-#' @seealso WriteCapInfo Decorate
+#' @seealso WriteCapInfo
 #'
-Decorate <- function(func, envir = .GlobalEnv){
-  if (class(func) == "function"){
-    fname <- as.character(substitute(func))
-  } else if (class(func) == "character"){
-    fname <- func
-  } else {
+Decorate <- function(func, package) {
+  if(class(func) != "character" || (!missing(package) && class(package) != "character")){
     stop("wrong argument type!")
-  }   
-  if (IsS3Generic(fname)) return(NULL);
-  write.call <- call("WriteCapInfo", fname, quote(sys.frame(-4)))
+  }
+  if (missing(package)){
+    package <- gsub("(.*):(.*)", "\\2", find(func))
+    if (length(package) == 0)
+      stop("Can't determine a package for function. If function is hidden, use package param")
+    if (length(package) > 1)
+      stop("Function found in multiple packages, supply the exact name")
+  }
+  if (IsS3Generic(func, getNamespace(package))) {
+    warning("Not decorating S3 generic")
+    return(invisible())
+  }
+  write.call <- call("WriteCapInfo", paste(package, func, sep=":::"), quote(sys.frame(-4)))
   tc <- call('trace', 
-             fname, 
+             func, 
              quote(write.call),
-             print=quote(testrOptions('verbose')))
+             print=quote(testrOptions('verbose')),
+             where=call('getNamespace', package))
   eval(tc)
-  cache$decorated <- c(cache$decorated, fname)
+  cache$decorated <- c(cache$decorated, func)
 } 
 
 #' @title Undecorate function
@@ -69,11 +77,11 @@ WriteCapInfo <- function(fname, args.env){
 #' @param flist function or list of functions to turn on capturing for. List should be only as character.
 #' @seealso Decorate
 #' @export
-SetupCapture <- function(flist){
+SetupCapture <- function(flist, package){
   testrOptions('capture.arguments', FALSE)
   for (func in flist)
     if (EligibleForCapture(func))
-      Decorate(func)
+      Decorate(func, package)
   testrOptions('capture.arguments', TRUE)
 }
 
@@ -101,13 +109,14 @@ EligibleForCapture <- function(func){
 #' @param internal wheather only internals should be captured, or all builtins
 #' @param functions list of functions to be decorate
 #' @param indexes specific indexes from functions vector
-#' @seealso SetupCapture
+#' @param package
+#' @seealso SetupCapture, Decorate
 #' @export
-BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal), indexes){
+BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal), indexes, package){
   if (missing(indexes))
-    SetupCapture(functions)
+    SetupCapture(functions, package)
   else
-    SetupCapture(functions[indexes])
+    SetupCapture(functions[indexes], package)
 }
 
 #' @title Clear decoration

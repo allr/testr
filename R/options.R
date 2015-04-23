@@ -57,7 +57,6 @@ primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
   cache$temp_dir <- tempdir()
   CleanTempDir()
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
-  cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   ## testr settings
   options('testr' = list(
     'verbose' = FALSE,

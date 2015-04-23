@@ -7,7 +7,7 @@
 Sets up capturing of builtin functions}
 \usage{
 BeginBuiltinCapture(internal = FALSE, functions = builtins(internal),
-  indexes)
+  indexes, package)
 }
 \arguments{
 \item{internal}{wheather only internals should be captured, or all builtins}
@@ -15,6 +15,8 @@ BeginBuiltinCapture(internal = FALSE, functions = builtins(internal),
 \item{functions}{list of functions to be decorate}
 
 \item{indexes}{specific indexes from functions vector}
+
+\item{package}{}
 }
 \description{
 Setup capture of builtin functions
@@ -22,6 +24,6 @@ Setup capture of builtin functions
 Sets up capturing of builtin functions
 }
 \seealso{
-SetupCapture
+SetupCapture, Decorate
 }
 

@@ -13,8 +13,8 @@ GetFunctionName <- function(filename){
 #' Determine if function has a call to UseMethod. In that case there is no need to capture it.
 #' @param fname function name
 #' @seealso Decorate
-IsS3Generic <- function(fname) {
-  f <- get(fname, env = parent.frame(), mode = "function")
+IsS3Generic <- function(fname, env) {
+  f <- get(fname, mode = "function", envir = env)
   if (is.null(body(f))) return(FALSE)
   uses <- codetools::findGlobals(f, merge = FALSE)$functions
   any(uses == "UseMethod")
@@ -85,4 +85,19 @@ SubstrLine <- function(l){
 #' @seealso GenerateTC
 StartsWith <- function(prefix, x) {
   grepl(paste("^", prefix, sep=""), x)
+}
+
+#' @title Find test directory for package
+#'
+#' @param path package path
+#' @seealso CapturePackage
+FindTestDir <- function(path) 
+{
+  testthat <- file.path(path, "tests", "testthat")
+  if (file.exists(testthat) && file.info(testthat)$isdir) 
+    return(testthat)
+  inst <- file.path(path, "inst", "tests")
+  if (file.exists(inst) && file.info(inst)$isdir) 
+    return(inst)
+  stop("No testthat directories found in ", path, call. = FALSE)
 }

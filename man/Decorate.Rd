@@ -7,10 +7,12 @@
 This function is respinsible for writing down capture information for decorated function calls.
 Replaces the function by decorated function in the global environment}
 \usage{
-Decorate(func, envir = .GlobalEnv)
+Decorate(func, package)
 }
 \arguments{
 \item{func}{function name as a character string}
+
+\item{package}{name of package to look for function}
 }
 \description{
 Decorates function to capture calls and return values
@@ -19,6 +21,6 @@ This function is respinsible for writing down capture information for decorated 
 Replaces the function by decorated function in the global environment
 }
 \seealso{
-WriteCapInfo Decorate
+WriteCapInfo
 }
 

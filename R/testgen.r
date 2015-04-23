@@ -153,17 +153,21 @@ GenerateTC<- function(symb, vsym, func, argv) {
   #  argv.obj.lst <- alter.arguments(argv.obj);
   
   call <- ""
-  where <- unique(gsub(".*:(.*)", "\\1", getAnywhere(func)$where))
-  if (length(where) > 0 && where[1] != "base") {
-    call <- paste(call, sprintf("require(%s)", where[1]), "\n", sep = "")
-  }
   
   args <- eval(parse(text=argv));
   if (length(args) > 0) {
     args <- lapply(args, function(x) paste(deparse(x), collapse = "\n"))
-    if (!is.null(names(args)) && length(names(args)) == length(args))
-      call <- paste(call, sprintf("%s(%s)", func, paste(names(args), args, sep="=", collapse=",")), "\n", sep="")
-    else
+    if (!is.null(names(args)) && length(names(args)) == length(args)) {
+      call.args <- ""
+      arg_names <- names(args)
+      for (i in 1:length(args)) {
+        if (arg_names[i] != "") 
+          call.args <- paste(call.args, arg_names[i], "=", sep = "")
+        call.args <- paste(call.args, args[[i]], ",", sep="")
+      }
+      call.args <- substr(call.args, 1, nchar(call.args) - 1)
+      call <- paste(call, sprintf("%s(%s)", func, call.args), "\n", sep="")
+    } else
       call <- paste(call, sprintf("%s(%s)", func, paste(args, collapse=",")), "\n", sep="")
   } else {
     call <- paste(call, func, "()", "\n", sep="")
