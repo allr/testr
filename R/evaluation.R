@@ -26,7 +26,7 @@ BioconductorTester <- function(indexes=1:1000, funcs) {
   sapply(ap, CapturePackage, from.bioc = T, contriburl = contriburl, funcs = funcs)
 }
 
-#' @title Capture run information from package
+#' @title Capture run information from package and generate test cases
 #' 
 #' This function is responsible for getting all possible capture information from specific package. 
 #' It tries to insstall package and run tests, examples and vignettes
@@ -35,9 +35,10 @@ BioconductorTester <- function(indexes=1:1000, funcs) {
 #' @param from.bioc if package is from Bioconductior
 #' @param contribur contributor url as in download.packages
 #' @param funcs functions to Decorate
+#' @paran gen if generate test cases
 #' @export
 #'
-CapturePackage <- function(name, dir=tempdir(), from.bioc = FALSE, contriburl, funcs) {
+PackageCapture <- function(name, dir=tempdir(), from.bioc = FALSE, contriburl, funcs, gen = FALSE) {
   if (!missing(contriburl))
     loc <- suppressMessages(download.packages(name, dir, contriburl = contriburl, type = "source")[,2])
   else 

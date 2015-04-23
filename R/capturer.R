@@ -29,7 +29,7 @@ Decorate <- function(func, package) {
              print=quote(testrOptions('verbose')),
              where=call('getNamespace', package))
   eval(tc)
-  cache$decorated <- c(cache$decorated, func)
+  .decorated[[func]] <- list(func=func, package=package)
 } 
 
 #' @title Undecorate function
@@ -40,18 +40,17 @@ Decorate <- function(func, package) {
 #' @seealso WriteCapInfo Decorate
 #'
 Undecorate <- function(func) {
-  if (class(func) == "functionWithTrace"){
-    fname <- as.character(substitute(func))
-  } else if (class(func) == "character"){
+  if (class(func) == "character"){
     fname <- func
   } else {
     stop("wrong argument type!")
   }  
-  ind <- which(fname %in% cache$decorated)
+  ind <- which(fname %in% ls(.decorated))
   if (length(ind) == 0)
     stop("Function was not decorated!")
-  do.call(untrace, list(fname))
-  cache$decorated <- cache$decorated[-ind]
+  package <- .decorated[[func]]$package
+  do.call(untrace, list(fname, where=call('getNamespace', package)))
+  rm(list=c(func), envir=.decorated)
 }
 
 #' @title Write down capture information 

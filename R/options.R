@@ -3,7 +3,7 @@ cache           <- new.env()
 cache$capture.file.number <- 0
 
 cache$arguments <- list()
-cache$decorated <- vector()
+.decorated <- new.env()
 
 kCaptureFile <- "capture"
 kCaptureFolder <- "capture"
