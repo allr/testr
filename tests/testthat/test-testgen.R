@@ -17,7 +17,7 @@ test_that('Generate Abbreviate', {
   TestGen("CaptureInfo/capture_warn_error", "we")
   expect_true(file.exists("we"))
   expect_true(file.info("we")$isdir)
-  expect_equal(length(list.files("we")), 3) # one is bad.args file
+  expect_equal(length(list.files("we",recursive = T)), 3) # one is bad.args file
   sink("out")
   expect_true(RunTests("we"))
   sink()

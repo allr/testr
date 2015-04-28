@@ -22,9 +22,13 @@ TestGen <- function(root, output.dir, verbose=testrOptions('verbose')) {
   # output dir checks
   if (missing(output.dir)) stop("A output directory must be provided!");
   if (!file.exists(output.dir) || !file.info(output.dir)$isdir) dir.create(output.dir)
-  cache$output.dir <- output.dir
+  output.dir.time <- file.path(output.dir, format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+  dir.create(output.dir.time)
+  file.remove(file.path(output.dir, "last"))
+  file.symlink(output.dir.time, file.path(output.dir, "last"))
+  cache$output.dir <- output.dir.time
   # bad.arguments file to store incorrect arguments
-  cache$bad.argv.file <- file.path(cache$output.dir, "bad_arguments", fsep=.Platform$file.sep);
+  cache$bad.argv.file <- file.path(cache$output.dir, "bad_arguments");
   if (!file.exists(cache$bad.argv.file) && !file.create(cache$bad.argv.file)) stop("Unable to create file: ", bad.argv.file);
   
   cache$tID <- list()

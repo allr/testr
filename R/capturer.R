@@ -26,10 +26,14 @@ Decorate <- function(func, package) {
   tc <- call('trace', 
              func, 
              quote(write.call),
-             print=quote(testrOptions('verbose')),
-             where=call('getNamespace', package))
+             print=quote(testrOptions('verbose')))
+  hidden <- FALSE
+  if (!func %in% ls(as.environment(paste("package", package, sep=":")))) {
+    tc[["where"]] <- call('getNamespace', package)
+    hidden <- TRUE
+  }
   eval(tc)
-  .decorated[[func]] <- list(func=func, package=package)
+  .decorated[[func]] <- list(func=func, package=package, hidden=hidden)
 } 
 
 #' @title Undecorate function
@@ -49,7 +53,11 @@ Undecorate <- function(func) {
   if (length(ind) == 0)
     stop("Function was not decorated!")
   package <- .decorated[[func]]$package
-  do.call(untrace, list(fname, where=call('getNamespace', package)))
+  hidden <- .decorated[[func]]$hidden
+  params <- list(fname)
+  if (hidden)
+    list[["where"]] <- call('getNamespace', package)
+  do.call(untrace, params)
   rm(list=c(func), envir=.decorated)
 }
 
@@ -124,6 +132,6 @@ BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal)
 #' @seealso Undecorate
 #' @export
 ClearDecoration <- function() {
-  for (fname in cache$decorated)
+  for (fname in ls(.decorated))
     Undecorate(fname)
 }

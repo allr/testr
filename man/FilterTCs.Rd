@@ -17,9 +17,6 @@ FilterTCs(tc.root, tc.result.root, tc.db.path = NULL, r.home = NULL,
 
 \item{clear.previous.cov}{wheather to clear accomulated cov of VM.}
 }
-\value{
-list(after.tc.cov.percentage)
-}
 \description{
 This function works with the GNU cov tool, gcov, to report code cov of the
  tested R virtual machine. The VM must have been compiled with gcov support and executed at least

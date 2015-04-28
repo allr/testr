@@ -14,7 +14,7 @@ test_that('Can decorate functions', {
     else
       TRUE
   })
-  expect_true(length(testr:::cache$decorated) > 0)
+  expect_true(length(testr:::.decorated) > 0)
   expect_true(all(check.dec))
   suppressMessages(ClearDecoration())
   check.dec <- sapply(builtins(T), function(x) {
@@ -26,6 +26,6 @@ test_that('Can decorate functions', {
     else
       FALSE
   })
-  expect_true(length(testr:::cache$decorated) == 0)
+  expect_true(length(testr:::.decorated) == 0)
   expect_false(any(check.dec))
 })

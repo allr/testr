@@ -4,8 +4,10 @@
 #' @param filename filename
 #' @seealso ProcessTC
 GetFunctionName <- function(filename){
-  spl <- strsplit(filename, "_")
-  ifelse((length(spl[[1]]) == 2), substr(spl[[1]][2], 1, nchar(spl[[1]][2]) - 2), spl[[1]][2])
+  name <- gsub("(.*)[:]+(.*)\\.[rR]$", "\\2", filename)
+  if (grepl("_", name))
+    name <- gsub("(.*)_(.*)", "\\1", name)
+  name
 }
 
 #' @title Check if function is S3 generic
@@ -13,7 +15,7 @@ GetFunctionName <- function(filename){
 #' Determine if function has a call to UseMethod. In that case there is no need to capture it.
 #' @param fname function name
 #' @seealso Decorate
-IsS3Generic <- function(fname, env) {
+IsS3Generic <- function(fname, env=parent.frame()) {
   f <- get(fname, mode = "function", envir = env)
   if (is.null(body(f))) return(FALSE)
   uses <- codetools::findGlobals(f, merge = FALSE)$functions
@@ -99,5 +101,6 @@ FindTestDir <- function(path)
   inst <- file.path(path, "inst", "tests")
   if (file.exists(inst) && file.info(inst)$isdir) 
     return(inst)
-  stop("No testthat directories found in ", path, call. = FALSE)
+  warning("No testthat directories found in ", path, call. = FALSE)
+  return(NULL)
 }
