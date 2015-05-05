@@ -77,7 +77,7 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
   ClearDecoration()
   cat("===Generating tests\n")
   TestGen("capture", gen.dir)
-  file.remove(list.files("capture", recursive = T))
+  file.remove(list.files("capture", recursive = T, full.names = T))
   invisible()
 }
 
