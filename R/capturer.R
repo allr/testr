@@ -100,8 +100,8 @@ SetupCapture <- function(flist, package){
 #' @return TRUE/FALSE if can be captured or not
 #' @seealso SetupCapture
 EligibleForCapture <- function(func){
-  return (!length(getAnywhere(func)$objs) == 0 &&
-            class(getAnywhere(func)[1]) == "function" &&
+  return (!length(utils::getAnywhere(func)$objs) == 0 &&
+            class(utils::getAnywhere(func)[1]) == "function" &&
             !func %in% blacklist &&
             !func %in% operators &&
             !func %in% keywords &&
