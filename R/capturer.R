@@ -12,11 +12,12 @@ Decorate <- function(func, package) {
     stop("wrong argument type!")
   }
   if (missing(package)){
-    package <- gsub("(.*):(.*)", "\\2", find(func))
+    package <- find(func)
     if (length(package) == 0)
       stop("Can't determine a package for function. If function is hidden, use package param")
     if (length(package) > 1)
       stop("Function found in multiple packages, supply the exact name")
+    package <- substr(package, 9, nchar(package))
   }
   if (IsS3Generic(func, getNamespace(package))) {
     warning("Not decorating S3 generic")
