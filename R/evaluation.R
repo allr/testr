@@ -86,7 +86,9 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
 #' This function is responsible for running all examples in specified package
 #' @param package package name
 PackageRunExamples <- function(package) {
-  invisible(sapply(ls(getNamespace(package)), function(x) do.call(example, list(x))))
+  invisible(sapply(ls(getNamespace(package)), 
+                   function(x) tryCatch(do.call(example, list(x, ask = FALSE, verbose = FALSE, echo = FALSE)),
+                                        error=function(y) invisible())))
 }
 
 #' @title Run testthat tests in the package
@@ -99,7 +101,7 @@ PackageRunTests <- function(loc) {
     return(invisible())
   test_files <- dir(test_path, "^test.*\\.[rR]$")
   library(testthat, quietly = TRUE)
-  testthat::test_dir(test_path)
+  tryCatch(testthat::test_dir(test_path), error=function(x) invisible())
 }
 
 #' @title Run all vignettes in the package
@@ -111,7 +113,8 @@ PackageRunVignettes <- function(name) {
   vdir <- info[,2]
   vfiles <- info[,6]
   p <- file.path(vdir, "doc", vfiles)
-  invisible(sapply(p, source))
+  invisible(tryCatch(sapply(p, source),
+                     error=function(x) invisible()))
 }
 
 #' @title Run specific code in the file and generated test cases
