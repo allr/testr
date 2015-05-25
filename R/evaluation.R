@@ -69,11 +69,11 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
     SetupCapture(funcs)
   }
   cat("===Running examples\n")
-  capture.output(suppressMessages(PackageRunExamples(name)))
+  capture.output(PackageRunExamples(loc))
   cat("===Running tests\n")
-  capture.output(suppressMessages(PackageRunTests(loc)))
+  capture.output(PackageRunTests(loc))
   cat("===Running vignettes\n")
-  capture.output(suppressMessages(PackageRunVignettes(name)))
+  capture.output(PackageRunVignettes(name))
   ClearDecoration()
   cat("===Generating tests\n")
   TestGen("capture", gen.dir)
@@ -86,9 +86,11 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
 #' This function is responsible for running all examples in specified package
 #' @param package package name
 PackageRunExamples <- function(package) {
-  invisible(sapply(ls(getNamespace(package)), 
-                   function(x) tryCatch(do.call(example, list(x, ask = FALSE, verbose = FALSE, echo = FALSE)),
-                                        error=function(y) invisible())))
+  pkg <- devtools:::as.package(package)
+  files <- devtools:::rd_files(pkg)
+  if (length(files) == 0) 
+    return()
+  tryCatch(lapply(files, devtools:::run_example), error=function(x) invisible())
 }
 
 #' @title Run testthat tests in the package
