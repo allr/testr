@@ -9,6 +9,7 @@ Description: More about what it does (maybe more than one line)
 License: GPL (>= 2)
 Imports: 
     Rcpp (>= 0.11.3),
-    codetools
+    codetools,
+    utils
 LinkingTo: Rcpp
 Suggests: testthat
