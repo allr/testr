@@ -72,12 +72,20 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
   } else {
     SetupCapture(funcs)
   }
+  hs <- help
+  inv <- function(x) invisible()
+  ReassignInEnv('help', inv, getNamespace('utils'))
+  ReassignInEnv('help', inv, as.environment('package:utils'))
+  
   cat("===Running examples\n")
   capture.output(PackageRunExamples(loc))
   cat("===Running tests\n")
   capture.output(PackageRunTests(loc))
   cat("===Running vignettes\n")
   capture.output(PackageRunVignettes(name))
+  
+  ReassignInEnv('help', hs, getNamespace('utils'))
+  ReassignInEnv('help', hs, as.environment('package:utils'))
   cat("===Removing trace points\n")
   ClearDecoration()
   cat("===Generating tests\n")
@@ -95,7 +103,7 @@ PackageRunExamples <- function(package) {
   files <- devtools:::rd_files(pkg)
   if (length(files) == 0) 
     return()
-  tryCatch(lapply(files, devtools:::run_example), error=function(x) invisible())
+  tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
 }
 
 #' @title Run testthat tests in the package
