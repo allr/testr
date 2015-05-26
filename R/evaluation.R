@@ -55,13 +55,17 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
   loc <- file.path(dir, name)
   cat("===Intalling package - ", name, "\n")
   if (name %in% loadedNamespaces())
-    detach(name=paste("package", name, sep=":"),unload = T, character.only = T)
+    tryCatch(detach(name=paste("package", name, sep=":"),unload = T, character.only = T),
+             error=function(x) invisible())
   if (from.bioc) 
     biocLite(name)
   else
     install.packages(name, quiet = T, dependencies = T)
-  do.call(require, list(name))
-  cat("===Inserting Trace points")
+  if (!do.call(require, list(name))) {
+    cat("===Package Loading Failed\n")
+    return(invisible())
+  }
+  cat("===Inserting Trace points\n")
   if (missing(funcs) || is.null(funcs)) {
     funcs <- ls(getNamespace(name))
     SetupCapture(funcs, name)
@@ -74,6 +78,7 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
   capture.output(PackageRunTests(loc))
   cat("===Running vignettes\n")
   capture.output(PackageRunVignettes(name))
+  cat("===Removing trace points\n")
   ClearDecoration()
   cat("===Generating tests\n")
   TestGen("capture", gen.dir)

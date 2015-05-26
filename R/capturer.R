@@ -57,7 +57,7 @@ Undecorate <- function(func) {
   hidden <- .decorated[[func]]$hidden
   params <- list(fname)
   if (hidden)
-    list[["where"]] <- call('getNamespace', package)
+    params[["where"]] <- call('getNamespace', package)
   do.call(untrace, params)
   rm(list=c(func), envir=.decorated)
 }
