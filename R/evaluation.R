@@ -89,7 +89,7 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
   cat("===Removing trace points\n")
   ClearDecoration()
   cat("===Generating tests\n")
-  TestGen("capture", gen.dir)
+  TestGen("capture", file.path(gen.dir, name))
   file.remove(list.files("capture", recursive = T, full.names = T))
   invisible()
 }

@@ -6,8 +6,9 @@
 #' @param root a directory containg capture information or capture file
 #' @param output.dir directory where generated test cases will be saved
 #' @param verbose wheater display debug output
+#' @param timed whether result is dependent on time of generation
 #' @export
-TestGen <- function(root, output.dir, verbose=testrOptions('verbose')) {
+TestGen <- function(root, output.dir, timed = F, verbose=testrOptions('verbose')) {
   if (verbose) {
     cat("Output:", output.dir, "\n");
     cat("Root:", root, "\n");
@@ -22,11 +23,9 @@ TestGen <- function(root, output.dir, verbose=testrOptions('verbose')) {
   # output dir checks
   if (missing(output.dir)) stop("A output directory must be provided!");
   if (!file.exists(output.dir) || !file.info(output.dir)$isdir) dir.create(output.dir)
-  output.dir.time <- file.path(output.dir, format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
-  dir.create(output.dir.time)
-  file.remove(file.path(output.dir, "last"))
-  file.symlink(output.dir.time, file.path(output.dir, "last"))
-  cache$output.dir <- output.dir.time
+  if (timed)
+    output.dir <- file.path(output.dir, format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+  cache$output.dir <- output.dir
   # bad.arguments file to store incorrect arguments
   cache$bad.argv.file <- file.path(cache$output.dir, "bad_arguments");
   if (!file.exists(cache$bad.argv.file) && !file.create(cache$bad.argv.file)) stop("Unable to create file: ", bad.argv.file);

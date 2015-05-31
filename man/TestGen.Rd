@@ -4,12 +4,14 @@
 \alias{TestGen}
 \title{Test Case generator based on capture files}
 \usage{
-TestGen(root, output.dir, verbose = testrOptions("verbose"))
+TestGen(root, output.dir, timed = F, verbose = testrOptions("verbose"))
 }
 \arguments{
 \item{root}{a directory containg capture information or capture file}
 
 \item{output.dir}{directory where generated test cases will be saved}
+
+\item{timed}{whether result is dependent on time of generation}
 
 \item{verbose}{wheater display debug output}
 }
