@@ -65,6 +65,7 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
     cat("===Package Loading Failed\n")
     return(invisible())
   }
+  if (!file.exists(gen.dir) || !file.info(gen.dir)$isdir) dir.create(gen.dir)
   cat("===Inserting Trace points\n")
   if (missing(funcs) || is.null(funcs)) {
     funcs <- ls(getNamespace(name))
