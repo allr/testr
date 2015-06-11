@@ -14,7 +14,10 @@ TestGen <- function(root, output.dir, timed = F, verbose=testrOptions('verbose')
     cat("Root:", root, "\n");
   }
   # input dir checks
-  if (missing(root) || !file.exists(root)) stop("Input dir/file doesn't exist!");
+  if (missing(root) || !file.exists(root)) {
+    warning("Input dir/file doesn't exist!")
+    return(invisible())
+  }
   if (file.info(root)$isdir){
     all.capture <- lapply(list.files(root, recursive=TRUE, all.files = TRUE), function(x) file.path(root,x))
   } else {
