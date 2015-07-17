@@ -5,9 +5,9 @@
 #' @param func function name as a character string
 #' @param package name of package to look for function
 #' @export 
-#' @seealso WriteCapInfo
+#' @seealso write_capture
 #'
-Decorate <- function(func, package) {
+decorate <- function(func, package) {
   if(class(func) != "character" || (!missing(package) && class(package) != "character")){
     stop("wrong argument type!")
   }
@@ -19,37 +19,37 @@ Decorate <- function(func, package) {
       stop("Function found in multiple packages, supply the exact name")
     package <- substr(package, 9, nchar(package))
   }
-  if (IsS3Generic(func, getNamespace(package))) {
+  if (is_s3_generic(func, getNamespace(package))) {
     warning("Not decorating S3 generic")
     return(invisible())
   }
-  write.call <- call("WriteCapInfo", paste(package, func, sep=":::"), quote(sys.frame(-4)))
-  tc <- call('trace', 
-             func, 
+  write.call <- call("write_capture", paste(package, func, sep=":::"), quote(sys.frame(-4))) #nolint
+  tc <- call("trace",
+             func,
              quote(write.call),
-             print=quote(testrOptions('verbose')))
+             print=quote(testr_options("verbose")))
   hidden <- FALSE
   if (!func %in% ls(as.environment(paste("package", package, sep=":")))) {
-    tc[["where"]] <- call('getNamespace', package)
+    tc[["where"]] <- call("getNamespace", package)
     hidden <- TRUE
   }
   eval(tc)
   .decorated[[func]] <- list(func=func, package=package, hidden=hidden)
-} 
+}
 
-#' @title Undecorate function
+#' @title undecorate function
 #' 
 #' Reset previously decorate function
 #' @param func function name as a character string
 #' @export 
-#' @seealso WriteCapInfo Decorate
+#' @seealso write_capture Decorate
 #'
-Undecorate <- function(func) {
+undecorate <- function(func) {
   if (class(func) == "character"){
     fname <- func
   } else {
     stop("wrong argument type!")
-  }  
+  }
   ind <- which(fname %in% ls(.decorated))
   if (length(ind) == 0)
     stop("Function was not decorated!")
@@ -57,7 +57,7 @@ Undecorate <- function(func) {
   hidden <- .decorated[[func]]$hidden
   params <- list(fname)
   if (hidden)
-    params[["where"]] <- call('getNamespace', package)
+    params[["where"]] <- call("getNamespace", package)
   do.call(untrace, params)
   rm(list=c(func), envir=.decorated)
 }
@@ -72,10 +72,10 @@ Undecorate <- function(func) {
 #' @importFrom Rcpp evalCpp
 #' @export
 #' 
-WriteCapInfo <- function(fname, args.env){
-  if (!testrOptions('capture.arguments'))
+write_capture <- function(fname, args.env){
+  if (!testr_options("capture.arguments"))
     return(NULL)
-  .Call('testr_WriteCapInfo_cpp', PACKAGE = 'testr', fname, args.env)
+  .Call("testr_write_capture_cpp", PACKAGE = "testr", fname, args.env)
 }
 
 #' @title Setup information capturing for list of function
@@ -85,30 +85,30 @@ WriteCapInfo <- function(fname, args.env){
 #' @param flist function or list of functions to turn on capturing for. List should be only as character.
 #' @seealso Decorate
 #' @export
-SetupCapture <- function(flist, package){
-  testrOptions('capture.arguments', FALSE)
+setup_capture <- function(flist, package){
+  testr_options("capture.arguments", FALSE)
   for (func in flist)
-    if (EligibleForCapture(func))
+    if (eligible_capture(func))
       Decorate(func, package)
-  testrOptions('capture.arguments', TRUE)
+  testr_options("capture.arguments", TRUE)
 }
 
 #' @title Check if function is eligible for wrapping to capture arguments and return values
 #' 
 #' This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
-#' This is an internal function and is supposed to be used in SetupCapture
+#' This is an internal function and is supposed to be used in setup_capture
 #' @param func function name to check
 #' @return TRUE/FALSE if can be captured or not
-#' @seealso SetupCapture
-EligibleForCapture <- function(func){
-  return (!length(utils::getAnywhere(func)$objs) == 0 &&
-            class(utils::getAnywhere(func)[1]) == "function" &&
-            !func %in% blacklist &&
-            !func %in% operators &&
-            !func %in% keywords &&
-            !func %in% sys &&
-            !func %in% env && 
-            !func %in% primitive.generics.fails)
+#' @seealso setup_capture
+eligible_capture <- function(func){
+  return (!length(utils::getAnywhere(func)$objs) == 0
+          && class(utils::getAnywhere(func)[1]) == "function"
+          && !func %in% blacklist
+          && !func %in% operators
+          && !func %in% keywords
+          && !func %in% sys
+          && !func %in% env
+          && !func %in% primitive_generics_fails)
 }
 
 #' @title Setup capture of builtin functions
@@ -118,21 +118,21 @@ EligibleForCapture <- function(func){
 #' @param functions list of functions to be decorate
 #' @param indexes specific indexes from functions vector
 #' @param package
-#' @seealso SetupCapture, Decorate
+#' @seealso setup_capture, Decorate
 #' @export
-BeginBuiltinCapture <- function(internal = FALSE, functions = builtins(internal), indexes, package){
+builtin_capture <- function(internal = FALSE, functions = builtins(internal), indexes, package){
   if (missing(indexes))
-    SetupCapture(functions, package)
+    setup_capture(functions, package)
   else
-    SetupCapture(functions[indexes], package)
+    setup_capture(functions[indexes], package)
 }
 
 #' @title Clear decoration
 #' 
 #' Clear anything previously decorate
-#' @seealso Undecorate
+#' @seealso undecorate
 #' @export
-ClearDecoration <- function() {
+clear_decoration <- function() {
   for (fname in ls(.decorated))
-    Undecorate(fname)
+    undecorate(fname)
 }

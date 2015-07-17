@@ -20,9 +20,9 @@ copyright.header <- c("/*",
 #' @param fastr.test.folder folder with FastR test cases in Java
 #' @export
 #'
-FastrTranslate <- function(r.test.folder, fastr.test.folder = "tests/"){
+fastr_translate <- function(r.test.folder, fastr.test.folder = "tests/"){
   # unility function for extraction of test case information. Replaces o
-  FastrTest <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
+  fastr_test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
     str <- as.list(substitute(code))[-1] # extract statements from code and replace double quotes with single ones   
     str <- lapply(str, function(x) paste(deparse(x), collapse = ""))
     str <- gsub('"', "\\\\'", str)
@@ -34,18 +34,18 @@ FastrTranslate <- function(r.test.folder, fastr.test.folder = "tests/"){
   # test.folder sanity check
   if (file.exists(fastr.test.folder)){
     if (!file.info(fastr.test.folder)$isdir) stop("Specified location of tests is not a folder")
-    fastr.test.files <- GetAllFiles(fastr.test.folder, pattern = ".java$", full.names = F)
+    fastr.test.files <- get_all_files(fastr.test.folder, pattern = ".java$", full.names = F)
     fastr.test.files <- sapply(fastr.test.files, function(x) gsub("TestrGenBuiltin(.*).java", "\\1", x))
   } else {
     dir.create(fastr.test.folder)
   }
   
-  r.test.files <- GetAllFiles(r.test.folder)
+  r.test.files <- get_all_files(r.test.folder)
   # cache for storing information about functions (code and test case count)
   function.cache <- list()
   
   for (filename in r.test.files) {
-    function.name <- ExtractFunctionName(filename)
+    function.name <- extract_func_name(filename)
     function.cache.entry <- function.cache[[function.name]]
 
     if (is.null(function.cache.entry)) {
@@ -71,7 +71,7 @@ FastrTranslate <- function(r.test.folder, fastr.test.folder = "tests/"){
     
     # evaluate R test file in special environment with replaces test function
     temp.env <- new.env();
-    temp.env$test <- FastrTest
+    temp.env$test <- fastr_test
     with(temp.env, res <- source(filename, local = TRUE)$value)
     # create Java testcase
     test.code <- sprintf("\n\t@Test\n\tpublic void test%s%d() {\n%s\t}\n", function.name, function.cache.entry$number, temp.env$res)
@@ -94,7 +94,7 @@ FastrTranslate <- function(r.test.folder, fastr.test.folder = "tests/"){
 #' @param result.file file with result of running FastR test cases
 #' @export
 #'
-FastrTagIgnored <- function(fastr.test.root, result.file) {
+fastr_tag_ignored <- function(fastr.test.root, result.file) {
   lines <- readLines(result.file)
   tests <- vector()
   for (line in lines)
@@ -103,7 +103,7 @@ FastrTagIgnored <- function(fastr.test.root, result.file) {
   
   trim <- function (x) gsub("^\\s+|\\s+$", "", x)
   
-  files <- GetAllFiles(fastr.test.root, pattern = "*.java", TRUE)
+  files <- get_all_files(fastr.test.root, pattern = "*.java", TRUE)
   for (tc.file in files){
     lines <- readLines(tc.file)
     sink(tc.file)

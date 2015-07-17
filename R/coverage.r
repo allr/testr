@@ -37,7 +37,7 @@
 #'  by nature. In that, the object information is included in the file/function detail tables for
 #'  users' reference.
 #'
-MeasureGCovCoverage <- function(root, 
+measure_gcov <- function(root, 
                                 verbose = TRUE, 
                                 exclude.header=TRUE, 
                                 file.detail=FALSE, 
@@ -178,7 +178,7 @@ MeasureGCovCoverage <- function(root,
 #' @description This function deletes gcov information files (*.gcda) thus clearing any previously collected coverage information is erased.
 #' @param root a directory or a single C file that contains or is instrumented VM source.
 #'
-ResetGCovInfo <- function(root) {
+clear_gcov <- function(root) {
   cat("reset called\n")
   if (missing(root)) stop("A directory containing VM source files must be specified!");
   if (length(root) == 0) return(invisible())

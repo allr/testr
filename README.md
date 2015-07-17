@@ -87,15 +87,15 @@ Simplified Test Case Generation
 -------------------------------
 TestR includes tools to capture function calls in R programs and automatically convert them into test cases. 
 
-It is possible to capture run time information and generate test cases with calling `TestGenCode` or `TestGenSrc`:
+It is possible to capture run time information and generate test cases with calling `code_gen` or `src_gen`:
 
 ```r
 library(testr)
 # generated test cases will be in `gen` folder
-TestGenCode({any(T,F,F); all(T,F,F)}, "gen", c('any', 'all')) 
+code_gen({any(T,F,F); all(T,F,F)}, "gen", c('any', 'all')) 
 writeLines("example(agrep)\nexample(abbreviate)", "tmp.R")
 # generated test cases will be in `gen` folder
-TestGenSrc("tmp.R", "gen", c('agrep', 'abbreviate'))
+src_gen("tmp.R", "gen", c('agrep', 'abbreviate'))
 ```
 
 Which will capture function calls from source code, generate test cases. 
@@ -106,14 +106,14 @@ For example following command, will download and install `A3` package from `CRAN
 
 ```r
 library(testr)
-CranPackageGen("A3", "gen", c('lm'))
+cran_gen("A3", "gen", c('lm'))
 ```
 
 If the `functions` argument is not supplied, test cases will be generated for all the functions in the package namespace.
 
 ```r
 library(testr)
-CranPackageGen("A3", "gen", c('lm'))
+cran_gen("A3", "gen", c('lm'))
 ```
 
 Running Test Cases
@@ -122,7 +122,7 @@ Running Test Cases
 The test cases are generated in the compatible format with the test harness of TestR. To run the test set under `<TC_DIR>`:
 
 ```r
-RunTests(<TC_DIR>)
+run_tests(<TC_DIR>)
 ```
 
 Filtering generated test cases
@@ -151,7 +151,7 @@ Measure Code C Coverage
 To invoke the reporter, call the following function located in coverage.r. The required argument is the the top level directory that
 contains the .gcda files. For details of the result report, see comments in coverarge.r.
 
-    MeasureGCovCoverage(<PATH_TO_GCDA_FILES>)
+    measure_gcov(<PATH_TO_GCDA_FILES>)
 
 Filtering generated test cases
 ----------------
@@ -159,13 +159,13 @@ Filtering generated test cases
 To filter generated test cases in a single file call
 
 ```r
-FilterTCs(<TC_DIR>, <OUTPUT_DIR>, <TC_DB>, <R_HOME>, <SRC_DIR>)
+filter_tcs(<TC_DIR>, <OUTPUT_DIR>, <TC_DB>, <R_HOME>, <SRC_DIR>)
 ```
 
 However, test cases generator usually provides large files with all the tests combined. In that cases, tests can be split and filtered with
 
 ```r
-ProcessTC(<TC_FILE>, <OUTPUT_DIR>, <TC_DB>, <R_HOME>, <SRC_DIR>)
+process_tc(<TC_FILE>, <OUTPUT_DIR>, <TC_DB>, <R_HOME>, <SRC_DIR>)
 ```
 
 Note that all test cases will be split into single files.

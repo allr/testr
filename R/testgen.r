@@ -8,7 +8,7 @@
 #' @param verbose wheater display debug output
 #' @param timed whether result is dependent on time of generation
 #' @export
-TestGen <- function(root, output.dir, timed = F, verbose=testrOptions('verbose')) {
+TestGen <- function(root, output.dir, timed = F, verbose=testr_options('verbose')) {
   if (verbose) {
     cat("Output:", output.dir, "\n");
     cat("Root:", root, "\n");
@@ -97,8 +97,8 @@ ReadSymbolValues <- function(lines){
   vsym <- vector()
   symb[k_sym] <- ""
   vsym[k_value] <- ""
-  while (StartsWith(kSymbPrefix, lines[cache$i])){
-    symb[k_sym] <- paste(symb[k_sym], SubstrLine(lines[cache$i]), sep = "") 
+  while (starts_with(kSymbPrefix, lines[cache$i])){
+    symb[k_sym] <- paste(symb[k_sym], substr_line(lines[cache$i]), sep = "") 
     cache$i <- cache$i + 1
     k_sym <- k_sym + 1
     symb[k_sym] <- ""
@@ -114,8 +114,8 @@ ReadSymbolValues <- function(lines){
 ReadValue <- function(lines, prefix){
   value <- vector()
   j <- cache$i
-  while (StartsWith(prefix, lines[j])){
-    value <- c(value, SubstrLine(lines[j]))
+  while (starts_with(prefix, lines[j])){
+    value <- c(value, substr_line(lines[j]))
     j <- j + 1
   }
   cache$i <- j
@@ -137,7 +137,7 @@ GenerateTC<- function(symb, vsym, func, argv) {
   if (length(symb) > 0 && symb[1] != ""){
     for (i in 1:length(vsym)){
       symbol <- paste(symb[i], "<-", vsym[i])
-      if (!ParseAndCheck(symbol)){
+      if (!parse_eval(symbol)){
         invalid.symbols <- c(invalid.symbols, i)  
       } else {
         variables <- paste(variables, symbol, "\n")
@@ -149,7 +149,7 @@ GenerateTC<- function(symb, vsym, func, argv) {
     }
   }
   # check validity of arguments
-  valid.argv <- ParseAndCheck(argv)
+  valid.argv <- parse_eval(argv)
   
   # proper argument should always be packed in a list
   if (!valid.argv) 
@@ -188,7 +188,7 @@ GenerateTC<- function(symb, vsym, func, argv) {
                      cache$warns <- ifelse(is.null(cache$warns), w$message, paste(cache$warns, w$message, sep="; "))
                      invokeRestart("muffleWarning")
                      })
-  retv <- Quoter(retv)
+  retv <- quoter(retv)
   src <- ""
   src <- paste(src, "test(id=",cache$tID[[func]],", code={\n", call, "}, ", sep="")
   if (!is.null(cache$warns))

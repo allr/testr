@@ -6,12 +6,12 @@
 #' @param funcs functions to Decorate
 #' @export
 #'
-CranPackageGen <- function(name, dir, funcs=NULL, indexes = 1:10000) {
+cran_gen <- function(name, dir, funcs=NULL, indexes = 1:10000) {
   if (!missing(name))
     ap <- name 
   else 
     ap <- available.packages()[indexes,1]
-  sapply(ap, TestGenPackage, gen.dir = dir, funcs = funcs)
+  sapply(ap, package_gen, gen.dir = dir, funcs = funcs)
 }
 
 #' @title Capture run information from Bioconductor packages
@@ -22,14 +22,14 @@ CranPackageGen <- function(name, dir, funcs=NULL, indexes = 1:10000) {
 #' @param funcs functions to Decorate
 #' @export
 #'
-BioconductorPackageGen <- function(name, dir, funcs=NULL, indexes = 1:1000) {
+bioconductor_gen<- function(name, dir, funcs=NULL, indexes = 1:1000) {
   contriburl <- paste(biocinstallRepos()["BioCsoft"], "src/contrib", 
                       sep = "/")
   if (!missing(name))
     ap <- name 
   else 
     ap <- available.packages(contriburl)[indexes,1]
-  sapply(ap, TestGenPackage, from.bioc = T, contriburl = contriburl, funcs = funcs, gen.dir = dir)
+  sapply(ap, package_gen, from.bioc = T, contriburl = contriburl, funcs = funcs, gen.dir = dir)
 }
 
 #' @title Capture run information from package and generate test cases
@@ -44,7 +44,7 @@ BioconductorPackageGen <- function(name, dir, funcs=NULL, indexes = 1:1000) {
 #' @param gen if generate test cases
 #' @export
 #'
-TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
+package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
   dir <- tempdir()
   if (!missing(contriburl))
     loc <- suppressMessages(download.packages(name, dir, contriburl = contriburl, type = "source")[,2])
@@ -69,26 +69,26 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
   cat("===Inserting Trace points\n")
   if (missing(funcs) || is.null(funcs)) {
     funcs <- ls(getNamespace(name))
-    SetupCapture(funcs, name)
+    setup_capture(funcs, name)
   } else {
-    SetupCapture(funcs)
+    setup_capture(funcs)
   }
   hs <- help
   inv <- function(x) invisible()
-  ReassignInEnv('help', inv, getNamespace('utils'))
-  ReassignInEnv('help', inv, as.environment('package:utils'))
+  reassing_in_env('help', inv, getNamespace('utils'))
+  reassing_in_env('help', inv, as.environment('package:utils'))
   
   cat("===Running examples\n")
-  capture.output(PackageRunExamples(loc))
+  capture.output(run_examples(loc))
   cat("===Running tests\n")
-  capture.output(PackageRunTests(loc))
+  capture.output(Packagerun_tests(loc))
   cat("===Running vignettes\n")
-  capture.output(PackageRunVignettes(name))
+  capture.output(run_vignettes(name))
   
-  ReassignInEnv('help', hs, getNamespace('utils'))
-  ReassignInEnv('help', hs, as.environment('package:utils'))
+  reassing_in_env('help', hs, getNamespace('utils'))
+  reassing_in_env('help', hs, as.environment('package:utils'))
   cat("===Removing trace points\n")
-  ClearDecoration()
+  clear_decoration()
   cat("===Generating tests\n")
   TestGen("capture", file.path(gen.dir, name))
   file.remove(list.files("capture", recursive = T, full.names = T))
@@ -99,7 +99,7 @@ TestGenPackage <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) 
 #' 
 #' This function is responsible for running all examples in specified package
 #' @param package package name
-PackageRunExamples <- function(package) {
+run_examples <- function(package) {
   pkg <- devtools:::as.package(package)
   files <- devtools:::rd_files(pkg)
   if (length(files) == 0) 
@@ -111,8 +111,8 @@ PackageRunExamples <- function(package) {
 #' 
 #' @description This function is responsible for running testthat tests for specified package
 #' @param loc location of the package source
-PackageRunTests <- function(loc) {
-  test_path <- FindTestDir(loc)
+run_tests <- function(loc) {
+  test_path <- find_tests(loc)
   if (is.null(test_path))
     return(invisible())
   test_files <- dir(test_path, "^test.*\\.[rR]$")
@@ -124,7 +124,7 @@ PackageRunTests <- function(loc) {
 #' 
 #' This function is responsible for running code from vignettes for specified package
 #' @param name package name
-PackageRunVignettes <- function(name) {
+run_vignettes <- function(name) {
   info <- tools:::getVignetteInfo(package = name)
   vdir <- info[,2]
   vfiles <- info[,6]
@@ -142,15 +142,15 @@ PackageRunVignettes <- function(name) {
 #' @param tc.result.root destination of generated test cases
 #' @param functions functions to be traced
 #' @export
-TestGenSrc <- function(src.root, tc.result, functions) {
+src_gen <- function(src.root, tc.result, functions) {
   if (!file.exists(src.root))
     stop("Supplied source does not exist")
   if (file.info(src.root)$isdir)
     src.root <- list.files(src.root, pattern = "\\[rR]", recursive = T, full.names = T)
-  BeginBuiltinCapture(functions = functions)
+  builtin_capture(functions = functions)
   for (src.file in src.root)
     source(src.file, local = T)
-  ClearDecoration()
+  clear_decoration()
   TestGen(kCaptureFolder, tc.result)
   invisible()
 }
@@ -164,11 +164,11 @@ TestGenSrc <- function(src.root, tc.result, functions) {
 #' @param tc.result.root destination of generated test cases
 #' @param functions functions to be traced
 #' @export
-TestGenCode <- function(code, tc.result, functions) {
+code_gen <- function(code, tc.result, functions) {
   code <- substitute(code)
-  BeginBuiltinCapture(functions = functions)
+  builtin_capture(functions = functions)
   eval(code)
-  ClearDecoration()
+  clear_decoration()
   TestGen(kCaptureFolder, tc.result)
   invisible()
 }

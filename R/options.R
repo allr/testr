@@ -47,15 +47,14 @@ keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "bre
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-", "[[<-", "$<-", "@<-", "+", "-", "*", "/", 
                "^", "%%", "%*%", "%/%", "<", "<=", "==", "!=", ">=", ">", "|", "||", "&", "!")
 
-primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expression", "attr")
+primitive_generics_fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expression", "attr")
 
-.onLoad <- function(libname, pkgname)
-{
+.onLoad <- function(libname, pkgname) {
   if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
     dir.create(kCaptureFolder)
   # make sure temp_dir is empty
   cache$temp_dir <- tempdir()
-  CleanTempDir()
+  clean_temp()
   cache$trace.folder.path <-  file.path(getwd(), kCaptureFolder)
   ## testr settings
   options('testr' = list(
@@ -82,7 +81,7 @@ primitive.generics.fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
 #' @param value value to assign (optional)
 #' @export
 #' 
-testrOptions <- function(o, value) {
+testr_options <- function(o, value) {
   res <- getOption('testr')
   ## just querying
   if (missing(value)) {
@@ -101,7 +100,7 @@ testrOptions <- function(o, value) {
 
 #' @export
 testr.option <- function(x, ...) {
-  mc <- match.call(testrOptions)
-  mc[[1]] <- quote(testrOptions)
+  mc <- match.call(testr_options)
+  mc[[1]] <- quote(testr_options)
   eval(mc)
 }

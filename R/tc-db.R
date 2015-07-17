@@ -5,8 +5,8 @@
 #' @param res.dir resulting folder. If this argument is missing than files in original folder will be replaced
 #' @export
 #' 
-OrginizeTestCases <- function(root, res.dir = tempdir()){
-  files <- GetAllFiles(root)
+organize_tcdb <- function(root, res.dir = tempdir()){
+  files <- get_all_files(root)
   if (missing(res.dir)) {
     copy.back <- TRUE
     res.dir <- tempdir()
@@ -19,7 +19,7 @@ OrginizeTestCases <- function(root, res.dir = tempdir()){
   for (filename in files) {
     
     cat(filename, "\n")
-    function.name <- ExtractFunctionName(filename)   
+    function.name <- extract_func_name(filename)   
     function.count <- cache[[function.name]]
     if (is.null(function.count)){
       function.count <- 0
@@ -50,24 +50,24 @@ OrginizeTestCases <- function(root, res.dir = tempdir()){
 #' @param tc.root folder of testcases to be added
 #' @export
 #'
-AddTCsDB <- function(db.root, tc.root){
+add_tcdb <- function(db.root, tc.root){
   db.files <- vector()
   # test.folder sanity check
   if (file.exists(db.root)){
     if (!file.info(db.root)$isdir) stop("Specified location of tests is not a folder")
-    db.files <- GetAllFiles(db.root, full.names = F)
-    db.files <- sapply(db.files, function(x) ExtractFunctionName(x, FALSE))
+    db.files <- get_all_files(db.root, full.names = F)
+    db.files <- sapply(db.files, function(x) extract_func_name(x, FALSE))
     db.files <- unique(db.files)
   } else {
     dir.create(db.root)
   }
   
-  tc.files <- GetAllFiles(tc.root)
+  tc.files <- get_all_files(tc.root)
   # cache for storing information about functions (code and test case count)
   function.cache <- list()
   
   for (filename in tc.files) {
-    function.name <- ExtractFunctionName(filename)
+    function.name <- extract_func_name(filename)
     function.count <- function.cache[[function.name]]
     
     if (is.null(function.count)) {
@@ -98,7 +98,7 @@ AddTCsDB <- function(db.root, tc.root){
 #' @param root testcase folder to be processed
 #' @export
 #'
-RemoveDuplicates <- function(root){
+remove_dup_tcdb <- function(root){
   TestGetArgs <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
     as.list(substitute(code))[2]   
   }
@@ -108,7 +108,7 @@ RemoveDuplicates <- function(root){
   args.cache <- new.env() 
   temp.env <- new.env()
   for (filename in files){
-    function.name <- ExtractFunctionName(filename)
+    function.name <- extract_func_name(filename)
     args.list <- args.cache[[function.name]]
     if (is.null(args.list)) {
       args.list <- list()
@@ -135,42 +135,15 @@ RemoveDuplicates <- function(root){
   }
 }
 
-#' @title Get all files with specific pattern
+#' @title clean database
+#' @description delete previously accomulated TCs in test case database. 
 #' 
-#' This function is respinsible for leturning all files from specified folder
-#' @param root input folder
-#' @param pattern pattern of files to be searched for
-#' @param full.names if full path to files should be returned
-#'
-GetAllFiles <- function(root, pattern = ".[rR]$", full.names = T){
-  if (file.info(root)$isdir){
-    files <- list.files(root, pattern=pattern, recursive = TRUE, all.files = TRUE, full.names = full.names) 
-  } else {
-    files <- root
-  }
-  files
-}
-
-#' @title Get function name without special characters
-#' 
-#' This function is respinsible for extractng function name from test file name and removing special characters
-#' @param filename filename to be processed
-#' @param modify.characters if special characters should be removed
-#'
-ExtractFunctionName <- function(filename, modify.characters = TRUE){
-  function.name <- filename
-  if (grepl(".[rR]$", filename))
-    function.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
-  if (function.name %in% operators) function.name <- "operators"
-  if (modify.characters){
-    function.name <- gsub("\\.", "", function.name)
-    function.name <- gsub("<-", "assign_", function.name)
-    function.name <- gsub("\\[", "extract_parentasis_", function.name)
-    function.name <- gsub("\\$", "extract_dollar_", function.name)
-    function.name <- gsub("\\+", "plus_", function.name)
-    function.name <- gsub("\\-", "minus_", function.name)
-    function.name <- gsub("&", "and_", function.name)
-    function.name <- gsub("\\*", "times_", function.name)
-  }
-  function.name
+#' @param tc.db.path a directory containing previosly collected test cases.
+clean_tcdb <- function(tc.db.path){
+  if (missing(tc.db.path)) 
+    stop("A directory containing TC DB files must be specified!");
+  if (!file.exists(tc.db.path))
+    stop('Specified directory with database of TCs does not exist!'); 
+  cmd <- paste("find", tc.db.path, "-name", '"*.[rR]"', "-delete", sep=" ");
+  system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);
 }

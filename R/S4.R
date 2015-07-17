@@ -4,7 +4,7 @@
 #'
 #' @param env environment to search for S4 methods
 #' @seealso ReplaceBody
-ReplaceS4 <- function(env) {
+replace_s4 <- function(env) {
   generics <- getGenerics(env)
   
   unlist(recursive = FALSE,
@@ -17,7 +17,7 @@ ReplaceS4 <- function(env) {
                  target <- get(x, envir = table)
                  if (!is.null(target)) {
                    new.value <- testr:::ReplaceBody(name, target)
-#                    rcov:::reassignInEnv(name, new.value, table
+#                    rcov:::reassing_in_env(name, new.value, table
                      setMethod(name, attr(target, "target"), new.value, where = .GlobalEnv)
                  }
                }

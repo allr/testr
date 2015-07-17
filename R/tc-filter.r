@@ -10,19 +10,19 @@
 #' @seealso Decorate
 #' @export
 #' 
-ProcessTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home = NULL, source.folder = NULL) {
+process_tc <- function(tc.file, tc.result.root, tc.db = NULL, r.home = NULL, source.folder = NULL) {
   cache$tc.result.root <- tc.result.root
   
   if (!file.exists(tc.result.root))
     dir.create(tc.result.root)
   
-  n <- ceiling(GetNumberOfTC(tc.file)/16)
+  n <- ceiling(get_num_tc(tc.file)/16)
   
-  SplitTCs(tc.root = tc.file, 
+  split_tcs(tc.root = tc.file, 
            tc.split.root = cache$temp_dir, 
            number.of.tc.per.file = n)
   
-  FilterTCs(tc.root = cache$temp_dir, 
+  filter_tcs(tc.root = cache$temp_dir, 
             tc.db.path = tc.db, 
             tc.result.root = tc.result.root,
             r.home = r.home,
@@ -32,11 +32,11 @@ ProcessTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home = NULL, sour
   
   while(n != 1) {
     n <- ceiling(n/2)
-    SplitTCs(tc.root = tc.result.root, 
+    split_tcs(tc.root = tc.result.root, 
              tc.split.root = cache$temp_dir, 
              number.of.tc.per.file = n) 
     file.remove(list.files(tc.result.root, recursive = T, full.names = T))
-    FilterTCs(tc.root = cache$temp_dir, 
+    filter_tcs(tc.root = cache$temp_dir, 
               tc.db.path = tc.db, 
               tc.result.root = tc.result.root,
               r.home = r.home,
@@ -52,9 +52,9 @@ ProcessTC <- function(tc.file, tc.result.root, tc.db = NULL, r.home = NULL, sour
 #' @param tc.root test case file/folder to split
 #' @param tc.split.root resulting location of split
 #' @param number.of.tc.per.file maximum number of test cases per file
-#' @seealso ProcessTC
+#' @seealso process_tc
 #'
-SplitTCs<- function(tc.root, tc.split.root, number.of.tc.per.file = 1) {
+split_tcs<- function(tc.root, tc.split.root, number.of.tc.per.file = 1) {
   # In case tc is diretory, recursively call this function on all files in directory
   if (file.info(tc.root)$isdir){
     all.tc <- list.files(tc.root, 
@@ -63,11 +63,11 @@ SplitTCs<- function(tc.root, tc.split.root, number.of.tc.per.file = 1) {
                          pattern = "\\.[rR]$", 
                          full.names = T)
     for (test.case in all.tc)
-      SplitTCs(test.case, tc.split.root, number.of.tc.per.file)
+      split_tcs(test.case, tc.split.root, number.of.tc.per.file)
     return(invisible())
   }
   
-  function.name <- GetFunctionName(basename(tc.root))
+  function.name <- get_function_name(basename(tc.root))
   tc.split.root <- file.path(tc.split.root, function.name)
   if (!file.exists(tc.split.root)) 
     dir.create(tc.split.root)
@@ -83,7 +83,7 @@ SplitTCs<- function(tc.root, tc.split.root, number.of.tc.per.file = 1) {
   tests.ends <- grep("^[ ]*$", lines)
   if (length(tests.ends) == 0) tests.ends <- grep("^[ ]*$", lines)
   
-  if (testrOptions('verbose')) {
+  if (testr_options('verbose')) {
     cat("File ", tc.root, "\n")
     cat("Number of TCs in file - ", length(tests.starts), "\n")
   }
@@ -114,25 +114,25 @@ SplitTCs<- function(tc.root, tc.split.root, number.of.tc.per.file = 1) {
 #' @param wipe.tc.database wheater delete previously accomulated test cases.
 #' @export
 #' 
-FilterTCs<- function(tc.root, tc.result.root, tc.db.path = NULL, 
+filter_tcs<- function(tc.root, tc.result.root, tc.db.path = NULL, 
                      r.home = NULL, source.folder = NULL,
                      clear.previous.coverage = TRUE, 
                      wipe.tc.database = FALSE, 
-                     verbose = testrOptions('verbose')) {
+                     verbose = testr_options('verbose')) {
   cache$r.home <- r.home
   cache$source.folder <- source.folder
   # parameter checks
   if (missing(tc.root) || !file.exists(tc.root)) stop('Specified directory with Test Cases does not exist!'); 
-  if (clear.previous.coverage) ResetGCovInfo(file.path(cache$r.home, cache$source.folder))
-  if (wipe.tc.database) CleanTCDB(tc.db.path)
+  if (clear.previous.coverage) clear_gcov(file.path(cache$r.home, cache$source.folder))
+  if (wipe.tc.database) clean_tcdb(tc.db.path)
   
-  db.cov <- MeasureCoverageByDB(tc.db.path)
+  db.cov <- measure_cov(tc.db.path)
   
   if (verbose) cat("TC Root - ", tc.root, "\n")
   all.tc <- list.files(path = tc.root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$")
   if (verbose) cat("Number of TC Files - ", length(all.tc), "\n")
   
-  function.name <- GetFunctionName(basename(all.tc[1]))
+  function.name <- get_function_name(basename(all.tc[1]))
   tc.function.path <- file.path(tc.result.root, function.name)
   if (!file.exists(tc.function.path)) dir.create(tc.function.path)
   if (verbose) cat("TC function path in filter - ",tc.function.path, "\n")
@@ -142,11 +142,11 @@ FilterTCs<- function(tc.root, tc.result.root, tc.db.path = NULL,
     tc.full.path <- file.path(tc.root, tc)
     info.file <- file.path(tc.root, paste(function.name,"info", sep = "_"))
     before.tc.cov.c <- 0
-    before.tc.cov.info <- tryCatch(MeasureGCovCoverage(root = file.path(cache$r.home, cache$source.folder), verbose=FALSE), 
+    before.tc.cov.info <- tryCatch(measure_gcov(root = file.path(cache$r.home, cache$source.folder), verbose=FALSE), 
                                      error=function(x) list(file.pcn = 0))
     before.tc.cov.c <- before.tc.cov.info$file.pcn
     before.tc.cov.r <- rcov::ReportCoveragePercentage(readRDS(file.path(cache$temp_dir, "cov.data.RData")))
-    cov.data <- RunTestsMeasureCoverage(tc.full.path)
+    cov.data <- run_testsMeasureCoverage(tc.full.path)
     after.tc.cov.c <- cov.data$c
     after.tc.cov.r <- cov.data$r
 
@@ -167,7 +167,7 @@ FilterTCs<- function(tc.root, tc.result.root, tc.db.path = NULL,
   final.cov <- result[[length(result)]]
   cat("C coverage gain by TCs - ", final.cov$c - db.cov$c, "\n")
   cat("R coverage gain by TCs - ", final.cov$r - db.cov$r, "\n")
-  CleanTempDir()
+  clean_temp()
 }
 
 rtemplate <- "library(rcov)
@@ -181,11 +181,11 @@ PauseMonitorCoverage()
 if (file.exists(cov.funcs)){
   cov.funcs <- readRDS(cov.funcs)
   for (func in ls(cov.funcs)){
-    rcov:::reassignInEnv(func, cov.funcs[[func]], getNamespace('base'))
+    rcov:::reassing_in_env(func, cov.funcs[[func]], getNamespace('base'))
   }
   if (file.exists(cov.data)) cov.data <- readRDS(cov.data) else 
   if (file.exists(cov.data.clean)) cov.data <- readRDS(cov.data.clean) else cov.data <- new.env()
-  rcov:::reassignInEnv('cov.cache', cov.data, getNamespace('rcov'))
+  rcov:::reassing_in_env('cov.cache', cov.data, getNamespace('rcov'))
 } else {
   for (func in r.func) {
     cat(func, '\n')
@@ -194,7 +194,7 @@ if (file.exists(cov.funcs)){
   saveRDS(rcov:::cov.cache, cov.data.clean)
   saveRDS(rcov:::cov.funcs, cov.funcs)
 }
-RunTests('%s', use.rcov = T)
+run_tests('%s', use.rcov = T)
 saveRDS(ReportCoveragePercentage(), '%s') 
 saveRDS(rcov:::cov.cache, file.path(tmp_folder, 'cov.data.RData'))"
 
@@ -202,7 +202,7 @@ saveRDS(rcov:::cov.cache, file.path(tmp_folder, 'cov.data.RData'))"
 #' 
 #' @param tc.full.path path of test.cases
 #' @param funcs R functions to measure coverage for
-RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
+run_tests_cov <- function(tc.full.path, funcs) {
   tmp_source <- file.path(cache$temp_dir, "tmp_source.R")
   cov.info <- file.path(cache$temp_dir, "cov.data.p.RData")
   if (is.null(tc.full.path))
@@ -210,7 +210,7 @@ RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
   if (missing(funcs)) {
     funcs <- vector()
     for (tc in tc.full.path) 
-      funcs <- c(funcs, GetFunctionName(basename(tc)))
+      funcs <- c(funcs, get_function_name(basename(tc)))
   }
   command <- sprintf(rtemplate, 
                      tools::file_path_as_absolute(cache$temp_dir), 
@@ -224,12 +224,11 @@ RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
                sep = "")
   cmd.output <- system(cmd, intern = TRUE, ignore.stderr = F)
   after.tc.cov.r <- readRDS(file = cov.info)
-  after.tc.cov.info.gcov <- MeasureGCovCoverage(root = file.path(cache$r.home, cache$source.folder), verbose = FALSE)
+  after.tc.cov.info.gcov <- measure_gcov(root = file.path(cache$r.home, cache$source.folder), verbose = FALSE)
   after.tc.cov.c <- after.tc.cov.info.gcov$file.pcn
   file.remove(tmp_source)
   list(r=after.tc.cov.r, c=after.tc.cov.c)
 }
-
 #' @title measure cov by database
 #' @description measures cov by test cases in TC database. 
 #' 
@@ -237,7 +236,7 @@ RunTestsMeasureCoverage <- function(tc.full.path, funcs) {
 #' @param source.folder a VM source files directory on which cov should be measured. Must be inside r.home.
 #' @param tc.db.path a directory containing previosly collected test cases.
 #' @return total percentage of cov by line after running TCs for database on specified VM
-MeasureCoverageByDB <- function(tc.db.path) {
+measure_cov <- function(tc.db.path) {
   # clear previous information
   cov.data <- file.path(cache$temp_dir, 'cov.data.RData')
   suppressWarnings(file.remove(cov.data))
@@ -245,24 +244,11 @@ MeasureCoverageByDB <- function(tc.db.path) {
   if (is.null(tc.db.path))
     tc.db.path <- ""
   out <- capture.output(
-    db.cov.info <- RunTestsMeasureCoverage(tc.db.path, funcs = builtins()) 
+    db.cov.info <- run_testsMeasureCoverage(tc.db.path, funcs = builtins()) 
   )
   db.cov.c <- db.cov.info$c
   db.cov.r <- db.cov.info$r
   cat(paste("C Code coverage by TCs in database ", db.cov.c, '\n',sep=""))
   cat(paste("R Code coverage by TCs in database ", db.cov.r, '\n',sep=""))
   db.cov.info
-} 
-
-#' @title clean database
-#' @description delete previously accomulated TCs in test case database. 
-#' 
-#' @param tc.db.path a directory containing previosly collected test cases.
-CleanTCDB <- function(tc.db.path){
-  if (missing(tc.db.path)) 
-    stop("A directory containing TC DB files must be specified!");
-  if (!file.exists(tc.db.path))
-    stop('Specified directory with database of TCs does not exist!'); 
-  cmd <- paste("find", tc.db.path, "-name", '"*.[rR]"', "-delete", sep=" ");
-  system(cmd, ignore.stdout=TRUE, ignore.stderr=TRUE);
 }

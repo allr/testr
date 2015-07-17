@@ -1,24 +1,24 @@
 #' @export
 #' @title Determines if given function is a proper testlisterenr listener or not. 
 #' 
-#' A test listener is a function that has exactly five arguments named "id", "name", "result", "filename" and "comments" in this order. The id is the unique id of the test within the runTests, name is the name of the test. Result is TRUE for passed test, or FALSE for a failed one. 
+#' A test listener is a function that has exactly five arguments named "id", "name", "result", "filename" and "comments" in this order. The id is the unique id of the test within the run_tests, name is the name of the test. Result is TRUE for passed test, or FALSE for a failed one. 
 #' 
 #' @param f Function to check
 #' @return TRUE if the function has the valid signature, FALSE otherwise
-#' @seealso runTests
+#' @seealso run_tests
 #' 
-IsTestListener <- function(f) {
+is_test_listener <- function(f) {
   identical(names(formals(f)), c("id", "name", "result", "filename", "comments"))
 }
 
 #' @export
 #' @title Launches the test suite on the target VM. 
 #' 
-#' runTests takes as an argument the root folder where the expanded test files are stored and then launches all tests found in all R (.r or .R) files recursively found in that location. Each test is executed and its output checked. Based on the optional arguments, different reporting methods can be used. 
+#' run_tests takes as an argument the root folder where the expanded test files are stored and then launches all tests found in all R (.r or .R) files recursively found in that location. Each test is executed and its output checked. Based on the optional arguments, different reporting methods can be used. 
 #' 
 #' By default, a text output is given on the standard output summarizing the numbers of failed / passed tests. If a listener function is provided, each analyzed test will invoke a call of this function so that more detailed reporting can be implemented directly by the caller. 
 #' 
-#' Note that since the runTests method also runs on the tested VM, the VM must at least support the functionality required by this function (and other functions used for the test analysis). 
+#' Note that since the run_tests method also runs on the tested VM, the VM must at least support the functionality required by this function (and other functions used for the test analysis). 
 #' 
 #' @param root Folder where to recursively look for the expanded tests. The tests must be located in files with extension either r or R. All other files are ignored.
 #' @param verbose If TRUE, each test will be reported to the stdout as soon as it was executed and analyzed.
@@ -30,9 +30,9 @@ IsTestListener <- function(f) {
 #'  
 #' @return TRUE if all tests have passed, FALSE otherwise. 
 #' 
-#' @seealso test, IsTestListener
+#' @seealso test, is_test_listener
 
-RunTests <- function(root, 
+run_tests <- function(root, 
                      verbose = testr.option('verbose'), 
                      file.summary = testr.option('file.summary'), 
                      display.only.errors = testr.option('display.only.errors'), 
@@ -42,7 +42,7 @@ RunTests <- function(root,
                      clean.wd = FALSE,
                      use.rcov = FALSE) {
   if (!missing(test.listener)) 
-    if (!IsTestListener(test.listener))
+    if (!is_test_listener(test.listener))
     stop("Invalid function supported as a test listener.")
   totalFails <- 0
   totalPasses <- 0
@@ -83,7 +83,7 @@ RunTests <- function(root,
     if (file.summary == TRUE) {
       cat(sprintf("%-80s", "Name"),"Result\n---------------------------------------------------------------------------------------\n")
       for (t in cache$tests[-1])
-        PrintTest(t)
+        print_tests(t)
       cat("\n")
     }
   }
@@ -116,7 +116,7 @@ RunTests <- function(root,
 } 
 
 #' Prettyprints the test, is intended to be used only internally. 
-PrintTest <- function(test, code = NULL) {
+print_tests <- function(test, code = NULL) {
   display.only.errors <- ifelse(!is.null(cache$display.only.errors),cache$display.only.errors, testr.option('display.only.errors'))
   display.code.on.error <- ifelse(!is.null(cache$display.code.on.error),cache$display.code.on.error, testr.option('display.code.on.error'))
   if (display.only.errors && identical(test[[2]], "PASS"))
@@ -135,7 +135,7 @@ PrintTest <- function(test, code = NULL) {
 }
 
 #' Comparing the results, also only to be used internally
-CompareResults <- function(a, b) {
+compare_results <- function(a, b) {
   if(is.language(a))
     a <- as.expression(a)
   if (identical(all.equal(a, b), TRUE) || identical(as.expression(a), as.expression(b))) {
@@ -168,9 +168,9 @@ CompareResults <- function(a, b) {
 #' 
 #' The test is a success if the expected output is identical to the actual output and expected (or none) warnings have been reported during the execution, or if the code itself failed and the expected error has been found. Two NA values are always identical regardless their type. 
 #' 
-#' This function effectively defines the test and should be used in the test files. However, the test should only be executed by the runTests function which also prepares the necessary environment for the test function. 
+#' This function effectively defines the test and should be used in the test files. However, the test should only be executed by the run_tests function which also prepares the necessary environment for the test function. 
 #' 
-#' @param id the unique id of the test in the runTests. 
+#' @param id the unique id of the test in the run_tests. 
 #' @param code The code of the test, must be a runnable R code.
 #' @param o Output of the test, if not specified no output will be checked (in case of an error expected)
 #' @param w String to find in the warning messages (scalar or vector)
@@ -179,7 +179,7 @@ CompareResults <- function(a, b) {
 #' 
 #' @return TRUE if the test passes, FALSE otherwise
 #'
-#' @seealso runTests
+#' @seealso run_tests
 #' @export
 test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   tests <- ifelse(!is.null(cache$tests), cache$tests, list(c("Test Name","Result", "Comments", "Id")))
@@ -225,7 +225,7 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
   # if we have an error, the result is irrelevant and should be NULL
   if (!is.null(errors)) {
     result <- TRUE
-  } else if (CompareResults(result, o)) {
+  } else if (compare_results(result, o)) {
     result <- TRUE
   } else {
     AppendComment("Expected",o, "got", result)
@@ -261,7 +261,7 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
     name <- as.character(length(tests))
   tests[[length(tests) + 1]] <- c(paste("[",id,"] ",name, sep = ""), result, comments, id)
   if (verbose)
-    PrintTest(tests[[length(tests)]], code)
+    print_tests(tests[[length(tests)]], code)
   if (result) {
     passes <- passes + 1
     rv <- TRUE
