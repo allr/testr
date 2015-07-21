@@ -29,11 +29,13 @@ is_s3_generic <- function(fname, env=parent.frame()) {
 #' @param path path to check
 #' @seealso process_tc
 get_num_tc <- function(path){
-    if (file.info(path)$isdir) 
+    if (file.info(path)$isdir) {
         path <- list.files(path, pattern = "\\.[rR]$", recursive = TRUE, all.files = TRUE)
+    }
     lines <- vector()
-    for (file in path) 
+    for (file in path) {
         lines <- c(lines, readLines(file))
+    }
     length(grep("test\\(id",lines))
 }
 
@@ -41,12 +43,19 @@ get_num_tc <- function(path){
 #'
 #' Make sure temp dir is empty by deleting unnecessary files
 clean_temp <- function() {
-    for (file in list.files(cache$temp_dir, full.names = T, pattern = "\\.RData|\\.[rR]$"))
+    for (file in list.files(cache$temp_dir, full.names = T, pattern = "\\.RData|\\.[rR]$")) {
         file.remove(file)
+    }
 }
 
 parse_eval <- function(what) {
-    tryCatch({eval(parse(text=what)); TRUE}, error=function(e){FALSE})
+    tryCatch({
+        eval(parse(text=what));
+        TRUE
+        },
+        error=function(e) {
+            FALSE
+            })
 }
 
 #' @title Quote language from evaluation
@@ -74,8 +83,8 @@ substr_line <- function(l){
         ret.line <- strsplit(l, "\\(")[[1]][2];
         if (substr(ret.line, nchar(ret.line), nchar(ret.line)) == ")")
             ret.line <- substr(ret.line, 0, nchar(ret.line) - 1)
-    }else{
-        ret.line <- substr(l, 7, nchar(l));     
+    } else {
+        ret.line <- substr(l, 7, nchar(l))
     }
     ret.line
 }
@@ -93,14 +102,15 @@ starts_with <- function(prefix, x) {
 #'
 #' @param path package path
 #' @seealso CapturePackage
-find_tests <- function(path) 
-{
+find_tests <- function(path) {
     testthat <- file.path(path, "tests", "testthat")
-    if (file.exists(testthat) && file.info(testthat)$isdir) 
+    if (file.exists(testthat) && file.info(testthat)$isdir) {
         return(testthat)
+    }
     inst <- file.path(path, "inst", "tests")
-    if (file.exists(inst) && file.info(inst)$isdir) 
+    if (file.exists(inst) && file.info(inst)$isdir) {
         return(inst)
+    }
     warning("No testthat directories found in ", path, call. = FALSE)
     return(NULL)
 }
@@ -120,7 +130,7 @@ reassing_in_env <- function(name, obj, env) {
         } else {
             assign(name, obj, envir = env)
         }
-    } 
+    }
 }
 
 #' @title Get all files with specific pattern
@@ -131,12 +141,12 @@ reassing_in_env <- function(name, obj, env) {
 #' @param full.names if full path to files should be returned
 #'
 get_all_files <- function(root, pattern = ".[rR]$", full.names = T){
-  if (file.info(root)$isdir){
-    files <- list.files(root, pattern=pattern, recursive = TRUE, all.files = TRUE, full.names = full.names) 
-  } else {
-    files <- root
-  }
-  files
+    if (file.info(root)$isdir){
+        files <- list.files(root, pattern=pattern, recursive = TRUE, all.files = TRUE, full.names = full.names)
+    } else {
+        files <- root
+    }
+    files
 }
 
 #' @title Get function name without special characters
@@ -146,19 +156,22 @@ get_all_files <- function(root, pattern = ".[rR]$", full.names = T){
 #' @param modify.characters if special characters should be removed
 #'
 extract_func_name <- function(filename, modify.characters = TRUE){
-  function.name <- filename
-  if (grepl(".[rR]$", filename))
-    function.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
-  if (function.name %in% operators) function.name <- "operators"
-  if (modify.characters){
-    function.name <- gsub("\\.", "", function.name)
-    function.name <- gsub("<-", "assign_", function.name)
-    function.name <- gsub("\\[", "extract_parentasis_", function.name)
-    function.name <- gsub("\\$", "extract_dollar_", function.name)
-    function.name <- gsub("\\+", "plus_", function.name)
-    function.name <- gsub("\\-", "minus_", function.name)
-    function.name <- gsub("&", "and_", function.name)
-    function.name <- gsub("\\*", "times_", function.name)
-  }
-  function.name
+    function.name <- filename
+    if (grepl(".[rR]$", filename)) {
+        function.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
+    }
+    if (function.name %in% operators) {
+        function.name <- "operators"
+    }
+    if (modify.characters){
+        function.name <- gsub("\\.", "", function.name)
+        function.name <- gsub("<-", "assign_", function.name)
+        function.name <- gsub("\\[", "extract_parentasis_", function.name)
+        function.name <- gsub("\\$", "extract_dollar_", function.name)
+        function.name <- gsub("\\+", "plus_", function.name)
+        function.name <- gsub("\\-", "minus_", function.name)
+        function.name <- gsub("&", "and_", function.name)
+        function.name <- gsub("\\*", "times_", function.name)
+    }
+    function.name
 }
