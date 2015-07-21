@@ -156,22 +156,22 @@ get_all_files <- function(root, pattern = ".[rR]$", full.names = T){
 #' @param modify.characters if special characters should be removed
 #'
 extract_func_name <- function(filename, modify.characters = TRUE){
-    function.name <- filename
+    fname <- filename
     if (grepl(".[rR]$", filename)) {
-        function.name <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
+        fname <- gsub("(.*)tc_(.*)_(.*).R", "\\2", filename)
     }
-    if (function.name %in% operators) {
-        function.name <- "operators"
+    if (fname %in% operators) {
+        fname <- "operators"
     }
     if (modify.characters){
-        function.name <- gsub("\\.", "", function.name)
-        function.name <- gsub("<-", "assign_", function.name)
-        function.name <- gsub("\\[", "extract_parentasis_", function.name)
-        function.name <- gsub("\\$", "extract_dollar_", function.name)
-        function.name <- gsub("\\+", "plus_", function.name)
-        function.name <- gsub("\\-", "minus_", function.name)
-        function.name <- gsub("&", "and_", function.name)
-        function.name <- gsub("\\*", "times_", function.name)
+        fname <- gsub("\\.", "", fname)
+        fname <- gsub("<-", "assign_", fname)
+        fname <- gsub("\\[", "extract_parentasis_", fname)
+        fname <- gsub("\\$", "extract_dollar_", fname)
+        fname <- gsub("\\+", "plus_", fname)
+        fname <- gsub("\\-", "minus_", fname)
+        fname <- gsub("&", "and_", fname)
+        fname <- gsub("\\*", "times_", fname)
     }
-    function.name
+    fname
 }
