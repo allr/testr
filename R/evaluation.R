@@ -7,10 +7,11 @@
 #' @export
 #'
 cran_gen <- function(name, dir, funcs=NULL, indexes = 1:10000) {
-  if (!missing(name))
-    ap <- name 
-  else 
+  if (!missing(name)) {
+    ap <- name
+  } else {
     ap <- available.packages()[indexes,1]
+  }
   sapply(ap, package_gen, gen.dir = dir, funcs = funcs)
 }
 
@@ -22,13 +23,14 @@ cran_gen <- function(name, dir, funcs=NULL, indexes = 1:10000) {
 #' @param funcs functions to Decorate
 #' @export
 #'
-bioconductor_gen<- function(name, dir, funcs=NULL, indexes = 1:1000) {
-  contriburl <- paste(biocinstallRepos()["BioCsoft"], "src/contrib", 
+bioconductor_gen <- function(name, dir, funcs=NULL, indexes = 1:1000) {
+  contriburl <- paste(biocinstallRepos()["BioCsoft"], "src/contrib", #nolint
                       sep = "/")
-  if (!missing(name))
-    ap <- name 
-  else 
+  if (!missing(name)) {
+    ap <- name
+  } else {
     ap <- available.packages(contriburl)[indexes,1]
+  }
   sapply(ap, package_gen, from.bioc = T, contriburl = contriburl, funcs = funcs, gen.dir = dir)
 }
 
@@ -46,10 +48,11 @@ bioconductor_gen<- function(name, dir, funcs=NULL, indexes = 1:1000) {
 #'
 package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
   dir <- tempdir()
-  if (!missing(contriburl))
+  if (!missing(contriburl)) {
     loc <- suppressMessages(download.packages(name, dir, contriburl = contriburl, type = "source")[,2])
-  else 
+  } else {
     loc <- suppressMessages(download.packages(name, dir, type = "source")[,2])
+  }
   untar(loc, exdir = dir)
   if (!missing(dir)) file.remove(loc)
   loc <- file.path(dir, name)
@@ -57,10 +60,11 @@ package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
   if (name %in% loadedNamespaces())
     tryCatch(detach(name=paste("package", name, sep=":"),unload = T, character.only = T),
              error=function(x) invisible())
-  if (from.bioc) 
-    biocLite(name)
-  else
+  if (from.bioc) {
+    biocLite(name) #nolint
+  } else {
     install.packages(name, quiet = T, dependencies = T)
+  }
   if (!do.call(require, list(name))) {
     cat("===Package Loading Failed\n")
     return(invisible())
@@ -75,18 +79,18 @@ package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
   }
   hs <- help
   inv <- function(x) invisible()
-  reassing_in_env('help', inv, getNamespace('utils'))
-  reassing_in_env('help', inv, as.environment('package:utils'))
-  
+  reassing_in_env("help", inv, getNamespace("utils"))
+  reassing_in_env("help", inv, as.environment("package:utils"))
+
   cat("===Running examples\n")
   capture.output(run_examples(loc))
   cat("===Running tests\n")
-  capture.output(Packagerun_tests(loc))
+  capture.output(run_tests(loc))
   cat("===Running vignettes\n")
   capture.output(run_vignettes(name))
-  
-  reassing_in_env('help', hs, getNamespace('utils'))
-  reassing_in_env('help', hs, as.environment('package:utils'))
+
+  reassing_in_env("help", hs, getNamespace("utils"))
+  reassing_in_env("help", hs, as.environment("package:utils"))
   cat("===Removing trace points\n")
   clear_decoration()
   cat("===Generating tests\n")
@@ -102,8 +106,9 @@ package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
 run_examples <- function(package) {
   pkg <- devtools:::as.package(package)
   files <- devtools:::rd_files(pkg)
-  if (length(files) == 0) 
+  if (length(files) == 0) {
     return()
+  }
   tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
 }
 
@@ -115,7 +120,6 @@ run_tests <- function(loc) {
   test_path <- find_tests(loc)
   if (is.null(test_path))
     return(invisible())
-  test_files <- dir(test_path, "^test.*\\.[rR]$")
   library(testthat, quietly = TRUE)
   tryCatch(testthat::test_dir(test_path), error=function(x) invisible())
 }
