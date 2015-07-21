@@ -97,10 +97,3 @@ testr_options <- function(o, value) {
     options('testr' = res)
   }
 }
-
-#' @export
-testr.option <- function(x, ...) {
-  mc <- match.call(testr_options)
-  mc[[1]] <- quote(testr_options)
-  eval(mc)
-}

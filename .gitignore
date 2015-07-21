@@ -18,6 +18,8 @@ testr.iml
 .Rproj.user/
 .Rproj.user
 .Rhistory
+.Rout
+.pdf
 # C/C++
 *.*o
 

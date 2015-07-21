@@ -10,6 +10,7 @@ clear_gcov(root)
 \item{root}{a directory or a single C file that contains or is instrumented VM source.}
 }
 \description{
-This function deletes gcov information files (*.gcda) thus clearing any previously collected coverage information is erased.
+This function deletes gcov information files (*.gcda)
+thus clearing any previously collected coverage information is erased.
 }
 

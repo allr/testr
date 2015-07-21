@@ -47,7 +47,7 @@ measure_gcov <- function(root, verbose = TRUE, exclude_header=TRUE, file_detail=
     if (.Platform$OS.type == "windows") {
         stop("Not supported on Windows!")
     }
-    if (length(grep("[.]c$", root, ignore_case=TRUE))) {
+    if (length(grep("[.]c$", root, ignore.case=TRUE))) {
         cfiles <- root
     } else {
         if (!length(list.files(path=root, recursive=TRUE, pattern=".gcda$"))) {
@@ -89,7 +89,7 @@ measure_gcov <- function(root, verbose = TRUE, exclude_header=TRUE, file_detail=
             colnames(file_df) <- c("File", "CovLnPcnt", "LOC")
             cal_cov_ln <- function(df) {
                 cov_ln <- round(as.numeric(df$"CovLnPcnt") / 100.0 * as.numeric(df$LOC), digits=0)
-                df <- cbind(df, covLn=cov_ln)
+                df <- cbind(df, CovLn=cov_ln)
                 cbind(df, Obj=f)
             }
             func_df <- cal_cov_ln(func_df)[,c(5,1,4,3,2)] # Obj _func _covLn LOC _covLn%
@@ -147,10 +147,10 @@ measure_gcov <- function(root, verbose = TRUE, exclude_header=TRUE, file_detail=
         cat("- src root:         ", root,           "\n", sep="")
         cat("- file keyword:     ", file_keyword,   "\n", sep="")
         cat("- func keyword:     ", func_keyword,   "\n", sep="")
-        cat("- igore case:       ", ignore_case,    "\n", sep="")
-        cat("- exclude_header:   ", exclude_header, "\n", sep="")
+        cat("- ignore case:       ", ignore_case,    "\n", sep="")
+        cat("- exclude header:   ", exclude_header, "\n", sep="")
         cat("\n")
-        cat(">>> _coverage:\n")
+        cat(">>> Coverage:\n")
         cat("\n")
         cat("* Line (file): ",
             total_cov_line_file, " out of ", total_line_file,
@@ -188,10 +188,12 @@ measure_gcov <- function(root, verbose = TRUE, exclude_header=TRUE, file_detail=
 #' @export
 #' @title Reset coverage information
 #'
-#' @description This function deletes gcov information files (*.gcda) thus clearing any previously collected coverage information is erased.
+#' @description This function deletes gcov information files (*.gcda) 
+#' thus clearing any previously collected coverage information is erased.
 #' @param root a directory or a single C file that contains or is instrumented VM source.
 #'
 clear_gcov <- function(root) {
     cat("clear_gcov called\n")
-    file.remove(list.files(root, pattern="*\\.gcda"))
+    invisible(file.remove(list.files(root, pattern="*\\.gcda",
+                                    recursive = TRUE, full.names = TRUE)))
 }
