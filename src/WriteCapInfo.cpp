@@ -50,4 +50,3 @@ void WriteCapInfo_cpp (CharacterVector fname, SEXP args_env) {
   if (stat_buf.st_size > MAX_FILE_SIZE)
   captureFileNumber++;
 }
-

@@ -4,14 +4,14 @@
 #' It is strictly oriented to that, please see readme for more information.
 #'
 #' @param root a directory containg capture information or capture file
-#' @param output.dir directory where generated test cases will be saved
+#' @param output_dir directory where generated test cases will be saved
 #' @param verbose wheater display debug output
 #' @param timed whether result is dependent on time of generation
 #' @export
-TestGen <- function(root, output.dir, timed = F, verbose=testr_options('verbose')) {
+test_gen <- function(root, output_dir, timed = F, verbose=testr_options("verbose")) {
   if (verbose) {
-    cat("Output:", output.dir, "\n");
-    cat("Root:", root, "\n");
+    cat("Output:", output_dir, "\n")
+    cat("Root:", root, "\n")
   }
   # input dir checks
   if (missing(root) || !file.exists(root)) {
@@ -24,21 +24,21 @@ TestGen <- function(root, output.dir, timed = F, verbose=testr_options('verbose'
     all.capture <- root
   }
   # output dir checks
-  if (missing(output.dir)) stop("A output directory must be provided!");
-  if (!file.exists(output.dir) || !file.info(output.dir)$isdir) dir.create(output.dir)
+  if (missing(output_dir)) stop("A output directory must be provided!");
+  if (!file.exists(output_dir) || !file.info(output_dir)$isdir) dir.create(output_dir)
   if (timed)
-    output.dir <- file.path(output.dir, format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
-  cache$output.dir <- output.dir
+    output_dir <- file.path(output_dir, format(Sys.time(), "%Y-%m-%d %H:%M:%S"))
+  cache$output_dir <- output_dir
   # bad.arguments file to store incorrect arguments
-  cache$bad.argv.file <- file.path(cache$output.dir, "bad_arguments");
-  if (!file.exists(cache$bad.argv.file) && !file.create(cache$bad.argv.file)) stop("Unable to create file: ", bad.argv.file);
-  
-  cache$tID <- list()
-  Map(ProcessCapture, all.capture)
-  
-  rm(tID, envir = cache)
-  rm(output.dir, envir = cache)
-  rm(bad.argv.file, envir = cache)
+  cache$bad_argv <- file.path(cache$output_dir, "bad_arguments");
+  if (!file.exists(cache$bad_argv)
+      && !file.create(cache$bad_argv))
+      stop("Unable to create file: ", cache$bad_argv)
+  cache$tid <- list()
+  Map(process_capture, all.capture)
+  cache$tid <- NULL
+  cache$output_dir <- NULL
+  cache$bad_argv <- NULL
 }
 
 #' @title Manage Test Case file
@@ -47,41 +47,40 @@ TestGen <- function(root, output.dir, timed = F, verbose=testr_options('verbose'
 #' @param path a directory containg capture information or capture file
 #' @param name directory where generated test cases will be saved
 #' @param cache environment for caching already created files
-#' @seealso TestGen
-EnsureTCFile <- function(name) {
-  name <- gsub(.Platform$file.sep, "sep", name);
-  tc.file <- file.path(cache$output.dir, paste("tc_", name, ".R", sep=""), fsep=.Platform$file.sep);
-  if (!file.exists(tc.file) && !file.create(tc.file)) stop("Unable to create file: ", tc.file);
-  return(tc.file);
+#' @seealso test_gen
+ensure_file <- function(name) {
+  name <- gsub(.Platform$file.sep, "sep", name)
+  tc.file <- file.path(cache$output_dir, paste("tc_", name, ".R", sep=""), fsep=.Platform$file.sep)
+  if (!file.exists(tc.file) && !file.create(tc.file)) stop("Unable to create file: ", tc.file)
+  return(tc.file)
 }
 
 #' @title Process File with Closure capture information
 #'
 #' @description This function parses file with closure capture information and generates test cases
-#' @param capture.file path to closure capture file
-#' @seealso TestGen GenClosureTC
-ProcessCapture<- function(capture.file){
-  lines <- readLines(capture.file)
+#' @param cap_file path to closure capture file
+process_capture <- function(cap_file){
+  lines <- readLines(cap_file)
   cache$i <- 1
   while (cache$i < length(lines)){
     # read test case information
-    symbol.values <- ReadSymbolValues(lines)
+    symbol.values <- read_symbol_values(lines)
     symb <- symbol.values[[1]]
     vsym <- symbol.values[[2]]
-    func <- ReadValue(lines, kFuncPrefix)
-    args <- ReadValue(lines, kArgsPrefix)
-    
-    cache$tID[[func]] <- ifelse(is.null(cache$tID[[func]]), 0, cache$tID[[func]] + 1)
-    tc.file <- EnsureTCFile(func)
-    feedback <- GenerateTC(symb, vsym, func, args)
-    
+    func <- read_value(lines, kFuncPrefix)
+    args <- read_value(lines, kArgsPrefix)
+
+    cache$tid[[func]] <- ifelse(is.null(cache$tid[[func]]), 0, cache$tid[[func]] + 1)
+    tc.file <- ensure_file(func)
+    feedback <- generate_tc(symb, vsym, func, args)
+
     #### see what we get
-    if (feedback$'type' == "err") {
+    if (feedback$type == "err") {
       #### the captured information is not usable
-      write(feedback$'msg', file=cache$bad.argv.file, append=TRUE);
-    } else if (feedback$'type' == "src") {
+      write(feedback$msg, file=cache$bad_argv, append=TRUE);
+    } else if (feedback$type == "src") {
       #### good, we get the source code
-      write(feedback$'msg', file=tc.file, append=TRUE);
+      write(feedback$msg, file=tc.file, append=TRUE);
     } else {
       stop("Not reached!");
     }
@@ -90,7 +89,7 @@ ProcessCapture<- function(capture.file){
 }
 
 
-ReadSymbolValues <- function(lines){
+read_symbol_values <- function(lines){
   k_sym <- 1
   k_value <- 1
   symb <- vector()
@@ -98,11 +97,11 @@ ReadSymbolValues <- function(lines){
   symb[k_sym] <- ""
   vsym[k_value] <- ""
   while (starts_with(kSymbPrefix, lines[cache$i])){
-    symb[k_sym] <- paste(symb[k_sym], substr_line(lines[cache$i]), sep = "") 
+    symb[k_sym] <- paste(symb[k_sym], substr_line(lines[cache$i]), sep = "")
     cache$i <- cache$i + 1
     k_sym <- k_sym + 1
     symb[k_sym] <- ""
-    vsym[k_value] <- ReadValue(lines, kValSPrefix)
+    vsym[k_value] <- read_value(lines, kValSPrefix)
     k_value <- k_value + 1
     vsym[k_value] <- ""
   }
@@ -111,7 +110,7 @@ ReadSymbolValues <- function(lines){
   return(list(symb, vsym))
 }
 
-ReadValue <- function(lines, prefix){
+read_value <- function(lines, prefix){
   value <- vector()
   j <- cache$i
   while (starts_with(prefix, lines[j])){
@@ -129,8 +128,8 @@ ReadValue <- function(lines, prefix){
 #' @param vsym values of the symbols
 #' @param func function name
 #' @param argv input arguments for a closure function call
-#' @seealso TestGen ProcessClosure
-GenerateTC<- function(symb, vsym, func, argv) {
+#' @seealso test_gen ProcessClosure
+generate_tc <- function(symb, vsym, func, argv) {
   # check validity of symbol values and construct part of the test
   invalid.symbols <- vector()
   variables <- ""
@@ -138,7 +137,7 @@ GenerateTC<- function(symb, vsym, func, argv) {
     for (i in 1:length(vsym)){
       symbol <- paste(symb[i], "<-", vsym[i])
       if (!parse_eval(symbol)){
-        invalid.symbols <- c(invalid.symbols, i)  
+        invalid.symbols <- c(invalid.symbols, i)
       } else {
         variables <- paste(variables, symbol, "\n")
       }
@@ -150,16 +149,16 @@ GenerateTC<- function(symb, vsym, func, argv) {
   }
   # check validity of arguments
   valid.argv <- parse_eval(argv)
-  
+
   # proper argument should always be packed in a list
-  if (!valid.argv) 
+  if (!valid.argv)
     return(list(type="err", msg=paste("func:", func, "\nargv:", argv, "\n")))
-  
-  # TODO: potentially good arguments, alter it 
+
+  # TODO: potentially good arguments, alter it
   #  argv.obj.lst <- alter.arguments(argv.obj);
-  
+
   call <- ""
-  
+
   args <- eval(parse(text=argv));
   if (length(args) > 0) {
     args <- lapply(args, function(x) paste(deparse(x), collapse = "\n"))
@@ -167,7 +166,7 @@ GenerateTC<- function(symb, vsym, func, argv) {
       call.args <- ""
       arg_names <- names(args)
       for (i in 1:length(args)) {
-        if (arg_names[i] != "") 
+        if (arg_names[i] != "")
           call.args <- paste(call.args, arg_names[i], "=", sep = "")
         call.args <- paste(call.args, args[[i]], ",", sep="")
       }
@@ -178,23 +177,24 @@ GenerateTC<- function(symb, vsym, func, argv) {
   } else {
     call <- paste(call, func, "()", "\n", sep="")
   }
-  
+
   if (length(symb) > 0 && symb[1] != "")
     call <- paste(variables, call, sep="")
   cache$warns <- NULL
   cache$errs <- NULL
-  retv <- withCallingHandlers(tryCatch(eval(parse(text=call), envir = new.env()), error=function(e){cache$errs <- e$message}, silent = T), 
+  retv <- withCallingHandlers(tryCatch(eval(parse(text=call), envir = new.env()),
+                                       error=function(e) cache$errs <- e$message, silent = TRUE),
                    warning=function(w) {
                      cache$warns <- ifelse(is.null(cache$warns), w$message, paste(cache$warns, w$message, sep="; "))
                      invokeRestart("muffleWarning")
                      })
   retv <- quoter(retv)
   src <- ""
-  src <- paste(src, "test(id=",cache$tID[[func]],", code={\n", call, "}, ", sep="")
+  src <- paste(src, "test(id=",cache$tid[[func]],", code={\n", call, "}, ", sep="")
   if (!is.null(cache$warns))
-    src <- paste(src, 'w = ', shQuote(cache$warns), ', ',  sep = "")
+    src <- paste(src, "w = ", shQuote(cache$warns), ", ",  sep = "")
   if (!is.null(cache$errs))
-    src <- paste(src, 'e = ', shQuote(cache$errs), sep = "")
+    src <- paste(src, "e = ", shQuote(cache$errs), sep = "")
   else {
     src <- paste("expected <- ", paste(deparse(retv), collapse = "\n"), "\n", src, sep="");
     src <- paste(src, "o = expected")
@@ -202,4 +202,3 @@ GenerateTC<- function(symb, vsym, func, argv) {
   src <- paste(src, ");\n", sep="")
   list(type="src", msg=src);
 }
-

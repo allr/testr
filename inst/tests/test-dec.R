@@ -4,19 +4,19 @@ library(testthat)
 context("Decoration")
 
 test_that('Can decorate functions', {
-  suppressMessages(BeginBuiltinCapture(T))
+  suppressMessages(builtin_capture(T))
   check.dec <- sapply(builtins(T), function(x) {
     if (!exists(x, envir = getNamespace('base')))
       return(TRUE)
     obj <- get(x, envir = getNamespace('base'))
     if (is.function(obj))
-      class(obj) == "functionWithTrace" || !testr:::EligibleForCapture(x) || testr:::IsS3Generic(x)
+      class(obj) == "functionWithTrace" || !testr:::eligible_capture(x) || testr:::is_s3_generic(x)
     else
       TRUE
   })
   expect_true(length(testr:::.decorated) > 0)
   expect_true(all(check.dec))
-  suppressMessages(ClearDecoration())
+  suppressMessages(clear_decoration())
   check.dec <- sapply(builtins(T), function(x) {
     if (!exists(x, envir = getNamespace('base')))
       return(FALSE)

@@ -8,10 +8,10 @@ This function is respinsible generating Java testcases for FastR.
 If there is a folder with already existing test cases translated from TestR to FastR, then the function will append test cases to proper files in that folder.
 Uses unility function for extraction of test case information. Idea is that to instead of running a test when calling test function, it collects test information and converts it to FastR test}
 \usage{
-fastr_translate(r.test.folder, fastr.test.folder = "tests/")
+fastr_translate(rtest_folder, fastr_test_folder = "tests/")
 }
 \arguments{
-\item{fastr.test.folder}{folder with FastR test cases in Java}
+\item{fastr_test_folder}{folder with FastR test cases in Java}
 
 \item{r.test.root}{folder with R testcases}
 }

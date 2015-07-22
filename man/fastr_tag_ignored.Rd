@@ -6,10 +6,10 @@
 
 This function tags test cases with Ignore preporcessor. It requires a file with results of running tests}
 \usage{
-fastr_tag_ignored(fastr.test.root, result.file)
+fastr_tag_ignored(fastr_test_root, result.file)
 }
 \arguments{
-\item{fastr.test.root}{folder with FastR test cases}
+\item{fastr_test_root}{folder with FastR test cases}
 
 \item{result.file}{file with result of running FastR test cases}
 }

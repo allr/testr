@@ -5,15 +5,18 @@
 #' @param env_vars environment variables
 #' @param verbose if to print additional information (default \code{TRUE})
 #'
-rcmd <- function(file, env_vars = NULL, verbose = testr_options('verbose')) {
-    cat("File - ", file, "\n")
+rcmd <- function(file, env_vars = NULL, verbose = testr_options("verbose")) {
+    if (verbose) {
+        cat("File - ", file, "\n")
+    }
     if (!file.exists(file))
         stop("File doesn't exist!")
     env_values <- sapply(names(env_vars), Sys.getenv)
     do.call(Sys.setenv, env_vars)
-    res <- system(sprintf("R CMD BATCH --no-save --no-restore %s", file))
+    cmd <- sprintf("R CMD BATCH --no-save --no-restore '%s'", file)
+    res <- system(cmd)
     do.call(Sys.setenv, as.list(env_values))
-    if (res != 0) {
+    if (res != 0 && verbose) {
         message(paste("File", basename(file), "failed"))
     }
     res
@@ -29,7 +32,7 @@ reg_tests <-  function(exec_dir = tempdir()) {
                                      "tests" = "testhat/reg-tests",
                                      "testr" = "tests/testthat/reg-tests",
                                      "testthat" = "reg-tests"))
-    invisible(run_tests(test_dir, exec_dir))
+    invisible(runner(test_dir, exec_dir))
 }
 
 #' @title Run all R tests other than regression tests
@@ -42,7 +45,7 @@ all_tests <-  function(exec_dir = tempdir()) {
                                      "tests" = "testhat/r-tests",
                                      "testr" = "tests/testthat/r-tests",
                                      "testthat" = "r-tests"))
-    invisible(run_tests(test_dir, exec_dir))
+    invisible(runner(test_dir, exec_dir))
 }
 
 #' @title Run R test from a folder
@@ -51,7 +54,7 @@ all_tests <-  function(exec_dir = tempdir()) {
 #' @param test_dir directory with R scripts
 #' @param exec_dir directory where command will be executed
 #'
-run_tests <- function(test_dir, exec_dir = tempdir()) {
+runner <- function(test_dir, exec_dir = tempdir()) {
     unlink(exec_dir, recursive = TRUE, force = TRUE)
     dir.create(exec_dir)
     files <- list.files(test_dir, pattern = "*.[rR]$", full.names = TRUE)

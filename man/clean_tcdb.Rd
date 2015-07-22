@@ -4,10 +4,10 @@
 \alias{clean_tcdb}
 \title{clean database}
 \usage{
-clean_tcdb(tc.db.path)
+clean_tcdb(tc_db_path)
 }
 \arguments{
-\item{tc.db.path}{a directory containing previosly collected test cases.}
+\item{tc_db_path}{a directory containing previosly collected test cases.}
 }
 \description{
 delete previously accomulated TCs in test case database.

@@ -69,11 +69,11 @@ primitive_generics_fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
     ## testr settings
     options("testr" = list(
         "verbose" = FALSE,
-        "display.only.errors" = FALSE,
-        "stop.on.error" = FALSE,
-        "display.code.on.error" = FALSE,
-        "file.summary" = FALSE,
-        "capture.file.size" = 50 * 1000 * 1000,
+        "display_only_errors" = FALSE,
+        "stop_on_error" = FALSE,
+        "display_code_on_error" = FALSE,
+        "file_summary" = FALSE,
+        "capture_file_size" = 50 * 1000 * 1000,
         "capture.arguments" = TRUE
     ))
 }

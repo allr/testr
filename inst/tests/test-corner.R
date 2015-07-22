@@ -5,7 +5,7 @@ context("Corner cases")
 
 test_that('Missing argument corner case is fixed', {
   # was failing before 5fe109579d670a0ebf094215398410ca08c3749b
-  suppressMessages(Decorate('qr.X'))
+  suppressMessages(decorate('qr.X'))
   p <- ncol(x <- LifeCycleSavings[,-1]) # not the `sr'
   qrstr <- qr(x)   # dim(x) == c(n,p)
   X <- qr.X(qrstr) # X == x
@@ -14,7 +14,7 @@ test_that('Missing argument corner case is fixed', {
   expect_true(all.equal(Xc[,1:p], X))
 
   # was failing before 5fe109579d670a0ebf094215398410ca08c3749b
-  suppressMessages(Decorate('svd'))
+  suppressMessages(decorate('svd'))
   Meps <- .Machine$double.eps
   Eps <- 100 * Meps
   hilbert <- function(n) { i <- 1:n; 1 / outer(i - 1, i, "+") }

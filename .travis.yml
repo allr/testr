@@ -1,14 +1,22 @@
 language: r
-warnings_are_errors: false
-env: _R_CHECK_CRAN_INCOMING_=FALSE
+
+env:
+  - LINTR_COMMENT_BOT=true
 
 r_binary_packages:
+  - Rcpp
   - testthat
 
 r_github_packages:
   - jimhester/covr
+  - jimhester/lintr
   - allr/rcov
-  - allr/testr
+
+script:
+  - make install
+  - make check
+  - make test
 
 after_success:
-  - Rscript -e 'library(covr);coveralls()'
+  - Rscript -e 'lintr::lint_package()'
+  - Rscript -e 'covr::codecov()'

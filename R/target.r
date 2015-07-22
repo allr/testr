@@ -34,7 +34,7 @@ is_test_listener <- function(f) {
 
 run_tests <- function(root,
                       verbose = testr_options("verbose"),
-                      file.summary = testr_options("file.summary"),
+                      file.summary = testr_options("file_summary"),
                       display_only_errors = testr_options("display_only_errors"),
                       stop_on_error = testr_options("stop_on_error"),
                       display_code_on_error = testr_options("display_code_on_error"),
@@ -69,7 +69,6 @@ run_tests <- function(root,
             "Result\n---------------------------------------------------------------------------------------\n")
     # process every file
     for (filename in files) {
-        cat(filename,"...\n")
         cache$tests <- list(c("Test Name","Result", "Comments", "Id"))
         cache$fails <- 0
         cache$passes <- 0
@@ -78,13 +77,16 @@ run_tests <- function(root,
         if (!is.null(test_listener))
             for (t in cache$tests[-1])
                 test_listener(t[[4]], t[[1]], t[[2]], filename, t[[3]])
-        cat("  (pass = ", cache$passes,
+        if (verbose) {
+            cat(filename, "...\n")
+            cat("  (pass = ", cache$passes,
             ", fail = ", cache$fails,
             ", total = ", cache$passes + cache$fails,
             ")\n", sep = "")
+        }
         total_fails <- total_fails + cache$fails
         total_passes <- total_passes + cache$passes
-        if (file.summary == TRUE) {
+        if (file.summary) {
             cat(sprintf("%-80s", "Name"),
                 "Result\n---------------------------------------------------------------------------------------\n")
             for (t in cache$tests[-1])
@@ -93,15 +95,17 @@ run_tests <- function(root,
         }
     }
     # summarized results
-    cat("\n-------- Results --------\n")
-    cat("Passed:   ", total_passes, "\n")
-    cat("Failed:   ", total_fails, "\n")
-    cat("Total:    ", total_passes + total_fails, "\n")
+    if (verbose) {
+        cat("\n-------- Results --------\n")
+        cat("Passed:   ", total_passes, "\n")
+        cat("Failed:   ", total_fails, "\n")
+        cat("Total:    ", total_passes + total_fails, "\n")
+    }
     if (total_fails == 0) {
-        cat("Overall:  ", "PASS\n")
+        if (verbose) cat("Overall:  ", "PASS\n")
         return(TRUE)
     } else {
-        cat("Overall:  ", "FAIL\n")
+        if (verbose) cat("Overall:  ", "FAIL\n")
         return(FALSE)
     }
     # clean working directory
@@ -190,7 +194,7 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
     passes <- ifelse(!is.null(cache$passes), cache$passes, 0)
     verbose <- ifelse(!is.null(cache$verbose),cache$verbose, testr_options("verbose"))
     stop_on_error <- ifelse(!is.null(cache$stop_on_error),cache$stop_on_error, testr_options("stop_on_error"))
-
+    
     append_comment <- function(...) {
         s <- list(...)[[1]]
         for (o in list(...)[-1])
@@ -207,9 +211,9 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
     # execute the test and grap warnings and errors
     result <- withCallingHandlers(
         tryCatch({
-            if (cache$use.rcov) rcov::ResumeMonitorCoverage()
+            if (!is.null(cache$use.rcov) && cache$use.rcov) rcov::ResumeMonitorCoverage()
             res <- eval(code, envir = new.env())
-            if (cache$use.rcov) rcov::PauseMonitorCoverage()
+            if (!is.null(cache$use.rcov) && cache$use.rcov) rcov::PauseMonitorCoverage()
             res
         },
         error = function(e) errors <<- e$message, silent = TRUE),
@@ -221,7 +225,7 @@ test <- function(id, code, o = NULL, w = NULL, e = NULL, name = NULL) {
             }
             invokeRestart("muffleWarning")
         })
-
+    
     # if we have an error, the result is irrelevant and should be NULL
     if (!is.null(errors)) {
         result <- TRUE

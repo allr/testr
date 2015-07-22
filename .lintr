@@ -1,2 +1,2 @@
 linters: with_defaults(line_length_linter(120))
-exclusions: list("filtered-test-suite")
+exclusions: c(as.list(list.files("filtered-test-suite", full.names = TRUE, recursive = TRUE)), as.list(list.files("ftestsuite", full.names = TRUE, recursive = TRUE)))

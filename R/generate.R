@@ -569,4 +569,4 @@ makeTests <- function(root, destRoot, showCode = FALSE) {
     }
     rm(tests, envir = globalenv())
     cat("Total", total, "tests created out of", nFiles, "files.\n")
-} 
+}

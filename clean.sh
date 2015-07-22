@@ -13,3 +13,5 @@ rm -rf shared2-02.pdf
 rm -rf temp.processing.tc/
 rm -rf test.dat
 rm -rf tmp_source.Rout
+rm -rf *.Rout
+rm -rf tests/testthat/*/*.pdf

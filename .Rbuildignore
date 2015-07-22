@@ -1,10 +1,14 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-filtered-test-suite-prim/*
-java-helpers/*
+filtered-test-suite/*
+ftestsuite/*
+java/*
 paper/*
 R/extcov.R
 capture_examples/
 genTests/
 reload.R
 ^\.travis\.yml$
+\.lintr
+clean.sh
+
