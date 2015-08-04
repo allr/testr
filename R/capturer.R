@@ -12,7 +12,7 @@ decorate <- function(func, package) {
         stop("wrong argument type!")
     }
     if (missing(package)){
-        package <- find(func)
+        package <- utils::find(func)
         if (length(package) == 0)
             stop("Can't determine a package for function. If function is hidden, use package param")
         if (length(package) > 1)

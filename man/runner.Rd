@@ -6,12 +6,15 @@
 
 This function runs R script located in folder and gets results}
 \usage{
-runner(test_dir, exec_dir = tempdir())
+runner(test_dir, file_patterns = ".*", exec_dir = tempdir(),
+  verbose = testr_options("verbose"))
 }
 \arguments{
 \item{test_dir}{directory with R scripts}
 
 \item{exec_dir}{directory where command will be executed}
+
+\item{verbose}{if to print additional information (default \code{TRUE})}
 }
 \description{
 Run R test from a folder

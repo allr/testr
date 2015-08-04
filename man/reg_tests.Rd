@@ -6,10 +6,13 @@
 
 Run test that are available with make test-Reg}
 \usage{
-reg_tests(exec_dir = tempdir())
+reg_tests(exec_dir = tempdir(), file_patterns = ".*",
+  verbose = testr_options("verbose"))
 }
 \arguments{
 \item{exec_dir}{directory where command will be executed}
+
+\item{verbose}{if to print additional information (default \code{TRUE})}
 }
 \description{
 Run R regression tests

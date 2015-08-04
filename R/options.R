@@ -42,7 +42,8 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "length<-", "call", "attr<-", "switch", "log2", "nargs", "as.numeric",
                "attributes", "attributes<-", "is.language",
                # errors with trace
-               "match.call", ".doTrace", "tracingState", "traceback", "trace"
+               "match.call", ".doTrace", "tracingState", "traceback", "trace",
+               "forceAndCall" # added in R.3.2.1
 )
 
 sys <- c("system.time", "system.file", "sys.status",
