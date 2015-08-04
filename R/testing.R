@@ -32,7 +32,7 @@ rcmd <- function(file, env_vars = NULL, verbose = testr_options("verbose")) {
 reg_tests <-  function(exec_dir = tempdir(),
                        file_patterns = ".*", verbose = testr_options("verbose")) {
     test_dir <- normalizePath(switch(basename(getwd()),
-                                     "tests" = "testhat/reg-tests",
+                                     "tests" = "reg-tests",
                                      "testr" = "inst/tests/reg-tests",
                                      "testthat" = "reg-tests"))
     invisible(runner(test_dir, file_patterns, exec_dir, verbose = verbose))
@@ -47,7 +47,7 @@ reg_tests <-  function(exec_dir = tempdir(),
 all_tests <-  function(exec_dir = tempdir(),
                        file_patterns = ".*", verbose = testr_options("verbose")) {
     test_dir <- normalizePath(switch(basename(getwd()),
-                                     "tests" = "testhat/r-tests",
+                                     "tests" = "r-tests",
                                      "testr" = "inst/tests/r-tests",
                                      "testthat" = "r-tests"))
     invisible(runner(test_dir, file_patterns, exec_dir, verbose = verbose))
