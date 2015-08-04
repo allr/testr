@@ -16,4 +16,4 @@ check: build
 	R CMD check $(PKGNAME)_$(PKGVERS).tar.gz --as-cran
 
 test:
-	Rscript -e 'library(testr);library(methods);library(testthat);test_package("testr")'
+	R -e 'library(testr);testr_options("rtests", TRUE); library(testthat);test_package("testr")'

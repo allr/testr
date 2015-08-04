@@ -4,19 +4,26 @@
 #' Replaces the function by decorated function in the global environment
 #' @param func function name as a character string
 #' @param package name of package to look for function
+#' @param verbose if to print additional output
 #' @export 
 #' @seealso write_capture
 #'
-decorate <- function(func, package) {
+decorate <- function(func, package, verbose = testr_options("verbose")) {
     if(class(func) != "character" || (!missing(package) && class(package) != "character")){
         stop("wrong argument type!")
     }
     if (missing(package)){
-        package <- find(func)
-        if (length(package) == 0)
-            stop("Can't determine a package for function. If function is hidden, use package param")
-        if (length(package) > 1)
-            stop("Function found in multiple packages, supply the exact name")
+        package <- utils::find(func)
+        if (length(package) == 0) {
+            warning(sprintf("Can't determine a package for function '%s'. If function is hidden, use package param",
+                            func))
+            return(invisible())
+        } else {
+            if (length(package) > 1) {
+                warning("Function found in multiple packages, supply the exact name")
+                return(invisible())
+            }
+        }
         package <- substr(package, 9, nchar(package))
     }
     if (is_s3_generic(func, getNamespace(package))) {
@@ -27,13 +34,17 @@ decorate <- function(func, package) {
     tc <- call("trace",
                func,
                quote(write.call),
-               print=quote(testr_options("verbose")))
+               print = testr_options("verbose"))
     hidden <- FALSE
     if (!func %in% ls(as.environment(paste("package", package, sep=":")))) {
         tc[["where"]] <- call("getNamespace", package)
         hidden <- TRUE
     }
-    eval(tc)
+    if (verbose) {
+        eval(tc)
+    } else {
+        suppressMessages(eval(tc))
+    }
     .decorated[[func]] <- list(func=func, package=package, hidden=hidden)
 }
 
@@ -41,24 +52,30 @@ decorate <- function(func, package) {
 #' 
 #' Reset previously decorate function
 #' @param func function name as a character string
+#' @param verbose if to print additional output
 #' @export 
 #' @seealso write_capture Decorate
 #'
-undecorate <- function(func) {
+undecorate <- function(func, verbose = testr_options("verbose")) {
     if (class(func) == "character"){
         fname <- func
     } else {
         stop("wrong argument type!")
     }
-    ind <- which(fname %in% ls(.decorated))
-    if (length(ind) == 0)
-        stop("Function was not decorated!")
+    ind <- which(fname %in% ls(.decorated, all.names = TRUE))
+    if (length(ind) == 0) {
+        stop(sprintf("Function %s was not decorated!", fname))
+    }
     package <- .decorated[[func]]$package
     hidden <- .decorated[[func]]$hidden
     params <- list(fname)
     if (hidden)
         params[["where"]] <- call("getNamespace", package)
-    do.call(untrace, params)
+    if (verbose) {
+        do.call(untrace, params)
+    } else {
+        suppressMessages(do.call(untrace, params))
+    }
     rm(list=c(func), envir=.decorated)
 }
 
@@ -133,6 +150,6 @@ builtin_capture <- function(internal = FALSE, functions = builtins(internal), in
 #' @seealso undecorate
 #' @export
 clear_decoration <- function() {
-    for (fname in ls(.decorated))
+    for (fname in ls(.decorated, all.names = TRUE))
         undecorate(fname)
 }

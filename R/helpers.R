@@ -15,7 +15,7 @@ get_function_name <- function(filename){
 #' Determine if function has a call to UseMethod. In that case there is no need to capture it.
 #' @param fname function name
 #' @seealso Decorate
-is_s3_generic <- function(fname, env=parent.frame()) {
+is_s3_generic <- function(fname, env=.GlobalEnv) {
     f <- get(fname, mode = "function", envir = env)
     if (is.null(body(f))) return(FALSE)
     uses <- codetools::findGlobals(f, merge = FALSE)$functions

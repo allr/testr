@@ -81,15 +81,15 @@ confint(glm.D93)
 confint.default(glm.D93)  # based on asymptotic normality}
 
 # contrasts.Rd
-utils::example(factor)
-fff <- ff[, drop = TRUE]  # reduce to 5 levels.
-contrasts(fff) <- contr.sum(5)[, 1:2]; contrasts(fff)
+# utils::example(factor)
+# fff <- ff[, drop = TRUE]  # reduce to 5 levels.
+# contrasts(fff) <- contr.sum(5)[, 1:2]; contrasts(fff)
 
 ## using sparse contrasts: % useful, once model.matrix() works with these :
-ffs <- fff
-contrasts(ffs) <- contr.sum(5, sparse = TRUE)[, 1:2]; contrasts(ffs)
-stopifnot(all.equal(ffs, fff))
-contrasts(ffs) <- contr.sum(5, sparse = TRUE); contrasts(ffs)
+# ffs <- fff
+# contrasts(ffs) <- contr.sum(5, sparse = TRUE)[, 1:2]; contrasts(ffs)
+# stopifnot(all.equal(ffs, fff))
+# contrasts(ffs) <- contr.sum(5, sparse = TRUE); contrasts(ffs)
 
 # glm.Rd
 utils::data(anorexia, package = "MASS")
@@ -171,8 +171,8 @@ example(packageDescription)
 
 
 ## From splines
-library(splines)
-Matrix::drop0(zapsmall(6*splineDesign(knots = 1:40, x = 4:37, sparse = TRUE)))
+# library(splines)
+# Matrix::drop0(zapsmall(6*splineDesign(knots = 1:40, x = 4:37, sparse = TRUE)))
 
 
 ## From tools

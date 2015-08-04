@@ -10,6 +10,8 @@ License: GPL (>= 2)
 Imports: 
     Rcpp (>= 0.11.3),
     codetools,
-    utils
+    utils,
+    parallel,
+    tools
 LinkingTo: Rcpp
 Suggests: testthat

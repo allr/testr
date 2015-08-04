@@ -6,10 +6,13 @@
 
 Run test that are available with make test-all-devel}
 \usage{
-all_tests(exec_dir = tempdir())
+all_tests(exec_dir = tempdir(), file_patterns = ".*",
+  verbose = testr_options("verbose"))
 }
 \arguments{
 \item{exec_dir}{directory where command will be executed}
+
+\item{verbose}{if to print additional information (default \code{TRUE})}
 }
 \description{
 Run all R tests other than regression tests

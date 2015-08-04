@@ -9,3 +9,4 @@ test_that("General coverage is correct", {
 #     expect_equal(nrow(res$file), 5)
 #     expect_equal(res$file[, 1], unique(res$func[, 1]))
 })
+
