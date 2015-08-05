@@ -1,6 +1,7 @@
 ## general (temporary) storage for testr's stuff
 cache <- new.env()
 cache$capture_num <- 0
+cache$io <- FALSE
 
 cache$arguments <- list()
 .decorated <- new.env()

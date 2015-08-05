@@ -14,7 +14,8 @@ decorate <- function(func, package) {
     if (missing(package)){
         package <- utils::find(func)
         if (length(package) == 0)
-            stop("Can't determine a package for function. If function is hidden, use package param")
+            stop(sprintf("Can't determine a package for function '%s'. If function is hidden, use package param",
+                         func))
         if (length(package) > 1)
             stop("Function found in multiple packages, supply the exact name")
         package <- substr(package, 9, nchar(package))

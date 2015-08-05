@@ -32,21 +32,26 @@ int captureFileNumber = 0;
 void WriteCapInfo_cpp (CharacterVector fname, SEXP args_env) {
   Environment testr = Environment::namespace_env("testr");
   Environment cache = testr.get("cache");
-  string traceFile = as<string>(cache.get("trace_path"));
-  traceFile += "/";
-  traceFile += as<string>(testr.get("kCaptureFile"));
-  traceFile += "."; 
-  char numstr[21];
-  sprintf(numstr, "%d", captureFileNumber);
-  traceFile += numstr;
-  tracefile.open(traceFile.c_str(), std::ios::app);
-  printCapture(fname, kFuncPrefix);
-  printCapture(deparse(GetArgs(args_env)), kArgsPrefix);
-  tracefile << std::endl;
-  tracefile.close();
-  // get file size
-  struct stat stat_buf;
-  stat(traceFile.c_str(), &stat_buf);
-  if (stat_buf.st_size > MAX_FILE_SIZE)
-  captureFileNumber++;
+  bool io = cache.get("io");
+  if (io) {
+      string traceFile = as<string>(cache.get("trace_path"));
+      traceFile += "/";
+      traceFile += as<string>(testr.get("kCaptureFile"));
+      traceFile += "."; 
+      char numstr[21];
+      sprintf(numstr, "%d", captureFileNumber);
+      traceFile += numstr;
+      tracefile.open(traceFile.c_str(), std::ios::app);
+      printCapture(fname, kFuncPrefix);
+      printCapture(deparse(GetArgs(args_env)), kArgsPrefix);
+      tracefile << std::endl;
+      tracefile.close();
+      // get file size
+      struct stat stat_buf;
+      stat(traceFile.c_str(), &stat_buf);
+      if (stat_buf.st_size > MAX_FILE_SIZE)
+          captureFileNumber++;
+  } else {
+      GetArgs(args_env);
+  }
 }

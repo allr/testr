@@ -13,8 +13,10 @@ rcmd <- function(file, env_vars = NULL, verbose = testr_options("verbose")) {
         stop("File doesn't exist!")
     env_values <- sapply(names(env_vars), Sys.getenv)
     do.call(Sys.setenv, env_vars)
-    cmd <- sprintf("R CMD BATCH --no-save --no-restore '%s'", file)
-    res <- system(cmd)
+#     cmd <- sprintf("R CMD BATCH --no-save --no-restore '%s'", file)
+#     res <- system(cmd)
+    res <- 0
+    source(file, local = TRUE, verbose = FALSE, print.eval = FALSE, echo = FALSE)
     do.call(Sys.setenv, as.list(env_values))
     if (res != 0 && verbose) {
         message(paste("File", basename(file), "failed"))
