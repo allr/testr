@@ -13,15 +13,9 @@ rcmd <- function(file, env_vars = NULL, verbose = testr_options("verbose")) {
         stop("File doesn't exist!")
     env_values <- sapply(names(env_vars), Sys.getenv)
     do.call(Sys.setenv, env_vars)
-#     cmd <- sprintf("R CMD BATCH --no-save --no-restore '%s'", file)
-#     res <- system(cmd)
-    res <- 0
-    source(file, local = TRUE, verbose = FALSE, print.eval = FALSE, echo = FALSE)
+    cmd <- sprintf("R CMD BATCH --no-save --no-restore '%s'", file)
+    res <- system(cmd)
     do.call(Sys.setenv, as.list(env_values))
-    if (res != 0 && verbose) {
-        message(paste("File", basename(file), "failed"))
-        print(tail(readLines(paste(getwd(), "/", basename(file), "out", sep="")), 10))
-    }
     res
 }
 
@@ -55,14 +49,6 @@ all_tests <-  function(exec_dir = tempdir(),
     invisible(runner(test_dir, file_patterns, exec_dir, verbose = verbose))
 }
 
-rprofile_capture <- '
-.First <- function() {
-    library(testr)
-    library(utils)
-    builtin_capture()
-}
-'
-
 #' @title Run R test from a folder
 #' 
 #' This function runs R script located in folder and gets results
@@ -71,7 +57,7 @@ rprofile_capture <- '
 #' @param verbose if to print additional information (default \code{TRUE})
 #'
 runner <- function(test_dir, file_patterns = ".*",
-                   exec_dir = tempdir(), verbose = testr_options("verbose")) {
+                   exec_dir = tempdir(), rprofile, verbose = testr_options("verbose")) {
     unlink(exec_dir, recursive = TRUE, force = TRUE)
     dir.create(exec_dir)
     files <- list.files(test_dir, pattern = "\\.[rR]$", full.names = TRUE)
@@ -80,7 +66,65 @@ runner <- function(test_dir, file_patterns = ".*",
     files <- files[ind]
     files <- sapply(files, normalizePath)
     old_wd <- setwd(exec_dir)
-    writeLines(rprofile_capture, ".Rprofile")
+    writeLines(testr_options("rprofile"), ".Rprofile")
     on.exit(setwd(old_wd))
-    sapply(files, rcmd, env_vars = list("SRCDIR"=test_dir), verbose = verbose)
+    res <- parallel::mclapply(files, rcmd, env_vars = list("SRCDIR"=test_dir), verbose = verbose, mc.cores = 8)
+    res
+}
+
+rprofile_check_5 <- '
+.First <- function() {
+library(testr)
+library(utils)
+bl <- testr:::blacklist
+builtin_capture()
+i <- %s
+for (j in ((i - 1) * 5 + 1):(i * 5))
+    decorate(bl[j])
+}'
+
+rprofile_check_single <- '
+.First <- function() {
+library(testr)
+library(utils)
+bl <- testr:::blacklist
+builtin_capture()
+i <- %s
+decorate(bl[i])
+}'
+
+bl_filter <- function() {
+    out_folder <- "/Users/romantsegelskyi/Programming/rstats/testr/blacklist_filter"
+    unlink(out_folder, recursive = TRUE, force = TRUE)
+    log_path <- file.path("logs")
+    unlink(log_path, recursive = TRUE, force = TRUE)
+    dir.create(out_folder)
+    dir.create(log_path)
+    for (i in 1:ceil(length(blacklist) / 5)) {
+        file.remove(list.files(out_folder, full.names = TRUE, pattern = "*\\.Rout"))
+        print(testr:::blacklist[((i - 1) * 5 + 1):(i * 5)])
+        rprofile <- sprintf(rprofile_check_5, i)
+        testr_options("rprofile", rprofile)
+        res <- reg_tests(out_folder)
+        if (any(res == 1)) {
+            cat(sprintf("===for %s failed\n", i))
+            cat("===Running separately for each function\n")
+            for (j in ((i - 1) * 5 + 1):(i * 5)) {
+                file.remove(list.files(out_folder, full.names = TRUE, pattern = "*\\.Rout"))
+                rprofile <- sprintf(rprofile_check_single, j)
+                testr_options("rprofile", rprofile)
+                cat(sprintf("\t+++Trying %s - ", blacklist[j]))
+                res <- reg_tests("blacklist_filter")
+                if (any(res == 1)) {
+                    cat("failed\n")
+                    errored_out <- paste(names(which(res == 1)), "out", sep="")
+                    dir.create(sprintf("%s/log_%s", log_path, blacklist[j]), recursive = TRUE)
+                    sapply(errored_out,
+                           function(x) file.rename(x, sprintf("%s/log_%s/%s", log_path, blacklist[j], basename(x))))
+                } else {
+                    cat("successful\n")
+                }
+            }
+        }
+    }
 }
