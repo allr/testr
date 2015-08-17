@@ -69,6 +69,13 @@ runner <- function(test_dir, file_patterns = ".*",
     writeLines(testr_options("rprofile"), ".Rprofile")
     on.exit(setwd(old_wd))
     res <- parallel::mclapply(files, rcmd, env_vars = list("SRCDIR"=test_dir), verbose = verbose, mc.cores = 8)
+    if (any(res == 1)) {
+        failed <- which(res == 1)
+        lapply(names(failed), function(x) { 
+            cat("===File -", x, "\n")
+            print(tail(readLines(paste(basename(x), "out", sep=""))))
+        })
+    }
     res
 }
 
