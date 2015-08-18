@@ -22,7 +22,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "library", # something problematic
                "standardGeneric", "identity","missing",
                "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible",
-               "sprintf", "parse", "paste",
+               "sprintf", "parse", "paste", "eval",
                "textConnection", "require", "with", "get", "sink", "eval",
                "evalq", "deparse", "exists", "environment", "conditionMessage.condition", "simpleError", "as.name",
                "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default",
