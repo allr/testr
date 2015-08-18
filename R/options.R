@@ -42,7 +42,7 @@ blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{
                "length<-", "call", "attr<-", "switch", "log2", "nargs", "as.numeric",
                "attributes", "attributes<-", "is.language",
                # errors with trace
-               "match.call", ".doTrace", "tracingState", "traceback", "trace",
+               "match.call", ".doTrace", "tracingState", "traceback", "trace", "get0",
                "forceAndCall" # added in R.3.2.1
 )
 
