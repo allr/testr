@@ -13,11 +13,16 @@ decorate <- function(func, package) {
     }
     if (missing(package)){
         package <- utils::find(func)
-        if (length(package) == 0)
-            stop(sprintf("Can't determine a package for function '%s'. If function is hidden, use package param",
-                         func))
-        if (length(package) > 1)
-            stop("Function found in multiple packages, supply the exact name")
+        if (length(package) == 0) {
+            warning(sprintf("Can't determine a package for function '%s'. If function is hidden, use package param",
+                            func))
+            return(invisible())
+        } else {
+            if (length(package) > 1) {
+                warning("Function found in multiple packages, supply the exact name")
+                return(invisible())
+            }
+        }
         package <- substr(package, 9, nchar(package))
     }
     if (is_s3_generic(func, getNamespace(package))) {

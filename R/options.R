@@ -12,16 +12,37 @@ kValSPrefix <- "vsym: "
 kFuncPrefix <- "func: "
 kArgsPrefix <- "argv: "
 
-blacklist <- c(".GlobalEnv", ".Internal", ".Primitive", "substitute",
-               ".Machine", "on.exit",
-               "withCallingHandlers", "quote",
-               "c", "NextMethod", "UseMethod", "standardGeneric", "identity","missing",
-               "sys.call", "withVisible", "findRestarts", "local", "withRestarts", "formals",
-               ".C", ".Call", ".External", ".External.graphics", ".External2", ".Fortran", ".Call.graphics",
-               "length", "as.environment",
-               "length<-", "call", "switch", "nargs", "as.numeric",
+blacklist <- c("builtins", "rm", "source", "~", "<-", "$", "<<-", "&&", "||" ,"{", "(",
+               ".GlobalEnv", ".Internal", ".Primitive", "::", ":::", "substitute", "list",
+               ".Machine", "on.exit", "debug", "undebug",
+               "withCallingHandlers", "quote", ".signalSimpleWarning", "..getNamespace", ".External", ".External2",
+               "c", "try", "NextMethod", "UseMethod",# no idea why
+               "setwd", # path of capture files are relative to WD, change that
+               "rawConnection", ".handleSimpleError", "tryCatch",
+               "library", # something problematic
+               "standardGeneric", "identity","missing",
+               "options", "ls", "sys.call", "stdout", "do.call", "cat", "withVisible",
+               "sprintf", "parse", "paste",
+               "textConnection", "require", "with", "get", "sink", "eval",
+               "evalq", "deparse", "exists", "environment", "conditionMessage.condition", "simpleError", "as.name",
+               "attach", "attachNamespace", "lazyLoadDBexec", "lazyLoad", "lazyLoadDBfetch", "as.null.default",
+               "asNamespace", "contributors", "close.connection",
+               "close.srcfile", "close.srcfilealias", "computeRestarts", "findRestarts", "bindingIsLocked",
+               "browserCondition", "browserSetDebug", "browserText", "closeAllConnections",
+               "debugonce", "callCC", "delayedAssign", "detach", "browser", "clearPushBack", ".row_names_info",
+               ".deparseOpts", ".makeMessage", ".libPaths", "%in%",
+               "getNamespace", "isNamespace", "stdin", "stderr", "stop",
+               "stopifnot", "structure", "local", "merge.data.frame",
+               "match", "match.arg", "typeof", "conditionCall.condition", "withRestarts", "formals",
+               # for .Primitive and functions without body
+               ".C", ".Call", ".External", ".External.graphics", ".External2", ".Fortran",
+               "as.call", "names<-", "names", "length",
+               "is.pairlist", "is.null", "is.list", "invisible", "class<-", "class",
+               "baseenv", "attributes<-", "as.environment", "as.character", ".Call.graphics",
+               "length<-", "call", "attr<-", "switch", "log2", "nargs", "as.numeric",
+               "attributes", "attributes<-", "is.language",
                # errors with trace
-               ".doTrace", "tracingState", "trace",
+               "match.call", ".doTrace", "tracingState", "traceback", "trace",
                "forceAndCall" # added in R.3.2.1
 )
 
