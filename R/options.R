@@ -57,6 +57,7 @@ primitive_generics_fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
         "capture_file_size" = 50 * 1000 * 1000,
         "capture.arguments" = TRUE,
         "IO"=TRUE,
+        "parallel_test"=TRUE,
         "rprofile"='
 .First <- function() {
         library(testr)

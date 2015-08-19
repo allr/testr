@@ -26,7 +26,8 @@ rcmd <- function(file, env_vars = NULL, verbose = testr_options("verbose")) {
 #' @param verbose if to print additional information (default \code{TRUE})
 #' @export
 reg_tests <-  function(exec_dir = tempdir(),
-                       file_patterns = ".*", verbose = testr_options("verbose")) {
+                       file_patterns = ".*", verbose = testr_options("verbose"),
+                       parallel_test = testr_options("parallel_test")) {
     test_dir <- normalizePath(switch(basename(getwd()),
                                      "tests" = "reg-tests",
                                      "testr" = "inst/tests/reg-tests",
@@ -41,7 +42,8 @@ reg_tests <-  function(exec_dir = tempdir(),
 #' @param verbose if to print additional information (default \code{TRUE})
 #' @export
 all_tests <-  function(exec_dir = tempdir(),
-                       file_patterns = ".*", verbose = testr_options("verbose")) {
+                       file_patterns = ".*", verbose = testr_options("verbose"),
+                       parallel_test = testr_options("parallel_test")) {
     test_dir <- normalizePath(switch(basename(getwd()),
                                      "tests" = "r-tests",
                                      "testr" = "inst/tests/r-tests",
@@ -57,7 +59,8 @@ all_tests <-  function(exec_dir = tempdir(),
 #' @param verbose if to print additional information (default \code{TRUE})
 #'
 runner <- function(test_dir, file_patterns = ".*",
-                   exec_dir = tempdir(), rprofile, verbose = testr_options("verbose")) {
+                   exec_dir = tempdir(), rprofile, verbose = testr_options("verbose"),
+                   parallel_test = testr_options("parallel_test")) {
     unlink(exec_dir, recursive = TRUE, force = TRUE)
     dir.create(exec_dir)
     files <- list.files(test_dir, pattern = "\\.[rR]$", full.names = TRUE)
@@ -68,7 +71,11 @@ runner <- function(test_dir, file_patterns = ".*",
     old_wd <- setwd(exec_dir)
     writeLines(testr_options("rprofile"), ".Rprofile")
     on.exit(setwd(old_wd))
-    res <- parallel::mclapply(files, rcmd, env_vars = list("SRCDIR"=test_dir), verbose = verbose, mc.cores = 8)
+    if (parallel_test) {
+        res <- parallel::mclapply(files, rcmd, env_vars = list("SRCDIR"=test_dir), verbose = verbose, mc.cores = 8)
+    } else {
+        res <- sapply(files, rcmd, env_vars = list("SRCDIR"=test_dir), verbose = verbose)
+    }
     if (any(res == 1)) {
         failed <- which(res == 1)
         lapply(names(failed), function(x) { 
