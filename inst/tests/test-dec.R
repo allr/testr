@@ -24,7 +24,7 @@ test_that('Can decorate functions', {
             return(FALSE)
         obj <- get(x, envir = getNamespace('base'))
         if (is.function(obj))
-            class(obj) == "functionWithTrace"
+            class(obj) == "functionWithTrace" && x != "library"
         else
             FALSE
     })
