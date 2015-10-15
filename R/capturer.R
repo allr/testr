@@ -9,6 +9,9 @@
 #' @seealso write_capture
 #'
 decorate <- function(func, package, verbose = testr_options("verbose")) {
+    if (identical(class(library), "function")) {
+        trace(library, exit=quote(testr:::refresh_decoration(package)), print = FALSE)
+    }
     if(class(func) != "character" || (!missing(package) && class(package) != "character")){
         stop("wrong argument type!")
     }
@@ -152,4 +155,11 @@ builtin_capture <- function(internal = FALSE, functions = builtins(internal), in
 clear_decoration <- function() {
     for (fname in ls(.decorated, all.names = TRUE))
         undecorate(fname)
+}
+
+refresh_decoration <- function(pkg) {
+    ienv <- getImportsEnv(pkg)
+    need_redecoration <- intersect(ls(ienv), names(.decorated))
+    sapply(need_redecoration, undecorate)
+    sapply(need_redecoration, decorate)
 }
