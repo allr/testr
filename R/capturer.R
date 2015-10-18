@@ -11,7 +11,7 @@
 decorate <- function(func, package, verbose = testr_options("verbose")) {
     if (identical(class(library), "function")) {
         suppressMessages(trace(library,
-                               exit=quote(testr:::refresh_decoration(package)),
+                               exit=quote(if (!missing(package)) testr:::refresh_decoration(package)),
                                print = FALSE))
     }
     if(class(func) != "character" || (!missing(package) && class(package) != "character")){
