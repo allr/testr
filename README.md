@@ -1,13 +1,15 @@
 testR - test case generation for R
 =====
 
-TestR implementation in R. It provides a framework for unit tests generation from source code and for test execution, and filtering of test cases based on C code coverage using `gcov` and R code coverage using `rcov` (https://github.com/RomanTsegelskyi/rcov).
+[![Build Status](https://travis-ci.org/allr/testr.svg?branch=master)](https://travis-ci.org/allr/testr) 
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/allr/testr?branch=master&svg=true)](https://ci.appveyor.com/project/allr/testr)
+[![Coverage Status](http://codecov.io/github/allr/testr/coverage.svg?branch=master)](http://codecov.io/github/allr/testr?branch=master) 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/testr)](http://cran.r-project.org/package=testr)
+
+TestR is a framework for unit tests generation from source code and for test execution, and filtering of test cases based on C code coverage using `gcov` and R code coverage using `rcov` (https://github.com/allr/rcov).
 
 This is the testR-py reimplementation and extension in R language. For the older testR version written in Python 3, please see the renamed testr-py repo
 on github: https://github.com/allr/testr-py
-
-[![Travis-CI Build Status](https://travis-ci.org/allr/testr.png?branch=master)](https://travis-ci.org/allr/testr)
-[![Coverage Status](https://coveralls.io/repos/allr/testr/badge.svg?branch=master)](https://coveralls.io/r/allr/testr?branch=master)
 
 # Installation
 Even thought the development of the package started sometime ago it is still rather experimental and no available from CRAN release yet. However, that is one of the near future plans to have a stable version and release it through CRAN.
@@ -130,7 +132,7 @@ Filtering generated test cases
 
 One way to assess the completeness of the test set is to measure the code coverage rate. TestR includes a coverage reporter which 
 supports generating various forms of summary of C file coverage by processing the output of `gcov`. 
-Moreover `testR` uses [rcov](https://github.com/RomanTsegelskyi/rcov) for reporting R code coverage. This section briefly explains
+Moreover `testR` uses [rcov](https://github.com/allr/rcov) for reporting R code coverage. This section briefly explains
 how to use the reporter and filtering of test cases based on coverage.
 
 Instrument GNU-R with GCOV
