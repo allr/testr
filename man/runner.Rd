@@ -6,8 +6,9 @@
 
 This function runs R script located in folder and gets results}
 \usage{
-runner(test_dir, file_patterns = ".*", exec_dir = tempdir(),
-  verbose = testr_options("verbose"))
+runner(test_dir, file_patterns, file_indexes, exec_dir = tempdir(), rprofile,
+  verbose = testr_options("verbose"),
+  parallel_test = testr_options("parallel_tests"))
 }
 \arguments{
 \item{test_dir}{directory with R scripts}

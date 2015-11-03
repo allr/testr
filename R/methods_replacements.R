@@ -276,9 +276,11 @@ getImportsEnv <- function(pkg) {
     }
     NULL
 }
+
 updateInImportsEnv <- function(what, newFun, importingPkg) {
     where = getImportsEnv(importingPkg)
     if (!is.null(where) && (what %in% names(where))) {
         methods:::.assignOverBinding(what, newFun, where, FALSE)
     }
 }
+

@@ -6,8 +6,9 @@
 
 Run test that are available with make test-Reg}
 \usage{
-reg_tests(exec_dir = tempdir(), file_patterns = ".*",
-  verbose = testr_options("verbose"))
+reg_tests(exec_dir = tempdir(), file_patterns, file_indexes,
+  verbose = testr_options("verbose"),
+  parallel_test = testr_options("parallel_tests"))
 }
 \arguments{
 \item{exec_dir}{directory where command will be executed}

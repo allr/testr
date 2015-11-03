@@ -1,6 +1,7 @@
 ## general (temporary) storage for testr's stuff
 cache <- new.env()
 cache$capture_num <- 0
+cache$trace_replaced <- FALSE
 
 cache$arguments <- list()
 .decorated <- new.env()
@@ -69,11 +70,11 @@ primitive_generics_fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
 }'
     ))
     ## replace functions connected to trace with temporary versions
-    assign(".TraceWithMethods", as.environment("package:methods"))
-    unlockBinding(".TraceWithMethods", getNamespace("methods"))
-    environment(TraceWithMethods) <- getNamespace("methods")
-    assign(".TraceWithMethods", TraceWithMethods, getNamespace("methods"))
-    lockBinding(".TraceWithMethods", getNamespace("methods"))
+    # assign(".TraceWithMethods", as.environment("package:methods"))
+    # unlockBinding(".TraceWithMethods", getNamespace("methods"))
+    # environment(TraceWithMethods) <- getNamespace("methods")
+    # assign(".TraceWithMethods", TraceWithMethods, getNamespace("methods"))
+    # lockBinding(".TraceWithMethods", getNamespace("methods"))
 }
 
 #' Querying/setting testr option

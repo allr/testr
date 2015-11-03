@@ -19,6 +19,7 @@ SEXP GetArgs(SEXP dotsE){
     if (missing(nameSym, dotsE)) {
       continue;
     }
+    
 //    args[name] = R_forcePromise(unevaluatedArg);
     if (unevaluatedArg != R_UnboundValue && TYPEOF(unevaluatedArg) == PROMSXP) {
       SEXP prcode = PRCODE(unevaluatedArg);

@@ -6,10 +6,12 @@
 
 Reset previously decorate function}
 \usage{
-undecorate(func)
+undecorate(func, verbose = testr_options("verbose"))
 }
 \arguments{
 \item{func}{function name as a character string}
+
+\item{verbose}{if to print additional output}
 }
 \description{
 undecorate function

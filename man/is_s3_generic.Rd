@@ -6,7 +6,7 @@
 
 Determine if function has a call to UseMethod. In that case there is no need to capture it.}
 \usage{
-is_s3_generic(fname, env = parent.frame())
+is_s3_generic(fname, env = .GlobalEnv)
 }
 \arguments{
 \item{fname}{function name}

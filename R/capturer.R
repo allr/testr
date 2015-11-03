@@ -9,10 +9,14 @@
 #' @seealso write_capture
 #'
 decorate <- function(func, package, verbose = testr_options("verbose")) {
+    print(func)
     if (identical(class(library), "function")) {
         suppressMessages(trace(library,
                                exit=quote(if (!missing(package)) testr:::refresh_decoration(package)),
                                print = FALSE))
+    }
+    if (!cache$trace_replaced) {
+        replace_trace()
     }
     if(class(func) != "character" || (!missing(package) && class(package) != "character")){
         stop("wrong argument type!")

@@ -6,8 +6,9 @@
 
 Run test that are available with make test-all-devel}
 \usage{
-all_tests(exec_dir = tempdir(), file_patterns = ".*",
-  verbose = testr_options("verbose"))
+all_tests(exec_dir = tempdir(), file_patterns, file_indexes,
+  verbose = testr_options("verbose"),
+  parallel_test = testr_options("parallel_tests"))
 }
 \arguments{
 \item{exec_dir}{directory where command will be executed}

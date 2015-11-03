@@ -7,12 +7,14 @@
 This function is respinsible for writing down capture information for decorated function calls.
 Replaces the function by decorated function in the global environment}
 \usage{
-decorate(func, package)
+decorate(func, package, verbose = testr_options("verbose"))
 }
 \arguments{
 \item{func}{function name as a character string}
 
 \item{package}{name of package to look for function}
+
+\item{verbose}{if to print additional output}
 }
 \description{
 Decorates function to capture calls and return values
