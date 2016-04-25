@@ -2,12 +2,11 @@
 cache <- new.env()
 cache$capture_num <- 0
 cache$trace_replaced <- FALSE
+cache$output.dir <- NA
 
 cache$arguments <- list()
 .decorated <- new.env()
 
-kCaptureFile <- "capture"
-kCaptureFolder <- "capture"
 kSymbPrefix <- "symb: "
 kValSPrefix <- "vsym: "
 kFuncPrefix <- "func: "
@@ -38,20 +37,19 @@ keywords <- c("while", "return", "repeat", "next", "if", "function", "for", "bre
 operators <- c("(", ":", "%sep%", "[", "[[", "$", "@", "=", "[<-",
                "[[<-", "$<-", "@<-", "+", "-", "*", "/",
                "^", "%%", "%*%", "%/%", "<", "<=", "==",
-               "!=", ">=", ">", "|", "||", "&", "!", "~", 
+               "!=", ">=", ">", "|", "||", "&", "!", "~",
                "<-", "$", "<<-", "&&", "||" ,"{", "(")
 
 primitive_generics_fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expression", "attr")
 
 .onLoad <- function(libname, pkgname) {
-    if (!file.exists(kCaptureFolder) || !file.info(kCaptureFolder)$isdir)
-        dir.create(kCaptureFolder)
     # make sure temp_dir is empty
     cache$temp_dir <- tempdir()
     clean_temp()
-    cache$trace_path <-  file.path(getwd(), kCaptureFolder)
     ## testr settings
     options("testr" = list(
+        "capture.folder" = "capture",
+        "capture.file" = "capture",
         "verbose" = FALSE,
         "display_only_errors" = FALSE,
         "stop_on_error" = FALSE,
@@ -89,7 +87,7 @@ primitive_generics_fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
 #' @param o option name (string). See below.
 #' @param value value to assign (optional)
 #' @export
-#' 
+#'
 testr_options <- function(o, value) {
     res <- getOption("testr")
     if (missing(value)) {
@@ -103,6 +101,15 @@ testr_options <- function(o, value) {
         if (!o %in% names(res))
             stop(paste("Invalid option name:", o))
         res[[o]] <- value
+        # if we are beginning to capture arguments, make sure the selected capture directory exists
+        if (o == "capture.arguments" && value) {
+            if (!file.exists(res[["capture.folder"]])) {
+                dir.create(res[["capture.folder"]])
+            } else if (!file.info(res[["capture.folder"]])$isdir) {
+                stop("Capture folder cannot be created")
+            }
+            cache$trace_path <- file.path(getwd(), res[["capture.folder"]])
+        }
         options("testr" = res)
     }
 }

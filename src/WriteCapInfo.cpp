@@ -36,8 +36,8 @@ void WriteCapInfo_cpp (CharacterVector fname, SEXP args_env) {
     if (as<bool>(options("IO"))) {
         string traceFile = as<string>(cache.get("trace_path"));
         traceFile += "/";
-        traceFile += as<string>(testr.get("kCaptureFile"));
-        traceFile += "."; 
+        traceFile += as<string>(options("capture.file"));
+        traceFile += ".";
         char numstr[21];
         sprintf(numstr, "%d", captureFileNumber);
         traceFile += numstr;

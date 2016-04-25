@@ -1,15 +1,14 @@
-#' @title Decorates function to capture calls and return values 
-#' 
+#' @title Decorates function to capture calls and return values
+#'
 #' This function is respinsible for writing down capture information for decorated function calls.
 #' Replaces the function by decorated function in the global environment
 #' @param func function name as a character string
 #' @param package name of package to look for function
 #' @param verbose if to print additional output
-#' @export 
+#' @export
 #' @seealso write_capture
 #'
-decorate <- function(func, package, verbose = testr_options("verbose")) {
-    print(func)
+decorate <- function(func, package, verbose) {
     if (identical(class(library), "function")) {
         suppressMessages(trace(library,
                                exit=quote(if (!missing(package)) testr:::refresh_decoration(package)),
@@ -21,7 +20,7 @@ decorate <- function(func, package, verbose = testr_options("verbose")) {
     if(class(func) != "character" || (!missing(package) && class(package) != "character")){
         stop("wrong argument type!")
     }
-    if (missing(package)){
+    if (is.na(package)){
         package <- utils::find(func)
         if (length(package) == 0) {
             warning(sprintf("Can't determine a package for function '%s'. If function is hidden, use package param",
@@ -58,14 +57,14 @@ decorate <- function(func, package, verbose = testr_options("verbose")) {
 }
 
 #' @title undecorate function
-#' 
+#'
 #' Reset previously decorate function
 #' @param func function name as a character string
 #' @param verbose if to print additional output
-#' @export 
+#' @export
 #' @seealso write_capture Decorate
 #'
-undecorate <- function(func, verbose = testr_options("verbose")) {
+undecorate <- function(func, verbose) {
     if (class(func) == "character"){
         fname <- func
     } else {
@@ -88,8 +87,8 @@ undecorate <- function(func, verbose = testr_options("verbose")) {
     rm(list=c(func), envir=.decorated)
 }
 
-#' @title Write down capture information 
-#' 
+#' @title Write down capture information
+#'
 #' This function is respinsible for writing down capture information for decorated function calls.
 #' @param fname function name
 #' @param args.env environment to read arguments to function call from
@@ -97,7 +96,7 @@ undecorate <- function(func, verbose = testr_options("verbose")) {
 #' @useDynLib testr
 #' @importFrom Rcpp evalCpp
 #' @export
-#' 
+#'
 write_capture <- function(fname, args.env){
     if (!testr_options("capture.arguments"))
         return(NULL)
@@ -105,22 +104,26 @@ write_capture <- function(fname, args.env){
 }
 
 #' @title Setup information capturing for list of function
-#' 
+#'
 #' This function is respinsible for setting up capturing for functions
-#' 
+#'
 #' @param flist function or list of functions to turn on capturing for. List should be only as character.
 #' @seealso Decorate
 #' @export
-setup_capture <- function(flist, package){
-    testr_options("capture.arguments", FALSE)
+setup_capture <- function(flist, package, verbose) {
+    old <- testr_options("capture.arguments")
+    if (old)
+        testr_options("capture.arguments", FALSE)
     for (func in flist)
         if (eligible_capture(func))
-            decorate(func, package)
-    testr_options("capture.arguments", TRUE)
+            # TODO perhaps we want to put base in because these are builtins?
+            decorate(func, NA_character_, verbose)
+    if (old)
+        testr_options("capture.arguments", TRUE)
 }
 
 #' @title Check if function is eligible for wrapping to capture arguments and return values
-#' 
+#'
 #' This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
 #' This is an internal function and is supposed to be used in setup_capture
 #' @param func function name to check
@@ -137,37 +140,22 @@ eligible_capture <- function(func){
             && !func %in% primitive_generics_fails)
 }
 
-#' @title Setup capture of builtin functions
-#' 
-#' Sets up capturing of builtin functions
-#' @param internal wheather only internals should be captured, or all builtins
-#' @param functions list of functions to be decorate
-#' @param indexes specific indexes from functions vector
-#' @param package
-#' @seealso setup_capture, Decorate
-#' @export
-builtin_capture <- function(internal = FALSE, functions = builtins(internal), indexes, package){
-    if (missing(indexes))
-        setup_capture(functions, package)
-    else
-        setup_capture(functions[indexes], package)
-}
 
 #' @title Clear decoration
-#' 
+#'
 #' Clear anything previously decorate
 #' @seealso undecorate
 #' @export
-clear_decoration <- function() {
+clear_decoration <- function(verbose) {
     for (fname in ls(.decorated, all.names = TRUE))
-        undecorate(fname)
+        undecorate(fname, verbose = verbose)
 }
 
 #' @title Refresh decoration
-#' 
+#'
 #' In cases when a function that is being traced is used through imports namespace
 #' by a package that is being loaded, the package won't get the correct copy, which results in
-#' the information loss. This function is hooked up to the library, to be run upon exist and 
+#' the information loss. This function is hooked up to the library, to be run upon exist and
 #' check what functions might need redecoration, to propagate correct version to imports namespace.
 refresh_decoration <- function(pkg) {
     ienv <- getImportsEnv(pkg)
