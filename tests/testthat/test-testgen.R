@@ -9,7 +9,7 @@ test_that('Generate Abbreviate', {
     expect_true(file.exists("abbreviate"))
     expect_true(file.info("abbreviate")$isdir)
     expect_equal(length(list.files("abbreviate")), 2) # one is bad.args file
-    #run()
+    run()
     unlink("abbreviate", recursive = T)
 })
 
@@ -19,7 +19,6 @@ test_that('Generate Warnings/Errors', {
     expect_true(file.exists("we"))
     expect_true(file.info("we")$isdir)
     expect_equal(length(list.files("we",recursive = T)), 3) # one is bad.args file
-    expect_true(run_tests("we"))
-    #run()
+    run()
     unlink("we", recursive = T)
 })

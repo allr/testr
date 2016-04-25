@@ -47,8 +47,8 @@ stop_capture_all <- function(verbose = testr_options("verbose")) {
 #'
 #' @param output_dir Directory to which the tests should be generated.
 #' @param root Directory with the capture information, defaults to capture.
-#' @param timed TRUE if the tests result depends on time
-#' @param vebose TRUE to display additional information
+#' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
+#' @param vebose TRUE to display additional information.
 generate <- function(output_dir, root = testr_options("capture.folder"), timed = F, verbose = testr_options("verbose")) {
     cache$output.dir <- output_dir
     test_gen(root, output_dir, timed, verbose = verbose);
@@ -65,15 +65,24 @@ filter <- function(output_dir) {
 #'
 #' @param test_dir Directory in which the tests are located. If empty, the last output directory for generate or filter functions is assumed.
 #' @param verbose TRUE to display additional information.
+#' @return TRUE if all tests passed, FALSE otherwise.
 run <- function(test_dir, verbose = testr_options("verbose")) {
     if (missing(test_dir)) {
         test_dir <- cache$output.dir
         if(is.na(test_dir))
             stop("Test directory must be specified, no testcases it cache yet")
     }
+    result = TRUE
     # now we have the directory in which the tests are located, run testthat on them
-    testthat::test_dir(output_dir)
+    library(testthat, quietly = TRUE)
+    tryCatch(testthat::test_dir(test_dir), error=function(x) {
+        result <<- FALSE
+        invisible(x)
+    })
+    result
 }
+
+# helpers -------------------------------------------------------------------------------------------------------------
 
 
 
