@@ -1,5 +1,0 @@
-linters: with_defaults(line_length_linter(120))
-exclusions: c(as.list(list.files("filtered-test-suite", full.names = TRUE, pattern=".*\\.R$", recursive = TRUE)),
-        as.list(list.files("ftestsuite", full.names = TRUE, pattern=".*\\.R$", recursive = TRUE)),
-        as.list(list.files("inst/tests/reg-tests/", full.names = TRUE, pattern=".*\\.R$",recursive = TRUE)),
-        as.list(list.files("inst/tests/r-tests/", full.names = TRUE, pattern=".*\\.R$", recursive = TRUE)))
