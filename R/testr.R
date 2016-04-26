@@ -6,6 +6,7 @@
 #'
 #' @param ... List of functions to capture, either character literals, or symbols
 #' @param verbose TRUE to display additional information
+#' @export
 capture <- function(..., verbose = testr_options("verbose")) {
     old <- testr_options("capture.arguments")
     if (old)
@@ -21,6 +22,7 @@ capture <- function(..., verbose = testr_options("verbose")) {
 #'
 #' @param internal TRUE if only internal functions should be captured
 #' @param verbose TRUE to display additional information
+#' @export
 capture_builtins <- function(internal = FALSE, verbose = testr_options("verbose")) {
     functions <- builtins(internal)
     setup_capture(functions, verbose = verbose)
@@ -30,6 +32,7 @@ capture_builtins <- function(internal = FALSE, verbose = testr_options("verbose"
 #'
 #' @param ... Functions whose capture is to be dropped (uses the same format as capture)
 #' @param verbose TRUE to display additional information
+#' @export
 stop_capture <- function(..., verbose = testr_options("verbose")) {
     for (f in parseFunctionNames(...))
         undecorate(f$name, f$package, verbose = verbose)
@@ -39,6 +42,7 @@ stop_capture <- function(..., verbose = testr_options("verbose")) {
 #' @title Stops capturing all currently captured functions.
 #'
 #' @param verbose TRUE to display additional information
+#' @export
 stop_capture_all <- function(verbose = testr_options("verbose")) {
     clear_decoration(verbose = verbose)
 }
@@ -49,13 +53,21 @@ stop_capture_all <- function(verbose = testr_options("verbose")) {
 #' @param root Directory with the capture information, defaults to capture.
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
 #' @param vebose TRUE to display additional information.
+#' @export
 generate <- function(output_dir, root = testr_options("capture.folder"), timed = F, verbose = testr_options("verbose")) {
     cache$output.dir <- output_dir
     test_gen(root, output_dir, timed, verbose = verbose);
 }
 
 #' @title Filters the generated tests so that only tests adding code coverage will be kept.
+#'
+#' Uses code coverage to remove tests... At least two, maybe three types of code coverage:
+#'
+#' - rcov for getting coverage of R code (here we need to annotate )
+#'
+#'
 filter <- function(output_dir) {
+    stop("NOT IMPLEMENTED")
 
 }
 
@@ -66,6 +78,7 @@ filter <- function(output_dir) {
 #' @param test_dir Directory in which the tests are located. If empty, the last output directory for generate or filter functions is assumed.
 #' @param verbose TRUE to display additional information.
 #' @return TRUE if all tests passed, FALSE otherwise.
+#' @export
 run <- function(test_dir, verbose = testr_options("verbose")) {
     if (missing(test_dir)) {
         test_dir <- cache$output.dir
@@ -75,18 +88,81 @@ run <- function(test_dir, verbose = testr_options("verbose")) {
     result = TRUE
     # now we have the directory in which the tests are located, run testthat on them
     library(testthat, quietly = TRUE)
-    tryCatch(testthat::test_dir(test_dir), error=function(x) {
-        result <<- FALSE
-        invisible(x)
-    })
+    # for all folders in the file
+    dirs <- list.files(test_dir, include.dirs = T, no.. = T)
+    for (d in dirs) {
+        d <- file.path(test_dir, d, fsep = .Platform$file.sep)
+        if (file.info(d)$isdir) {
+            tryCatch(testthat::test_dir(d), error=function(x) {
+                result <<- FALSE
+                x #invisible(x)
+            })
+        }
+    }
     result
 }
 
 # helpers -------------------------------------------------------------------------------------------------------------
 
+# TODO these are also in evaluation.R, perhaps evaluation.R should die and its non-api should move to helpers, or someplace else?
+
+#' @title Generates tests from given code and specific captured functions
+#'
+#'
+#' @param code Code from which the tests will be generated.
+#' @param output_dir Directory to which the tests will be generated.
+#' @param ... functions to be captured during the code execution (same syntax as capture function)
+#' @export
+testr_code <- function(code, output_dir, ...) {
+    code <- substitute(code)
+    capture(...)
+    eval(code)
+    stop_capture_all()
+    generate(output_dir)
+    invisible()
+}
+
+#' @title Generates tests by running given source file.
+#'
+#' @param src.root Source file to be executed and captured, or directory containing multiple files.
+#' @param output_dir Directory to which the tests will be generated.
+#' @param ... Functions to be tested.
+#' @export
+testr_source <- function(src.root, output_dir, ...) {
+    if (!file.exists(src.root))
+        stop("Supplied source does not exist")
+    if (file.info(src.root)$isdir)
+        src.root <- list.files(src.root, pattern = "\\[rR]", recursive = T, full.names = T)
+    capture(...)
+    for (src.file in src.root)
+        source(src.file, local = T)
+    stop_capture_all()
+    generate(output_dir)
+    invisible()
+
+}
 
 
+# ideally this sholuld use existing downloaded package
+testr_package <- function() {
 
+}
+
+# this should download the package from bioconductor
+testr_bioconductor <- function() {
+
+
+}
+
+# this should download the package from cran
+testr_cran <- function() {
+
+}
+
+# this should download the package from github
+test_github <- function() {
+
+}
 
 # anything below should not be exported -------------------------------------------------------------------------------
 
