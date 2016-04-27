@@ -52,7 +52,7 @@ stop_capture_all <- function(verbose = testr_options("verbose")) {
 #' @param output_dir Directory to which the tests should be generated.
 #' @param root Directory with the capture information, defaults to capture.
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
-#' @param vebose TRUE to display additional information.
+#' @param verbose TRUE to display additional information.
 #' @export
 generate <- function(output_dir, root = testr_options("capture.folder"), timed = F, verbose = testr_options("verbose")) {
     cache$output.dir <- output_dir
