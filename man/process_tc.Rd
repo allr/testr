@@ -4,7 +4,7 @@
 \alias{process_tc}
 \title{Process Test Case file
 
-This function is respinsible for splitting a file into single test cases and filtering out 
+This function is respinsible for splitting a file into single test cases and filtering out
 the unneeded file based or R and C code coverage}
 \usage{
 process_tc(tc.file, tc_result_root, tc.db = NULL, r.home = NULL,

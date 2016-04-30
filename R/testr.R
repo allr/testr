@@ -202,5 +202,6 @@ parseFunctionNames <- function(...) {
         })
         i <- i + 1
     }
+    names(result) <- sapply(result, `[`, "name")
     result
 }

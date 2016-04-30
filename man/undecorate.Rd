@@ -6,12 +6,12 @@
 
 Reset previously decorate function}
 \usage{
-undecorate(fname, verbose = testr_options("verbose"))
+undecorate(func, verbose)
 }
 \arguments{
-\item{verbose}{if to print additional output}
+\item{func}{function name as a character string}
 
-\item{func}{function name as a character string or name}
+\item{verbose}{if to print additional output}
 }
 \seealso{
 write_capture Decorate

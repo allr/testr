@@ -18,5 +18,5 @@ Suggests:
     knitr,
     rmarkdown
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.0
 VignetteBuilder: knitr

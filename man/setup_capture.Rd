@@ -6,7 +6,7 @@
 
 This function is respinsible for setting up capturing for functions}
 \usage{
-setup_capture(flist, package)
+setup_capture(flist, package, verbose)
 }
 \arguments{
 \item{flist}{function or list of functions to turn on capturing for. List should be only as character.}
