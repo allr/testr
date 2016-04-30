@@ -66,9 +66,14 @@ generate <- function(output_dir, root = testr_options("capture.folder"), timed =
 #' - rcov for getting coverage of R code (here we need to annotate )
 #'
 #'
-filter <- function(output_dir) {
-    stop("NOT IMPLEMENTED")
-
+#'@export
+filter_tests <- function(test_root, output_dir, ..., verbose = testr_options("verbose")) {
+    functions <- parseFunctionNames(...)
+    # convert functions into a list function=>package
+    fn <- sapply(functions, `[`, 1)
+    functions <- sapply(functions, `[`, 2)
+    names(functions) <- fn
+    filter_by_function(test_root, output_dir, functions, verbose = verbose)
 }
 
 #' @title Runs the generated tests.

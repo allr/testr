@@ -105,58 +105,52 @@ split_tcs <- function(tc.root, tc_split_root, ntc_file = 1) {
     }
 }
 
-#' @title Test Case filter based on cov Report on Specified R Virtual Machine Source Code
+#' @title Test Case filtering based on coverage
 #'
-#' @description This function works with the GNU cov tool, gcov, to report code cov of the
-#'	tested R virtual machine. The VM must have been compiled with gcov support and executed at least
-#'	once before this function is executed for meanful statistics.
+#' @description This function attemps to filter the test cases for given functions based on
+#' code coverage information collected by covr.
 #'
-#' @param tc.root a directory containg test suite
-#' @param tc_result_root a directory where filtered test cases should be store.
-#' If not specified, tests that don't increase coverate will be removed from tc_root
-#' @param clear.previous.cov wheather to clear accomulated cov of VM.
-#' @param wipe_tc_db wheater delete previously accomulated test cases.
+#' @param tc_root directory with test cases to filter
+#' @param tc_result_root directory where the filtered test cases should be copied
+#' @param remove_tests if to delete test cases that don't affect coverage from tc_root
+#' @param verbose if to show additional infomation during filtering
 #'
-filter_tests <- function(tc_root, tc_result_root, remove_tests = FALSE, verbose = testr_options("verbose"), ...) {
+filter_by_function <- function(tc_root, tc_result_root, functions, remove_tests = FALSE, verbose = testr_options("verbose")) {
+    require(covr)
     if (missing(tc_root) || !file.exists(tc_root))
         stop("Specified directory with Test Cases does not exist!")
     if (verbose) cat("Test cases root - ", tc_root, "\n")
     all.tc <- list.files(path = tc_root, all.files = TRUE, recursive = TRUE, pattern = "\\.[rR]$", full.names = TRUE)
     if (verbose) cat("Number of test cases - ", length(all.tc), "\n")
-    functions <- parseFunctionNames(...)
     # create dummy objects
-    total_coverage <- lapply(functions, function(fname) {
-        f <- fname["name"]
-        covr::function_coverage(f, 1)
-        })
+    total_coverage <- sapply(names(functions), function(fname) {
+        function_coverage(fname, 1)
+        }, simplify = FALSE)
     cov_change <- function(tc) {
-        if (!is.null(tc_result_root)) {
-            result_path <- gsub(tc_root, tc_result_root, tc)
-        }
-        # test how this will work with compiled code
-        test_coverage <- lapply(functions, function(fname) {
-            f <- fname["name"]
-            covr::function_coverage(f, code = quote(testthat::test_file(tc)))
-            })
-        new_total_coverage <- lapply(functions, function(func) {
-            f <- func["name"]
-            covr:::merge_coverage(list(test_coverage[[f]], total_coverage[[f]]))
-            })
-        if (any(sapply(functions, function(fname) {
-            f <- fname["name"]
-            covr::percent_coverage(new_total_coverage[[f]]) - covr::percent_coverage(total_coverage[[f]])
-            }) > 0)) {
-            cat("Test case ", tc, " increased the coverage")
-            if (!is.null(result_path)) {
-                file.copy(tc, result_path, overwrite = FALSE)
-            }
+        if (!is.null(tc_result_root)) result_path <- gsub(tc_root, tc_result_root, tc)
+
+        test_coverage <- sapply(names(functions), function(fname) {
+            sink(tempfile())
+            res <- covr::function_coverage(fname, code = quote(testthat::test_file(tc)))
+            sink()
+            res
+            }, simplify = FALSE)
+
+        new_total_coverage <- sapply(names(functions), function(fname) {
+            covr:::merge_coverage(list(test_coverage[[fname]], total_coverage[[fname]]))
+            }, simplify = FALSE)
+
+        coverage_increased <- any(sapply(names(functions),function(fname) {
+            percent_coverage(new_total_coverage[[fname]]) - percent_coverage(total_coverage[[fname]])
+            }) > 0)
+        if (coverage_increased) {
+            if (verbose) cat("Test case ", tc, " increased the coverage\n")
+            if (!is.null(result_path)) file.copy(tc, result_path, overwrite = FALSE)
             total_coverage <<- new_total_coverage
         } else {
-          cat("Test case ", cache$i, "didn't increase coverage\n")
-          if (remove_tests) {
-            file.remove(tc_full_path)
-          }
+          if (verbose) cat("Test case ", tc, " didn't increase coverage\n")
+          if (remove_tests) file.remove(tc)
         }
     }
-    Map(cov_change, all.tc)
+    sapply(all.tc, cov_change)
 }
