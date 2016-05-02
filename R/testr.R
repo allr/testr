@@ -67,13 +67,13 @@ generate <- function(output_dir, root = testr_options("capture.folder"), timed =
 #'
 #'
 #'@export
-filter_tests <- function(test_root, output_dir, ..., verbose = testr_options("verbose")) {
+filter_tests <- function(test_root, output_dir, ..., package_path, verbose = testr_options("verbose")) {
     functions <- parseFunctionNames(...)
     # convert functions into a list function=>package
     fn <- sapply(functions, `[`, 1)
     functions <- sapply(functions, `[`, 2)
     names(functions) <- fn
-    filter_by_function(test_root, output_dir, functions, verbose = verbose)
+    filter(test_root, output_dir, functions, package_path, verbose = verbose)
 }
 
 #' @title Runs the generated tests.

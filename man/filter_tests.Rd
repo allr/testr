@@ -8,6 +8,7 @@ Uses code coverage to remove tests... At least two, maybe three types of code co
 
 - rcov for getting coverage of R code (here we need to annotate )}
 \usage{
-filter_tests(test_root, output_dir, ...)
+filter_tests(test_root, output_dir, ..., package_path,
+  verbose = testr_options("verbose"))
 }
 
