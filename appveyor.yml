@@ -13,12 +13,11 @@ build_script:
   - travis-tool.sh install_deps
 
 test_script:
-  - make build
-  - make install
-  - make test
+  - travis-tool.sh run_tests
 
 on_failure:
-  - travis-tool.sh dump_logs
+  - 7z a failure.zip *.Rcheck\*
+  - appveyor PushArtifact failure.zip
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
@@ -38,3 +37,7 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+notifications:
+  - provider: Slack
+    incoming_webhook: $SLACK_HOOK
