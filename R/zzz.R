@@ -67,12 +67,6 @@ primitive_generics_fails <- c(.S3PrimitiveGenerics, "round", "min", "max", "expr
         builtin_capture()
 }'
     ))
-    ## replace functions connected to trace with temporary versions
-    # assign(".TraceWithMethods", as.environment("package:methods"))
-    # unlockBinding(".TraceWithMethods", getNamespace("methods"))
-    # environment(TraceWithMethods) <- getNamespace("methods")
-    # assign(".TraceWithMethods", TraceWithMethods, getNamespace("methods"))
-    # lockBinding(".TraceWithMethods", getNamespace("methods"))
 }
 
 #' Querying/setting testr option
