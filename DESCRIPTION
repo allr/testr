@@ -10,11 +10,12 @@ Imports:
     Rcpp (>= 0.11.3),
     codetools,
     utils,
-    parallel,
-    tools
+    tools,
 LinkingTo: Rcpp
 Suggests:
     testthat,
+    covr,
+    parallel,
     knitr,
     rmarkdown
 LazyData: TRUE

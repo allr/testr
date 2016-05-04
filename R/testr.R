@@ -59,21 +59,40 @@ generate <- function(output_dir, root = testr_options("capture.folder"), timed =
     test_gen(root, output_dir, timed, verbose = verbose);
 }
 
-#' @title Filters the generated tests so that only tests adding code coverage will be kept.
+#' @title Filter the generated tests so that only tests increasing code coverage will be kept.
 #'
-#' Uses code coverage to remove tests... At least two, maybe three types of code coverage:
+#' @description This function attempts to filter test cases based on code coverage collected by covr package.
+#' Filtering is done in iterational way by measuring code coverage of every test separately and skipping the ones
+#' that don't increase the coverage.
 #'
-#' - rcov for getting coverage of R code (here we need to annotate )
+#' @param test_root root directory of tests to be filtered
+#' @param output_dir resulting directory where tests will be store. If nothing is supplied, tests that don't
+#' increase coverage will be removed from test_root
+#' @param ... functions that tests should be filtered aganist
+#' @param package_path package root of the package that coverage should be measured
+#' @param remove_tests if the tests that don't increase coverage should be removed. Default: \code{FALSE}.
+#' This option will be set to \code{TRUE} if \code{output_dir} is not supplied
+#' @param verbose whether the additional information should be displayed. Default: \code{TRUE}
+#' @return NULL
 #'
-#'
-#'@export
-filter_tests <- function(test_root, output_dir, ..., package_path, verbose = testr_options("verbose")) {
+#' @export
+filter <- function(test_root, output_dir, ...,
+                   package_path = "", remove_tests = FALSE,
+                   verbose = testr_options("verbose")) {
     functions <- parseFunctionNames(...)
-    # convert functions into a list function=>package
+    if (length(functions) && package_path != "") {
+        stop("Both list of functions and package to be filtered aganist is supplied, please use one of the arguments")
+    }
+    if (missing(output_dir) && !remove_tests) {
+        warning("output_directory was not supplied, so the tests that don't increase coverage will be removed from test_root")
+        remove_tests <- TRUE
+    }
+    # convert functions into a list function=>package to use vectorize functions sapply/lapply
     fn <- sapply(functions, `[`, 1)
     functions <- sapply(functions, `[`, 2)
     names(functions) <- fn
-    filter(test_root, output_dir, functions, package_path, verbose = verbose)
+    filter_tests(test_root, output_dir, functions, package_path, remove_test = remove_tests, verbose = verbose)
+    invisible(NULL)
 }
 
 #' @title Runs the generated tests.
