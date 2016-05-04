@@ -17,7 +17,8 @@ Suggests:
     covr,
     parallel,
     knitr,
-    rmarkdown
+    rmarkdown,
+    roxygen2
 LazyData: TRUE
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr

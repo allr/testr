@@ -19,3 +19,6 @@ script:
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+notifications:
+    slack: just-r:TYxSFBXA2smeu7iGbLQT9SKT
