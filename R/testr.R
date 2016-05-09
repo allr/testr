@@ -163,69 +163,92 @@ testr_source <- function(src.root, output_dir, ...) {
     stop_capture_all()
     generate(output_dir)
     invisible()
-
 }
 
 
-# ideally this sholuld use existing downloaded package
-testr_package <- function() {
-
-}
-
-# this should download the package from bioconductor
-testr_bioconductor <- function() {
-
-
-}
-
-# this should download the package from cran
-testr_cran <- function() {
-
-}
-
-# this should download the package from github
-test_github <- function() {
-
-}
-
-# anything below should not be exported -------------------------------------------------------------------------------
-
-#' @title Parses given function names to a list of name, package characters. If package is not specified, NA is returned instead of its name.
+#' @title Generates tests for a package by running the code associated with it.
 #'
-#' @param ... Functions either as character vectors, or package:::function expressions.
-#' @return List of parsed package and function names as characters.
-parseFunctionNames <- function(...) {
-    args <- as.list(substitute(list(...)))[-1]
-    i <- 1
-    result <- list()
-    result[length(args)] <- NULL
-    while (i <= length(args)) {
-        tryCatch({
-            x <- eval(as.name(paste("..",i,sep="")))
-            if (is.character(x)) {
-                # it is a character vector, use its value
-                x <- strsplit(x, ":::")[[1]]
-                if (length(x) == 1)
-                    x <- list(NA, x)
-                if (x[[2]] == "")
-                    x[[2]] <- ":::"
-                result[[i]] <- c(name = x[[2]], package = x[[1]])
-            } else {
-                stop("Use substitured value")
-            }
-        }, error = function(e) {
-            a <- args[[i]]
-            if (is.name(a)) {
-                result[[i]] <<- c(name = as.character(a), package = NA)
-            } else if (is.language(a) && length(a) == 3 && a[[1]] == as.name(":::")) {
-                result[[i]] <<- c(name = as.character(a[[3]]), package = as.character(a[[2]]))
-            } else {
-                print("error")
-                stop(paste("Invalid argument index", i));
-            }
-        })
-        i <- i + 1
+#' Runs the examples, vignettes and possibly tests associated with the package and captures the usage of package's functions. Creates tests from the captured information, filters it according to the already existing tests and if any new tests are found, adds them to package's tests.
+#'
+#' @param package.dir Name/path to the package, uses devtools notation.
+#' @param include.tests If TRUE, captures also execution of package's tests.
+#' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
+#' @param filter TRUE if generated tests should be filteres so that only those adding to a coverage will be used
+#' @param verbose Prints additional information.
+#' @export
+#'
+testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
+    # stop all ongoing captures
+    stop_capture_all()
+    library(devtools, quietly = T)
+    library(tools, quietly = T)
+    if (build) {
+        if (verbose)
+            cat(paste("Building package", package.dir, "\n"))
+        package.path = devtools::build(package.dir, quiet = T)
+        if (verbose)
+            cat(paste("  built into", package.dir, "\n"))
+    } else {
+        package.path = package.dir
     }
-    names(result) <- sapply(result, `[`, "name")
-    result
+    # install the package
+    if (verbose)
+        cat(paste("Installing package", package.path, "\n"))
+    #devtools:::install(package.name, quiet = T)
+    install.packages(package.path, repos = NULL, quiet = T, type = "source")
+    # get list of all functions
+    package = devtools:::as.package(package.dir)
+    library(package = package$package, character.only = T)
+    if (verbose)
+        cat(paste("Package", package$package, "installed\n"))
+    # get list of all functions defined in the package' R code
+    functions <- list_functions(file.path(package$path, "R"))
+    if (verbose)
+        cat(paste("Decorating",length(functions), "functions\n"))
+    # capture all functions in the package
+    for (f in functions) {
+        decorate(f, package$package, verbose = verbose)
+    }
+    # start the capturing
+    testr_options("capture.arguments", TRUE)
+    # run package examples
+    files <- devtools:::rd_files(package)
+    if (verbose)
+        cat(paste("Running examples (", length(files), "files)\n"))
+    if (length(files) != 0)
+        tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
+    # run package vignettes
+    info <- tools:::getVignetteInfo(package = package$package)
+    vdir <- info[,2]
+    vfiles <- info[,6]
+    p <- file.path(vdir, "doc", vfiles)
+    if (verbose)
+        cat(paste("Running vignettes (", length(vfiles), "files)\n"))
+    # vignettes are not expected to be runnable, silence errors
+    invisible(tryCatch(sapply(p, source), error=function(x) invisible()))
+    if (include.tests) {
+        if (verbose)
+            cat("Running package tests\n")
+        library(testthat, quietly = T)
+        testthat:::run_tests(package.name)
+    }
+    # stop capturing
+    testr_options("capture.arguments", FALSE)
+    stop_capture_all()
+    # generate the tests to the output directory
+    if (missing(output)) {
+        if (filter)
+            output = "temp"
+        else
+            output = file.path(package$path, "tests")
+    }
+    if (verbose)
+        cat(paste("Generating tests to", output, "\n"))
+    generate(output, verbose = verbose)
+    # filter, if enabled
+    if (filter) {
+        if (verbose)
+            cat("Filtering tests - this may take some time...\n")
+        filter_tests(output, file.path(package$path, "tests"), functions, package.dir, verbose = verbose)
+    }
 }

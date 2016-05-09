@@ -1,6 +1,6 @@
 ---
 title: "testr - Basic Usage"
-author: "Petr Maj & Roman Tsegelskyi"
+author: "Roman Tsegelskyi & Petr Maj"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -8,6 +8,16 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+## Overview
+
+The purpose of the testR package is to help package developers with creating tests for their code. testR captures functions of a specified package and records all their invocations, together with input arguments and results. It then syntesized the captured data into testthat tests and prunes them, using code coverage so that only tests increasing it (i.e. testing yet untested code paths) are kept. 
+
+## Basic Usage
+
+
+
+
 
 ## testR Overview
 

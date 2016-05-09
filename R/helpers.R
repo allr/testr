@@ -1,5 +1,5 @@
 #' @title Get function name from filename
-#' 
+#'
 #' This function extracts a function name from testcase file name
 #' @param filename filename
 #' @seealso process_tc
@@ -11,7 +11,7 @@ get_function_name <- function(filename){
 }
 
 #' @title Check if function is S3 generic
-#' 
+#'
 #' Determine if function has a call to UseMethod. In that case there is no need to capture it.
 #' @param fname function name
 #' @seealso Decorate
@@ -134,7 +134,7 @@ reassing_in_env <- function(name, obj, env) {
 }
 
 #' @title Get all files with specific pattern
-#' 
+#'
 #' This function is respinsible for leturning all files from specified folder
 #' @param root input folder
 #' @param pattern pattern of files to be searched for
@@ -150,7 +150,7 @@ get_all_files <- function(root, pattern = ".[rR]$", full.names = T){
 }
 
 #' @title Get function name without special characters
-#' 
+#'
 #' This function is respinsible for extractng function name from test file name and removing special characters
 #' @param filename filename to be processed
 #' @param modify.characters if special characters should be removed
@@ -184,3 +184,70 @@ replace_trace <- function() {
     lockBinding(".TraceWithMethods", getNamespace("methods"))
     cache$trace_replaced <- TRUE
 }
+
+
+#' @title Parses given function names to a list of name, package characters. If package is not specified, NA is returned instead of its name.
+#'
+#' @param ... Functions either as character vectors, or package:::function expressions.
+#' @return List of parsed package and function names as characters.
+parseFunctionNames <- function(...) {
+    args <- as.list(substitute(list(...)))[-1]
+    i <- 1
+    result <- list()
+    result[length(args)] <- NULL
+    while (i <= length(args)) {
+        tryCatch({
+            x <- eval(as.name(paste("..",i,sep="")))
+            if (is.character(x)) {
+                # it is a character vector, use its value
+                x <- strsplit(x, ":::")[[1]]
+                if (length(x) == 1)
+                    x <- list(NA, x)
+                if (x[[2]] == "")
+                    x[[2]] <- ":::"
+                result[[i]] <- c(name = x[[2]], package = x[[1]])
+            } else {
+                stop("Use substitured value")
+            }
+        }, error = function(e) {
+            a <- args[[i]]
+            if (is.name(a)) {
+                result[[i]] <<- c(name = as.character(a), package = NA)
+            } else if (is.language(a) && length(a) == 3 && a[[1]] == as.name(":::")) {
+                result[[i]] <<- c(name = as.character(a[[3]]), package = as.character(a[[2]]))
+            } else {
+                print("error")
+                stop(paste("Invalid argument index", i));
+            }
+        })
+        i <- i + 1
+    }
+    result
+}
+
+#' @title Returns names of functions defined in given file(s)
+#'
+#' Analyses given file, or files if directory is supplied for all functions defined in global scope and returns their names as character vector.
+#'
+#' @param src.root A source file to be analyzed, or a directory containing source files (*.R or *.r) to be analyzed.
+#' @param recursive TRUE if subdirectories should be scanned too.
+#' @return Character vector of function names defined in the file.
+list_functions <- function(src.root, recursive = TRUE) {
+    functions = character()
+    if (file.info(src.root)$isdir)
+        src.root <- list.files(src.root, pattern = "[rR]$", recursive = recursive, full.names = T)
+    for (src.file in src.root) {
+        exp <- parse(src.file)
+        for (e in exp) {
+            if (typeof(e) == "language" && e[[1]] == as.name("<-") && is.name(e[[2]])) {
+                name <- e[[2]]
+                what <- e[[3]]
+                if (typeof(what) == "language" && what[[1]] == as.name("function")) {
+                    functions = c(functions, as.character(name))
+                }
+            }
+        }
+    }
+    functions
+}
+
