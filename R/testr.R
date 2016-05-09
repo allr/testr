@@ -10,6 +10,7 @@
 #' @export
 #'
 testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
+    cleanup = F
     # stop all ongoing captures
     stop_capture_all()
     library(devtools, quietly = T)
@@ -69,10 +70,12 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
     stop_capture_all()
     # generate the tests to the output directory
     if (missing(output)) {
-        if (filter)
+        if (filter) {
             output = "temp"
-        else
+            cleanup = T
+        } else {
             output = file.path(package$path, "tests")
+        }
     }
     if (verbose)
         cat(paste("Generating tests to", output, "\n"))
@@ -83,6 +86,8 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
             cat("Filtering tests - this may take some time...\n")
         filter_tests(output, file.path(package$path, "tests/testthat"), functions, package.dir, compact = T, verbose = verbose)
     }
+    if (cleanup)
+        unlink(output, recursive = T)
 }
 
 
@@ -150,10 +155,15 @@ stop_capture_all <- function(verbose = testr_options("verbose")) {
 #' @param root Directory with the capture information, defaults to capture.
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
 #' @param verbose TRUE to display additional information.
+#' @param clear_capture if FALSE captured traces will not be deleted after the generation so that subsequent calls to generate() can use them too
 #' @export
-generate <- function(output_dir, root = testr_options("capture.folder"), timed = F, verbose = testr_options("verbose")) {
+generate <- function(output_dir, root = testr_options("capture.folder"), timed = F, clear_capture = T, verbose = testr_options("verbose")) {
     cache$output.dir <- output_dir
     test_gen(root, output_dir, timed, verbose = verbose);
+    if (clear_capture) {
+        unlink(file.path(root, list.files(path = root, no.. = T)))
+    }
+
 }
 
 #' @title Filter the generated tests so that only tests increasing code coverage will be kept.
