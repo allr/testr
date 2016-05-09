@@ -1,7 +1,9 @@
 #' @title Capture run information from CRAN packages
-#' 
-#' This function is responsible for getting all possible capture information from CRAN
+#'
+#' @description This function is responsible for getting all possible capture information from CRAN
 #' It tries to insstall package and run tests, examples and vignettes
+#' @param name name of the package to be downloaded
+#' @param dir resulting directory with tests
 #' @param indexes indexes of specific packages
 #' @param funcs functions to Decorate
 #' @export
@@ -16,9 +18,11 @@ cran_gen <- function(name, dir, funcs=NULL, indexes = 1:10000) {
 }
 
 #' @title Capture run information from Bioconductor packages
-#' 
-#' This function is responsible for getting all possible capture information from Bioconductor
+#'
+#' @description This function is responsible for getting all possible capture information from Bioconductor
 #' It tries to insstall package and run tests, examples and vignettes
+#' @param name name of the package to be downloaded
+#' @param dir resulting directory with tests
 #' @param indexes indexes of specific packages
 #' @param funcs functions to Decorate
 #' @export
@@ -35,13 +39,13 @@ bioconductor_gen <- function(name, dir, funcs=NULL, indexes = 1:1000) {
 }
 
 #' @title Capture run information from package and generate test cases
-#' 
-#' This function is responsible for getting all possible capture information from specific package. 
+#'
+#' @description This function is responsible for getting all possible capture information from specific package.
 #' It tries to insstall package and run tests, examples and vignettes
-#' @param name function name as a character string
-#' @param dir function name as a character string
+#' @param name name of the package
+#' @param gen.dir resulting directory with tests
 #' @param from.bioc if package is from Bioconductior
-#' @param contribur contributor url as in download.packages
+#' @param contriburl contributor url as in download.packages
 #' @param funcs functions to Decorate
 #' @param gen if generate test cases
 #' @export
@@ -100,11 +104,11 @@ package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
 }
 
 #' @title Run all examples in the package
-#' 
-#' This function is responsible for running all examples in specified package
+#'
+#' @description This function is responsible for running all examples in specified package
 #' @param package package name
 run_examples <- function(package) {
-  pkg <- devtools:::as.package(package)
+  pkg <- devtools::as.package(package)
   files <- devtools:::rd_files(pkg)
   if (length(files) == 0) {
     return()
@@ -113,7 +117,7 @@ run_examples <- function(package) {
 }
 
 #' @title Run testthat tests in the package
-#' 
+#'
 #' @description This function is responsible for running testthat tests for specified package
 #' @param loc location of the package source
 run_tests <- function(loc) {
@@ -125,11 +129,11 @@ run_tests <- function(loc) {
 }
 
 #' @title Run all vignettes in the package
-#' 
-#' This function is responsible for running code from vignettes for specified package
+#'
+#' @description This function is responsible for running code from vignettes for specified package
 #' @param name package name
 run_vignettes <- function(name) {
-  info <- tools:::getVignetteInfo(package = name)
+  info <- tools::getVignetteInfo(package = name)
   vdir <- info[,2]
   vfiles <- info[,6]
   p <- file.path(vdir, "doc", vfiles)
@@ -143,7 +147,7 @@ run_vignettes <- function(name) {
 #' from collected trace information.
 #'
 #' @param src.root source root or source file
-#' @param tc.result.root destination of generated test cases
+#' @param tc.result destination of generated test cases
 #' @param functions functions to be traced
 #' @export
 src_gen <- function(src.root, tc.result, functions) {
@@ -164,8 +168,8 @@ src_gen <- function(src.root, tc.result, functions) {
 #' @description This function runs the code in give source files and tries to generate test cases
 #' from collected trace information.
 #'
-#' @param src.root source root or source file
-#' @param tc.result.root destination of generated test cases
+#' @param code source root or source file
+#' @param tc.result destination of generated test cases
 #' @param functions functions to be traced
 #' @export
 code_gen <- function(code, tc.result, functions) {

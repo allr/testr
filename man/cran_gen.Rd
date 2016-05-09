@@ -2,16 +2,21 @@
 % Please edit documentation in R/evaluation.R
 \name{cran_gen}
 \alias{cran_gen}
-\title{Capture run information from CRAN packages
-
-This function is responsible for getting all possible capture information from CRAN
-It tries to insstall package and run tests, examples and vignettes}
+\title{Capture run information from CRAN packages}
 \usage{
 cran_gen(name, dir, funcs = NULL, indexes = 1:10000)
 }
 \arguments{
+\item{name}{name of the package to be downloaded}
+
+\item{dir}{resulting directory with tests}
+
 \item{funcs}{functions to Decorate}
 
 \item{indexes}{indexes of specific packages}
+}
+\description{
+This function is responsible for getting all possible capture information from CRAN
+It tries to insstall package and run tests, examples and vignettes
 }
 

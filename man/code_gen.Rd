@@ -7,11 +7,11 @@
 code_gen(code, tc.result, functions)
 }
 \arguments{
+\item{code}{source root or source file}
+
+\item{tc.result}{destination of generated test cases}
+
 \item{functions}{functions to be traced}
-
-\item{src.root}{source root or source file}
-
-\item{tc.result.root}{destination of generated test cases}
 }
 \description{
 This function runs the code in give source files and tries to generate test cases

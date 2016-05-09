@@ -2,7 +2,7 @@
 % Please edit documentation in R/testr.R
 \name{testr_source}
 \alias{testr_source}
-\title{Generates tests by running given source file.}
+\title{Generate tests for give source}
 \usage{
 testr_source(src.root, output_dir, ...)
 }
@@ -12,5 +12,8 @@ testr_source(src.root, output_dir, ...)
 \item{output_dir}{Directory to which the tests will be generated.}
 
 \item{...}{Functions to be tested.}
+}
+\description{
+Generates tests by running given source file.
 }
 

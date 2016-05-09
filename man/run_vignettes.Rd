@@ -2,13 +2,14 @@
 % Please edit documentation in R/evaluation.R
 \name{run_vignettes}
 \alias{run_vignettes}
-\title{Run all vignettes in the package
-
-This function is responsible for running code from vignettes for specified package}
+\title{Run all vignettes in the package}
 \usage{
 run_vignettes(name)
 }
 \arguments{
 \item{name}{package name}
+}
+\description{
+This function is responsible for running code from vignettes for specified package
 }
 

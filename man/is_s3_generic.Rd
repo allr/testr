@@ -2,14 +2,17 @@
 % Please edit documentation in R/helpers.R
 \name{is_s3_generic}
 \alias{is_s3_generic}
-\title{Check if function is S3 generic
-
-Determine if function has a call to UseMethod. In that case there is no need to capture it.}
+\title{Check if function is S3 generic}
 \usage{
 is_s3_generic(fname, env = .GlobalEnv)
 }
 \arguments{
 \item{fname}{function name}
+
+\item{env}{environment to check aganist. Default \code{.GlobalEnv}}
+}
+\description{
+Determine if function has a call to UseMethod. In that case there is no need to capture it.
 }
 \seealso{
 Decorate

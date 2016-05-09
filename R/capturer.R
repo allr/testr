@@ -1,6 +1,6 @@
 #' @title Decorates function to capture calls and return values
 #'
-#' This function is respinsible for writing down capture information for decorated function calls.
+#' @description This function is respinsible for writing down capture information for decorated function calls.
 #' Replaces the function by decorated function in the global environment
 #' @param func function name as a character string
 #' @param package name of package to look for function
@@ -58,7 +58,7 @@ decorate <- function(func, package, verbose) {
 
 #' @title undecorate function
 #'
-#' Reset previously decorate function
+#' @description Reset previously decorate function
 #' @param func function name as a character string
 #' @param verbose if to print additional output
 #' @export
@@ -89,7 +89,7 @@ undecorate <- function(func, verbose) {
 
 #' @title Write down capture information
 #'
-#' This function is respinsible for writing down capture information for decorated function calls.
+#' @description This function is respinsible for writing down capture information for decorated function calls.
 #' @param fname function name
 #' @param args.env environment to read arguments to function call from
 #' @seealso Decorate
@@ -105,9 +105,11 @@ write_capture <- function(fname, args.env){
 
 #' @title Setup information capturing for list of function
 #'
-#' This function is respinsible for setting up capturing for functions
+#' @description This function is respinsible for setting up capturing for functions
 #'
 #' @param flist function or list of functions to turn on capturing for. List should be only as character.
+#' @param package name of the package
+#' @param verbose if to print additional status information
 #' @seealso Decorate
 #' @export
 setup_capture <- function(flist, package, verbose) {
@@ -124,7 +126,7 @@ setup_capture <- function(flist, package, verbose) {
 
 #' @title Check if function is eligible for wrapping to capture arguments and return values
 #'
-#' This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
+#' @description This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
 #' This is an internal function and is supposed to be used in setup_capture
 #' @param func function name to check
 #' @return TRUE/FALSE if can be captured or not
@@ -143,7 +145,8 @@ eligible_capture <- function(func){
 
 #' @title Clear decoration
 #'
-#' Clear anything previously decorate
+#' @description Clear anything previously decorate
+#' @param verbose if to print additional debugging information. Default \code{TRUE}.
 #' @seealso undecorate
 #' @export
 clear_decoration <- function(verbose) {
@@ -153,10 +156,11 @@ clear_decoration <- function(verbose) {
 
 #' @title Refresh decoration
 #'
-#' In cases when a function that is being traced is used through imports namespace
+#' @description In cases when a function that is being traced is used through imports namespace
 #' by a package that is being loaded, the package won't get the correct copy, which results in
 #' the information loss. This function is hooked up to the library, to be run upon exist and
 #' check what functions might need redecoration, to propagate correct version to imports namespace.
+#' @param pkg package
 refresh_decoration <- function(pkg) {
     ienv <- getImportsEnv(pkg)
     need_redecoration <- intersect(ls(ienv), names(.decorated))

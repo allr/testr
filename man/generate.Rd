@@ -5,7 +5,7 @@
 \title{Generates tests from captured information.}
 \usage{
 generate(output_dir, root = testr_options("capture.folder"), timed = F,
-  verbose = testr_options("verbose"))
+  clear_capture = T, verbose = testr_options("verbose"))
 }
 \arguments{
 \item{output_dir}{Directory to which the tests should be generated.}
@@ -14,6 +14,12 @@ generate(output_dir, root = testr_options("capture.folder"), timed = F,
 
 \item{timed}{TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.}
 
+\item{clear_capture}{if FALSE captured traces will not be deleted after the generation so that subsequent calls to generate() can use them too}
+
 \item{verbose}{TRUE to display additional information.}
+}
+\description{
+This function takes the tracing information collected by capture and generates
+testthat compatible testcases.
 }
 

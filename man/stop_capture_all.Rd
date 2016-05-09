@@ -9,4 +9,7 @@ stop_capture_all(verbose = testr_options("verbose"))
 \arguments{
 \item{verbose}{TRUE to display additional information}
 }
+\description{
+Remove tracing functionality for all the functions
+}
 

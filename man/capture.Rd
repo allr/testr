@@ -2,9 +2,7 @@
 % Please edit documentation in R/testr.R
 \name{capture}
 \alias{capture}
-\title{Enables capturing of the specified functions.
-
-The functions can be expressed as character literals in the form of either only a function name, or package name ::: function name, or directly as a symbol (i.e. only function name, or package name ::: function name).}
+\title{Enables capturing of the specified functions.}
 \usage{
 capture(..., verbose = testr_options("verbose"))
 }
@@ -12,5 +10,9 @@ capture(..., verbose = testr_options("verbose"))
 \item{...}{List of functions to capture, either character literals, or symbols}
 
 \item{verbose}{TRUE to display additional information}
+}
+\description{
+The functions can be expressed as character literals in the form of either only a function name,
+or package name ::: function name, or directly as a symbol (i.e. only function name, or package name ::: function name).
 }
 

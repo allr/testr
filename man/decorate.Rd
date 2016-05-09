@@ -2,10 +2,7 @@
 % Please edit documentation in R/capturer.R
 \name{decorate}
 \alias{decorate}
-\title{Decorates function to capture calls and return values
-
-This function is respinsible for writing down capture information for decorated function calls.
-Replaces the function by decorated function in the global environment}
+\title{Decorates function to capture calls and return values}
 \usage{
 decorate(func, package, verbose)
 }
@@ -15,6 +12,10 @@ decorate(func, package, verbose)
 \item{package}{name of package to look for function}
 
 \item{verbose}{if to print additional output}
+}
+\description{
+This function is respinsible for writing down capture information for decorated function calls.
+Replaces the function by decorated function in the global environment
 }
 \seealso{
 write_capture

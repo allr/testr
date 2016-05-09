@@ -2,13 +2,14 @@
 % Please edit documentation in R/evaluation.R
 \name{run_examples}
 \alias{run_examples}
-\title{Run all examples in the package
-
-This function is responsible for running all examples in specified package}
+\title{Run all examples in the package}
 \usage{
 run_examples(package)
 }
 \arguments{
 \item{package}{package name}
+}
+\description{
+This function is responsible for running all examples in specified package
 }
 

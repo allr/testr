@@ -11,4 +11,7 @@ stop_capture(..., verbose = testr_options("verbose"))
 
 \item{verbose}{TRUE to display additional information}
 }
+\description{
+This function removes the tracing functionality for specified function
+}
 

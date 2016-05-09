@@ -2,9 +2,7 @@
 % Please edit documentation in R/capturer.R
 \name{write_capture}
 \alias{write_capture}
-\title{Write down capture information
-
-This function is respinsible for writing down capture information for decorated function calls.}
+\title{Write down capture information}
 \usage{
 write_capture(fname, args.env)
 }
@@ -12,6 +10,9 @@ write_capture(fname, args.env)
 \item{fname}{function name}
 
 \item{args.env}{environment to read arguments to function call from}
+}
+\description{
+This function is respinsible for writing down capture information for decorated function calls.
 }
 \seealso{
 Decorate

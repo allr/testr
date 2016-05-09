@@ -2,13 +2,17 @@
 % Please edit documentation in R/capturer.R
 \name{refresh_decoration}
 \alias{refresh_decoration}
-\title{Refresh decoration
-
+\title{Refresh decoration}
+\usage{
+refresh_decoration(pkg)
+}
+\arguments{
+\item{pkg}{package}
+}
+\description{
 In cases when a function that is being traced is used through imports namespace
 by a package that is being loaded, the package won't get the correct copy, which results in
 the information loss. This function is hooked up to the library, to be run upon exist and
-check what functions might need redecoration, to propagate correct version to imports namespace.}
-\usage{
-refresh_decoration(pkg)
+check what functions might need redecoration, to propagate correct version to imports namespace.
 }
 

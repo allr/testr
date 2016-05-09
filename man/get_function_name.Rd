@@ -2,14 +2,15 @@
 % Please edit documentation in R/helpers.R
 \name{get_function_name}
 \alias{get_function_name}
-\title{Get function name from filename
-
-This function extracts a function name from testcase file name}
+\title{Get function name from filename}
 \usage{
 get_function_name(filename)
 }
 \arguments{
 \item{filename}{filename}
+}
+\description{
+This function extracts a function name from testcase file name
 }
 \seealso{
 process_tc

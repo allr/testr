@@ -2,24 +2,25 @@
 % Please edit documentation in R/evaluation.R
 \name{package_gen}
 \alias{package_gen}
-\title{Capture run information from package and generate test cases
-
-This function is responsible for getting all possible capture information from specific package. 
-It tries to insstall package and run tests, examples and vignettes}
+\title{Capture run information from package and generate test cases}
 \usage{
 package_gen(name, gen.dir, funcs, from.bioc = FALSE, contriburl)
 }
 \arguments{
-\item{name}{function name as a character string}
+\item{name}{name of the package}
+
+\item{gen.dir}{resulting directory with tests}
 
 \item{funcs}{functions to Decorate}
 
 \item{from.bioc}{if package is from Bioconductior}
 
-\item{dir}{function name as a character string}
-
-\item{contribur}{contributor url as in download.packages}
+\item{contriburl}{contributor url as in download.packages}
 
 \item{gen}{if generate test cases}
+}
+\description{
+This function is responsible for getting all possible capture information from specific package.
+It tries to insstall package and run tests, examples and vignettes
 }
 

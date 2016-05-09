@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{starts_with}
 \alias{starts_with}
-\title{Check if line starts with prefix}
+\title{Check line's starting prefix}
 \usage{
 starts_with(prefix, x)
 }
@@ -10,6 +10,9 @@ starts_with(prefix, x)
 \item{prefix}{prefix}
 
 \item{x}{text to be checked}
+}
+\description{
+Check if line starts with prefix
 }
 \seealso{
 GenerateTC

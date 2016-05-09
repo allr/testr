@@ -2,9 +2,7 @@
 % Please edit documentation in R/capturer.R
 \name{undecorate}
 \alias{undecorate}
-\title{undecorate function
-
-Reset previously decorate function}
+\title{undecorate function}
 \usage{
 undecorate(func, verbose)
 }
@@ -12,6 +10,9 @@ undecorate(func, verbose)
 \item{func}{function name as a character string}
 
 \item{verbose}{if to print additional output}
+}
+\description{
+Reset previously decorate function
 }
 \seealso{
 write_capture Decorate

@@ -2,14 +2,15 @@
 % Please edit documentation in R/helpers.R
 \name{quoter}
 \alias{quoter}
-\title{Quote language from evaluation
-
-In certain cases, language arguments (like calls), need to be quoated}
+\title{Quote language from evaluation}
 \usage{
 quoter(arg)
 }
 \arguments{
 \item{arg}{list of arguments}
+}
+\description{
+In certain cases, language arguments (like calls), need to be quoated
 }
 \seealso{
 GenerateTC

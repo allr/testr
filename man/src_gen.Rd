@@ -9,9 +9,9 @@ src_gen(src.root, tc.result, functions)
 \arguments{
 \item{src.root}{source root or source file}
 
-\item{functions}{functions to be traced}
+\item{tc.result}{destination of generated test cases}
 
-\item{tc.result.root}{destination of generated test cases}
+\item{functions}{functions to be traced}
 }
 \description{
 This function runs the code in give source files and tries to generate test cases

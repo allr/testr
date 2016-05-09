@@ -2,9 +2,7 @@
 % Please edit documentation in R/testr.R
 \name{run}
 \alias{run}
-\title{Runs the generated tests.
-
-This function is a shorthand for calling testthat on the previously generated tests.}
+\title{Runs the generated tests.}
 \usage{
 run(test_dir, verbose = testr_options("verbose"))
 }
@@ -15,5 +13,8 @@ run(test_dir, verbose = testr_options("verbose"))
 }
 \value{
 TRUE if all tests passed, FALSE otherwise.
+}
+\description{
+This function is a shorthand for calling testthat on the previously generated tests.
 }
 

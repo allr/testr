@@ -9,6 +9,9 @@ find_tests(path)
 \arguments{
 \item{path}{package path}
 }
+\description{
+Find a known test location for the package
+}
 \seealso{
 CapturePackage
 }

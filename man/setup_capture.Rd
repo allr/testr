@@ -2,14 +2,19 @@
 % Please edit documentation in R/capturer.R
 \name{setup_capture}
 \alias{setup_capture}
-\title{Setup information capturing for list of function
-
-This function is respinsible for setting up capturing for functions}
+\title{Setup information capturing for list of function}
 \usage{
 setup_capture(flist, package, verbose)
 }
 \arguments{
 \item{flist}{function or list of functions to turn on capturing for. List should be only as character.}
+
+\item{package}{name of the package}
+
+\item{verbose}{if to print additional status information}
+}
+\description{
+This function is respinsible for setting up capturing for functions
 }
 \seealso{
 Decorate

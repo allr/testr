@@ -2,9 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{get_all_files}
 \alias{get_all_files}
-\title{Get all files with specific pattern
-
-This function is respinsible for leturning all files from specified folder}
+\title{Get all files with specific pattern}
 \usage{
 get_all_files(root, pattern = ".[rR]$", full.names = T)
 }
@@ -14,5 +12,8 @@ get_all_files(root, pattern = ".[rR]$", full.names = T)
 \item{pattern}{pattern of files to be searched for}
 
 \item{full.names}{if full path to files should be returned}
+}
+\description{
+This function is respinsible for leturning all files from specified folder
 }
 

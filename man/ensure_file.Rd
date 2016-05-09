@@ -8,10 +8,6 @@ ensure_file(name)
 }
 \arguments{
 \item{name}{directory where generated test cases will be saved}
-
-\item{path}{a directory containg capture information or capture file}
-
-\item{cache}{environment for caching already created files}
 }
 \description{
 This function creates a test case file if one does not exist already

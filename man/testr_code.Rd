@@ -2,7 +2,7 @@
 % Please edit documentation in R/testr.R
 \name{testr_code}
 \alias{testr_code}
-\title{Generates tests from given code and specific captured functions}
+\title{Generate tests for give code}
 \usage{
 testr_code(code, output_dir, ...)
 }
@@ -12,5 +12,8 @@ testr_code(code, output_dir, ...)
 \item{output_dir}{Directory to which the tests will be generated.}
 
 \item{...}{functions to be captured during the code execution (same syntax as capture function)}
+}
+\description{
+Generates tests from given code and specific captured functions
 }
 

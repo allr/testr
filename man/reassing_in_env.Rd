@@ -14,6 +14,7 @@ reassing_in_env(name, obj, env)
 \item{env}{environment to be replaced in}
 }
 \description{
-Record that particual line was executed. Used in statement coverage, needed for namespace replacement
+Record that particual line was executed.
+Used in statement coverage, needed for namespace replacement
 }
 

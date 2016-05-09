@@ -2,10 +2,7 @@
 % Please edit documentation in R/capturer.R
 \name{eligible_capture}
 \alias{eligible_capture}
-\title{Check if function is eligible for wrapping to capture arguments and return values
-
-This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
-This is an internal function and is supposed to be used in setup_capture}
+\title{Check if function is eligible for wrapping to capture arguments and return values}
 \usage{
 eligible_capture(func)
 }
@@ -14,6 +11,10 @@ eligible_capture(func)
 }
 \value{
 TRUE/FALSE if can be captured or not
+}
+\description{
+This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
+This is an internal function and is supposed to be used in setup_capture
 }
 \seealso{
 setup_capture

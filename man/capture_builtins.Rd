@@ -11,4 +11,7 @@ capture_builtins(internal = FALSE, verbose = testr_options("verbose"))
 
 \item{verbose}{TRUE to display additional information}
 }
+\description{
+Wrapper around capture to capture builtin functions
+}
 

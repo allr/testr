@@ -2,14 +2,15 @@
 % Please edit documentation in R/helpers.R
 \name{get_num_tc}
 \alias{get_num_tc}
-\title{Estimate the number of test cases
-
-Estimate the number of test cases in the give path}
+\title{Estimate the number of test cases}
 \usage{
 get_num_tc(path)
 }
 \arguments{
 \item{path}{path to check}
+}
+\description{
+Estimate the number of test cases in the give path
 }
 \seealso{
 process_tc

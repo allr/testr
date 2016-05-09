@@ -44,9 +44,7 @@ test_gen <- function(root, output_dir, timed = F, verbose=testr_options("verbose
 #' @title Manage Test Case file
 #'
 #' @description This function creates a test case file if one does not exist already
-#' @param path a directory containg capture information or capture file
 #' @param name directory where generated test cases will be saved
-#' @param cache environment for caching already created files
 #' @seealso test_gen
 ensure_file <- function(name) {
 

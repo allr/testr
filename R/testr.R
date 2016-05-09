@@ -1,9 +1,11 @@
 #' @title Generates tests for a package by running the code associated with it.
 #'
-#' Runs the examples, vignettes and possibly tests associated with the package and captures the usage of package's functions. Creates tests from the captured information, filters it according to the already existing tests and if any new tests are found, adds them to package's tests.
+#' @description Runs the examples, vignettes and possibly tests associated with the package and captures the usage of package's functions. Creates tests from the captured information, filters it according to the already existing tests and if any new tests are found, adds them to package's tests.
 #'
 #' @param package.dir Name/path to the package, uses devtools notation.
 #' @param include.tests If TRUE, captures also execution of package's tests.
+#' @param build if to build package before. Default \code{TRUE}
+#' @param output resulting directory with test cases
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
 #' @param filter TRUE if generated tests should be filteres so that only those adding to a coverage will be used
 #' @param verbose Prints additional information.
@@ -104,7 +106,8 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
 
 #' @title Enables capturing of the specified functions.
 #'
-#' The functions can be expressed as character literals in the form of either only a function name, or package name ::: function name, or directly as a symbol (i.e. only function name, or package name ::: function name).
+#' @description The functions can be expressed as character literals in the form of either only a function name,
+#' or package name ::: function name, or directly as a symbol (i.e. only function name, or package name ::: function name).
 #'
 #' @param ... List of functions to capture, either character literals, or symbols
 #' @param verbose TRUE to display additional information
@@ -122,6 +125,7 @@ capture <- function(..., verbose = testr_options("verbose")) {
 
 #' @title Enables capturing of all builtin functions.
 #'
+#' @description Wrapper around capture to capture builtin functions
 #' @param internal TRUE if only internal functions should be captured
 #' @param verbose TRUE to display additional information
 #' @export
@@ -132,6 +136,7 @@ capture_builtins <- function(internal = FALSE, verbose = testr_options("verbose"
 
 #' @title Stops capturing the selected functions.
 #'
+#' @description This function removes the tracing functionality for specified function
 #' @param ... Functions whose capture is to be dropped (uses the same format as capture)
 #' @param verbose TRUE to display additional information
 #' @export
@@ -143,6 +148,7 @@ stop_capture <- function(..., verbose = testr_options("verbose")) {
 
 #' @title Stops capturing all currently captured functions.
 #'
+#' @description Remove tracing functionality for all the functions
 #' @param verbose TRUE to display additional information
 #' @export
 stop_capture_all <- function(verbose = testr_options("verbose")) {
@@ -151,13 +157,17 @@ stop_capture_all <- function(verbose = testr_options("verbose")) {
 
 #' @title Generates tests from captured information.
 #'
+#' @description This function takes the tracing information collected by capture and generates
+#' testthat compatible testcases.
+#'
 #' @param output_dir Directory to which the tests should be generated.
 #' @param root Directory with the capture information, defaults to capture.
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
 #' @param verbose TRUE to display additional information.
 #' @param clear_capture if FALSE captured traces will not be deleted after the generation so that subsequent calls to generate() can use them too
 #' @export
-generate <- function(output_dir, root = testr_options("capture.folder"), timed = F, clear_capture = T, verbose = testr_options("verbose")) {
+generate <- function(output_dir, root = testr_options("capture.folder"),
+                     timed = F, clear_capture = T, verbose = testr_options("verbose")) {
     cache$output.dir <- output_dir
     test_gen(root, output_dir, timed, verbose = verbose);
     if (clear_capture) {
@@ -204,7 +214,7 @@ filter <- function(test_root, output_dir, ...,
 
 #' @title Runs the generated tests.
 #'
-#' This function is a shorthand for calling testthat on the previously generated tests.
+#' @description This function is a shorthand for calling testthat on the previously generated tests.
 #'
 #' @param test_dir Directory in which the tests are located. If empty, the last output directory for generate or filter functions is assumed.
 #' @param verbose TRUE to display additional information.
@@ -237,8 +247,8 @@ run <- function(test_dir, verbose = testr_options("verbose")) {
 
 # TODO these are also in evaluation.R, perhaps evaluation.R should die and its non-api should move to helpers, or someplace else?
 
-#' @title Generates tests from given code and specific captured functions
-#'
+#' @title Generate tests for give code
+#' @description Generates tests from given code and specific captured functions
 #'
 #' @param code Code from which the tests will be generated.
 #' @param output_dir Directory to which the tests will be generated.
@@ -253,7 +263,8 @@ testr_code <- function(code, output_dir, ...) {
     invisible()
 }
 
-#' @title Generates tests by running given source file.
+#' @title Generate tests for give source
+#' @description Generates tests by running given source file.
 #'
 #' @param src.root Source file to be executed and captured, or directory containing multiple files.
 #' @param output_dir Directory to which the tests will be generated.
@@ -271,5 +282,3 @@ testr_source <- function(src.root, output_dir, ...) {
     generate(output_dir)
     invisible()
 }
-
-

@@ -1,6 +1,6 @@
 #' @title Get function name from filename
 #'
-#' This function extracts a function name from testcase file name
+#' @description This function extracts a function name from testcase file name
 #' @param filename filename
 #' @seealso process_tc
 get_function_name <- function(filename){
@@ -12,8 +12,9 @@ get_function_name <- function(filename){
 
 #' @title Check if function is S3 generic
 #'
-#' Determine if function has a call to UseMethod. In that case there is no need to capture it.
+#' @description Determine if function has a call to UseMethod. In that case there is no need to capture it.
 #' @param fname function name
+#' @param env environment to check aganist. Default \code{.GlobalEnv}
 #' @seealso Decorate
 is_s3_generic <- function(fname, env=.GlobalEnv) {
     f <- get(fname, mode = "function", envir = env)
@@ -25,7 +26,7 @@ is_s3_generic <- function(fname, env=.GlobalEnv) {
 
 #' @title Estimate the number of test cases
 #'
-#' Estimate the number of test cases in the give path
+#' @description Estimate the number of test cases in the give path
 #' @param path path to check
 #' @seealso process_tc
 get_num_tc <- function(path){
@@ -41,7 +42,7 @@ get_num_tc <- function(path){
 
 #' @title Clean temporary directory
 #'
-#' Make sure temp dir is empty by deleting unnecessary files
+#' @description Make sure temp dir is empty by deleting unnecessary files
 clean_temp <- function() {
     for (file in list.files(cache$temp_dir, full.names = T, pattern = "\\.RData|\\.[rR]$")) {
         file.remove(file)
@@ -60,7 +61,7 @@ parse_eval <- function(what) {
 
 #' @title Quote language from evaluation
 #'
-#' In certain cases, language arguments (like calls), need to be quoated
+#' @description In certain cases, language arguments (like calls), need to be quoated
 #' @param arg list of arguments
 #' @seealso GenerateTC
 quoter <- function(arg) {
@@ -89,7 +90,8 @@ substr_line <- function(l){
     ret.line
 }
 
-#' @title Check if line starts with prefix
+#' @title Check line's starting prefix
+#' @description Check if line starts with prefix
 #'
 #' @param prefix prefix
 #' @param x text to be checked
@@ -100,6 +102,7 @@ starts_with <- function(prefix, x) {
 
 #' @title Find test directory for package
 #'
+#' @description Find a known test location for the package
 #' @param path package path
 #' @seealso CapturePackage
 find_tests <- function(path) {
@@ -115,9 +118,10 @@ find_tests <- function(path) {
     return(NULL)
 }
 
-#' Reassing object in the namespace
+#' @title Reassing object in the namespace
 #'
-#' Record that particual line was executed. Used in statement coverage, needed for namespace replacement
+#' @description Record that particual line was executed.
+#' Used in statement coverage, needed for namespace replacement
 #' @param name name of an object to be replaced
 #' @param obj object that will be put in the environment
 #' @param env environment to be replaced in
@@ -135,7 +139,7 @@ reassing_in_env <- function(name, obj, env) {
 
 #' @title Get all files with specific pattern
 #'
-#' This function is respinsible for leturning all files from specified folder
+#' @description This function is respinsible for leturning all files from specified folder
 #' @param root input folder
 #' @param pattern pattern of files to be searched for
 #' @param full.names if full path to files should be returned
@@ -151,7 +155,7 @@ get_all_files <- function(root, pattern = ".[rR]$", full.names = T){
 
 #' @title Get function name without special characters
 #'
-#' This function is respinsible for extractng function name from test file name and removing special characters
+#' @description This function is respinsible for extractng function name from test file name and removing special characters
 #' @param filename filename to be processed
 #' @param modify.characters if special characters should be removed
 #'
@@ -186,7 +190,9 @@ replace_trace <- function() {
 }
 
 
-#' @title Parses given function names to a list of name, package characters. If package is not specified, NA is returned instead of its name.
+#' @title Parse function names from objects
+#' @description  Parses given function names to a list of name, package characters.
+#' If package is not specified, NA is returned instead of its name.
 #'
 #' @param ... Functions either as character vectors, or package:::function expressions.
 #' @return List of parsed package and function names as characters.
@@ -227,7 +233,8 @@ parseFunctionNames <- function(...) {
 
 #' @title Returns names of functions defined in given file(s)
 #'
-#' Analyses given file, or files if directory is supplied for all functions defined in global scope and returns their names as character vector.
+#' @description Analyses given file, or files if directory
+#' is supplied for all functions defined in global scope and returns their names as character vector.
 #'
 #' @param src.root A source file to be analyzed, or a directory containing source files (*.R or *.r) to be analyzed.
 #' @param recursive TRUE if subdirectories should be scanned too.

@@ -2,10 +2,11 @@
 % Please edit documentation in R/helpers.R
 \name{clean_temp}
 \alias{clean_temp}
-\title{Clean temporary directory
-
-Make sure temp dir is empty by deleting unnecessary files}
+\title{Clean temporary directory}
 \usage{
 clean_temp()
+}
+\description{
+Make sure temp dir is empty by deleting unnecessary files
 }
 

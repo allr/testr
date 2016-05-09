@@ -2,11 +2,15 @@
 % Please edit documentation in R/capturer.R
 \name{clear_decoration}
 \alias{clear_decoration}
-\title{Clear decoration
-
-Clear anything previously decorate}
+\title{Clear decoration}
 \usage{
 clear_decoration(verbose)
+}
+\arguments{
+\item{verbose}{if to print additional debugging information. Default \code{TRUE}.}
+}
+\description{
+Clear anything previously decorate
 }
 \seealso{
 undecorate
