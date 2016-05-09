@@ -8,9 +8,10 @@
 #' @param functions functions to be filtered aganist
 #' @param package_path root of the package to be filtered aganist
 #' @param remove_tests if to delete test cases that don't affect coverage from tc_root
+#' @param compact If TRUE, after filtering, tests will be compacted to a file per function
 #' @param verbose if to show additional infomation during filtering
 #'
-filter_tests <- function(tc_root, tc_result_root, functions, package_path, remove_tests = FALSE, verbose = testr_options("verbose")) {
+filter_tests <- function(tc_root, tc_result_root, functions, package_path, remove_tests = FALSE, compact = FALSE, verbose = testr_options("verbose")) {
     if (missing(tc_root) || !file.exists(tc_root))
         stop("Specified directory with test cases does not exist!")
     if (missing(functions) && missing(package_path)) {
@@ -28,7 +29,8 @@ filter_tests <- function(tc_root, tc_result_root, functions, package_path, remov
     if (verbose) cat("Number of test cases - ", length(all.tc), "\n")
     # create dummy objects
     if (is_package) {
-        total_coverage <- covr::package_coverage(package_path, type = "none")
+        # for package, run also its tests so that we do not duplicate
+        total_coverage <- covr::package_coverage(package_path, type = "tests")
     } else {
         total_coverage <- sapply(names(functions), function(fname) {
             covr::function_coverage(fname, 1)
@@ -64,7 +66,19 @@ filter_tests <- function(tc_root, tc_result_root, functions, package_path, remov
                                      }) > 0))
         if (coverage_increased) {
             if (verbose) cat("Test case ", tc, " increased the coverage\n")
-            if (!is.null(result_path)) file.copy(tc, result_path, overwrite = FALSE)
+            if (compact) {
+                # get function name
+                fname <- rev(split_path(tc))[[2]]
+                testFile <- file.path(tc_result_root, paste("test-", fname, ".R", sep = ""))
+                if (file.exists(testFile))
+                    # ignore the library and context declarations as they already exist in the file
+                    test <- paste(readLines(tc)[c(-1,-2,-3)], collapse="\n")
+                else
+                    test <- paste(readLines(tc), collapse="\n")
+                write(test, file = testFile, append = T)
+            } else {
+                if (!is.null(result_path)) file.copy(tc, result_path, overwrite = FALSE)
+            }
             total_coverage <<- new_total_coverage
         } else {
           if (verbose) cat("Test case ", tc, " didn't increase coverage\n")

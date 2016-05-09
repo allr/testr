@@ -1,4 +1,101 @@
-# the actual API
+#' @title Generates tests for a package by running the code associated with it.
+#'
+#' Runs the examples, vignettes and possibly tests associated with the package and captures the usage of package's functions. Creates tests from the captured information, filters it according to the already existing tests and if any new tests are found, adds them to package's tests.
+#'
+#' @param package.dir Name/path to the package, uses devtools notation.
+#' @param include.tests If TRUE, captures also execution of package's tests.
+#' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
+#' @param filter TRUE if generated tests should be filteres so that only those adding to a coverage will be used
+#' @param verbose Prints additional information.
+#' @export
+#'
+testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
+    # stop all ongoing captures
+    stop_capture_all()
+    library(devtools, quietly = T)
+    library(tools, quietly = T)
+    if (build) {
+        if (verbose)
+            cat(paste("Building package", package.dir, "\n"))
+        package.path = devtools::build(package.dir, quiet = T)
+        if (verbose)
+            cat(paste("  built into", package.dir, "\n"))
+    } else {
+        package.path = package.dir
+    }
+    # install the package
+    if (verbose)
+        cat(paste("Installing package", package.path, "\n"))
+    #devtools:::install(package.name, quiet = T)
+    install.packages(package.path, repos = NULL, quiet = T, type = "source")
+    # get list of all functions
+    package = devtools:::as.package(package.dir)
+    library(package = package$package, character.only = T)
+    if (verbose)
+        cat(paste("Package", package$package, "installed\n"))
+    # get list of all functions defined in the package' R code
+    functions <- list_functions(file.path(package$path, "R"))
+    if (verbose)
+        cat(paste("Decorating",length(functions), "functions\n"))
+    # capture all functions in the package
+    for (f in functions) {
+        decorate(f, package$package, verbose = verbose)
+    }
+    # start the capturing
+    testr_options("capture.arguments", TRUE)
+    # run package examples
+    files <- devtools:::rd_files(package)
+    if (verbose)
+        cat(paste("Running examples (", length(files), "files)\n"))
+    if (length(files) != 0)
+        tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
+    # run package vignettes
+    info <- tools:::getVignetteInfo(package = package$package)
+    vdir <- info[,2]
+    vfiles <- info[,6]
+    p <- file.path(vdir, "doc", vfiles)
+    if (verbose)
+        cat(paste("Running vignettes (", length(vfiles), "files)\n"))
+    # vignettes are not expected to be runnable, silence errors
+    invisible(tryCatch(sapply(p, source), error=function(x) invisible()))
+    if (include.tests) {
+        if (verbose)
+            cat("Running package tests\n")
+        library(testthat, quietly = T)
+        testthat:::run_tests(package.name)
+    }
+    # stop capturing
+    testr_options("capture.arguments", FALSE)
+    stop_capture_all()
+    # generate the tests to the output directory
+    if (missing(output)) {
+        if (filter)
+            output = "temp"
+        else
+            output = file.path(package$path, "tests")
+    }
+    if (verbose)
+        cat(paste("Generating tests to", output, "\n"))
+    generate(output, verbose = verbose)
+    # filter, if enabled
+    if (filter) {
+        if (verbose)
+            cat("Filtering tests - this may take some time...\n")
+        filter_tests(output, file.path(package$path, "tests/testthat"), functions, package.dir, compact = T, verbose = verbose)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 #' @title Enables capturing of the specified functions.
 #'
@@ -166,89 +263,3 @@ testr_source <- function(src.root, output_dir, ...) {
 }
 
 
-#' @title Generates tests for a package by running the code associated with it.
-#'
-#' Runs the examples, vignettes and possibly tests associated with the package and captures the usage of package's functions. Creates tests from the captured information, filters it according to the already existing tests and if any new tests are found, adds them to package's tests.
-#'
-#' @param package.dir Name/path to the package, uses devtools notation.
-#' @param include.tests If TRUE, captures also execution of package's tests.
-#' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
-#' @param filter TRUE if generated tests should be filteres so that only those adding to a coverage will be used
-#' @param verbose Prints additional information.
-#' @export
-#'
-testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
-    # stop all ongoing captures
-    stop_capture_all()
-    library(devtools, quietly = T)
-    library(tools, quietly = T)
-    if (build) {
-        if (verbose)
-            cat(paste("Building package", package.dir, "\n"))
-        package.path = devtools::build(package.dir, quiet = T)
-        if (verbose)
-            cat(paste("  built into", package.dir, "\n"))
-    } else {
-        package.path = package.dir
-    }
-    # install the package
-    if (verbose)
-        cat(paste("Installing package", package.path, "\n"))
-    #devtools:::install(package.name, quiet = T)
-    install.packages(package.path, repos = NULL, quiet = T, type = "source")
-    # get list of all functions
-    package = devtools:::as.package(package.dir)
-    library(package = package$package, character.only = T)
-    if (verbose)
-        cat(paste("Package", package$package, "installed\n"))
-    # get list of all functions defined in the package' R code
-    functions <- list_functions(file.path(package$path, "R"))
-    if (verbose)
-        cat(paste("Decorating",length(functions), "functions\n"))
-    # capture all functions in the package
-    for (f in functions) {
-        decorate(f, package$package, verbose = verbose)
-    }
-    # start the capturing
-    testr_options("capture.arguments", TRUE)
-    # run package examples
-    files <- devtools:::rd_files(package)
-    if (verbose)
-        cat(paste("Running examples (", length(files), "files)\n"))
-    if (length(files) != 0)
-        tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
-    # run package vignettes
-    info <- tools:::getVignetteInfo(package = package$package)
-    vdir <- info[,2]
-    vfiles <- info[,6]
-    p <- file.path(vdir, "doc", vfiles)
-    if (verbose)
-        cat(paste("Running vignettes (", length(vfiles), "files)\n"))
-    # vignettes are not expected to be runnable, silence errors
-    invisible(tryCatch(sapply(p, source), error=function(x) invisible()))
-    if (include.tests) {
-        if (verbose)
-            cat("Running package tests\n")
-        library(testthat, quietly = T)
-        testthat:::run_tests(package.name)
-    }
-    # stop capturing
-    testr_options("capture.arguments", FALSE)
-    stop_capture_all()
-    # generate the tests to the output directory
-    if (missing(output)) {
-        if (filter)
-            output = "temp"
-        else
-            output = file.path(package$path, "tests")
-    }
-    if (verbose)
-        cat(paste("Generating tests to", output, "\n"))
-    generate(output, verbose = verbose)
-    # filter, if enabled
-    if (filter) {
-        if (verbose)
-            cat("Filtering tests - this may take some time...\n")
-        filter_tests(output, file.path(package$path, "tests"), functions, package.dir, verbose = verbose)
-    }
-}

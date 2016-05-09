@@ -251,3 +251,6 @@ list_functions <- function(src.root, recursive = TRUE) {
     functions
 }
 
+split_path <- function(path) {
+    setdiff(strsplit(path,"/|\\\\")[[1]], "")
+}

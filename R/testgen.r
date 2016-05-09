@@ -63,9 +63,9 @@ ensure_file <- function(name) {
     if (!file.create(tc.file))
         stop("Unable to create file: ", tc.file)
     # TODO perhaps this is not needed for testthat
-    write("library(testthat)\n\n", file = tc.file, append = TRUE)
+    write("library(testthat)\n", file = tc.file, append = TRUE)
     # write context information (the function name)
-    write(paste("context(\"",name,"\")\n\n", sep=""), file = tc.file, append = TRUE)
+    write(paste("context(\"",name,"\")\n", sep=""), file = tc.file, append = TRUE)
     return(tc.file)
 }
 
