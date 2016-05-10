@@ -1,13 +1,14 @@
 #' @title Adds regression tests to specified package.
 #'
-#' Captured specified functions of the package, then executes the given code and creates regression tests from the provided code.
+#' Given a package, the code to be executed and a list of functions to capture, the function captures the selected functions from the package, then runs the specified code. It then generates tests from the captured information and using code coverage filters them against existing tests for the package. Those that increase the code coverage will be added to already existing testthat tests for the package.
 #'
 #' @param package.dir Name/path to the package, uses devtools notation
 #' @param code Function (with no arguments) whose code will be executed and its calls in the package captured.
-#' @param functions Functions from the package to be captured, if empty, all package functions will be captured
+#' @param functions Functions from the package to be captured, if missing, all package functions will be captured (character vector)
 #' @param filter T if the generated tests should be filtered
 #' @param build T if the package will be built beforehand
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
+#' @param output If used, specifies where should the tests be unfiltered tests be generated (if not specified, they will use a temp directory and clean it afterwards)
 #' @param verbose Prints additional information.
 #' @export
 
@@ -88,9 +89,9 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
 #' @param package.dir Name/path to the package, uses devtools notation.
 #' @param include.tests If TRUE, captures also execution of package's tests.
 #' @param build if to build package before. Default \code{TRUE}
-#' @param output resulting directory with test cases
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
 #' @param filter TRUE if generated tests should be filteres so that only those adding to a coverage will be used
+#' @param output If used, specifies where should the tests be unfiltered tests be generated (if not specified, they will use a temp directory and clean it afterwards)
 #' @param verbose Prints additional information.
 #' @export
 #'
