@@ -9,12 +9,12 @@
 #' @seealso write_capture
 #'
 decorate <- function(func, package, verbose) {
-    if (identical(class(library), "function")) {
+    if (identical(class(library), "function") && getRversion() < '3.3.0') {
         suppressMessages(trace(library,
                                exit=quote(if (!missing(package)) testr:::refresh_decoration(package)),
                                print = FALSE))
     }
-    if (!cache$trace_replaced) {
+    if (!cache$trace_replaced && getRversion() < '3.3.0') {
         replace_trace()
     }
     if(class(func) != "character" || (!missing(package) && class(package) != "character")){
@@ -154,16 +154,3 @@ clear_decoration <- function(verbose) {
         undecorate(fname, verbose = verbose)
 }
 
-#' @title Refresh decoration
-#'
-#' @description In cases when a function that is being traced is used through imports namespace
-#' by a package that is being loaded, the package won't get the correct copy, which results in
-#' the information loss. This function is hooked up to the library, to be run upon exist and
-#' check what functions might need redecoration, to propagate correct version to imports namespace.
-#' @param pkg package
-refresh_decoration <- function(pkg) {
-    ienv <- getImportsEnv(pkg)
-    need_redecoration <- intersect(ls(ienv), names(.decorated))
-    sapply(need_redecoration, undecorate)
-    sapply(need_redecoration, decorate)
-}

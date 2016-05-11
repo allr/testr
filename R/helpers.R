@@ -180,14 +180,6 @@ extract_func_name <- function(filename, modify.characters = TRUE){
     fname
 }
 
-replace_trace <- function() {
-    assign(".TraceWithMethods", as.environment("package:methods"))
-    unlockBinding(".TraceWithMethods", getNamespace("methods"))
-    environment(TraceWithMethods) <- getNamespace("methods")
-    assign(".TraceWithMethods", TraceWithMethods, getNamespace("methods"))
-    lockBinding(".TraceWithMethods", getNamespace("methods"))
-    cache$trace_replaced <- TRUE
-}
 
 
 #' @title Parse function names from objects
@@ -261,3 +253,4 @@ list_functions <- function(src.root, recursive = TRUE) {
 split_path <- function(path) {
     setdiff(strsplit(path,"/|\\\\")[[1]], "")
 }
+
