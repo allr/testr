@@ -6,13 +6,14 @@
 #' @param code Function (with no arguments) whose code will be executed and its calls in the package captured.
 #' @param functions Functions from the package to be captured, if missing, all package functions will be captured (character vector)
 #' @param filter T if the generated tests should be filtered
+#' @param exclude_existing_tests If TRUE, existing tests will be ignored from the code coverage
 #' @param build T if the package will be built beforehand
 #' @param timed TRUE if the tests result depends on time, in which case the current date & time will be appended to the output_dir.
 #' @param output If used, specifies where should the tests be unfiltered tests be generated (if not specified, they will use a temp directory and clean it afterwards)
 #' @param verbose Prints additional information.
 #' @export
 
-testr_addRegression <- function(package.dir = ".", code, functions, filter = TRUE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose")) {
+testr_addRegression <- function(package.dir = ".", code, functions, filter = TRUE, exclude_existing_tests = FALSE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose")) {
     cleanup = F
     # stop all ongoing captures
     stop_capture_all()
@@ -121,9 +122,9 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
         }
     }
     if (missing(output))
-        testr_addRegression(package.dir, code = f , filter = filter, build = build, timed = timed, verbose = verbose)
+        testr_addRegression(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, verbose = verbose)
     else
-        testr_addRegression(package.dir, code = f , filter = filter, build = build, timed = timed, output, verbose = verbose)
+        testr_addRegression(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, output, verbose = verbose)
 }
 
 
@@ -159,8 +160,8 @@ capture <- function(..., verbose = testr_options("verbose")) {
 #' @param internal TRUE if only internal functions should be captured
 #' @param verbose TRUE to display additional information
 #' @export
-capture_builtins <- function(internal = FALSE, verbose = testr_options("verbose")) {
-    functions <- builtins(internal)
+capture_builtins <- function(internal,only = FALSE, verbose = testr_options("verbose")) {
+    functions <- builtins(internal.only)
     setup_capture(functions, verbose = verbose)
 }
 
@@ -224,7 +225,7 @@ generate <- function(output_dir, root = testr_options("capture.folder"),
 #'
 #' @export
 filter <- function(test_root, output_dir, ...,
-                   package_path = "", remove_tests = FALSE,
+                   package_path = "", remove_tests = FALSE, compact = FALSE,
                    verbose = testr_options("verbose")) {
     functions <- parseFunctionNames(...)
     if (length(functions) && package_path != "") {
@@ -238,7 +239,7 @@ filter <- function(test_root, output_dir, ...,
     fn <- sapply(functions, `[`, 1)
     functions <- sapply(functions, `[`, 2)
     names(functions) <- fn
-    filter_tests(test_root, output_dir, functions, package_path, remove_test = remove_tests, verbose = verbose)
+    filter_tests(test_root, output_dir, functions, package_path, remove_test = remove_tests, compact = compact, verbose = verbose)
     invisible(NULL)
 }
 

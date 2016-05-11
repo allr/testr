@@ -8,10 +8,11 @@
 #' @param functions functions to be filtered aganist
 #' @param package_path root of the package to be filtered aganist
 #' @param remove_tests if to delete test cases that don't affect coverage from tc_root
+#' @param exclude_existing_tests If TRUE, existing tests will be ignored from the code coverage
 #' @param compact If TRUE, after filtering, tests will be compacted to a file per function
 #' @param verbose if to show additional infomation during filtering
 #'
-filter_tests <- function(tc_root, tc_result_root, functions, package_path, remove_tests = FALSE, compact = FALSE, verbose = testr_options("verbose")) {
+filter_tests <- function(tc_root, tc_result_root, functions, package_path, remove_tests = FALSE, exclude_existing_tests = FALSE, compact = FALSE, verbose = testr_options("verbose")) {
     if (missing(tc_root) || !file.exists(tc_root))
         stop("Specified directory with test cases does not exist!")
     if (missing(functions) && missing(package_path)) {
@@ -30,7 +31,10 @@ filter_tests <- function(tc_root, tc_result_root, functions, package_path, remov
     # create dummy objects
     if (is_package) {
         # for package, run also its tests so that we do not duplicate
-        total_coverage <- covr::package_coverage(package_path, type = "tests")
+        if (exclude_existing_tests)
+            total_coverage <- covr::package_coverage(package_path, type = "none")
+        else
+            total_coverage <- covr::package_coverage(package_path, type = "tests")
     } else {
         total_coverage <- sapply(names(functions), function(fname) {
             covr::function_coverage(fname, 1)
