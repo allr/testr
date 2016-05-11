@@ -1,6 +1,6 @@
 #' @title Adds regression tests to specified package.
 #'
-#' Given a package, the code to be executed and a list of functions to capture, the function captures the selected functions from the package, then runs the specified code. It then generates tests from the captured information and using code coverage filters them against existing tests for the package. Those that increase the code coverage will be added to already existing testthat tests for the package.
+#' @description Given a package, the code to be executed and a list of functions to capture, the function captures the selected functions from the package, then runs the specified code. It then generates tests from the captured information and using code coverage filters them against existing tests for the package. Those that increase the code coverage will be added to already existing testthat tests for the package.
 #'
 #' @param package.dir Name/path to the package, uses devtools notation
 #' @param code Function (with no arguments) whose code will be executed and its calls in the package captured.
@@ -155,10 +155,10 @@ capture <- function(..., verbose = testr_options("verbose")) {
 #' @title Enables capturing of all builtin functions.
 #'
 #' @description Wrapper around capture to capture builtin functions
-#' @param internal TRUE if only internal functions should be captured
+#' @param internal.only TRUE if only internal functions should be captured
 #' @param verbose TRUE to display additional information
 #' @export
-capture_builtins <- function(internal,only = FALSE, verbose = testr_options("verbose")) {
+capture_builtins <- function(internal.only = FALSE, verbose = testr_options("verbose")) {
     functions <- builtins(internal.only)
     setup_capture(functions, verbose = verbose)
 }
@@ -218,6 +218,7 @@ generate <- function(output_dir, root = testr_options("capture.folder"),
 #' @param package_path package root of the package that coverage should be measured
 #' @param remove_tests if the tests that don't increase coverage should be removed. Default: \code{FALSE}.
 #' This option will be set to \code{TRUE} if \code{output_dir} is not supplied
+#' @param compact If TRUE, the filtered tests will be compacted into files one per function, rather than the default one per test.
 #' @param verbose whether the additional information should be displayed. Default: \code{TRUE}
 #' @return NULL
 #'

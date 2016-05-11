@@ -5,7 +5,7 @@
 \title{Filter the generated tests so that only tests increasing code coverage will be kept.}
 \usage{
 filter(test_root, output_dir, ..., package_path = "", remove_tests = FALSE,
-  verbose = testr_options("verbose"))
+  compact = FALSE, verbose = testr_options("verbose"))
 }
 \arguments{
 \item{test_root}{root directory of tests to be filtered}
@@ -19,6 +19,8 @@ increase coverage will be removed from test_root}
 
 \item{remove_tests}{if the tests that don't increase coverage should be removed. Default: \code{FALSE}.
 This option will be set to \code{TRUE} if \code{output_dir} is not supplied}
+
+\item{compact}{If TRUE, the filtered tests will be compacted into files one per function, rather than the default one per test.}
 
 \item{verbose}{whether the additional information should be displayed. Default: \code{TRUE}}
 }

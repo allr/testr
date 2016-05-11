@@ -18,7 +18,7 @@ testr_package(package.dir = ".", include.tests = FALSE, timed = FALSE,
 
 \item{build}{if to build package before. Default \code{TRUE}}
 
-\item{output}{resulting directory with test cases}
+\item{output}{If used, specifies where should the tests be unfiltered tests be generated (if not specified, they will use a temp directory and clean it afterwards)}
 
 \item{verbose}{Prints additional information.}
 }

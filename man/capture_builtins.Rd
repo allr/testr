@@ -4,10 +4,10 @@
 \alias{capture_builtins}
 \title{Enables capturing of all builtin functions.}
 \usage{
-capture_builtins(internal = FALSE, verbose = testr_options("verbose"))
+capture_builtins(internal.only = FALSE, verbose = testr_options("verbose"))
 }
 \arguments{
-\item{internal}{TRUE if only internal functions should be captured}
+\item{internal.only}{TRUE if only internal functions should be captured}
 
 \item{verbose}{TRUE to display additional information}
 }

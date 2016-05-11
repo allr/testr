@@ -5,7 +5,7 @@
 \title{Test Case filtering based on coverage}
 \usage{
 filter_tests(tc_root, tc_result_root, functions, package_path,
-  remove_tests = FALSE, compact = FALSE,
+  remove_tests = FALSE, exclude_existing_tests = FALSE, compact = FALSE,
   verbose = testr_options("verbose"))
 }
 \arguments{
@@ -18,6 +18,8 @@ filter_tests(tc_root, tc_result_root, functions, package_path,
 \item{package_path}{root of the package to be filtered aganist}
 
 \item{remove_tests}{if to delete test cases that don't affect coverage from tc_root}
+
+\item{exclude_existing_tests}{If TRUE, existing tests will be ignored from the code coverage}
 
 \item{compact}{If TRUE, after filtering, tests will be compacted to a file per function}
 
