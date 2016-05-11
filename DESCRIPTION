@@ -12,11 +12,11 @@ Imports:
     utils,
     tools,
     devtools,
-    methods
+    methods,
+    testthat,
+    covr
 LinkingTo: Rcpp
 Suggests:
-    testthat,
-    covr,
     parallel,
     knitr,
     rmarkdown,

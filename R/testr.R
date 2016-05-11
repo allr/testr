@@ -17,8 +17,6 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
     cleanup = F
     # stop all ongoing captures
     stop_capture_all()
-    library(devtools, quietly = T)
-    library(tools, quietly = T)
     if (build) {
         if (verbose)
             cat(paste("Building package", package.dir, "\n"))
@@ -34,8 +32,9 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
     #devtools:::install(package.name, quiet = T)
     install.packages(package.path, repos = NULL, quiet = T, type = "source")
     # get list of all functions
-    package = devtools:::as.package(package.dir)
-    library(package = package$package, character.only = T)
+    package = devtools::as.package(package.dir)
+    # TODO I don't thing this line is needed anymore
+    # library(package = package$package, character.only = T)
     if (verbose)
         cat(paste("Package", package$package, "installed\n"))
     # if function names were not specified,
@@ -97,7 +96,7 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
 #' @export
 #'
 testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
-    package = devtools:::as.package(package.dir)
+    package = devtools::as.package(package.dir)
     f <- function() {
         # run package examples
         files <- devtools:::rd_files(package)
@@ -106,7 +105,7 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
         if (length(files) != 0)
             tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
         # run package vignettes
-        info <- tools:::getVignetteInfo(package = package$package)
+        info <- tools::getVignetteInfo(package = package$package)
         vdir <- info[,2]
         vfiles <- info[,6]
         p <- file.path(vdir, "doc", vfiles)
@@ -117,7 +116,6 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
         if (include.tests) {
             if (verbose)
                 cat("Running package tests\n")
-            library(testthat, quietly = T)
             testthat:::run_tests(package.name)
         }
     }
@@ -259,7 +257,6 @@ run <- function(test_dir, verbose = testr_options("verbose")) {
     }
     result = TRUE
     # now we have the directory in which the tests are located, run testthat on them
-    library(testthat, quietly = TRUE)
     # for all folders in the file
     dirs <- list.files(test_dir, include.dirs = T, no.. = T)
     for (d in dirs) {
@@ -440,7 +437,6 @@ run_tests <- function(loc) {
   test_path <- find_tests(loc)
   if (is.null(test_path))
     return(invisible())
-  library(testthat, quietly = TRUE)
   tryCatch(testthat::test_dir(test_path), error=function(x) invisible())
 }
 
