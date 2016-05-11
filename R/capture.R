@@ -153,4 +153,3 @@ clear_decoration <- function(verbose) {
     for (fname in ls(.decorated, all.names = TRUE))
         undecorate(fname, verbose = verbose)
 }
-
