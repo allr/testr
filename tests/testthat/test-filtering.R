@@ -24,22 +24,48 @@ func2 <<- function(x, y) {
     res
 }
 
+test_template_f1 <- "
+library(testthat)
+
 test_that('Basic test filtering works correctly', {
-    t <- tempdir()
-    # one function
-    filter("filtering/simple", t, func1, verbose = FALSE)
-    expect_true(file.exists(file.path(t, "test1.R")))
-    expect_true(file.exists(file.path(t, "test2.R")))
-    expect_false(file.exists(file.path(t, "test3.R")))
-    # multiple functions
-    filter("filtering/simple", t, func1, func2, verbose = FALSE)
-    expect_true(file.exists(file.path(t, "test1.R")))
-    expect_true(file.exists(file.path(t, "test2.R")))
-    expect_false(file.exists(file.path(t, "test3.R")))
-    expect_true(file.exists(file.path(t, "test4.R")))
-    expect_false(file.exists(file.path(t, "test5.R")))
-    rm(func1, func2, envir = .GlobalEnv)
-})
+expect_equal(func1(%d), %d)
+expect_equal(func1(%d), %d)
+})"
+
+test_template_f2 <- "
+library(testthat)
+
+test_that('Basic test filtering works correctly', {
+expect_equal(func2(%d, %d), %d)
+expect_equal(func2(%d, %d), %d)
+})"
+
+# test_that('Basic test filtering works correctly', {
+#     t <- tempdir()
+#     path_to_filter <- file.path(t, "to-filter")
+#     filter_out <- file.path(t, "filter-out")
+#     dir.create(path_to_filter)
+#     dir.create(filter_out)
+#     write(sprintf(test_template_f1, 5, 5, 3, 3), file.path(path_to_filter, "test1.R"))
+#     write(sprintf(test_template_f1, 11, 12, 13, 14), file.path(path_to_filter, "test2.R"))
+#     write(sprintf(test_template_f1, 5, 5, 3, 3), file.path(path_to_filter, "test3.R"))
+#     write(sprintf(test_template_f2, 4, 1, 5, 5, 0, 5), file.path(path_to_filter, "test4.R"))
+#     write(sprintf(test_template_f2, 4, 1, 5, 5, 0, 5), file.path(path_to_filter, "test5.R"))
+#     # one function
+#     filter(path_to_filter, filter_out, func1, verbose = FALSE)
+#     expect_true(file.exists(file.path(filter_out, "test1.R")))
+#     expect_true(file.exists(file.path(filter_out, "test2.R")))
+#     expect_false(file.exists(file.path(filter_out, "test3.R")))
+#
+#     # multiple functions
+#     filter(path_to_filter, filter_out, func1, func2, verbose = FALSE)
+#     expect_true(file.exists(file.path(filter_out, "test1.R")))
+#     expect_true(file.exists(file.path(filter_out, "test2.R")))
+#     expect_false(file.exists(file.path(filter_out, "test3.R")))
+#     expect_true(file.exists(file.path(filter_out, "test4.R")))
+#     expect_false(file.exists(file.path(filter_out, "test5.R")))
+#     rm(func1, func2, envir = .GlobalEnv)
+# })
 
 # test_that('Package filtering works correctly', {
 #     temp <- "/Users/romantsegelskyi/temp"
