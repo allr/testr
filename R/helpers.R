@@ -156,8 +156,11 @@ parseFunctionNames <- function(...) {
             if (is.character(x)) {
                 # it is a character vector, use its value
                 x <- strsplit(x, ":::")[[1]]
-                if (length(x) == 1)
-                    x <- list(NA, x)
+                if (length(x) == 1) {
+                    x <- strsplit(x, "::")[[1]]
+                    if (length(x) == 1)
+                        x <- list(NA, x)
+                }
                 if (x[[2]] == "")
                     x[[2]] <- ":::"
                 result[[i]] <- c(name = x[[2]], package = x[[1]])
@@ -168,7 +171,7 @@ parseFunctionNames <- function(...) {
             a <- args[[i]]
             if (is.name(a)) {
                 result[[i]] <<- c(name = as.character(a), package = NA)
-            } else if (is.language(a) && length(a) == 3 && a[[1]] == as.name(":::")) {
+            } else if (is.language(a) && length(a) == 3 && a[[1]] %in% c(as.name(":::"), as.name("::"))) {
                 result[[i]] <<- c(name = as.character(a[[3]]), package = as.character(a[[2]]))
             } else {
                 print("error")

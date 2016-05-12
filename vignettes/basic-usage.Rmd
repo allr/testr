@@ -23,10 +23,6 @@ This is accomplished using a so called *code coverage*. Code coverage analyzes w
 
 It is important to stress that testR does not actually create new tests from thin air, it just extracts the smallest possible test fragments from existing cod to be used as tests. Therefore the tests produced are only (a) as good as the the code they have been taken from and (b) the tests cannot determine whether the program behaves *correctly*, only whether it behaves *consistently* for a period of time. 
 
-## Installation
-
-testR can be installed from *CRAN* repository. 
-
 ## Creating tests for the first time 
 
 Assume you already have a package with vignettes, examples, and some testthat tests that test the package in general, but you want to have fine grained unittests as well. You can use testR to run the existing code of the package (vignettes, examples and perhaps the tests as well) and generate fine grained tests for these captures. If your package is located in say `"~/mypackage"`, you can execute the following to generate the tests:
@@ -99,57 +95,3 @@ testr_addRegression(package.dir = ".", code, functions, filter = TRUE, build = T
 
 The output of the function (if `verbose` is enabled) is the same as that of `testr_package` so we refer the readed to that section. 
 
-## Capturing and generating tests for arbitrary code
-
-Until now, we have always worked with entire package. But there may be cases in which you do not want to limit yourself to create tests or add regressions for a specified package. testR thus allows you to use all the underlying functions used in the process of the above examples so that you can capture any functions and any code. This section briefly explains the functions to accomplish this in order of their logical application:
-
-```R
-capture(..., verbose = testr_options("verbose"))
-```
-
-`capture` functions allows specified functions from different packages to be captured (i.e. tests for their usage will be generated). The function names are accepted in either characters, or in R's symbols, i.e. `package:::function`. 
-
-```R
-capture_builtins(internal.only = FALSE, verbose = testr_options("verbose"))
-```
-
-Shorthand for capturing all builtin functions (or internal functions only).
-
-```R
-stop_capture(..., verbose = testr_options("verbose"))
-```
-
-Stops capturing selected functions (given ether as characters, or `package:::function`).
-
-```R
-stop_capture_all(verbose = testr_options("verbose"))
-```
-
-Stops capturing *all* functions. 
-
-```R
-generate(output_dir, root = testr_options("capture.folder"),
-         timed = F, clear_capture = T, verbose = testr_options("verbose"))
-```
-
-Generates tests from captured information into the specified `output_dir`. Unless `clear_capture` is `FALSE` also deletes the captured data afterwards so that new capturing & generation can begin. If `timed` is `TRUE` the tests will be stamped with current date and time. The generator creates one file per test and puts tests of a specific function into a directory named as the function (`pakage___function`).
-
-```R
-filter(test_root, output_dir, ...,
-       package_path = "", remove_tests = FALSE, compact = FALSE
-       verbose = testr_options("verbose"))
-```
-
-Filters tests from either specific functions or for given package based on coverage. The testsr that do not contribute to the coverage will be deleted if `remove_tests` is `TRUE`. If `compact` is `TRUE`, the output format of the filtered tests will not be one file per test, but one file per function with tests appended. 
-
-```R
-testr_code(code, output_dir, ...)
-```
-
-Shorthand for generating tests by running the given code, into the specified `output_dir`. Functions to capture may be specified in the `...` argument in the usual character vector, or R symbols format. This function does not do any filtering. 
-
-```R
-testr_source(src.root, output_dir, ...)
-```
-                   
-Shorthand for generating tests by running R file or directory specified into the `output_dir`. Functions to capture may be specified in the `...` argument in the usual character vector, or R symbols format. This function does not do any filtering. 
