@@ -40,28 +40,26 @@ filter_tests <- function(tc_root, tc_result_root, functions, package_path, remov
             covr::function_coverage(fname, 1)
         }, simplify = FALSE)
     }
+    tests_so_far <- character()
+
     cov_change <- function(tc) {
+        tests_so_far <<- c(tests_so_far, tc)
         if (!is.null(tc_result_root)) result_path <- gsub(tc_root, tc_result_root, tc)
         sink(tempfile())
+        # code is all passed tests
+        code <- character()
+        for (f in tests_so_far)
+            code <- paste(code, sprintf("\ntestthat::test_file('%s')", tools::file_path_as_absolute(f)), sep="")
         if (is_package) {
-            code <- sprintf("\ntestthat::test_file('%s')", tools::file_path_as_absolute(tc))
-            test_coverage <- covr::package_coverage(package_path,
+            new_total_coverage <- covr::package_coverage(package_path,
                                                     type = "none",
                                                     code = code)
         } else {
-            test_coverage <- sapply(names(functions), function(fname) {
-                covr::function_coverage(fname, code = quote(testthat::test_file(tc)))
+            new_total_coverage <- sapply(names(functions), function(fname) {
+                covr::function_coverage(fname, code = parse(code))
             }, simplify = FALSE)
         }
         sink()
-
-        if (is_package) {
-            new_total_coverage <- covr:::merge_coverage(list(test_coverage, total_coverage))
-        } else {
-            new_total_coverage <- sapply(names(functions), function(fname) {
-                covr:::merge_coverage(list(test_coverage[[fname]], total_coverage[[fname]]))
-            }, simplify = FALSE)
-        }
 
         coverage_increased <- ifelse(is_package,
                                      covr::percent_coverage(new_total_coverage) - covr::percent_coverage(total_coverage) > 0,
