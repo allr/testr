@@ -1,15 +1,3 @@
-#' @title Get function name from filename
-#'
-#' @description This function extracts a function name from testcase file name
-#' @param filename filename
-#' @seealso process_tc
-get_function_name <- function(filename){
-    name <- gsub("(.*)[:]+(.*)\\.[rR]$", "\\2", filename)
-    if (grepl("_", name))
-        name <- gsub("(.*)_(.*)", "\\1", name)
-    name
-}
-
 #' @title Check if function is S3 generic
 #'
 #' @description Determine if function has a call to UseMethod. In that case there is no need to capture it.
@@ -23,35 +11,22 @@ is_s3_generic <- function(fname, env=.GlobalEnv) {
     any(uses == "UseMethod")
 }
 
-
-#' @title Estimate the number of test cases
-#'
-#' @description Estimate the number of test cases in the give path
-#' @param path path to check
-#' @seealso process_tc
-get_num_tc <- function(path){
-    if (file.info(path)$isdir) {
-        path <- list.files(path, pattern = "\\.[rR]$", recursive = TRUE, all.files = TRUE)
-    }
-    lines <- vector()
-    for (file in path) {
-        lines <- c(lines, readLines(file))
-    }
-    length(grep("test\\(id",lines))
-}
-
 #' @title Clean temporary directory
 #'
 #' @description Make sure temp dir is empty by deleting unnecessary files
 clean_temp <- function() {
-    for (file in list.files(cache$temp_dir, full.names = T, pattern = "\\.RData|\\.[rR]$")) {
+    for (file in list.files(cache$temp_dir, full.names = TRUE, pattern = "\\.RData|\\.[rR]$")) {
         file.remove(file)
     }
 }
 
+#' @title Parse and evaluate
+#'
+#' @description Function that wraps parse(eval(...)) call with tryCatch
+#' @param what text to be parse and evaluate
 parse_eval <- function(what) {
     tryCatch({
-        eval(parse(text=what));
+        eval(parse(text=what))
         TRUE
         },
         error=function(e) {
@@ -63,7 +38,6 @@ parse_eval <- function(what) {
 #'
 #' @description In certain cases, language arguments (like calls), need to be quoated
 #' @param arg list of arguments
-#' @seealso GenerateTC
 quoter <- function(arg) {
     if (is.list(arg)) {
         org.attrs <- attributes(arg)
@@ -137,22 +111,6 @@ reassing_in_env <- function(name, obj, env) {
     }
 }
 
-#' @title Get all files with specific pattern
-#'
-#' @description This function is respinsible for leturning all files from specified folder
-#' @param root input folder
-#' @param pattern pattern of files to be searched for
-#' @param full.names if full path to files should be returned
-#'
-get_all_files <- function(root, pattern = ".[rR]$", full.names = T){
-    if (file.info(root)$isdir){
-        files <- list.files(root, pattern=pattern, recursive = TRUE, all.files = TRUE, full.names = full.names)
-    } else {
-        files <- root
-    }
-    files
-}
-
 #' @title Get function name without special characters
 #'
 #' @description This function is respinsible for extractng function name from test file name and removing special characters
@@ -179,7 +137,6 @@ extract_func_name <- function(filename, modify.characters = TRUE){
     }
     fname
 }
-
 
 
 #' @title Parse function names from objects
@@ -253,4 +210,3 @@ list_functions <- function(src.root, recursive = TRUE) {
 split_path <- function(path) {
     setdiff(strsplit(path,"/|\\\\")[[1]], "")
 }
-

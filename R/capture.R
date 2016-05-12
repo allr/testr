@@ -112,7 +112,7 @@ write_capture <- function(fname, args.env){
 #' @param verbose if to print additional status information
 #' @seealso Decorate
 #' @export
-setup_capture <- function(flist, package, verbose) {
+setup_capture <- function(flist, package, verbose = testr_options("verbose")) {
     old <- testr_options("capture.arguments")
     if (old)
         testr_options("capture.arguments", FALSE)

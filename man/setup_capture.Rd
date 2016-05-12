@@ -4,7 +4,7 @@
 \alias{setup_capture}
 \title{Setup information capturing for list of function}
 \usage{
-setup_capture(flist, package, verbose)
+setup_capture(flist, package, verbose = testr_options("verbose"))
 }
 \arguments{
 \item{flist}{function or list of functions to turn on capturing for. List should be only as character.}
