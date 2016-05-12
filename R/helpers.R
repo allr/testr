@@ -210,3 +210,16 @@ list_functions <- function(src.root, recursive = TRUE) {
 split_path <- function(path) {
     setdiff(strsplit(path,"/|\\\\")[[1]], "")
 }
+
+extract_example <- function(ex) {
+    sapply(ex, function(x) x[[1]])
+}
+
+example_code <- function(fromFile) {
+    code <- tools::parse_Rd(fromFile)
+    code <- code[sapply(code, function(x) attr(x, "Rd_tag") == "\\examples")]
+    result = ""
+    for (cc in code)
+        result = c(result, extract_example(cc))
+    result
+}

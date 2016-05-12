@@ -20,7 +20,7 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
     if (build) {
         if (verbose)
             cat(paste("Building package", package.dir, "\n"))
-        package.path = devtools::build(package.dir, quiet = T)
+        package.path = devtools::build(package.dir, quiet = ! verbose)
         if (verbose)
             cat(paste("  built into", package.dir, "\n"))
     } else {
@@ -34,7 +34,8 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
     # get list of all functions
     package = devtools::as.package(package.dir)
     # TODO I don't thing this line is needed anymore
-    # library(package = package$package, character.only = T)
+    l <- library
+    l(package = package$package, character.only = T)
     if (verbose)
         cat(paste("Package", package$package, "installed\n"))
     # if function names were not specified,
@@ -78,6 +79,7 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
     # clear the temp folder, if we used a temp folder implicitly
     if (cleanup)
         unlink(output, recursive = T)
+    detach(paste("package", package$package, sep=":"), unload = T, character.only = T)
 }
 
 
@@ -97,13 +99,9 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
 #'
 testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
     package = devtools::as.package(package.dir)
+    devtools::document(package.dir)
+    detach(paste("package", package$package, sep=":"), unload = T, character.only = T)
     f <- function() {
-        # run package examples
-        files <- devtools:::rd_files(package)
-        if (verbose)
-            cat(paste("Running examples (", length(files), "files)\n"))
-        if (length(files) != 0)
-            tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
         # run package vignettes
         info <- tools::getVignetteInfo(package = package$package)
         vdir <- info[,2]
@@ -113,10 +111,22 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
             cat(paste("Running vignettes (", length(vfiles), "files)\n"))
         # vignettes are not expected to be runnable, silence errors
         invisible(tryCatch(sapply(p, source), error=function(x) invisible()))
+        # run package examples
+        manPath <- file.path(package.dir, "man")
+        examples <- list.files(manPath, pattern = "\\.[Rr]d$", no.. = T)
+        if (length(examples) != 0) {
+            if (verbose)
+                cat(paste("Running examples (", length(examples), "man files)\n"))
+            for (f in examples) {
+                code <- example_code(file.path(manPath, f))
+                tryCatch(eval(parse(text = code)), error=function(x) print(x))
+            }
+        }
+        # run tests
         if (include.tests) {
             if (verbose)
                 cat("Running package tests\n")
-            testthat:::run_tests(package.name)
+            testthat::test_dir(file.path(package.dir, "tests", "testthat"), filter = NULL)
         }
     }
     if (missing(output))
@@ -415,41 +425,4 @@ package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
   TestGen("capture", file.path(gen.dir, name))
   file.remove(list.files("capture", recursive = T, full.names = T))
   invisible()
-}
-
-#' @title Run all examples in the package
-#'
-#' @description This function is responsible for running all examples in specified package
-#' @param package package name
-run_examples <- function(package) {
-  pkg <- devtools::as.package(package)
-  files <- devtools:::rd_files(pkg)
-  if (length(files) == 0) {
-    return()
-  }
-  tryCatch(lapply(files, devtools:::run_example), error=function(x) print(x))
-}
-
-#' @title Run testthat tests in the package
-#'
-#' @description This function is responsible for running testthat tests for specified package
-#' @param loc location of the package source
-run_tests <- function(loc) {
-  test_path <- find_tests(loc)
-  if (is.null(test_path))
-    return(invisible())
-  tryCatch(testthat::test_dir(test_path), error=function(x) invisible())
-}
-
-#' @title Run all vignettes in the package
-#'
-#' @description This function is responsible for running code from vignettes for specified package
-#' @param name package name
-run_vignettes <- function(name) {
-  info <- tools::getVignetteInfo(package = name)
-  vdir <- info[,2]
-  vfiles <- info[,6]
-  p <- file.path(vdir, "doc", vfiles)
-  invisible(tryCatch(sapply(p, source),
-                     error=function(x) invisible()))
 }
