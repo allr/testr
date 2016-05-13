@@ -248,7 +248,7 @@ filter <- function(test_root, output_dir, ...,
     fn <- sapply(functions, `[`, 1)
     functions <- sapply(functions, `[`, 2)
     names(functions) <- fn
-    filter_tests(test_root, output_dir, functions, package_path, remove_test = remove_tests, compact = compact, verbose = verbose)
+    filter_tests(test_root, output_dir, functions, package_path, remove_tests = remove_tests, compact = compact, verbose = verbose)
     invisible(NULL)
 }
 
