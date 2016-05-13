@@ -1,0 +1,89 @@
+---
+title: "testr - Manual Usage"
+author: "Roman Tsegelskyi & Petr Maj"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+## Capturing arbitrary code
+
+While the basic usage vignette deals with the introduction of testR capabilies, explanation of its limitations and a walkthrough over the two most common usecases, testR also exports the functions required to capture and generate regressions from any code. These functions will be discussed in this document.
+
+## Capturing Functions
+
+```R
+capture(..., verbose = testr_options("verbose"))
+```
+
+`capture` function allows specified functions from different packages to be captured (i.e. tests for their usage will be generated). The function names are accepted in either characters, or in R's symbols, i.e. `package:::function`.
+
+```R
+capture_builtins(internal.only = FALSE, verbose = testr_options("verbose"))
+```
+
+Shorthand for capturing all builtin functions (or internal functions only).
+
+```R
+stop_capture(..., verbose = testr_options("verbose"))
+```
+
+Stops capturing selected functions (given ether as characters, or `package:::function`).
+
+```R
+stop_capture_all(verbose = testr_options("verbose"))
+```
+
+Stops capturing *all* functions. 
+
+## Generating tests
+
+```R
+generate(output_dir, root = testr_options("capture.folder"),
+         timed = F, clear_capture = T, verbose = testr_options("verbose"))
+```
+
+Generates tests from captured information into the specified `output_dir`. Unless `clear_capture` is `FALSE` also deletes the captured data afterwards so that new capturing & generation can begin. If `timed` is `TRUE` the tests will be stamped with current date and time. The generator creates one file per test and puts tests of a specific function into a directory named as the function (`pakage___function`).
+
+## Filtering tests
+
+```R
+filter(test_root, output_dir, ...,
+       package_path = "", remove_tests = FALSE, compact = FALSE
+       verbose = testr_options("verbose"))
+```
+
+Filters tests from either specific functions or for given package based on coverage. The testsr that do not contribute to the coverage will be deleted if `remove_tests` is `TRUE`. If `compact` is `TRUE`, the output format of the filtered tests will not be one file per test, but one file per function with tests appended. Filtering works either with entire packages (when `package_path` is specified, or on functions, in which case their names must be supplied as the `...` argument).
+
+## Shorthands
+
+```R
+testr_code(code, output_dir, ...)
+```
+
+Shorthand for generating tests by running the given code, into the specified `output_dir`. Functions to capture may be specified in the `...` argument in the usual character vector, or R symbols format. This function does not do any filtering. 
+
+```R
+testr_source(src.root, output_dir, ...)
+```
+                   
+Shorthand for generating tests by running R file or directory specified into the `output_dir`. Functions to capture may be specified in the `...` argument in the usual character vector, or R symbols format. This function does not do any filtering. 
+
+## Session example
+
+Assume, we want to capture a function, say `base:::any`:
+
+```R
+library(testr)
+testr::capture(base::any) # start capturing
+# now run the code that exercises the captured functions
+any(T, T, F)
+any()
+any(T, F)
+any(F, T)
+any(F, F, F)
+testr::stop_capture_all() # stop capturing
+testr::generate("capture_example") # generates the tests
+```
