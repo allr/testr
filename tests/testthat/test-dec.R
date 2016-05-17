@@ -3,6 +3,8 @@ library(testthat)
 
 context("Decoration")
 
+
+
 test_decoration <- function(functions) {
     testr_options("verbose", F)
     suppressWarnings(setup_capture(functions))
@@ -31,8 +33,6 @@ test_decoration <- function(functions) {
     expect_true(length(testr:::.decorated) == 0)
     expect_false(any(check.dec))
 }
-
-
 
 test_that('Can decorate functions (long)', {
     skip_on_cran()

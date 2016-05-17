@@ -13,7 +13,7 @@
 #' @param verbose Prints additional information.
 #' @export
 
-testr_addRegression <- function(package.dir = ".", code, functions, filter = TRUE, exclude_existing_tests = FALSE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose")) {
+gen_from_patch <- function(package.dir = ".", code, functions, filter = TRUE, exclude_existing_tests = FALSE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose")) {
     cleanup = F
     # stop all ongoing captures
     stop_capture_all()
@@ -97,7 +97,7 @@ testr_addRegression <- function(package.dir = ".", code, functions, filter = TRU
 #' @param verbose Prints additional information.
 #' @export
 #'
-testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
+gen_from_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
     package = devtools::as.package(package.dir)
     devtools::document(package.dir)
     detach(paste("package", package$package, sep=":"), unload = T, character.only = T)
@@ -130,9 +130,9 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
         }
     }
     if (missing(output))
-        testr_addRegression(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, verbose = verbose)
+        gen_from_patch(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, verbose = verbose)
     else
-        testr_addRegression(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, output, verbose = verbose)
+        gen_from_patch(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, output, verbose = verbose)
 }
 
 
@@ -151,7 +151,7 @@ testr_package <- function(package.dir = ".", include.tests = FALSE, timed = FALS
 #' @param ... List of functions to capture, either character literals, or symbols
 #' @param verbose TRUE to display additional information
 #' @export
-capture <- function(..., verbose = testr_options("verbose")) {
+start_capture <- function(..., verbose = testr_options("verbose")) {
     old <- testr_options("capture.arguments")
     if (old)
         testr_options("capture.arguments", FALSE)
@@ -168,7 +168,7 @@ capture <- function(..., verbose = testr_options("verbose")) {
 #' @param internal.only TRUE if only internal functions should be captured
 #' @param verbose TRUE to display additional information
 #' @export
-capture_builtins <- function(internal.only = FALSE, verbose = testr_options("verbose")) {
+start_capture_builtins <- function(internal.only = FALSE, verbose = testr_options("verbose")) {
     functions <- builtins(internal.only)
     setup_capture(functions, verbose = verbose)
 }
@@ -233,7 +233,7 @@ generate <- function(output_dir, root = testr_options("capture.folder"),
 #' @return NULL
 #'
 #' @export
-filter <- function(test_root, output_dir, ...,
+prune <- function(test_root, output_dir, ...,
                    package_path = "", remove_tests = FALSE, compact = FALSE,
                    verbose = testr_options("verbose")) {
     functions <- parseFunctionNames(...)
@@ -252,35 +252,6 @@ filter <- function(test_root, output_dir, ...,
     invisible(NULL)
 }
 
-#' @title Runs the generated tests.
-#'
-#' @description This function is a shorthand for calling testthat on the previously generated tests.
-#'
-#' @param test_dir Directory in which the tests are located. If empty, the last output directory for generate or filter functions is assumed.
-#' @param verbose TRUE to display additional information.
-#' @return TRUE if all tests passed, FALSE otherwise.
-#' @export
-run <- function(test_dir, verbose = testr_options("verbose")) {
-    if (missing(test_dir)) {
-        test_dir <- cache$output.dir
-        if(is.na(test_dir))
-            stop("Test directory must be specified, no testcases it cache yet")
-    }
-    result = TRUE
-    # now we have the directory in which the tests are located, run testthat on them
-    # for all folders in the file
-    dirs <- list.files(test_dir, include.dirs = T, no.. = T)
-    for (d in dirs) {
-        d <- file.path(test_dir, d, fsep = .Platform$file.sep)
-        if (file.info(d)$isdir) {
-            tryCatch(testthat::test_dir(d), error=function(x) {
-                result <<- FALSE
-                x #invisible(x)
-            })
-        }
-    }
-    result
-}
 
 # helpers -------------------------------------------------------------------------------------------------------------
 
@@ -293,7 +264,7 @@ run <- function(test_dir, verbose = testr_options("verbose")) {
 #' @param output_dir Directory to which the tests will be generated.
 #' @param ... functions to be captured during the code execution (same syntax as capture function)
 #' @export
-testr_code <- function(code, output_dir, ...) {
+gen_from_code <- function(code, output_dir, ...) {
     code <- substitute(code)
     capture(...)
     eval(code)
@@ -309,7 +280,7 @@ testr_code <- function(code, output_dir, ...) {
 #' @param output_dir Directory to which the tests will be generated.
 #' @param ... Functions to be tested.
 #' @export
-testr_source <- function(src.root, output_dir, ...) {
+gen_from_source <- function(src.root, output_dir, ...) {
     if (!file.exists(src.root))
         stop("Supplied source does not exist")
     if (file.info(src.root)$isdir)
@@ -322,107 +293,4 @@ testr_source <- function(src.root, output_dir, ...) {
     invisible()
 }
 
-#' @title Capture run information from CRAN packages
-#'
-#' @description This function is responsible for getting all possible capture information from CRAN
-#' It tries to insstall package and run tests, examples and vignettes
-#' @param name name of the package to be downloaded
-#' @param dir resulting directory with tests
-#' @param indexes indexes of specific packages
-#' @param funcs functions to Decorate
-#' @export
-#'
-cran_gen <- function(name, dir, funcs=NULL, indexes = 1:10000) {
-  if (!missing(name)) {
-    ap <- name
-  } else {
-    ap <- available.packages()[indexes,1]
-  }
-  sapply(ap, package_gen, gen.dir = dir, funcs = funcs)
-}
 
-#' @title Capture run information from Bioconductor packages
-#'
-#' @description This function is responsible for getting all possible capture information from Bioconductor
-#' It tries to insstall package and run tests, examples and vignettes
-#' @param name name of the package to be downloaded
-#' @param dir resulting directory with tests
-#' @param indexes indexes of specific packages
-#' @param funcs functions to Decorate
-#' @export
-#'
-bioconductor_gen <- function(name, dir, funcs=NULL, indexes = 1:1000) {
-  contriburl <- paste(biocinstallRepos()["BioCsoft"], "src/contrib", #nolint
-                      sep = "/")
-  if (!missing(name)) {
-    ap <- name
-  } else {
-    ap <- available.packages(contriburl)[indexes,1]
-  }
-  sapply(ap, package_gen, from.bioc = T, contriburl = contriburl, funcs = funcs, gen.dir = dir)
-}
-
-#' @title Capture run information from package and generate test cases
-#'
-#' @description This function is responsible for getting all possible capture information from specific package.
-#' It tries to insstall package and run tests, examples and vignettes
-#' @param name name of the package
-#' @param gen.dir resulting directory with tests
-#' @param from.bioc if package is from Bioconductior
-#' @param contriburl contributor url as in download.packages
-#' @param funcs functions to Decorate
-#' @param gen if generate test cases
-#' @export
-#'
-package_gen <- function(name, gen.dir, funcs, from.bioc = FALSE, contriburl) {
-  dir <- tempdir()
-  if (!missing(contriburl)) {
-    loc <- suppressMessages(download.packages(name, dir, contriburl = contriburl, type = "source")[,2])
-  } else {
-    loc <- suppressMessages(download.packages(name, dir, type = "source")[,2])
-  }
-  untar(loc, exdir = dir)
-  if (!missing(dir)) file.remove(loc)
-  loc <- file.path(dir, name)
-  cat("===Intalling package - ", name, "\n")
-  if (name %in% loadedNamespaces())
-    tryCatch(detach(name=paste("package", name, sep=":"),unload = T, character.only = T),
-             error=function(x) invisible())
-  if (from.bioc) {
-    biocLite(name) #nolint
-  } else {
-    install.packages(name, quiet = T, dependencies = T)
-  }
-  if (!do.call(require, list(name))) {
-    cat("===Package Loading Failed\n")
-    return(invisible())
-  }
-  if (!file.exists(gen.dir) || !file.info(gen.dir)$isdir) dir.create(gen.dir)
-  cat("===Inserting Trace points\n")
-  if (missing(funcs) || is.null(funcs)) {
-    funcs <- ls(getNamespace(name))
-    setup_capture(funcs, name)
-  } else {
-    setup_capture(funcs)
-  }
-  hs <- help
-  inv <- function(x) invisible()
-  reassing_in_env("help", inv, getNamespace("utils"))
-  reassing_in_env("help", inv, as.environment("package:utils"))
-
-  cat("===Running examples\n")
-  capture.output(run_examples(loc))
-  cat("===Running tests\n")
-  capture.output(run_tests(loc))
-  cat("===Running vignettes\n")
-  capture.output(run_vignettes(name))
-
-  reassing_in_env("help", hs, getNamespace("utils"))
-  reassing_in_env("help", hs, as.environment("package:utils"))
-  cat("===Removing trace points\n")
-  clear_decoration()
-  cat("===Generating tests\n")
-  TestGen("capture", file.path(gen.dir, name))
-  file.remove(list.files("capture", recursive = T, full.names = T))
-  invisible()
-}

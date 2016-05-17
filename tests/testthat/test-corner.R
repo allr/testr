@@ -3,6 +3,22 @@ library(testthat)
 
 context("Corner cases")
 
+context("unittests")
+
+test_that('list_functions', {
+    x <- list_functions("../../R/testr.R")
+    expect_true("gen_from_patch" %in% x)
+    expect_true("gen_from_package" %in% x)
+    expect_true("start_capture" %in% x)
+    expect_true("start_capture_builtins" %in% x)
+    expect_true("stop_capture" %in% x)
+    expect_true("stop_capture_all" %in% x)
+    expect_true("generate" %in% x)
+    expect_true("prune" %in% x)
+    expect_true("gen_from_code" %in% x)
+    expect_true("gen_from_source" %in% x)
+})
+
 # test_that('Missing argument corner case is fixed', {
 #   # was failing before 5fe109579d670a0ebf094215398410ca08c3749b
 #   suppressMessages(capture('qr.X'))

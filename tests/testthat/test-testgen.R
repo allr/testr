@@ -10,7 +10,10 @@ test_that('Generate Abbreviate', {
     expect_true(file.info("abbreviate")$isdir)
     expect_equal(length(list.files("abbreviate")), 2) # one is bad.args file
     sink(tempfile())
-    run()
+    tryCatch(testthat::test_dir(cache$output_dir), error=function(x) {
+        result <<- FALSE
+        x #invisible(x)
+    })
     sink()
     unlink("abbreviate", recursive = T)
 })
@@ -22,7 +25,10 @@ test_that('Generate Warnings/Errors', {
     expect_true(file.info("we")$isdir)
     expect_equal(length(list.files("we",recursive = T)), 3) # one is bad.args file
     sink(tempfile())
-    run()
+    tryCatch(testthat::test_dir(cache$output_dir), error=function(x) {
+        result <<- FALSE
+        x #invisible(x)
+    })
     sink()
     unlink("we", recursive = T)
 })
