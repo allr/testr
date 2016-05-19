@@ -10,80 +10,84 @@ vignette: >
 ---
 ## Capturing arbitrary code
 
-While the basic usage vignette deals with the introduction of testR capabilies, explanation of its limitations and a walkthrough over the two most common usecases, testR also exports the functions required to capture and generate regressions from any code. These functions will be discussed in this document.
+While the basic usage vignette deals with the introduction of testR capabilies, explanation of its limitations and a walkthrough over the two most common usecases, testR also exports the functions required to capture and generate regressions from any code. These functions will be discussed in this document. To illustrate the low level API for *genthat* we will need a function, we can use the isPrime() function from `testgenthat` package:
+
+```R
+isPrime <- function (x) {
+    for (i in 2:(x - 1)) if (x%%i >= 1) 
+        return(F)
+    return(T)
+}
+```
 
 ## Capturing Functions
 
-```R
-start_capture(..., verbose = testr_options("verbose"))
-```
-
-`start_capture` function allows specified functions from different packages to be captured (i.e. tests for their usage will be generated). The function names are accepted in either characters, or in R's symbols, i.e. `package:::function`.
+First we must determine which functions we want to capture. Enabling capture for functions is done using the `start_capture` function that takes the functions to be captured as its arguments. You can use either package qualified function names, such as `base::any`, or you specify the same in a character vector (`"base::any"`):
 
 ```R
-capture_builtins(internal.only = FALSE, verbose = testr_options("verbose"))
+start_capture(isPrime, verbose = testr_options("verbose"))
 ```
 
-Shorthand for capturing all builtin functions (or internal functions only).
+As with all other functions, the `verbose` flag is used to add more output. If there are no namespace clashes for given functions, you can omit the package name from the function definition, i.e. we could have written just `start_capture(isPrime)` to the same effect. 
+
+Once the functions are captured, we must make sure to execute the code that actuall calls them to generate the call snapshots. The simplest way to do this is call them manually, but many other ways are possible:
 
 ```R
-stop_capture(..., verbose = testr_options("verbose"))
+isPrime(2)
+isPrime(3)
+isPrime(10)
 ```
 
-Stops capturing selected functions (given ether as characters, or `package:::function`).
+When the code has exected, we should stop capturing the functions. Specific function can be stopped using the `stop_capture` function, or all currently captured functions can be stopped:
 
 ```R
-stop_capture_all(verbose = testr_options("verbose"))
+stop_capture_all()
 ```
-
-Stops capturing *all* functions. 
 
 ## Generating tests
 
-```R
-generate(output_dir, root = testr_options("capture.folder"),
-         timed = F, clear_capture = T, verbose = testr_options("verbose"))
-```
-
-Generates tests from captured information into the specified `output_dir`. Unless `clear_capture` is `FALSE` also deletes the captured data afterwards so that new capturing & generation can begin. If `timed` is `TRUE` the tests will be stamped with current date and time. The generator creates one file per test and puts tests of a specific function into a directory named as the function (`pakage___function`).
-
-## Filtering tests
+After the data has been captured, it is now time to generate the tests:
 
 ```R
-filter(test_root, output_dir, ...,
-       package_path = "", remove_tests = FALSE, compact = FALSE
-       verbose = testr_options("verbose"))
+generate("isPrime_tests")
 ```
 
-Filters tests from either specific functions or for given package based on coverage. The testsr that do not contribute to the coverage will be deleted if `remove_tests` is `TRUE`. If `compact` is `TRUE`, the output format of the filtered tests will not be one file per test, but one file per function with tests appended. Filtering works either with entire packages (when `package_path` is specified, or on functions, in which case their names must be supplied as the `...` argument).
+The generate function analyzes the captured information and generates tests out of it. In its simplest invocation only the output directory to which the tests should be generated is needed, as in the example above. Other options include specifying where to look for the captured data (`root`), whether a timestamp should be added to the tests directory (`timed`) or if the capture data should be retained so that tests from it can be generated again (`clear_capture`).
+
+The generator creates a file called `bad_arguments` in which it puts all invocations that cannot be reproduced (because of external dependencies, environment, user input, etc.) and then for each captured function a directory, in which tests are stored, one test per file. Our example has generated three tests in the testthat format:
+
+```
+library(testthat)
+
+context("testgenthat:::isPrime")
+
+test_that("0", {
+    expected <- FALSE
+    expect_equal({
+        testgenthat:::isPrime(x = 1)
+    }, expected)
+})
+```
 
 ## Shorthands
 
-```R
-testr_code(code, output_dir, ...)
-```
-
-Shorthand for generating tests by running the given code, into the specified `output_dir`. Functions to capture may be specified in the `...` argument in the usual character vector, or R symbols format. This function does not do any filtering. 
+The following steps could be accomplished by calling a shorthand function:
 
 ```R
-testr_source(src.root, output_dir, ...)
+gen_from_code({ isPrime(1); isPrime(2); isPrime(10) }, "isPrime_tests", isPrime)
 ```
-                   
-Shorthand for generating tests by running R file or directory specified into the `output_dir`. Functions to capture may be specified in the `...` argument in the usual character vector, or R symbols format. This function does not do any filtering. 
 
-## Session example
+will have the same effect. The function takes first the code to be executed, then the directory where to put the tests and finally list of functions to be captured. Similar function called `gen_from_source` has the same purpose, but instead of code to run expects a source file to execute. 
 
-Assume, we want to capture a function, say `base:::any`:
+## Pruning the tests
+
+Usually, *genthat* generates way more tests than are necessary as it record each invocation of captured functions. To prune the generated tests based on code coverage, we may use the prune function:
 
 ```R
-library(testr)
-testr::capture(base::any) # start capturing
-# now run the code that exercises the captured functions
-any(T, T, F)
-any()
-any(T, F)
-any(F, T)
-any(F, F, F)
-testr::stop_capture_all() # stop capturing
-testr::generate("capture_example") # generates the tests
+prune("isPrime_tests", "pruned", isPrime)
 ```
+
+This tells genthat to take all tests in `isPrime_tests` directory and prune them, looking into code coverage for function `isPrime`. The tests that increase the coverage will be copied into the `pruned` directory. Additional arguments may specify whether the remove the unpruned tests (`remove_tests`), whether to compact the pruned tests into a file per function (`compact`) or, instead of specifying the functions to be checked against code coverage, it may specify an entire package to be checked (`package_path`). 
+
+After the pruning, in our tiny example, we will have only two tests out of the original three (one that covers prime numbers and one that covers the others).
+

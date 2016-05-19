@@ -258,7 +258,7 @@ prune <- function(test_root, output_dir, ...,
 #' @export
 gen_from_code <- function(code, output_dir, ...) {
     code <- substitute(code)
-    capture(...)
+    start_capture(...)
     eval(code)
     stop_capture_all()
     generate(output_dir)
@@ -277,7 +277,7 @@ gen_from_source <- function(src.root, output_dir, ...) {
         stop("Supplied source does not exist")
     if (file.info(src.root)$isdir)
         src.root <- list.files(src.root, pattern = "\\[rR]", recursive = T, full.names = T)
-    capture(...)
+    start_capture(...)
     for (src.file in src.root)
         source(src.file, local = T)
     stop_capture_all()

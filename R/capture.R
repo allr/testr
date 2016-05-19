@@ -32,19 +32,26 @@ decorate <- function(func, package, verbose) {
                 return(invisible())
             }
         }
-        package <- substr(package, 9, nchar(package))
+        if (package != ".GlobalEnv")
+            package <- substr(package, 9, nchar(package))
+        else
+            package <- NA
     }
-    if (is_s3_generic(func, getNamespace(package))) {
+    if (is.na(package))
+        isS3 <- is_s3_generic(func)
+    else
+        isS3 <- is_s3_generic(func, getNamespace(package))
+    if (isS3) {
         warning("Not decorating S3 generic")
         return(invisible())
     }
-    write.call <- call("write_capture", paste(package, func, sep=":::"), quote(sys.frame(-4))) #nolint
+    write.call <- call("write_capture", if (is.na(package)) func else paste(package, func, sep=":::"), quote(sys.frame(-4))) #nolint
     tc <- call("trace",
                func,
                quote(write.call),
                print = testr_options("verbose"))
     hidden <- FALSE
-    if (!func %in% ls(as.environment(paste("package", package, sep=":")))) {
+    if (!func %in% ls(as.environment(if (is.na(package)) .GlobalEnv else paste("package", package, sep=":")))) {
         tc[["where"]] <- call("getNamespace", package)
         hidden <- TRUE
     }

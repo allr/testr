@@ -41,6 +41,8 @@ filter_tests <- function(tc_root, tc_result_root, functions, package_path, remov
         }, simplify = FALSE)
     }
     tests_so_far <- character()
+    if (verbose)
+        cat("Pruning tests...\n")
 
     cov_change <- function(tc) {
         tests_so_far <<- c(tests_so_far, tc)
@@ -56,11 +58,10 @@ filter_tests <- function(tc_root, tc_result_root, functions, package_path, remov
                                                     code = code)
         } else {
             new_total_coverage <- sapply(names(functions), function(fname) {
-                covr::function_coverage(fname, code = parse(code))
+                covr::function_coverage(fname, code = parse(text = code))
             }, simplify = FALSE)
         }
         sink()
-
         coverage_increased <- ifelse(is_package,
                                      covr::percent_coverage(new_total_coverage) - covr::percent_coverage(total_coverage) > 0,
                                      any(sapply(names(functions),function(fname) {
@@ -77,8 +78,10 @@ filter_tests <- function(tc_root, tc_result_root, functions, package_path, remov
                     test <- paste(readLines(tc)[c(-1,-2,-3)], collapse="\n")
                 else
                     test <- paste(readLines(tc), collapse="\n")
+                # create necessary directories
                 write(test, file = testFile, append = T)
             } else {
+                dir.create(dirname(result_path), showWarnings = F, recursive = T)
                 if (!is.null(result_path)) file.copy(tc, result_path, overwrite = FALSE)
             }
             total_coverage <<- new_total_coverage

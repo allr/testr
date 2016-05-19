@@ -31,6 +31,7 @@ For the purposes of this demonstration, we have created an example R package you
 library(devtools)
 install_github("reactorlabs/testgenthat")
 ```
+
 This is a package with vignettes, examples, and some testthat tests that test the package in general, but you want to add more. You can use testR to run the existing code of the package (vignettes, examples and perhaps the tests as well) and generate fine grained tests for these captures. You can execute the following to generate the tests:
 
 ```R
