@@ -7,7 +7,7 @@ context("unittests")
 
 test_that('list_functions', {
     x <- list_functions("../../R/testr.R")
-    expect_true("gen_from_patch" %in% x)
+    expect_true("gen_from_function" %in% x)
     expect_true("gen_from_package" %in% x)
     expect_true("start_capture" %in% x)
     expect_true("start_capture_builtins" %in% x)

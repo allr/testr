@@ -13,7 +13,7 @@
 #' @param verbose Prints additional information.
 #' @export
 
-gen_from_patch <- function(package.dir = ".", code, functions, filter = TRUE, exclude_existing_tests = FALSE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose")) {
+gen_from_function <- function(package.dir = ".", code, functions, filter = TRUE, exclude_existing_tests = FALSE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose")) {
     cleanup = F
     # stop all ongoing captures
     stop_capture_all()
@@ -130,18 +130,10 @@ gen_from_package <- function(package.dir = ".", include.tests = FALSE, timed = F
         }
     }
     if (missing(output))
-        gen_from_patch(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, verbose = verbose)
+        gen_from_function(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, verbose = verbose)
     else
-        gen_from_patch(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, output, verbose = verbose)
+        gen_from_function(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, output, verbose = verbose)
 }
-
-
-
-
-
-
-
-
 
 #' @title Enables capturing of the specified functions.
 #'

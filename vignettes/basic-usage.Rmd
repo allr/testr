@@ -134,10 +134,10 @@ isPrime <- function(x) {
 Now that the error has been fixed, we might want to create a test for it. genthat provides a function specifically for that purpose:
 
 ```R
-gen_from_patch("testgenthat", function() { isPrime(2.3) }, verbose = T)
+gen_from_function("testgenthat", function() { isPrime(2.3) }, verbose = T)
 ```
 
-The `gen_from_patch` function takes as argument the package for which test case should be generated and code that generates them. The code is expected to be a single function with no arguments and will be executed when the functions in the package are captured (by supplying the `functions` argument, only certain functions from the package may be captured). When the function finishes, we can inspect the generated testfile to see that a new test has indeed been added:
+The `gen_from_function` function takes as argument the package for which test case should be generated and code that generates them. The code is expected to be a single function with no arguments and will be executed when the functions in the package are captured (by supplying the `functions` argument, only certain functions from the package may be captured). When the function finishes, we can inspect the generated testfile to see that a new test has indeed been added:
 
 ```R
 test_that("0", {
