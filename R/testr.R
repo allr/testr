@@ -43,7 +43,7 @@ gen_from_patch <- function(package.dir = ".", code, functions, filter = TRUE, ex
         # get list of all functions defined in the package' R code
         functions <- list_functions(file.path(package$path, "R"))
         if (verbose)
-            cat(paste("All functions from package will be decorated"))
+            cat("All functions from package will be decorated\n")
     }
     if (verbose)
         cat(paste("Decorating",length(functions), "functions\n"))
@@ -73,7 +73,7 @@ gen_from_patch <- function(package.dir = ".", code, functions, filter = TRUE, ex
     # filter, if enabled
     if (filter) {
         if (verbose)
-            cat("Filtering tests - this may take some time...\n")
+            cat("Pruning tests - this may take some time...\n")
         filter_tests(output, file.path(package$path, "tests/testthat"), functions, package.dir, compact = T, verbose = verbose)
     }
     # clear the temp folder, if we used a temp folder implicitly

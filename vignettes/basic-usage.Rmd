@@ -25,34 +25,53 @@ It is important to stress that testR does not actually create new tests from thi
 
 ## Creating tests for the first time 
 
-Assume you already have a package with vignettes, examples, and some testthat tests that test the package in general, but you want to have fine grained unittests as well. You can use testR to run the existing code of the package (vignettes, examples and perhaps the tests as well) and generate fine grained tests for these captures. If your package is located in say `"~/mypackage"`, you can execute the following to generate the tests:
+For the purposes of this demonstration, we have created an example R package you can download from github using the following:
 
 ```R
-testr_package("~/mypackage", verbose = T)
+library(devtools)
+install_github("reactorlabs/testgenthat")
+```
+This is a package with vignettes, examples, and some testthat tests that test the package in general, but you want to add more. You can use testR to run the existing code of the package (vignettes, examples and perhaps the tests as well) and generate fine grained tests for these captures. You can execute the following to generate the tests:
+
+```R
+gen_from_package("testgenthat", verbose = T)
 ```
 
-By setting verbose to `TRUE`, the function will actually output what it does, which would like similar to this:
+By setting verbose to `TRUE`, we have enabled verbose output so that we can see what is happening under the hood:
 
 ```
-Building package ~/mypackage
-  built into ~/mypackage
-Installing package /home/mypackage_0.0.0.9000.tar.gz 
-Package mypackage installed
+Updating testgenthat documentation
+Loading testgenthat
+Building package testgenthat 
+'/usr/lib/R/bin/R' --no-site-file --no-environ --no-save --no-restore CMD build 'testgenthat' --no-resave-data --no-manual 
+
+* checking for file ‘test_genthat/DESCRIPTION’ ... OK
+* preparing ‘testgenthat’:
+* checking DESCRIPTION meta-information ... OK
+* installing the package to build vignettes
+* creating vignettes ... OK
+* checking for LF line-endings in source and make files
+* checking for empty or unneeded directories
+* building ‘testgenthat_0.0.0.9000.tar.gz’
+
+  built into testgenthat 
+Installing package testgenthat_0.0.0.9000.tar.gz 
+Package testgenthat installed
 ```
-First, the package is built and installed. If you prefer to use already built version of the package, you can add the `build = FALSE` as an argument to the `testr_package` function. The package is then reinstalled. 
+
+First, the package is built and installed. If you prefer to use already built version of the package, you can add the `build = FALSE` as an argument to the `get_from_package` function. The package is then reinstalled. 
 
 ```
-All functions from package will be decoratedDecorating 3 functions
-Tracing function "foo" in package "mypackage"
-Tracing function "bar" in package "mypackage"
-Tracing function "foobar" in package "mypackage"
+All functions from package will be decorated
+Decorating 1 functions
+Tracing function "isPrime" in package "testgenthat"
 ```
 
-After the package is installed, testR starts tracking all functions in the package (for this one they are aptly named `foo`, `bar` and `foobar`). 
+After the package is installed, testR starts tracking all functions in the package (there is only one, named `isPrime`). 
 
 ```
-Running examples ( 3 files)
-Running vignettes ( 2 files)
+Running vignettes ( 1 files)
+Running examples ( 1 man files)
 ```
 
 testR then runs the examples and vignettes of the package and if their code calls any of the package's functions, testR will record the input arguments and the result the function gave. If you want, you can run tests too - this would later generate the small grained tests from the exissting unit tests as well. While these will not help catch more bugs, they may help pinpointing what is wrong if the existing tests are rather large. If you want to execute existing tests as well, add optional argument `include.tests = TRUE`. 
@@ -66,32 +85,67 @@ Root: capture
 After the code is executed, tests from it are generated into the temporary directory. The temporary directory will be deleted afterwards, but if you want to keep all the tests, you can pass the `output` argument to point to the folder when you want testr to dump the tests. 
 
 ```
-Filtering tests - this may take some time...
-Test cases root -  temp 
-Number of test cases -  3 
-Test case  temp/mypackage___bar/test-0.R  didn't increase coverage
-Test case  temp/mypackage___foo/test-0.R  increased coverage
-Test case  temp/mypackage___foo/test-1.R  didn't increase coverage
+Pruning tests - this may take some time...
+Number of test cases -  4 
+Test case  temp/testgenthat___isPrime/test-0.R  increased the coverage
+Test case  temp/testgenthat___isPrime/test-1.R  didn't increase coverage
+Test case  temp/testgenthat___isPrime/test-2.R  didn't increase coverage
+Test case  temp/testgenthat___isPrime/test-3.R  didn't increase coverage
 ```
 And finally, the tests are filtered against the existing ones (unless `include.tests` is `TRUE`) and each other and only those increasing the code coverage are kept. The final tests will be added to the testthat tests directory for the specified package, one file per function. If you want, you can skip the filtering by passing the `filter = FALSE` argument to the function.
 
-## Adding regressions
-
-Another frequent scenario is that you already have a package, presumably with some tests, and some users. And one of your users finds a bug in your package and send you the code to reproduce the error. Depending on the expertise of the user, this code may be a tiny unittest exposing directly the flaw, but more often this would be a slab of code that does many calls to your package with a simple description that it does not do what it shoud.
-
-In this case you can:
-
-1. Use testR to split the reproducible into small calls to isolated functions in your package and then use this information to quickly localize the error and fix it. Note however, that by the very nature of testR, when you generate the tests, they will *all* pass. Manual inspection of the code is required because you must first identify the problem yourself, then fix the test, and finally fix your code.
-
-2. Fix the problem yourself and then use testR to capture tests from the reproducible code (which now works)
-
-In both cases the test will be kept as a regression so that if this particular functionality will ever break again, you will be left with a siple localized test that fails to quickly see what went wrong.
-
-To create tests from existing code, you can use the `testr_addRegression` function. You submit it the location to the package, the code from which to generate the tests (as a function with no arguments) and other arguments you could have passed to `testr_package` function discussed before:
+Inspection of the tests directory of the package now reveals that a new file has been added (containing tests for function `isPrime`) with the captured test that increased the coverage:
 
 ```R
-testr_addRegression(package.dir = ".", code, functions, filter = TRUE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose"))
+library(testthat)
+
+context("testgenthat:::isPrime")
+
+test_that("0", {
+    expected <- FALSE
+    expect_equal({
+        testgenthat:::isPrime(x = 10)
+    }, expected)
+})
 ```
 
-The output of the function (if `verbose` is enabled) is the same as that of `testr_package` so we refer the readed to that section. 
+## Adding regressions
 
+Unfortunately programs are not always correct from the very beginning. We can for instance quickly see that there is something wrong with our `isPrime()` function:
+
+```R
+isPrime(2.3)
+[1] TRUE
+```
+
+The problem is that the modulo operator used in `isPrime` function will work for fractional numbers too, just not in the way we have anticipated. We can open the `isPrime.R` file and quickly fix the function:
+
+```R
+isPrime <- function(x) {
+    if (trunc(x) != x)
+        return(F)
+    for (i in 2:(x-1))
+        if (x %% i >= 1)
+            return(F)
+    return(T)
+}
+```
+
+Now that the error has been fixed, we might want to create a test for it. genthat provides a function specifically for that purpose:
+
+```R
+gen_from_patch("testgenthat", function() { isPrime(2.3) }, verbose = T)
+```
+
+The `gen_from_patch` function takes as argument the package for which test case should be generated and code that generates them. The code is expected to be a single function with no arguments and will be executed when the functions in the package are captured (by supplying the `functions` argument, only certain functions from the package may be captured). When the function finishes, we can inspect the generated testfile to see that a new test has indeed been added:
+
+```R
+test_that("0", {
+    expected <- FALSE
+    expect_equal({
+        testgenthat:::isPrime(x = 2.3)
+    }, expected)
+})
+```
+
+While the above described process is probably not that advantageous in the simple case, one can easily think of a more complex scenario where the automatic capture of the tests will be handier. Another possibility is to first generate the new tests and then inspect and correct the tests first, so that important clues to where to find the bug can be found. 

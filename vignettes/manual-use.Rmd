@@ -15,10 +15,10 @@ While the basic usage vignette deals with the introduction of testR capabilies, 
 ## Capturing Functions
 
 ```R
-capture(..., verbose = testr_options("verbose"))
+start_capture(..., verbose = testr_options("verbose"))
 ```
 
-`capture` function allows specified functions from different packages to be captured (i.e. tests for their usage will be generated). The function names are accepted in either characters, or in R's symbols, i.e. `package:::function`.
+`start_capture` function allows specified functions from different packages to be captured (i.e. tests for their usage will be generated). The function names are accepted in either characters, or in R's symbols, i.e. `package:::function`.
 
 ```R
 capture_builtins(internal.only = FALSE, verbose = testr_options("verbose"))
