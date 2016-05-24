@@ -80,7 +80,7 @@ testR then runs the examples and vignettes of the package and if their code call
 ```
 Generating tests to temp 
 Output: temp 
-Root: capture 
+<!-- Root: capture  -->
 ```
 
 After the code is executed, tests from it are generated into the temporary directory. The temporary directory will be deleted afterwards, but if you want to keep all the tests, you can pass the `output` argument to point to the folder when you want testr to dump the tests. 

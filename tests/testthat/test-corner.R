@@ -5,18 +5,28 @@ context("Corner cases")
 
 context("unittests")
 
+a <- function(a, b) {
+    a + b
+}
+
+b <- function() {
+
+}
+
+d <- function() {
+    e <- function() {
+
+    }
+    e
+}
+
+
 test_that('list_functions', {
-    x <- list_functions("../../R/testr.R")
-    expect_true("gen_from_function" %in% x)
-    expect_true("gen_from_package" %in% x)
-    expect_true("start_capture" %in% x)
-    expect_true("start_capture_builtins" %in% x)
-    expect_true("stop_capture" %in% x)
-    expect_true("stop_capture_all" %in% x)
-    expect_true("generate" %in% x)
-    expect_true("prune" %in% x)
-    expect_true("gen_from_code" %in% x)
-    expect_true("gen_from_source" %in% x)
+    x <- list_functions("test-corner.R")
+    expect_true("a" %in% x)
+    expect_true("b" %in% x)
+    expect_true("d" %in% x)
+    expect_true(length(x) == 3)
 })
 
 # test_that('Missing argument corner case is fixed', {
