@@ -3,43 +3,30 @@
 using namespace Rcpp;
 using namespace std;
 
-CCODE get_internal(string name)
-{ 
-    FUNTAB* p = R_FunTab ;
-    for( ; p->name != NULL; ++p ){
-        if( name == p->name )
-            return p->cfun ;
-    } 
-    return NULL ;
-}
-
 SEXP search(){
-      CCODE search_fun = get_internal("search");
-      Language call("search") ;    
-      return search_fun(call, Rf_ScalarInteger(0), NULL,  R_GlobalEnv ) ; 
+    return Rf_eval(Language(".Internal", Language("search")), R_GlobalEnv);
 }
 
 SEXP deparse(SEXP x)
 {
-      CCODE deparse_fun = get_internal("deparse");
-      Language call("deparse", x) ;    
-      return deparse_fun(call, Rf_ScalarInteger(0), CDR(call), R_GlobalEnv ) ; 
+    Language call("deparse", x, Rf_ScalarInteger(60), Rf_ScalarLogical(1), Rf_ScalarReal(69), Rf_ScalarInteger(-1));
+    Language intCall(".Internal", call);
+    return Rf_eval(intCall, R_GlobalEnv);
 }
 
 
 bool missing(SEXP x, SEXP env)
 {
-      CCODE missing_fun = get_internal("missing");
-      Language call("missing", x);
-      LogicalVector res(missing_fun(call, Rf_ScalarInteger(0), CDR(call), env));
-      return res[0] == TRUE; 
+    // missing is blacklisted
+    LogicalVector res(Rf_eval(Language("missing", x), env));
+    return res[0] == TRUE;
 }
 
 bool contains(CharacterVector v, string elem){
   for (int i = 0; i < v.length(); i++){
     if (elem == as<string>(v[i]))
     return true;
-  } 
+  }
   return false;
 }
 
