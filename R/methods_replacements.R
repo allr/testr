@@ -268,7 +268,8 @@ TraceWithMethods <- function (what, tracer = NULL, exit = NULL, at = numeric(), 
     what
 }
 
-getImportsEnv <- function(pkg) {
+getImportsEnv <- function(pkg)
+{
     iname = paste("imports:", pkg, sep="")
     empty = emptyenv()
     env = asNamespace(pkg)
@@ -280,14 +281,16 @@ getImportsEnv <- function(pkg) {
     NULL
 }
 
-updateInImportsEnv <- function(what, newFun, importingPkg) {
+updateInImportsEnv <- function(what, newFun, importingPkg)
+{
     where = getImportsEnv(importingPkg)
     if (!is.null(where) && (what %in% names(where))) {
         methods:::.assignOverBinding(what, newFun, where, FALSE)
     }
 }
 
-replace_trace <- function() {
+replace_trace <- function()
+{
     assign(".TraceWithMethods", as.environment("package:methods"))
     unlockBinding(".TraceWithMethods", getNamespace("methods"))
     environment(TraceWithMethods) <- getNamespace("methods")
@@ -296,17 +299,17 @@ replace_trace <- function() {
     cache$trace_replaced <- TRUE
 }
 
-#' @title Refresh decoration
+#' Refresh decoration
 #'
 #' @description In cases when a function that is being traced is used through imports namespace
 #' by a package that is being loaded, the package won't get the correct copy, which results in
 #' the information loss. This function is hooked up to the library, to be run upon exist and
 #' check what functions might need redecoration, to propagate correct version to imports namespace.
 #' @param pkg package
-refresh_decoration <- function(pkg) {
+refresh_decoration <- function(pkg)
+{
     ienv <- getImportsEnv(pkg)
     need_redecoration <- intersect(ls(ienv), names(.decorated))
     sapply(need_redecoration, undecorate)
     sapply(need_redecoration, decorate)
 }
-

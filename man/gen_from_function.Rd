@@ -30,4 +30,3 @@ gen_from_function(package.dir = ".", code, functions, filter = TRUE,
 \description{
 Given a package, the code to be executed and a list of functions to capture, the function captures the selected functions from the package, then runs the specified code. It then generates tests from the captured information and using code coverage filters them against existing tests for the package. Those that increase the code coverage will be added to already existing testthat tests for the package.
 }
-

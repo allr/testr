@@ -15,4 +15,3 @@ Clear anything previously decorate
 \seealso{
 undecorate
 }
-

@@ -16,4 +16,3 @@ gen_from_source(src.root, output_dir, ...)
 \description{
 Generates tests by running given source file.
 }
-

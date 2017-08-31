@@ -15,4 +15,3 @@ by a package that is being loaded, the package won't get the correct copy, which
 the information loss. This function is hooked up to the library, to be run upon exist and
 check what functions might need redecoration, to propagate correct version to imports namespace.
 }
-

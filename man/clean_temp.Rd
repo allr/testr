@@ -9,4 +9,3 @@ clean_temp()
 \description{
 Make sure temp dir is empty by deleting unnecessary files
 }
-

@@ -20,4 +20,3 @@ Replaces the function by decorated function in the global environment
 \seealso{
 write_capture
 }
-

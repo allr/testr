@@ -1,10 +1,7 @@
 testR - test case generation for R
 =====
 
-[![Build Status](https://travis-ci.org/allr/testr.svg?branch=master)](https://travis-ci.org/allr/testr) 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/allr/testr?branch=master&svg=true)](https://ci.appveyor.com/project/allr/testr)
-[![Coverage Status](http://codecov.io/github/allr/testr/coverage.svg?branch=master)](http://codecov.io/github/allr/testr?branch=master) 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/testr)](http://cran.r-project.org/package=testr)
+[![Build Status](http://build.renjin.org/job/Test-Generation/job/testr/badge/icon)](http://build.renjin.org/job/Test-Generation/job/testr/)
 
 TestR is a framework for unit tests generation from source code and for test execution, and filtering of test cases based on C code coverage using `gcov` and R code coverage using `rcov` (https://github.com/allr/rcov).
 

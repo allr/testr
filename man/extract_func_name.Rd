@@ -14,4 +14,3 @@ extract_func_name(filename, modify.characters = TRUE)
 \description{
 This function is respinsible for extractng function name from test file name and removing special characters
 }
-

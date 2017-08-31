@@ -16,4 +16,3 @@ gen_from_code(code, output_dir, ...)
 \description{
 Generates tests from given code and specific captured functions
 }
-

@@ -15,4 +15,3 @@ Used for processing capture file information. Deletes prefixes to get essential 
 \seealso{
 ProcessClosure
 }
-

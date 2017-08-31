@@ -12,4 +12,3 @@ process_capture(cap_file)
 \description{
 This function parses file with closure capture information and generates test cases
 }
-

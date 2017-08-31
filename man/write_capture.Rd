@@ -17,4 +17,3 @@ This function is respinsible for writing down capture information for decorated 
 \seealso{
 Decorate
 }
-

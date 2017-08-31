@@ -29,4 +29,3 @@ filter_tests(tc_root, tc_result_root, functions, package_path,
 This function attemps to filter the test cases for given functions based on
 code coverage information collected by covr.
 }
-

@@ -18,4 +18,3 @@ Character vector of function names defined in the file.
 Analyses given file, or files if directory
 is supplied for all functions defined in global scope and returns their names as character vector.
 }
-

@@ -17,4 +17,3 @@ Reset previously decorate function
 \seealso{
 write_capture Decorate
 }
-

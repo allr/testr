@@ -4,10 +4,12 @@
 \alias{ensure_file}
 \title{Manage Test Case file}
 \usage{
-ensure_file(name)
+ensure_file(name, funHash)
 }
 \arguments{
 \item{name}{directory where generated test cases will be saved}
+
+\item{funHash}{hash of function name and function arguments}
 }
 \description{
 This function creates a test case file if one does not exist already
@@ -15,4 +17,3 @@ This function creates a test case file if one does not exist already
 \seealso{
 test_gen
 }
-

@@ -15,4 +15,3 @@ start_capture_builtins(internal.only = FALSE,
 \description{
 Wrapper around capture to capture builtin functions
 }
-

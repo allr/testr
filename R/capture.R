@@ -1,17 +1,17 @@
-#' @title Decorates function to capture calls and return values
+#' Decorates function to capture calls and return values
 #'
 #' @description This function is respinsible for writing down capture information for decorated function calls.
 #' Replaces the function by decorated function in the global environment
 #' @param func function name as a character string
 #' @param package name of package to look for function
 #' @param verbose if to print additional output
-#' @export
 #' @seealso write_capture
 #'
-decorate <- function(func, package, verbose) {
+decorate <- function(func, package, verbose)
+{
     if (identical(class(library), "function") && getRversion() < '3.3.0') {
         suppressMessages(trace(library,
-                               exit=quote(if (!missing(package)) testr:::refresh_decoration(package)),
+                               exit = quote(if (!missing(package)) testr:::refresh_decoration(package)),
                                print = FALSE))
     }
     if (!cache$trace_replaced && getRversion() < '3.3.0') {
@@ -32,27 +32,31 @@ decorate <- function(func, package, verbose) {
                 return(invisible())
             }
         }
-        if (package != ".GlobalEnv")
+        if (package != ".GlobalEnv") {
             package <- substr(package, 9, nchar(package))
-        else
+        } else {
             package <- NA
+        }
     }
-    if (is.na(package))
+    if (is.na(package)) {
         isS3 <- is_s3_generic(func)
-    else
+    } else {
         isS3 <- is_s3_generic(func, getNamespace(package))
+    }
     if (isS3) {
         warning("Not decorating S3 generic")
         return(invisible())
     }
-    write.call <- call("write_capture", if (is.na(package)) func else paste(package, func, sep=":::"), quote(sys.frame(-4))) #nolint
+    write.call <- call("write_capture", if (is.na(package)) func else paste(package, func, sep = ":::"), quote(sys.frame(-4))) #nolint
+    write.call[[1]] <- testr::write_capture
     tc <- call("trace",
                func,
                quote(write.call),
                print = testr_options("verbose"))
     hidden <- FALSE
-    if (!func %in% ls(as.environment(if (is.na(package)) .GlobalEnv else paste("package", package, sep=":")))) {
-        tc[["where"]] <- call("getNamespace", package)
+    if (!func %in% ls(as.environment(if (is.na(package)) .GlobalEnv else paste("package", package, sep = ":")))) {
+        if (!is.na(package))
+            tc[["where"]] <- call("getNamespace", package)
         hidden <- TRUE
     }
     if (verbose) {
@@ -60,10 +64,10 @@ decorate <- function(func, package, verbose) {
     } else {
         suppressMessages(eval(tc))
     }
-    .decorated[[func]] <- list(func=func, package=package, hidden=hidden)
+    .decorated[[func]] <- list(func = func, package = package, hidden = hidden)
 }
 
-#' @title undecorate function
+#' undecorate function
 #'
 #' @description Reset previously decorate function
 #' @param func function name as a character string
@@ -71,7 +75,8 @@ decorate <- function(func, package, verbose) {
 #' @export
 #' @seealso write_capture Decorate
 #'
-undecorate <- function(func, verbose) {
+undecorate <- function(func, verbose)
+{
     if (class(func) == "character"){
         fname <- func
     } else {
@@ -91,10 +96,10 @@ undecorate <- function(func, verbose) {
     } else {
         suppressMessages(do.call(untrace, params))
     }
-    rm(list=c(func), envir=.decorated)
+    rm(list = c(func), envir = .decorated)
 }
 
-#' @title Write down capture information
+#' Write down capture information
 #'
 #' @description This function is respinsible for writing down capture information for decorated function calls.
 #' @param fname function name
@@ -104,13 +109,14 @@ undecorate <- function(func, verbose) {
 #' @importFrom Rcpp evalCpp
 #' @export
 #'
-write_capture <- function(fname, args.env){
+write_capture <- function(fname, args.env)
+{
     if (!testr_options("capture.arguments"))
         return(NULL)
     .Call("testr_WriteCapInfo_cpp", PACKAGE = "testr", fname, args.env)
 }
 
-#' @title Setup information capturing for list of function
+#' Setup information capturing for list of function
 #'
 #' @description This function is respinsible for setting up capturing for functions
 #'
@@ -119,7 +125,8 @@ write_capture <- function(fname, args.env){
 #' @param verbose if to print additional status information
 #' @seealso Decorate
 #' @export
-setup_capture <- function(flist, package, verbose = testr_options("verbose")) {
+setup_capture <- function(flist, package, verbose = testr_options("verbose"))
+{
     old <- testr_options("capture.arguments")
     if (old)
         testr_options("capture.arguments", FALSE)
@@ -131,14 +138,15 @@ setup_capture <- function(flist, package, verbose = testr_options("verbose")) {
         testr_options("capture.arguments", TRUE)
 }
 
-#' @title Check if function is eligible for wrapping to capture arguments and return values
+#' Check if function is eligible for wrapping to capture arguments and return values
 #'
 #' @description This function checks that supplied function for capture is not a keyword, operator or in the blacklist (functions like rm, .GlobalEnv, etc.)
 #' This is an internal function and is supposed to be used in setup_capture
 #' @param func function name to check
 #' @return TRUE/FALSE if can be captured or not
 #' @seealso setup_capture
-eligible_capture <- function(func){
+eligible_capture <- function(func)
+{
     return (!length(utils::getAnywhere(func)$objs) == 0
             && class(utils::getAnywhere(func)[1]) == "function"
             && !func %in% blacklist
@@ -150,13 +158,14 @@ eligible_capture <- function(func){
 }
 
 
-#' @title Clear decoration
+#' Clear decoration
 #'
 #' @description Clear anything previously decorate
 #' @param verbose if to print additional debugging information. Default \code{TRUE}.
 #' @seealso undecorate
 #' @export
-clear_decoration <- function(verbose) {
+clear_decoration <- function(verbose)
+{
     for (fname in ls(.decorated, all.names = TRUE))
         undecorate(fname, verbose = verbose)
 }

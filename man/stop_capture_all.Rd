@@ -12,4 +12,3 @@ stop_capture_all(verbose = testr_options("verbose"))
 \description{
 Remove tracing functionality for all the functions
 }
-

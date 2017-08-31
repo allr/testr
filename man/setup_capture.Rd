@@ -19,4 +19,3 @@ This function is respinsible for setting up capturing for functions
 \seealso{
 Decorate
 }
-

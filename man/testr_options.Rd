@@ -21,4 +21,3 @@ The following \code{testr} options are available:
      \item \code{digits}: numeric (default: \code{2}) passed to \code{format}
 }
 }
-

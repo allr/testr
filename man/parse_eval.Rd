@@ -12,4 +12,3 @@ parse_eval(what)
 \description{
 Function that wraps parse(eval(...)) call with tryCatch
 }
-

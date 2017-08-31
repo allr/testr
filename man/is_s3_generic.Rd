@@ -17,4 +17,3 @@ Determine if function has a call to UseMethod. In that case there is no need to 
 \seealso{
 Decorate
 }
-

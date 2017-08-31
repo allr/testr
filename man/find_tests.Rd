@@ -15,4 +15,3 @@ Find a known test location for the package
 \seealso{
 CapturePackage
 }
-

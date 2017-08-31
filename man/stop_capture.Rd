@@ -14,4 +14,3 @@ stop_capture(..., verbose = testr_options("verbose"))
 \description{
 This function removes the tracing functionality for specified function
 }
-

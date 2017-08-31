@@ -13,29 +13,33 @@ SEXP GetArgs(SEXP dotsE){
   for( int i=0; i<nArgs; i++){
     evaluatedArg = R_NilValue;
     string name = as<string>(envNames[i]);
-//    Rcout << "name - " << name << endl;
     SEXP nameSym = Rf_install(name.c_str());
     unevaluatedArg = Rf_findVar(nameSym, dotsE);
     if (missing(nameSym, dotsE)) {
       continue;
     }
-    
-//    args[name] = R_forcePromise(unevaluatedArg);
-    if (unevaluatedArg != R_UnboundValue && TYPEOF(unevaluatedArg) == PROMSXP) {
-      SEXP prcode = PRCODE(unevaluatedArg);
-      if (!Rf_isNull(PRENV(unevaluatedArg))){
-        evalEnv = PRENV(unevaluatedArg);
-      } else {
-        evalEnv = dotsE;
-      }
-      int err = 0;
-      SEXP res = R_tryEvalSilent(unevaluatedArg, evalEnv, &err);
-      if(err){
-        evaluatedArg = prcode;
-      } else {
-        evaluatedArg = res;
-      }
-        args[name] = evaluatedArg; 
+
+    if (unevaluatedArg != R_UnboundValue) {
+        if(TYPEOF(unevaluatedArg) == PROMSXP) {
+          SEXP prcode = PRCODE(unevaluatedArg);
+          if (!Rf_isNull(PRENV(unevaluatedArg))){
+            evalEnv = PRENV(unevaluatedArg);
+          } else {
+            evalEnv = dotsE;
+          }
+          int err = 0;
+          SEXP res = R_tryEvalSilent(unevaluatedArg, evalEnv, &err);
+          if(err){
+            evaluatedArg = prcode;
+          } else {
+            evaluatedArg = res;
+          }
+          args[name] = evaluatedArg;
+        } else {
+          // Non promises such as vectors or other constants
+          // are already evaluated.
+          args[name] = unevaluatedArg;
+        }
     }
   }
   nArgs--;
@@ -43,7 +47,7 @@ SEXP GetArgs(SEXP dotsE){
     SEXP dots = dotsEnv.get("...");
     vector<SEXP> promises;
     int dArgs = 0;
-    if( dots != R_MissingArg ){ 
+    if( dots != R_MissingArg ){
       while(dots != R_NilValue){
         promises.push_back(CAR(dots)) ;
         dots = CDR(dots);

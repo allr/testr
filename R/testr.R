@@ -1,4 +1,4 @@
-#' @title Adds regression tests to specified package.
+#' Adds regression tests to specified package.
 #'
 #' @description Given a package, the code to be executed and a list of functions to capture, the function captures the selected functions from the package, then runs the specified code. It then generates tests from the captured information and using code coverage filters them against existing tests for the package. Those that increase the code coverage will be added to already existing testthat tests for the package.
 #'
@@ -13,8 +13,12 @@
 #' @param verbose Prints additional information.
 #' @export
 
-gen_from_function <- function(package.dir = ".", code, functions, filter = TRUE, exclude_existing_tests = FALSE, build = TRUE, timed = FALSE, output, verbose = testr_options("verbose")) {
-    cleanup = F
+gen_from_function <- function(package.dir = ".", code, functions, filter = TRUE,
+                              exclude_existing_tests = FALSE, build = TRUE,
+                              timed = FALSE, output,
+                              verbose = testr_options("verbose"))
+{
+    cleanup = FALSE
     # stop all ongoing captures
     stop_capture_all()
     if (build) {
@@ -27,26 +31,21 @@ gen_from_function <- function(package.dir = ".", code, functions, filter = TRUE,
         package.path = package.dir
     }
     # install the package
-    if (verbose)
-        cat(paste("Installing package", package.path, "\n"))
-    #devtools:::install(package.name, quiet = T)
-    install.packages(package.path, repos = NULL, quiet = T, type = "source")
+    if (verbose) cat(paste("Installing package", package.path, "\n"))
+    install.packages(package.path, repos = NULL, quiet = TRUE, type = "source")
     # get list of all functions
     package = devtools::as.package(package.dir)
     # TODO I don't thing this line is needed anymore
     l <- library
-    l(package = package$package, character.only = T)
-    if (verbose)
-        cat(paste("Package", package$package, "installed\n"))
+    l(package = package$package, character.only = TRUE)
+    if (verbose) cat(paste("Package", package$package, "installed\n"))
     # if function names were not specified,
     if (missing(functions)) {
         # get list of all functions defined in the package' R code
         functions <- list_functions(file.path(package$path, "R"))
-        if (verbose)
-            cat("All functions from package will be decorated\n")
+        if (verbose) cat("All functions from package will be decorated\n")
     }
-    if (verbose)
-        cat(paste("Decorating",length(functions), "functions\n"))
+    if (verbose) cat(paste("Decorating",length(functions), "functions\n"))
     # capture all functions in the package
     for (f in functions) {
         decorate(f, package$package, verbose = verbose)
@@ -62,7 +61,7 @@ gen_from_function <- function(package.dir = ".", code, functions, filter = TRUE,
     if (missing(output)) {
         if (filter) {
             output = "temp"
-            cleanup = T
+            cleanup = TRUE
         } else {
             output = file.path(package$path, "tests")
         }
@@ -74,17 +73,16 @@ gen_from_function <- function(package.dir = ".", code, functions, filter = TRUE,
     if (filter) {
         if (verbose)
             cat("Pruning tests - this may take some time...\n")
-        filter_tests(output, file.path(package$path, "tests/testthat"), functions, package.dir, compact = T, verbose = verbose)
+        filter_tests(output, file.path(package$path, "tests/testthat"),
+                     functions, package.dir, compact = TRUE, verbose = verbose)
     }
     # clear the temp folder, if we used a temp folder implicitly
-    if (cleanup)
-        unlink(output, recursive = T)
-    detach(paste("package", package$package, sep=":"), unload = T, character.only = T)
+    if (cleanup) unlink(output, recursive = T)
+    detach(paste("package", package$package, sep=":"), unload = TRUE,
+           character.only = TRUE)
 }
 
-
-
-#' @title Generates tests for a package by running the code associated with it.
+#' Generates tests for a package by running the code associated with it.
 #'
 #' @description Runs the examples, vignettes and possibly tests associated with the package and captures the usage of package's functions. Creates tests from the captured information, filters it according to the already existing tests and if any new tests are found, adds them to package's tests.
 #'
@@ -97,45 +95,52 @@ gen_from_function <- function(package.dir = ".", code, functions, filter = TRUE,
 #' @param verbose Prints additional information.
 #' @export
 #'
-gen_from_package <- function(package.dir = ".", include.tests = FALSE, timed = FALSE, filter = TRUE, build = TRUE, output, verbose = testr_options("verbose")) {
+gen_from_package <- function(package.dir = ".", include.tests = FALSE,
+                             timed = FALSE, filter = TRUE, build = TRUE,
+                             output, verbose = testr_options("verbose"))
+{
     package = devtools::as.package(package.dir)
     devtools::document(package.dir)
-    detach(paste("package", package$package, sep=":"), unload = T, character.only = T)
+    detach(paste("package", package$package, sep=":"), unload = TRUE,
+           character.only = TRUE)
     f <- function() {
         # run package vignettes
         info <- tools::getVignetteInfo(package = package$package)
-        vdir <- info[,2]
-        vfiles <- info[,6]
+        vdir <- info[ ,2]
+        vfiles <- info[ ,6]
         p <- file.path(vdir, "doc", vfiles)
-        if (verbose)
-            cat(paste("Running vignettes (", length(vfiles), "files)\n"))
+        if (verbose) cat(paste("Running vignettes (", length(vfiles), "files)\n"))
         # vignettes are not expected to be runnable, silence errors
-        invisible(tryCatch(sapply(p, source), error=function(x) invisible()))
+        invisible( tryCatch( sapply(p, source), error = function(x) invisible() ) )
         # run package examples
         manPath <- file.path(package.dir, "man")
-        examples <- list.files(manPath, pattern = "\\.[Rr]d$", no.. = T)
+        examples <- list.files(manPath, pattern = "\\.[Rr]d$", no.. = TRUE)
         if (length(examples) != 0) {
             if (verbose)
                 cat(paste("Running examples (", length(examples), "man files)\n"))
             for (f in examples) {
                 code <- example_code(file.path(manPath, f))
-                tryCatch(eval(parse(text = code)), error=function(x) print(x))
+                tryCatch(eval(parse(text = code)), error = function(x) print(x))
             }
         }
         # run tests
         if (include.tests) {
-            if (verbose)
-                cat("Running package tests\n")
-            testthat::test_dir(file.path(package.dir, "tests", "testthat"), filter = NULL)
+            if (verbose) cat("Running package tests\n")
+            testthat::test_dir(file.path(package.dir, "tests", "testthat"),
+                               filter = NULL)
         }
     }
     if (missing(output))
-        gen_from_function(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, verbose = verbose)
+        gen_from_function(package.dir, code = f , filter = filter,
+                          exclude_existing_tests = include.tests, build = build,
+                          timed = timed, verbose = verbose)
     else
-        gen_from_function(package.dir, code = f , filter = filter, exclude_existing_tests = include.tests, build = build, timed = timed, output, verbose = verbose)
+        gen_from_function(package.dir, code = f , filter = filter,
+                          exclude_existing_tests = include.tests, build = build,
+                          timed = timed, output, verbose = verbose)
 }
 
-#' @title Enables capturing of the specified functions.
+#' Enables capturing of the specified functions.
 #'
 #' @description The functions can be expressed as character literals in the form of either only a function name,
 #' or package name ::: function name, or directly as a symbol (i.e. only function name, or package name ::: function name).
@@ -143,50 +148,55 @@ gen_from_package <- function(package.dir = ".", include.tests = FALSE, timed = F
 #' @param ... List of functions to capture, either character literals, or symbols
 #' @param verbose TRUE to display additional information
 #' @export
-start_capture <- function(..., verbose = testr_options("verbose")) {
+start_capture <- function(..., verbose = testr_options("verbose"))
+{
     old <- testr_options("capture.arguments")
-    if (old)
-        testr_options("capture.arguments", FALSE)
-    for (f in parseFunctionNames(...))
+    if (old) testr_options("capture.arguments", FALSE)
+    for (f in parseFunctionNames(...)) {
         decorate(f[["name"]], f[["package"]], verbose = verbose)
-    if (old)
-        testr_options("capture.arguments", TRUE)
+    }
+    if (old) testr_options("capture.arguments", TRUE)
     invisible(NULL)
 }
 
-#' @title Enables capturing of all builtin functions.
+#' Enables capturing of all builtin functions.
 #'
 #' @description Wrapper around capture to capture builtin functions
 #' @param internal.only TRUE if only internal functions should be captured
 #' @param verbose TRUE to display additional information
 #' @export
-start_capture_builtins <- function(internal.only = FALSE, verbose = testr_options("verbose")) {
+start_capture_builtins <- function(internal.only = FALSE,
+                                   verbose = testr_options("verbose"))
+{
     functions <- builtins(internal.only)
     setup_capture(functions, verbose = verbose)
 }
 
-#' @title Stops capturing the selected functions.
+#' Stops capturing the selected functions.
 #'
 #' @description This function removes the tracing functionality for specified function
 #' @param ... Functions whose capture is to be dropped (uses the same format as capture)
 #' @param verbose TRUE to display additional information
 #' @export
-stop_capture <- function(..., verbose = testr_options("verbose")) {
-    for (f in parseFunctionNames(...))
+stop_capture <- function(..., verbose = testr_options("verbose"))
+{
+    for (f in parseFunctionNames(...)) {
         undecorate(f$name, f$package, verbose = verbose)
+    }
     invisible(NULL)
 }
 
-#' @title Stops capturing all currently captured functions.
+#' Stops capturing all currently captured functions.
 #'
 #' @description Remove tracing functionality for all the functions
 #' @param verbose TRUE to display additional information
 #' @export
-stop_capture_all <- function(verbose = testr_options("verbose")) {
+stop_capture_all <- function(verbose = testr_options("verbose"))
+{
     clear_decoration(verbose = verbose)
 }
 
-#' @title Generates tests from captured information.
+#' Generates tests from captured information.
 #'
 #' @description This function takes the tracing information collected by capture and generates
 #' testthat compatible testcases.
@@ -198,16 +208,18 @@ stop_capture_all <- function(verbose = testr_options("verbose")) {
 #' @param clear_capture if FALSE captured traces will not be deleted after the generation so that subsequent calls to generate() can use them too
 #' @export
 generate <- function(output_dir, root = testr_options("capture.folder"),
-                     timed = F, clear_capture = T, verbose = testr_options("verbose")) {
+                     timed = FALSE, clear_capture = TRUE,
+                     verbose = testr_options("verbose"))
+{
     cache$output.dir <- output_dir
     test_gen(root, output_dir, timed, verbose = verbose);
     if (clear_capture) {
-        unlink(file.path(root, list.files(path = root, no.. = T)))
+        unlink(file.path(root, list.files(path = root, no.. = TRUE)))
     }
 
 }
 
-#' @title Filter the generated tests so that only tests increasing code coverage will be kept.
+#' Filter the generated tests so that only tests increasing code coverage will be kept.
 #'
 #' @description This function attempts to filter test cases based on code coverage collected by covr package.
 #' Filtering is done in iterational way by measuring code coverage of every test separately and skipping the ones
@@ -227,7 +239,8 @@ generate <- function(output_dir, root = testr_options("capture.folder"),
 #' @export
 prune <- function(test_root, output_dir, ...,
                    package_path = "", remove_tests = FALSE, compact = FALSE,
-                   verbose = testr_options("verbose")) {
+                   verbose = testr_options("verbose"))
+{
     functions <- parseFunctionNames(...)
     if (length(functions) && package_path != "") {
         stop("Both list of functions and package to be filtered aganist is supplied, please use one of the arguments")
@@ -240,23 +253,25 @@ prune <- function(test_root, output_dir, ...,
     fn <- sapply(functions, `[`, 1)
     functions <- sapply(functions, `[`, 2)
     names(functions) <- fn
-    filter_tests(test_root, output_dir, functions, package_path, remove_tests = remove_tests, compact = compact, verbose = verbose)
+    filter_tests(test_root, output_dir, functions, package_path,
+                 remove_tests = remove_tests, compact = compact,
+                 verbose = verbose)
     invisible(NULL)
 }
-
 
 # helpers -------------------------------------------------------------------------------------------------------------
 
 # TODO these are also in evaluation.R, perhaps evaluation.R should die and its non-api should move to helpers, or someplace else?
 
-#' @title Generate tests for give code
+#' Generate tests for give code
 #' @description Generates tests from given code and specific captured functions
 #'
 #' @param code Code from which the tests will be generated.
 #' @param output_dir Directory to which the tests will be generated.
 #' @param ... functions to be captured during the code execution (same syntax as capture function)
 #' @export
-gen_from_code <- function(code, output_dir, ...) {
+gen_from_code <- function(code, output_dir, ...)
+{
     code <- substitute(code)
     start_capture(...)
     eval(code)
@@ -265,24 +280,27 @@ gen_from_code <- function(code, output_dir, ...) {
     invisible()
 }
 
-#' @title Generate tests for give source
+#' Generate tests for give source
 #' @description Generates tests by running given source file.
 #'
 #' @param src.root Source file to be executed and captured, or directory containing multiple files.
 #' @param output_dir Directory to which the tests will be generated.
 #' @param ... Functions to be tested.
 #' @export
-gen_from_source <- function(src.root, output_dir, ...) {
-    if (!file.exists(src.root))
+gen_from_source <- function(src.root, output_dir, ...)
+{
+    if (!file.exists(src.root)) {
         stop("Supplied source does not exist")
-    if (file.info(src.root)$isdir)
-        src.root <- list.files(src.root, pattern = "\\[rR]", recursive = T, full.names = T)
+    }
+    if (file.info(src.root)$isdir) {
+        src.root <- list.files(src.root, pattern = "\\[rR]",
+                               recursive = TRUE, full.names = TRUE)
+    }
     start_capture(...)
-    for (src.file in src.root)
-        source(src.file, local = T)
+    for (src.file in src.root) {
+        source(src.file, local = TRUE)
+    }
     stop_capture_all()
     generate(output_dir)
     invisible()
 }
-
-

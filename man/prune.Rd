@@ -29,4 +29,3 @@ This function attempts to filter test cases based on code coverage collected by 
 Filtering is done in iterational way by measuring code coverage of every test separately and skipping the ones
 that don't increase the coverage.
 }
-

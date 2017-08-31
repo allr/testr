@@ -16,4 +16,3 @@ List of parsed package and function names as characters.
 Parses given function names to a list of name, package characters.
 If package is not specified, NA is returned instead of its name.
 }
-

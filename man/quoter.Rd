@@ -12,4 +12,3 @@ quoter(arg)
 \description{
 In certain cases, language arguments (like calls), need to be quoated
 }
-

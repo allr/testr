@@ -15,4 +15,3 @@ start_capture(..., verbose = testr_options("verbose"))
 The functions can be expressed as character literals in the form of either only a function name,
 or package name ::: function name, or directly as a symbol (i.e. only function name, or package name ::: function name).
 }
-

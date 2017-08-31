@@ -19,4 +19,3 @@ This is an internal function and is supposed to be used in setup_capture
 \seealso{
 setup_capture
 }
-

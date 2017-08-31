@@ -17,4 +17,3 @@ reassing_in_env(name, obj, env)
 Record that particual line was executed.
 Used in statement coverage, needed for namespace replacement
 }
-

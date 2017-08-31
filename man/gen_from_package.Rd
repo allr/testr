@@ -25,4 +25,3 @@ gen_from_package(package.dir = ".", include.tests = FALSE, timed = FALSE,
 \description{
 Runs the examples, vignettes and possibly tests associated with the package and captures the usage of package's functions. Creates tests from the captured information, filters it according to the already existing tests and if any new tests are found, adds them to package's tests.
 }
-

@@ -17,4 +17,3 @@ Check if line starts with prefix
 \seealso{
 GenerateTC
 }
-
